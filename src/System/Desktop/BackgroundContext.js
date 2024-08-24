@@ -23,8 +23,8 @@ export function BackgroundProvider({ children }) {
       gradient: {
         type: "linear",
         degree: 0,
-        color1: "#000000",
-        color2: "#000000",
+        color1: "hsl(210, 100%, 34%)",
+        color2: "hsl(210, 100%, 34%)",
       },
     },
     image: {
@@ -56,11 +56,11 @@ export function BackgroundProvider({ children }) {
       },
       ocean: {
         isActive: true,
-        color: 0x001e0f
+        color: "hsl(150, 100%, 6%)"
       },
       desert: {
         isActive: true,
-        color: 0xffffff
+        color: "hsl(0, 0%, 100%)"
       },
       ambientLight:{
         isActive: true,
