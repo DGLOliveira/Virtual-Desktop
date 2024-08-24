@@ -1,0 +1,17 @@
+{
+    "paths": {
+        "component": "Apps/Calculator/Calculator.js",
+        "icon": ""
+    },
+    "default": {
+        "Location": {
+            "top": "100px",
+            "left": "200px"
+        },
+        "Size": {
+            "width": "400px",
+            "height": "500px"
+        }
+    },
+    "menu": false
+}

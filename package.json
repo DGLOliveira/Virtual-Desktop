@@ -1,0 +1,43 @@
+{
+  
+  "name": "desktop",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "latest",
+    "@react-three/fiber": "latest",
+    "axios": "1.6.5",
+    "chart.js": "^4.4.3",
+    "loader-utils": "latest",
+    "ol": "latest",
+    "react": "latest",
+    "react-chartjs-2": "^5.2.0",
+    "react-circle-flags": "0.0.20",
+    "react-dom": "latest",
+    "react-icons": "^5.0.1",
+    "react-scripts": "^5.0.1",
+    "sanitize-html": "latest",
+    "three": "latest",
+    "three-stdlib": "latest"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "typescript": "4.1.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+    
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

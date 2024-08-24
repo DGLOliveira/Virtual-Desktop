@@ -1,0 +1,187 @@
+#calculatorContainer {
+  align-items: center;
+  justify-content: space-around;
+  overflow: hidden;
+  /*prevent text selection*/
+  -moz-user-select: none; /* Firefox */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+#calculatorTopBar {
+  display: flex;
+  width: 100%;
+  height: 6%;
+  font-size: 3vh;
+  padding:5px;
+  color: var(--WindowFontColor);
+}
+.calculatorTypeButton {
+  border: 2px silver solid;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 5px;
+  background: dimgray;
+  color: ghostwhite;
+  cursor: pointer;
+}
+.calculatorTypeButtonSelected {
+  color: black;
+  background: lightgray;
+}
+#calculatorDisplayContainer {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  height: 25%;
+  margin: 5px;
+}
+#calculatorDisplay {
+  height: 65%;
+  font-size: 7vh;
+  background: white;
+  align-items: center;
+  color: black;
+  border-radius: 0% 0% 10px 10px;
+}
+#calculatorMinorDisplay {
+  height: 35%;
+  font-size: 4vh;
+  align-items: center;
+  background: lightgray;
+  color: black;
+  border-radius: 10px 10px 0% 0%;
+}
+#calculatorGraphicContainer {
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  width: 95%;
+  margin: 5px;
+}
+#calculatorGraphic {
+  display: flex;
+  background: ghostwhite;
+  justify-content: center;
+  height: 80%;
+  border-radius: 10px 10px 0% 0%;
+  overflow: hidden;
+}
+#calculatorGraphic > * {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background: black;
+}
+.calculatorGraphicParam {
+  display: flex;
+  flex-direction: column;
+  height: 20%;
+  font-size: 4vh;
+  padding: 5px;
+  background: lightgray;
+  border-radius: 0% 0% 10px 10px;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+}
+.calculatorGraphicFunction {
+  display: flex;
+  text-align: start;
+  flex-grow: 2;
+  cursor: pointer;
+}
+.calculatorGraphicFunctionActive {
+  border: 2px black solid;
+  border-radius: 5px;
+}
+#calculatorKeyboard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.calculatorKeyboardDigital {
+  height: 100%;
+  font-size: 5vh;
+}
+.calculatorKeyboardGraphic {
+  height: 50%;
+  font-size: 4vh;
+}
+#calculatorFunctions {
+  display: flex;
+  width: 100%;
+  height: 20%;
+}
+#calculatorKeyboardRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+}
+#calculatorNumpad {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.calculatorNumpadBasic {
+  width: 75%;
+}
+.calculatorNumpadScientific {
+  width: 43%;
+}
+.calculatorNumpadRow {
+  display: flex;
+  flex-grow: 1;
+}
+#calculatorExpressions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+}
+.calculatorExpressionsBasic {
+  width: 25%;
+}
+.calculatorExpressionsScientific {
+  width: 57%;
+}
+.calculatorExpressionsColumn {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+}
+.calculatorExpressionsColumn > * {
+  background: rgba(255, 255, 255, 0.1);
+}
+.calculatorButton {
+  display: flex;
+  flex: 1;
+  margin:-1px;
+  border: 1px gray solid;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 1;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.calculatorButton:hover{
+  background: gray;
+}
+.calculatorButtonSmall {
+  font-size: 4vh;
+}
+@media screen and (max-width: 600px) {
+  .calculatorKeyboardDigital {
+    font-size: 4vh;
+  }
+  .calculatorKeyboardGraphic {
+    font-size: 3vh;
+  }
+  .calculatorButtonSmall {
+    font-size: 2vh;
+  }
+}

@@ -1,0 +1,120 @@
+#arcadeContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  color:silver;
+}
+#arcadeContaier>*>*{
+  background:black;
+}
+#gameMenu{
+  background:black;
+  color:silver;
+}
+.arcadeButtonOn{
+  color:deepskyblue;
+  cursor:pointer;
+}
+.arcadeButton{
+  border: 1px silver solid;
+  margin:1px
+}
+.arcadeButton:active{
+  color:deepskyblue;
+}
+#arcadeSelect {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 10%;
+  font-size: 18px;
+  transition: 0.3s;
+}
+#arcadeCanvasContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  background: black;
+}
+#arcadeCanvasContainer > * {
+  display: flex;
+  border: 1px silver solid;
+}
+#arcadeScoreboard {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50px;
+  text-align: left;
+  border: 1px silver solid;
+}
+#arcadeScore {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 5;
+  font-size: 18px;
+  color: deepskyblue;
+}
+#arcadePlayButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  font-size: 40px;
+  cursor: pointer;
+}
+#arcadeControls {
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 35px;
+}
+#arcadeVerticalControls {
+  flex: 3;
+}
+#arcadeLeftButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+  cursor: pointer;
+}
+#arcadeLeftButton:active {
+  color: deepskyblue;
+}
+#arcadeRightButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+  cursor: pointer;
+}
+#arcadeRightButton:active {
+  color: deepskyblue;
+}
+#arcadeUpButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+}
+#arcadeUpButton:active {
+  color: deepskyblue;
+}
+#arcadeDownButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+}
+#arcadeDownButton:active {
+  color: deepskyblue;
+}

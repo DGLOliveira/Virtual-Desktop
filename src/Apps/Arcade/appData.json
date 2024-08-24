@@ -1,0 +1,17 @@
+{
+    "paths": {
+        "component": "Apps/Arcade/Arcade.js",
+        "icon": ""
+    },
+    "default": {
+        "Location": {
+            "top": "100px",
+            "left": "100px"
+        },
+        "Size": {
+            "width": "500px",
+            "height": "500px"
+        }
+    },
+    "menu": false
+}

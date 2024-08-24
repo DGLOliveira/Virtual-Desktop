@@ -1,0 +1,182 @@
+settings-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+settings-container>nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+settings-container>nav>* {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  text-align: start;
+  align-items: center;
+  padding: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px white solid;
+}
+
+settings-container>nav>*:hover {
+  background: rgb(140, 140, 140);
+  cursor: pointer;
+}
+
+settings-container>form {
+  width: 100%;
+  height: 100%;
+  color: white;
+  overflow: auto;
+}
+
+settings-container>form>fieldset {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+settings-container>form>fieldset>legend {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border: 1px white solid;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+settings-container>form>fieldset>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width:fit-content;
+  margin: 5px;
+  padding: 5px;
+  border-bottom: 1px white solid;
+  border-radius: 5px;
+}
+
+settings-container>form>fieldset>div>label{
+  display:flex;
+  justify-content: start;
+  align-items: center;
+  width:200px;
+}
+
+settings-container>form>fieldset>fieldset {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+settings-container>form>fieldset>fieldset>legend {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border: 1px white solid;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+settings-container>form>fieldset>fieldset>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width:fit-content;
+  margin: 5px;
+  padding: 5px;
+  border-bottom: 1px white solid;
+  border-radius: 5px;
+
+}
+
+settings-container>form>fieldset>fieldset>div>label{
+  display:flex;
+  justify-content: start;
+  align-items: center;
+  width:200px;
+}
+
+.defPreview {
+  position: sticky;
+  top:0;
+  left:0;
+  width:95%;
+  height:200px;
+  display: flex;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  justify-self: space-around;
+  border: 1px white solid;
+  border-radius: 5px;
+  background-color: var(--DesktopBkgrColor);
+  background-image: var(--DesktopBkgrImage);
+  background-position: var(--DesktopBkgrPosition);
+  background-size: var(--DesktopBkgrSize);
+  background-repeat: var(--DesktopBkgrRepeat);
+  background-attachment: var(--DesktopBkgrAttachment);
+  overflow: hidden;
+  margin: 10px;
+  margin-right:50px;
+}
+
+.defMenu {
+  display: flex;
+  justify-content: space-around;
+}
+
+.defMenuButton {
+  padding: 5px;
+  border: 2px white solid;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.defMenuButton:hover {
+  background: white;
+  color: black;
+}
+
+.defMenuButtonON {
+  background: white;
+  color: black;
+}
+
+@media (max-width: 600px) {
+  #defContainer {
+    flex-direction: column;
+  }
+
+  #defSideBar {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+  }
+
+  #defSideBar>* {
+    border-right: solid 1px white;
+  }
+
+  .defPage {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}

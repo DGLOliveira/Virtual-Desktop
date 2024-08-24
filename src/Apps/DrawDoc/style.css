@@ -1,0 +1,96 @@
+app-body {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+}
+
+button>label {
+  font-size: small;
+  cursor: pointer;
+}
+
+
+tool-bar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 30px;
+}
+
+tool-bar>button {
+  color: white;
+  font-size: 25px;
+}
+
+canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+#drawCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: none;
+  background: white;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+#previewCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+canvas-container>textarea {
+  position: absolute;
+  background: transparent;
+  border-style: dashed;
+  width: auto;
+}
+
+.cursorBrush {
+  cursor:
+    url("./Assets/GameIconsSVG/paint-brush-resized.svg") 52 75,
+    auto;
+}
+
+.cursorBucket {
+  cursor:
+    url("./Assets/ThemifyIconsSVG/paint-bucket.svg") 2 28,
+    auto;
+}
+
+.cursorPipette {
+  cursor:
+    url("./Assets/Css.gg/color-picker.svg") 4 20,
+    auto;
+}
+
+.cursorSpray {
+  cursor:
+    url("./Assets/ThemifyIconsSVG/spray.svg") 0 2,
+    auto;
+}
+
+.cursorEraser {
+  cursor:
+    url("./Assets/ThemifyIconsSVG/eraser.svg") 2 28,
+    auto;
+}
+
+.cursorText {
+  cursor: text;
+}
+
+.cursorMagnifier,
+.cursorSelect,
+.cursorShape {
+  cursor: crosshair;
+}
