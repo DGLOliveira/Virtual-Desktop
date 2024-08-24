@@ -16,7 +16,7 @@ export const BackgroundContext = createContext({
 
 export function BackgroundProvider({ children }) {
   const [state, setState] = useState({
-    active: "scenario",
+    active: "color",
     color: {
       type: "color",
       color: "hsl(210, 100%, 34%)",
