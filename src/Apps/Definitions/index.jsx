@@ -11,7 +11,7 @@ import { BackgroundContext } from "../../System/Desktop/BackgroundContext.js";
 import "./style.css";
 
 export default function Definitions() {
-  const [defPage, setDefPage] = useState("Desktop");
+  const [defPage, setDefPage] = useState("Global");
   const background = useContext(BackgroundContext);
   return (
     <settings-container>
