@@ -211,7 +211,6 @@ export default function Calculator ({isSelected, action, setAction, appMenu, set
       }
     }
     setGraph({ ...graph });
-    console.log(graph);
   };
   const setWindow = (input) => {
     let key = 0;
