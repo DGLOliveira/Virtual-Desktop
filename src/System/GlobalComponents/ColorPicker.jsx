@@ -90,6 +90,8 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                         start = i + 1;
                     }
                 }
+                console.log(color);
+                console.log(hslColor);
                 setHue(Number(hslColor[0]));
                 setSaturation(Number(hslColor[1].slice(0, hslColor[1].length - 1)));
                 setLightness(Number(hslColor[2].slice(0, hslColor[2].length - 1)));
