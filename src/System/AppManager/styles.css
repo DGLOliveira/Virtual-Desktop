@@ -1,0 +1,192 @@
+app-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: var(--WindowBorderWidth) var(--WindowBorderColor) var(--WindowBorderType);
+  border-radius: var(--WindowBorderRadius);
+  box-shadow: var(--WindowShadowXOffset) var(--WindowShadowYOffset) var(--WindowShadowBlur) var(--WindowShadowSpread) var(--WindowShadowColor);
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+app-top-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: var(--WindowTopBarHeight);
+  width: 100%;
+  border-bottom: 1px var(--GeneralBorderColor) solid;
+}
+app-top-bar>h1 {
+  display: flex;
+  flex-wrap: nowrap;
+  text-wrap: nowrap;
+  overflow: hidden;
+  width: 100%;
+  margin:0;
+  padding:0;
+  font-size: var(--WindowTopBarFontSize);
+  padding: 4px;
+}
+app-top-bar > svg {
+  height: var(--WindowTopBarIconSize);
+  width: var(--WindowTopBarIconSize);
+  padding: 2px;
+}
+app-top-bar>button{
+  margin-left: 4px;
+}
+app-top-bar>button> svg {
+  height: var(--WindowTopBarIconSize);
+  width: var(--WindowTopBarIconSize);
+  padding: 2px;
+  color: var(--WindowFontColor);
+}
+app-window>nav {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  color: var(--WindowFontColor);
+  border-bottom: 1px var(--GeneralBorderColor) solid;
+}
+app-window>nav > button {
+  border: solid 1px var(--GeneralBorderColor);
+} 
+drop-down>ul{
+  display:grid;
+  position: absolute;
+  color:inherit;
+  padding:0px;
+  margin:0px; 
+  background: rgba(45, 45, 45, 1);
+  border: 1px var(--GeneralBorderColor) solid;
+  z-index: 1;
+  transition:0.2s;
+  translate: 0px 30px;
+}
+app-window>nav>drop-down>ul{
+  translate: 0px 20px;
+}
+drop-down>ul>li{
+  list-style-type:none;
+  margin-left:2px;
+  margin-right:2px;
+}
+drop-down>ul>li>button{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  color: inherit;
+  width: 100%;
+  text-align: left;
+  align-items: start;
+  justify-content: space-between;
+} 
+drop-down>ul>li>button>kbd{
+  opacity:0.5;
+}
+drop-down>ul>li>button>span{
+  width:20px;
+}
+app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+app-container > nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: auto;
+  width: 100%;
+  font-size: 25px;
+  color:var(--WindowFontColor);
+  padding-left: 0;
+  border-bottom: 1px var(--GeneralBorderColor) solid;
+}
+app-container > nav > button {
+  position: relative;
+  color: inherit;
+  height: inherit;
+  font-size: inherit;
+  width: fit-content;
+}
+app-container > nav > drop-down {
+  position: relative;
+  color: inherit;
+  height: inherit;
+  font-size: inherit;
+  width: fit-content;
+}
+app-container > nav > drop-down> button {
+  position: relative;
+  color: inherit;
+  height: 32px;
+  font-size: 16px;
+  width: fit-content;
+}
+app-container > nav > button > input[type="color"] {
+  width: 25px;
+}
+app-body {
+  width: 100%;
+  height: 100%;
+}
+app-dialog{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10000;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  border: var(--DialogBorderWidth) var(--DialogBorderColor) var(--DialogBorderType);
+  border-radius: var(--DialogBorderRadius);
+  transition: 0.2s;
+  background:var(--DialogBkgr);
+  color:var(--DialogFontColor);
+}
+app-dialog>app-dialog-info{
+  display:flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--DialogInfoFontSize);
+  color: var(--DialogInfoFontColor);
+  width:100%;
+  height:100%;
+  padding:10px;
+}
+app-dialog>app-dialog-actions{
+  display:flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+app-dialog>app-dialog-actions>button{
+  display:flex;
+  box-sizing: border-box;
+  justify-content: center;
+  margin:5px;
+  padding: 5px;
+  width:100%;
+  color: var(--DialogButtonFontColor);
+  background: var(--DialogButtonBkgr);
+  font-size: var(--DialogButtonFontSize);
+  border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) var(--DialogButtonBorderType);
+  border-radius: var(--DialogButtonBorderRadius);
+}
+
+app-dialog-top-bar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:5px;
+  font-size: var(--DialogTopBarFontSize);
+  color: var(--DialogTopBarFontColor);
+  background: var(--DialogTopBarBkgr);
+  border-bottom: solid 1px var(--DialogBorderColor);
+}

@@ -1,0 +1,145 @@
+task-bar-clock {
+  width: auto;
+}
+
+task-bar-clock>button {
+  white-space: nowrap;
+  font-size: var(--TaskbarFontSize);
+  color: var(--TaskbarClockColor);
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+calendar-window {
+  position: absolute;
+  bottom: var(--TaskbarHeight);
+  right: 0;
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  bottom: var(--TaskbarHeight);
+  overflow: hidden;
+  transition: 1s ease-in-out 0s;
+  color: var(--ClockFontColor);
+  background: var(--ClockBkgr);
+}
+
+calendar-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 1px gray solid;
+  padding-bottom: 2px;
+  background: var(-ClockBkgr);
+  z-index: 2;
+}
+
+calendar-date {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+}
+
+calendar-date>div {
+  font-size: "24px";
+  font-weight: "bold";
+}
+
+calendar-clock {
+  display: flex;
+  flex-shrink: 2;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: 2px;
+}
+
+calendar-container-selector {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  background: var(--ClockBkgr);
+  z-index: 20;
+}
+
+calendar-container-table>table {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1px;
+  border: 1px gray solid;
+  background: black;
+  z-index: 0;
+}
+
+calendar-container-table>table>* {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  margin: 1px;
+}
+
+calendar-container-table>table>*>* {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: row;
+}
+
+calendar-container-table>table>*>*>* {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 1px;
+  background: var(--ClockBkgr);
+  z-index: 2;
+}
+
+calendar-container-table>table>tbody>tr>td {
+  border: 1px rgb(69, 69, 69) solid;
+}
+
+calendar-container-table>table>*>*>*:hover {
+  border-color: skyblue;
+}
+
+.calendarDiffMonth {
+  color: dimgray;
+}
+
+#calendar-hover {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(silver, transparent, transparent);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+calendar-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  border-top: 1px gray solid;
+  padding-top: 2px;
+  background: var(--ClockBkgr);
+  padding: 1px;
+  z-index: 2;
+}
+
+calendar-settings>div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 2px;
+  padding-left: 5px;
+}

@@ -1,0 +1,265 @@
+taskbar-weather {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: auto;
+    font-size: var(--TaskbarFontSize);
+    color: var(--TaskbarWeatherColor);
+}
+
+taskbar-weather>button {
+    display: flex;
+    flex-direction: row;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: var(--TaskbarWeatherColor);
+}
+
+taskbar-weather>button>svg {
+    display: flex;
+    width: var(--TaskbarIconSize);
+    height: var(--TaskbarIconSize);
+}
+
+weather-details {
+    position: absolute;
+    bottom: var(--TaskbarHeight);
+    right: 0;
+    width: 350px;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    bottom: var(--TaskbarHeight);
+    overflow: hidden;
+    transition: 1s ease-in-out 0s;
+    color: var(--WeatherFontColor);
+    background: var(--WeatherBkgr);
+}
+
+weather-header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+    border-bottom: 1px gray solid;
+}
+
+weather-header-now {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px;
+    width: 100%;
+}
+
+weather-header-unknown {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+}
+
+flex-column-start {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+weather-header-summary{
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    width: 170px; 
+    border: 1px gray solid; 
+    border-radius: 5px;
+    background: linear-gradient(80deg, rgba(0, 128, 255, 0.1), rgba(20, 87, 149, 0.1), rgba(0, 128, 255, 0.1));
+}
+
+weather-header-summary:last-child {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center; 
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+}
+
+weather-param {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: 12px;
+    justify-content: start;
+    align-items: center;
+}
+
+weather-header-now>flex-column-start>weather-param>weather-param-icon {
+    font-size: 14px;
+    width: 30px;
+}
+
+weather-header-curr-page {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    color: silver;
+    font-size: 16px;
+    padding: 1px;
+}
+
+weather-header-curr-page>div {
+    display: flex;
+    width: 170px;
+    justify-content: center;
+}
+
+weather-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-top: 5px;
+    border-top: 1px gray solid;
+}
+
+weather-footer>a {
+    color: var(--StartMenuFontColor);
+
+}
+
+weather-settings{
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+    width: 100%;
+    padding:5px;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+weather-settings>div{
+    display:flex;
+    flex-direction: row;
+    width: 280px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px;
+    padding-bottom:2px;
+    border-bottom: 1px silver solid;
+}
+weather-settings>div>div{
+    display:flex;
+    flex-direction: row;
+}
+weather-settings>div>div>div{
+    padding-right: 10px;
+}
+
+weather-location{
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+    width: 100%;
+    padding:2px;
+    box-sizing: border-box;
+}
+weather-location>*{
+    box-sizing: border-box;
+    padding:5px;
+}
+weather-map-container{
+    display: block; 
+    flex-direction: row; 
+    height: 170px; 
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding:5px;
+    box-sizing: border-box;
+}
+
+weather-page-summary{
+    display: flex; 
+    flex-direction: row; 
+    width: 100%;
+    overflow-x: scroll; 
+    overflow-y: hidden;
+}
+
+weather-page-summary-card{
+    display: flex; 
+    flex-direction: column; 
+    min-width: 160px;
+    height: 220px; 
+    padding: 1px;
+    margin: 15px; 
+    border: 1px silver solid; 
+    border-radius: 5px;
+    background: linear-gradient(80deg, rgba(0, 128, 255, 0.1), rgba(20, 87, 149, 0.1), rgba(0, 128, 255, 0.1));
+}
+
+weather-page-summary-card-date{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 12px;
+}
+
+weather-page-summary-card-summary{
+    display: flex; 
+    flex-direction: row;
+    font-size: 16px;
+    justify-content: start; 
+    align-items: center;
+    border-top: 1px silver solid;
+    margin: 2px; 
+    padding-top: 2px;
+}
+
+weather-page-summary-card-summary>weather-param-icon{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px; 
+    width: 50px;
+}
+weather-page-summary-card-summary>div{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+weather-page-summary-card>weather-param{
+    border-top: 1px silver solid;
+    padding-top: 2px;
+    padding-bottom:2px;
+}
+
+weather-page-summary-card>weather-param>weather-param-icon{
+    width: 40px;
+    font-size: 18px;
+    padding-top: 2px;
+    padding-bottom:2px;
+}
+
+weather-page-chart {
+    display: flex;
+    width: 100%;
+    height:150px;
+}
+weather-page>table{
+    width: 100%;
+}
+weather-page>table>tbody>tr>td{
+    border-left: 1px gray solid;
+    background: rgba(238, 130, 238,0.25);
+}

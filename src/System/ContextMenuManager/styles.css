@@ -1,0 +1,32 @@
+
+context-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: var(--ContextMenuBkgr);
+    border: var(--ContextMenuBorderWidth) var(--ContextMenuBorderType) var(--ContextMenuBorderColor);
+    border-radius: var(--ContextMenuBorderRadius);
+    padding: 5px;
+    color: var(--ContextMenuFontColor);
+    font-size: var(--ContextMenuFontSize);
+    z-index: 101;
+}
+context-menu > button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--ContextMenuFontColor);
+    font-size: var(--ContextMenuFontSize);
+    width: 100%;
+}
+context-menu > button > span {
+    width:20px;
+}
+context-menu > button > kbd {
+    opacity:0.5;
+}
+context-menu > hr {
+    width: 100%;
+    opacity: 0.5;
+    border-color:var(--ContextMenuFontColor);
+}

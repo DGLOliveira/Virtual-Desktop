@@ -1,0 +1,26 @@
+{
+    "DrawDoc": {
+        "shortcuts": {
+            "Desktop": false,
+            "Taskbar": false
+        }
+    },
+    "Arcade": {
+        "shortcuts": {
+            "Desktop": false,
+            "Taskbar": false
+        }
+    },
+    "Calculator": {
+        "shortcuts": {
+            "Desktop": false,
+            "Taskbar": false
+        }
+    },
+    "Definitions": {
+        "shortcuts": {
+            "Desktop": false,
+            "Taskbar": false
+        }
+    }
+}

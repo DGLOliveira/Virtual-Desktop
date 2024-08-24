@@ -1,0 +1,334 @@
+loading-suspense {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color: var(--WindowFontColor);
+    font-size: 5vh;
+    cursor: progress;
+    white-space: pre;
+}
+
+loading-suspense>div {
+    color: cyan;
+}
+
+loading-suspense>div>* {
+    opacity: 0;
+    animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        opacity: 1;
+        clip-path: polygon(30% 0, 50% 50%, 70% 0);
+    }
+
+    10% {
+        clip-path: polygon(100% 0, 100% 30%, 50% 50%, 20% 0);
+    }
+
+    20% {
+        clip-path: polygon(100% 0, 100% 70%, 50% 50%, 20% 0);
+    }
+
+    30% {
+        clip-path: polygon(100% 0, 100% 100%, 70% 100%, 50% 50%, 30% 0);
+    }
+
+    40% {
+        clip-path: polygon(100% 0, 100% 100%, 30% 100%, 50% 50%, 30% 0);
+    }
+
+    50% {
+        clip-path: polygon(25% 0%, 100% 0, 100% 100%, 0 100%, 0 70%, 50% 50%);
+    }
+
+    60% {
+        clip-path: polygon(25% 0%, 100% 0, 100% 100%, 0 100%, 0 30%, 50% 50%);
+    }
+
+    70% {
+        clip-path: none;
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+        clip-path: polygon(30% 0, 50% 50%, 70% 0);
+    }
+}
+
+error-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    font-size: 3vh;
+    color: white;
+    overflow: auto;
+}
+
+error-container>samp {
+    font-size: 5vh;
+}
+
+error-container>div {
+    position: relative;
+    display: flex;
+    color: white;
+    font-size: 10vh;
+    height: 10vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+error-container>div>* {
+    position: absolute;
+}
+
+.fullwarning {
+    color: red;
+    animation: warningflash 1.5s ease-in-out infinite;
+}
+
+.radialwarning {
+    color: red;
+    animation: warningradial 1.5s ease-in-out infinite;
+}
+
+@keyframes warningflash {
+
+    0%,
+    100% {
+        color: transparent;
+    }
+
+    50% {
+        color: red;
+    }
+}
+
+@keyframes warningradial {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+        filter: blur(5px);
+    }
+}
+
+color-picker-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(60deg,
+            rgb(60, 60, 60),
+            rgb(80, 80, 80),
+            rgb(60, 60, 60),
+            rgb(80, 80, 80),
+            rgb(60, 60, 60),
+            rgb(80, 80, 80),
+            rgb(60, 60, 60));
+    border: 1px black solid;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+color-picker-window>div {
+    display: flex; 
+    flex-direction: row; 
+    padding: 6px; 
+    box-sizing: border-box;
+}
+
+color-picker-window>div>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1px;
+}
+
+color-picker-window>div>div>div {
+    width: 40px;
+    text-align: start;
+}
+
+color-picker-window-color {
+    display: flex;
+    min-width: 30px;
+    min-height: 30px;
+    border: 5px silver solid;
+    border-radius: 5px;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+color-picker-button {
+    display: flex;
+    cursor: pointer;
+    height: 30px;
+    width: 40px;
+    border: 5px solid lightgray;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-image: url(./Assets/checkersBackground.jpg);
+    background-size:160px;
+    background-repeat: repeat-x;
+}
+
+color-picker-button>button {
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    border: 1px black solid;
+    border-radius:5px;
+}
+
+slider-thumb {
+    position: absolute;
+    cursor: pointer; 
+    border: 2px solid silver;
+    border-radius: 50%; 
+    box-sizing: border-box; 
+    box-shadow: 0 0 2px 1px black;
+    height: 15px; 
+    width: 15px;
+}
+
+hue-light-map {
+    position: "relative";
+    width:180px;
+    height:180px;
+    background-image: url(./Assets/checkersBackground.jpg);
+    background-size: cover;
+    padding: 0;
+    box-sizing: border-box;
+    margin:5px;
+    border: 1px solid black;
+}
+
+hue-light-map>slider-thumb {
+    transform: translate(8px, 8px);
+}
+
+saturation-slider{
+    position: relative;
+    width:12px;
+    height:180px;
+}
+saturation-slider>div{
+    width:100%;
+    height:100%;
+    border-radius: 12px; 
+    margin-top:5px;
+    margin-left: 6px;
+    box-sizing: border-box; 
+    border: 1px solid black;
+}
+
+saturation-slider>slider-thumb{
+    transform: translate(-2px, -3px); 
+}
+
+alpha-slider{
+    position: relative;
+    display: flex;
+    height:12px;
+    width:180px;
+    justify-content: center;
+    align-items: center;
+    background-image: url(./Assets/checkersBackground.jpg);
+    background-size:cover;
+    background-repeat: repeat-x;
+    border-radius: 12px; 
+    box-sizing: border-box; 
+    border: 1px solid black;
+    margin-right: 12px; 
+}
+
+alpha-slider>div{
+    border-radius: 12px; 
+    width:100%;
+    height:100%;
+}
+
+alpha-slider>slider-thumb{
+    transform: translate(-8px, 0px);
+}
+
+color-inputs{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%; 
+    color: silver; 
+    font-size: 14px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+color-inputs>div{
+    display: flex; 
+    flex-direction: column; 
+    width: 100%; 
+    align-content: center; 
+    justify-content: center; 
+    text-align: center;
+}
+
+color-inputs>div>input[type="number"]{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+color-button {
+    width: 95%;
+    border: 5px silver solid;
+    background-image: url(./Assets/checkersBackground.jpg);
+    background-size:160px;
+    background-repeat: repeat-x;
+    margin: 5px;
+}
+
+color-button>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding:0;
+    margin:0;
+    text-shadow: 0 0 4px black;
+}
