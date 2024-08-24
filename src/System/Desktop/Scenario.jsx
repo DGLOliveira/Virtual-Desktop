@@ -36,7 +36,7 @@ export default function Scenario() {
     );
     return <water ref={ref} args={[geom, config]} rotation-x={-Math.PI / 2} />;
   };
-/*
+
   const Desert = () => {
     const ref = useRef();
     const desertNormals = useLoader(THREE.TextureLoader, '/DesertNormal.png');
@@ -55,7 +55,7 @@ export default function Scenario() {
         displacementMap={desertNormals}
         displacementScale={50} />
     </Plane>;
-  };*/
+  };
 
   return (
     <Canvas
@@ -106,6 +106,9 @@ export default function Scenario() {
         />}
       <Suspense fallback={null}>
         {background.state["scenario"]["ocean"].isActive && <Ocean />}
+      </Suspense>
+      <Suspense fallback={null}>
+        {background.state["scenario"]["desert"].isActive && <Desert />}
       </Suspense>
     </Canvas>
   );

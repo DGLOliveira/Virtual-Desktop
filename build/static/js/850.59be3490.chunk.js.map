@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/850.59be3490.chunk.js","mappings":"qHAGA,Q,QAAyB,G","sources":["Apps/Definitions/icon.js"],"sourcesContent":["import { FcSettings } from \"react-icons/fc\";\r\n\r\n\r\nexport default FcSettings"],"names":[],"sourceRoot":""}
