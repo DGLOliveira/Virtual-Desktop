@@ -2,9 +2,10 @@ import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 import { useRef, useMemo, useContext, Suspense } from "react";
 import { BackgroundContext } from "./BackgroundContext.js";
-import { OrbitControls, Plane, Stars, Sky, Cloud } from "@react-three/drei";
+import { OrbitControls, Plane, Stars, Sky } from "@react-three/drei";
 import { extend, useFrame, useThree, useLoader } from "@react-three/fiber";
 import { Water } from "three-stdlib";
+
 
 extend({ Water });
 
@@ -13,7 +14,7 @@ export default function Scenario() {
   const Ocean = () => {
     const ref = useRef();
     const gl = useThree((state) => state.gl);
-    const waterNormals = useLoader(THREE.TextureLoader, "./waternormals.jpeg");
+    const waterNormals = useLoader(THREE.TextureLoader, './waternormals.jpeg');
     waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
     const geom = useMemo(() => new THREE.PlaneGeometry(1500, 1500), []);
     const config = useMemo(
@@ -35,12 +36,12 @@ export default function Scenario() {
     );
     return <water ref={ref} args={[geom, config]} rotation-x={-Math.PI / 2} />;
   };
-
+/*
   const Desert = () => {
     const ref = useRef();
-    const desertNormals = useLoader(THREE.TextureLoader, "./DesertNormal.png");
+    const desertNormals = useLoader(THREE.TextureLoader, '/DesertNormal.png');
     desertNormals.wrapS = desertNormals.wrapT = THREE.ClampToEdgeWrapping;
-    const sandTexture = useLoader(THREE.TextureLoader, "./SandTexture1.jpg");
+    const sandTexture = useLoader(THREE.TextureLoader, '/SandTexture1.jpg');
     sandTexture.wrapS = sandTexture.wrapT = THREE.RepeatWrapping;
     sandTexture.repeat.set(100, 100);
     return <Plane ref={ref} position={[0, -15, 0]} args={[1500, 1500, 150, 150]} rotation-x={-Math.PI / 2}>
@@ -54,7 +55,7 @@ export default function Scenario() {
         displacementMap={desertNormals}
         displacementScale={50} />
     </Plane>;
-  };
+  };*/
 
   return (
     <Canvas
@@ -103,9 +104,6 @@ export default function Scenario() {
           intensity={background.state["scenario"]["ambientLight"].intensity}
           color={background.state["scenario"]["ambientLight"].color}
         />}
-      <Suspense fallback={null}>
-        {background.state["scenario"]["desert"].isActive && <Desert />}
-      </Suspense>
       <Suspense fallback={null}>
         {background.state["scenario"]["ocean"].isActive && <Ocean />}
       </Suspense>

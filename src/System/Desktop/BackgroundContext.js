@@ -16,10 +16,10 @@ export const BackgroundContext = createContext({
 
 export function BackgroundProvider({ children }) {
   const [state, setState] = useState({
-    active: "scenario",
+    active: "color",
     color: {
       type: "color",
-      color: "#000000",
+      color: "hsl(210, 100%, 34%)",
       gradient: {
         type: "linear",
         degree: 0,
