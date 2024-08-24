@@ -1,6 +1,6 @@
 {
-  
-  "name": "desktop",
+  "homepage": "http://RagingDisease90.github.io/Portfolio",
+  "name": "pc",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -29,10 +29,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-    
   },
   "browserslist": [
     ">0.2%",
