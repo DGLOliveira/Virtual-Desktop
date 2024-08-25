@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 
-import ColorPicker from "../../../System/GlobalComponents/ColorPicker.jsx";
+import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 
 export const WindowPreview = () => {

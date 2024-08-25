@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import ColorPicker from "../../../System/GlobalComponents/ColorPicker.jsx";
+import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 import { FaReact } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";

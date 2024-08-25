@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { BackgroundContext } from "../../../System/Desktop/BackgroundContext.js";
 import { FcGlobe } from "react-icons/fc";
 
-import ColorPicker from "../../../System/GlobalComponents/ColorPicker.jsx";
+import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 export const DesktopPreview = () => {
   return (

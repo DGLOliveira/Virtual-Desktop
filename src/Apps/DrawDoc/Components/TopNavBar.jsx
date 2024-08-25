@@ -3,7 +3,7 @@ import { Context } from "../Context.jsx";
 import { BiUndo, BiRedo } from "react-icons/bi";
 import { TfiSave, TfiFile } from "react-icons/tfi";
 
-import ColorPicker from "../../../System/GlobalComponents/ColorPicker.jsx";
+import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 export const TopNavBar = ({ setAction, contextMenu }) => {
   const context = useContext(Context);

@@ -2,9 +2,9 @@
 Custom color picker to replace default color picker from input[type="color"],
 allowing for the use of alpha channel. The color picker is open on click,
 and closes on blur. 
-The color is provided as a string in hsl or hsla format.
 The color preview is set on color change, and applied when confirmed, by use 
 of the callback function setColor, which is passed as props.
+The return value is always in hsl or hsla format.
 The alpha channel is used only if the useAlpha prop is true.
 
 TODO: 
@@ -13,7 +13,13 @@ Add support for color values RGB, RGBA, hex, and hex with alpha
 */
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import "./styles.css";
+import hexToRgb from "./Converters/hexToRgb";
+import hexToRgba from "./Converters/hexToRgba";
+import rgbToHsl from "./Converters/rgbToHsl";
+import rgbaToHsla from "./Converters/rgbaToHsla";
+import nameToHsl from "./Converters/nameToHsl";
+import "../styles.css";
+
 export default function ColorPicker({ color, setColor, useAlpha }) {
     const colorPickerRef = useRef(null);
     const hueLumRef = useRef(null);
@@ -34,7 +40,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             colorPickerRef.current.focus();
         }
     }, [open]);
-    
+
     // Closes color picker on blur
     const handleBlur = (event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -47,17 +53,23 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
         if (color) {
             if (useAlpha) {
                 let hslaColor = [];
-                for (let i = 0; i < color.length; i++) {
-                    var start;
-                    var end;
-                    if (color[i] === "(") {
-                        start = i + 1;
-                    } else if (color[i] === ")") {
-                        end = i;
-                        hslaColor.push(color.slice(start, end));
-                    } else if (color[i] === ",") {
-                        hslaColor.push(color.slice(start, i));
-                        start = i + 1;
+                if (color[0] === "#") {
+                    hsla = rgbaToHsla(hexToRgba(color));
+                } else if (color.slice(0, 4) === "rgba") {
+                    hsla = rgbaToHsla(color);
+                } else if (color.slice(0, 4) === "hsla") {
+                    for (let i = 0; i < color.length; i++) {
+                        var start;
+                        var end;
+                        if (color[i] === "(") {
+                            start = i + 1;
+                        } else if (color[i] === ")") {
+                            end = i;
+                            hslaColor.push(color.slice(start, end));
+                        } else if (color[i] === ",") {
+                            hslaColor.push(color.slice(start, i));
+                            start = i + 1;
+                        }
                     }
                 }
                 setHue(Number(hslaColor[0]));
@@ -66,9 +78,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                 setAlpha(Number(hslaColor[3]));
                 if (open) {
                     const hueLumRect = hueLumRef.current.getBoundingClientRect();
-                    setColorSelectorPos({ 
-                        x:  hslaColor[0] / 360 * hueLumRect.width, 
-                        y: (100-hslaColor[2].slice(0, hslaColor[2].length - 1)) / 100 * hueLumRect.height 
+                    setColorSelectorPos({
+                        x: hslaColor[0] / 360 * hueLumRect.width,
+                        y: (100 - hslaColor[2].slice(0, hslaColor[2].length - 1)) / 100 * hueLumRect.height
                     });
                     const saturationRect = saturationRef.current.getBoundingClientRect();
                     setSaturationSliderPos(((100 - hslaColor[1].slice(0, hslaColor[1].length - 1)) / 100) * saturationRect.height);
@@ -77,29 +89,35 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                 }
             } else {
                 let hslColor = [];
-                for (let i = 0; i < color.length; i++) {
-                    var start;
-                    var end;
-                    if (color[i] === "(") {
-                        start = i + 1;
-                    } else if (color[i] === ")") {
-                        end = i;
-                        hslColor.push(color.slice(start, end));
-                    } else if (color[i] === ",") {
-                        hslColor.push(color.slice(start, i));
-                        start = i + 1;
+                if (color[0] === "#") {
+                    hsl = rgbToHsl(hexToRgb(color));
+                } else if (color.slice(0, 3) === "rgb") {
+                    hsl = rgbToHsl(color);
+                } else if (color.slice(0, 3) === "hsl") {
+                    for (let i = 0; i < color.length; i++) {
+                        var start;
+                        var end;
+                        if (color[i] === "(") {
+                            start = i + 1;
+                        } else if (color[i] === ")") {
+                            end = i;
+                            hslColor.push(color.slice(start, end));
+                        } else if (color[i] === ",") {
+                            hslColor.push(color.slice(start, i));
+                            start = i + 1;
+                        }
                     }
+                }else{
+                    hsl = nameToHsl(color);
                 }
-                console.log(color);
-                console.log(hslColor);
                 setHue(Number(hslColor[0]));
                 setSaturation(Number(hslColor[1].slice(0, hslColor[1].length - 1)));
                 setLightness(Number(hslColor[2].slice(0, hslColor[2].length - 1)));
                 if (open) {
                     const hueLumRect = hueLumRef.current.getBoundingClientRect();
-                    setColorSelectorPos({ 
-                        x:  hslColor[0] / 360 * hueLumRect.width, 
-                        y: (100-hslColor[2].slice(0, hslColor[2].length - 1) )/ 100 * hueLumRect.height 
+                    setColorSelectorPos({
+                        x: hslColor[0] / 360 * hueLumRect.width,
+                        y: (100 - hslColor[2].slice(0, hslColor[2].length - 1)) / 100 * hueLumRect.height
                     });
                     const saturationRect = saturationRef.current.getBoundingClientRect();
                     setSaturationSliderPos(((100 - hslColor[1].slice(0, hslColor[1].length - 1)) / 100) * saturationRect.height);
@@ -173,13 +191,13 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
     const handleHueInput = (value) => {
         setHue(value);
         const rect = hueLumRef.current.getBoundingClientRect();
-        setColorSelectorPos({...colorSelectorPos, x: value / 360 * rect.width });
+        setColorSelectorPos({ ...colorSelectorPos, x: value / 360 * rect.width });
     };
 
     const handleLumInput = (value) => {
         setLightness(value);
         const rect = hueLumRef.current.getBoundingClientRect();
-        setColorSelectorPos({...colorSelectorPos, y: (100 - value) / 100 * rect.height });
+        setColorSelectorPos({ ...colorSelectorPos, y: (100 - value) / 100 * rect.height });
     };
 
     const handleSaturationInput = (value) => {
@@ -193,7 +211,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
         const rect = alphaRef.current.getBoundingClientRect();
         setAlphaSliderPos(value * rect.width);
     };
-    
+
     return (
         <>
             <color-picker-button onClick={() => setOpen(!open)} >
