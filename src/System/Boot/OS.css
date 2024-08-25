@@ -55,7 +55,7 @@
   --DialogButtonBorderRadius: 0px;
   --DialogButtonBorderType: solid;
 
-  --ContextMenuBkgr: hsla(0, 0%, 18%, 1);
+  --ContextMenuBkgr: hsla(0, 0%, 18%, 0.95);
   --ContextMenuFontColor: hsl(0, 0%, 75%);
   --ContextMenuFontSize: 16px;
   --ContextMenuBorderColor: hsl(0, 0%, 18%);
