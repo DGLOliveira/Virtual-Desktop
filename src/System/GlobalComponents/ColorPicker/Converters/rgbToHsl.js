@@ -34,6 +34,6 @@ export default function rgbToHsl(rgb) {
     }
     s = Math.abs(s * 100).toFixed(0);
     l = (l * 100 ).toFixed(0);
-    let hsl = [h, s, l];
+    let hsl = [h, s + '%', l + '%'];
     return hsl;
 }
