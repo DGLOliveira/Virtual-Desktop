@@ -6,7 +6,7 @@ export default function rgbaToHsla(rgba) {
         var r = parseInt(rgba[1], 16);
         var g = parseInt(rgba[2], 16);
         var b = parseInt(rgba[3], 16);
-        var a = parseInt(rgba[4], 16) / 255;
+        var a = parseInt(rgba[4], 16);
         r /= 255;
         g /= 255;
         b /= 255;
