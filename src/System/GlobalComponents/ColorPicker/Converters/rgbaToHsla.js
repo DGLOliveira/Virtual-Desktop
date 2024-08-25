@@ -39,6 +39,6 @@ export default function rgbaToHsla(rgba) {
         }
         s = Math.abs(s * 100).toFixed(0);
         l = (l * 100 ).toFixed(0);
-        let hsla = [h, s, l, a];
+        let hsla = [h, s + '%', l + '%', a];
         return hsla;
     }

@@ -46,7 +46,7 @@
   --DialogInfoFontSize: 16px;
   --DialogTopBarBkgr: hsl(0, 0%, 41%);
   --DialogTopBarFontSize: 20px;
-  --DialogTopBarFontColor: hsl(0, 0%, 75%);
+  --DialogTopBarFontColor: rgb(191, 191, 191);
   --DialogButtonBkgr: hsl(0, 0%, 18%);
   --DialogButtonFontColor: hsl(0, 0%, 75%);
   --DialogButtonFontSize: 16px;
