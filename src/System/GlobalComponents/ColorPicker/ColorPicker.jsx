@@ -51,6 +51,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
     // Set displayed color based on current hue, saturation, and lightness, and uptades slider positions
     useEffect(() => {
         if (color) {
+            console.log(color);
             if (useAlpha) {
                 let hslaColor = [];
                 if (color[0] === "#") {
