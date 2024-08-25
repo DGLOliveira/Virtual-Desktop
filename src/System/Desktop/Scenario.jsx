@@ -5,7 +5,9 @@ import { BackgroundContext } from "./BackgroundContext.js";
 import { OrbitControls, Plane, Stars, Sky } from "@react-three/drei";
 import { extend, useFrame, useThree, useLoader } from "@react-three/fiber";
 import { Water } from "three-stdlib";
-
+import * as WaterNormals from "./Textures/waternormals.jpeg";
+import * as HillsNormals from "./Textures/DesertNormal.png";
+import * as SandTexture from "./Textures/SandTexture1.jpg";
 
 extend({ Water });
 
@@ -14,7 +16,7 @@ export default function Scenario() {
   const Ocean = () => {
     const ref = useRef();
     const gl = useThree((state) => state.gl);
-    const waterNormals = useLoader(THREE.TextureLoader, './waternormals.jpeg');
+    const waterNormals = useLoader(THREE.TextureLoader, WaterNormals.default);
     waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
     const geom = useMemo(() => new THREE.PlaneGeometry(1500, 1500), []);
     const config = useMemo(
@@ -39,9 +41,9 @@ export default function Scenario() {
 
   const Desert = () => {
     const ref = useRef();
-    const desertNormals = useLoader(THREE.TextureLoader, '/DesertNormal.png');
-    desertNormals.wrapS = desertNormals.wrapT = THREE.ClampToEdgeWrapping;
-    const sandTexture = useLoader(THREE.TextureLoader, '/SandTexture1.jpg');
+    const hillsNormals = useLoader(THREE.TextureLoader, HillsNormals.default);
+    hillsNormals.wrapS = hillsNormals.wrapT = THREE.ClampToEdgeWrapping;
+    const sandTexture = useLoader(THREE.TextureLoader, SandTexture.default);
     sandTexture.wrapS = sandTexture.wrapT = THREE.RepeatWrapping;
     sandTexture.repeat.set(100, 100);
     return <Plane ref={ref} position={[0, -15, 0]} args={[1500, 1500, 150, 150]} rotation-x={-Math.PI / 2}>
@@ -50,9 +52,9 @@ export default function Scenario() {
         metalness={0.5}
         roughness={0.8}
         map={sandTexture}
-        normalMap={desertNormals}
+        normalMap={hillsNormals}
         normalScale={new THREE.Vector2(0.8, 0.8)}
-        displacementMap={desertNormals}
+        displacementMap={hillsNormals}
         displacementScale={50} />
     </Plane>;
   };
