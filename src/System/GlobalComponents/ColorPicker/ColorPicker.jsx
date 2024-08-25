@@ -54,9 +54,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             if (useAlpha) {
                 let hslaColor = [];
                 if (color[0] === "#") {
-                    hsla = rgbaToHsla(hexToRgba(color));
+                    hslaColor = rgbaToHsla(hexToRgba(color));
                 } else if (color.slice(0, 4) === "rgba") {
-                    hsla = rgbaToHsla(color);
+                    hslaColor = rgbaToHsla(color);
                 } else if (color.slice(0, 4) === "hsla") {
                     for (let i = 0; i < color.length; i++) {
                         var start;
@@ -90,9 +90,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             } else {
                 let hslColor = [];
                 if (color[0] === "#") {
-                    hsl = rgbToHsl(hexToRgb(color));
+                    hslColor = rgbToHsl(hexToRgb(color));
                 } else if (color.slice(0, 3) === "rgb") {
-                    hsl = rgbToHsl(color);
+                    hslColor = rgbToHsl(color);
                 } else if (color.slice(0, 3) === "hsl") {
                     for (let i = 0; i < color.length; i++) {
                         var start;
@@ -108,7 +108,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                         }
                     }
                 }else{
-                    hsl = nameToHsl(color);
+                    hslColor = nameToHsl(color);
                 }
                 setHue(Number(hslColor[0]));
                 setSaturation(Number(hslColor[1].slice(0, hslColor[1].length - 1)));
