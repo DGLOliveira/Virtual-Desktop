@@ -19,6 +19,7 @@ Future plans:
 <br/>-More Star button icons and animations
 <br/>-Customizable Cursor
 <br/>-OS sound effects
+<br/>-Other OS styles, such as Apple or Linux Ubuntu
 
 # Widgets
 
