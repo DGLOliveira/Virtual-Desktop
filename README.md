@@ -87,7 +87,7 @@ The only notable mention here is not visible, but rather within the code itself,
 
 |<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/calculator_basic.png" width="30%" />
 |<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/calculator_scientific.png" width="30%" />
-|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/calculator_graphic.png" width="30%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/calculator_graphic.png" width="32%" />
 |
 
 Future plans:
