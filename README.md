@@ -70,9 +70,9 @@ This app is currently in development, as some of its features are currently not 
 A package of remade famous games, wrapped in a single app, with the hability to change keybinds. Currently includes Snake, Breakout, and Space Invaders. These are not faithfull remakes, and besides Snake, they include some twist or modification that make them slightly different than the original. For Breakout, it currently includes only 3 levels, and has no notable features. For Space Invaders, the graphics have been altered and the obstacles have been replaced with indestructible asteroids, and the game is finite, once all invaders are defeated, its over. 
 
 
-|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_snake.jpg" width="29%" />
-|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_breakout.jpg" width="29%" />
-|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_space_invaders.jpg" width="40%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_snake.jpg" width="28%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_breakout.jpg" width="28%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_space_invaders.jpg" width="39%" />
 |
 
 Future plans: 
