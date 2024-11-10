@@ -1,3 +1,4 @@
+![start screen](docs/start_screen.jpg)
 <h1>Portfolio</h1>
 
 Welcome, this is my personal portfolio for showcasing some of my works and habilities, and doubles as a side project meant to grow with time in both features and functionality.
@@ -10,9 +11,13 @@ This is a Front End React App based on the style and features present in a typic
 
 ### Customization
 
-Within the Settings app, present in the Start Menu on the Taskbar, there is a wide array of styling options for the user to play around, ranging from changing the color, size and style of several application components, all the way to making round corners, dashed borders and blurry window shadows. More customizations to come.
+Within the Settings app, present in the Start Menu on the Taskbar, there is a wide array of styling options for the user to play around, ranging from changing the color, size and style of several application components, all the way to making round corners, dashed borders and blurry window shadows. 
+
+![Window personalization](docs/3d_background_personalization_window.jpg)
 
 The most notable feature here is the background, while it is possible to keep it a simple plain color or upload an image to your liking, the unique feature is the animated 3D background, and the hability to personalize it, its possible to turn off or on features such as the stars or the water, change the color of the landscape by changing the color of the light, mess with the fog, and generate different skies, such as night or twilight. 
+
+![3D Scenario Personalization](docs/3d_background_personalization_scenario.jpg)
 
 Future plans: 
 <br/>-For the animated background, include presets daytime and weather systems, more landscapes, the moon, and eventually the hability of syncronize it with the Weather data from a provided location;
@@ -27,6 +32,11 @@ Future plans:
 
 As a feature of most personal based operating systems, be it for PC or mobile, is the hability of knowing the local weather, as such, a widget in the corner of the taskbar has been incorporated into the system. With basic features such as determining the user location with GPS, by city name or provided coordinates, this widget leverages the Open-Meteo free API to provide the data necessary, on an hourly basis, all the way to the weekly forecast. The most notable feature here is providing a chart for each individual data point, so that the user can know in finer detail the forecast for specific data, instead of the regular maximum, minimum and current time. Otherwise the widget has the standard functionalities present in most other weather apps, such as providing current relevant data and changing the units from imperial to metric, and a few others.
 
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/weather_location.png" width="30%"/>
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/weather_summary.png" width="30%"/>
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/weather_temperature.png" width="30%"/>
+|
+
 Future features will include: 
 <br/>-Incorporation of a warning system for weather and other emergency situations.
 <br/>-A more functional map, leveraging Open-Layers API, as it currently only displays where the data is being fetched from; 
@@ -39,6 +49,8 @@ Future features will include:
 
 Another common feature, present in all operating systems, is the hability to show the current time, date, and a calendar, once again, made in the style of Windows 10. The only notable feature here is that the user can replace how the date is shown in the taskbar, including a simple analog clock.
 
+<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/calendar_settings.jpg" />
+
 Future features will include:
 <br/>-Customizable Analog clock, and more clock styles;
 <br/>-Incorporating an API that fetches relevant data for the day, such as holidays and notable events;
@@ -49,11 +61,19 @@ Future features will include:
 
 A stylized but limited version of the well known Paint program, present in most Windows operating systems. This app allows the user to create a .png image with the use of basic tools such as the brush, bucket, erasor and a form and shape generator for lines, curves, polygons, stars, hearts and arrows. The objective here is not to stray away too much from the original program in terms of functionality, with its only unique feature being the hability to generate stretched shapes and stars with dozens of points. 
 
+<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/drawdoc_Seven_Star.jpg" />
+
 This app is currently in development, as some of its features are currently not intuitive or practical.
 
 ### Arcade
 
 A package of remade famous games, wrapped in a single app, with the hability to change keybinds. Currently includes Snake, Breakout, and Space Invaders. These are not faithfull remakes, and besides Snake, they include some twist or modification that make them slightly different than the original. For Breakout, it currently includes only 3 levels, and has no notable features. For Space Invaders, the graphics have been altered and the obstacles have been replaced with indestructible asteroids, and the game is finite, once all invaders are defeated, its over. 
+
+
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_snake.jpg" width="28%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_breakout.jpg" width="28%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_space_invaders.jpg" width="39%" />
+|
 
 Future plans: 
 <br/>-Develop upon current game logic into a more fullfledge versions; 
@@ -64,6 +84,11 @@ Future plans:
 
 Another basic tool for all operating systems for PC and Mobile, the faithfull calculator. This one includes a scientific and graphic version! 
 The only notable mention here is not visible, but rather within the code itself, as the goal here was to reject the commonly used <i>eval()</i> function, due to its dangerous nature, as it leaves the code exposed to script injection attacks, and instead hardcode the calculation process.
+
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/calculator_basic.png" width="30%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/calculator_scientific.png" width="30%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/calculator_graphic.png" width="32%" />
+|
 
 Future plans:
 <br/>-Expand upon graphic mode, in order to track cursor position and calculate intersection points of multiple function.
