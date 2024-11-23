@@ -1,0 +1,62 @@
+.FileViewerControls{
+    align-items: center;
+    justify-content: space-between;
+}
+.FileViewerControls>div{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.FileViewerControls>div:first-child{
+    justify-content: start;
+}
+.FileViewerControls>div:nth-child(2){
+    display: flex;
+    flex-grow: 2;
+    justify-content: start;
+}
+.FileViewerControls>div:nth-child(2)>div{
+    display: flex;
+}
+.FileViewerControls>div:last-child{
+    justify-content: end;
+}
+.FileViewerContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+    background: ghostwhite;
+    overflow: scroll;
+}
+.FileViewerContent>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 10vh;
+    min-height: 10vh;
+    overflow: hidden;
+}
+.FileViewerContent>div:hover{
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.FileViewerContent>div>svg{
+    width: 5vh;
+    height: 5vh;
+}
+.FileViewerContent>div>span{
+    width:100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 2.2vh;
+    overflow: hidden;
+}

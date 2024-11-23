@@ -22,5 +22,11 @@
             "Desktop": false,
             "Taskbar": false
         }
+    },
+    "FileViewer": {
+        "shortcuts": {
+            "Desktop": false,
+            "Taskbar": false
+        }
     }
 }

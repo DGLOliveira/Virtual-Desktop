@@ -1,0 +1,107 @@
+{
+    "type": "root",
+    "icon": "",
+    "children": {
+        "Apps":{
+            "type": "Folder",
+            "icon": "",
+            "read/write": "read",
+            "children": {
+                "Arcade":{
+                    "type": "App",
+                    "icon": "Apps/Arcade/icon.js",
+                    "path": "Apps/Arcade/index.js",
+                    "read/write": "read"
+                },
+                "Calculator":{
+                    "type": "App",
+                    "icon": "Apps/Calculator/icon.js",
+                    "path": "Apps/Calculator/index.js",
+                    "read/write": "read"
+                },
+                "DrawDoc":{
+                    "type": "App",
+                    "icon": "Apps/DrawDoc/icon.js",
+                    "path": "Apps/DrawDoc/index.js",
+                    "read/write": "read"
+                }
+            }
+        },
+        "System":{
+            "type": "Folder",
+            "icon": "",
+            "read/write": "read",
+            "children": {
+                "Apps":{
+                    "type": "Folder",
+                    "icon": "",
+                    "read/write": "read",
+                    "children": {
+                        "Definitions":{
+                            "type": "App",
+                            "icon": "Apps/Definitions/icon.js",
+                            "path": "Apps/Definitions/index.js",
+                            "read/write": "read"
+                        },
+                        "FileViewer":{
+                            "type": "App",
+                            "icon": "Apps/FileViewer/icon.js",
+                            "path": "Apps/FileViewer/index.js",
+                            "read/write": "read"
+                        }
+                    }
+                }
+            }
+        },
+        "User":{
+            "type": "Folder",
+            "icon": "",
+            "read/write": "read",
+            "children": {
+                "Desktop": {
+                    "type": "Folder",
+                    "icon": "",
+                    "read/write": "read",
+                    "children": {}
+                },
+                "Documents": {
+                    "type": "Folder",
+                    "icon": "",
+                    "read/write": "read",
+                    "children": {}
+                },
+                "Taskbar": {
+                    "type": "Folder",
+                    "icon": "",
+                    "read/write": "read",
+                    "children": {
+                        "Arcade":{
+                            "type": "App",
+                            "icon": "Apps/Arcade/icon.js",
+                            "path": "Apps/Arcade/index.js",
+                            "read/write": "read"
+                        },
+                        "Calculator":{
+                            "type": "App",
+                            "icon": "Apps/Calculator/icon.js",
+                            "path": "Apps/Calculator/index.js",
+                            "read/write": "read"
+                        },
+                        "DrawDoc":{
+                            "type": "App",
+                            "icon": "Apps/DrawDoc/icon.js",
+                            "path": "Apps/DrawDoc/index.js",
+                            "read/write": "read"
+                        },
+                        "FileViewer":{
+                            "type": "App",
+                            "icon": "Apps/FileViewer/icon.js",
+                            "path": "Apps/FileViewer/index.js",
+                            "read/write": "read"
+                        }
+                    }
+                }
+            }
+        }
+}
+}

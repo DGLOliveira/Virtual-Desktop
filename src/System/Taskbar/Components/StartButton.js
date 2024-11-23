@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import AppData from "../../../System/AppManager/Data/AppData.json";
+import {FileContext} from "../../../System/FileManager/context.jsx";
 import { AppContext } from "../../AppManager/Context/context.jsx";
 import { AppIcon } from "../../AppManager/Components/AppIcon.jsx";
 
@@ -10,6 +10,7 @@ import { MdOutlineRestartAlt } from "react-icons/md";
 import { RiShutDownLine } from "react-icons/ri";
 
 export const StartButton = () => {
+  const fileContext = useContext(FileContext);
   const appContext = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -63,7 +64,7 @@ export const StartButton = () => {
           </button>
         </div>
         <ul>
-          {Object.keys(AppData).map((name, index) => (
+          {Object.keys(fileContext.taskbar).map((name, index) => (
             name!== "Definitions" &&
             <li key={name + "startListedApp"} >
               <button 
