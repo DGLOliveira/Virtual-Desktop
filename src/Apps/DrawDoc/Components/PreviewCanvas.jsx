@@ -38,6 +38,7 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
         setClipboard,
     };
     const handleCursor = (e) => {
+        console.log(e);
         if (e.button === 0) {
             switch (e.type) {
                 case "touchstart":
