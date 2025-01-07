@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/242.755d75db.chunk.js","mappings":"qHAEA,Q,QAAyB,G","sources":["Apps/Arcade/icon.js"],"sourcesContent":["import { BsJoystick } from \"react-icons/bs\";\r\n\r\nexport default BsJoystick"],"names":[],"sourceRoot":""}
