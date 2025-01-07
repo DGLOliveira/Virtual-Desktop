@@ -107,7 +107,6 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
     };
 
     const handleTouch = (e) => {
-        console.log(e);
         if (e.touches.length === 1) {
             switch (e.type) {
                 case "touchstart":
