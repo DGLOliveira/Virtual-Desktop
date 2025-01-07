@@ -38,10 +38,8 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
         setClipboard,
     };
     const handleCursor = (e) => {
-        console.log(e);
         if (e.button === 0) {
             switch (e.type) {
-                case "touchstart":
                 case "mousedown":
                     if (cursor.down) {
                         setCursor({
@@ -57,7 +55,6 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                         });
                     }
                     break;
-                case "touchend":
                 case "mouseup":
                     setCursor({
                         ...cursor,
@@ -65,7 +62,6 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                         down: false
                     });
                     break;
-                case "touchmove":
                 case "mousemove":
                     if (!cursor.down) {
                         setCursor({
@@ -81,7 +77,6 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                         })
                     }
                     break;
-                case "touchleave":
                 case "mouseleave":
                     setCursor({
                         ...cursor,
@@ -108,6 +103,59 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                 default:
                     break;
             }
+        }
+    };
+
+    const handleTouch = (e) => {
+        console.log(e);
+        if (e.touches.length === 1) {
+            switch (e.type) {
+                case "touchstart":
+                    if (cursor.down) {
+                        setCursor({
+                            ...cursor,
+                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY },
+                            end: { x: e.touches[0].clientX, y: e.touches[0].clientY },
+                        });
+                    } else {
+                        setCursor({
+                            ...cursor,
+                            down: true,
+                            start: { x: e.touches[0].clientX, y: e.touches[0].clientY }
+                        });
+                    }
+                    break;
+                case "touchleave":
+                    setCursor({
+                        ...cursor,
+                        current: { x: 0, y: 0 }
+                    });
+                    break;
+                case "touchend":
+                    setCursor({
+                        ...cursor,
+                        end: { x: e.touches[0].clientX, y: e.touches[0].clientY },
+                        down: false
+                    });
+                    break;
+                case "touchmove":
+                    if (!cursor.down) {
+                        setCursor({
+                            ...cursor,
+                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY }
+                        });
+                    }
+                    else {
+                        setCursor({
+                            ...cursor,
+                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY },
+                            end: { x: e.touches[0].clientX, y: e.touches[0].clientY },
+                        })
+                    }
+                    break;
+                default:
+                    break;
+            };
         }
     };
 
@@ -142,11 +190,11 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             onMouseMove={(e) => handleCursor(e)}
             onMouseLeave={(e) => handleCursor(e)}
             onMouseEnter={(e) => handleCursor(e)}
-            onTouchStart={(e) => handleCursor(e)}
-            onTouchEnd={(e) => handleCursor(e)}
-            onTouchMove={(e) => handleCursor(e)}
-            onTouchLeave={(e) => handleCursor(e)}
-            onTouchEnter={(e) => handleCursor(e)}
+            onTouchStart={(e) => handleTouch(e)}
+            onTouchEnd={(e) => handleTouch(e)}
+            onTouchMove={(e) => handleTouch(e)}
+            onTouchLeave={(e) => handleTouch(e)}
+            onTouchEnter={(e) => handleTouch(e)}
             onContextMenu={(e) => handleContextMenu(e)}
         />
     );
