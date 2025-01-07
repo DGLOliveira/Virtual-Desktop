@@ -141,6 +141,11 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             onMouseMove={(e) => handleCursor(e)}
             onMouseLeave={(e) => handleCursor(e)}
             onMouseEnter={(e) => handleCursor(e)}
+            onTouchStart={(e) => handleCursor(e)}
+            onTouchEnd={(e) => handleCursor(e)}
+            onTouchMove={(e) => handleCursor(e)}
+            onTouchLeave={(e) => handleCursor(e)}
+            onTouchEnter={(e) => handleCursor(e)}
             onContextMenu={(e) => handleContextMenu(e)}
         />
     );
