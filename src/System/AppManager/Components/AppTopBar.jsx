@@ -39,9 +39,16 @@ export const AppTopBar = ({ appName, setAction }) => {
     const dragStart = (event, appName) => {
         let windowX = appContext.apps[appName].Location.Current.left;
         let windowY = appContext.apps[appName].Location.Current.top;
-        let x = event.clientX - windowX;
-        let y = event.clientY - windowY;
-        setCursorToWindowDiff({ 
+        let x, y;
+        if (event.type === "touchstart") {
+            windowX = event.touches[0].clientX - windowX;
+            windowY = event.touches[0].clientY - windowY;
+        }
+        else {
+            x = event.clientX - windowX;
+            y = event.clientY - windowY;
+        }
+        setCursorToWindowDiff({
             x: x,
             y: y
         });
@@ -52,9 +59,9 @@ export const AppTopBar = ({ appName, setAction }) => {
         contextMenu.setOpen();
         contextMenu.setPosition(e.clientX, e.clientY);
         contextMenu.setContent({
-            "Minimize": {action: () => { appContext.switchMinimized(appName);} },
-            "Maximize": {action: () => { appContext.switchMaximized(appName);} },
-            "Close": {action: () => { setAction("Close");} }
+            "Minimize": { action: () => { appContext.switchMinimized(appName); } },
+            "Maximize": { action: () => { appContext.switchMaximized(appName); } },
+            "Close": { action: () => { setAction("Close"); } }
         })
     };
 
@@ -99,6 +106,7 @@ export const AppTopBar = ({ appName, setAction }) => {
             onDragStart={(e) => dragStart(e, appName)}
             onDrag={(e) => dragWindow(e, appName)}
             onDragEnd={(e) => dragWindow(e, appName)}
+            onTouchStart={(e) => dragStart(e, appName)}
             onTouchMove={(e) => dragWindow(e, appName)}
             onDoubleClick={(e) => (
                 e.stopPropagation(), appContext.switchMaximized(appName)
