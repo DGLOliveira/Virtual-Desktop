@@ -51,7 +51,6 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
     // Set displayed color based on current hue, saturation, and lightness, and uptades slider positions
     useEffect(() => {
         if (color) {
-            console.log(color);
             if (useAlpha) {
                 let hslaColor = [];
                 if (color[0] === "#") {
@@ -73,7 +72,6 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                         }
                     }
                 }
-                console.log(hslaColor);
                 setHue(Number(hslaColor[0]));
                 setSaturation(Number(hslaColor[1].slice(0, hslaColor[1].length - 1)));
                 setLightness(Number(hslaColor[2].slice(0, hslaColor[2].length - 1)));
@@ -112,8 +110,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                 }else{
                     hslColor = nameToHsl(color);
                 }
-                console.log(hslColor);
-                setHue(Number(hslColor[1]));
+                setHue(Number(hslColor[0]));
                 setSaturation(Number(hslColor[1].slice(0, hslColor[1].length - 1)));
                 setLightness(Number(hslColor[2].slice(0, hslColor[2].length - 1)));
                 if (open) {
@@ -215,6 +212,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
         setAlphaSliderPos(value * rect.width);
     };
 
+    
     return (
         <>
             <color-picker-button onClick={() => setOpen(!open)} >
