@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { handleCanvasBorders } from "../../Handlers/handleCanvasBorders.js";
 
 const frequency = 4; //Hertz
 const frameRate = 1000 / frequency; // frames / milisecond
@@ -224,6 +225,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
     let animationFrameId;
     if (gameState === "Play") {
       drawBoard(context, context.canvas.width, context.canvas.height);
+      handleCanvasBorders(context, context.canvas.width, context.canvas.height);
       drawFruit(context, blockWidth, blockHeight);
       drawSnakeHead(context, blockWidth, blockHeight);
       drawSnakeBody(context, blockWidth, blockHeight);

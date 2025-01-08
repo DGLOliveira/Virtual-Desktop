@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { handleCanvasBorders } from "../../Handlers/handleCanvasBorders.js";
 import Maps from "./Maps.json";
 
 const frequency = 60; //Hertz
@@ -326,7 +327,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
             } else if (controls.left && controls.right
             ) {
                 player.move = "none";
-            }else if( !controls.left && !controls.right){
+            } else if (!controls.left && !controls.right) {
                 player.move = "none";
             }
             if (controls.up) {
@@ -716,6 +717,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
             case "Play":
                 if (lives >= 0 && enemies > 0) {
                     clearDraws(context);
+                    handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                     handleEvents();
                     drawObjects(context);
                     drawBottomText(context, blockSize, blockSize);

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import LevelsJSON from "./Breakout_Maps.json";
+import { handleCanvasBorders } from "../../Handlers/handleCanvasBorders.js";
 
 const frequency = 60; //Hertz
 const frameRate = 1000 / frequency; // frames / milisecond
@@ -327,6 +328,7 @@ export default function Breakout({ controls, updateScoreboard, isSelected, gameS
     switch (gameState) {
       case "Play":
         clearDraws(context);
+        handleCanvasBorders(context, context.canvas.width, context.canvas.height);
         drawPlayerBar(context, blockWidth, blockHeight);
         drawLevel(context, blockWidth, blockHeight);
         ball.x = ball.x + ball.dirX;
