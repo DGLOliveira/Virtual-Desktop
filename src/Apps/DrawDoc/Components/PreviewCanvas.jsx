@@ -124,12 +124,6 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                         });
                     }
                     break;
-                case "touchleave":
-                    setCursor({
-                        ...cursor,
-                        current: { x: 0, y: 0 }
-                    });
-                    break;
                 case "touchend":
                     setCursor({
                         ...cursor,
@@ -192,8 +186,6 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             onTouchStart={(e) => handleTouch(e)}
             onTouchEnd={(e) => handleTouch(e)}
             onTouchMove={(e) => handleTouch(e)}
-            onTouchLeave={(e) => handleTouch(e)}
-            onTouchEnter={(e) => handleTouch(e)}
             onContextMenu={(e) => handleContextMenu(e)}
         />
     );
