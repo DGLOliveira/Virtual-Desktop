@@ -99,7 +99,6 @@ export const AppTopBar = ({ appName, setAction }) => {
             onDragStart={(e) => dragStart(e, appName)}
             onDrag={(e) => dragWindow(e, appName)}
             onDragEnd={(e) => dragWindow(e, appName)}
-            onTouchStart={(e) => dragStart(e, appName)}
             onTouchMove={(e) => dragWindow(e, appName)}
             onDoubleClick={(e) => (
                 e.stopPropagation(), appContext.switchMaximized(appName)
