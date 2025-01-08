@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import Maps from "./Maps.json";
-import Controls from "../../Controls/Keyboard.js";
 
 const frequency = 60; //Hertz
 const frameRate = 1000 / frequency; // frames / milisecond

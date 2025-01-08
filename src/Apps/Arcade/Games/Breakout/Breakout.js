@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import Controls from "../../Controls/Keyboard.js";
 import LevelsJSON from "./Breakout_Maps.json";
 
 const frequency = 60; //Hertz
