@@ -1,12 +1,16 @@
-import { useRef, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { CheckValue } from "./CheckValue.js";
 import { Calculate } from "./Calculate.js";
 
 export const Graphic = (graph) => {
   let data = graph.graph;
   const canvasRef = useRef(null);
-  const rows = 100;
+  const canvasPreviewRef = useRef(null);
+  const rows = 1000;
   const cols = 1000;
+  const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [cursorXResult, setCursorXResult] = useState("?");
+  //const [cursorYResult, setCursorYResults] = useState([]);
   const findX = (calc) => {
     let xIndex = [];
     calc.forEach((value, index) => {
@@ -16,7 +20,7 @@ export const Graphic = (graph) => {
     });
     return xIndex;
   };
-  const handleOmittedXMiltiplications = (calc) => {
+  const handleOmittedXMultiplications = (calc) => {
     let xIndex = findX(calc);
     let shift = 0;
     xIndex.forEach((value) => {
@@ -51,49 +55,49 @@ export const Graphic = (graph) => {
     });
     return calc;
   };
-  const getXincrement = ()=>{
+  const getXincrement = () => {
     let incrementX = 0;
-    if(data.window.x[0]<=0 && data.window.x[1]>=0){
+    if (data.window.x[0] <= 0 && data.window.x[1] >= 0) {
       incrementX =
-      (Math.abs(data.window.x[1]) + Math.abs(data.window.x[0])) / cols;
-    }else if(data.window.x[0]>=0 && data.window.x[1]>0){
+        (Math.abs(data.window.x[1]) + Math.abs(data.window.x[0])) / cols;
+    } else if (data.window.x[0] >= 0 && data.window.x[1] > 0) {
       incrementX =
-      (Math.abs(data.window.x[1]) - Math.abs(data.window.x[0])) / cols;
-    }else{
+        (Math.abs(data.window.x[1]) - Math.abs(data.window.x[0])) / cols;
+    } else {
       incrementX =
-      -(Math.abs(data.window.x[1]) - Math.abs(data.window.x[0])) / cols;
+        -(Math.abs(data.window.x[1]) - Math.abs(data.window.x[0])) / cols;
     }
     return incrementX
   };
-  const getYincrement = ()=>{
-    let incrementY=0;
+  const getYincrement = () => {
+    let incrementY = 0;
     if (data.window.y[0] <= 0 && data.window.y[1] >= 0) {
       incrementY =
         (Math.abs(data.window.y[1]) + Math.abs(data.window.y[0])) / rows;
     } else if (data.window.y[0] >= 0 && data.window.y[1] > 0) {
       incrementY =
         (Math.abs(data.window.y[1]) - Math.abs(data.window.y[0])) / rows;
-    }else{
+    } else {
       incrementY =
         -(Math.abs(data.window.y[1]) - Math.abs(data.window.y[0])) / rows;
     }
     return incrementY
-};
-  const getZeroOffset = ()=>{
-    let zeroOffset=0;
+  };
+  const getZeroOffset = () => {
+    let zeroOffset = 0;
     if (data.window.y[0] <= 0 && data.window.y[1] >= 0) {
       zeroOffset =
         (data.window.y[1] * rows) /
         (Math.abs(data.window.y[0]) + Math.abs(data.window.y[1]));
     } else if (data.window.y[0] >= 0 && data.window.y[1] > 0) {
       zeroOffset =
-      (data.window.y[1] * rows) /(Math.abs(data.window.y[1]) - Math.abs(data.window.y[0])) ;
-    }else{
+        (data.window.y[1] * rows) / (Math.abs(data.window.y[1]) - Math.abs(data.window.y[0]));
+    } else {
       zeroOffset =
-      -(data.window.y[1] * rows) /(Math.abs(data.window.y[1]) - Math.abs(data.window.y[0])) ;
+        -(data.window.y[1] * rows) / (Math.abs(data.window.y[1]) - Math.abs(data.window.y[0]));
     }
     return zeroOffset;
-};
+  };
   const clearGraph = (ctx, canvasWidth, canvasHeight) => {
     ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -110,7 +114,7 @@ export const Graphic = (graph) => {
       ctx.fillRect(
         0,
         (Math.abs(data.window.y[1]) * rows) /
-          (Math.abs(data.window.y[0]) + data.window.y[1]),
+        (Math.abs(data.window.y[0]) + data.window.y[1]),
         canvasWidth,
         pixelHeight,
       );
@@ -131,7 +135,7 @@ export const Graphic = (graph) => {
     if (data.window.x[0] < 0 && data.window.x[1] > 0) {
       ctx.fillRect(
         (Math.abs(data.window.x[0]) * cols) /
-          (Math.abs(data.window.x[0]) + data.window.x[1]),
+        (Math.abs(data.window.x[0]) + data.window.x[1]),
         0,
         pixelWidth,
         canvasHeight,
@@ -151,7 +155,7 @@ export const Graphic = (graph) => {
         if (data[key].calc.length > 0) {
           ctx.fillStyle = data[key].color;
           let calc = structuredClone(data[key].calc);
-          calc = handleOmittedXMiltiplications(calc);
+          calc = handleOmittedXMultiplications(calc);
           let ans = 0;
           let x = data.window.x[0];
           let xIndex = findX(calc);
@@ -181,7 +185,7 @@ export const Graphic = (graph) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     let pixelWidth = (context.canvas.width / cols) * 2;
-    let pixelHeight = context.canvas.height / rows / 2;
+    let pixelHeight = context.canvas.height / rows * 10;
     let animationFrameId;
     clearGraph(context, context.canvas.width, context.canvas.height);
     drawXAxis(
@@ -210,5 +214,74 @@ export const Graphic = (graph) => {
     };
   }, [data.draw]);
 
-  return <canvas height="100" width="1000" ref={canvasRef} />;
+  const clearPreview = (ctx, canvas) => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  const drawCursorYAxis = (ctx, boundary, pixelWidth, scaleX) => {
+    ctx.fillStyle = "#888888";
+    ctx.fillRect(
+      (cursor.x - boundary.left) * scaleX,
+      0,
+      pixelWidth,
+      ctx.canvas.height,
+    );
+  };
+  const getCursorXValue = (ctx, boundary, scaleX) => {
+    let xRow = Math.round(((cursor.x - boundary.left) * scaleX * cols) / ctx.canvas.width);
+    let xValue = data.window.x[0] + getXincrement() * xRow;
+    return xValue;
+  };
+
+  //const getCursorDataValues = (ctx, xValue) => {}
+
+  //Draws Mouse hover results
+  useEffect(() => {
+    const canvas = canvasPreviewRef.current;
+    const context = canvas.getContext("2d");
+    const boundary = canvas.getBoundingClientRect();
+    let pixelWidth = (context.canvas.width / cols) * 2;
+    //let pixelHeight = (context.canvas.height / rows) * 10;
+    const scaleX = context.canvas.width / boundary.width;
+    //const scaleY = context.canvas.height / boundary.height;
+    let animationFrameId;
+    clearPreview(context, canvas);
+    if (cursor.x != 0 && cursor.y != 0) {
+      drawCursorYAxis(context, boundary, pixelWidth, scaleX);
+      let xValue = getCursorXValue(context, boundary, scaleX);
+      setCursorXResult(xValue);
+    } else {
+      setCursorXResult("?");
+    }
+    const render = () => {
+      animationFrameId = window.requestAnimationFrame(render);
+    };
+    render();
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
+
+  }, [cursor]);
+
+  return <>
+    <canvas
+      height="1000"
+      width="1000"
+      ref={canvasRef}
+    />
+    <canvas
+      height="1000"
+      width="1000"
+      ref={canvasPreviewRef}
+      style={{ background: "rgba(0,0,0,0.5)", cursor: "crosshair" }}
+      onMouseEnter={(e) => setCursor({ x: e.clientX, y: e.clientY })}
+      onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
+      onMouseLeave={() => setCursor({ x: 0, y: 0 })}
+    />
+    <div
+      style={{ width: "auto", height: "auto", color: "white" }}
+    >
+      𝑥: {cursorXResult}
+    </div>
+  </>;
 };

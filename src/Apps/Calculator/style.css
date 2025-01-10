@@ -61,6 +61,7 @@
 }
 #calculatorGraphic {
   display: flex;
+  position: relative;
   background: ghostwhite;
   justify-content: center;
   height: 80%;
@@ -69,9 +70,11 @@
 }
 #calculatorGraphic > * {
   display: flex;
+  position: absolute;
+  top:0;
+  left:0;
   height: 100%;
   width: 100%;
-  background: black;
 }
 .calculatorGraphicParam {
   display: flex;
