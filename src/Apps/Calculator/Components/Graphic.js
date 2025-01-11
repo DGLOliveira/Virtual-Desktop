@@ -9,8 +9,8 @@ export const Graphic = (graph) => {
   const rows = 1000;
   const cols = 1000;
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
-  const [cursorXResult, setCursorXResult] = useState("?");
-  //const [cursorYResult, setCursorYResults] = useState([]);
+  const [cursorXResult, setCursorXResult] = useState("");
+  const [cursorYResults, setCursorYResults] = useState({});
   const findX = (calc) => {
     let xIndex = [];
     calc.forEach((value, index) => {
@@ -181,12 +181,14 @@ export const Graphic = (graph) => {
     });
   };
 
+//Draw Graphic display
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     let pixelWidth = (context.canvas.width / cols) * 2;
     let pixelHeight = context.canvas.height / rows * 10;
     let animationFrameId;
+    console.log(data);
     clearGraph(context, context.canvas.width, context.canvas.height);
     drawXAxis(
       context,
@@ -233,7 +235,36 @@ export const Graphic = (graph) => {
     return xValue;
   };
 
-  //const getCursorDataValues = (ctx, xValue) => {}
+  const getCursorDataValues = (ctx, xValue) => {
+    let newYresults = {};
+    if(data.F.calc.length > 0){
+      let ans = getFunctionResult(xValue, data.F.calc);
+      newYresults = { ...newYresults, F: ans };
+    }
+    if(data.G.calc.length > 0){
+      let ans = getFunctionResult(xValue, data.G.calc);
+      newYresults = { ...newYresults, G: ans };
+    }
+    if(data.H.calc.length > 0){
+      let ans = getFunctionResult(xValue, data.H.calc);
+      newYresults = { ...newYresults, H: ans };
+    }
+    setCursorYResults(newYresults);
+    console.log(newYresults);
+  }
+
+  const getFunctionResult = (xValue, func) => {
+    let ans = 0;
+    let calc = structuredClone(func);
+    calc = handleOmittedXMultiplications(calc);
+    let xIndex = findX(calc);
+    xIndex.forEach((value) => {
+      calc[value] = xValue;
+    });
+    ans = Calculate(calc, "");
+    return ans;
+  }
+
 
   //Draws Mouse hover results
   useEffect(() => {
@@ -250,8 +281,11 @@ export const Graphic = (graph) => {
       drawCursorYAxis(context, boundary, pixelWidth, scaleX);
       let xValue = getCursorXValue(context, boundary, scaleX);
       setCursorXResult(xValue);
+      if(data.F.calc.length > 0 || data.G.calc.length > 0 || data.H.calc.length > 0) {
+        getCursorDataValues(context, xValue);
+      }
     } else {
-      setCursorXResult("?");
+      setCursorXResult("");
     }
     const render = () => {
       animationFrameId = window.requestAnimationFrame(render);
@@ -279,9 +313,12 @@ export const Graphic = (graph) => {
       onMouseLeave={() => setCursor({ x: 0, y: 0 })}
     />
     <div
-      style={{ width: "auto", height: "auto", color: "white" }}
+      style={{ width: "auto", height: "auto", color: "white", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start" }}
     >
-      𝑥: {cursorXResult}
+      {cursorXResult !== "" && <div>𝑥: {cursorXResult}</div>}
+      {cursorYResults.F !== undefined && <div style={{ color: "cyan" }}> ƒ(𝑥): {cursorYResults.F}</div>}
+      {cursorYResults.G !== undefined && <div style={{ color: "magenta" }}> 𝑔(𝑥): {cursorYResults.G}</div>}
+      {cursorYResults.H !== undefined && <div style={{ color: "yellow" }}> 𝒉(𝑥): {cursorYResults.H}</div>}
     </div>
   </>;
 };
