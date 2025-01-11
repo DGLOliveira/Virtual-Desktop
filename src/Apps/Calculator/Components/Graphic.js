@@ -250,7 +250,6 @@ export const Graphic = (graph) => {
       newYresults = { ...newYresults, H: ans };
     }
     setCursorYResults(newYresults);
-    console.log(newYresults);
   }
 
   const getFunctionResult = (xValue, func) => {
@@ -286,6 +285,7 @@ export const Graphic = (graph) => {
       }
     } else {
       setCursorXResult("");
+      setCursorYResults({});
     }
     const render = () => {
       animationFrameId = window.requestAnimationFrame(render);
