@@ -39,8 +39,8 @@ export const StartButton = () => {
         <div>
           <button
             onClick={() => appContext.setOpen("Definitions")}
-            title="Restart (F5)"
-            aria-label="Restart Button"
+            title="Definitions"
+            aria-label="Definitions Button"
           >
             <FaGear />
             Settings
