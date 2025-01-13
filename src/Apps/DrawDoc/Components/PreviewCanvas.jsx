@@ -149,6 +149,12 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                 default:
                     break;
             };
+        }else{
+            setCursor({
+                ...cursor,
+                current: { x: 0, y: 0 },
+                down: false
+            });
         }
     };
 
