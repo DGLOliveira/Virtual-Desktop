@@ -179,12 +179,12 @@
 }
 @media screen and (max-width: 600px) {
   .calculatorKeyboardDigital {
-    font-size: 4vh;
+    font-size: 5vw;
   }
   .calculatorKeyboardGraphic {
-    font-size: 3vh;
+    font-size: 5vw;
   }
   .calculatorButtonSmall {
-    font-size: 2vh;
+    font-size: 3vw;
   }
 }
