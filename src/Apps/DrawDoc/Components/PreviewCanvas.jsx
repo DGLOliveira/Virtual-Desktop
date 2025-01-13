@@ -192,6 +192,7 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             onTouchStart={(e) => handleTouch(e)}
             onTouchEnd={(e) => handleTouch(e)}
             onTouchMove={(e) => handleTouch(e)}
+            onTouchCancel={(e) => handleTouch(e)}
             onContextMenu={(e) => handleContextMenu(e)}
         />
     );
