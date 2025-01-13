@@ -153,6 +153,7 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             setCursor({
                 ...cursor,
                 current: { x: 0, y: 0 },
+                end: { x: cursor.current.x, y: cursor.current.y },
                 down: false
             });
         }
