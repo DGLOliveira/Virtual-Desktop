@@ -309,7 +309,9 @@ export const Graphic = (graph) => {
       ref={canvasPreviewRef}
       style={{ background: "rgba(0,0,0,0.5)", cursor: "crosshair" }}
       onMouseEnter={(e) => setCursor({ x: e.clientX, y: e.clientY })}
+      onTouchStart={(e) => setCursor({ x: e.touches[0].clientX, y: e.touches[0].clientY })}
       onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
+      onTouchMove={(e) => setCursor({ x: e.touches[0].clientX, y: e.touches[0].clientY })}
       onMouseLeave={() => setCursor({ x: 0, y: 0 })}
     />
     <div
