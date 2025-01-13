@@ -114,6 +114,8 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
                             <input
                                 style={{ width: "70px" }}
                                 type="number"
+                                min="-90"
+                                max="90"
                                 value={newLocation.lat}
                                 disabled={newLocation.source !== "Coords"}
                                 onChange={(e) => setNewLocation({ ...newLocation, lat: e.target.value })}
@@ -128,6 +130,8 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
                             <input
                                 style={{ width: "70px" }}
                                 type="number"
+                                min="-180"
+                                max="180"
                                 value={newLocation.long}
                                 disabled={newLocation.source !== "Coords"}
                                 onChange={(e) => setNewLocation({ ...newLocation, long: e.target.value })}
