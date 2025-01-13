@@ -12,6 +12,31 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
     const [searchText, setSearchText] = useState("");
     const [searchList, setSearchList] = useState([]);
     const [showSearchList, setShowSearchList] = useState(false);
+    const MAX_LAT = 90;
+    const MIN_LAT = -90;
+    const MAX_LONG = 180;
+    const MIN_LONG = -180;
+
+    const handleLatitudeChange = (e) => {
+        let lat = e.target.value;
+        if (lat > MAX_LAT) {
+            lat = MAX_LAT;
+        } else if (lat < MIN_LAT) {
+            lat = MIN_LAT;
+        }
+        setNewLocation({ ...newLocation, lat: lat });
+    };
+
+    const handleLongitudeChange = (e) => {
+        let long = e.target.value;
+        if (long > MAX_LONG) {
+            long = MAX_LONG;
+        } else if (long < MIN_LONG) {
+            long = MIN_LONG;
+        }
+        setNewLocation({ ...newLocation, long: long });
+    };
+
     const handleSearchButton = (index) => {
         searchRef.current.focus();
         setNewLocation({
@@ -118,7 +143,7 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
                                 max="90"
                                 value={newLocation.lat}
                                 disabled={newLocation.source !== "Coords"}
-                                onChange={(e) => setNewLocation({ ...newLocation, lat: e.target.value })}
+                                onChange={(e) => handleLatitudeChange(e)}
                             />
                         </div>
                     </div>
@@ -134,7 +159,7 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
                                 max="180"
                                 value={newLocation.long}
                                 disabled={newLocation.source !== "Coords"}
-                                onChange={(e) => setNewLocation({ ...newLocation, long: e.target.value })}
+                                onChange={(e) => handleLongitudeChange(e)}
                             />
                         </div>
                     </div>
