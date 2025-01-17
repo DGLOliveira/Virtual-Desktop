@@ -31,7 +31,7 @@ export function Desktop() {
       onDrop={(e) => e.preventDefault()}
     >
       <AppHandler />
-      {/* <Presentation /> */}
+      {/*<Presentation />*/}
     </desk-top>
   );
 }

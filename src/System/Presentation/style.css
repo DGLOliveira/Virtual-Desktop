@@ -45,3 +45,48 @@ portfolio-presentation>div{
     font-weight: bold;
     scroll-snap-align: start;
 }
+
+#presentationProjects{
+    height:300%;
+    width: 100%;
+}
+#presentationProjects>div{
+    height: 100%;
+    width: 100%;
+    scroll-snap-align: start;
+    justify-content: center;
+    align-items: center;
+}
+
+.presentationSkillCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 10vh;
+    background-color: white;
+    padding:1vh;
+    margin: 1vh;
+    border:1px silver solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.presentationSkillCard>img{
+    width: 5vh;
+    height: 5vh;
+}
+
+.presentationSkillCard>p{
+    font-size: 2vh;
+    font-weight: bold;
+    margin:0;
+    padding: 0;
+    text-align: center;
+    text-wrap: wrap;
+    color:black;
+}
+
+.presentationSkillCard:hover>p{
+    text-decoration: underline;
+}
