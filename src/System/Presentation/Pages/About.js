@@ -9,11 +9,12 @@ import GitHub from "./../Assets/GitHub.svg";
 import ThreeJS from "./../Assets/ThreeJS.svg";
 import Unity from "./../Assets/Unity.svg";
 import Blender from "./../Assets/Blender.svg";
+import Cura from "./../Assets/Cura.png";
 
 export default function About() {
     const languages = [
-        ["HTML", HTML, "Html5"],
-        ["CSS", CSS, "Css3"],
+        ["HTML", HTML, "HTML 5"],
+        ["CSS", CSS, "CSS 3"],
         ["JS", JS, "Javascript"],
         ["C#", CHash, "C#"]
     ];
@@ -25,7 +26,8 @@ export default function About() {
         ["VSCode", VSCode, "VS Code"],
         ["GitHub", GitHub, "GitHub"],
         ["Unity", Unity, "Unity"],
-        ["Blender", Blender, "Blender"]
+        ["Blender", Blender, "Blender"],
+        ["Cura", Cura, "Cura"]
     ];
 
 
