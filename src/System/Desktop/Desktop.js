@@ -6,7 +6,6 @@ import { AppHandler } from "../AppManager/AppHandler.jsx";
 import { AppIcon } from "../AppManager/Components/AppIcon.jsx";
 import { ContextMenuContext } from "../ContextMenuManager/context.jsx";
 import AppData from "../AppManager/Data/AppData.json";
-import Presentation from "../Presentation/script.jsx";
 import "./styles.css";
 
 
@@ -31,7 +30,6 @@ export function Desktop() {
       onDrop={(e) => e.preventDefault()}
     >
       <AppHandler />
-      {/*<Presentation />*/}
     </desk-top>
   );
 }
