@@ -1,80 +1,64 @@
 import { useState, useEffect, useRef } from "react";
+import faviconLight from "./Assets/faviconLight.ico";
+import faviconDark from "./Assets/faviconDark.ico";
+import "./StartupScreen.css";
 
-export default function StartupScreen() {
 
-    const canvasRef = useRef(null);
-    const frequency = 120;
-    const frameRate = 1000 / frequency;
-    const [framecount, setFramecount] = useState(0);
-    let clientHeight = window.innerHeight;
-    let clientWidth = window.innerWidth;
-    let minWindowDimention=0;
-    if(clientHeight<clientWidth){
-        minWindowDimention=clientHeight/2.5;
-    }else{
-        minWindowDimention=clientWidth/2.5;
+//App loading Screen utilizing an animated logo using svg
+
+const COLOR_SCHEME = {
+    "light": {
+      background: "#FFFFFF",
+      outline: "#808080",
+      primary: ["#FF00FF", "#00FFFF", "#FFFF00",]
+    },
+    "dark": {
+      background: "#000000",
+      outline: "#808080",
+      primary: ["#FF0000", "#00FF00", "#0000FF"]
     }
-
-    const drawClear = (canvas, ctx) => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    };
-
-    const drawOrbit = (ctx, count) => {
-        ctx.strokeStyle = "dodgerblue";
-        ctx.lineWidth = 5;
-        ctx.beginPath();
-        ctx.ellipse(
-            minWindowDimention / 2,
-            minWindowDimention / 2,
-            (minWindowDimention/2-5),
-            (minWindowDimention/2-5) * Math.abs(Math.cos( Math.PI/3 + framecount/60)),
-            Math.PI/3 *count + framecount/30,
-            0,
-            2 * Math.PI
-        );
-        ctx.stroke();
-    };
-
-    const drawNucleus = (ctx) => {
-        ctx.fillStyle = "dodgerblue";
-        ctx.beginPath();
-        ctx.arc(
-            minWindowDimention / 2,
-            minWindowDimention / 2,
-            minWindowDimention / 25 + minWindowDimention / 50 * Math.abs(Math.cos(framecount * Math.PI / 60)),
-            0,
-            2 * Math.PI
-        );
-        ctx.fill();
-    };
-
+  }
+export default function StartupScreen() {
+    //State to store current theme, to change favicon and logo color
+    //Will eventually be moved elsewhere
+    const [theme, setTheme] = useState("light");
+    //Changes favicon on theme change
     useEffect(() => {
-        let animationFrameId;
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d', { alpha: true });
-        drawClear(canvas, ctx);
-        drawOrbit(ctx, 0);
-        drawOrbit(ctx, 1);
-        drawOrbit(ctx, 2);
-        drawNucleus(ctx);
-        setTimeout(() => {
-            setFramecount(framecount + 1);
-        }, [frameRate]);
-        const render = () => {
-            animationFrameId = window.requestAnimationFrame(render);
-        };
-        render();
-        return () => {
-            window.cancelAnimationFrame(animationFrameId);
-        };
-    }, [framecount]);
+      let link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.getElementsByTagName('head')[0].appendChild(link);
+      }
+      if (theme === "light") {
+        link.href = faviconLight;
+      }
+      else {
+        link.href = faviconDark;
+      }
+    }, [theme]);
+  
+    //Gets user current theme 
+    useEffect(() => {
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? setTheme("dark")
+        : setTheme("light");
+    }, []);
+
     return (
-        <div style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%", background:"black", cursor: "wait"}}>
-        <div style={{position:"absolute", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", top:"50%",left:"50%",transform:"translate(-50%,-50%)", color:"white", fontFamily:"monospace"}}>
-            <canvas style={{background:"radial-gradient(rgba(30, 143, 255, 0.4), rgba(30, 143, 255, 0.3),rgba(30, 143, 255, 0.2),rgba(30, 143, 255, 0.1),transparent, transparent)"}} ref={canvasRef} width={minWindowDimention} height={minWindowDimention} />
-            <h1>{"Loading"}</h1>
-            <p>Please Wait</p>
-        </div>
+        <div style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%", background: COLOR_SCHEME[theme].background, cursor: "wait" }}>
+            <div style={{ position: "absolute", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", top: "50%", left: "50%", transform: "translate(-50%,-50%)", color: "white", fontFamily: "monospace" }}>
+                <svg className="combined-animation" width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path className="hex hex1" style={{ mixBlendMode: theme === "light" ? "multiply" : "screen" }} d="M41.0481 108.077L105 71.1547L168.952 108.077V181.923L105 218.845L41.0481 181.923V108.077Z" fill={COLOR_SCHEME[theme].primary[0]} stroke={COLOR_SCHEME[theme].outline} stroke-width="4" />
+                    <path className="hex hex2" style={{ mixBlendMode: theme === "light" ? "multiply" : "screen" }} d="M231.048 108.077L295 71.1547L358.952 108.077V181.923L295 218.845L231.048 181.923V108.077Z" fill={COLOR_SCHEME[theme].primary[1]} stroke={COLOR_SCHEME[theme].outline} stroke-width="4" />
+                    <path className="hex hex3" style={{ mixBlendMode: theme === "light" ? "multiply" : "screen" }} d="M136.048 273.077L200 236.155L263.952 273.077V346.923L200 383.845L136.048 346.923V273.077Z" fill={COLOR_SCHEME[theme].primary[2]} stroke={COLOR_SCHEME[theme].outline} stroke-width="4" />
+                    <path className="axis" d="M200 200L200 60" stroke={COLOR_SCHEME[theme].outline} stroke-width="4" />
+                    <path className="axis" d="M200 200L78.7564 270" stroke={COLOR_SCHEME[theme].outline} stroke-width="4" />
+                    <path className="axis" d="M200 200L321.244 270" stroke={COLOR_SCHEME[theme].outline} stroke-width="4" />
+                </svg>
+                <h1 style={{color: theme === "light" ? "black" : "white"}}>{"Loading"}</h1>
+                <p style={{color: theme === "light" ? "black" : "white"}}>Please Wait</p>
+            </div>
         </div>
     );
 }
