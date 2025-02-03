@@ -1,6 +1,7 @@
 {
   "files": {
-    "main.js": "/Virtual-Desktop/static/js/main.bfb12f34.js",
+    "main.css": "/Virtual-Desktop/static/css/main.ac36fc1d.css",
+    "main.js": "/Virtual-Desktop/static/js/main.ab0cb7d2.js",
     "static/css/249.df315c09.chunk.css": "/Virtual-Desktop/static/css/249.df315c09.chunk.css",
     "static/js/249.e0a4f0da.chunk.js": "/Virtual-Desktop/static/js/249.e0a4f0da.chunk.js",
     "static/js/368.f7956ca7.chunk.js": "/Virtual-Desktop/static/js/368.f7956ca7.chunk.js",
@@ -28,13 +29,16 @@
     "static/media/DesertNormal.png": "/Virtual-Desktop/static/media/DesertNormal.369eecbfa89bac2d7889.png",
     "static/media/waternormals.jpeg": "/Virtual-Desktop/static/media/waternormals.537ec85b965d414829ab.jpeg",
     "static/media/checkersBackground.jpg": "/Virtual-Desktop/static/media/checkersBackground.56d7954daa0f46365af9.jpg",
+    "static/media/faviconDark.ico": "/Virtual-Desktop/static/media/faviconDark.077b60cf30f79d189c37.ico",
+    "static/media/faviconLight.ico": "/Virtual-Desktop/static/media/faviconLight.f9d0cf6cd4fe7aec7034.ico",
     "static/media/paint-brush-resized.svg": "/Virtual-Desktop/static/media/paint-brush-resized.0f5fd6536fa48672a478.svg",
     "static/media/paint-bucket.svg": "/Virtual-Desktop/static/media/paint-bucket.b82200a1ce48f7fdffec.svg",
     "static/media/color-picker.svg": "/Virtual-Desktop/static/media/color-picker.8f884626fcd94a9817b4.svg",
+    "index.html": "/Virtual-Desktop/index.html",
     "static/media/eraser.svg": "/Virtual-Desktop/static/media/eraser.b49b9a61862d53c88608.svg",
     "static/media/spray.svg": "/Virtual-Desktop/static/media/spray.91c01632acb7533e06bb.svg",
-    "index.html": "/Virtual-Desktop/index.html",
-    "main.bfb12f34.js.map": "/Virtual-Desktop/static/js/main.bfb12f34.js.map",
+    "main.ac36fc1d.css.map": "/Virtual-Desktop/static/css/main.ac36fc1d.css.map",
+    "main.ab0cb7d2.js.map": "/Virtual-Desktop/static/js/main.ab0cb7d2.js.map",
     "249.df315c09.chunk.css.map": "/Virtual-Desktop/static/css/249.df315c09.chunk.css.map",
     "249.e0a4f0da.chunk.js.map": "/Virtual-Desktop/static/js/249.e0a4f0da.chunk.js.map",
     "368.f7956ca7.chunk.js.map": "/Virtual-Desktop/static/js/368.f7956ca7.chunk.js.map",
@@ -60,6 +64,7 @@
     "189.c6361d8e.chunk.js.map": "/Virtual-Desktop/static/js/189.c6361d8e.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.bfb12f34.js"
+    "static/css/main.ac36fc1d.css",
+    "static/js/main.ab0cb7d2.js"
   ]
 }
