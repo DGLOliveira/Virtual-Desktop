@@ -66,14 +66,6 @@ start-button>button:hover>svg>.hex3 {
   fill: #0000FF;
 }
 
-.startButtonActive {
-  color: var(--StartButtonActiveColor);
-}
-
-.startButtonActive>svg {
-  animation: linear 2.5s rotate infinite;
-}
-
 start-list {
   position: absolute;
   display: flex;

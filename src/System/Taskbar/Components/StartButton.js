@@ -79,7 +79,6 @@ export const StartButton = () => {
         </ul>
       </start-list>
       <button
-        className={isOpen ? "startisOpen" : null}
         onClick={() => setIsOpen(!isOpen)}
         title="Start (Alt + ❖)"
         aria-label="Start Button">
