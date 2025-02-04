@@ -9,6 +9,7 @@ task-bar {
   width: 100%;
   background: var(--TaskbarBkgr);
 }
+
 live-apps {
   display: flex;
   flex-direction: row;
@@ -17,6 +18,7 @@ live-apps {
   border-right: 2px dimgray solid;
   margin: 2px;
 }
+
 live-apps>button {
   display: flex;
   padding-left: 5px;
@@ -24,10 +26,12 @@ live-apps>button {
   color: var(--TaskbarFontColor);
   font-size: var(--TaskbarIconSize);
 }
-live-apps>button>svg{
+
+live-apps>button>svg {
   width: var(--TaskbarIconSize);
   height: var(--TaskbarIconSize);
 }
+
 start-button>button {
   display: flex;
   height: 100%;
@@ -36,12 +40,36 @@ start-button>button {
   padding-right: 5px;
   font-size: var(--TaskbarIconSize);
 }
-start-button>button:hover {
-  color:var(--StartButtonActiveColor);
+
+start-button>button>svg {
+  width: var(--TaskbarIconSize);
+  height: var(--TaskbarIconSize);
 }
+
+start-button>button>svg>.hex {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: fill 0.5s ease-in-out;
+}
+
+start-button>button:hover>svg>.hex1 {
+  fill: #FF0000;
+}
+
+start-button>button:hover>svg>.hex2 {
+  transition: fill 1s ease-in-out;
+  fill: #00FF00;
+}
+
+start-button>button:hover>svg>.hex3 {
+  transition: fill 1s ease-in-out;
+  fill: #0000FF;
+}
+
 .startButtonActive {
-  color:var(--StartButtonActiveColor);
+  color: var(--StartButtonActiveColor);
 }
+
 .startButtonActive>svg {
   animation: linear 2.5s rotate infinite;
 }
@@ -64,9 +92,10 @@ start-list>ul {
   padding-left: 14px;
   margin-left: var(--StartMenuIconSize);
   width: 100%;
-  height:100%;
+  height: 100%;
   overflow-y: auto;
 }
+
 start-list>ul>li {
   display: flex;
   flex-direction: row;
@@ -74,6 +103,7 @@ start-list>ul>li {
   width: 100%;
   height: 100%;
 }
+
 start-list>ul>li>button {
   font-size: var(--StartMenuFontSize);
   display: block;
@@ -82,32 +112,36 @@ start-list>ul>li>button {
   text-align: start;
   align-items: start;
   width: 100%;
-  padding:2px;
+  padding: 2px;
   color: var(--StartMenuFontColor);
 }
-start-list>ul>li>button>svg{
+
+start-list>ul>li>button>svg {
   width: var(--StartMenuIconSize);
   height: var(--StartMenuIconSize);
 }
+
 start-list>div {
   position: absolute;
-  bottom:0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: end;
   width: calc(var(--StartMenuIconSize) + 10px);
-  height:100%;
+  height: 100%;
   border-right: 2px gray solid;
   margin-bottom: 2px;
-  overflow-x:hidden;
-  transition:0.3s;
+  overflow-x: hidden;
+  transition: 0.3s;
   transition-delay: 0.3s;
 }
-start-list>div:hover{
-  width:150px;
+
+start-list>div:hover {
+  width: 150px;
   background: var(--StartMenuBkgr);
 }
+
 start-list>div>button {
   display: flex;
   flex-direction: row;
@@ -116,13 +150,16 @@ start-list>div>button {
   font-size: var(--StartMenuIconSize);
   padding: 4px;
 }
-start-list>div>button>svg{
-  padding-right:10px;
+
+start-list>div>button>svg {
+  padding-right: 10px;
 }
+
 @keyframes rotate {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
