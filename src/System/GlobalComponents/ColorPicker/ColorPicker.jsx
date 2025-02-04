@@ -161,7 +161,18 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             }
         }
     };
-
+    const touchHueLumMap = (event) => {
+        if (event.touches.length === 1) {
+        const rect = hueLumRef.current.getBoundingClientRect();
+        let x = event.touches[0].clientX - rect.left;
+        let y = event.touches[0].clientY - rect.top;
+        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+            setColorSelectorPos({ x, y });
+            setHue(Math.floor(360 * x / rect.width));
+            setLightness(100 - Math.floor(100 * y / rect.height));
+        }
+    }
+    };
 
     //Updates saturation slider position when mouse moves, as well as its value
     const handleSaturationSlider = (event) => {
@@ -175,19 +186,43 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             }
         }
     };
+    const touchSaturationSlider = (event) => {        
+        if (event.touches.length === 1) {
+        const rect = saturationRef.current.getBoundingClientRect();
+        let x = event.touches[0].clientX - rect.left;
+        let y = event.touches[0].clientY - rect.top;
+        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+            setSaturation(100 - Math.floor(100 * y / rect.height));
+            setSaturationSliderPos(y);
+        }
+    }
+    };
 
     //Updates alpha slider position when mouse moves, as well as its value
-    const handleAlphaSlider = (e) => {
-        if (e.buttons !== 0) {
+    const handleAlphaSlider = (event) => {
+        if (event.buttons !== 0) {
             const rect = alphaRef.current.getBoundingClientRect();
-            let x = e.clientX - rect.left;
-            let y = e.clientY - rect.top;
+            let x = event.clientX - rect.left;
+            let y = event.clientY - rect.top;
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
                 setAlpha((Math.floor(100 * x / rect.width)) / 100);
                 setAlphaSliderPos(x);
             }
         }
     };
+    const touchAlphaSlider = (event) => {
+        if (event.touches.length === 1) {
+        const rect = alphaRef.current.getBoundingClientRect();
+        let x = event.touches[0].clientX - rect.left;
+        let y = event.touches[0].clientY - rect.top;
+        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+            setAlpha((Math.floor(100 * x / rect.width)) / 100);
+            setAlphaSliderPos(x);
+        }
+    }
+    };
+
+
     const handleHueInput = (value) => {
         setHue(value);
         const rect = hueLumRef.current.getBoundingClientRect();
@@ -212,7 +247,6 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
         setAlphaSliderPos(value * rect.width);
     };
 
-    
     return (
         <>
             <color-picker-button onClick={() => setOpen(!open)} >
@@ -226,7 +260,13 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                 >
                     <div>
                         <hue-light-map>
-                            <canvas onMouseDown={(e) => handleHueLumMap(e)} onMouseMove={(e) => handleHueLumMap(e)} ref={hueLumRef} width="180" height="180"
+                            <canvas 
+                            onMouseDown={(e) => handleHueLumMap(e)} 
+                            onMouseMove={(e) => handleHueLumMap(e)} 
+                            onTouchMove={(e) => touchHueLumMap(e)}
+                            onTouchStart={(e) => touchHueLumMap(e)}
+                            onTouchEnd={(e) => touchHueLumMap(e)}
+                            ref={hueLumRef} width="180" height="180"
                                 style={{ opacity: useAlpha ? alpha : 1 }}
                             />
                             <slider-thumb
@@ -240,6 +280,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                 }}
                                 onMouseDown={(e) => handleHueLumMap(e)}
                                 onMouseMove={(e) => handleHueLumMap(e)}
+                                onTouchMove={(e) => touchHueLumMap(e)}
+                                onTouchStart={(e) => touchHueLumMap(e)}
+                                onTouchEnd={(e) => touchHueLumMap(e)}
                             />
                         </hue-light-map>
                         <saturation-slider title="Saturation">
@@ -251,6 +294,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                 }}
                                 onMouseDown={(e) => handleSaturationSlider(e)}
                                 onMouseMove={(e) => handleSaturationSlider(e)}
+                                onTouchMove={(e) => touchSaturationSlider(e)}
+                                onTouchStart={(e) => touchSaturationSlider(e)}
+                                onTouchEnd={(e) => touchSaturationSlider(e)}
                             />
                             <slider-thumb
                                 style={{
@@ -259,6 +305,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                 }}
                                 onMouseDown={(e) => handleSaturationSlider(e)}
                                 onMouseMove={(e) => handleSaturationSlider(e)}
+                                onTouchMove={(e) => touchSaturationSlider(e)}
+                                onTouchStart={(e) => touchSaturationSlider(e)}
+                                onTouchEnd={(e) => touchSaturationSlider(e)}
                             />
                         </saturation-slider>
                     </div>
@@ -272,6 +321,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                 }}
                                 onMouseDown={(e) => handleAlphaSlider(e)}
                                 onMouseMove={(e) => handleAlphaSlider(e)}
+                                onTouchMove={(e) => touchAlphaSlider(e)}
+                                onTouchStart={(e) => touchAlphaSlider(e)}
+                                onTouchEnd={(e) => touchAlphaSlider(e)}
                             />
                             <slider-thumb
                                 style={{
@@ -280,6 +332,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                 }}
                                 onMouseDown={(e) => handleAlphaSlider(e)}
                                 onMouseMove={(e) => handleAlphaSlider(e)}
+                                onTouchMove={(e) => touchAlphaSlider(e)}
+                                onTouchStart={(e) => touchAlphaSlider(e)}
+                                onTouchEnd={(e) => touchAlphaSlider(e)}
                             />
                         </alpha-slider>
                     }
