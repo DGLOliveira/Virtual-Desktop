@@ -93,7 +93,7 @@ export const StartButton = () => {
             }}
             d="M41.0481 108.077L105 71.1547L168.952 108.077V181.923L105 218.845L41.0481 181.923V108.077Z"
             stroke="#808080"
-            stroke-width="8"
+            strokeWidth="8"
           />
           <path
             className="hex hex2"
@@ -105,7 +105,7 @@ export const StartButton = () => {
             }}
             d="M231.048 108.077L295 71.1547L358.952 108.077V181.923L295 218.845L231.048 181.923V108.077Z"
             stroke="#808080"
-            stroke-width="8"
+            strokeWidth="8"
           />
           <path
             className="hex hex3"
@@ -117,11 +117,11 @@ export const StartButton = () => {
             }}
             d="M136.048 273.077L200 236.155L263.952 273.077V346.923L200 383.845L136.048 346.923V273.077Z"
             stroke="#808080"
-            stroke-width="8"
+            strokeWidth="8"
           />
-          <path className="axis" d="M200 200L200 60" stroke="#808080" stroke-width="8" />
-          <path className="axis" d="M200 200L78.7564 270" stroke="#808080" stroke-width="8" />
-          <path className="axis" d="M200 200L321.244 270" stroke="#808080" stroke-width="8" />
+          <path className="axis" d="M200 200L200 60" stroke="#808080" strokeWidth="8" />
+          <path className="axis" d="M200 200L78.7564 270" stroke="#808080" strokeWidth="8" />
+          <path className="axis" d="M200 200L321.244 270" stroke="#808080" strokeWidth="8" />
         </svg>
       </button>
     </start-button>
