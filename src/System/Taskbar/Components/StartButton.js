@@ -4,7 +4,6 @@ import { FileContext } from "../../../System/FileManager/context.jsx";
 import { AppContext } from "../../AppManager/Context/context.jsx";
 import { AppIcon } from "../../AppManager/Components/AppIcon.jsx";
 
-import { FaReact } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { MdOutlineRestartAlt } from "react-icons/md";
 import { RiShutDownLine } from "react-icons/ri";
