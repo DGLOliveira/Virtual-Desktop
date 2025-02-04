@@ -82,7 +82,7 @@ export const StartButton = () => {
         onClick={() => setIsOpen(!isOpen)}
         title="Start (Alt + ❖)"
         aria-label="Start Button">
-        <svg className='buttonAnimated' width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             className="hex hex1"
             style={{
