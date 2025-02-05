@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Virtual-Desktop/static/css/main.ac36fc1d.css",
-    "main.js": "/Virtual-Desktop/static/js/main.6c7d9f15.js",
+    "main.js": "/Virtual-Desktop/static/js/main.5cb7886a.js",
     "static/css/249.3809d8bc.chunk.css": "/Virtual-Desktop/static/css/249.3809d8bc.chunk.css",
     "static/js/249.f2d5f44a.chunk.js": "/Virtual-Desktop/static/js/249.f2d5f44a.chunk.js",
     "static/js/368.f7956ca7.chunk.js": "/Virtual-Desktop/static/js/368.f7956ca7.chunk.js",
@@ -11,7 +11,7 @@
     "static/js/788.9829aba8.chunk.js": "/Virtual-Desktop/static/js/788.9829aba8.chunk.js",
     "static/js/610.9023e5c4.chunk.js": "/Virtual-Desktop/static/js/610.9023e5c4.chunk.js",
     "static/css/255.01411085.chunk.css": "/Virtual-Desktop/static/css/255.01411085.chunk.css",
-    "static/js/255.6e9a4a9a.chunk.js": "/Virtual-Desktop/static/js/255.6e9a4a9a.chunk.js",
+    "static/js/255.cf6e12f5.chunk.js": "/Virtual-Desktop/static/js/255.cf6e12f5.chunk.js",
     "static/css/364.9a6164a6.chunk.css": "/Virtual-Desktop/static/css/364.9a6164a6.chunk.css",
     "static/js/364.317c8a21.chunk.js": "/Virtual-Desktop/static/js/364.317c8a21.chunk.js",
     "static/css/664.1d6815bb.chunk.css": "/Virtual-Desktop/static/css/664.1d6815bb.chunk.css",
@@ -38,7 +38,7 @@
     "static/media/eraser.svg": "/Virtual-Desktop/static/media/eraser.b49b9a61862d53c88608.svg",
     "static/media/spray.svg": "/Virtual-Desktop/static/media/spray.91c01632acb7533e06bb.svg",
     "main.ac36fc1d.css.map": "/Virtual-Desktop/static/css/main.ac36fc1d.css.map",
-    "main.6c7d9f15.js.map": "/Virtual-Desktop/static/js/main.6c7d9f15.js.map",
+    "main.5cb7886a.js.map": "/Virtual-Desktop/static/js/main.5cb7886a.js.map",
     "249.3809d8bc.chunk.css.map": "/Virtual-Desktop/static/css/249.3809d8bc.chunk.css.map",
     "249.f2d5f44a.chunk.js.map": "/Virtual-Desktop/static/js/249.f2d5f44a.chunk.js.map",
     "368.f7956ca7.chunk.js.map": "/Virtual-Desktop/static/js/368.f7956ca7.chunk.js.map",
@@ -48,7 +48,7 @@
     "788.9829aba8.chunk.js.map": "/Virtual-Desktop/static/js/788.9829aba8.chunk.js.map",
     "610.9023e5c4.chunk.js.map": "/Virtual-Desktop/static/js/610.9023e5c4.chunk.js.map",
     "255.01411085.chunk.css.map": "/Virtual-Desktop/static/css/255.01411085.chunk.css.map",
-    "255.6e9a4a9a.chunk.js.map": "/Virtual-Desktop/static/js/255.6e9a4a9a.chunk.js.map",
+    "255.cf6e12f5.chunk.js.map": "/Virtual-Desktop/static/js/255.cf6e12f5.chunk.js.map",
     "364.9a6164a6.chunk.css.map": "/Virtual-Desktop/static/css/364.9a6164a6.chunk.css.map",
     "364.317c8a21.chunk.js.map": "/Virtual-Desktop/static/js/364.317c8a21.chunk.js.map",
     "664.1d6815bb.chunk.css.map": "/Virtual-Desktop/static/css/664.1d6815bb.chunk.css.map",
@@ -65,6 +65,6 @@
   },
   "entrypoints": [
     "static/css/main.ac36fc1d.css",
-    "static/js/main.6c7d9f15.js"
+    "static/js/main.5cb7886a.js"
   ]
 }
