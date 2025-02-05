@@ -316,14 +316,16 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         if (gameState === "Play") {
             if (
                 controls.left &&
-                !controls.right
+                !controls.right &&
+                player.x + player.w > player.w
             ) {
-                player.move = "left";
+                player.x = player.x - player.speed;
             } else if (
                 controls.right &&
-                !controls.left
+                !controls.left &&
+                player.x + player.w < cols
             ) {
-                player.move = "right";
+                player.x = player.x + player.speed;
             } else if (controls.left && controls.right
             ) {
                 player.move = "none";
@@ -337,6 +339,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
             }
         }
     }, [controls]);
+
 
     //Drawing functions
     const clearDraws = (ctx) => {
@@ -480,7 +483,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         setEntities(newEntities);
         setEnemyMoveParam(newEnemyMoveParam);
     }
-    const playerMove = () => {
+    /*const playerMove = () => {
         if (player.move === "left" &&
             player.x + player.w > player.w) {
             player.x = player.x - player.speed;
@@ -488,7 +491,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
             player.x + player.w < cols) {
             player.x = player.x + player.speed;
         }
-    }
+    }*/
     const invaderMove = () => {
         if (enemyMoveParam.index >= enemies) {
             enemyMoveParam.index = 0;
@@ -704,7 +707,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         invaderShooting();
         handleBullets();
         handleExplosions();
-        playerMove();
+        //playerMove();
         invaderMove();
     }
 
