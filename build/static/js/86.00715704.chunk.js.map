@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/86.00715704.chunk.js","mappings":"oHAEA,Q,QAA2B,G","sources":["Apps/Calculator/icon.js"],"sourcesContent":["import { FcCalculator } from \"react-icons/fc\";\r\n\r\nexport default FcCalculator"],"names":[],"sourceRoot":""}
