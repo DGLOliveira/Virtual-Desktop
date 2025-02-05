@@ -332,13 +332,12 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
             } else if (!controls.left && !controls.right) {
                 player.move = "none";
             }
-            if (controls.up) {
+            if (controls.up &&
+                player.cooling === 0) {
                 player.shooting = true;
-            } else if (!controls.up) {
-                player.shooting = false;
             }
         }
-    }, [controls]);
+    }, [controls, frameCount]);
 
 
     //Drawing functions
@@ -579,6 +578,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
                 player.cooling = 0;
             }, [player.cooldown]);
             setBullets(bullets);
+            player.shooting = false;
         }
     }
     const invaderShooting = () => {
