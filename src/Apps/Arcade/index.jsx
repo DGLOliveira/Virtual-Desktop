@@ -156,7 +156,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
       </div>
       {showControls &&
         <div id="arcadeControls"
-          onContextMenu={(e) => handleContextMenu(e, "keypad")}
         >
           <div
             id="arcadeLeftButton"

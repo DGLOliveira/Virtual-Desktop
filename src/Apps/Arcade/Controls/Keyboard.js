@@ -41,12 +41,17 @@ export default function Controls(isSelected, keyboard) {
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyPress);
-    document.addEventListener("keyup", handleKeyRelease);
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
+  useEffect(() => {
+    document.addEventListener("keyup", handleKeyRelease);
+    return () => {
       document.removeEventListener("keyup", handleKeyRelease);
     };
-  }, [handleKeyPress, handleKeyRelease]);
+  }, [handleKeyRelease]);
 
   useEffect(() => {
     if (!isSelected) {
