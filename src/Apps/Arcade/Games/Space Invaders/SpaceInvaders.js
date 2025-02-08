@@ -294,7 +294,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
     const scoreboard = { time: 0, score: 0, gameState: "Start" };
     const invaderSpeed = 1;
 
-    //Player controls
+    //Game state
     useEffect(() => {
         if (controls.pause) {
             switch (gameState) {
@@ -313,6 +313,9 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
                     break;
             }
         }
+    }, [controls]);
+    //Player controls
+    useEffect(() => {
         if (gameState === "Play") {
             if (
                 controls.left &&
