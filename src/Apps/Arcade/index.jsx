@@ -162,8 +162,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
             className={controls.left ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
             onMouseDown={() => handleScreenButton("left", "keydown", true)}
             onMouseUp={() => handleScreenButton("left", "keyup", true)}
-            onTouchStart={() => handleScreenButton("left", "keyup", true)}
-            onTouchEnd={() => handleScreenButton("left", "keyup", true)}
+            onTouchStart={() => controls.left = true}
+            onTouchEnd={() => controls.left = false}
           >
             <FaArrowLeft />
           </div>
@@ -173,8 +173,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
               className={controls.up ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
               onMouseDown={() => handleScreenButton("up", "keydown", true)}
               onMouseUp={() => handleScreenButton("up", "keyup", true)}
-              onTouchStart={() => handleScreenButton("up", "keyup", true)}
-              onTouchEnd={() => handleScreenButton("up", "keyup", true)}
+              onTouchStart={() => controls.up = true}
+              onTouchEnd={() => controls.up = false}
             >
               <FaArrowUp />
             </div>
@@ -183,8 +183,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
               className={controls.down ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
               onMouseDown={() => handleScreenButton("down", "keydown", true)}
               onMouseUp={() => handleScreenButton("down", "keyup", true)}
-              onTouchStart={() => handleScreenButton("down", "keyup", true)}
-              onTouchEnd={() => handleScreenButton("down", "keyup", true)}
+              onTouchStart={() => controls.down = true}
+              onTouchEnd={() => controls.down = false}
             >
               <FaArrowDown />
             </div>
@@ -194,8 +194,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
             className={controls.right ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
             onMouseDown={() => handleScreenButton("right", "keydown", true)}
             onMouseUp={() => handleScreenButton("right", "keyup", true)}
-            onTouchStart={() => handleScreenButton("right", "keyup", true)}
-            onTouchEnd={() => handleScreenButton("right", "keyup", true)}
+            onTouchStart={() => controls.right = true}
+            onTouchEnd={() => controls.right = false}
           >
             <FaArrowRight />
           </div>
