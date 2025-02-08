@@ -17,8 +17,13 @@
   color:deepskyblue;
 }
 .arcadeButton{
+  display: flex;
   border: 1px silver solid;
   margin:1px;
+  color:rgba(128, 128, 128, 0.514);
+  font-size: 36pt;
+  justify-content: center;
+  align-items: center;
   cursor:pointer;
 }
 .arcadeButton:active{
@@ -73,48 +78,54 @@
   font-size: 40px;
   cursor: pointer;
 }
-#arcadeControls {
+#arcadeArrowControls {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   bottom: 5pt;
   left:5pt;
-  color:rgba(128, 128, 128, 0.514);
-  font-size: 36pt;
 }
 #arcadeLeftButton {
-  display: flex;
   width:48pt;
   height:48pt;
-  justify-content: center;
-  align-items: center;
   border-radius: 10% 50% 50% 10%;
   margin-right:-14pt;
 }
 #arcadeRightButton {
-  display: flex;
   width:48pt;
   height:48pt;
-  justify-content: center;
-  align-items: center;
   border-radius: 50% 10% 10% 50%;
   margin-left:-14pt;
 }
 #arcadeUpButton {
-  display: flex;
   width:48pt;
   height:48pt;
-  justify-content: center;
-  align-items: center;
   border-radius: 10% 10% 50% 50%;
   margin-bottom: 28pt;
 }
 #arcadeDownButton {
-  display: flex;
   width:48pt;
   height:48pt;
+  border-radius: 50% 50% 10% 10%;
+}
+#arcadeFireControls {
+  position: absolute;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50% 50% 10% 10%;
+  bottom: 5pt;
+  right:5pt;
+}
+#arcadeFireAButton {
+  border-radius: 50%;
+  margin-bottom: -48pt;
+  width: 64pt;
+  height: 64pt;
+}
+#arcadeFireBButton {
+  border-radius: 50%;
+  margin-bottom: 64pt;
+  width: 64pt;
+  height: 64pt;
 }

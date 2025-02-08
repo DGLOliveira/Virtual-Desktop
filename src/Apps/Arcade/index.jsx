@@ -46,23 +46,37 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
     document.dispatchEvent(new KeyboardEvent(state, { key: keyboard[key].keys[0], repeat: repeat }),)
   };
 
+  const handleTouchEvent = (event, target) => {
+    event.preventDefault();
+    if (event.type === "touchstart") {
+      controls[target] = true;
+    }
+    else if (event.type === "touchend") {
+      controls[target] = false;
+    }
+    else if (event.type === "touchcancel") {
+      controls[target] = false;
+    }
+    else if (event.type === "touchmove") { }
+  };
+
   const handleContextMenu = (event, target) => {
     let content = {};
     event.preventDefault();
     if (target === "keypad") {
       content = {
-        "Hide": {action: () => { setShowControls(false);} },
+        "Hide": { action: () => { setShowControls(false); } },
       }
     } else if (target === "scoreboard") {
       content = {
-        "Hide": {action: () => { setShowScoreboard(false);} },
+        "Hide": { action: () => { setShowScoreboard(false); } },
       }
     } else if (target === "canvas") {
       if (gameChoice !== "None") {
         let playpause = gameState === "Play" ? "Pause" : "Play";
         content = {
-          "Play/Pause": {action: () => { setGameState(playpause);} },
-          "New Game": {action: () => { setGameState("Restart");} },
+          "Play/Pause": { action: () => { setGameState(playpause); } },
+          "New Game": { action: () => { setGameState("Restart"); } },
         }
       }
     }
@@ -87,7 +101,7 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
       setShowControls: setShowControls,
       showScoreboard: showScoreboard,
       setShowScoreboard: setShowScoreboard,
-      showKeybindDialog: showKeybindDialog, 
+      showKeybindDialog: showKeybindDialog,
       setShowKeybindDialog: setShowKeybindDialog
     }
     handleAction(action, setAction, appDialog, setAppDialog, args);
@@ -155,58 +169,89 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
           )}
       </div>
       {showControls &&
-        <div id="arcadeControls"
-        >
-          <div
-            id="arcadeLeftButton"
-            className={controls.left ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
-            onMouseDown={() => handleScreenButton("left", "keydown", true)}
-            onMouseUp={() => handleScreenButton("left", "keyup", true)}
-            onTouchStart={() => controls.left = true}
-            onTouchEnd={() => controls.left = false}
+        <>
+          <div id="arcadeArrowControls"
           >
-            <FaArrowLeft />
-          </div>
-          <div id="arcadeVerticalControls">
             <div
-              id="arcadeUpButton"
-              className={controls.up ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
-              onMouseDown={() => handleScreenButton("up", "keydown", true)}
-              onMouseUp={() => handleScreenButton("up", "keyup", true)}
-              onTouchStart={() => controls.up = true}
-              onTouchEnd={() => controls.up = false}
+              id="arcadeLeftButton"
+              className={controls.left ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+              onMouseDown={() => handleScreenButton("left", "keydown", true)}
+              onMouseUp={() => handleScreenButton("left", "keyup", true)}
+              onTouchStart={(e) => handleTouchEvent(e, "left")}
+              onTouchMove={(e) => handleTouchEvent(e, "left")}
+              onTouchEnd={(e) => handleTouchEvent(e, "left")}
+              onTouchCancel={(e) => handleTouchEvent(e, "left")}
             >
-              <FaArrowUp />
+              <FaArrowLeft />
+            </div>
+            <div id="arcadeVerticalControls">
+              <div
+                id="arcadeUpButton"
+                className={controls.up ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+                onMouseDown={() => handleScreenButton("up", "keydown", true)}
+                onMouseUp={() => handleScreenButton("up", "keyup", true)}
+                onTouchStart={(e) => handleTouchEvent(e, "up")}
+                onTouchMove={(e) => handleTouchEvent(e, "up")}
+                onTouchEnd={(e) => handleTouchEvent(e, "up")}
+                onTouchCancel={(e) => handleTouchEvent(e, "up")}
+              >
+                <FaArrowUp />
+              </div>
+              <div
+                id="arcadeDownButton"
+                className={controls.down ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+                onMouseDown={() => handleScreenButton("down", "keydown", true)}
+                onMouseUp={() => handleScreenButton("down", "keyup", true)}
+                onTouchStart={(e) => handleTouchEvent(e, "down")}
+                onTouchMove={(e) => handleTouchEvent(e, "down")}
+                onTouchEnd={(e) => handleTouchEvent(e, "down")}
+                onTouchCancel={(e) => handleTouchEvent(e, "down")}
+              >
+                <FaArrowDown />
+              </div>
             </div>
             <div
-              id="arcadeDownButton"
-              className={controls.down ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
-              onMouseDown={() => handleScreenButton("down", "keydown", true)}
-              onMouseUp={() => handleScreenButton("down", "keyup", true)}
-              onTouchStart={() => controls.down = true}
-              onTouchEnd={() => controls.down = false}
+              id="arcadeRightButton"
+              className={controls.right ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+              onMouseDown={() => handleScreenButton("right", "keydown", true)}
+              onMouseUp={() => handleScreenButton("right", "keyup", true)}
+              onTouchStart={(e) => handleTouchEvent(e, "right")}
+              onTouchMove={(e) => handleTouchEvent(e, "right")}
+              onTouchEnd={(e) => handleTouchEvent(e, "right")}
+              onTouchCancel={(e) => handleTouchEvent(e, "right")}
             >
-              <FaArrowDown />
+              <FaArrowRight />
             </div>
           </div>
-          <div
-            id="arcadeRightButton"
-            className={controls.right ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
-            onMouseDown={() => handleScreenButton("right", "keydown", true)}
-            onMouseUp={() => handleScreenButton("right", "keyup", true)}
-            onTouchStart={() => controls.right = true}
-            onTouchEnd={() => controls.right = false}
-          >
-            <FaArrowRight />
+          <div id="arcadeFireControls">
+            <div id="arcadeFireAButton" 
+              className={controls.one ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+              onMouseDown={() => handleScreenButton("one", "keydown", true)}
+              onMouseUp={() => handleScreenButton("one", "keyup", true)}
+              onTouchStart={(e) => handleTouchEvent(e, "one")}
+              onTouchMove={(e) => handleTouchEvent(e, "one")}
+              onTouchEnd={(e) => handleTouchEvent(e, "one")}
+              onTouchCancel={(e) => handleTouchEvent(e, "one")}
+            >A</div>
+              <div id="arcadeFireBButton" 
+                className={controls.two ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+                onMouseDown={() => handleScreenButton("two", "keydown", true)}
+                onMouseUp={() => handleScreenButton("two", "keyup", true)}
+                onTouchStart={(e) => handleTouchEvent(e, "two")}
+                onTouchMove={(e) => handleTouchEvent(e, "two")}
+                onTouchEnd={(e) => handleTouchEvent(e, "two")}
+                onTouchCancel={(e) => handleTouchEvent(e, "two")}
+              >B</div>
           </div>
-        </div>}
-        <KeybindDialog
-          showKeybindDialog={showKeybindDialog}
-          setShowKeybindDialog={setShowKeybindDialog}
-          setAppDialog={setAppDialog}
-          keyboard={keyboard}
-          setKeyboard={setKeyboard}
-          />
+        </>
+      }
+      <KeybindDialog
+        showKeybindDialog={showKeybindDialog}
+        setShowKeybindDialog={setShowKeybindDialog}
+        setAppDialog={setAppDialog}
+        keyboard={keyboard}
+        setKeyboard={setKeyboard}
+      />
     </div>
   );
 };
