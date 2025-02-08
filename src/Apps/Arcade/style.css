@@ -15,11 +15,11 @@
 }
 .arcadeButtonOn{
   color:deepskyblue;
-  cursor:pointer;
 }
 .arcadeButton{
   border: 1px silver solid;
-  margin:1px
+  margin:1px;
+  cursor:pointer;
 }
 .arcadeButton:active{
   color:deepskyblue;
@@ -74,52 +74,47 @@
   cursor: pointer;
 }
 #arcadeControls {
-  bottom: 0;
+  position: absolute;
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  font-size: 35px;
-}
-#arcadeVerticalControls {
-  flex: 3;
+  justify-content: center;
+  align-items: center;
+  bottom: 5pt;
+  left:5pt;
+  color:rgba(128, 128, 128, 0.514);
+  font-size: 36pt;
 }
 #arcadeLeftButton {
   display: flex;
+  width:48pt;
+  height:48pt;
   justify-content: center;
   align-items: center;
-  flex: 2;
-  cursor: pointer;
-}
-#arcadeLeftButton:active {
-  color: deepskyblue;
+  border-radius: 10% 50% 50% 10%;
+  margin-right:-14pt;
 }
 #arcadeRightButton {
   display: flex;
+  width:48pt;
+  height:48pt;
   justify-content: center;
   align-items: center;
-  flex: 2;
-  cursor: pointer;
-}
-#arcadeRightButton:active {
-  color: deepskyblue;
+  border-radius: 50% 10% 10% 50%;
+  margin-left:-14pt;
 }
 #arcadeUpButton {
   display: flex;
+  width:48pt;
+  height:48pt;
   justify-content: center;
   align-items: center;
-  flex: 1;
-  cursor: pointer;
-}
-#arcadeUpButton:active {
-  color: deepskyblue;
+  border-radius: 10% 10% 50% 50%;
+  margin-bottom: 28pt;
 }
 #arcadeDownButton {
   display: flex;
+  width:48pt;
+  height:48pt;
   justify-content: center;
   align-items: center;
-  flex: 1;
-  cursor: pointer;
-}
-#arcadeDownButton:active {
-  color: deepskyblue;
+  border-radius: 50% 50% 10% 10%;
 }
