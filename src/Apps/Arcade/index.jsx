@@ -5,7 +5,7 @@ import {
   FaArrowUp,
   FaArrowDown,
 } from "react-icons/fa";
-import { BsFillPlayFill, BsPauseFill } from "react-icons/bs";
+import { BsFillPlayFill, BsPauseFill, BsEjectFill, BsZoomIn, BsZoomOut } from "react-icons/bs";
 import Controls from "./Controls/Keyboard.js";
 import Breakout from "./Games/Breakout/Breakout.js";
 import Snake from "./Games/Snake/Snake.js";
@@ -14,6 +14,7 @@ import { handleAction } from "./Handlers/handleAction.js";
 import { handleTopMenu } from "./Handlers/handleTopMenu.js";
 import { KeybindDialog } from "./Components/KeybindDialog.jsx";
 import "./style.css";
+import { set } from "ol/transform.js";
 
 export default function Arcade({ isSelected, action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu }) {
   const canvasContainer = useRef();
@@ -29,6 +30,7 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
   const controls = Controls(isSelected, keyboard);
   const [gameState, setGameState] = useState("Start");
   const [gameChoice, setGameChoice] = useState("None");
+  const [canvasZoom, setCanvasZoom] = useState(1);
   const [playButtonFlag, setPlayButtonFlag] = useState(true);
   const [showControls, setShowControls] = useState(true);
   const [showScoreboard, setShowScoreboard] = useState(true);
@@ -143,48 +145,76 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
 
   return (
     <div id="arcadeContainer">
-      <select
-        id="gameMenu"
-        onChange={(e) => {
-          setGameChoice(e.target.value);
-          setGameState("Start");
-        }}
-      >
-        <option value="None" >Select Game</option>
-        <option value="Snake">Snake</option>
-        <option value="Breakout">Breakout</option>
-        <option value="Space Invaders">Space Invaders</option>
-      </select>
       <div
         id="arcadeCanvasContainer"
         ref={canvasContainer}
         onContextMenu={(e) => handleContextMenu(e, "canvas")}
       >
-        {gameChoice === "Snake" ? (
-          <Snake controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} />
-        ) : gameChoice === "Breakout" ? (
-          <Breakout controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} />
-        ) :
-          gameChoice === "Space Invaders" ? (
-            <SpaceInvaders controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} />
-          ) : (
-            <></>
-          )}
+        {gameChoice === "None" ?
+          <div id="arcadeStartScreen">
+            <select
+              id="gameMenu"
+              onChange={(e) => {
+                setGameChoice(e.target.value);
+                setGameState("Start");
+              }}
+            >
+              <option value="None" >Select Game</option>
+              <option value="Snake">Snake</option>
+              <option value="Breakout">Breakout</option>
+              <option value="Space Invaders">Space Invaders</option>
+            </select>
+          </div> :
+          gameChoice === "Snake" ? (
+            <Snake controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
+          ) :
+            gameChoice === "Breakout" ? (
+              <Breakout controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
+            ) :
+              gameChoice === "Space Invaders" ? (
+                <SpaceInvaders controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
+              ) : (
+                <></>
+              )}
       </div>
       {showControls &&
         <>
-          <div
-            id="arcadePlayButton"
-            className="arcadeButton"
-            onClick={() => {
-              handleScreenButton("pause", "keydown", false);
-              setTimeout(() => handleScreenButton("pause", "keyup", false), 50);
-            }}
-          >
-            {playButtonFlag ? <BsFillPlayFill /> : <BsPauseFill />}
+          <div id="arcadeZoomControls">
+            <div
+              id="arcadeZoomInButton"
+              className="arcadeButton arcadeButtonOff"
+              onClick={() => {if(canvasZoom < 2) {setCanvasZoom(canvasZoom + 0.1)}}}
+            >
+              <BsZoomIn />
+            </div>
+            <div
+              id="arcadeZoomOutButton"
+              className="arcadeButton arcadeButtonOff"
+              onClick={() => {if(canvasZoom > 0.1) {setCanvasZoom(canvasZoom - 0.1)}}}
+            >
+              <BsZoomOut />
+            </div>
           </div>
-          <div id="arcadeArrowControls"
-          >
+          <div id="arcadeStateControls">
+            <div
+              id="arcadeEjectButton"
+              className="arcadeButton arcadeButtonOff"
+              onClick={() => { setGameChoice("None"); setGameState("Start"); }}
+            >
+              <BsEjectFill />
+            </div>
+            <div
+              id="arcadePlayButton"
+              className="arcadeButton arcadeButtonOff"
+              onClick={() => {
+                handleScreenButton("pause", "keydown", false);
+                setTimeout(() => handleScreenButton("pause", "keyup", false), 50);
+              }}
+            >
+              {playButtonFlag ? <BsFillPlayFill /> : <BsPauseFill />}
+            </div>
+          </div>
+          <div id="arcadeArrowControls">
             <div
               id="arcadeButtonLeft"
               className={controls.left ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
