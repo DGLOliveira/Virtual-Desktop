@@ -19,6 +19,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
   let [previousDir, setPreviousDir] = useState("right");
   let [snakeBody, setSnakeBody] = useState({ x: [], y: [] });
   let [initialPos, setInitialPos] = useState(false);
+  let [frameCount, setFrameCount] = useState(0);
   const scoreboard = { time: 0, score: 0, gameState: "Start" };
 
   useEffect(() => {
@@ -37,6 +38,9 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
         }
       }
     }
+  }, [controls]);
+
+  useEffect(() => {
     if (snakeBody.x[0] === undefined) {
       if (controls.up) {
         snakeHeadPos.direction = "up";
@@ -58,7 +62,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
         snakeHeadPos.direction = "right";
       }
     }
-  }, [controls]);
+  }, [controls, frameCount]);
 
   const drawBoard = (ctx, canvasWidth, canvasHeight) => {
     ctx.fillStyle = "#000000";
@@ -216,7 +220,6 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
     ctx.fillText("Paused", 8 * blockWidth, 17 * blockHeight, 500);
   };
 
-  let [frameCount, setFrameCount] = useState(0);
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
