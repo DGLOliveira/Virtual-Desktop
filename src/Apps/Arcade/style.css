@@ -1,4 +1,5 @@
 #arcadeContainer {
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -16,11 +17,13 @@
 .arcadeButtonOn{
   color:deepskyblue;
 }
+.arcadeButtonOff{
+  color:rgba(128, 128, 128, 0.5);
+}
 .arcadeButton{
   display: flex;
   border: 1px silver solid;
   margin:1px;
-  color:rgba(128, 128, 128, 0.514);
   font-size: 36pt;
   justify-content: center;
   align-items: center;
@@ -38,8 +41,10 @@
   transition: 0.3s;
 }
 #arcadeCanvasContainer {
-  position: relative;
+  position: absolute;
   display: flex;
+  top:0;
+  left:0;
   width: 100%;
   height: 100%;
   justify-content: center;
@@ -53,29 +58,15 @@
   object-fit: contain;
   border: 1px silver solid;
 }
-#arcadeScoreboard {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 50px;
-  text-align: left;
-  border: 1px silver solid;
-}
-#arcadeScore {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex: 5;
-  font-size: 18px;
-  color: deepskyblue;
-}
 #arcadePlayButton {
-  display: flex;
+  position: absolute;
+  top:5pt;
+  right:5pt;
+  width: 64pt;
+  height: 64pt;
+  border-radius: 20%;
   justify-content: center;
   align-items: center;
-  flex: 1;
-  font-size: 40px;
   cursor: pointer;
 }
 #arcadeArrowControls {
@@ -86,25 +77,25 @@
   bottom: 5pt;
   left:5pt;
 }
-#arcadeLeftButton {
+#arcadeButtonLeft {
   width:48pt;
   height:48pt;
   border-radius: 10% 50% 50% 10%;
   margin-right:-14pt;
 }
-#arcadeRightButton {
+#arcadeButtonRight {
   width:48pt;
   height:48pt;
   border-radius: 50% 10% 10% 50%;
   margin-left:-14pt;
 }
-#arcadeUpButton {
+#arcadeButtonUp {
   width:48pt;
   height:48pt;
   border-radius: 10% 10% 50% 50%;
   margin-bottom: 28pt;
 }
-#arcadeDownButton {
+#arcadeButtonDown {
   width:48pt;
   height:48pt;
   border-radius: 50% 50% 10% 10%;
@@ -117,13 +108,13 @@
   bottom: 5pt;
   right:5pt;
 }
-#arcadeFireAButton {
+#arcadeButtonA {
   border-radius: 50%;
   margin-bottom: -48pt;
   width: 64pt;
   height: 64pt;
 }
-#arcadeFireBButton {
+#arcadeButtonB {
   border-radius: 50%;
   margin-bottom: 64pt;
   width: 64pt;

@@ -22,8 +22,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
     down: { keys: ["s", "S", "ArrowDown"], active: true },
     left: { keys: ["a", "A", "ArrowLeft"], active: true },
     right: { keys: ["d", "D", "ArrowRight"], active: true },
-    one: { keys: ["1"], active: false },
-    two: { keys: ["2"], active: false },
+    one: { keys: ["1"], active: true },
+    two: { keys: ["2"], active: true },
     pause: { keys: ["p", "P", "Pause"], active: true },
   });
   const controls = Controls(isSelected, keyboard);
@@ -47,7 +47,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
   };
 
   const handleTouchEvent = (event, target) => {
-    event.preventDefault();
     if (event.type === "touchstart") {
       controls[target] = true;
     }
@@ -57,7 +56,32 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
     else if (event.type === "touchcancel") {
       controls[target] = false;
     }
-    else if (event.type === "touchmove") { }
+    else if (event.type === "touchmove") {
+      Object.values(event.touches).forEach((t) => {
+        let keys = [];
+        let pos = { x: t.clientX, y: t.clientY };
+        let boundingRects = {
+          up: document.getElementById("arcadeButtonUp").getBoundingClientRect(),
+          down: document.getElementById("arcadeButtonDown").getBoundingClientRect(),
+          left: document.getElementById("arcadeButtonLeft").getBoundingClientRect(),
+          right: document.getElementById("arcadeButtonRight").getBoundingClientRect(),
+          one: document.getElementById("arcadeButtonA").getBoundingClientRect(),
+          two: document.getElementById("arcadeButtonB").getBoundingClientRect(),
+        };
+        Object.keys(boundingRects).forEach((key) => {
+          if (pos.x >= boundingRects[key].x && pos.x <= boundingRects[key].x + boundingRects[key].width && pos.y >= boundingRects[key].y && pos.y <= boundingRects[key].y + boundingRects[key].height) {
+            keys.push(key);
+          }
+        })
+        Object.keys(keyboard).forEach((key) => {
+          if (keys.includes(key)) {
+            controls[key] = true;
+          } else {
+            controls[key] = false;
+          }
+        })
+      })
+    }
   };
 
   const handleContextMenu = (event, target) => {
@@ -131,27 +155,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
         <option value="Breakout">Breakout</option>
         <option value="Space Invaders">Space Invaders</option>
       </select>
-      {showScoreboard &&
-        <div id="arcadeScoreboard"
-          onContextMenu={(e) => handleContextMenu(e, "scoreboard")}
-        >
-          <div id="arcadeScore">
-            Time: {scoreboard.time} seconds
-            <br />
-            Score: {scoreboard.score}
-            <br />
-          </div>
-          <div
-            id="arcadePlayButton"
-            className="arcadeButton"
-            onClick={() => {
-              handleScreenButton("pause", "keydown", false);
-              setTimeout(() => handleScreenButton("pause", "keyup", false), 50);
-            }}
-          >
-            {playButtonFlag ? <BsFillPlayFill /> : <BsPauseFill />}
-          </div>
-        </div>}
       <div
         id="arcadeCanvasContainer"
         ref={canvasContainer}
@@ -170,11 +173,21 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
       </div>
       {showControls &&
         <>
+          <div
+            id="arcadePlayButton"
+            className="arcadeButton"
+            onClick={() => {
+              handleScreenButton("pause", "keydown", false);
+              setTimeout(() => handleScreenButton("pause", "keyup", false), 50);
+            }}
+          >
+            {playButtonFlag ? <BsFillPlayFill /> : <BsPauseFill />}
+          </div>
           <div id="arcadeArrowControls"
           >
             <div
-              id="arcadeLeftButton"
-              className={controls.left ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+              id="arcadeButtonLeft"
+              className={controls.left ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
               onMouseDown={() => handleScreenButton("left", "keydown", true)}
               onMouseUp={() => handleScreenButton("left", "keyup", true)}
               onTouchStart={(e) => handleTouchEvent(e, "left")}
@@ -184,10 +197,10 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
             >
               <FaArrowLeft />
             </div>
-            <div id="arcadeVerticalControls">
+            <div>
               <div
-                id="arcadeUpButton"
-                className={controls.up ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+                id="arcadeButtonUp"
+                className={controls.up ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
                 onMouseDown={() => handleScreenButton("up", "keydown", true)}
                 onMouseUp={() => handleScreenButton("up", "keyup", true)}
                 onTouchStart={(e) => handleTouchEvent(e, "up")}
@@ -198,8 +211,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
                 <FaArrowUp />
               </div>
               <div
-                id="arcadeDownButton"
-                className={controls.down ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+                id="arcadeButtonDown"
+                className={controls.down ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
                 onMouseDown={() => handleScreenButton("down", "keydown", true)}
                 onMouseUp={() => handleScreenButton("down", "keyup", true)}
                 onTouchStart={(e) => handleTouchEvent(e, "down")}
@@ -211,8 +224,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
               </div>
             </div>
             <div
-              id="arcadeRightButton"
-              className={controls.right ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+              id="arcadeButtonRight"
+              className={controls.right ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
               onMouseDown={() => handleScreenButton("right", "keydown", true)}
               onMouseUp={() => handleScreenButton("right", "keyup", true)}
               onTouchStart={(e) => handleTouchEvent(e, "right")}
@@ -224,8 +237,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
             </div>
           </div>
           <div id="arcadeFireControls">
-            <div id="arcadeFireAButton" 
-              className={controls.one ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
+            <div id="arcadeButtonA"
+              className={controls.one ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
               onMouseDown={() => handleScreenButton("one", "keydown", true)}
               onMouseUp={() => handleScreenButton("one", "keyup", true)}
               onTouchStart={(e) => handleTouchEvent(e, "one")}
@@ -233,15 +246,15 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
               onTouchEnd={(e) => handleTouchEvent(e, "one")}
               onTouchCancel={(e) => handleTouchEvent(e, "one")}
             >A</div>
-              <div id="arcadeFireBButton" 
-                className={controls.two ? "arcadeButton arcadeButtonOn" : "arcadeButton"}
-                onMouseDown={() => handleScreenButton("two", "keydown", true)}
-                onMouseUp={() => handleScreenButton("two", "keyup", true)}
-                onTouchStart={(e) => handleTouchEvent(e, "two")}
-                onTouchMove={(e) => handleTouchEvent(e, "two")}
-                onTouchEnd={(e) => handleTouchEvent(e, "two")}
-                onTouchCancel={(e) => handleTouchEvent(e, "two")}
-              >B</div>
+            <div id="arcadeButtonB"
+              className={controls.two ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
+              onMouseDown={() => handleScreenButton("two", "keydown", true)}
+              onMouseUp={() => handleScreenButton("two", "keyup", true)}
+              onTouchStart={(e) => handleTouchEvent(e, "two")}
+              onTouchMove={(e) => handleTouchEvent(e, "two")}
+              onTouchEnd={(e) => handleTouchEvent(e, "two")}
+              onTouchCancel={(e) => handleTouchEvent(e, "two")}
+            >B</div>
           </div>
         </>
       }
