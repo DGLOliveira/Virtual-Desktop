@@ -10,6 +10,7 @@ const defaultPlayerBar = {
   x: 12,
   y: 27,
   w: 6,
+  speed: 0.25,
 };
 const defaultBall = {
   x: 15,
@@ -53,7 +54,8 @@ export default function Breakout({ controls, updateScoreboard, isSelected, gameS
   firework7.color = "white";
   const scoreboard = { time: 0, score: 0, gameState: "Start" };
   let [score, setScore] = useState(0);
-  useEffect(() => {
+
+useEffect(() => {
     if (controls.pause) {
       if (gameState === "Play") {
         setGameState("Pause");
@@ -67,23 +69,26 @@ export default function Breakout({ controls, updateScoreboard, isSelected, gameS
         setGameState("Restart");
       }
     }
+}, [controls]);
+
+  useEffect(() => {
     if (gameState === "Play" || "Win") {
       if (
         controls.left &&
         !controls.right &&
         playerBar.x + playerBar.w > playerBar.w
       ) {
-        playerBar.x = playerBar.x - 1;
+        playerBar.x = playerBar.x - playerBar.speed;
       }
       if (
         controls.right &&
         !controls.left &&
         playerBar.x + playerBar.w < cols
       ) {
-        playerBar.x = playerBar.x + 1;
+        playerBar.x = playerBar.x + playerBar.speed;
       }
     }
-  }, [controls]);
+  }, [controls, frameCount]);
 
   const clearDraws = (ctx) => {
     ctx.fillStyle = "black";
