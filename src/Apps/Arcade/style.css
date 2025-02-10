@@ -35,14 +35,53 @@
 .arcadeButton:active{
   color:deepskyblue;
 }
-#arcadeSelect {
+#arcadeMainMenu {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 10%;
+  height: 100%;
   font-size: 18px;
-  transition: 0.3s;
+  justify-content: center;
+  align-items: center;
 }
+#arcadeSplashScreen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  border: 1px silver solid;
+  margin:1px;
+  cursor:pointer;
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
+}
+#arcadeGameList{
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color:deepskyblue;
+}
+#arcadeGameList>div{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  border: 1px silver solid;
+  padding:2pt;
+  cursor:pointer;
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
+}
+
 #arcadeCanvasContainer {
   position: absolute;
   display: flex;

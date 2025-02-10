@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa";
 import { BsFillPlayFill, BsPauseFill, BsEjectFill, BsZoomIn, BsZoomOut } from "react-icons/bs";
 import Controls from "./Controls/Keyboard.js";
+import MainMenu from "./Components/MainMenu.js";
 import Breakout from "./Games/Breakout/Breakout.js";
 import Snake from "./Games/Snake/Snake.js";
 import SpaceInvaders from "./Games/Space Invaders/SpaceInvaders.js";
@@ -14,7 +15,6 @@ import { handleAction } from "./Handlers/handleAction.js";
 import { handleTopMenu } from "./Handlers/handleTopMenu.js";
 import { KeybindDialog } from "./Components/KeybindDialog.jsx";
 import "./style.css";
-import { set } from "ol/transform.js";
 
 export default function Arcade({ isSelected, action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu }) {
   const canvasContainer = useRef();
@@ -151,20 +151,7 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
         onContextMenu={(e) => handleContextMenu(e, "canvas")}
       >
         {gameChoice === "None" ?
-          <div id="arcadeStartScreen">
-            <select
-              id="gameMenu"
-              onChange={(e) => {
-                setGameChoice(e.target.value);
-                setGameState("Start");
-              }}
-            >
-              <option value="None" >Select Game</option>
-              <option value="Snake">Snake</option>
-              <option value="Breakout">Breakout</option>
-              <option value="Space Invaders">Space Invaders</option>
-            </select>
-          </div> :
+          <MainMenu controls={controls} setGameChoice={setGameChoice} setGameState={setGameState} canvasZoom={canvasZoom} /> :
           gameChoice === "Snake" ? (
             <Snake controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
           ) :
