@@ -184,10 +184,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
               id="arcadeZoomInButton"
               className="arcadeButton arcadeButtonOff"
               onClick={() => {if(canvasZoom < 2) {setCanvasZoom(canvasZoom + 0.1)}}}
-              onTouchStart={(e) => e.preventDefault()}
-              onTouchMove={(e) => e.preventDefault()}
-              onTouchEnd={(e) => e.preventDefault()}
-              onTouchCancel={(e) => e.preventDefault()}
             >
               <BsZoomIn />
             </div>
@@ -195,10 +191,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
               id="arcadeZoomOutButton"
               className="arcadeButton arcadeButtonOff"
               onClick={() => {if(canvasZoom > 0.1) {setCanvasZoom(canvasZoom - 0.1)}}}
-              onTouchStart={(e) => e.preventDefault()}
-              onTouchMove={(e) => e.preventDefault()}
-              onTouchEnd={(e) => e.preventDefault()}
-              onTouchCancel={(e) => e.preventDefault()}
             >
               <BsZoomOut />
             </div>
@@ -208,10 +200,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
               id="arcadeEjectButton"
               className="arcadeButton arcadeButtonOff"
               onClick={() => { setGameChoice("None"); setGameState("Start"); }}
-              onTouchStart={(e) => e.preventDefault()}
-              onTouchMove={(e) => e.preventDefault()}
-              onTouchEnd={(e) => e.preventDefault()}
-              onTouchCancel={(e) => e.preventDefault()}
             >
               <BsEjectFill />
             </div>
@@ -222,10 +210,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
                 handleScreenButton("pause", "keydown", false);
                 setTimeout(() => handleScreenButton("pause", "keyup", false), 50);
               }}
-              onTouchStart={(e) => e.preventDefault()}
-              onTouchMove={(e) => e.preventDefault()}
-              onTouchEnd={(e) => e.preventDefault()}
-              onTouchCancel={(e) => e.preventDefault()}
             >
               {playButtonFlag ? <BsFillPlayFill /> : <BsPauseFill />}
             </div>
