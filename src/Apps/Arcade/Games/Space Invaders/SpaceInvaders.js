@@ -335,9 +335,12 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
             } else if (!controls.left && !controls.right) {
                 player.move = "none";
             }
-            if (controls.up &&
-                player.cooling === 0) {
-                player.shooting = true;
+            if (controls.up || controls.one
+            ) {
+                if (player.cooling === 0) {
+                    player.shooting = true;
+
+                }
             }
         }
     }, [controls, frameCount]);
@@ -778,5 +781,10 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
     }, [gameState, frameCount]);
 
     return <canvas ref={canvasRef} width={300} height={150}
-    style={{ transform: `scale(${canvasZoom})` }}></canvas>;
+        style={{ transform: `scale(${canvasZoom})` }}
+        onTouchStart={(e) => e.preventDefault()}
+        onTouchMove={(e) => e.preventDefault()}
+        onTouchEnd={(e) => e.preventDefault()}
+        onTouchCancel={(e) => e.preventDefault()}
+        ></canvas>;
 }

@@ -262,6 +262,10 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
   }, [frameCount, gameState]);
 
   return <canvas height="150" width="150" ref={canvasRef} 
-  style={{ transform: `scale(${canvasZoom})` }}></canvas>;
+  style={{ transform: `scale(${canvasZoom})` }}
+  onTouchStart={(e) => e.preventDefault()}
+  onTouchMove={(e) => e.preventDefault()}
+  onTouchEnd={(e) => e.preventDefault()}
+  onTouchCancel={(e) => e.preventDefault()}></canvas>;
 };
 export default Snake;

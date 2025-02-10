@@ -414,5 +414,9 @@ useEffect(() => {
   }, [frameCount, winFrameCount, gameState]);
 
   return <canvas ref={canvasRef} 
-  style={{ transform: `scale(${canvasZoom})` }}></canvas>;
+  style={{ transform: `scale(${canvasZoom})` }}
+  onTouchStart={(e) => e.preventDefault()}
+  onTouchMove={(e) => e.preventDefault()}
+  onTouchEnd={(e) => e.preventDefault()}
+  onTouchCancel={(e) => e.preventDefault()}></canvas>;
 }
