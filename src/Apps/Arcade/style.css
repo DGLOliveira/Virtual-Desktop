@@ -6,6 +6,7 @@
   flex-direction: column;
   overflow: hidden;
   color:silver;
+  background: black;
 }
 #arcadeContaier>*>*{
   background:black;
@@ -43,6 +44,7 @@
   font-size: 18px;
   justify-content: center;
   align-items: center;
+  border: 1px silver solid;
 }
 #arcadeSplashScreen {
   display: flex;
@@ -53,7 +55,6 @@
   align-items: center;
   border: 1px silver solid;
   margin:1px;
-  cursor:pointer;
   -webkit-user-select: none; 
   -ms-user-select: none; 
   user-select: none;
@@ -65,7 +66,6 @@
   height: 100%;
   justify-content: center;
   align-items: center;
-  color:deepskyblue;
 }
 #arcadeGameList>div{
   display: flex;

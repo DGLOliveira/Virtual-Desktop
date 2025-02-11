@@ -146,7 +146,8 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
   return (
     <div id="arcadeContainer">
       <div
-        id="arcadeCanvasContainer"
+        id="arcadeCanvasContainer" 
+        style={{ transform: `scale(${canvasZoom})` }}
         ref={canvasContainer}
         onContextMenu={(e) => handleContextMenu(e, "canvas")}
       >

@@ -23,7 +23,8 @@ export default function MainMenu({ controls, setGameState, setGameChoice }) {
     }, [controls]);
 
     return (
-        <div id="arcadeMainMenu">
+        <div>
+        <object id="arcadeMainMenu" width={600} height={400}>
             <div id="arcadeSplashScreen">
                 {Object.keys(gamelist).map((name, index) => (
                     index === currentSelection &&
@@ -34,12 +35,13 @@ export default function MainMenu({ controls, setGameState, setGameChoice }) {
                 {Object.keys(gamelist).map((name, index) => (
                     <div 
                     key={index}
-                    style={index === currentSelection ? {background: "cyan", color: "black"} : {background: "black", color: "white"}}
+                    style={index === currentSelection ? {background: "deepskyblue", color: "black"} : {background: "black", color: "white"}}
                     onClick={() => setCurrentSelection(index)}>
                         {name}
                     </div>
                 ))}
             </div>
+        </object>
         </div>
         );
 }

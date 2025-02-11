@@ -4,7 +4,7 @@ import { handleCanvasBorders } from "../../Handlers/handleCanvasBorders.js";
 const frequency = 4; //Hertz
 const frameRate = 1000 / frequency; // frames / milisecond
 
-const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState, canvasZoom }) => {
+const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState }) => {
   const rows = 30;
   const cols = 30;
   let canvasRef = useRef(null);
@@ -262,7 +262,6 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
   }, [frameCount, gameState]);
 
   return <canvas height="150" width="150" ref={canvasRef} 
-  style={{ transform: `scale(${canvasZoom})` }}
   onTouchStart={(e) => e.preventDefault()}
   onTouchMove={(e) => e.preventDefault()}
   onTouchEnd={(e) => e.preventDefault()}

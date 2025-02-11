@@ -272,7 +272,7 @@ const defaultInvaderBullet = {
     },
 }
 
-export default function SpaceInvaders({ controls, updateScoreboard, isSelected, gameState, setGameState, canvasZoom }) {
+export default function SpaceInvaders({ controls, updateScoreboard, isSelected, gameState, setGameState }) {
 
     const canvasRef = useRef(null);
     const [score, setScore] = useState(0);
@@ -781,7 +781,6 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
     }, [gameState, frameCount]);
 
     return <canvas ref={canvasRef} width={300} height={150}
-        style={{ transform: `scale(${canvasZoom})` }}
         onTouchStart={(e) => e.preventDefault()}
         onTouchMove={(e) => e.preventDefault()}
         onTouchEnd={(e) => e.preventDefault()}
