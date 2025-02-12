@@ -207,17 +207,23 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
     snakeBody.y.pop();
   };
 
-  const endGame = (ctx, blockWidth, blockHeight) => {
+  const drawEndGame = (ctx, blockWidth, blockHeight) => {
     drawBoard(ctx, blockWidth, blockHeight);
     ctx.fillStyle = "#FF0000";
-    ctx.font = "20px monospace"; //I hate this
-    ctx.fillText("Game Over", 5 * blockWidth, 17 * blockHeight, 500);
+    ctx.font = "50px monospace";
+    ctx.fillText("Game Over", 3 * blockWidth, 8 * blockHeight, 500);
+    ctx.font = "28px monospace";
+    ctx.fillText("Score: " + score, 7 * blockWidth, 15 * blockHeight, 500);
+    ctx.fillText("Time: " + Math.floor(frameCount / (score / 2 + frequency)), 7 * blockWidth, 20 * blockHeight, 500);
+    ctx.font = "16px monospace";
+    ctx.fillText("Press Play to Restart", 5.5 * blockWidth, 25 * blockHeight, 500);
   };
-  const pauseGame = (ctx, blockWidth, blockHeight) => {
+  
+  const drawPauseGame = (ctx, blockWidth, blockHeight) => {
     drawBoard(ctx, blockWidth, blockHeight);
     ctx.fillStyle = "#FF0000";
-    ctx.font = "20px monospace"; //I hate this
-    ctx.fillText("Paused", 8 * blockWidth, 17 * blockHeight, 500);
+    ctx.font = "50px monospace";
+    ctx.fillText("Paused", 7 * blockWidth, 17 * blockHeight, 500);
   };
 
   useEffect(() => {
@@ -236,10 +242,10 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
         setFrameCount(frameCount + 1);
       }, [1000 / (score / 2 + frequency)]);
     } else if (gameState === "Pause") {
-      pauseGame(context, blockWidth, blockHeight);
+      drawPauseGame(context, blockWidth, blockHeight);
     } else if (gameState === "End") {
       drawBoard(context, context.canvas.width, context.canvas.height);
-      endGame(context, blockWidth, blockHeight);
+      drawEndGame(context, blockWidth, blockHeight);
     } else if (gameState === "Restart") {
       setGameState("Play");
       setFrameCount(1);
@@ -261,10 +267,10 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
     };
   }, [frameCount, gameState]);
 
-  return <canvas height="150" width="150" ref={canvasRef} 
-  onTouchStart={(e) => e.preventDefault()}
-  onTouchMove={(e) => e.preventDefault()}
-  onTouchEnd={(e) => e.preventDefault()}
-  onTouchCancel={(e) => e.preventDefault()}></canvas>;
+  return <canvas height="300" width="300" ref={canvasRef}
+    onTouchStart={(e) => e.preventDefault()}
+    onTouchMove={(e) => e.preventDefault()}
+    onTouchEnd={(e) => e.preventDefault()}
+    onTouchCancel={(e) => e.preventDefault()}></canvas>;
 };
 export default Snake;

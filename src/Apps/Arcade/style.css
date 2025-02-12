@@ -54,7 +54,6 @@
   justify-content: center;
   align-items: center;
   border: 1px silver solid;
-  margin:1px;
   -webkit-user-select: none; 
   -ms-user-select: none; 
   user-select: none;
@@ -64,6 +63,7 @@
   flex-direction: column;
   width: auto;
   height: 100%;
+  width: 100%;
   justify-content: center;
   align-items: center;
 }
@@ -75,7 +75,6 @@
   justify-content: center;
   align-items: center;
   border: 1px silver solid;
-  padding:2pt;
   cursor:pointer;
   -webkit-user-select: none; 
   -ms-user-select: none; 
