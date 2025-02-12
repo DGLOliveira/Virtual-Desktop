@@ -94,15 +94,26 @@ useEffect(() => {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   };
+  const drawStartGame = (ctx, blockWidth, blockHeight) => {
+    clearDraws(ctx);
+    ctx.fillStyle = "#FF0000";
+    ctx.font = "24px monospace";
+    ctx.fillText("Press Play to Start", 2.5 * blockWidth, 15 * blockHeight, 500);
+  };
 
   const drawGameOver = (ctx, blockWidth, blockHeight) => {
     ctx.fillStyle = "red";
-    ctx.font = "40px monospace"; //change this nonsense static font size
-    ctx.fillText("Game Over", 5 * blockWidth, 17 * blockHeight, 500);
+    ctx.font = "40px monospace"; 
+    ctx.fillText("Game Over", 5 * blockWidth, 9 * blockHeight, 500);
+    ctx.font = "16px monospace";
+    ctx.fillText("Score: " + score, 11 * blockWidth, 15 * blockHeight, 500);
+    ctx.fillText("Time: " + Math.floor(frameCount/frequency), 11 * blockWidth, 19 * blockHeight, 500);
+    ctx.font = "12px monospace";
+    ctx.fillText("Press Play to Restart", 8 * blockWidth, 26 * blockHeight, 500);
   };
   const drawPauseGame = (ctx, blockWidth, blockHeight) => {
     ctx.fillStyle = "red";
-    ctx.font = "40px monospace"; //and this
+    ctx.font = "40px monospace"; 
     ctx.fillText("Paused", 8 * blockWidth, 17 * blockHeight, 500);
   };
   const handleFireworks = (ctx, blockWidth, blockHeight) => {
@@ -173,10 +184,14 @@ useEffect(() => {
     }
   };
   const drawWinGame = (ctx, blockWidth, blockHeight) => {
-    clearDraws(ctx);
     ctx.fillStyle = "red";
     ctx.font = "40px monospace";
-    ctx.fillText("You Win", 8 * blockWidth, 17 * blockHeight, 500);
+    ctx.fillText("You Win", 7 * blockWidth, 9 * blockHeight, 500);
+    ctx.font = "16px monospace";
+    ctx.fillText("Score: " + score, 11 * blockWidth, 15 * blockHeight, 500);
+    ctx.fillText("Time: " + Math.floor(frameCount/frequency), 11 * blockWidth, 19 * blockHeight, 500);
+    ctx.font = "12px monospace";
+    ctx.fillText("Press Play to Restart", 8 * blockWidth, 26 * blockHeight, 500);
   };
 
   const drawLevelUp = (ctx, blockWidth, blockHeight, t) => {
@@ -331,6 +346,19 @@ useEffect(() => {
     let blockHeight = context.canvas.height / rows;
     let animationFrameId;
     switch (gameState) {
+      case "Start":
+        setMaps(JSON.parse(JSON.stringify(LevelsJSON)));
+        setGameLevel(0);
+        setCurrLevel(Maps[gameLevel]);
+        setLevelHealth(currLevel.Bars);
+        setBall(Object.create(defaultBall));
+        setPlayerBar(Object.create(defaultPlayerBar));
+        setScore(0);
+        setFrameCount(1);
+        clearDraws(context);
+        drawStartGame(context, blockWidth, blockHeight);
+        handleCanvasBorders(context, context.canvas.width, context.canvas.height);
+        break;
       case "Play":
         clearDraws(context);
         handleCanvasBorders(context, context.canvas.width, context.canvas.height);
@@ -348,7 +376,9 @@ useEffect(() => {
         drawPauseGame(context, blockWidth, blockHeight);
         break;
       case "End":
+        clearDraws(context);
         drawGameOver(context, blockWidth, blockHeight);
+        handleCanvasBorders(context, context.canvas.width, context.canvas.height);
         break;
       case "Restart":
         setMaps(JSON.parse(JSON.stringify(LevelsJSON)));
@@ -389,9 +419,11 @@ useEffect(() => {
         break;
       case "Win":
         setCurrLevel(Maps[3]);
-        drawWinGame(context, blockWidth, blockHeight);
+        clearDraws(context);
         drawPlayerBar(context, blockWidth, blockHeight);
         handleFireworks(context, blockWidth, blockHeight);
+        drawWinGame(context, blockWidth, blockHeight);
+        handleCanvasBorders(context, context.canvas.width, context.canvas.height);
         setTimeout(() => {
           setWinFrameCount(winFrameCount + 1);
         }, [frameRate]);
