@@ -218,12 +218,19 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
     ctx.font = "16px monospace";
     ctx.fillText("Press Play to Restart", 5.5 * blockWidth, 25 * blockHeight, 500);
   };
-  
+
   const drawPauseGame = (ctx, blockWidth, blockHeight) => {
     drawBoard(ctx, blockWidth, blockHeight);
     ctx.fillStyle = "#FF0000";
     ctx.font = "50px monospace";
     ctx.fillText("Paused", 7 * blockWidth, 17 * blockHeight, 500);
+  };
+
+  const drawStartGame = (ctx, blockWidth, blockHeight) => {
+    drawBoard(ctx, blockWidth, blockHeight);
+    ctx.fillStyle = "#FF0000";
+    ctx.font = "28px monospace";
+    ctx.fillText("Press Play to Start", 0 * blockWidth, 17 * blockHeight, 500);
   };
 
   useEffect(() => {
@@ -248,6 +255,13 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
       drawEndGame(context, blockWidth, blockHeight);
     } else if (gameState === "Restart") {
       setGameState("Play");
+      setFrameCount(1);
+      setFruit(false);
+      setInitialPos(false);
+      setScore(0);
+      setSnakeBody({ x: [], y: [] });
+    } else if (gameState === "Start") {
+      drawStartGame(context, blockWidth, blockHeight);
       setFrameCount(1);
       setFruit(false);
       setInitialPos(false);
