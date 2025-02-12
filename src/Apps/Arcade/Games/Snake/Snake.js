@@ -214,7 +214,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
     ctx.fillText("Game Over", 3 * blockWidth, 8 * blockHeight, 500);
     ctx.font = "28px monospace";
     ctx.fillText("Score: " + score, 7 * blockWidth, 15 * blockHeight, 500);
-    ctx.fillText("Time: " + Math.floor(frameCount / (score / 2 + frequency)), 7 * blockWidth, 20 * blockHeight, 500);
+    ctx.fillText("Time: " + Math.floor(frameCount / frequency), 7 * blockWidth, 20 * blockHeight, 500);
     ctx.font = "16px monospace";
     ctx.fillText("Press Play to Restart", 5.5 * blockWidth, 25 * blockHeight, 500);
   };
@@ -271,7 +271,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
       setScore(0);
       setSnakeBody({ x: [], y: [] });
     }
-    scoreboard.time = Math.floor(frameCount / (score / 2 + frequency));
+    scoreboard.time = Math.floor(frameCount / frequency);
     scoreboard.score = score;
     scoreboard.gameState = gameState;
     updateScoreboard(scoreboard);

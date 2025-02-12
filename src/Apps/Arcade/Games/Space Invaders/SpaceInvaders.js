@@ -411,24 +411,30 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
     };
     const drawGameOver = (ctx, blockWidth, blockHeight) => {
         ctx.fillStyle = "red";
-        ctx.font = "40px monospace"; //change this nonsense static font size
-        ctx.fillText("Game Over", 5 * blockWidth, 8 * blockHeight, 500);
+        ctx.font = "40px monospace"; 
+        ctx.fillText("Game Over", 5 * blockWidth, 5 * blockHeight, 500);
+        ctx.font = "16px monospace";
+        ctx.fillText("Score: " + score, 11 * blockWidth, 8 * blockHeight, 500);
+        ctx.fillText("Time: " + Math.floor(frameCount/frequency), 11 * blockWidth, 10 * blockHeight, 500);
+        ctx.font = "12px monospace";
+        ctx.fillText("Press Play to Restart", 8 * blockWidth, 13 * blockHeight, 500);
     };
     const drawPauseGame = (ctx, blockWidth, blockHeight) => {
         ctx.fillStyle = "red";
-        ctx.font = "40px monospace"; //and this
+        ctx.font = "40px monospace"; 
         ctx.fillText("Paused", 8 * blockWidth, 8 * blockHeight, 500);
     };
     const drawWinGame = (ctx, blockWidth, blockHeight) => {
         drawBoard(ctx);
         ctx.fillStyle = "red";
         ctx.font = "40px monospace";
-        ctx.fillText("You Win", 7 * blockWidth, 5 * blockHeight, 500);
+        ctx.fillText("You Win", 7 * blockWidth, 4 * blockHeight, 500);
         ctx.font = "16px monospace";
-        ctx.fillText("Score: " + score, 11 * blockWidth, 8 * blockHeight, 500);
-        ctx.fillText("Time: " + Math.floor(frameCount / (score / 2 + frequency)), 11 * blockWidth, 10 * blockHeight, 500);
+        ctx.fillText("Score: " + score, 10 * blockWidth, 7 * blockHeight, 500);
+        ctx.fillText("Time: " + Math.floor(frameCount/frequency), 10 * blockWidth, 9 * blockHeight, 500);
+        ctx.fillText("Lives: " + lives, 10 * blockWidth, 11 * blockHeight, 500);
         ctx.font = "12px monospace";
-        ctx.fillText("Press Play to Restart", 8 * blockWidth, 13 * blockHeight, 500);
+        ctx.fillText("Press Play to Restart", 8 * blockWidth, 14 * blockHeight, 500);
     };
     const drawBottomText = (ctx, blockWidth, blockHeight) => {
         ctx.fillStyle = "red";
@@ -747,10 +753,12 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
                 handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                 break;
             case "Win":
+                drawBoard(context);
                 drawWinGame(context, blockSize, blockSize);
                 handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                 break;
             case "End":
+                drawBoard(context);
                 drawGameOver(context, blockSize, blockSize);
                 handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                 break;
@@ -763,6 +771,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
                 setUpLevel();
                 setPlayer(Object.create(defaultPlayer));
                 setFrameCount(1);
+                drawBoard(context);
                 drawStartGame(context, blockSize, blockSize);
                 handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                 break;
