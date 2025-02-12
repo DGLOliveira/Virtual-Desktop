@@ -347,7 +347,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
 
 
     //Drawing functions
-    const clearDraws = (ctx) => {
+    const drawBoard = (ctx) => {
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     };
@@ -403,6 +403,12 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
 
         }
     }
+    const drawStartGame = (ctx, blockWidth, blockHeight) => {
+      drawBoard(ctx, blockWidth, blockHeight);
+      ctx.fillStyle = "#FF0000";
+      ctx.font = "24px monospace";
+      ctx.fillText("Press Play to Start", 2.5 * blockWidth, 8 * blockHeight, 500);
+    };
     const drawGameOver = (ctx, blockWidth, blockHeight) => {
         ctx.fillStyle = "red";
         ctx.font = "40px monospace"; //change this nonsense static font size
@@ -414,10 +420,15 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         ctx.fillText("Paused", 8 * blockWidth, 8 * blockHeight, 500);
     };
     const drawWinGame = (ctx, blockWidth, blockHeight) => {
-        clearDraws(ctx);
+        drawBoard(ctx);
         ctx.fillStyle = "red";
         ctx.font = "40px monospace";
-        ctx.fillText("You Win", 7 * blockWidth, 8 * blockHeight, 500);
+        ctx.fillText("You Win", 7 * blockWidth, 5 * blockHeight, 500);
+        ctx.font = "16px monospace";
+        ctx.fillText("Score: " + score, 11 * blockWidth, 8 * blockHeight, 500);
+        ctx.fillText("Time: " + Math.floor(frameCount / (score / 2 + frequency)), 11 * blockWidth, 10 * blockHeight, 500);
+        ctx.font = "12px monospace";
+        ctx.fillText("Press Play to Restart", 8 * blockWidth, 13 * blockHeight, 500);
     };
     const drawBottomText = (ctx, blockWidth, blockHeight) => {
         ctx.fillStyle = "red";
@@ -488,15 +499,6 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         setEntities(newEntities);
         setEnemyMoveParam(newEnemyMoveParam);
     }
-    /*const playerMove = () => {
-        if (player.move === "left" &&
-            player.x + player.w > player.w) {
-            player.x = player.x - player.speed;
-        } else if (player.move === "right" &&
-            player.x + player.w < cols) {
-            player.x = player.x + player.speed;
-        }
-    }*/
     const invaderMove = () => {
         if (enemyMoveParam.index >= enemies) {
             enemyMoveParam.index = 0;
@@ -713,7 +715,6 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         invaderShooting();
         handleBullets();
         handleExplosions();
-        //playerMove();
         invaderMove();
     }
 
@@ -725,7 +726,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         switch (gameState) {
             case "Play":
                 if (lives >= 0 && enemies > 0) {
-                    clearDraws(context);
+                    drawBoard(context);
                     handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                     handleEvents();
                     drawObjects(context);
@@ -743,15 +744,27 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
                 break;
             case "Pause":
                 drawPauseGame(context, blockSize, blockSize);
+                handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                 break;
             case "Win":
                 drawWinGame(context, blockSize, blockSize);
+                handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                 break;
             case "End":
                 drawGameOver(context, blockSize, blockSize);
+                handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                 break;
             case "Start":
-                //setUpLevel();
+                setLevel(1);
+                setScore(0);
+                setLives(3);
+                setExplosions([]);
+                setBullets([]);
+                setUpLevel();
+                setPlayer(Object.create(defaultPlayer));
+                setFrameCount(1);
+                drawStartGame(context, blockSize, blockSize);
+                handleCanvasBorders(context, context.canvas.width, context.canvas.height);
                 break;
             case "Restart":
                 setLevel(1);

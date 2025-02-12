@@ -229,8 +229,8 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
   const drawStartGame = (ctx, blockWidth, blockHeight) => {
     drawBoard(ctx, blockWidth, blockHeight);
     ctx.fillStyle = "#FF0000";
-    ctx.font = "28px monospace";
-    ctx.fillText("Press Play to Start", 0 * blockWidth, 17 * blockHeight, 500);
+    ctx.font = "26px monospace";
+    ctx.fillText("Press Play to Start", 1.5 * blockWidth, 17 * blockHeight, 500);
   };
 
   useEffect(() => {
@@ -241,18 +241,20 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
     let animationFrameId;
     if (gameState === "Play") {
       drawBoard(context, context.canvas.width, context.canvas.height);
-      handleCanvasBorders(context, context.canvas.width, context.canvas.height);
       drawFruit(context, blockWidth, blockHeight);
       drawSnakeHead(context, blockWidth, blockHeight);
       drawSnakeBody(context, blockWidth, blockHeight);
+      handleCanvasBorders(context, context.canvas.width, context.canvas.height);
       setTimeout(() => {
         setFrameCount(frameCount + 1);
       }, [1000 / (score / 2 + frequency)]);
     } else if (gameState === "Pause") {
       drawPauseGame(context, blockWidth, blockHeight);
+      handleCanvasBorders(context, context.canvas.width, context.canvas.height);
     } else if (gameState === "End") {
       drawBoard(context, context.canvas.width, context.canvas.height);
       drawEndGame(context, blockWidth, blockHeight);
+      handleCanvasBorders(context, context.canvas.width, context.canvas.height);
     } else if (gameState === "Restart") {
       setGameState("Play");
       setFrameCount(1);
@@ -262,6 +264,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
       setSnakeBody({ x: [], y: [] });
     } else if (gameState === "Start") {
       drawStartGame(context, blockWidth, blockHeight);
+      handleCanvasBorders(context, context.canvas.width, context.canvas.height);
       setFrameCount(1);
       setFruit(false);
       setInitialPos(false);
