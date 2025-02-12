@@ -10,6 +10,7 @@ export default function Controls(isSelected, keyboard) {
     one: false,
     two: false,
     pause: false,
+    eject: false,
   });
   const validateKey = useCallback(
     (key, state) => {

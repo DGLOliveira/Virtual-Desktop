@@ -26,6 +26,7 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
     one: { keys: ["1"], active: true },
     two: { keys: ["2"], active: true },
     pause: { keys: ["p", "P", "Pause"], active: true },
+    eject: { keys: ["Escape"], active: true },
   });
   const controls = Controls(isSelected, keyboard);
   const [gameState, setGameState] = useState("Start");
@@ -118,6 +119,13 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
       setPlayButtonFlag(true);
     }
   }, [gameState]);
+
+  useEffect(()=>{
+    if(controls.eject){
+      setGameChoice("None");
+      setGameState("Start");
+    }
+  },[controls.eject])
 
   useEffect(() => {
     const args = {
