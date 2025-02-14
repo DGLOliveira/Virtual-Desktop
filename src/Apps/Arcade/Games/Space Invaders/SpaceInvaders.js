@@ -291,7 +291,8 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
     //let entities = [];
     //let bullets = [];
     let [player, setPlayer] = useState(Object.create(defaultPlayer));
-    const scoreboard = { time: 0, score: 0, gameState: "Start" };
+    let [time, setTime] = useState(0);
+    const [startTime, setStartTime] = useState(0);
     const invaderSpeed = 1;
 
     //Game state
@@ -344,7 +345,20 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
             }
         }
     }, [controls, frameCount]);
-
+    //Game time
+    useEffect(() => {
+        console.log(gameState);
+        if (gameState === "Restart") {
+            setTime(0);
+        } else if (gameState === "Play") {
+            setStartTime(performance.now());
+        } else if (gameState === "Pause" ||
+            gameState === "End" ||
+            gameState === "Win") {
+            setTime(time + performance.now() - startTime);
+            time += performance.now() - startTime;
+        }
+    }, [gameState]);
 
     //Drawing functions
     const drawBoard = (ctx) => {
@@ -404,24 +418,24 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         }
     }
     const drawStartGame = (ctx, blockWidth, blockHeight) => {
-      drawBoard(ctx, blockWidth, blockHeight);
-      ctx.fillStyle = "#FF0000";
-      ctx.font = "24px monospace";
-      ctx.fillText("Press Play to Start", 2.5 * blockWidth, 8 * blockHeight, 500);
+        drawBoard(ctx, blockWidth, blockHeight);
+        ctx.fillStyle = "#FF0000";
+        ctx.font = "24px monospace";
+        ctx.fillText("Press Play to Start", 2.5 * blockWidth, 8 * blockHeight, 500);
     };
     const drawGameOver = (ctx, blockWidth, blockHeight) => {
         ctx.fillStyle = "red";
-        ctx.font = "40px monospace"; 
+        ctx.font = "40px monospace";
         ctx.fillText("Game Over", 5 * blockWidth, 5 * blockHeight, 500);
         ctx.font = "16px monospace";
         ctx.fillText("Score: " + score, 11 * blockWidth, 8 * blockHeight, 500);
-        ctx.fillText("Time: " + Math.floor(frameCount/frequency), 11 * blockWidth, 10 * blockHeight, 500);
+        ctx.fillText("Time: " + Math.floor(time / 1000), 11 * blockWidth, 10 * blockHeight, 500);
         ctx.font = "12px monospace";
         ctx.fillText("Press Play to Restart", 8 * blockWidth, 13 * blockHeight, 500);
     };
     const drawPauseGame = (ctx, blockWidth, blockHeight) => {
         ctx.fillStyle = "red";
-        ctx.font = "40px monospace"; 
+        ctx.font = "40px monospace";
         ctx.fillText("Paused", 8 * blockWidth, 8 * blockHeight, 500);
     };
     const drawWinGame = (ctx, blockWidth, blockHeight) => {
@@ -431,7 +445,7 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         ctx.fillText("You Win", 7 * blockWidth, 4 * blockHeight, 500);
         ctx.font = "16px monospace";
         ctx.fillText("Score: " + score, 10 * blockWidth, 7 * blockHeight, 500);
-        ctx.fillText("Time: " + Math.floor(frameCount/frequency), 10 * blockWidth, 9 * blockHeight, 500);
+        ctx.fillText("Time: " + Math.floor( time / 1000), 10 * blockWidth, 9 * blockHeight, 500);
         ctx.fillText("Lives: " + lives, 10 * blockWidth, 11 * blockHeight, 500);
         ctx.font = "12px monospace";
         ctx.fillText("Press Play to Restart", 8 * blockWidth, 14 * blockHeight, 500);
@@ -789,10 +803,6 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
             default:
                 break;
         }
-        scoreboard.time = Math.floor(frameCount / frequency);
-        scoreboard.score = score;
-        scoreboard.gameState = gameState;
-        updateScoreboard(scoreboard);
         const render = () => {
             animationFrameId = window.requestAnimationFrame(render);
         };
@@ -807,5 +817,5 @@ export default function SpaceInvaders({ controls, updateScoreboard, isSelected, 
         onTouchMove={(e) => e.preventDefault()}
         onTouchEnd={(e) => e.preventDefault()}
         onTouchCancel={(e) => e.preventDefault()}
-        ></canvas>;
+    ></canvas>;
 }

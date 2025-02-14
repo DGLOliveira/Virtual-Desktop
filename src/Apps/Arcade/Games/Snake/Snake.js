@@ -21,7 +21,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
   let [snakeBody, setSnakeBody] = useState({ x: [], y: [] });
   let [initialPos, setInitialPos] = useState(false);
   let [frameCount, setFrameCount] = useState(0);
-  const [time, setTime] = useState(0);
+  let [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
 
   useEffect(() => {
@@ -50,7 +50,8 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
       setStartTime(performance.now());
     } else if (gameState === "Pause" ||
       gameState === "End") {
-      setTime(performance.now() - startTime);
+      setTime(time + performance.now() - startTime);
+      time += performance.now() - startTime;
     }
   }, [gameState]);
 

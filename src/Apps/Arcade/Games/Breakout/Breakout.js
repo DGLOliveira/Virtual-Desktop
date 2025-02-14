@@ -53,7 +53,7 @@ export default function Breakout({ controls, updateScoreboard, isSelected, gameS
   let [firework7] = useState(Object.create(defaultFirework));
   firework7.color = "white";
   let [score, setScore] = useState(0);
-  const [time, setTime] = useState(0);
+  let [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
 
   useEffect(() => {
@@ -100,7 +100,8 @@ export default function Breakout({ controls, updateScoreboard, isSelected, gameS
       gameState === "End" ||
       gameState === "Win" ||
       gameState === "LevelUp") {
-      setTime(performance.now() - startTime);
+      setTime(time + performance.now() - startTime);
+      time += performance.now() - startTime;
     }
   }, [gameState]);
 
