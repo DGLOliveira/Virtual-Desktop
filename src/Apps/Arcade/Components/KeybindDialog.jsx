@@ -51,7 +51,7 @@ export const KeybindDialog = ({ showKeybindDialog, setShowKeybindDialog, setAppD
                     <div style={{ width: "55px", height:"30px", display: "flex", justifyContent: "start", alignItems: "center", textAlign: "center" }}><b>{key}:</b></div>
                     {newKeybinds[key].keys.map((keybind, index) =>
                         <button
-                            key={key}
+                            key={index}
                             style={{ width: "75px", height:"30px", border: "1px solid dimgray"}}
                             onContextMenu={(e) => removeKeybind(key, index)}
                             onClick={() => changeKeybind(key, index)}
