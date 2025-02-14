@@ -16,10 +16,6 @@ export const handleAction = (action, setAction, appDialog, setAppDialog, args) =
             args.setGameState("Restart");
             setAction(false);
             break;
-        case "scoreboard":
-            args.setShowScoreboard(!args.showScoreboard);
-            setAction(false);
-            break;
         case "touchscreenControls":{
             args.setShowControls(!args.showControls);
             setAction(false);

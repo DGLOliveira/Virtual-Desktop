@@ -5,7 +5,7 @@ import { set } from "ol/transform.js";
 const frequency = 4; //Hertz
 const frameRate = 1000 / frequency; // frames / milisecond
 
-const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState }) => {
+const Snake = ({ controls, isSelected, gameState, setGameState }) => {
   const rows = 30;
   const cols = 30;
   let canvasRef = useRef(null);

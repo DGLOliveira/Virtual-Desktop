@@ -25,11 +25,6 @@ export const handleTopMenu = (appMenu, setAppMenu, args) => {
             }
         },
         "View": {
-            "Scoreboard": {
-                "action": "scoreboard",
-                "checkbox": true,
-                "disabled": false
-            },
             "Touchscreen Controls": {
                 "action": "touchscreenControls",
                 "checkbox": true,
@@ -69,10 +64,6 @@ export const handleTopMenu = (appMenu, setAppMenu, args) => {
                     },
                     "View": {
                         ...appMenu["View"],
-                        "Scoreboard": {
-                            ...appMenu["View"]["Scoreboard"],
-                            "checkbox": args.showScoreboard
-                        },
                         "Touchscreen Controls": {
                             ...appMenu["View"]["Touchscreen Controls"],
                             "checkbox": args.showControls

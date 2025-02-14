@@ -272,7 +272,7 @@ const defaultInvaderBullet = {
     },
 }
 
-export default function SpaceInvaders({ controls, updateScoreboard, isSelected, gameState, setGameState }) {
+export default function SpaceInvaders({ controls, isSelected, gameState, setGameState }) {
 
     const canvasRef = useRef(null);
     const [score, setScore] = useState(0);

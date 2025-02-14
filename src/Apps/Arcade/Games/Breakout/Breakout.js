@@ -28,7 +28,7 @@ const defaultFirework = {
   t: -5,
   color: "",
 };
-export default function Breakout({ controls, updateScoreboard, isSelected, gameState, setGameState }) {
+export default function Breakout({ controls, isSelected, gameState, setGameState }) {
   const canvasRef = useRef(null);
   const [Maps, setMaps] = useState(JSON.parse(JSON.stringify(LevelsJSON))); //Only way to deep copy nested objects without external dependency
   const [gameLevel, setGameLevel] = useState(0);

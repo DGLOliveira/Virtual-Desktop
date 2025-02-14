@@ -34,17 +34,7 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
   const [canvasZoom, setCanvasZoom] = useState(1);
   const [playButtonFlag, setPlayButtonFlag] = useState(true);
   const [showControls, setShowControls] = useState(true);
-  const [showScoreboard, setShowScoreboard] = useState(true);
   const [showKeybindDialog, setShowKeybindDialog] = useState(false);
-  const [scoreboard, setScoreboard] = useState({
-    time: 0,
-    score: 0,
-    gameState: "Start",
-  });
-  const updateScoreboard = (scoreboard) => {
-    setScoreboard(scoreboard);
-  };
-
   const handleScreenButton = (key, state, repeat) => {
     document.dispatchEvent(new KeyboardEvent(state, { key: keyboard[key].keys[0], repeat: repeat }),)
   };
@@ -94,10 +84,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
       content = {
         "Hide": { action: () => { setShowControls(false); } },
       }
-    } else if (target === "scoreboard") {
-      content = {
-        "Hide": { action: () => { setShowScoreboard(false); } },
-      }
     } else if (target === "canvas") {
       if (gameChoice !== "None") {
         let playpause = gameState === "Play" ? "Pause" : "Play";
@@ -133,8 +119,6 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
       setGameState: setGameState,
       showControls: showControls,
       setShowControls: setShowControls,
-      showScoreboard: showScoreboard,
-      setShowScoreboard: setShowScoreboard,
       showKeybindDialog: showKeybindDialog,
       setShowKeybindDialog: setShowKeybindDialog
     }
@@ -145,11 +129,10 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
     const args = {
       gameState: gameState,
       showControls: showControls,
-      showScoreboard: showScoreboard,
       gameChoice: gameChoice
     };
     handleTopMenu(appMenu, setAppMenu, args);
-  }, [gameState, gameChoice, showControls, showScoreboard]);
+  }, [gameState, gameChoice, showControls]);
 
   return (
     <div id="arcadeContainer">
@@ -162,13 +145,13 @@ export default function Arcade({ isSelected, action, setAction, appMenu, setAppM
         {gameChoice === "None" ?
           <MainMenu controls={controls} setGameChoice={setGameChoice} setGameState={setGameState} canvasZoom={canvasZoom} /> :
           gameChoice === "Snake" ? (
-            <Snake controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
+            <Snake controls={controls} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
           ) :
             gameChoice === "Breakout" ? (
-              <Breakout controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
+              <Breakout controls={controls} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
             ) :
               gameChoice === "Space Invaders" ? (
-                <SpaceInvaders controls={controls} updateScoreboard={updateScoreboard} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
+                <SpaceInvaders controls={controls} isSelected={isSelected} gameState={gameState} setGameState={setGameState} canvasZoom={canvasZoom} />
               ) : (
                 <></>
               )}
