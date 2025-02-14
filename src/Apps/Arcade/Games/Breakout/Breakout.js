@@ -52,10 +52,11 @@ export default function Breakout({ controls, updateScoreboard, isSelected, gameS
   firework6.color = "magenta";
   let [firework7] = useState(Object.create(defaultFirework));
   firework7.color = "white";
-  const scoreboard = { time: 0, score: 0, gameState: "Start" };
   let [score, setScore] = useState(0);
+  const [time, setTime] = useState(0);
+  const [startTime, setStartTime] = useState(0);
 
-useEffect(() => {
+  useEffect(() => {
     if (controls.pause) {
       if (gameState === "Play") {
         setGameState("Pause");
@@ -69,7 +70,7 @@ useEffect(() => {
         setGameState("Restart");
       }
     }
-}, [controls]);
+  }, [controls]);
 
   useEffect(() => {
     if (gameState === "Play" || "Win") {
@@ -90,6 +91,19 @@ useEffect(() => {
     }
   }, [controls, frameCount]);
 
+  useEffect(() => {
+    if (gameState === "Restart") {
+      setTime(0);
+    } else if (gameState === "Play") {
+      setStartTime(performance.now());
+    } else if (gameState === "Pause" ||
+      gameState === "End" ||
+      gameState === "Win" ||
+      gameState === "LevelUp") {
+      setTime(performance.now() - startTime);
+    }
+  }, [gameState]);
+
   const clearDraws = (ctx) => {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -103,17 +117,18 @@ useEffect(() => {
 
   const drawGameOver = (ctx, blockWidth, blockHeight) => {
     ctx.fillStyle = "red";
-    ctx.font = "40px monospace"; 
+    ctx.font = "40px monospace";
     ctx.fillText("Game Over", 5 * blockWidth, 9 * blockHeight, 500);
     ctx.font = "16px monospace";
-    ctx.fillText("Score: " + score, 11 * blockWidth, 15 * blockHeight, 500);
-    ctx.fillText("Time: " + Math.floor(frameCount/frequency), 11 * blockWidth, 19 * blockHeight, 500);
+    ctx.fillText("Score: " + score, 11 * blockWidth, 13 * blockHeight, 500);
+    ctx.fillText("Time: " + Math.floor(time / 1000), 11 * blockWidth, 17 * blockHeight, 500);
+    ctx.fillText("Level: " + (gameLevel+1), 11 * blockWidth, 21 * blockHeight, 500);
     ctx.font = "12px monospace";
     ctx.fillText("Press Play to Restart", 8 * blockWidth, 26 * blockHeight, 500);
   };
   const drawPauseGame = (ctx, blockWidth, blockHeight) => {
     ctx.fillStyle = "red";
-    ctx.font = "40px monospace"; 
+    ctx.font = "40px monospace";
     ctx.fillText("Paused", 8 * blockWidth, 17 * blockHeight, 500);
   };
   const handleFireworks = (ctx, blockWidth, blockHeight) => {
@@ -171,9 +186,9 @@ useEffect(() => {
       ctx.beginPath();
       ctx.arc(
         currBall.x * blockWidth +
-          Math.cos(((2 * Math.PI) / 12) * i) * currBall.t * 2 * blockWidth,
+        Math.cos(((2 * Math.PI) / 12) * i) * currBall.t * 2 * blockWidth,
         currBall.y * blockHeight +
-          Math.sin(((2 * Math.PI) / 12) * i) * 2 * currBall.t * 2 * blockHeight,
+        Math.sin(((2 * Math.PI) / 12) * i) * 2 * currBall.t * 2 * blockHeight,
         (currBall.r / 1) * blockWidth,
         0,
         Math.PI * 2,
@@ -189,7 +204,7 @@ useEffect(() => {
     ctx.fillText("You Win", 7 * blockWidth, 9 * blockHeight, 500);
     ctx.font = "16px monospace";
     ctx.fillText("Score: " + score, 11 * blockWidth, 15 * blockHeight, 500);
-    ctx.fillText("Time: " + Math.floor(frameCount/frequency), 11 * blockWidth, 19 * blockHeight, 500);
+    ctx.fillText("Time: " + Math.floor(time/1000), 11 * blockWidth, 19 * blockHeight, 500);
     ctx.font = "12px monospace";
     ctx.fillText("Press Play to Restart", 8 * blockWidth, 26 * blockHeight, 500);
   };
@@ -432,10 +447,6 @@ useEffect(() => {
         clearDraws(context);
         break;
     }
-    scoreboard.time = Math.floor(frameCount / frequency);
-    scoreboard.score = score;
-    scoreboard.gameState = gameState;
-    updateScoreboard(scoreboard);
     const render = () => {
       animationFrameId = window.requestAnimationFrame(render);
     };
@@ -445,9 +456,9 @@ useEffect(() => {
     };
   }, [frameCount, winFrameCount, gameState]);
 
-  return <canvas ref={canvasRef} 
-  onTouchStart={(e) => e.preventDefault()}
-  onTouchMove={(e) => e.preventDefault()}
-  onTouchEnd={(e) => e.preventDefault()}
-  onTouchCancel={(e) => e.preventDefault()}></canvas>;
+  return <canvas ref={canvasRef}
+    onTouchStart={(e) => e.preventDefault()}
+    onTouchMove={(e) => e.preventDefault()}
+    onTouchEnd={(e) => e.preventDefault()}
+    onTouchCancel={(e) => e.preventDefault()}></canvas>;
 }
