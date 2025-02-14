@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { handleCanvasBorders } from "../../Handlers/handleCanvasBorders.js";
+import { set } from "ol/transform.js";
 
 const frequency = 4; //Hertz
 const frameRate = 1000 / frequency; // frames / milisecond
@@ -20,7 +21,8 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
   let [snakeBody, setSnakeBody] = useState({ x: [], y: [] });
   let [initialPos, setInitialPos] = useState(false);
   let [frameCount, setFrameCount] = useState(0);
-  const scoreboard = { time: 0, score: 0, gameState: "Start" };
+  const [time, setTime] = useState(0);
+  const [startTime, setStartTime] = useState(0);
 
   useEffect(() => {
     if (controls.pause) {
@@ -28,6 +30,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
         if (gameState === "Play") {
           setGameState("Pause");
         } else if (gameState === "Pause") {
+
           setGameState("Play");
         } else if (
           gameState === "Win" ||
@@ -39,6 +42,17 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
       }
     }
   }, [controls]);
+
+  useEffect(() => {
+    if (gameState === "Restart") {
+      setTime(0);
+    } else if (gameState === "Play") {
+      setStartTime(performance.now());
+    } else if (gameState === "Pause" ||
+      gameState === "End") {
+      setTime(performance.now() - startTime);
+    }
+  }, [gameState]);
 
   useEffect(() => {
     if (snakeBody.x[0] === undefined) {
@@ -214,9 +228,10 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
     ctx.fillText("Game Over", 3 * blockWidth, 8 * blockHeight, 500);
     ctx.font = "28px monospace";
     ctx.fillText("Score: " + score, 7 * blockWidth, 15 * blockHeight, 500);
-    ctx.fillText("Time: " + Math.floor(frameCount / frequency), 7 * blockWidth, 20 * blockHeight, 500);
+    ctx.fillText("Time: " + Math.floor(time/1000), 7 * blockWidth, 20 * blockHeight, 500);
     ctx.font = "16px monospace";
     ctx.fillText("Press Play to Restart", 5.5 * blockWidth, 25 * blockHeight, 500);
+    console.log(time);
   };
 
   const drawPauseGame = (ctx, blockWidth, blockHeight) => {
@@ -247,7 +262,7 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
       handleCanvasBorders(context, context.canvas.width, context.canvas.height);
       setTimeout(() => {
         setFrameCount(frameCount + 1);
-      }, [1000 / (score / 2 + frequency)]);
+      }, [frameRate]);
     } else if (gameState === "Pause") {
       drawPauseGame(context, blockWidth, blockHeight);
       handleCanvasBorders(context, context.canvas.width, context.canvas.height);
@@ -271,10 +286,6 @@ const Snake = ({ controls, updateScoreboard, isSelected, gameState, setGameState
       setScore(0);
       setSnakeBody({ x: [], y: [] });
     }
-    scoreboard.time = Math.floor(frameCount / frequency);
-    scoreboard.score = score;
-    scoreboard.gameState = gameState;
-    updateScoreboard(scoreboard);
     const render = () => {
       animationFrameId = window.requestAnimationFrame(render);
     };
