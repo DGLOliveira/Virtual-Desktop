@@ -45,8 +45,8 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
   useEffect(() => {
     let offsetX = (context.dimention.width / 2 - context.zoom * context.dimention.width / 2) * -1 / context.zoom;
     let offsetY = (context.dimention.height / 2 - context.zoom * context.dimention.height / 2) * -1 / context.zoom;
-    document.getElementById("previewCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
-    document.getElementById("drawCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
+    document.getElementById("previewCanvas").style.transform = `scale(${context.zoom})`;
+    document.getElementById("drawCanvas").style.transform = `scale(${context.zoom})`;
 
   }, [context.zoom]);
 
