@@ -11,7 +11,7 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
 };
   if (context.view.bottomNavBar) {
     return (
-      <nav onContextMenu={(event) => handleContextMenu(event)}>
+      <nav id="drawDocBottomNavBar" onContextMenu={(event) => handleContextMenu(event)}>
         {context.tool === "Text" &&
           <>
             <button
