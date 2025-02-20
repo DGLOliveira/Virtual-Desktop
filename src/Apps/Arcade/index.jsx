@@ -16,7 +16,16 @@ import { handleTopMenu } from "./Handlers/handleTopMenu.js";
 import { KeybindDialog } from "./Components/KeybindDialog.jsx";
 import "./style.css";
 
-export default function Arcade({ isSelected, action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu }) {
+export default function Arcade(props) {
+  const isSelected = props.isSelected;
+  const action = props.action;
+  const setAction = props.setAction;
+  const appDialog = props.appDialog;
+  const setAppDialog = props.setAppDialog;
+  const appMenu = props.appMenu;
+  const setAppMenu = props.setAppMenu;
+  const contextMenu = props.contextMenu;
+
   const canvasContainer = useRef();
   const [keyboard, setKeyboard] = useState({
     up: { keys: ["w", "W", "ArrowUp"], active: true },

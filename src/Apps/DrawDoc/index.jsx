@@ -10,7 +10,18 @@ import { ToolBar } from "./Components/ToolBar.jsx";
 import { BottomNavBar } from "./Components/BottomNavBar.jsx";
 
 import "./style.css";
-export default function DrawDoc({ isSelected, action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose }) {
+export default function DrawDoc(props) {
+
+  const action = props.action;
+  const setAction = props.setAction;
+  const appMenu = props.appMenu;
+  const setAppMenu = props.setAppMenu;
+  const appDialog = props.appDialog;
+  const setAppDialog = props.setAppDialog;
+  const contextMenu = props.contextMenu;
+  const canClose = props.canClose;
+  const setCanClose = props.setCanClose;
+
   const context = useContext(Context);
 
   return (

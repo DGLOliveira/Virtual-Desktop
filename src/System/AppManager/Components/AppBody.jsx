@@ -29,6 +29,19 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
     ))
   ), [appName]);
 
+  const appProps = { 
+    isSelected, 
+    action, 
+    setAction, 
+    appMenu, 
+    setAppMenu, 
+    appDialog, 
+    setAppDialog, 
+    contextMenu, 
+    canClose, 
+    setCanClose 
+  };
+
   return (
     <>
       <AppTopBar
@@ -50,18 +63,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
               appDialog={appDialog}
             />
           }
-          <App
-            isSelected={isSelected}
-            action={action}
-            setAction={setAction}
-            appMenu={appMenu}
-            setAppMenu={setAppMenu}
-            appDialog={appDialog}
-            setAppDialog={setAppDialog}
-            contextMenu={contextMenu}
-            canClose={canClose}
-            setCanClose={setCanClose}
-          />
+          <App {...appProps} />
         </Suspense>
       </ErrorBoundary>
     </>

@@ -8,7 +8,14 @@ import { handleAction } from "./Handlers/handleAction.js";
 import { handleTopMenu } from "./Handlers/handleTopMenu.js";
 import "./style.css";
 
-export default function Calculator ({isSelected, action, setAction, appMenu, setAppMenu, appDialog, setAppDialog}) {
+export default function Calculator (props) {
+  
+  const isSelected = props.isSelected;
+  const action = props.action;
+  const setAction = props.setAction;
+  const appMenu = props.appMenu;
+  const setAppMenu = props.setAppMenu;
+  
   const functionFRef = useRef(null);
   const functionGRef = useRef(null);
   const functionHRef = useRef(null);
