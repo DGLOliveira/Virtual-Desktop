@@ -144,6 +144,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     //answer from user gman.
     //Regular flood fill algorithm is too slow as it looks at individual pixels.
     //This solution looks at entire lines and fills them in.
+    //Code has been edited to work with hsla color values
     const drawBucket = () => {
         let r, g, b, h, s, l;
         let hslaColor = [];
