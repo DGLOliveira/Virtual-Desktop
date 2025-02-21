@@ -317,8 +317,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                     let data = ctx.getImageData(
                         (startX - boundary.left) * scaleX,
                         (startY - boundary.top) * scaleY,
-                        endX - startX,
-                        endY - startY
+                        (endX - startX) * scaleX,
+                        (endY - startY) * scaleY
                     );
                     param.setClipboard({
                         data: data,
@@ -331,8 +331,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                     let data = ctx.getImageData(
                         (startX - boundary.left) * scaleX,
                         (startY - boundary.top) * scaleY,
-                        endX - startX,
-                        endY - startY
+                        (endX - startX) * scaleX,
+                        (endY - startY) * scaleY
                     );
                     param.setClipboard({
                         data: data,
@@ -346,8 +346,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                     ctx.fillRect(
                         (startX - boundary.left) * scaleX,
                         (startY - boundary.top) * scaleY,
-                        (endX - startX),
-                        (endY - startY),
+                        (endX - startX) * scaleX,
+                        (endY - startY) * scaleY,
                     );
                 }
                 break;
@@ -402,8 +402,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 ctx.strokeRect(
                     (startX - boundary.left) * scaleX,
                     (startY - boundary.top) * scaleY,
-                    (endX - startX),
-                    (endY - startY),
+                    (endX - startX) * scaleX,
+                    (endY - startY) * scaleY,
                 );
                 break;
         }
@@ -416,8 +416,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.strokeRect(
             (startX - boundary.left) * scaleX,
             (startY - boundary.top) * scaleY,
-            (endX - startX),
-            (endY - startY),
+            (endX - startX) * scaleX,
+            (endY - startY) * scaleY,
         );
     }
 
@@ -429,7 +429,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.arc(
             (startX + centerX - boundary.left) * scaleX,
             (startY + centerY - boundary.top) * scaleY,
-            radius,
+            radius * scaleX,
             0,
             Math.PI * 2,
         );
@@ -445,8 +445,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.ellipse(
             (startX + centerX - boundary.left) * scaleX,
             (startY + centerY - boundary.top) * scaleY,
-            stretchX * radius,
-            stretchY * radius,
+            stretchX * radius * scaleX,
+            stretchY * radius * scaleY,
             Math.PI / 180 * param.subTool.angle,
             0,
             Math.PI * 2,
@@ -560,17 +560,17 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     const drawRectangle = (centerX, centerY) => {
         if (param.subTool.fill) {
             ctx.fillRect(
-                -centerX,
-                -centerY,
-                (endX - startX),
-                (endY - startY),
+                -centerX * scaleX,
+                -centerY * scaleY,
+                (endX - startX) * scaleX,
+                (endY - startY) * scaleY,
             );
         }
         ctx.strokeRect(
-            -centerX,
-            -centerY,
-            (endX - startX),
-            (endY - startY),
+            -centerX * scaleX,
+            -centerY * scaleY,
+            (endX - startX) * scaleX,
+            (endY - startY) * scaleY,
         );
     }
 
@@ -579,8 +579,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.ellipse(
             0,
             0,
-            stretchX * radius,
-            stretchY * radius,
+            stretchX * radius * scaleX,
+            stretchY * radius * scaleY,
             0,
             0,
             2 * Math.PI
@@ -595,8 +595,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.beginPath();
         for (let i = 0; i < param.subTool.sides + 2; i++) {
             ctx.lineTo(
-                stretchX * radius * Math.cos((2 * Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
-                stretchY * radius * Math.sin((2 * Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
+                scaleX * stretchX * radius * Math.cos((2 * Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
+                scaleY * stretchY * radius * Math.sin((2 * Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
             );
         };
         if (param.subTool.fill) {
@@ -610,13 +610,13 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         for (let i = 0; i < param.subTool.sides * 2 + 2; i++) {
             if (i % 2 === 0) {
                 ctx.lineTo(
-                    stretchX * radius * Math.cos((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
-                    stretchY * radius * Math.sin((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
+                    scaleX * stretchX * radius * Math.cos((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
+                    scaleY * stretchY * radius * Math.sin((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
                 );
             } else {
                 ctx.lineTo(
-                    stretchX * radius / 3 * Math.cos((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
-                    stretchY * radius / 3 * Math.sin((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
+                    scaleX * stretchX * radius / 3 * Math.cos((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
+                    scaleY * stretchY * radius / 3 * Math.sin((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
                 );
             }
         };
@@ -628,13 +628,13 @@ export const handleDraw = (canvas, cursor, param, preview) => {
 
     const drawArrow = (stretchX, stretchY, radius) => {
         ctx.beginPath();
-        ctx.moveTo(stretchX * -radius * Math.cos(Math.PI / 8), stretchY * -radius * Math.sin(Math.PI / 8));
-        ctx.lineTo(0, stretchY * -radius * Math.sin(Math.PI / 8));
-        ctx.lineTo(0, stretchY * -radius);
-        ctx.lineTo(stretchX * radius, 0);
-        ctx.lineTo(0, stretchY * radius);
-        ctx.lineTo(0, stretchY * radius * Math.sin(Math.PI / 8));
-        ctx.lineTo(stretchX * -radius * Math.cos(Math.PI / 8), stretchY * radius * Math.sin(Math.PI / 8));
+        ctx.moveTo(scaleX * stretchX * -radius * Math.cos(Math.PI / 8), scaleY * stretchY * -radius * Math.sin(Math.PI / 8));
+        ctx.lineTo(0, scaleY * stretchY * -radius * Math.sin(Math.PI / 8));
+        ctx.lineTo(0, scaleY * stretchY * -radius);
+        ctx.lineTo(scaleX * stretchX * radius, 0);
+        ctx.lineTo(0, scaleY * stretchY * radius);
+        ctx.lineTo(0, scaleY * stretchY * radius * Math.sin(Math.PI / 8));
+        ctx.lineTo(scaleX * stretchX * -radius * Math.cos(Math.PI / 8), scaleY * stretchY * radius * Math.sin(Math.PI / 8));
         ctx.closePath();
         if (param.subTool.fill) {
             ctx.fill();
@@ -651,9 +651,9 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             }
         }
         ctx.beginPath();
-        ctx.moveTo(0, radius);
-        ctx.arc(-radius / 2, -radius / 5, radius / 2, 3 * Math.PI / 4, 0, false);
-        ctx.arc(radius / 2, -radius / 5, radius / 2, Math.PI, Math.PI / 4, false);
+        ctx.moveTo(0, radius * scaleY);
+        ctx.arc(scaleX * -radius / 2, scaleY * -radius / 5, scaleX * radius / 2, 3 * Math.PI / 4, 0, false);
+        ctx.arc(scaleX * radius / 2, scaleY * -radius / 5, scaleX * radius / 2, Math.PI, Math.PI / 4, false);
         ctx.closePath();
         if (param.subTool.fill) {
             ctx.fill();
