@@ -1,10 +1,5 @@
 export const switchMaximizedHandler = (name, appStatus, setAppStatus) => {
   let newAppStatus = {};
-  var body = document.body,  html = document.documentElement;
-  var totalHeight = Math.max(body.scrollHeight, body.offsetHeight,
-    html.clientHeight, html.scrollHeight, html.offsetHeight);
-  var desktopHeight = totalHeight -
-    getComputedStyle(root).getPropertyValue("--TaskbarHeight").slice(0, -2);
   if (appStatus[name].State.isSelected) {
     if (!appStatus[name].State.isMaximized) {
       setAppStatus({
@@ -29,7 +24,7 @@ export const switchMaximizedHandler = (name, appStatus, setAppStatus) => {
             ...appStatus[name].Size,
             Current:{
             width: "100%",
-            height: desktopHeight,
+            height: "100%",
             }
           }
         },
@@ -86,7 +81,7 @@ export const switchMaximizedHandler = (name, appStatus, setAppStatus) => {
               Size: {
                 Current:{
                   width: "100%",
-                  height: desktopHeight
+                  height: "100%"
                 },
                 Previous:{
                   width: appStatus[name].Size.Current.width,

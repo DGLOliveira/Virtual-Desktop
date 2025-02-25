@@ -65,6 +65,7 @@ export default function Scenario() {
         position: "absolute",
         top: "0",
         left: "0",
+        zIndex: "-1",
       }}
       dpr={window.devicePixelRatio}
       camera={{ position: [0, 25, 10], near: 2 }}
