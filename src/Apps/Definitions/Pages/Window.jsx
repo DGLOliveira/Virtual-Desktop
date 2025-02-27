@@ -108,6 +108,9 @@ export const Window = () => {
   const [bkgColor, setBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBkgr"),
   );
+  const [topbarFlexDirection, setTopbarFlexDirection] = useState(
+    getComputedStyle(root).getPropertyValue("--WindowTopBarFlexDirection"),
+  );
   const [topbarBkgColor, setTopbarBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarBkgr"),
   );
@@ -211,6 +214,7 @@ export const Window = () => {
     root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
     root.style.setProperty("--WindowFontColor", fontColor);
     root.style.setProperty("--WindowBkgr", bkgColor);
+    root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
     root.style.setProperty("--WindowTopBarBkgr", topbarBkgColor);
     root.style.setProperty("--WindowTopBarHeight", topBarHeight + "px");
     root.style.setProperty(
@@ -251,6 +255,7 @@ export const Window = () => {
     fontSize,
     fontColor,
     bkgColor,
+    topbarFlexDirection,
     topbarBkgColor,
     topBarHeight,
     topBarIconSize,
@@ -290,7 +295,17 @@ export const Window = () => {
       <fieldset>
         <legend>Window</legend>
         <fieldset>
-          <legend>Top Bar Dimentions</legend>
+          <legend>Top Bar</legend>
+          <div>
+            <label>Direction:</label>
+            <select
+              value={topbarFlexDirection}
+              onChange={(e) => setTopbarFlexDirection(e.target.value)}
+            >
+              <option value="row">Close on the Right</option>
+              <option value="row-reverse">Close on the Left</option>
+            </select>
+          </div>
           <div>
             <label>Height:</label>
             <input

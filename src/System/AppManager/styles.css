@@ -11,11 +11,14 @@ app-window {
 }
 app-top-bar {
   display: flex;
-  flex-direction: row;
+  flex-direction: var(--WindowTopBarFlexDirection);
   align-items: center;
   height: var(--WindowTopBarHeight);
   width: 100%;
   border-bottom: 1px var(--GeneralBorderColor) solid;
+  padding-left: 4px;
+  padding-right: 4px;
+  box-sizing: border-box;
 }
 app-top-bar>h1 {
   display: flex;
@@ -80,9 +83,9 @@ app-top-bar > svg {
   width: calc(var(--WindowTopBarIconSize)/3);
   flex-shrink: 0;
   margin-right: calc(var(--WindowTopBarIconSize)/4);
+  padding: 2px;
 }
 .appTopBarButtonNewAqua>* {
-  padding: 2px;
   color: transparent;
 }
 .appTopBarButtonNewAqua:hover{
@@ -90,7 +93,6 @@ app-top-bar > svg {
 }
 .appTopBarButtonNewAquaRed{
   background: red;
-  margin-left: calc(var(--WindowTopBarIconSize)/4);
 }
 .appTopBarButtonNewAquaYellow{
   background: yellow;

@@ -26,6 +26,7 @@
   --WindowBorderWidth: 2px;
   --WindowBorderRadius: 0px;
   --WindowBorderType: solid;
+  --WindowTopBarFlexDirection: row;
   --WindowTopBarBkgr: hsl(0, 0%, 18%);
   --WindowTopBarBkgrInactive: hsl(0, 0%, 5%);
   --WindowTopBarHeight: 40px;

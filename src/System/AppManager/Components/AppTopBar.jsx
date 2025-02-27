@@ -114,43 +114,13 @@ export const AppTopBar = ({ appName, setAction }) => {
             onTouchMove={(e) => dragWindow(e, appName)}
             onContextMenu={(e) => handleContextMenu(e)}
         >
-            {themeContext.theme === "NewAqua" && (
-                <>
-                    <div
-                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaRed"
-                        onClick={(e) => (
-                            e.stopPropagation(), setAction("Close")
-                        )}
-                        title="Close (Ctrl + Shift + F4)"
-                    >X</div>
-                    <div
-                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaYellow"
-                        onClick={(e) => (
-                            e.stopPropagation(), appContext.switchMinimized(appName)
-                        )}
-                        title="Minimize (Alt + ⇩)"
-                    >-</div>
-                    <div
-                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaGreen"
-                        onClick={(e) => (
-                            e.stopPropagation(), appContext.switchMaximized(appName)
-                        )}
-                        title={appContext.apps[appName].State.isMaximized ? "Restore (Alt + ⇩)" : "Maximize (Alt + ⇧)"}
-                    >■</div>
-                    <h1
-                        onDoubleClick={(e) => (
-                            e.stopPropagation(), appContext.switchMaximized(appName)
-                        )}>{appName}</h1>
-                    <AppIcon appName={appName} />
-                </>
-            )}
-            {themeContext.theme === "Default" &&
-                <>
             <AppIcon appName={appName} />
             <h1
                 onDoubleClick={(e) => (
                     e.stopPropagation(), appContext.switchMaximized(appName)
                 )}>{appName}</h1>
+            {themeContext.theme === "Default" &&
+                <>
                     <div
                         className="appTopBarButtonFluent"
                         onClick={(e) => (
@@ -186,6 +156,31 @@ export const AppTopBar = ({ appName, setAction }) => {
                         title="Close (Ctrl + Shift + F4)">
                         <AiOutlineClose />
                     </div></>}
+            {themeContext.theme === "NewAqua" && (
+                <>
+                    <div
+                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaGreen"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMaximized(appName)
+                        )}
+                        title={appContext.apps[appName].State.isMaximized ? "Restore (Alt + ⇩)" : "Maximize (Alt + ⇧)"}
+                    >■</div>
+                    <div
+                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaYellow"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMinimized(appName)
+                        )}
+                        title="Minimize (Alt + ⇩)"
+                    >-</div>
+                    <div
+                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaRed"
+                        onClick={(e) => (
+                            e.stopPropagation(), setAction("Close")
+                        )}
+                        title="Close (Ctrl + Shift + F4)"
+                    >X</div>
+                </>
+            )}
         </app-top-bar>
     )
 
