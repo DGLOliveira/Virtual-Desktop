@@ -32,6 +32,7 @@ app-top-bar > svg {
   height: var(--WindowTopBarIconSize);
   width: var(--WindowTopBarIconSize);
   padding: 2px;
+  flex-shrink: 0;
 }
 .appTopBarButtonFluent{
   display: flex;
