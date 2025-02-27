@@ -33,15 +33,71 @@ app-top-bar > svg {
   width: var(--WindowTopBarIconSize);
   padding: 2px;
 }
-app-top-bar>button{
+.appTopBarButtonFluent{
+  display: flex;
+  flex-direction: column;
+  border: none;
+  outline: none;
+  justify-content: center;
+  align-items: center;
+  color: var(--GeneralButtonFontColor);
+  font-family: inherit;
+  background: none;
+  margin: 1px;
+  transition: 0.2s;
+  cursor: pointer;
   margin-left: 4px;
+  padding: 2px;
 }
-app-top-bar>button> svg {
+.appTopBarButtonFluent:hover{
+  background: rgba(128, 128, 128, 0.5);
+}
+.appTopBarButtonFluentRed:hover{
+  background: red;
+}
+.appTopBarButtonFluent>svg {
   height: var(--WindowTopBarIconSize);
   width: var(--WindowTopBarIconSize);
   padding: 2px;
   color: var(--WindowFontColor);
 }
+.appTopBarButtonNewAqua{
+  display: flex;
+  flex-direction: column;
+  border: 2px rgba(128, 128, 128, 0.5) solid;
+  border-radius: 50%;
+  outline: none;
+  justify-content: center;
+  align-items: center;
+  color: transparent;
+  font-family: inherit;
+  background: none;
+  margin: 1px;
+  transition: 0.2s;
+  cursor: pointer;
+  height: calc(var(--WindowTopBarIconSize)/3);
+  width: calc(var(--WindowTopBarIconSize)/3);
+  flex-shrink: 0;
+  margin-right: calc(var(--WindowTopBarIconSize)/4);
+}
+.appTopBarButtonNewAqua>* {
+  padding: 2px;
+  color: transparent;
+}
+.appTopBarButtonNewAqua:hover{
+  color:black;
+}
+.appTopBarButtonNewAquaRed{
+  background: red;
+  margin-left: calc(var(--WindowTopBarIconSize)/4);
+}
+.appTopBarButtonNewAquaYellow{
+  background: yellow;
+}
+.appTopBarButtonNewAquaGreen{
+  background: green;
+}
+
 app-window>nav {
   position: relative;
   display: flex;

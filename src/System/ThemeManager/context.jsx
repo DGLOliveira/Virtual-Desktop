@@ -1,15 +1,19 @@
-import {createContext, useState} from "react";
+import {createContext, useState, useEffect} from "react";
 
 export const ThemeContext = createContext({
     theme: "",
+    themeList: [],
     setTheme: () => {}
 });
 
 export function ThemeProvider({children}) {
     const [theme, setTheme] = useState("Default");
+    const themeList = ["Default", "NewAqua"];
 
+    
     const contextValue = {
         theme,
+        themeList,
         setTheme
     };
 

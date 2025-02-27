@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../Context/context.jsx";
 import { ContextMenuContext } from "../../ContextMenuManager/context.jsx";
+import { ThemeContext } from "../../ThemeManager/context.jsx";
 import {
     FaRegWindowMinimize,
     FaWindowRestore,
@@ -12,6 +13,7 @@ import { AppIcon } from "./AppIcon.jsx"
 export const AppTopBar = ({ appName, setAction }) => {
     const appContext = useContext(AppContext);
     const contextMenu = useContext(ContextMenuContext);
+    const themeContext = useContext(ThemeContext);
     const [cursor, setCursor] = useState("grab");
     const [cursorToWindowDiff, setCursorToWindowDiff] = useState({ x: 0, y: 0 });
 
@@ -52,7 +54,7 @@ export const AppTopBar = ({ appName, setAction }) => {
             x: x,
             y: y
         });
-    }
+    };
 
     const handleContextMenu = (e) => {
         e.preventDefault();
@@ -88,10 +90,12 @@ export const AppTopBar = ({ appName, setAction }) => {
             }
         }
     };
+
     useEffect(() => {
         document.addEventListener("keydown", handleKeybinds);
         return () => document.removeEventListener("keydown", handleKeybinds);
     }, [handleKeybinds]);
+
     return (
         <app-top-bar
             style={{
@@ -108,45 +112,80 @@ export const AppTopBar = ({ appName, setAction }) => {
             onDragEnd={(e) => dragWindow(e, appName)}
             onTouchStart={(e) => dragStart(e, appName)}
             onTouchMove={(e) => dragWindow(e, appName)}
-            onDoubleClick={(e) => (
-                e.stopPropagation(), appContext.switchMaximized(appName)
-            )}
             onContextMenu={(e) => handleContextMenu(e)}
         >
-            <AppIcon appName={appName} />
-            <h1>{appName}</h1>
-            <button
-                onClick={(e) => (
-                    e.stopPropagation(), appContext.switchMinimized(appName)
-                )}
-                title="Minimize (Alt + ⇩)">
-                <FaRegWindowMinimize />
-            </button>
-            {appContext.apps[appName].State.isMaximized ? (
-                <button
-                    onClick={(e) => (
-                        e.stopPropagation(), appContext.switchMaximized(appName)
-                    )}
-                    title="Restore (Alt + ⇩)">
-                    <FaWindowRestore />
-                </button>
-            ) : (
-                <button
-                    onClick={(e) => (
-                        e.stopPropagation(), appContext.switchMaximized(appName)
-                    )}
-                    title="Maximize (Alt + ⇧)">
-                    <FaWindowMaximize />
-                </button>
+            {themeContext.theme === "NewAqua" && (
+                <>
+                    <div
+                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaRed"
+                        onClick={(e) => (
+                            e.stopPropagation(), setAction("Close")
+                        )}
+                        title="Close (Ctrl + Shift + F4)"
+                    >X</div>
+                    <div
+                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaYellow"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMinimized(appName)
+                        )}
+                        title="Minimize (Alt + ⇩)"
+                    >-</div>
+                    <div
+                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaGreen"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMaximized(appName)
+                        )}
+                        title={appContext.apps[appName].State.isMaximized ? "Restore (Alt + ⇩)" : "Maximize (Alt + ⇧)"}
+                    >■</div>
+                    <h1
+                        onDoubleClick={(e) => (
+                            e.stopPropagation(), appContext.switchMaximized(appName)
+                        )}>{appName}</h1>
+                    <AppIcon appName={appName} />
+                </>
             )}
-            <button
-                className="buttonActiveRed"
-                onClick={(e) => (
-                    e.stopPropagation(), setAction("Close")
-                )}
-                title="Close (Ctrl + Shift + F4)">
-                <AiOutlineClose />
-            </button>
+            {themeContext.theme === "Default" &&
+                <>
+            <AppIcon appName={appName} />
+            <h1
+                onDoubleClick={(e) => (
+                    e.stopPropagation(), appContext.switchMaximized(appName)
+                )}>{appName}</h1>
+                    <div
+                        className="appTopBarButtonFluent"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMinimized(appName)
+                        )}
+                        title="Minimize (Alt + ⇩)">
+                        <FaRegWindowMinimize />
+                    </div>
+                    {appContext.apps[appName].State.isMaximized ? (
+                        <div
+                            className="appTopBarButtonFluent"
+                            onClick={(e) => (
+                                e.stopPropagation(), appContext.switchMaximized(appName)
+                            )}
+                            title="Restore (Alt + ⇩)">
+                            <FaWindowRestore />
+                        </div>
+                    ) : (
+                        <div
+                            className="appTopBarButtonFluent"
+                            onClick={(e) => (
+                                e.stopPropagation(), appContext.switchMaximized(appName)
+                            )}
+                            title="Maximize (Alt + ⇧)">
+                            <FaWindowMaximize />
+                        </div>
+                    )}
+                    <div
+                        className="appTopBarButtonFluentRed appTopBarButtonFluent"
+                        onClick={(e) => (
+                            e.stopPropagation(), setAction("Close")
+                        )}
+                        title="Close (Ctrl + Shift + F4)">
+                        <AiOutlineClose />
+                    </div></>}
         </app-top-bar>
     )
 

@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "./../../../System/ThemeManager/context.jsx";
+import { context } from "@react-three/fiber";
 
 const fontFamilyList = [
     "Arial",
@@ -27,12 +29,13 @@ const fontFamilyList = [
 ];
 
 export const Global = () => {
+    const theme = useContext(ThemeContext);
     const [fontFamily, setFontFamily] = useState(
         getComputedStyle(root).getPropertyValue("--GeneralFontFamily"));
     useEffect(() => {
         root.style.setProperty("--GeneralFontFamily", fontFamily);
     }, [fontFamily]);
-    const [theme, setTheme] = useState("Default");
+    
     return (
         <>
             <fieldset>
@@ -51,14 +54,13 @@ export const Global = () => {
             <fieldset>
                 <legend>Theme:</legend>
                 <select
-                    value={theme}
-                    onChange={(e) => setTheme(e.target.value)}
-                    disabled={true}
+                    value={theme.theme}
+                    onChange={(e) => theme.setTheme(e.target.value)}
                     title={"This feature is not available yet."}
                 >
-                    <option value="Default">Default</option>
-                    <option value="Aero">Aero</option>
-                    <option value="Aqua">Aqua</option>
+                    {theme.themeList.map((theme) => (
+                        <option key={theme}>{theme}</option>
+                    ))}
                 </select>
             </fieldset>
         </>
