@@ -1,4 +1,5 @@
 //Sets up the Computer window
+import ThemeProvider from "./../ThemeManager/context.jsx";
 import FileProvider from "./../FileManager/context.jsx";
 import AppProvider from "./../AppManager/Context/context.jsx";
 import BackgroundProvider from "./../Desktop/BackgroundContext.js";
@@ -9,15 +10,17 @@ import "./OS.css";
 export default function OS() {
   return (
     <>
-    <FileProvider>
-      <AppProvider>
-        <BackgroundProvider>
-          <ContextMenuProvider>
-            <WorkScreen />
-          </ContextMenuProvider>
-        </BackgroundProvider>
-      </AppProvider>
-    </FileProvider>
+      <ThemeProvider>
+        <FileProvider>
+          <AppProvider>
+            <BackgroundProvider>
+              <ContextMenuProvider>
+                <WorkScreen />
+              </ContextMenuProvider>
+            </BackgroundProvider>
+          </AppProvider>
+        </FileProvider>
+      </ThemeProvider>
     </>
   );
 }
