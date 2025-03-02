@@ -159,21 +159,21 @@ export const AppTopBar = ({ appName, setAction }) => {
             {themeContext.theme === "NewAqua" && (
                 <>
                     <div
-                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaGreen"
+                        className="appTopBarButtonNewAqua appTopBarButtonAquaGreen"
                         onClick={(e) => (
                             e.stopPropagation(), appContext.switchMaximized(appName)
                         )}
                         title={appContext.apps[appName].State.isMaximized ? "Restore (Alt + ⇩)" : "Maximize (Alt + ⇧)"}
                     >■</div>
                     <div
-                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaYellow"
+                        className="appTopBarButtonNewAqua appTopBarButtonAquaYellow"
                         onClick={(e) => (
                             e.stopPropagation(), appContext.switchMinimized(appName)
                         )}
                         title="Minimize (Alt + ⇩)"
                     >-</div>
                     <div
-                        className="appTopBarButtonNewAqua appTopBarButtonNewAquaRed"
+                        className="appTopBarButtonNewAqua appTopBarButtonAquaRed"
                         onClick={(e) => (
                             e.stopPropagation(), setAction("Close")
                         )}
