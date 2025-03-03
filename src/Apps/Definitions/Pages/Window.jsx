@@ -102,6 +102,9 @@ export const Window = () => {
   const [fontSize, setFontSize] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontSize").slice(0, -2),
   );
+  const [fontAlign, setFontAlign] = useState(
+    getComputedStyle(root).getPropertyValue("--WindowTopBarFontAlign").slice(0, -2),
+  );
   const [fontColor, setFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowFontColor"),
   );
@@ -212,6 +215,7 @@ export const Window = () => {
   )
   useEffect(() => {
     root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
+    root.style.setProperty("--WindowTopBarFontAlign", fontAlign);
     root.style.setProperty("--WindowFontColor", fontColor);
     root.style.setProperty("--WindowBkgr", bkgColor);
     root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
@@ -253,6 +257,7 @@ export const Window = () => {
     root.style.setProperty("--WindowShadowSpread", shadowSpread + "px");
   }, [
     fontSize,
+    fontAlign,
     fontColor,
     bkgColor,
     topbarFlexDirection,
@@ -304,6 +309,17 @@ export const Window = () => {
             >
               <option value="row">Close on the Right</option>
               <option value="row-reverse">Close on the Left</option>
+            </select>
+          </div>
+          <div>
+            <label>Align Title</label>
+            <select
+              value={fontAlign}
+              onChange={(e) => setFontAlign(e.target.value)}
+            >
+              <option value="left">Left</option>
+              <option value="center">Center</option>
+              <option value="right">Right</option>
             </select>
           </div>
           <div>

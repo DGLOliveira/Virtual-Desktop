@@ -24,7 +24,8 @@ app-top-bar>h1 {
   display: flex;
   flex-wrap: nowrap;
   text-wrap: nowrap;
-  overflow: hidden;
+  overflow: hidden; 
+  justify-content: var(--WindowTopBarFontAlign);
   width: 100%;
   margin:0;
   padding:0;

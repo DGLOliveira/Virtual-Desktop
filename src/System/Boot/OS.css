@@ -32,6 +32,7 @@
   --WindowTopBarHeight: 40px;
   --WindowTopBarIconSize: 34px;
   --WindowTopBarFontSize: 32px;
+  --WindowTopBarFontAlign: left;
   --WindowShadowYOffset: 2px;
   --WindowShadowXOffset: 2px;
   --WindowShadowBlur: 5px;
