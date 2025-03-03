@@ -313,6 +313,7 @@ app-dialog{
   transition: 0.2s;
   background:var(--DialogBkgr);
   color:var(--DialogFontColor);
+  box-shadow: var(--WindowShadowXOffset) var(--WindowShadowYOffset) var(--WindowShadowBlur) var(--WindowShadowSpread) var(--WindowShadowColor);
 }
 app-dialog>app-dialog-info{
   display:flex;
