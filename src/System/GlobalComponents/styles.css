@@ -175,7 +175,6 @@ slider-thumb {
 }
 
 hue-light-map {
-    position: "relative";
     width:180px;
     height:180px;
     background-image: url(./Assets/checkersBackground.jpg);
@@ -184,6 +183,12 @@ hue-light-map {
     box-sizing: border-box;
     margin:5px;
     border: 1px solid black;
+    overflow: hidden;
+}
+hue-light-map>canvas{
+    position: relative;
+    top:-1px;
+    left:-1px;
 }
 
 hue-light-map>slider-thumb {
