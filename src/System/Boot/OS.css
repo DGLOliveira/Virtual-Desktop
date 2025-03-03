@@ -39,7 +39,7 @@
   --WindowShadowSpread: 0px;
   --WindowShadowColor: hsla(0, 0%, 0%, 0.5);
 
-  --DialogBkgr: hsl(0, 0%, 18%);
+  --DialogBkgrColor: hsl(0, 0%, 18%);
   --DialogBorderColor: hsl(0, 0%, 50%);
   --DialogBorderWidth: 1px;
   --DialogBorderRadius: 0px;

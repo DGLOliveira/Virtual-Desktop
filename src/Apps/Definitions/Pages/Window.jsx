@@ -162,8 +162,8 @@ export const Window = () => {
   const [inactiveBkgColor, setInactiveBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBkgrInactive"),
   );
-  const [dialogBkgr, setDialogBkgr] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogBkgr"),
+  const [dialogBkgrColor, setDialogBkgrColor] = useState(
+    getComputedStyle(root).getPropertyValue("--DialogBkgrColor"),
   );
   const [dialogBorderColor, setDialogBorderColor] = useState(
     getComputedStyle(root).getPropertyValue("--DialogBorderColor"),
@@ -233,7 +233,7 @@ export const Window = () => {
     root.style.setProperty("--WindowBorderColorInactive", inactiveBorderColor);
     root.style.setProperty("--WindowFontColorInactive", inactiveFontColor);
     root.style.setProperty("--WindowBkgrInactive", inactiveBkgColor);
-    root.style.setProperty("--DialogBkgr", dialogBkgr);
+    root.style.setProperty("--DialogBkgrColor", dialogBkgrColor);
     root.style.setProperty("--DialogBorderColor", dialogBorderColor);
     root.style.setProperty("--DialogBorderWidth", dialogBorderWidth + "px");
     root.style.setProperty("--DialogBorderRadius", dialogBorderRadius + "px");
@@ -277,7 +277,7 @@ export const Window = () => {
     inactiveFontColor,
     inactiveBkgColor,
     inactiveBorderColor,
-    dialogBkgr,
+    dialogBkgrColor,
     dialogBorderColor,
     dialogBorderWidth,
     dialogBorderRadius,
@@ -528,8 +528,8 @@ export const Window = () => {
         <div>
           <label>Background Color: </label>
           <ColorPicker
-            color={dialogBkgr}
-            setColor={setDialogBkgr}
+            color={dialogBkgrColor}
+            setColor={setDialogBkgrColor}
             useAlpha={false}
           />
         </div>

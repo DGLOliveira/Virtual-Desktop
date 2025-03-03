@@ -311,7 +311,7 @@ app-dialog{
   border: var(--DialogBorderWidth) var(--DialogBorderColor) var(--DialogBorderType);
   border-radius: var(--DialogBorderRadius);
   transition: 0.2s;
-  background:var(--DialogBkgr);
+  background-color:var(--DialogBkgrColor);
   color:var(--DialogFontColor);
   box-shadow: var(--WindowShadowXOffset) var(--WindowShadowYOffset) var(--WindowShadowBlur) var(--WindowShadowSpread) var(--WindowShadowColor);
 }
