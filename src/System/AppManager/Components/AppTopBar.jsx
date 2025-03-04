@@ -156,7 +156,7 @@ export const AppTopBar = ({ appName, setAction }) => {
                         title="Close (Ctrl + Shift + F4)">
                         <AiOutlineClose />
                     </div></>}
-            {themeContext.theme === "NewAqua" && (
+            {themeContext.theme === "Aqua" && (
                 <>
                     <div
                         className="appTopBarButtonNewAqua appTopBarButtonAquaGreen"

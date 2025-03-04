@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "./../../../System/ThemeManager/context.jsx";
-import { context } from "@react-three/fiber";
 
 const fontFamilyList = [
     "Arial",
@@ -56,7 +55,6 @@ export const Global = () => {
                 <select
                     value={theme.theme}
                     onChange={(e) => theme.setTheme(e.target.value)}
-                    title={"This feature is not available yet."}
                 >
                     {theme.themeList.map((theme) => (
                         <option key={theme}>{theme}</option>

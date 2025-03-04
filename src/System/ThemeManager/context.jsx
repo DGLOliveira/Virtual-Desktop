@@ -1,4 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, lazy } from "react";
+import Aqua from "./Themes/Aqua.json";
+import Default from "./Themes/Default.json";
 
 export const ThemeContext = createContext({
     theme: "",
@@ -8,15 +10,19 @@ export const ThemeContext = createContext({
 
 export function ThemeProvider({ children }) {
     const [theme, setTheme] = useState("Default");
-    const themeList = ["Default", "NewAqua"];
+    const themeList = ["Default", "Aqua"];
+    
+    const changeRootStyle = (property, value) => {
+        document.querySelector(":root").style.setProperty(`${property}`, value);
+    };
 
     useEffect(() => {
         switch (theme) {
-            case "NewAqua":
-                document.querySelector(":root").style.setProperty("--WindowTopBarFlexDirection", "row-reverse");
+            case "Aqua":
+                Object.keys(Aqua).forEach((key) => changeRootStyle(key, Aqua[key]));
                 break;
             default:
-                document.documentElement.style.setProperty("--WindowTopBarFlexDirection", "row");
+                Object.keys(Default).forEach((key) => changeRootStyle(key, Default[key]));
                 break;
         }
     }, [theme]);

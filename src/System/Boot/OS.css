@@ -33,8 +33,8 @@
   --WindowTopBarIconSize: 34px;
   --WindowTopBarFontSize: 32px;
   --WindowTopBarFontAlign: left;
-  --WindowShadowYOffset: 2px;
   --WindowShadowXOffset: 2px;
+  --WindowShadowYOffset: 2px;
   --WindowShadowBlur: 5px;
   --WindowShadowSpread: 0px;
   --WindowShadowColor: hsla(0, 0%, 0%, 0.5);
