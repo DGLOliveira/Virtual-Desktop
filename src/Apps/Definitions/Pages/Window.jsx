@@ -88,9 +88,9 @@ export const WindowPreview = () => {
           Information
         </app-dialog-info>
         <app-dialog-actions>
-          <button>Ok</button>
-          <button>Cancel</button>
-          <button className="buttonActiveRed">Close</button>
+          <button className="appDialogButtonFluent">Ok</button>
+          <button className="appDialogButtonFluent">Cancel</button>
+          <button className="appDialogButtonFluent buttonActiveRed">Close</button>
         </app-dialog-actions>
       </app-dialog>
     </>
