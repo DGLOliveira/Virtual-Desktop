@@ -7,7 +7,7 @@ It also receives the content of the menu bar as a json object in order to be dis
 import { useState, useEffect, useCallback, Fragment } from "react";
 import parseKeybinds from "./../Handlers/parseKeybinds.js";
 
-export const AppMenuBar = ({ setAction, appMenu }) => {
+export const AppMenuBar = ({ isSelected, setAction, appMenu }) => {
     const [menuState, setMenuState] = useState(false);
     /*useEffect(() => {
         (import(`./../../../Apps/${appName}/appData.json`)).then(appData => {setAppMenu(appData.default.menu)}).catch(
@@ -48,7 +48,13 @@ export const AppMenuBar = ({ setAction, appMenu }) => {
         }
     }, [handleKeydown, appMenu]);
     return (
-        <nav className="appMenuBar" onBlur={(e) => handleBlur(e)}>
+        <nav 
+        className="appMenuBar" 
+        style={{
+            color: isSelected ? "var(--WindowTopBarFontColor)" : "var(--WindowTopBarFontColorInactive)",
+            backgroundColor: isSelected ? "var(--WindowTopBarBkgrColor)": "var(--WindowTopBarBkgrColorInactive)"}}
+        onBlur={(e) => handleBlur(e)}
+        >
             {Object.keys(appMenu).map((name, index) => (
                 <Fragment key={name + "appMenuBar"}>
                     <drop-down>

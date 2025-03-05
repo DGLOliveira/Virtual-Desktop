@@ -211,10 +211,10 @@ app-window>nav {
   position: relative;
   display: flex;
   flex-direction: row;
-  color: var(--WindowFontColor);
   border-bottom: 1px var(--GeneralBorderColor) solid;
 }
 app-window>nav > button {
+  color: inherit;
   border: solid 1px var(--GeneralBorderColor);
 } 
 drop-down>ul{
@@ -267,7 +267,8 @@ app-container > nav {
   height: auto;
   width: 100%;
   font-size: 25px;
-  color:var(--WindowFontColor);
+  color:var(--WindowTopBarFontColor);
+  background-color: var(--WindowTopBarBkgrColor);
   padding-left: 0;
   border-bottom: 1px var(--GeneralBorderColor) solid;
 }

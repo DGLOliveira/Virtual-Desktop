@@ -52,6 +52,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
         <Suspense fallback={<Loading message={"App"}/>}>
           {appMenu &&
             <AppMenuBar
+              isSelected={isSelected}
               action={action}
               setAction={setAction}
               appMenu={appMenu}
