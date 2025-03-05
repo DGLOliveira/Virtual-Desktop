@@ -29,7 +29,7 @@ export const WindowPreview = () => {
       >
         <app-top-bar
           style={{
-            color: "var(--WindowFontColorInactive)",
+            color: "var(--WindowTopBarFontColorInactive)",
             background: "var(--WindowTopBarBkgrInactive)"
           }}>
           <FcGlobe />
@@ -58,7 +58,7 @@ export const WindowPreview = () => {
       >
         <app-top-bar
           style={{
-            color: "var(--WindowFontColor)",
+            color: "var(--WindowTopBarFontColor)",
             background: "var(--WindowTopBarBkgr)"
           }}>
           <FcGlobe />
@@ -105,8 +105,8 @@ export const Window = () => {
   const [fontAlign, setFontAlign] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontAlign").slice(0, -2),
   );
-  const [fontColor, setFontColor] = useState(
-    getComputedStyle(root).getPropertyValue("--WindowFontColor"),
+  const [topbarFontColor, setTopbarFontColor] = useState(
+    getComputedStyle(root).getPropertyValue("--WindowTopBarFontColor"),
   );
   const [bkgColor, setBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBkgr"),
@@ -156,8 +156,8 @@ export const Window = () => {
   const [inactiveTopBarBkgColor, setInactiveTopBarBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarBkgrInactive"),
   );
-  const [inactiveFontColor, setInactiveFontColor] = useState(
-    getComputedStyle(root).getPropertyValue("--WindowFontColorInactive"),
+  const [topbarFontColorInactive, setTopbarFontColorInactive] = useState(
+    getComputedStyle(root).getPropertyValue("--WindowTopBarFontColorInactive"),
   );
   const [inactiveBkgColor, setInactiveBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBkgrInactive"),
@@ -216,7 +216,7 @@ export const Window = () => {
   useEffect(() => {
     root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
     root.style.setProperty("--WindowTopBarFontAlign", fontAlign);
-    root.style.setProperty("--WindowFontColor", fontColor);
+    root.style.setProperty("--WindowTopBarFontColor", topbarFontColor);
     root.style.setProperty("--WindowBkgr", bkgColor);
     root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
     root.style.setProperty("--WindowTopBarBkgr", topbarBkgColor);
@@ -231,7 +231,7 @@ export const Window = () => {
     root.style.setProperty("--WindowBorderType", borderType);
     root.style.setProperty("--WindowBorderColor", borderColor);
     root.style.setProperty("--WindowBorderColorInactive", inactiveBorderColor);
-    root.style.setProperty("--WindowFontColorInactive", inactiveFontColor);
+    root.style.setProperty("--WindowTopBarFontColorInactive", topbarFontColorInactive);
     root.style.setProperty("--WindowBkgrInactive", inactiveBkgColor);
     root.style.setProperty("--DialogBkgrColor", dialogBkgrColor);
     root.style.setProperty("--DialogBorderColor", dialogBorderColor);
@@ -258,7 +258,7 @@ export const Window = () => {
   }, [
     fontSize,
     fontAlign,
-    fontColor,
+    topbarFontColor,
     bkgColor,
     topbarFlexDirection,
     topbarBkgColor,
@@ -274,7 +274,7 @@ export const Window = () => {
     shadowSpread,
     shadowColor,
     inactiveTopBarBkgColor,
-    inactiveFontColor,
+    topbarFontColorInactive,
     inactiveBkgColor,
     inactiveBorderColor,
     dialogBkgrColor,
@@ -473,8 +473,8 @@ export const Window = () => {
           <div>
             <label>Top Bar Font Color: </label>
             <ColorPicker
-              color={fontColor}
-              setColor={setFontColor}
+              color={topbarFontColor}
+              setColor={setTopbarFontColor}
               useAlpha={false}
             />
           </div>
@@ -500,8 +500,8 @@ export const Window = () => {
           <div>
             <label>Top Bar Font Color: </label>
             <ColorPicker
-              color={inactiveFontColor}
-              setColor={setInactiveFontColor}
+              color={topbarFontColorInactive}
+              setColor={setTopbarFontColorInactive}
               useAlpha={false}
             />
           </div>
