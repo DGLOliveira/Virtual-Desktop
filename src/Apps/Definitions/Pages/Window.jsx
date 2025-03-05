@@ -370,7 +370,7 @@ export const Window = () => {
             />
           </div>
           <div>
-            <label>Border Radius:</label>
+            <label>Corner Curvature:</label>
             <input
               type="range"
               min={0}
