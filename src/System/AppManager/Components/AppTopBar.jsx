@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { AppIcon } from "./AppIcon.jsx"
+import { backgroundBlurriness } from "three/webgpu";
 
 export const AppTopBar = ({ appName, setAction }) => {
     const appContext = useContext(AppContext);
@@ -101,8 +102,8 @@ export const AppTopBar = ({ appName, setAction }) => {
             style={{
                 color: appContext.apps[appName].State.isSelected
                     ? "var(--WindowTopBarFontColor)" : "var(--WindowTopBarFontColorInactive)",
-                background: appContext.apps[appName].State.isSelected
-                    ? "var(--WindowTopBarBkgr)" : "var(--WindowTopBarBkgrInactive)",
+                backgroundColor: appContext.apps[appName].State.isSelected
+                    ? "var(--WindowTopBarBkgrColor)" : "var(--WindowTopBarBkgrColorInactive)",
                 cursor: appContext.apps[appName].State.isMaximized
                     ? "default" : cursor
             }}

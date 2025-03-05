@@ -16,8 +16,9 @@
   --DesktopFontSize: 16px;
   --DesktopIconSize: 80px;
 
-  --WindowBkgr: hsl(0, 0%, 18%);
-  --WindowBkgrInactive: hsl(0, 0%, 0%);
+  --WindowBkgr: none;
+  --WindowBkgrColor: hsl(0, 0%, 18%);
+  --WindowBkgrColorInactive: hsl(0, 0%, 0%);
   --WindowFontColor: hsl(0, 0%, 75%);
   --WindowFontColorInactive: hsl(0, 0%, 50%);
   --WindowFontSize: 32px;
@@ -27,8 +28,8 @@
   --WindowBorderRadius: 0px;
   --WindowBorderType: solid;
   --WindowTopBarFlexDirection: row;
-  --WindowTopBarBkgr: hsl(0, 0%, 18%);
-  --WindowTopBarBkgrInactive: hsl(0, 0%, 5%);
+  --WindowTopBarBkgrColor: hsl(0, 0%, 18%);
+  --WindowTopBarBkgrColorInactive: hsl(0, 0%, 5%);
   --WindowTopBarHeight: 40px;
   --WindowTopBarIconSize: 34px;
   --WindowTopBarFontSize: 32px;
@@ -87,6 +88,41 @@
 
   --ClockBkgr: hsla(0, 0%, 10%, 0.95);
   --ClockFontColor: hsl(0, 0%, 75%);
+
+  --ReflectiveFXBkgrImage: linear-gradient(60deg,
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15),
+  hsla(0, 0%, 0%, 0.15),
+  hsla(0,0%,100%,0.15));
+  --ReflectiveFXBkgrPosition: "top left";
+  --ReflectiveFXBkgrRepeat:"repeat";
+  --ReflectiveFXBkgrSize:"2000px 2000px";
 
   background-color: var(--DesktopBkgrColor);
   background-image: var(--DesktopBkgrImage);

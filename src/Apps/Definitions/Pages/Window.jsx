@@ -22,7 +22,7 @@ export const WindowPreview = () => {
           left: "10px",
           width: "80%",
           height: "120px",
-          background: "var(--WindowBkgrInactive)",
+          backgroundColor: "var(--WindowBkgrColorInactive)",
           borderColor: "var(--WindowBorderColorInactive)"
         }}
         className="app appInactive"
@@ -30,7 +30,7 @@ export const WindowPreview = () => {
         <app-top-bar
           style={{
             color: "var(--WindowTopBarFontColorInactive)",
-            background: "var(--WindowTopBarBkgrInactive)"
+            backgroundColor: "var(--WindowTopBarBkgrColorInactive)"
           }}>
           <FcGlobe />
           <h1>Inactive</h1>
@@ -52,14 +52,14 @@ export const WindowPreview = () => {
           left: "60px",
           width: "80%",
           height: "120px",
-          background: "var(--WindowBkgr)"
+          backgroundColor: "var(--WindowBkgrColor)"
         }}
         className="app"
       >
         <app-top-bar
           style={{
             color: "var(--WindowTopBarFontColor)",
-            background: "var(--WindowTopBarBkgr)"
+            backgroundColor: "var(--WindowTopBarBkgrColor)"
           }}>
           <FcGlobe />
           <h1>Active</h1>
@@ -109,13 +109,13 @@ export const Window = () => {
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontColor"),
   );
   const [bkgColor, setBkgColor] = useState(
-    getComputedStyle(root).getPropertyValue("--WindowBkgr"),
+    getComputedStyle(root).getPropertyValue("--WindowBkgrColor"),
   );
   const [topbarFlexDirection, setTopbarFlexDirection] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFlexDirection"),
   );
   const [topbarBkgColor, setTopbarBkgColor] = useState(
-    getComputedStyle(root).getPropertyValue("--WindowTopBarBkgr"),
+    getComputedStyle(root).getPropertyValue("--WindowTopBarBkgrColor"),
   );
   const [topBarHeight, setTopBarHeight] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarHeight").slice(0, -2),
@@ -154,13 +154,13 @@ export const Window = () => {
     getComputedStyle(root).getPropertyValue("--WindowBorderColorInactive"),
   );
   const [inactiveTopBarBkgColor, setInactiveTopBarBkgColor] = useState(
-    getComputedStyle(root).getPropertyValue("--WindowTopBarBkgrInactive"),
+    getComputedStyle(root).getPropertyValue("--WindowTopBarBkgrColorInactive"),
   );
   const [topbarFontColorInactive, setTopbarFontColorInactive] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontColorInactive"),
   );
   const [inactiveBkgColor, setInactiveBkgColor] = useState(
-    getComputedStyle(root).getPropertyValue("--WindowBkgrInactive"),
+    getComputedStyle(root).getPropertyValue("--WindowBkgrColorInactive"),
   );
   const [dialogBkgrColor, setDialogBkgrColor] = useState(
     getComputedStyle(root).getPropertyValue("--DialogBkgrColor"),
@@ -217,12 +217,12 @@ export const Window = () => {
     root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
     root.style.setProperty("--WindowTopBarFontAlign", topbarTitleAlign);
     root.style.setProperty("--WindowTopBarFontColor", topbarFontColor);
-    root.style.setProperty("--WindowBkgr", bkgColor);
+    root.style.setProperty("--WindowBkgrColor", bkgColor);
     root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
-    root.style.setProperty("--WindowTopBarBkgr", topbarBkgColor);
+    root.style.setProperty("--WindowTopBarBkgrColor", topbarBkgColor);
     root.style.setProperty("--WindowTopBarHeight", topBarHeight + "px");
     root.style.setProperty(
-      "--WindowTopBarBkgrInactive",
+      "--WindowTopBarBkgrColorInactive",
       inactiveTopBarBkgColor,
     );
     root.style.setProperty("--WindowTopBarIconSize", topBarIconSize + "px");
@@ -232,7 +232,7 @@ export const Window = () => {
     root.style.setProperty("--WindowBorderColor", borderColor);
     root.style.setProperty("--WindowBorderColorInactive", inactiveBorderColor);
     root.style.setProperty("--WindowTopBarFontColorInactive", topbarFontColorInactive);
-    root.style.setProperty("--WindowBkgrInactive", inactiveBkgColor);
+    root.style.setProperty("--WindowBkgrColorInactive", inactiveBkgColor);
     root.style.setProperty("--DialogBkgrColor", dialogBkgrColor);
     root.style.setProperty("--DialogBorderColor", dialogBorderColor);
     root.style.setProperty("--DialogBorderWidth", dialogBorderWidth + "px");

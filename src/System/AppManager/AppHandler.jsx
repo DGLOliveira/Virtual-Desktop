@@ -24,9 +24,9 @@ export function AppHandler() {
             borderColor: appContext.apps[name].State.isSelected
               ? "var(--WindowBorderColor)"
               : "var(--WindowBorderColorInactive)",
-            background: appContext.apps[name].State.isSelected
-              ? "var(--WindowBkgr)"
-              : "var(--WindowBkgrInactive)",
+            backgroundColor: appContext.apps[name].State.isSelected
+              ? "var(--WindowBkgrColor)"
+              : "var(--WindowBkgrColorInactive)",
             visibility: appContext.apps[name].State.isMinimized
               ? "hidden"
               : "visible",
