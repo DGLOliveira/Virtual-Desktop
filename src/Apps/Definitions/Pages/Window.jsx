@@ -459,7 +459,7 @@ export const Window = () => {
             <ColorPicker
               color={bkgColor}
               setColor={setBkgColor}
-              useAlpha={false}
+              useAlpha={true}
             />
           </div>
           <div>
@@ -467,7 +467,7 @@ export const Window = () => {
             <ColorPicker
               color={topbarBkgColor}
               setColor={setTopbarBkgColor}
-              useAlpha={false}
+              useAlpha={true}
             />
           </div>
           <div>
@@ -494,7 +494,7 @@ export const Window = () => {
             <ColorPicker
               color={inactiveTopBarBkgColor}
               setColor={setInactiveTopBarBkgColor}
-              useAlpha={false}
+              useAlpha={true}
             />
           </div>
           <div>
@@ -510,7 +510,7 @@ export const Window = () => {
             <ColorPicker
               color={inactiveBkgColor}
               setColor={setInactiveBkgColor}
-              useAlpha={false}
+              useAlpha={true}
             />
           </div>
           <div>

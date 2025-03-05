@@ -328,7 +328,7 @@ useEffect(()=>{
   handleTopMenu(appMenu,setAppMenu, args);
 },[calculatorState])
   return (
-    <app-container id="calculatorContainer">
+    <div id="calculatorContainer">
       {calculatorState.type !== "Graphic" ? (
         <div id="calculatorDisplayContainer">
           <div id="calculatorMinorDisplay">{displayState.minorDisplay}</div>
@@ -668,6 +668,6 @@ useEffect(()=>{
           </div>
         </div>
       </div>
-    </app-container>
+    </div>
   );
 };

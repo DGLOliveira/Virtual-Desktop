@@ -63,7 +63,15 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
               appDialog={appDialog}
             />
           }
+          <app-container
+            style={{
+              backgroundColor: isSelected
+              ? "var(--WindowBkgrColor)"
+              : "var(--WindowBkgrColorInactive)"
+            }}
+          >
           <App {...appProps} />
+          </app-container>
         </Suspense>
       </ErrorBoundary>
     </>

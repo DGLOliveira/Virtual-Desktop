@@ -26,7 +26,7 @@ export default function DrawDoc(props) {
 
   return (
     <Provider>
-      <app-container>
+      <>
         <TopNavBar 
         setAction={setAction} 
         contextMenu={contextMenu} 
@@ -59,7 +59,7 @@ export default function DrawDoc(props) {
           setAction={setAction}
           contextMenu={contextMenu}
         />
-      </app-container>
+      </>
     </Provider>
   );
 };

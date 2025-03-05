@@ -17,8 +17,8 @@
   --DesktopIconSize: 80px;
 
   --WindowBkgr: none;
-  --WindowBkgrColor: hsl(0, 0%, 18%);
-  --WindowBkgrColorInactive: hsl(0, 0%, 0%);
+  --WindowBkgrColor: hsla(0, 0%, 18%,1);
+  --WindowBkgrColorInactive: hsla(0, 0%, 0%,1);
   --WindowFontColor: hsl(0, 0%, 75%);
   --WindowFontColorInactive: hsl(0, 0%, 50%);
   --WindowFontSize: 32px;
@@ -28,8 +28,8 @@
   --WindowBorderRadius: 0px;
   --WindowBorderType: solid;
   --WindowTopBarFlexDirection: row;
-  --WindowTopBarBkgrColor: hsl(0, 0%, 18%);
-  --WindowTopBarBkgrColorInactive: hsl(0, 0%, 5%);
+  --WindowTopBarBkgrColor: hsla(0, 0%, 18%, 1);
+  --WindowTopBarBkgrColorInactive: hsla(0, 0%, 5%, 1);
   --WindowTopBarHeight: 40px;
   --WindowTopBarIconSize: 34px;
   --WindowTopBarFontSize: 32px;
