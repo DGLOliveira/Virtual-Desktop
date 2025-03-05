@@ -100,7 +100,7 @@ export const AppTopBar = ({ appName, setAction }) => {
         <app-top-bar
             style={{
                 color: appContext.apps[appName].State.isSelected
-                    ? "var(--WindowFontColor)" : "var(--WindowFontColorInactive)",
+                    ? "var(--WindowTopBarFontColor)" : "var(--WindowTopBarFontColorInactive)",
                 background: appContext.apps[appName].State.isSelected
                     ? "var(--WindowTopBarBkgr)" : "var(--WindowTopBarBkgrInactive)",
                 cursor: appContext.apps[appName].State.isMaximized
