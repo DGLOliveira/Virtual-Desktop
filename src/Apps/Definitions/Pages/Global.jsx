@@ -1,7 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "./../../../System/ThemeManager/context.jsx";
 
-const fontFamilyList = [
+export const Global = () => {
+    const theme = useContext(ThemeContext);
+    /*
+    To be moved outside of the component, due to interfering with theme change
+    const fontFamilyList = [
     "Arial",
     "Times New Roman",
     "Monospace",
@@ -26,17 +30,12 @@ const fontFamilyList = [
     "Century Gothic",
     "Century Schoolbook"
 ];
-
-export const Global = () => {
-    const theme = useContext(ThemeContext);
     const [fontFamily, setFontFamily] = useState(
         getComputedStyle(root).getPropertyValue("--GeneralFontFamily"));
     useEffect(() => {
         root.style.setProperty("--GeneralFontFamily", fontFamily);
     }, [fontFamily]);
     
-    return (
-        <>
             <fieldset>
                 <legend>Font Family:</legend>
                 <select
@@ -50,6 +49,10 @@ export const Global = () => {
                     ))}
                 </select>
             </fieldset>
+    */
+    
+    return (
+        <>
             <fieldset>
                 <legend>Theme:</legend>
                 <select

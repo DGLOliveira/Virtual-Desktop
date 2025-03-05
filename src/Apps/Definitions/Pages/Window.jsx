@@ -102,8 +102,8 @@ export const Window = () => {
   const [fontSize, setFontSize] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontSize").slice(0, -2),
   );
-  const [fontAlign, setFontAlign] = useState(
-    getComputedStyle(root).getPropertyValue("--WindowTopBarFontAlign").slice(0, -2),
+  const [topbarTitleAlign, setTopbarTitleAlign] = useState(
+    getComputedStyle(root).getPropertyValue("--WindowTopBarFontAlign"),
   );
   const [topbarFontColor, setTopbarFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontColor"),
@@ -215,7 +215,7 @@ export const Window = () => {
   )
   useEffect(() => {
     root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
-    root.style.setProperty("--WindowTopBarFontAlign", fontAlign);
+    root.style.setProperty("--WindowTopBarFontAlign", topbarTitleAlign);
     root.style.setProperty("--WindowTopBarFontColor", topbarFontColor);
     root.style.setProperty("--WindowBkgr", bkgColor);
     root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
@@ -257,7 +257,7 @@ export const Window = () => {
     root.style.setProperty("--WindowShadowSpread", shadowSpread + "px");
   }, [
     fontSize,
-    fontAlign,
+    topbarTitleAlign,
     topbarFontColor,
     bkgColor,
     topbarFlexDirection,
@@ -314,8 +314,8 @@ export const Window = () => {
           <div>
             <label>Align Title</label>
             <select
-              value={fontAlign}
-              onChange={(e) => setFontAlign(e.target.value)}
+              value={topbarTitleAlign}
+              onChange={(e) => setTopbarTitleAlign(e.target.value)}
             >
               <option value="left">Left</option>
               <option value="center">Center</option>
