@@ -549,7 +549,7 @@ export const Window = () => {
             <ColorPicker
               color={borderColor}
               setColor={setBorderColor}
-              useAlpha={false}
+              useAlpha={true}
             />
           </div>
         </fieldset>
@@ -593,7 +593,7 @@ export const Window = () => {
             <ColorPicker
               color={inactiveBorderColor}
               setColor={setInactiveBorderColor}
-              useAlpha={false}
+              useAlpha={true}
             />
           </div>
         </fieldset>
@@ -615,7 +615,7 @@ export const Window = () => {
             <ColorPicker
               color={dialogBorderColor}
               setColor={setDialogBorderColor}
-              useAlpha={false}
+              useAlpha={true}
             />
           </div>
           <div>
