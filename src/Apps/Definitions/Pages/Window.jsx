@@ -1,18 +1,48 @@
 //Allows to change the style of individual tasks windows
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FcGlobe } from "react-icons/fc";
 import {
   FaRegWindowMinimize,
-  FaWindowRestore,
   FaWindowMaximize,
 } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 
+import {ThemeContext} from "../../../System/ThemeManager/context.jsx";
 import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 
 export const WindowPreview = () => {
+  const themeContext = useContext(ThemeContext);
+  const [buttonClassNeutral, setButtonClassNeutral] = useState("appDialogButtonFluent");
+  const [buttonClassSuggested, setButtonClassSuggested] = useState("appDialogButtonFluent");
+  const [buttonClassClose, setButtonClassClose] = useState("appDialogButtonFluent buttonActiveRed");
+  useEffect(() => {
+      switch(themeContext.theme) {
+          case "Aqua":
+              setButtonClassNeutral("appDialogButtonAqua appDialogButtonAquaNeutral");
+              setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");
+              setButtonClassClose("appDialogButtonAqua appDialogButtonAquaRed");
+              break;
+          default:
+              setButtonClassNeutral("appDialogButtonFluent");
+              setButtonClassSuggested("appDialogButtonFluent");
+              setButtonClassClose("appDialogButtonFluent buttonActiveRed");
+              break;
+      }
+  },[themeContext.theme]);
+
+  const setButtonClass = (name) => {
+      switch(name){
+       case "Close":
+          return buttonClassClose;
+      case "Save":
+      case "Ok":
+          return buttonClassSuggested;
+      default:
+          return buttonClassNeutral;
+      }
+  }
   return (
     <>
       <app-window
@@ -34,15 +64,24 @@ export const WindowPreview = () => {
           }}>
           <FcGlobe />
           <h1>Inactive</h1>
-          <button>
-            <FaRegWindowMinimize className="appTopBarButton" />
-          </button>
-          <button>
-            <FaWindowMaximize className="appTopBarButton" />
-          </button>
-          <button>
-            <AiOutlineClose className="appTopBarButton appClose" />
-          </button>
+          {themeContext.theme === "Aqua" && (
+            <>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">■</div>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaYellow">-</div>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">X</div>
+            </>
+          )}
+          {themeContext.theme === "Default" &&
+            <>
+              <div className="appTopBarButtonFluent">
+                <FaRegWindowMinimize />
+              </div>
+              <div className="appTopBarButtonFluent">
+                <FaWindowMaximize />
+              </div>
+              <div className="appTopBarButtonFluentRed appTopBarButtonFluent">
+                <AiOutlineClose />
+              </div></>}
         </app-top-bar>
       </app-window>
       <app-window
@@ -63,15 +102,24 @@ export const WindowPreview = () => {
           }}>
           <FcGlobe />
           <h1>Active</h1>
-          <button>
-            <FaRegWindowMinimize />
-          </button>
-          <button>
-            <FaWindowMaximize />
-          </button>
-          <button className="buttonActiveRed">
-            <AiOutlineClose />
-          </button>
+          {themeContext.theme === "Aqua" && (
+            <>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">■</div>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaYellow">-</div>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">X</div>
+            </>
+          )}
+          {themeContext.theme === "Default" &&
+            <>
+              <div className="appTopBarButtonFluent">
+                <FaRegWindowMinimize />
+              </div>
+              <div className="appTopBarButtonFluent">
+                <FaWindowMaximize />
+              </div>
+              <div className="appTopBarButtonFluentRed appTopBarButtonFluent">
+                <AiOutlineClose />
+              </div></>}
         </app-top-bar>
       </app-window>
       <app-dialog
@@ -88,9 +136,9 @@ export const WindowPreview = () => {
           Information
         </app-dialog-info>
         <app-dialog-actions>
-          <button className="appDialogButtonFluent">Ok</button>
-          <button className="appDialogButtonFluent">Cancel</button>
-          <button className="appDialogButtonFluent buttonActiveRed">Close</button>
+          <div className={setButtonClass("Ok")}>Ok</div>
+          <div className={setButtonClass("Cancel")}>Cancel</div>
+          <div className={setButtonClass("Close")}>Close</div>
         </app-dialog-actions>
       </app-dialog>
     </>
@@ -402,46 +450,46 @@ export const Window = () => {
           <div>
             <label>Y-Offset</label>
             <input
-            type="number"
-            min={-50}
-            max={50}
-            step="1"
-            value={shadowYOffset}
-            onChange={(e) => setShadowYOffset(e.target.value)}
-          />
+              type="number"
+              min={-50}
+              max={50}
+              step="1"
+              value={shadowYOffset}
+              onChange={(e) => setShadowYOffset(e.target.value)}
+            />
           </div>
           <div>
             <label>X-Offset</label>
             <input
-            type="number"
-            min={-50}
-            max={50}
-            step="1"
-            value={shadowXOffset}
-            onChange={(e) => setShadowXOffset(e.target.value)}
-          />
+              type="number"
+              min={-50}
+              max={50}
+              step="1"
+              value={shadowXOffset}
+              onChange={(e) => setShadowXOffset(e.target.value)}
+            />
           </div>
           <div>
             <label>Spread</label>
             <input
-            type="number"
-            min={0}
-            max={50}
-            step="1"
-            value={shadowSpread}
-            onChange={(e) => setShadowSpread(e.target.value)}
-          />
+              type="number"
+              min={0}
+              max={50}
+              step="1"
+              value={shadowSpread}
+              onChange={(e) => setShadowSpread(e.target.value)}
+            />
           </div>
           <div>
             <label>Blur</label>
             <input
-            type="number"
-            min={0}
-            max={50}
-            step="1"
-            value={shadowBlur}
-            onChange={(e) => setShadowBlur(e.target.value)}
-          />
+              type="number"
+              min={0}
+              max={50}
+              step="1"
+              value={shadowBlur}
+              onChange={(e) => setShadowBlur(e.target.value)}
+            />
           </div>
           <div>
             <label>Color</label>
