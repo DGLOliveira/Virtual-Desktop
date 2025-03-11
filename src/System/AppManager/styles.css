@@ -299,6 +299,7 @@ app-container > nav > button > input[type="color"] {
 app-body {
   width: 100%;
   height: 100%;
+  color: var(--WindowFontColor);
 }
 app-dialog{
   position: absolute;

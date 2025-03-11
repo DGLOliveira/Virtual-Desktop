@@ -147,6 +147,12 @@ export const WindowPreview = () => {
 
 export const Window = () => {
   var root = document.querySelector(":root");
+  const [windowFontColor, setWindowFontColor] = useState(
+    getComputedStyle(root).getPropertyValue("--WindowFontColor"),
+  );
+  const [windowFontColorInactive, setWindowFontColorInactive] = useState(
+    getComputedStyle(root).getPropertyValue("--WindowFontColorInactive"),
+  )
   const [fontSize, setFontSize] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontSize").slice(0, -2),
   );
@@ -262,6 +268,8 @@ export const Window = () => {
     getComputedStyle(root).getPropertyValue("--DialogButtonBorderType"),
   )
   useEffect(() => {
+    root.style.setProperty("--WindowFontColor", windowFontColor);
+    root.style.setProperty("--WindowFontColorInactive", windowFontColorInactive);
     root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
     root.style.setProperty("--WindowTopBarFontAlign", topbarTitleAlign);
     root.style.setProperty("--WindowTopBarFontColor", topbarFontColor);
@@ -304,6 +312,8 @@ export const Window = () => {
     root.style.setProperty("--WindowShadowColor", shadowColor);
     root.style.setProperty("--WindowShadowSpread", shadowSpread + "px");
   }, [
+    windowFontColor,
+    windowFontColorInactive,
     fontSize,
     topbarTitleAlign,
     topbarFontColor,
@@ -503,14 +513,6 @@ export const Window = () => {
         <fieldset>
           <legend>Active Window</legend>
           <div>
-            <label>Background Color: </label>
-            <ColorPicker
-              color={bkgColor}
-              setColor={setBkgColor}
-              useAlpha={true}
-            />
-          </div>
-          <div>
             <label>Top Bar Background Color: </label>
             <ColorPicker
               color={topbarBkgColor}
@@ -527,6 +529,22 @@ export const Window = () => {
             />
           </div>
           <div>
+            <label>Background Color: </label>
+            <ColorPicker
+              color={bkgColor}
+              setColor={setBkgColor}
+              useAlpha={true}
+            />
+          </div>
+          <div>
+            <label>Font Color: </label>
+            <ColorPicker
+              color={windowFontColor}
+              setColor={setWindowFontColor}
+              useAlpha={false}
+            />
+          </div>
+          <div>
             <label>Border Color: </label>
             <ColorPicker
               color={borderColor}
@@ -537,6 +555,7 @@ export const Window = () => {
         </fieldset>
         <fieldset>
           <legend>Inactive Window</legend>
+          
           <div>
             <label>Top Bar Background Color: </label>
             <ColorPicker
@@ -559,6 +578,14 @@ export const Window = () => {
               color={inactiveBkgColor}
               setColor={setInactiveBkgColor}
               useAlpha={true}
+            />
+          </div>
+          <div>
+            <label>Font Color: </label>
+            <ColorPicker
+              color={windowFontColorInactive}
+              setColor={setWindowFontColorInactive}
+              useAlpha={false}
             />
           </div>
           <div>

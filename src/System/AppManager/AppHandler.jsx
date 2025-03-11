@@ -21,6 +21,9 @@ export function AppHandler() {
             left: appContext.apps[name].Location.Current.left,
             width: appContext.apps[name].Size.Current.width,
             height: appContext.apps[name].Size.Current.height,
+            color: appContext.apps[name].State.isSelected
+              ? "var(--WindowFontColor)"
+              : "var(--WindowFontColorInactive)",
             borderColor: appContext.apps[name].State.isSelected
               ? "var(--WindowBorderColor)"
               : "var(--WindowBorderColorInactive)",
