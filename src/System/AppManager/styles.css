@@ -352,8 +352,9 @@ app-dialog>app-dialog-actions>div{
   border-radius: var(--DialogButtonBorderRadius);
 }
 .appDialogButtonAqua{
-  border: 0;
-  border-radius: 100vw;
+  font-size: var(--DialogButtonFontSize);
+  border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) var(--DialogButtonBorderType);
+  border-radius: var(--DialogButtonBorderRadius);
   position: relative;
   padding: 5px 10px;
 }
@@ -363,7 +364,7 @@ app-dialog>app-dialog-actions>div{
   z-index: -1;
   inset: -1px;
   margin-inline: auto;
-  border-radius: 100vw;
+  border-radius: var(--DialogButtonBorderRadius);
 }
 .appDialogButtonAqua:hover{
   text-shadow: 0 0 5px white;
@@ -404,7 +405,7 @@ app-dialog>app-dialog-actions>div{
       hsl(0 0% 100% / 0.25) 5px,
       transparent 5px
     ),
-    linear-gradient(hsl(0, 0%, 60%), hsl(0, 0%, 92%));
+    linear-gradient(hsl(0, 0%, 50%), hsl(0, 0%, 92%));
   background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
   background-position: top, top center, top left, top right, center;
   background-repeat: no-repeat;

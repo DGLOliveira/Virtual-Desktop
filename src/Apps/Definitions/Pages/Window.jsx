@@ -607,7 +607,7 @@ export const Window = () => {
             <input
               type="range"
               min={1}
-              max={10}
+              max={25}
               step="1"
               value={dialogBorderRadius}
               onChange={(e) => setDialogBorderRadius(e.target.value)}
@@ -735,7 +735,7 @@ export const Window = () => {
             <input
               type="range"
               min={1}
-              max={10}
+              max={25}
               step="1"
               value={dialogButtonBorderRadius}
               onChange={(e) => setDialogButtonBorderRadius(e.target.value)}
