@@ -59,12 +59,12 @@
     "--DialogButtonBorderRadius": "25px",
     "--DialogButtonBorderType": "solid",
 
-    "--ContextMenuBkgr": "hsla(0, 0%, 18%, 0.95)",
-    "--ContextMenuFontColor": "hsl(0, 0%, 75%)",
+    "--ContextMenuBkgr": "hsla(0, 0%, 75%, 0.90)",
+    "--ContextMenuFontColor": "hsl(0, 0%, 20%)",
     "--ContextMenuFontSize": "16px",
     "--ContextMenuBorderColor": "hsl(0, 0%, 18%)",
-    "--ContextMenuBorderWidth": "1px",
-    "--ContextMenuBorderRadius": "0px",
+    "--ContextMenuBorderWidth": "0px",
+    "--ContextMenuBorderRadius": "10px",
     "--ContextMenuBorderType": "solid",
 
     "--TaskbarBkgr": "hsla(0, 0%, 0%, 0.8)",
