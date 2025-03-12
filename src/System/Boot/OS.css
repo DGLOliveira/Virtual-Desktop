@@ -125,6 +125,17 @@
   --ReflectiveFXBkgrRepeat:"repeat";
   --ReflectiveFXBkgrSize:"2000px 2000px";
 
+  --MetallicFXBkgrImage: -webkit-repeating-linear-gradient(top, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%, .05) 7%),
+  -webkit-repeating-linear-gradient(top, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   4%, hsla(0,0%,  0%,.03) 4.25%),
+  -webkit-repeating-linear-gradient(top, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.07) 1.8%),
+  -webkit-repeating-linear-gradient(45deg, hsla(0, 0%, 100%, 0.1) 0%, hsla(0, 0%, 0%, 0.1) 10%, hsla(0, 0%, 100%, 0.1) 20%);
+  --MetallicFXBkgrPosition: "top left";
+  --MetallicFXBkgrRepeat: "repeat";
+  --MetallicFXBkgrSize: "contain";
+
+
+
+
   background-color: var(--DesktopBkgrColor);
   background-image: var(--DesktopBkgrImage);
   background-position: var(--DesktopBkgrPosition);
