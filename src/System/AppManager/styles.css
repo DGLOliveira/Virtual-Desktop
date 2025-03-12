@@ -98,24 +98,34 @@ app-top-bar > svg {
 
 .appTopBarButtonAquaRed{
   background-image: linear-gradient(hsl(0 0% 100% / 0.95), transparent 10px),
-    linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
-    radial-gradient(
-      circle at 10px 5px,
-      hsl(0 0% 100% / 0.25) 5px,
-      transparent 5px
-    ),
-    radial-gradient(
-      circle at 0px 5px,
-      hsl(0 0% 100% / 0.25) 5px,
-      transparent 5px
-    ),
-    linear-gradient(hsl(0, 94%, 50%), hsl(0, 51%, 62%));
+  linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+  radial-gradient(
+    circle at 9px 2px,
+    hsl(0 0% 100% / 0.75) 1px,
+    transparent 5px
+  ),
+  radial-gradient(
+    circle at 0px 2px,
+    hsl(0 0% 100% / 0.75) 1px,
+    transparent 5px
+  ),
+  radial-gradient(
+    circle at 9px 8px,
+    hsl(0 0% 100% / 0.25) 2px,
+    transparent 5px
+  ),
+  radial-gradient(
+    circle at 0px 8px,
+    hsl(0 0% 100% / 0.25) 2px,
+    transparent 5px
+  ),
+  linear-gradient(hsl(0, 100%, 30%), hsl(0, 100%,40%), hsl(0, 100%, 68%), hsl(0, 100%, 80%));
   padding: calc(var(--WindowTopBarIconSize)/10) calc(var(--WindowTopBarIconSize)/10);
-  background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
-  background-position: top, top center, top left, top right, center;
+  background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 10px 10px, 10px 10px, 100%;
+  background-position: top, top center, top left, top right, bottom left, bottom right, center;
   background-repeat: no-repeat;
   border: 0;
-  border-radius: 100vw;
+  border-radius: 50%;
   position: relative;
   border: 2px var(--GeneralBorderColor) inset;
   font-weight: bold;
@@ -139,19 +149,29 @@ app-top-bar > svg {
   background-image: linear-gradient(hsl(0 0% 100% / 0.95), transparent 10px),
     linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
     radial-gradient(
-      circle at 10px 5px,
-      hsl(0 0% 100% / 0.25) 5px,
+      circle at 9px 2px,
+      hsl(0 0% 100% / 1) 1px,
       transparent 5px
     ),
     radial-gradient(
-      circle at 0px 5px,
-      hsl(0 0% 100% / 0.25) 5px,
+      circle at 0px 2px,
+      hsl(0 0% 100% / 1) 1px,
       transparent 5px
     ),
-    linear-gradient(hsl(61, 100%, 50%), hsl(61, 51%, 62%));
+    radial-gradient(
+      circle at 9px 8px,
+      hsl(0 0% 100% / 0.25) 2px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 0px 8px,
+      hsl(0 0% 100% / 0.25) 2px,
+      transparent 5px
+    ),
+    linear-gradient(hsl(45, 100%, 30%), hsl(45, 100%,40%), hsl(45, 100%, 60%), hsl(45, 100%, 80%));
   padding: calc(var(--WindowTopBarIconSize)/10) calc(var(--WindowTopBarIconSize)/10);
-  background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
-  background-position: top, top center, top left, top right, center;
+  background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 10px 10px, 10px 10px, 100%;
+  background-position: top, top center, top left, top right, bottom left, bottom right, center;
   background-repeat: no-repeat;
   border: 0;
   border-radius: 100vw;
@@ -166,7 +186,7 @@ app-top-bar > svg {
   z-index: -1;
   inset: -1px;
   margin-inline: auto;
-  background: linear-gradient(hsl(61, 74%, 30%), hsl(0, 0%, 38%));
+  background: linear-gradient(hsl(45, 74%, 30%), hsl(0, 0%, 38%));
   border-radius: 100vw;
 }
 
@@ -178,19 +198,29 @@ app-top-bar > svg {
   background-image: linear-gradient(hsl(0 0% 100% / 0.95), transparent 10px),
     linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
     radial-gradient(
-      circle at 10px 5px,
-      hsl(0 0% 100% / 0.25) 5px,
+      circle at 9px 2px,
+      hsl(0 0% 100% / 1) 1px,
       transparent 5px
     ),
     radial-gradient(
-      circle at 0px 5px,
-      hsl(0 0% 100% / 0.25) 5px,
+      circle at 0px 2px,
+      hsl(0 0% 100% / 1) 1px,
       transparent 5px
     ),
-    linear-gradient(hsl(135, 94%, 50%), hsl(136, 51%, 62%));
+    radial-gradient(
+      circle at 9px 8px,
+      hsl(0 0% 100% / 0.25) 2px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 0px 8px,
+      hsl(0 0% 100% / 0.25) 2px,
+      transparent 5px
+    ),
+    linear-gradient(hsl(135, 100%, 20%), hsl(135, 100%,30%), hsl(135, 100%, 45%), hsl(135, 100%, 80%));
   padding: calc(var(--WindowTopBarIconSize)/10) calc(var(--WindowTopBarIconSize)/10);
-  background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
-  background-position: top, top center, top left, top right, center;
+  background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 10px 10px, 10px 10px, 100%;
+  background-position: top, top center, top left, top right, bottom left, bottom right, center;
   background-repeat: no-repeat;
   border: 0;
   border-radius: 100vw;
