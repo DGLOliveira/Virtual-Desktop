@@ -39,6 +39,8 @@
   width: 95%;
   height: 25%;
   margin: 5px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 #calculatorDisplay {
   height: 65%;
@@ -170,8 +172,8 @@
   border: 1px gray solid;
   align-items: center;
   justify-content: space-around;
+  background: hsla(0, 0%, 0%, 0.1);
   flex-grow: 1;
-  color: white;
   cursor: pointer;
   transition: 0.3s;
 }
