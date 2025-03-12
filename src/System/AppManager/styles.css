@@ -118,6 +118,7 @@ app-top-bar > svg {
   border-radius: 100vw;
   position: relative;
   border: 2px var(--GeneralBorderColor) inset;
+  font-weight: bold;
 }
 
 .appTopBarButtonAquaRed::before{
@@ -156,6 +157,7 @@ app-top-bar > svg {
   border-radius: 100vw;
   position: relative;
   border: 2px var(--GeneralBorderColor) inset;
+  font-weight: bold;
 }
 
 .appTopBarButtonAquaYellow::before {
@@ -194,6 +196,7 @@ app-top-bar > svg {
   border-radius: 100vw;
   position: relative;
   border: 2px var(--GeneralBorderColor) inset;
+  font-weight: bold;
 }
 
 .appTopBarButtonAquaGreen::before{
@@ -358,6 +361,7 @@ app-dialog>app-dialog-actions>div{
   border-radius: var(--DialogButtonBorderRadius);
   position: relative;
   padding: 5px 10px;
+  font-weight: bold;
 }
 .appDialogButtonAqua::before{
   content: "";
@@ -369,6 +373,7 @@ app-dialog>app-dialog-actions>div{
 }
 .appDialogButtonAqua:hover{
   text-shadow: 0 0 5px white;
+  box-shadow: inset 0 0 20px 0 hsla(0, 0%, 100%, 0.4);
 }
 .appDialogButtonAquaBlue{
   background-image: linear-gradient(hsl(0 0% 100% / 0.85), transparent 10px),
@@ -383,7 +388,7 @@ app-dialog>app-dialog-actions>div{
       hsl(0 0% 100% / 0.25) 5px,
       transparent 5px
     ),
-    linear-gradient(hsl(213, 100%, 50%), hsl(181, 95%, 92%));
+    linear-gradient(hsl(213, 100%, 50%), hsl(187, 100%, 55%));
   background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
   background-position: top, top center, top left, top right, center;
   background-repeat: no-repeat;
@@ -395,18 +400,18 @@ app-dialog>app-dialog-actions>div{
 
 .appDialogButtonAquaNeutral{
   background-image: linear-gradient(hsl(0 0% 100% / 0.85), transparent 10px),
-    linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+    linear-gradient(hsl(0 0% 100% / 0.30) 10px, transparent 10px),
     radial-gradient(
       circle at 10px 5px,
-      hsl(0 0% 100% / 0.25) 5px,
+      hsl(0 0% 100% / 0.30) 5px,
       transparent 5px
     ),
     radial-gradient(
       circle at 0px 5px,
-      hsl(0 0% 100% / 0.25) 5px,
+      hsl(0 0% 100% / 0.30) 5px,
       transparent 5px
     ),
-    linear-gradient(hsl(0, 0%, 50%), hsl(0, 0%, 92%));
+    linear-gradient(hsl(0, 0%, 30%), hsl(0, 0%, 95%));
   background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
   background-position: top, top center, top left, top right, center;
   background-repeat: no-repeat;
@@ -429,7 +434,7 @@ app-dialog>app-dialog-actions>div{
       hsl(0 0% 100% / 0.25) 5px,
       transparent 5px
     ),
-    linear-gradient(hsl(0, 100%, 50%), hsl(0, 95%, 92%));
+    linear-gradient(hsl(0, 100%, 50%), hsl(32, 100%, 80%));
   background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
   background-position: top, top center, top left, top right, center;
   background-repeat: no-repeat;

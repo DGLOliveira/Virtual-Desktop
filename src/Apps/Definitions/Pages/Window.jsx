@@ -66,9 +66,9 @@ export const WindowPreview = () => {
           <h1>Inactive</h1>
           {themeContext.theme === "Aqua" && (
             <>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">■</div>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">+</div>
               <div className="appTopBarButtonNewAqua appTopBarButtonAquaYellow">-</div>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">X</div>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">x</div>
             </>
           )}
           {themeContext.theme === "Default" &&
@@ -104,9 +104,9 @@ export const WindowPreview = () => {
           <h1>Active</h1>
           {themeContext.theme === "Aqua" && (
             <>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">■</div>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">+</div>
               <div className="appTopBarButtonNewAqua appTopBarButtonAquaYellow">-</div>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">X</div>
+              <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">x</div>
             </>
           )}
           {themeContext.theme === "Default" &&

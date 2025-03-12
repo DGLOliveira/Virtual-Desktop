@@ -165,7 +165,7 @@ export const AppTopBar = ({ appName, setAction }) => {
                             e.stopPropagation(), appContext.switchMaximized(appName)
                         )}
                         title={appContext.apps[appName].State.isMaximized ? "Restore (Alt + ⇩)" : "Maximize (Alt + ⇧)"}
-                    >■</div>
+                    >+</div>
                     <div
                         className="appTopBarButtonNewAqua appTopBarButtonAquaYellow"
                         onClick={(e) => (
@@ -179,7 +179,7 @@ export const AppTopBar = ({ appName, setAction }) => {
                             e.stopPropagation(), setAction("Close")
                         )}
                         title="Close (Ctrl + Shift + F4)"
-                    >X</div>
+                    >x</div>
                 </>
             )}
         </app-top-bar>

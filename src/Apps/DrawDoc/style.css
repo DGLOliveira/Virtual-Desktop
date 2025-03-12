@@ -19,7 +19,6 @@ tool-bar {
 }
 
 tool-bar>button {
-  color: white;
   font-size: 25px;
 }
 
@@ -38,6 +37,7 @@ canvas-container {
   background: white;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  border: 1px solid black;
 }
 
 #previewCanvas {
@@ -47,6 +47,7 @@ canvas-container {
   background: transparent;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  border: 1px solid black;
 }
 
 canvas-container>textarea {
