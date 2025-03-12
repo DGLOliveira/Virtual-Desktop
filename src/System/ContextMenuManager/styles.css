@@ -19,6 +19,12 @@ context-menu > button {
     font-size: var(--ContextMenuFontSize);
     width: 100%;
 }
+
+context-menu > button:hover:enabled {
+    background-color: var(--ContextMenuButtonHoverBkgr);
+    cursor: pointer;
+}
+
 context-menu > button > span {
     width:20px;
 }

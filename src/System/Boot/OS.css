@@ -67,6 +67,7 @@
   --ContextMenuBorderWidth: 1px;
   --ContextMenuBorderRadius: 0px;
   --ContextMenuBorderType: solid;
+  --ContextMenuButtonHoverBkgr: hsla(0, 0%, 100%, 0.2);
 
   --TaskbarBkgr: hsla(0, 0%, 0%, 0.8);
   --TaskbarHeight: 36px;
@@ -210,7 +211,7 @@ button {
 }
 
 button:hover:enabled {
-  background: var(--GeneralButtonColorHover);
+  background-color: var(--GeneralButtonColorHover);
   cursor: pointer;
 }
 

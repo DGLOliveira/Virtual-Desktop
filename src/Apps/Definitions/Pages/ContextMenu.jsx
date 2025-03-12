@@ -69,6 +69,9 @@ export const ContextMenu = () => {
     const [borderType, setBorderType] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuBorderType"),
     );
+    const [hoverColor, setHoverColor] = useState(
+        getComputedStyle(root).getPropertyValue("--ContextMenuButtonHoverBkgr"),
+    );
 
     useEffect(() => {
         root.style.setProperty("--ContextMenuFontSize", fontSize + "px");
@@ -78,7 +81,16 @@ export const ContextMenu = () => {
         root.style.setProperty("--ContextMenuBorderWidth", borderWidth + "px");
         root.style.setProperty("--ContextMenuBorderRadius", borderRadius + "px");
         root.style.setProperty("--ContextMenuBorderType", borderType);
-    }, [fontSize, fontColor, bkgColor, borderColor, borderWidth, borderRadius, borderType]);
+        root.style.setProperty("--ContextMenuButtonHoverBkgr", hoverColor);
+    }, [fontSize, 
+        fontColor, 
+        bkgColor, 
+        borderColor, 
+        borderWidth, 
+        borderRadius, 
+        borderType,
+        hoverColor
+    ]);
     return (
         <>
             <fieldset>
@@ -158,6 +170,17 @@ export const ContextMenu = () => {
                         <option value="inset">inset</option>
                         <option value="outset">outset</option>
                     </select>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Hover</legend>
+                <div>
+                    <label>Hover Color:</label>
+                    <ColorPicker
+                      color={hoverColor}
+                      setColor={setHoverColor}
+                      useAlpha={true}
+                    />
                 </div>
             </fieldset>
         </>

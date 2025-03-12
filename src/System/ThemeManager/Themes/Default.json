@@ -66,6 +66,7 @@
     "--ContextMenuBorderWidth": "1px",
     "--ContextMenuBorderRadius": "0px",
     "--ContextMenuBorderType": "solid",
+    "--ContextMenuButtonHoverBkgr": "hsla(0, 0%, 100%, 0.5)",
 
     "--TaskbarBkgr": "hsla(0, 0%, 0%, 0.8)",
     "--TaskbarHeight": "36px",
