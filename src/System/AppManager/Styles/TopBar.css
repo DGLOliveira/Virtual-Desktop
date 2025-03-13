@@ -1,0 +1,215 @@
+app-top-bar {
+    display: flex;
+    flex-direction: var(--WindowTopBarFlexDirection);
+    align-items: center;
+    height: var(--WindowTopBarHeight);
+    width: 100%;
+    border-bottom: 1px var(--GeneralBorderColor) solid;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
+}
+
+app-top-bar>h1 {
+    display: flex;
+    flex-wrap: nowrap;
+    text-wrap: nowrap;
+    overflow: hidden;
+    justify-content: var(--WindowTopBarFontAlign);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: var(--WindowTopBarFontSize);
+    padding: 4px;
+}
+
+app-top-bar>svg {
+    height: var(--WindowTopBarIconSize);
+    width: var(--WindowTopBarIconSize);
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.appTopBarButtonFluent {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    outline: none;
+    justify-content: center;
+    align-items: center;
+    color: var(--GeneralButtonFontColor);
+    font-family: inherit;
+    background: none;
+    margin: 1px;
+    transition: 0.2s;
+    cursor: pointer;
+    margin-left: 4px;
+    padding: 2px;
+}
+
+.appTopBarButtonFluent:hover {
+    background: rgba(128, 128, 128, 0.5);
+}
+
+.appTopBarButtonFluentRed:hover {
+    background: red;
+}
+
+.appTopBarButtonFluent>svg {
+    height: var(--WindowTopBarIconSize);
+    width: var(--WindowTopBarIconSize);
+    padding: 2px;
+    color: var(--WindowFontColor);
+}
+
+.appTopBarButtonNewAqua {
+    display: flex;
+    flex-direction: column;
+    border: 2px rgba(128, 128, 128, 0.5) solid;
+    border-radius: 50%;
+    outline: none;
+    justify-content: center;
+    align-items: center;
+    color: transparent;
+    font-family: inherit;
+    background: none;
+    margin: 1px;
+    transition: 0.2s;
+    cursor: pointer;
+    height: calc(var(--WindowTopBarIconSize)/3);
+    width: calc(var(--WindowTopBarIconSize)/3);
+    flex-shrink: 0;
+    margin-right: calc(var(--WindowTopBarIconSize)/4);
+    padding: 2px;
+}
+
+.appTopBarButtonNewAqua>* {
+    color: transparent;
+}
+
+.appTopBarButtonNewAqua:hover {
+    color: black;
+}
+
+.appTopBarButtonNewAquaRed {
+    background: red;
+}
+
+.appTopBarButtonAquaRed {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.95), transparent 10px),
+        linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+        radial-gradient(circle at 9px 2px,
+            hsl(0 0% 100% / 0.75) 1px,
+            transparent 5px),
+        radial-gradient(circle at 0px 2px,
+            hsl(0 0% 100% / 0.75) 1px,
+            transparent 5px),
+        radial-gradient(circle at 9px 8px,
+            hsl(0 0% 100% / 0.25) 2px,
+            transparent 5px),
+        radial-gradient(circle at 0px 8px,
+            hsl(0 0% 100% / 0.25) 2px,
+            transparent 5px),
+        linear-gradient(hsl(0, 100%, 30%), hsl(0, 100%, 40%), hsl(0, 100%, 68%), hsl(0, 100%, 80%));
+    padding: calc(var(--WindowTopBarIconSize)/10) calc(var(--WindowTopBarIconSize)/10);
+    background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 10px 10px, 10px 10px, 100%;
+    background-position: top, top center, top left, top right, bottom left, bottom right, center;
+    background-repeat: no-repeat;
+    border: 0;
+    border-radius: 50%;
+    position: relative;
+    border: 2px var(--GeneralBorderColor) inset;
+    font-weight: bold;
+}
+
+.appTopBarButtonAquaRed::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -1px;
+    margin-inline: auto;
+    background: linear-gradient(hsl(0, 74%, 30%), hsl(0, 0%, 38%));
+    border-radius: 100vw;
+}
+
+.appTopBarButtonNewAquaYellow {
+    background: yellow;
+}
+
+.appTopBarButtonAquaYellow {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.95), transparent 10px),
+        linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+        radial-gradient(circle at 9px 2px,
+            hsl(0 0% 100% / 1) 1px,
+            transparent 5px),
+        radial-gradient(circle at 0px 2px,
+            hsl(0 0% 100% / 1) 1px,
+            transparent 5px),
+        radial-gradient(circle at 9px 8px,
+            hsl(0 0% 100% / 0.25) 2px,
+            transparent 5px),
+        radial-gradient(circle at 0px 8px,
+            hsl(0 0% 100% / 0.25) 2px,
+            transparent 5px),
+        linear-gradient(hsl(45, 100%, 30%), hsl(45, 100%, 40%), hsl(45, 100%, 60%), hsl(45, 100%, 80%));
+    padding: calc(var(--WindowTopBarIconSize)/10) calc(var(--WindowTopBarIconSize)/10);
+    background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 10px 10px, 10px 10px, 100%;
+    background-position: top, top center, top left, top right, bottom left, bottom right, center;
+    background-repeat: no-repeat;
+    border: 0;
+    border-radius: 100vw;
+    position: relative;
+    border: 2px var(--GeneralBorderColor) inset;
+    font-weight: bold;
+}
+
+.appTopBarButtonAquaYellow::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -1px;
+    margin-inline: auto;
+    background: linear-gradient(hsl(45, 74%, 30%), hsl(0, 0%, 38%));
+    border-radius: 100vw;
+}
+
+.appTopBarButtonNewAquaGreen {
+    background: green;
+}
+
+.appTopBarButtonAquaGreen {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.95), transparent 10px),
+        linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+        radial-gradient(circle at 9px 2px,
+            hsl(0 0% 100% / 1) 1px,
+            transparent 5px),
+        radial-gradient(circle at 0px 2px,
+            hsl(0 0% 100% / 1) 1px,
+            transparent 5px),
+        radial-gradient(circle at 9px 8px,
+            hsl(0 0% 100% / 0.25) 2px,
+            transparent 5px),
+        radial-gradient(circle at 0px 8px,
+            hsl(0 0% 100% / 0.25) 2px,
+            transparent 5px),
+        linear-gradient(hsl(135, 100%, 20%), hsl(135, 100%, 30%), hsl(135, 100%, 45%), hsl(135, 100%, 80%));
+    padding: calc(var(--WindowTopBarIconSize)/10) calc(var(--WindowTopBarIconSize)/10);
+    background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 10px 10px, 10px 10px, 100%;
+    background-position: top, top center, top left, top right, bottom left, bottom right, center;
+    background-repeat: no-repeat;
+    border: 0;
+    border-radius: 100vw;
+    position: relative;
+    border: 2px var(--GeneralBorderColor) inset;
+    font-weight: bold;
+}
+
+.appTopBarButtonAquaGreen::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -1px;
+    margin-inline: auto;
+    background: linear-gradient(hsl(133, 74%, 30%), hsl(0, 0%, 38%));
+    border-radius: 100vw;
+}

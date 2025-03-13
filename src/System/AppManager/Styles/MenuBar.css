@@ -1,0 +1,54 @@
+app-window>nav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px var(--GeneralBorderColor) solid;
+}
+
+app-window>nav>button {
+    color: inherit;
+    border: solid 1px var(--GeneralBorderColor);
+}
+
+drop-down>ul {
+    display: grid;
+    position: absolute;
+    color: inherit;
+    padding: 0px;
+    margin: 0px;
+    background: rgba(45, 45, 45, 1);
+    border: 1px var(--GeneralBorderColor) solid;
+    z-index: 1;
+    transition: 0.2s;
+    translate: 0px 30px;
+}
+
+app-window>nav>drop-down>ul {
+    translate: 0px 20px;
+}
+
+drop-down>ul>li {
+    list-style-type: none;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+drop-down>ul>li>button {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    color: inherit;
+    width: 100%;
+    text-align: left;
+    align-items: start;
+    justify-content: space-between;
+}
+
+drop-down>ul>li>button>kbd {
+    opacity: 0.5;
+}
+
+drop-down>ul>li>button>span {
+    width: 20px;
+}

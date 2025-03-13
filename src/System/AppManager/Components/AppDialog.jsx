@@ -1,8 +1,7 @@
-import { AiOutlineClose } from "react-icons/ai";
 import { createPortal } from "react-dom";
 import{useState, useEffect, useContext} from "react";
 import { ThemeContext } from "../../ThemeManager/context";
-import { use } from "react";
+import "../Styles/Dialog.css";
 
 export const AppDialog = ({ action, setAction, appDialog }) => {
     const theme = useContext(ThemeContext);

@@ -1,0 +1,53 @@
+app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+app-container>nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+    font-size: 25px;
+    color: var(--WindowTopBarFontColor);
+    background-color: var(--WindowTopBarBkgrColor);
+    padding-left: 0;
+    border-bottom: 1px var(--GeneralBorderColor) solid;
+}
+
+app-container>nav>button {
+    position: relative;
+    color: inherit;
+    height: inherit;
+    font-size: inherit;
+    width: fit-content;
+}
+
+app-container>nav>drop-down {
+    position: relative;
+    color: inherit;
+    height: inherit;
+    font-size: inherit;
+    width: fit-content;
+}
+
+app-container>nav>drop-down>button {
+    position: relative;
+    color: inherit;
+    height: 32px;
+    font-size: 16px;
+    width: fit-content;
+}
+
+app-container>nav>button>input[type="color"] {
+    width: 25px;
+}
+
+app-body {
+    width: 100%;
+    height: 100%;
+    color: var(--WindowFontColor);
+}

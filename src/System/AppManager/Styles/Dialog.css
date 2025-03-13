@@ -1,0 +1,144 @@
+app-dialog {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: var(--DialogBorderWidth) var(--DialogBorderColor) var(--DialogBorderType);
+    border-radius: var(--DialogBorderRadius);
+    transition: 0.2s;
+    background-color: var(--DialogBkgrColor);
+    color: var(--DialogFontColor);
+    box-shadow: var(--WindowShadowXOffset) var(--WindowShadowYOffset) var(--WindowShadowBlur) var(--WindowShadowSpread) var(--WindowShadowColor);
+}
+
+app-dialog>app-dialog-info {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--DialogInfoFontSize);
+    color: var(--DialogInfoFontColor);
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+app-dialog>app-dialog-actions {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+app-dialog>app-dialog-actions>div {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+    width: 100%;
+    color: var(--DialogButtonFontColor);
+    cursor: pointer;
+}
+
+.appDialogButtonFluent {
+    background: var(--DialogButtonBkgr);
+    font-size: var(--DialogButtonFontSize);
+    border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) var(--DialogButtonBorderType);
+    border-radius: var(--DialogButtonBorderRadius);
+}
+
+.appDialogButtonAqua {
+    font-size: var(--DialogButtonFontSize);
+    border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) var(--DialogButtonBorderType);
+    border-radius: var(--DialogButtonBorderRadius);
+    position: relative;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.appDialogButtonAqua::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -1px;
+    margin-inline: auto;
+    border-radius: var(--DialogButtonBorderRadius);
+}
+
+.appDialogButtonAqua:hover {
+    text-shadow: 0 0 5px white;
+    box-shadow: inset 0 0 20px 0 hsla(0, 0%, 100%, 0.4);
+}
+
+.appDialogButtonAquaBlue {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.85), transparent 10px),
+        linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+        radial-gradient(circle at 10px 5px,
+            hsl(0 0% 100% / 0.25) 5px,
+            transparent 5px),
+        radial-gradient(circle at 0px 5px,
+            hsl(0 0% 100% / 0.25) 5px,
+            transparent 5px),
+        linear-gradient(hsl(213, 100%, 50%), hsl(187, 100%, 55%));
+    background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
+    background-position: top, top center, top left, top right, center;
+    background-repeat: no-repeat;
+}
+
+.appDialogButtonAquaBlue::before {
+    background: linear-gradient(hsl(240, 74%, 30%), hsl(0, 0%, 10%));
+}
+
+.appDialogButtonAquaNeutral {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.85), transparent 10px),
+        linear-gradient(hsl(0 0% 100% / 0.30) 10px, transparent 10px),
+        radial-gradient(circle at 10px 5px,
+            hsl(0 0% 100% / 0.30) 5px,
+            transparent 5px),
+        radial-gradient(circle at 0px 5px,
+            hsl(0 0% 100% / 0.30) 5px,
+            transparent 5px),
+        linear-gradient(hsl(0, 0%, 30%), hsl(0, 0%, 95%));
+    background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
+    background-position: top, top center, top left, top right, center;
+    background-repeat: no-repeat;
+}
+
+.appDialogButtonAquaNeutral::before {
+    background: linear-gradient(hsl(0, 0%, 55%), hsl(0, 0%, 10%));
+}
+
+.appDialogButtonAquaRed {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.85), transparent 10px),
+        linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+        radial-gradient(circle at 10px 5px,
+            hsl(0 0% 100% / 0.25) 5px,
+            transparent 5px),
+        radial-gradient(circle at 0px 5px,
+            hsl(0 0% 100% / 0.25) 5px,
+            transparent 5px),
+        linear-gradient(hsl(0, 100%, 50%), hsl(32, 100%, 80%));
+    background-size: 100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
+    background-position: top, top center, top left, top right, center;
+    background-repeat: no-repeat;
+}
+
+.appDialogButtonAquaRed::before {
+    background: linear-gradient(hsl(0, 74%, 30%), hsl(0, 0%, 10%));
+}
+
+app-dialog-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: var(--DialogTopBarFontSize);
+    color: var(--DialogTopBarFontColor);
+    background: var(--DialogTopBarBkgr);
+    border-bottom: solid 1px var(--DialogBorderColor);
+}

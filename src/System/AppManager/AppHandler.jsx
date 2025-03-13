@@ -2,10 +2,10 @@
 For each App that is currently open, this component generates a window for it.
 */
 
-import { useContext, useState, Suspense } from "react";
+import { useContext } from "react";
 import { AppContext } from "./Context/context.jsx";
-import "./styles.css";
 import { AppBody } from "./Components/AppBody.jsx";
+import "./Styles/Window.css";
 
 export function AppHandler() {
   const appContext = useContext(AppContext);

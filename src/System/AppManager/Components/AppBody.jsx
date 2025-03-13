@@ -6,6 +6,7 @@ import { AppTopBar } from "./AppTopBar.jsx";
 import Loading from "./../../GlobalComponents/Loading.jsx";
 import ErrorBoundary from "./../../GlobalComponents/ErrorBoundary.jsx";
 import ErrorMessage from "./../../GlobalComponents/ErrorMessage.jsx";
+import "../Styles/App.css";
 
 export const AppBody = ({ appName, isSelected, setClose }) => {
   const contextMenu = useContext(ContextMenuContext);

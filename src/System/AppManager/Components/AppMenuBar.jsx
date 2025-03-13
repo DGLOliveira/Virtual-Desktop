@@ -6,6 +6,7 @@ It also receives the content of the menu bar as a json object in order to be dis
 
 import { useState, useEffect, useCallback, Fragment } from "react";
 import parseKeybinds from "./../Handlers/parseKeybinds.js";
+import "../Styles/MenuBar.css";
 
 export const AppMenuBar = ({ isSelected, setAction, appMenu }) => {
     const [menuState, setMenuState] = useState(false);

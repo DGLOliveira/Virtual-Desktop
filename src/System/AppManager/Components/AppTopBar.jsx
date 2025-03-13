@@ -8,8 +8,8 @@ import {
     FaWindowMaximize,
 } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import { AppIcon } from "./AppIcon.jsx"
-import { backgroundBlurriness } from "three/webgpu";
+import { AppIcon } from "./AppIcon.jsx";
+import "../Styles/TopBar.css";
 
 export const AppTopBar = ({ appName, setAction }) => {
     const appContext = useContext(AppContext);
