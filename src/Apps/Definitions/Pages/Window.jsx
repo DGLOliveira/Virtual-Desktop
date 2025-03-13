@@ -66,22 +66,22 @@ export const WindowPreview = () => {
           <h1>Inactive</h1>
           {themeContext.topBarIconTheme === "Aqua" && (
             <>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">+</div>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaYellow">-</div>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">x</div>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
             </>
           )}
           {themeContext.topBarIconTheme === "Default" &&
             <>
-              <div className="appTopBarButtonFluent">
+              <button className="appTopBarButtonFluent">
                 <FaRegWindowMinimize />
-              </div>
-              <div className="appTopBarButtonFluent">
+              </button>
+              <button className="appTopBarButtonFluent">
                 <FaWindowMaximize />
-              </div>
-              <div className="appTopBarButtonFluentRed appTopBarButtonFluent">
+              </button>
+              <button className="appTopBarButtonFluentRed appTopBarButtonFluent">
                 <AiOutlineClose />
-              </div></>}
+              </button></>}
         </app-top-bar>
       </app-window>
       <app-window
@@ -104,22 +104,22 @@ export const WindowPreview = () => {
           <h1>Active</h1>
           {themeContext.topBarIconTheme === "Aqua" && (
             <>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">+</div>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaYellow">-</div>
-              <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">x</div>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
             </>
           )}
           {themeContext.topBarIconTheme === "Default" &&
             <>
-              <div className="appTopBarButtonFluent">
+              <button className="appTopBarButtonFluent">
                 <FaRegWindowMinimize />
-              </div>
-              <div className="appTopBarButtonFluent">
+              </button>
+              <button className="appTopBarButtonFluent">
                 <FaWindowMaximize />
-              </div>
-              <div className="appTopBarButtonFluentRed appTopBarButtonFluent">
+              </button>
+              <button className="appTopBarButtonFluentRed appTopBarButtonFluent">
                 <AiOutlineClose />
-              </div></>}
+              </button></>}
         </app-top-bar>
       </app-window>
       <app-dialog
