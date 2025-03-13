@@ -120,7 +120,7 @@ export const AppTopBar = ({ appName, setAction }) => {
                 onDoubleClick={(e) => (
                     e.stopPropagation(), appContext.switchMaximized(appName)
                 )}>{appName}</h1>
-            {themeContext.theme === "Default" &&
+            {themeContext.topBarIconTheme === "Default" &&
                 <>
                     <div
                         className="appTopBarButtonFluent"
@@ -157,7 +157,7 @@ export const AppTopBar = ({ appName, setAction }) => {
                         title="Close (Ctrl + Shift + F4)">
                         <AiOutlineClose />
                     </div></>}
-            {themeContext.theme === "Aqua" && (
+            {themeContext.topBarIconTheme === "Aqua" && (
                 <>
                     <div
                         className="appTopBarButtonNewAqua appTopBarButtonAquaGreen"

@@ -64,14 +64,14 @@ export const WindowPreview = () => {
           }}>
           <FcGlobe />
           <h1>Inactive</h1>
-          {themeContext.theme === "Aqua" && (
+          {themeContext.topBarIconTheme === "Aqua" && (
             <>
               <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">+</div>
               <div className="appTopBarButtonNewAqua appTopBarButtonAquaYellow">-</div>
               <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">x</div>
             </>
           )}
-          {themeContext.theme === "Default" &&
+          {themeContext.topBarIconTheme === "Default" &&
             <>
               <div className="appTopBarButtonFluent">
                 <FaRegWindowMinimize />
@@ -102,14 +102,14 @@ export const WindowPreview = () => {
           }}>
           <FcGlobe />
           <h1>Active</h1>
-          {themeContext.theme === "Aqua" && (
+          {themeContext.topBarIconTheme === "Aqua" && (
             <>
               <div className="appTopBarButtonNewAqua appTopBarButtonAquaGreen">+</div>
               <div className="appTopBarButtonNewAqua appTopBarButtonAquaYellow">-</div>
               <div className="appTopBarButtonNewAqua appTopBarButtonAquaRed">x</div>
             </>
           )}
-          {themeContext.theme === "Default" &&
+          {themeContext.topBarIconTheme === "Default" &&
             <>
               <div className="appTopBarButtonFluent">
                 <FaRegWindowMinimize />
@@ -146,6 +146,7 @@ export const WindowPreview = () => {
 };
 
 export const Window = () => {
+  const themeContext = useContext(ThemeContext);
   var root = document.querySelector(":root");
   const [windowFontColor, setWindowFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowFontColor"),
@@ -364,6 +365,19 @@ export const Window = () => {
         <legend>Window</legend>
         <fieldset>
           <legend>Top Bar</legend>
+        <div>
+          <label>Icon Theme:</label>
+          <select
+            value={themeContext.topBarIconTheme}
+            onChange={(e) => themeContext.setTopBarIconTheme(e.target.value)}
+          >
+            {themeContext.topBarIconThemeList.map((iconTheme) => (
+              <option key={iconTheme} value={iconTheme}>
+                {iconTheme}
+              </option>
+            ))}
+          </select>
+        </div>
           <div>
             <label>Direction:</label>
             <select
