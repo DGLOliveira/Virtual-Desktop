@@ -16,7 +16,11 @@
   --DesktopFontSize: 16px;
   --DesktopIconSize: 80px;
 
-  --WindowBkgr: none;
+  --WindowBkgrImage: none;
+  --WindowBkgrPosition: none;
+  --WindowBkgrSize: none;
+  --WindowBkgrRepeat: none;
+  --WindowBackdropFilter: none;
   --WindowBkgrColor: hsla(0, 0%, 18%,1);
   --WindowBkgrColorInactive: hsla(0, 0%, 0%,1);
   --WindowFontColor: hsl(0, 0%, 75%);
@@ -91,7 +95,7 @@
   --ClockBkgr: hsla(0, 0%, 10%, 0.95);
   --ClockFontColor: hsl(0, 0%, 75%);
 
-  --ReflectiveFXBkgrImage: linear-gradient(60deg,
+  --TranslucentFXBkgrImage: linear-gradient(60deg,
   hsla(0,0%,100%,0.15),
   hsla(0, 0%, 0%, 0.15),
   hsla(0,0%,100%,0.15),
@@ -122,9 +126,11 @@
   hsla(0,0%,100%,0.15),
   hsla(0, 0%, 0%, 0.15),
   hsla(0,0%,100%,0.15));
-  --ReflectiveFXBkgrPosition: "top left";
-  --ReflectiveFXBkgrRepeat:"repeat";
-  --ReflectiveFXBkgrSize:"2000px 2000px";
+  --TranslucentFXBkgrPosition: "top left";
+  --TranslucentFXBkgrRepeat:"repeat";
+  --TranslucentFXBkgrSize:"2000px 2000px";
+  --TranslucentFXBackdropFilter: "blur(10px)";
+
 
   --MetallicFXBkgrImage: -webkit-repeating-linear-gradient(top, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%, .05) 7%),
   -webkit-repeating-linear-gradient(top, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   4%, hsla(0,0%,  0%,.03) 4.25%),
@@ -133,8 +139,7 @@
   --MetallicFXBkgrPosition: "top left";
   --MetallicFXBkgrRepeat: "repeat";
   --MetallicFXBkgrSize: "contain";
-
-
+  --MetallicFXBackdropFilter: "none";
 
 
   background-color: var(--DesktopBkgrColor);

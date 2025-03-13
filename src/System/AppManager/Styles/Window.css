@@ -8,5 +8,10 @@ app-window {
     box-shadow: var(--WindowShadowXOffset) var(--WindowShadowYOffset) var(--WindowShadowBlur) var(--WindowShadowSpread) var(--WindowShadowColor);
     transition: 0.2s;
     box-sizing: border-box;
+    background-image: var(--WindowBkgrImage);
+    background-position: var(--WindowBkgrPosition);
+    background-size: var(--WindowBkgrSize);
+    background-repeat: var(--WindowBkgrRepeat);
+    
   }
   

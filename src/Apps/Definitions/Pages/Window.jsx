@@ -363,6 +363,19 @@ export const Window = () => {
     <>
       <fieldset>
         <legend>Window</legend>
+        <div>
+          <label>Background Effect:</label>
+          <select
+            value={themeContext.windowBackgroundFX}
+            onChange={(e) => themeContext.setWindowBackgroundFX(e.target.value)}
+          >
+            {themeContext.windowBackgroundFXList.map((backgroundFX) => (
+              <option key={backgroundFX} value={backgroundFX}>
+                {backgroundFX}
+              </option>
+          ))}
+          </select>
+        </div>
         <fieldset>
           <legend>Top Bar</legend>
         <div>
