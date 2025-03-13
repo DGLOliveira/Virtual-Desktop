@@ -27,14 +27,20 @@ export default function DrawDoc(props) {
   return (
     <Provider>
       <>
-        <TopNavBar 
-        setAction={setAction} 
-        contextMenu={contextMenu} 
-        />
-        <app-body>
-          <ToolBar 
-          setAction={setAction} 
+        <TopNavBar
+          setAction={setAction}
           contextMenu={contextMenu}
+        />
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%", 
+          height: "100%",
+          margin: "0px"
+        }}>
+          <ToolBar
+            setAction={setAction}
+            contextMenu={contextMenu}
           />
           <canvas-container>
             <DrawCanvas
@@ -53,7 +59,7 @@ export default function DrawDoc(props) {
               contextMenu={contextMenu}
             />
           </canvas-container>
-        </app-body>
+        </div>
         <BottomNavBar
           action={action}
           setAction={setAction}

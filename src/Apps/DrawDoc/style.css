@@ -1,14 +1,7 @@
-app-body {
-  display: flex;
-  flex-direction: row;
-  margin: 0px;
-}
-
 button>label {
   font-size: small;
   cursor: pointer;
 }
-
 
 tool-bar {
   display: flex;
@@ -57,7 +50,7 @@ canvas-container>textarea {
   width: auto;
 }
 
-#drawDocBottomNavBar{
+#drawDocBottomNavBar {
   border-top: 1px var(--GeneralBorderColor) solid;
 }
 
