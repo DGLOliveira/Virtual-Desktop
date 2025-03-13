@@ -73,13 +73,13 @@ export const WindowPreview = () => {
           )}
           {themeContext.topBarIconTheme === "Default" &&
             <>
-              <button className="appTopBarButtonFluent">
+              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
                 <FaRegWindowMinimize />
               </button>
-              <button className="appTopBarButtonFluent">
+              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
                 <FaWindowMaximize />
               </button>
-              <button className="appTopBarButtonFluentRed appTopBarButtonFluent">
+              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed ">
                 <AiOutlineClose />
               </button></>}
         </app-top-bar>
@@ -111,13 +111,13 @@ export const WindowPreview = () => {
           )}
           {themeContext.topBarIconTheme === "Default" &&
             <>
-              <button className="appTopBarButtonFluent">
+              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
                 <FaRegWindowMinimize />
               </button>
-              <button className="appTopBarButtonFluent">
+              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
                 <FaWindowMaximize />
               </button>
-              <button className="appTopBarButtonFluentRed appTopBarButtonFluent">
+              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed">
                 <AiOutlineClose />
               </button></>}
         </app-top-bar>

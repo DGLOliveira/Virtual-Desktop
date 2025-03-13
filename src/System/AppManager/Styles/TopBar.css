@@ -47,11 +47,11 @@ app-top-bar>svg {
     padding: 2px;
 }
 
-.appTopBarButtonFluent:hover {
+.appTopBarButtonFluentHoverGray:hover:enabled {
     background: rgba(128, 128, 128, 0.5);
 }
 
-.appTopBarButtonFluentRed:hover {
+.appTopBarButtonFluentHoverRed:hover:enabled {
     background: red;
 }
 

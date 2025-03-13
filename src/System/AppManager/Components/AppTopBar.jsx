@@ -123,7 +123,7 @@ export const AppTopBar = ({ appName, setAction }) => {
             {themeContext.topBarIconTheme === "Default" &&
                 <>
                     <button
-                        className="appTopBarButtonFluent"
+                        className="appTopBarButtonFluent appTopBarButtonFluentHoverGray"
                         onClick={(e) => (
                             e.stopPropagation(), appContext.switchMinimized(appName)
                         )}
@@ -132,7 +132,7 @@ export const AppTopBar = ({ appName, setAction }) => {
                     </button>
                     {appContext.apps[appName].State.isMaximized ? (
                         <button
-                            className="appTopBarButtonFluent"
+                            className="appTopBarButtonFluent appTopBarButtonFluentHoverGray"
                             onClick={(e) => (
                                 e.stopPropagation(), appContext.switchMaximized(appName)
                             )}
@@ -141,7 +141,7 @@ export const AppTopBar = ({ appName, setAction }) => {
                         </button>
                     ) : (
                         <button
-                            className="appTopBarButtonFluent"
+                            className="appTopBarButtonFluent appTopBarButtonFluentHoverGray"
                             onClick={(e) => (
                                 e.stopPropagation(), appContext.switchMaximized(appName)
                             )}
@@ -150,7 +150,7 @@ export const AppTopBar = ({ appName, setAction }) => {
                         </button>
                     )}
                     <button
-                        className="appTopBarButtonFluentRed appTopBarButtonFluent"
+                        className=" appTopBarButtonFluent appTopBarButtonFluentHoverRed"
                         onClick={(e) => (
                             e.stopPropagation(), setAction("Close")
                         )}
