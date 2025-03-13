@@ -2,7 +2,10 @@ app-window>nav {
     position: relative;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px var(--GeneralBorderColor) solid;
+    box-sizing: border-box;
+    margin-left: var(--WindowPadding);
+    margin-right: var(--WindowPadding);
+    margin-bottom: var(--WindowPadding);
 }
 
 app-window>nav>button {

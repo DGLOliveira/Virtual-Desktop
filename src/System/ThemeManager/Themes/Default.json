@@ -40,6 +40,7 @@
     "--WindowShadowBlur": "5px",
     "--WindowShadowSpread": "0px",
     "--WindowShadowColor": "hsla(0, 0%, 0%, 0.5)",
+    "--WindowPadding": "0px",
 
     "--DialogBkgrColor": "hsl(0, 0%, 18%)",
     "--DialogBorderColor": "hsla(0, 0%, 50%, 1)",

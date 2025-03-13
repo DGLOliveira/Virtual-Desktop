@@ -165,6 +165,9 @@ export const Window = () => {
   const [bkgColor, setBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBkgrColor"),
   );
+  const [windowPadding, setWindowPadding] = useState(
+    getComputedStyle(root).getPropertyValue("--WindowPadding").slice(0, -2),
+  )
   const [topbarFlexDirection, setTopbarFlexDirection] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFlexDirection"),
   );
@@ -270,6 +273,7 @@ export const Window = () => {
   useEffect(() => {
     root.style.setProperty("--WindowFontColor", windowFontColor);
     root.style.setProperty("--WindowFontColorInactive", windowFontColorInactive);
+    root.style.setProperty("--WindowPadding", windowPadding + "px");
     root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
     root.style.setProperty("--WindowTopBarFontAlign", topbarTitleAlign);
     root.style.setProperty("--WindowTopBarFontColor", topbarFontColor);
@@ -314,6 +318,7 @@ export const Window = () => {
   }, [
     windowFontColor,
     windowFontColorInactive,
+    windowPadding,
     fontSize,
     topbarTitleAlign,
     topbarFontColor,
@@ -453,6 +458,17 @@ export const Window = () => {
               <option value="inset">inset</option>
               <option value="outset">outset</option>
             </select>
+          </div>
+          <div>
+            <label>Padding:</label>
+            <input
+              type="range"
+              min={0}
+              max={10}
+              step="1"
+              value={windowPadding}
+              onChange={(e) => setWindowPadding(e.target.value)}
+            />
           </div>
         </fieldset>
         <fieldset>

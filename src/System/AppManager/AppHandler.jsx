@@ -21,6 +21,9 @@ export function AppHandler() {
             left: appContext.apps[name].Location.Current.left,
             width: appContext.apps[name].Size.Current.width,
             height: appContext.apps[name].Size.Current.height,
+            backgroundColor: appContext.apps[name].State.isSelected
+              ? "var(--WindowBkgrColor)"
+              : "var(--WindowBkgrColorInactive)",
             color: appContext.apps[name].State.isSelected
               ? "var(--WindowFontColor)"
               : "var(--WindowFontColorInactive)",
@@ -38,12 +41,12 @@ export function AppHandler() {
           onContextMenu={(e) => e.preventDefault()}
           onDrop={(e) => e.preventDefault()}
         >
-          <AppBody 
-          appName={name} 
-          isSelected={appContext.apps[name].State.isSelected}
-          setClose={appContext.setClose}
+          <AppBody
+            appName={name}
+            isSelected={appContext.apps[name].State.isSelected}
+            setClose={appContext.setClose}
           />
-      </app-window>
+        </app-window>
       )
       )}
     </>

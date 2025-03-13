@@ -4,9 +4,8 @@ app-top-bar {
     align-items: center;
     height: var(--WindowTopBarHeight);
     width: 100%;
-    border-bottom: 1px var(--GeneralBorderColor) solid;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: calc(4px + var(--WindowPadding));
+    padding-right: calc(4px + var(--WindowPadding));
     box-sizing: border-box;
 }
 

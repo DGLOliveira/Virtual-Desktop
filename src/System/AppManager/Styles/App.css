@@ -1,8 +1,14 @@
 app-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 2 * var(--WindowPadding));
+    height: calc(100% - var(--WindowPadding));
+    box-sizing: border-box;
+    margin-left: var(--WindowPadding);
+    margin-right: var(--WindowPadding);
+    margin-bottom: var(--WindowPadding);
+    border: 1px var(--GeneralBorderColor) solid;
+    border-radius: calc(var(--WindowBorderRadius)/2);
 }
 
 app-container>nav {

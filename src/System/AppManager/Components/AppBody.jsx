@@ -18,7 +18,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
     if (action === "Close" && canClose) {
       setClose(appName);
     }
-  }, [action, canClose]); 
+  }, [action, canClose]);
 
   const App = useCallback((
     lazy(() => import(`./../../../Apps/${appName}/index.jsx`).catch(
@@ -30,17 +30,17 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
     ))
   ), [appName]);
 
-  const appProps = { 
-    isSelected, 
-    action, 
-    setAction, 
-    appMenu, 
-    setAppMenu, 
-    appDialog, 
-    setAppDialog, 
-    contextMenu, 
-    canClose, 
-    setCanClose 
+  const appProps = {
+    isSelected,
+    action,
+    setAction,
+    appMenu,
+    setAppMenu,
+    appDialog,
+    setAppDialog,
+    contextMenu,
+    canClose,
+    setCanClose
   };
 
   return (
@@ -50,7 +50,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
         setAction={setAction}
       />
       <ErrorBoundary fallback={<ErrorMessage errorMessage={"Something went wrong while loading the App"} />}>
-        <Suspense fallback={<Loading message={"App"}/>}>
+        <Suspense fallback={<Loading message={"App"} />}>
           {appMenu &&
             <AppMenuBar
               isSelected={isSelected}
@@ -65,14 +65,8 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
               appDialog={appDialog}
             />
           }
-          <app-container
-            style={{
-              backgroundColor: isSelected
-              ? "var(--WindowBkgrColor)"
-              : "var(--WindowBkgrColorInactive)"
-            }}
-          >
-          <App {...appProps} />
+          <app-container>
+            <App {...appProps} />
           </app-container>
         </Suspense>
       </ErrorBoundary>
