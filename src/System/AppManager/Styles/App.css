@@ -9,6 +9,7 @@ app-container {
     margin-bottom: var(--WindowPadding);
     border: 1px var(--GeneralBorderColor) solid;
     border-radius: calc(var(--WindowBorderRadius)/2);
+    overflow: hidden;
 }
 
 app-container>nav {
