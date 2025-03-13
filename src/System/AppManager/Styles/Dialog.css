@@ -141,4 +141,5 @@ app-dialog-top-bar {
     color: var(--DialogTopBarFontColor);
     background: var(--DialogTopBarBkgr);
     border-bottom: solid 1px var(--DialogBorderColor);
+    user-select: none;
 }
