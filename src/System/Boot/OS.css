@@ -57,8 +57,14 @@
   --DialogBorderWidth: 1px;
   --DialogBorderRadius: 0px;
   --DialogBorderType: solid;
+  --DialogPadding: 0px;
+  --DialogInfoBkgr: hsla(0, 0%, 18%, 1);
   --DialogInfoFontColor: hsl(0, 0%, 75%);
   --DialogInfoFontSize: 16px;
+  --DialogInfoBorderColor: hsla(0, 0%, 18%, 1);
+  --DialogInfoBorderWidth: 0px;
+  --DialogInfoBorderRadius: 0px;
+  --DialogInfoBorderType: solid;
   --DialogTopBarBkgr: hsla(0, 0%, 41%, 1);
   --DialogTopBarFontSize: 20px;
   --DialogTopBarFontColor: rgb(191, 191, 191);

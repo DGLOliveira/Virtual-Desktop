@@ -111,6 +111,44 @@ settings-container>form>fieldset>fieldset>div>label{
   align-items: center;
   width:200px;
 }
+settings-container>form>fieldset>fieldset>fieldset {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+settings-container>form>fieldset>fieldset>fieldset>legend {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border: 1px  solid;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+settings-container>form>fieldset>fieldset>fieldset>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width:fit-content;
+  margin: 5px;
+  padding: 5px;
+  border-bottom: 1px  solid;
+  border-radius: 5px;
+
+}
+
+settings-container>form>fieldset>fieldset>fieldset>div>label{
+  display:flex;
+  justify-content: start;
+  align-items: center;
+  width:200px;
+}
 
 .defPreview {
   position: sticky;

@@ -237,12 +237,30 @@ export const Window = () => {
   const [dialogBorderType, setDialogBorderType] = useState(
     getComputedStyle(root).getPropertyValue("--DialogBorderType"),
   );
+  const [dialogInfoBkgr, setDialogInfoBkgr] = useState(
+    getComputedStyle(root).getPropertyValue("--DialogInfoBkgr"),
+  );
   const [dialogInfoFontColor, setDialogInfoFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--DialogInfoFontColor"),
   );
   const [dialogInfoFontSize, setDialogInfoFontSize] = useState(
     getComputedStyle(root).getPropertyValue("--DialogInfoFontSize").slice(0, -2),
   );
+  const [dialogInfoBorderColor, setDialogInfoBorderColor] = useState(
+    getComputedStyle(root).getPropertyValue("--DialogInfoBorderColor"),
+  )
+  const [dialogInfoBorderWidth, setDialogInfoBorderWidth] = useState(
+    getComputedStyle(root).getPropertyValue("--DialogInfoBorderWidth").slice(0, -2),
+  );
+  const [dialogInfoBorderRadius, setDialogInfoBorderRadius] = useState(
+    getComputedStyle(root).getPropertyValue("--DialogInfoBorderRadius").slice(0, -2),
+  );
+  const [dialogInfoBorderType, setDialogInfoBorderType] = useState(
+    getComputedStyle(root).getPropertyValue("--DialogInfoBorderType"),
+  );
+  const [dialogPadding, setDialogPadding] = useState(
+    getComputedStyle(root).getPropertyValue("--DialogPadding").slice(0, -2),
+  )
   const [dialogTopBarBkgr, setDialogTopBarBkgr] = useState(
     getComputedStyle(root).getPropertyValue("--DialogTopBarBkgr"),
   );
@@ -301,8 +319,14 @@ export const Window = () => {
     root.style.setProperty("--DialogBorderWidth", dialogBorderWidth + "px");
     root.style.setProperty("--DialogBorderRadius", dialogBorderRadius + "px");
     root.style.setProperty("--DialogBorderType", dialogBorderType);
+    root.style.setProperty("--DialogInfoBkgr", dialogInfoBkgr);
     root.style.setProperty("--DialogInfoFontColor", dialogInfoFontColor);
     root.style.setProperty("--DialogInfoFontSize", dialogInfoFontSize + "px");
+    root.style.setProperty("--DialogInfoBorderColor", dialogInfoBorderColor);
+    root.style.setProperty("--DialogInfoBorderWidth", dialogInfoBorderWidth + "px");
+    root.style.setProperty("--DialogInfoBorderRadius", dialogInfoBorderRadius + "px");
+    root.style.setProperty("--DialogInfoBorderType", dialogInfoBorderType);
+    root.style.setProperty("--DialogPadding", dialogPadding + "px");
     root.style.setProperty("--DialogTopBarBkgr", dialogTopBarBkgr);
     root.style.setProperty("--DialogTopBarFontSize", dialogTopBarFontSize + "px");
     root.style.setProperty("--DialogTopBarFontColor", dialogTopBarFontColor);
@@ -348,8 +372,14 @@ export const Window = () => {
     dialogBorderWidth,
     dialogBorderRadius,
     dialogBorderType,
+    dialogInfoBkgr,
     dialogInfoFontColor,
     dialogInfoFontSize,
+    dialogInfoBorderColor,
+    dialogInfoBorderWidth,
+    dialogInfoBorderRadius,
+    dialogInfoBorderType,
+    dialogPadding,
     dialogTopBarBkgr,
     dialogTopBarFontSize,
     dialogTopBarFontColor,
@@ -746,7 +776,15 @@ export const Window = () => {
           </div>
         </fieldset>
         <fieldset>
-          <legend>Text</legend>
+          <legend>Info</legend>
+          <div>
+            <label>Background:</label>
+            <ColorPicker
+              color={dialogInfoBkgr}
+              setColor={setDialogInfoBkgr}
+              useAlpha={true}
+            />
+          </div>
           <div>
             <label>Font Size: </label>
             <input
@@ -766,6 +804,66 @@ export const Window = () => {
               useAlpha={false}
             />
           </div>
+        <fieldset>
+          <legend>Border</legend>
+          <div>
+            <label>Color: </label>
+            <ColorPicker
+              color={dialogInfoBorderColor}
+              setColor={setDialogInfoBorderColor}
+              useAlpha={true}
+            />
+          </div>
+          <div>
+            <label>Thickness: </label>
+            <input
+              type="range"
+              min={0}
+              max={10}
+              step="1"
+              value={dialogInfoBorderWidth}
+              onChange={(e) => setDialogInfoBorderWidth(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Corner Curvature: </label>
+            <input
+              type="range"
+              min={0}
+              max={12}
+              step="1"
+              value={dialogInfoBorderRadius}
+              onChange={(e) => setDialogInfoBorderRadius(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Type: </label>
+            <select
+              value={dialogInfoBorderType}
+              onChange={(e) => setDialogInfoBorderType(e.target.value)}
+            >
+              <option value="solid">Solid</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+              <option value="double">Double</option>
+              <option value="groove">Groove</option>
+              <option value="ridge">Ridge</option>
+              <option value="inset">Inset</option>
+              <option value="outset">Outset</option>
+            </select>
+          </div>
+          <div>
+            <label>Margin Distance</label>
+            <input
+              type="range"
+              min={0}
+              max={10}
+              step="1"
+              value={dialogPadding}
+              onChange={(e) => setDialogPadding(e.target.value)}
+            />
+          </div>
+        </fieldset>
         </fieldset>
         <fieldset>
           <legend>Button</legend>

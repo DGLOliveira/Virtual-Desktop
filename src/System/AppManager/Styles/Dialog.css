@@ -2,6 +2,8 @@ app-dialog {
     position: absolute;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     overflow: hidden;
     z-index: 10000;
     top: 50%;
@@ -28,9 +30,12 @@ app-dialog>app-dialog-info {
     align-items: center;
     font-size: var(--DialogInfoFontSize);
     color: var(--DialogInfoFontColor);
-    width: 100%;
+    width: calc(100% - 2 * var(--DialogPadding));
     height: 100%;
     padding: 10px;
+    background-color: var(--DialogInfoBkgr);
+    border: var(--DialogInfoBorderColor) var(--DialogInfoBorderWidth) var(--DialogInfoBorderType);
+    border-radius: var(--DialogInfoBorderRadius);
 }
 
 app-dialog>app-dialog-actions {
@@ -142,9 +147,9 @@ app-dialog-top-bar {
     align-items: center;
     justify-content: center;
     padding: 5px;
+    width: 100%;
     font-size: var(--DialogTopBarFontSize);
     color: var(--DialogTopBarFontColor);
     background: var(--DialogTopBarBkgr);
-    border-bottom: solid 1px var(--DialogBorderColor);
     user-select: none;
 }
