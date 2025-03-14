@@ -3,7 +3,7 @@ button>label {
   cursor: pointer;
 }
 
-tool-bar {
+#drawDocToolBar {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -11,7 +11,7 @@ tool-bar {
   border-right: 1px var(--GeneralBorderColor) solid;
 }
 
-tool-bar>button {
+#drawDocToolBar>button {
   font-size: 25px;
 }
 

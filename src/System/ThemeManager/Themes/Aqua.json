@@ -23,7 +23,7 @@
     "--WindowFontSize": "32px",
     "--WindowBorderColor": "hsla(0, 0%, 65%, 1)",
     "--WindowBorderColorInactive": "hsla(0, 0%, 55%, 1)",
-    "--WindowBorderWidth": "5px",
+    "--WindowBorderWidth": "3px",
     "--WindowBorderRadius": "20px",
     "--WindowBorderType": "outset",
     "--WindowTopBarFlexDirection": "row-reverse",
@@ -40,7 +40,7 @@
     "--WindowShadowBlur": "5px",
     "--WindowShadowSpread": "4px",
     "--WindowShadowColor": "hsla(0, 0%, 0%, 0.5)",
-    "--WindowPadding": "3px",
+    "--WindowPadding": "7px",
 
     "--DialogBkgrColor": "hsla(0, 0%, 70%, 1)",
     "--DialogBorderColor": "hsla(0, 0%, 75%, 1)",

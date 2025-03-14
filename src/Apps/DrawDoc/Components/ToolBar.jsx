@@ -37,7 +37,7 @@ export const ToolBar = ({ setAction, contextMenu }) => {
     };
     if (context.view.toolBar) {
         return (
-            <tool-bar onContextMenu={(event) => handleContextMenu(event)}>
+            <nav id="drawDocToolBar" onContextMenu={(event) => handleContextMenu(event)}>
                 {Object.keys(toolComponents).map((name) => (
                     <button
                         key={name + "drawToolDropdown"}
@@ -47,7 +47,7 @@ export const ToolBar = ({ setAction, contextMenu }) => {
                         {toolComponents[name]}
                     </button>
                 ))}
-            </tool-bar>
+            </nav>
         )
     }
 }
