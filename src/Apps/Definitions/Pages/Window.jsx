@@ -83,6 +83,7 @@ export const WindowPreview = () => {
                 <AiOutlineClose />
               </button></>}
         </app-top-bar>
+        <app-container></app-container>
       </app-window>
       <app-window
         style={{
@@ -121,6 +122,7 @@ export const WindowPreview = () => {
                 <AiOutlineClose />
               </button></>}
         </app-top-bar>
+        <app-container></app-container>
       </app-window>
       <app-dialog
         style={{
@@ -369,7 +371,7 @@ export const Window = () => {
             value={themeContext.windowBackgroundFX}
             onChange={(e) => themeContext.setWindowBackgroundFX(e.target.value)}
           >
-            {themeContext.windowBackgroundFXList.map((backgroundFX) => (
+            {themeContext.backgroundFXList.map((backgroundFX) => (
               <option key={backgroundFX} value={backgroundFX}>
                 {backgroundFX}
               </option>
@@ -648,8 +650,21 @@ export const Window = () => {
           <ColorPicker
             color={dialogBkgrColor}
             setColor={setDialogBkgrColor}
-            useAlpha={false}
+            useAlpha={true}
           />
+        </div>
+        <div>
+          <label>Background Effect:</label>
+          <select
+            value={themeContext.windowBackgroundFX}
+            onChange={(e) => themeContext.setWindowBackgroundFX(e.target.value)}
+          >
+            {themeContext.backgroundFXList.map((backgroundFX) => (
+              <option key={backgroundFX} value={backgroundFX}>
+                {backgroundFX}
+              </option>
+          ))}
+          </select>
         </div>
         <fieldset>
           <legend>Border</legend>
@@ -707,7 +722,7 @@ export const Window = () => {
             <ColorPicker
               color={dialogTopBarBkgr}
               setColor={setDialogTopBarBkgr}
-              useAlpha={false}
+              useAlpha={true}
             />
           </div>
           <div>

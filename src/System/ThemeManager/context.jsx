@@ -9,9 +9,11 @@ export const ThemeContext = createContext({
     topBarIconTheme: "",
     topBarIconThemeList: [],
     setTopBarIconTheme: () => { },
+    backgroundFXList: [],
     windowBackgroundFX: "",
-    windowBackgroundFXList: [],
     setWindowBackgroundFX: () => { },
+    dialogBackgroundFX: "",
+    setDialogBackgroundFX: () => { },
 });
 
 export function ThemeProvider({ children }) {
@@ -23,67 +25,76 @@ export function ThemeProvider({ children }) {
     const topBarIconThemeList = ["Default", "Aqua"];
 
     const [windowBackgroundFX, setWindowBackgroundFX] = useState("none");
-    const windowBackgroundFXList = ["None", "Metallic"];
+    const [dialogBackgroundFX, setDialogBackgroundFX] = useState("none");
+
+    const backgroundFXList = ["None", "Metallic"];
     const MetallicFX = {
-        "--WindowBkgrImage": "var(--MetallicFXBkgrImage)",
-        "--WindowBkgrPosition": "var(--MetallicFXBkgrPosition)",
-        "--WindowBkgrSize": "var(--MetallicFXBkgrSize)",
-        "--WindowBkgrRepeat": "var(--MetallicFXBkgrRepeat)",
-        "--WindowBackdropFilter": "var(--MetallicFXBackdropFilter)",
+        BkgrImage: "var(--MetallicFXBkgrImage)",
+        BkgrPosition: "var(--MetallicFXBkgrPosition)",
+        BkgrSize: "var(--MetallicFXBkgrSize)",
+        BkgrRepeat: "var(--MetallicFXBkgrRepeat)",
+        BackdropFilter: "var(--MetallicFXBackdropFilter)",
     };
     // Translucent FX needs to be refined
     const TranslucentFX = {
-        "--WindowBkgrImage": "var(--TranslucentFXBkgrImage)",
-        "--WindowBkgrPosition": "var(--TranslucentFXBkgrPosition)",
-        "--WindowBkgrSize": "var(--TranslucentFXBkgrSize)",
-        "--WindowBkgrRepeat": "var(--TranslucentFXBkgrRepeat)",
-        "--WindowBackdropFilter": "var(--TranslucentFXBackdropFilter)",
+        BkgrImage: "var(--TranslucentFXBkgrImage)",
+        BkgrPosition: "var(--TranslucentFXBkgrPosition)",
+        BkgrSize: "var(--TranslucentFXBkgrSize)",
+        BkgrRepeat: "var(--TranslucentFXBkgrRepeat)",
+        BackdropFilter: "var(--TranslucentFXBackdropFilter)",
     };
     const NoneFX = {
-        "--WindowBkgrImage": "none",
-        "--WindowBkgrPosition": "none",
-        "--WindowBkgrSize": "none",
-        "--WindowBkgrRepeat": "none",
-        "--WindowBackdropFilter": "none",
+        BkgrImage: "none",
+        BkgrPosition: "none",
+        BkgrSize: "none",
+        BkgrRepeat: "none",
+        BackdropFilter: "none",
     };
 
     const changeRootStyle = (property, value) => {
         document.querySelector(":root").style.setProperty(`${property}`, value);
     };
-
-    useEffect(() => {
-        switch (theme) {
+    const switchTheme = (value) => {
+        switch (value) {
             case "Aqua":
                 Object.keys(Aqua).forEach((key) => changeRootStyle(key, Aqua[key]));
                 setTopBarIconTheme("Aqua");
                 setWindowBackgroundFX("Metallic");
+                setDialogBackgroundFX("Metallic");
                 break;
             default:
                 Object.keys(Default).forEach((key) => changeRootStyle(key, Default[key]));
                 setTopBarIconTheme("Default");
                 setWindowBackgroundFX("None");
+                setDialogBackgroundFX("None");
                 break;
         }
-    }, [theme]);
+    };
 
-    useEffect(() => {
-        console.log("FX changed " + windowBackgroundFX);
-        switch (windowBackgroundFX) {
+    const changeRootStyleFX = (target, property, value) => {
+        document.querySelector(":root").style.setProperty(`--${target}${property}`, value);
+    };
+    const switchFX = (target, value) => {
+        switch (value) {
             case "Metallic":
-                console.log("Metallic");
-                Object.keys(MetallicFX).forEach((key) => changeRootStyle(key, MetallicFX[key]));
+                Object.keys(MetallicFX).forEach((key) => changeRootStyleFX(target, key, MetallicFX[key]));
                 break;
             case "Translucent":
-                Object.keys(TranslucentFX).forEach((key) => changeRootStyle(key, TranslucentFX[key]));
+                Object.keys(TranslucentFX).forEach((key) => changeRootStyleFX(target, key, TranslucentFX[key]));
                 break;
             case "None":
-                Object.keys(NoneFX).forEach((key) => changeRootStyle(key, NoneFX[key]));
+                Object.keys(NoneFX).forEach((key) => changeRootStyleFX(target, key, NoneFX[key]));
                 break;
             default:
-                Object.keys(NoneFX).forEach((key) => changeRootStyle(key, NoneFX[key]));
+                Object.keys(NoneFX).forEach((key) => changeRootStyleFX(target, key, NoneFX[key]));
                 break;
         }
-    }, [windowBackgroundFX]);
+    };
+
+    useEffect(() => {switchTheme(theme);}, [theme]);
+
+    useEffect(() => {switchFX("Window", windowBackgroundFX);}, [windowBackgroundFX]);
+    useEffect(() => {switchFX("Dialog", dialogBackgroundFX);}, [dialogBackgroundFX]);
 
     const contextValue = {
         theme,
@@ -93,7 +104,7 @@ export function ThemeProvider({ children }) {
         topBarIconThemeList,
         setTopBarIconTheme,
         windowBackgroundFX,
-        windowBackgroundFXList,
+        backgroundFXList,
         setWindowBackgroundFX
     };
 
