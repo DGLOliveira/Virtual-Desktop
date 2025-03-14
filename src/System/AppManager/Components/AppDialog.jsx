@@ -47,13 +47,13 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                     </app-dialog-info>
                     <app-dialog-actions>
                         {Object.keys(appDialog.actions).map((name, index) => 
-                            <div 
+                            <button 
                             key={index}
                             className={setButtonClass(name)}
                             onClick={appDialog.actions[name]}
                             >
                                 {name}
-                            </div>
+                            </button>
                             )}
                     </app-dialog-actions>
                 </app-dialog>

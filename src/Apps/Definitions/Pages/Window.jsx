@@ -138,9 +138,9 @@ export const WindowPreview = () => {
           Information
         </app-dialog-info>
         <app-dialog-actions>
-          <div className={setButtonClass("Ok")}>Ok</div>
-          <div className={setButtonClass("Cancel")}>Cancel</div>
-          <div className={setButtonClass("Close")}>Close</div>
+          <button className={setButtonClass("Ok")}>Ok</button>
+          <button className={setButtonClass("Cancel")}>Cancel</button>
+          <button className={setButtonClass("Close")}>Close</button>
         </app-dialog-actions>
       </app-dialog>
     </>
