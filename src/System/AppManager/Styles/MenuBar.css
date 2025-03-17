@@ -31,12 +31,12 @@ drop-down>ul {
     z-index: 1;
     transition: 0.2s;
     translate:  1px calc(var(--WindowMenuFontSize) + 2 * var(--WindowMenuBorderWidth) + 6px);
+    overflow: hidden;
 }
 
 drop-down>ul>li {
     list-style-type: none;
-    margin-left: 2px;
-    margin-right: 2px;
+    margin: 0px;
 }
 
 drop-down>ul>li>button {
@@ -50,6 +50,7 @@ drop-down>ul>li>button {
     justify-content: space-between;
     font-size: var(--WindowMenuFontSize);
     color: var(--WindowMenuFontColor);
+    margin: 0px;
 }
 
 drop-down>ul>li>button>kbd {
@@ -65,6 +66,8 @@ drop-down>ul>li>button:hover:enabled {
 }
 
 drop-down>ul>li>hr{
-    border:none;
-    border-top: var(--WindowMenuBorderColor) var(--WindowMenuBorderWidth) solid;
+    border-bottom:none;
+    border-left: none;
+    border-right: none;
+    border-top: var(--WindowMenuBorderColor) max(var(--WindowMenuBorderWidth), 1px) solid;
 }

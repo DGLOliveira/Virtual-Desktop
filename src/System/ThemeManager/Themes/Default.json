@@ -42,6 +42,15 @@
     "--WindowShadowColor": "hsla(0, 0%, 0%, 0.5)",
     "--WindowPadding": "0px",
 
+    "--WindowMenuBkgr": "hsla(0, 0%, 18%, 0.95)",
+    "--WindowMenuFontColor": "hsl(0, 0%, 75%)",
+    "--WindowMenuFontSize": "16px",
+    "--WindowMenuBorderColor": "hsl(0, 0%, 18%)",
+    "--WindowMenuBorderWidth": "1px",
+    "--WindowMenuBorderRadius": "0px",
+    "--WindowMenuBorderType": "solid",
+    "--WindowMenuButtonHoverBkgr": "hsla(0, 0%, 100%, 0.2)",
+
     "--DialogBkgrColor": "hsla(0, 0%, 18%, 1)",
     "--DialogBorderColor": "hsla(0, 0%, 50%, 1)",
     "--DialogBorderWidth": "1px",
