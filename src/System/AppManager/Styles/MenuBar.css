@@ -59,3 +59,12 @@ drop-down>ul>li>button>kbd {
 drop-down>ul>li>button>span {
     width: 20px;
 }
+
+drop-down>ul>li>button:hover:enabled {
+    background: var(--WindowMenuButtonHoverBkgr);
+}
+
+drop-down>ul>li>hr{
+    border:none;
+    border-top: var(--WindowMenuBorderColor) var(--WindowMenuBorderWidth) solid;
+}
