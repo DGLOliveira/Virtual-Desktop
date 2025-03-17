@@ -47,14 +47,23 @@
   --WindowShadowColor: hsla(0, 0%, 0%, 0.5);
   --WindowPadding: 0px;
 
-  --WindowMenuBkgr: hsla(0, 0%, 18%, 0.95);
   --WindowMenuFontColor: hsl(0, 0%, 75%);
   --WindowMenuFontSize: 16px;
+  --WindowMenuNavButtonBkgr: hsla(0, 0%, 18%, 0.95);
+  --WindowMenuNavButtonColor: hsl(0, 0%, 75%);
+  --WindowMenuNavButtonBorderColor: hsl(0, 0%, 50%);
+  --WindowMenuNavButtonBorderWidth: 1px;
+  --WindowMenuNavButtonBorderRadius: 0px;
+  --WindowMenuNavButtonBorderType: solid;
+  --WindowMenuNavButtonHoverBkgr: hsla(0, 0%, 100%, 0.2);
+  --WindowMenuNavButtonHoverFontColor: hsl(0, 0%, 75%);
+  --WindowMenuBkgr: hsla(0, 0%, 18%, 0.95);
   --WindowMenuBorderColor: hsl(0, 0%, 50%);
   --WindowMenuBorderWidth: 1px;
   --WindowMenuBorderRadius: 0px;
   --WindowMenuBorderType: solid;
-  --WindowMenuButtonHoverBkgr: hsla(0, 0%, 100%, 0.2);
+  --WindowMenuHoverColor: hsl(0, 0%, 75%);
+  --WindowMenuHoverBkgr: hsla(0, 0%, 100%, 0.2);
 
   --DialogBkgrImage: none;
   --DialogBkgrPosition: none;

@@ -10,13 +10,15 @@ app-window>nav {
 
 app-window>nav>button {
     font-size: var(--WindowMenuFontSize);
-    color: var(--WindowMenuFontColor);
-    border: var(--WindowMenuBorderWidth) var(--WindowMenuBorderColor) var(--WindowMenuBorderType);
-    border-radius: var(--WindowMenuBorderRadius);
+    background-color: var(--WindowMenuNavButtonBkgrColor);
+    color: var(--WindowMenuNavButtonColor);
+    border: var(--WindowMenuNavButtonBorderColor) var(--WindowMenuNavButtonBorderWidth) var(--WindowMenuNavButtonBorderType);
+    border-radius: var(--WindowMenuNavButtonBorderRadius);
 }
 
-app-window>nav>button:hover {
-    background: var(--WindowMenuButtonHoverBkgr);
+app-window>nav>button:hover:enabled {
+    color: var(--WindowMenuNavButtonHoverColor);
+    background: var(--WindowMenuNavButtonHoverBkgr);
 }
 
 drop-down>ul {
@@ -62,7 +64,8 @@ drop-down>ul>li>button>span {
 }
 
 drop-down>ul>li>button:hover:enabled {
-    background: var(--WindowMenuButtonHoverBkgr);
+    color: var(--WindowMenuHoverColor);
+    background: var(--WindowMenuHoverBkgr);
 }
 
 drop-down>ul>li>hr{
