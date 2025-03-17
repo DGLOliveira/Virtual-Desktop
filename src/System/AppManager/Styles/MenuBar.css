@@ -9,8 +9,14 @@ app-window>nav {
 }
 
 app-window>nav>button {
-    color: inherit;
-    border: solid 1px var(--GeneralBorderColor);
+    font-size: var(--WindowMenuFontSize);
+    color: var(--WindowMenuFontColor);
+    border: var(--WindowMenuBorderWidth) var(--WindowMenuBorderColor) var(--WindowMenuBorderType);
+    border-radius: var(--WindowMenuBorderRadius);
+}
+
+app-window>nav>button:hover {
+    background: var(--WindowMenuButtonHoverBkgr);
 }
 
 drop-down>ul {
@@ -19,15 +25,12 @@ drop-down>ul {
     color: inherit;
     padding: 0px;
     margin: 0px;
-    background: rgba(45, 45, 45, 1);
-    border: 1px var(--GeneralBorderColor) solid;
+    background: var(--WindowMenuBkgr);
+    border: var(--WindowMenuBorderWidth) var(--WindowMenuBorderColor) var(--WindowMenuBorderType);
+    border-radius: var(--WindowMenuBorderRadius);
     z-index: 1;
     transition: 0.2s;
-    translate: 0px 30px;
-}
-
-app-window>nav>drop-down>ul {
-    translate: 0px 20px;
+    translate:  1px calc(var(--WindowMenuFontSize) + 2 * var(--WindowMenuBorderWidth) + 6px);
 }
 
 drop-down>ul>li {
@@ -41,11 +44,12 @@ drop-down>ul>li>button {
     flex-direction: row;
     flex-wrap: nowrap;
     white-space: nowrap;
-    color: inherit;
     width: 100%;
     text-align: left;
     align-items: start;
     justify-content: space-between;
+    font-size: var(--WindowMenuFontSize);
+    color: var(--WindowMenuFontColor);
 }
 
 drop-down>ul>li>button>kbd {
