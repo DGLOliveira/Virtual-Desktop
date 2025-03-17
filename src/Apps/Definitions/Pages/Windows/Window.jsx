@@ -8,41 +8,12 @@ import {
 } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 
-import {ThemeContext} from "../../../System/ThemeManager/context.jsx";
-import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
+import {ThemeContext} from "../../../../System/ThemeManager/context.jsx";
+import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 
 export const WindowPreview = () => {
   const themeContext = useContext(ThemeContext);
-  const [buttonClassNeutral, setButtonClassNeutral] = useState("appDialogButtonFluent");
-  const [buttonClassSuggested, setButtonClassSuggested] = useState("appDialogButtonFluent");
-  const [buttonClassClose, setButtonClassClose] = useState("appDialogButtonFluent buttonActiveRed");
-  useEffect(() => {
-      switch(themeContext.theme) {
-          case "Aqua":
-              setButtonClassNeutral("appDialogButtonAqua appDialogButtonAquaNeutral");
-              setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");
-              setButtonClassClose("appDialogButtonAqua appDialogButtonAquaRed");
-              break;
-          default:
-              setButtonClassNeutral("appDialogButtonFluent");
-              setButtonClassSuggested("appDialogButtonFluent");
-              setButtonClassClose("appDialogButtonFluent buttonActiveRed");
-              break;
-      }
-  },[themeContext.theme]);
-
-  const setButtonClass = (name) => {
-      switch(name){
-       case "Close":
-          return buttonClassClose;
-      case "Save":
-      case "Ok":
-          return buttonClassSuggested;
-      default:
-          return buttonClassNeutral;
-      }
-  }
   return (
     <>
       <app-window
@@ -124,25 +95,6 @@ export const WindowPreview = () => {
         </app-top-bar>
         <app-container></app-container>
       </app-window>
-      <app-dialog
-        style={{
-          position: "absolute",
-          top: "100px",
-          left: "320px",
-        }}
-      >
-        <app-dialog-top-bar>
-          Dialog
-        </app-dialog-top-bar>
-        <app-dialog-info>
-          Information
-        </app-dialog-info>
-        <app-dialog-actions>
-          <button className={setButtonClass("Ok")}>Ok</button>
-          <button className={setButtonClass("Cancel")}>Cancel</button>
-          <button className={setButtonClass("Close")}>Close</button>
-        </app-dialog-actions>
-      </app-dialog>
     </>
   );
 };
@@ -222,75 +174,6 @@ export const Window = () => {
   const [inactiveBkgColor, setInactiveBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBkgrColorInactive"),
   );
-  const [dialogBkgrColor, setDialogBkgrColor] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogBkgrColor"),
-  );
-  const [dialogBorderColor, setDialogBorderColor] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogBorderColor"),
-  );
-  const [dialogBorderWidth, setDialogBorderWidth] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogBorderWidth").slice(0, -2),
-  );
-  const [dialogBorderRadius, setDialogBorderRadius] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogBorderRadius").slice(0, -2),
-  );
-  const [dialogBorderType, setDialogBorderType] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogBorderType"),
-  );
-  const [dialogInfoBkgr, setDialogInfoBkgr] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogInfoBkgr"),
-  );
-  const [dialogInfoFontColor, setDialogInfoFontColor] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogInfoFontColor"),
-  );
-  const [dialogInfoFontSize, setDialogInfoFontSize] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogInfoFontSize").slice(0, -2),
-  );
-  const [dialogInfoBorderColor, setDialogInfoBorderColor] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogInfoBorderColor"),
-  )
-  const [dialogInfoBorderWidth, setDialogInfoBorderWidth] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogInfoBorderWidth").slice(0, -2),
-  );
-  const [dialogInfoBorderRadius, setDialogInfoBorderRadius] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogInfoBorderRadius").slice(0, -2),
-  );
-  const [dialogInfoBorderType, setDialogInfoBorderType] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogInfoBorderType"),
-  );
-  const [dialogPadding, setDialogPadding] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogPadding").slice(0, -2),
-  )
-  const [dialogTopBarBkgr, setDialogTopBarBkgr] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogTopBarBkgr"),
-  );
-  const [dialogTopBarFontSize, setDialogTopBarFontSize] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogTopBarFontSize").slice(0, -2),
-  );
-  const [dialogTopBarFontColor, setDialogTopBarFontColor] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogTopBarFontColor"),
-  );
-  const [dialogButtonBkgr, setDialogButtonBkgr] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogButtonBkgr"),
-  );
-  const [dialogButtonFontColor, setDialogButtonFontColor] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogButtonFontColor"),
-  );
-  const [dialogButtonFontSize, setDialogButtonFontSize] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogButtonFontSize").slice(0, -2),
-  );
-  const [dialogButtonBorderColor, setDialogButtonBorderColor] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogButtonBorderColor"),
-  );
-  const [dialogButtonBorderWidth, setDialogButtonBorderWidth] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogButtonBorderWidth").slice(0, -2),
-  );
-  const [dialogButtonBorderRadius, setDialogButtonBorderRadius] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogButtonBorderRadius").slice(0, -2),
-  );
-  const [dialogButtonBorderType, setDialogButtonBorderType] = useState(
-    getComputedStyle(root).getPropertyValue("--DialogButtonBorderType"),
-  )
   useEffect(() => {
     root.style.setProperty("--WindowFontColor", windowFontColor);
     root.style.setProperty("--WindowFontColorInactive", windowFontColorInactive);
@@ -302,10 +185,7 @@ export const Window = () => {
     root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
     root.style.setProperty("--WindowTopBarBkgrColor", topbarBkgColor);
     root.style.setProperty("--WindowTopBarHeight", topBarHeight + "px");
-    root.style.setProperty(
-      "--WindowTopBarBkgrColorInactive",
-      inactiveTopBarBkgColor,
-    );
+    root.style.setProperty("--WindowTopBarBkgrColorInactive",inactiveTopBarBkgColor);
     root.style.setProperty("--WindowTopBarIconSize", topBarIconSize + "px");
     root.style.setProperty("--WindowBorderWidth", borderWidth + "px");
     root.style.setProperty("--WindowBorderRadius", borderRadius + "px");
@@ -314,29 +194,6 @@ export const Window = () => {
     root.style.setProperty("--WindowBorderColorInactive", inactiveBorderColor);
     root.style.setProperty("--WindowTopBarFontColorInactive", topbarFontColorInactive);
     root.style.setProperty("--WindowBkgrColorInactive", inactiveBkgColor);
-    root.style.setProperty("--DialogBkgrColor", dialogBkgrColor);
-    root.style.setProperty("--DialogBorderColor", dialogBorderColor);
-    root.style.setProperty("--DialogBorderWidth", dialogBorderWidth + "px");
-    root.style.setProperty("--DialogBorderRadius", dialogBorderRadius + "px");
-    root.style.setProperty("--DialogBorderType", dialogBorderType);
-    root.style.setProperty("--DialogInfoBkgr", dialogInfoBkgr);
-    root.style.setProperty("--DialogInfoFontColor", dialogInfoFontColor);
-    root.style.setProperty("--DialogInfoFontSize", dialogInfoFontSize + "px");
-    root.style.setProperty("--DialogInfoBorderColor", dialogInfoBorderColor);
-    root.style.setProperty("--DialogInfoBorderWidth", dialogInfoBorderWidth + "px");
-    root.style.setProperty("--DialogInfoBorderRadius", dialogInfoBorderRadius + "px");
-    root.style.setProperty("--DialogInfoBorderType", dialogInfoBorderType);
-    root.style.setProperty("--DialogPadding", dialogPadding + "px");
-    root.style.setProperty("--DialogTopBarBkgr", dialogTopBarBkgr);
-    root.style.setProperty("--DialogTopBarFontSize", dialogTopBarFontSize + "px");
-    root.style.setProperty("--DialogTopBarFontColor", dialogTopBarFontColor);
-    root.style.setProperty("--DialogButtonBkgr", dialogButtonBkgr);
-    root.style.setProperty("--DialogButtonFontColor", dialogButtonFontColor);
-    root.style.setProperty("--DialogButtonFontSize", dialogButtonFontSize + "px");
-    root.style.setProperty("--DialogButtonBorderColor", dialogButtonBorderColor);
-    root.style.setProperty("--DialogButtonBorderWidth", dialogButtonBorderWidth + "px");
-    root.style.setProperty("--DialogButtonBorderRadius", dialogButtonBorderRadius + "px");
-    root.style.setProperty("--DialogButtonBorderType", dialogButtonBorderType);
     root.style.setProperty("--WindowShadowXOffset", shadowXOffset + "px");
     root.style.setProperty("--WindowShadowYOffset", shadowYOffset + "px");
     root.style.setProperty("--WindowShadowBlur", shadowBlur + "px");
@@ -366,30 +223,7 @@ export const Window = () => {
     inactiveTopBarBkgColor,
     topbarFontColorInactive,
     inactiveBkgColor,
-    inactiveBorderColor,
-    dialogBkgrColor,
-    dialogBorderColor,
-    dialogBorderWidth,
-    dialogBorderRadius,
-    dialogBorderType,
-    dialogInfoBkgr,
-    dialogInfoFontColor,
-    dialogInfoFontSize,
-    dialogInfoBorderColor,
-    dialogInfoBorderWidth,
-    dialogInfoBorderRadius,
-    dialogInfoBorderType,
-    dialogPadding,
-    dialogTopBarBkgr,
-    dialogTopBarFontSize,
-    dialogTopBarFontColor,
-    dialogButtonBkgr,
-    dialogButtonFontColor,
-    dialogButtonFontSize,
-    dialogButtonBorderColor,
-    dialogButtonBorderWidth,
-    dialogButtonBorderRadius,
-    dialogButtonBorderType,
+    inactiveBorderColor
   ]);
   return (
     <>
@@ -673,275 +507,6 @@ export const Window = () => {
           </div>
         </fieldset>
       </fieldset>
-      <fieldset>
-        <legend>Dialog Window</legend>
-        <div>
-          <label>Background Color: </label>
-          <ColorPicker
-            color={dialogBkgrColor}
-            setColor={setDialogBkgrColor}
-            useAlpha={true}
-          />
-        </div>
-        <div>
-          <label>Background Effect:</label>
-          <select
-            value={themeContext.windowBackgroundFX}
-            onChange={(e) => themeContext.setWindowBackgroundFX(e.target.value)}
-          >
-            {themeContext.backgroundFXList.map((backgroundFX) => (
-              <option key={backgroundFX} value={backgroundFX}>
-                {backgroundFX}
-              </option>
-          ))}
-          </select>
-        </div>
-        <fieldset>
-          <legend>Border</legend>
-          <div>
-            <label>Color: </label>
-            <ColorPicker
-              color={dialogBorderColor}
-              setColor={setDialogBorderColor}
-              useAlpha={true}
-            />
-          </div>
-          <div>
-            <label>Thickness: </label>
-            <input
-              type="range"
-              min={1}
-              max={10}
-              step="1"
-              value={dialogBorderWidth}
-              onChange={(e) => setDialogBorderWidth(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Corner Curvature: </label>
-            <input
-              type="range"
-              min={1}
-              max={25}
-              step="1"
-              value={dialogBorderRadius}
-              onChange={(e) => setDialogBorderRadius(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Type: </label>
-            <select
-              value={dialogBorderType}
-              onChange={(e) => setDialogBorderType(e.target.value)}
-            >
-              <option value="solid">Solid</option>
-              <option value="dashed">Dashed</option>
-              <option value="dotted">Dotted</option>
-              <option value="double">Double</option>
-              <option value="groove">Groove</option>
-              <option value="ridge">Ridge</option>
-              <option value="inset">Inset</option>
-              <option value="outset">Outset</option>
-            </select>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Top Bar</legend>
-          <div>
-            <label>Background:</label>
-            <ColorPicker
-              color={dialogTopBarBkgr}
-              setColor={setDialogTopBarBkgr}
-              useAlpha={true}
-            />
-          </div>
-          <div>
-            <label>Font Color:</label>
-            <ColorPicker
-              color={dialogTopBarFontColor}
-              setColor={setDialogTopBarFontColor}
-              useAlpha={false}
-            />
-          </div>
-          <div>
-            <label>Font Size:</label>
-            <input
-              type="range"
-              min={12}
-              max={60}
-              step="1"
-              value={dialogTopBarFontSize}
-              onChange={(e) => setDialogTopBarFontSize(e.target.value)}
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Info</legend>
-          <div>
-            <label>Background:</label>
-            <ColorPicker
-              color={dialogInfoBkgr}
-              setColor={setDialogInfoBkgr}
-              useAlpha={true}
-            />
-          </div>
-          <div>
-            <label>Font Size: </label>
-            <input
-              type="range"
-              min={12}
-              max={60}
-              step="1"
-              value={dialogInfoFontSize}
-              onChange={(e) => setDialogInfoFontSize(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Font Color:</label>
-            <ColorPicker
-              color={dialogInfoFontColor}
-              setColor={setDialogInfoFontColor}
-              useAlpha={false}
-            />
-          </div>
-        <fieldset>
-          <legend>Border</legend>
-          <div>
-            <label>Color: </label>
-            <ColorPicker
-              color={dialogInfoBorderColor}
-              setColor={setDialogInfoBorderColor}
-              useAlpha={true}
-            />
-          </div>
-          <div>
-            <label>Thickness: </label>
-            <input
-              type="range"
-              min={0}
-              max={10}
-              step="1"
-              value={dialogInfoBorderWidth}
-              onChange={(e) => setDialogInfoBorderWidth(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Corner Curvature: </label>
-            <input
-              type="range"
-              min={0}
-              max={12}
-              step="1"
-              value={dialogInfoBorderRadius}
-              onChange={(e) => setDialogInfoBorderRadius(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Type: </label>
-            <select
-              value={dialogInfoBorderType}
-              onChange={(e) => setDialogInfoBorderType(e.target.value)}
-            >
-              <option value="solid">Solid</option>
-              <option value="dashed">Dashed</option>
-              <option value="dotted">Dotted</option>
-              <option value="double">Double</option>
-              <option value="groove">Groove</option>
-              <option value="ridge">Ridge</option>
-              <option value="inset">Inset</option>
-              <option value="outset">Outset</option>
-            </select>
-          </div>
-          <div>
-            <label>Margin Distance</label>
-            <input
-              type="range"
-              min={0}
-              max={10}
-              step="1"
-              value={dialogPadding}
-              onChange={(e) => setDialogPadding(e.target.value)}
-            />
-          </div>
-        </fieldset>
-        </fieldset>
-        <fieldset>
-          <legend>Button</legend>
-          <div>
-            <label>Background:</label>
-            <ColorPicker
-              color={dialogButtonBkgr}
-              setColor={setDialogButtonBkgr}
-              useAlpha={false}
-            />
-          </div>
-          <div>
-            <label>Font Color:</label>
-            <ColorPicker
-              color={dialogButtonFontColor}
-              setColor={setDialogButtonFontColor}
-              useAlpha={false}
-            />
-          </div>
-          <div>
-            <label>Font Size:</label>
-            <input
-              type="range"
-              min={12}
-              max={60}
-              step="1"
-              value={dialogButtonFontSize}
-              onChange={(e) => setDialogButtonFontSize(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Border Color:</label>
-            <ColorPicker
-              color={dialogButtonBorderColor}
-              setColor={setDialogButtonBorderColor}
-              useAlpha={false}
-            />
-          </div>
-          <div>
-            <label>Border Width:</label>
-            <input
-              type="range"
-              min={1}
-              max={10}
-              step="1"
-              value={dialogButtonBorderWidth}
-              onChange={(e) => setDialogButtonBorderWidth(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Border Radius:</label>
-            <input
-              type="range"
-              min={1}
-              max={25}
-              step="1"
-              value={dialogButtonBorderRadius}
-              onChange={(e) => setDialogButtonBorderRadius(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Border Style:</label>
-            <select
-              value={dialogButtonBorderType}
-              onChange={(e) => setDialogButtonBorderType(e.target.value)}
-            >
-              <option value="solid">Solid</option>
-              <option value="dashed">Dashed</option>
-              <option value="dotted">Dotted</option>
-              <option value="double">Double</option>
-              <option value="groove">Groove</option>
-              <option value="ridge">Ridge</option>
-              <option value="inset">Inset</option>
-              <option value="outset">Outset</option>
-            </select>
-          </div>
-        </fieldset>
-      </fieldset >
     </>
   );
 };
