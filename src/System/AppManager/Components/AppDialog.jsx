@@ -9,7 +9,7 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
     const [buttonClassSuggested, setButtonClassSuggested] = useState("appDialogButtonFluent");
     const [buttonClassClose, setButtonClassClose] = useState("appDialogButtonFluent buttonActiveRed");
     useEffect(() => {
-        switch(theme.theme) {
+        switch(theme.dialogButtonTheme) {
             case "Aqua":
                 setButtonClassNeutral("appDialogButtonAqua appDialogButtonAquaNeutral");
                 setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");
@@ -21,7 +21,7 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                 setButtonClassClose("appDialogButtonFluent buttonActiveRed");
                 break;
         }
-    },[theme.theme]);
+    },[theme.dialogButtonTheme]);
 
     const setButtonClass = (name) => {
         switch(name){

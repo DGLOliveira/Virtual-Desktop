@@ -9,11 +9,15 @@ export const ThemeContext = createContext({
     topBarIconTheme: "",
     topBarIconThemeList: [],
     setTopBarIconTheme: () => { },
+    dialogButtonTheme: "",
+    dialogButtonThemeList: [],
+    setDialogButtonTheme: () => { },
     backgroundFXList: [],
     windowBackgroundFX: "",
     setWindowBackgroundFX: () => { },
     dialogBackgroundFX: "",
     setDialogBackgroundFX: () => { },
+
 });
 
 export function ThemeProvider({ children }) {
@@ -23,6 +27,9 @@ export function ThemeProvider({ children }) {
 
     const [topBarIconTheme, setTopBarIconTheme] = useState("Default");
     const topBarIconThemeList = ["Default", "Aqua"];
+
+    const [dialogButtonTheme, setDialogButtonTheme] = useState("Default");
+    const dialogButtonThemeList = ["Default", "Aqua"];
 
     const [windowBackgroundFX, setWindowBackgroundFX] = useState("none");
     const [dialogBackgroundFX, setDialogBackgroundFX] = useState("none");
@@ -59,12 +66,14 @@ export function ThemeProvider({ children }) {
             case "Aqua":
                 Object.keys(Aqua).forEach((key) => changeRootStyle(key, Aqua[key]));
                 setTopBarIconTheme("Aqua");
+                setDialogButtonTheme("Aqua");
                 setWindowBackgroundFX("Metallic");
                 setDialogBackgroundFX("Metallic");
                 break;
             default:
                 Object.keys(Default).forEach((key) => changeRootStyle(key, Default[key]));
                 setTopBarIconTheme("Default");
+                setDialogButtonTheme("Default");
                 setWindowBackgroundFX("None");
                 setDialogBackgroundFX("None");
                 break;
@@ -103,6 +112,9 @@ export function ThemeProvider({ children }) {
         topBarIconTheme,
         topBarIconThemeList,
         setTopBarIconTheme,
+        dialogButtonTheme,
+        dialogButtonThemeList,
+        setDialogButtonTheme,
         windowBackgroundFX,
         backgroundFXList,
         setWindowBackgroundFX

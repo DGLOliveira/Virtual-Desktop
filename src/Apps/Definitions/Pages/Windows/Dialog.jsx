@@ -1,11 +1,5 @@
 
 import { useState, useEffect, useContext } from "react";
-import { FcGlobe } from "react-icons/fc";
-import {
-  FaRegWindowMinimize,
-  FaWindowMaximize,
-} from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
 
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
@@ -17,7 +11,7 @@ export const DialogPreview = () => {
   const [buttonClassSuggested, setButtonClassSuggested] = useState("appDialogButtonFluent");
   const [buttonClassClose, setButtonClassClose] = useState("appDialogButtonFluent buttonActiveRed");
   useEffect(() => {
-    switch (themeContext.theme) {
+    switch (themeContext.dialogButtonTheme) {
       case "Aqua":
         setButtonClassNeutral("appDialogButtonAqua appDialogButtonAquaNeutral");
         setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");
@@ -29,7 +23,7 @@ export const DialogPreview = () => {
         setButtonClassClose("appDialogButtonFluent buttonActiveRed");
         break;
     }
-  }, [themeContext.theme]);
+  }, [themeContext.dialogButtonTheme]);
 
   const setButtonClass = (name) => {
     switch (name) {
@@ -430,6 +424,19 @@ export const Dialog = () => {
       </fieldset>
       <fieldset>
         <legend>Button</legend>
+        <div>
+          <label>Theme:</label>
+          <select
+            value={themeContext.dialogButtonTheme}
+            onChange={(e) => themeContext.setDialogButtonTheme(e.target.value)}
+          >
+            {themeContext.dialogButtonThemeList.map((buttonTheme) => (
+              <option key={buttonTheme} value={buttonTheme}>
+                {buttonTheme}
+              </option>
+            ))}
+          </select>
+        </div>
         <div>
           <label>Background:</label>
           <ColorPicker
