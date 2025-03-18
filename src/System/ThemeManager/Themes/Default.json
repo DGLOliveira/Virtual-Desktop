@@ -95,6 +95,7 @@
     "--ContextMenuBorderType": "solid",
     "--ContextMenuButtonHoverColor": "hsl(0, 0%, 75%)",
     "--ContextMenuButtonHoverBkgr": "hsla(0, 0%, 100%, 0.5)",
+    "--ContextMenuPadding": "5px",
 
     "--TaskbarBkgr": "hsla(0, 0%, 0%, 0.8)",
     "--TaskbarHeight": "36px",

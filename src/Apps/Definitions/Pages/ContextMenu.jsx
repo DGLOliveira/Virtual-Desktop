@@ -75,6 +75,9 @@ export const ContextMenu = () => {
     const [hoverBkgr, setHoverBkgr] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuButtonHoverBkgr"),
     );
+    const [padding, setPadding] = useState(
+        getComputedStyle(root).getPropertyValue("--ContextMenuPadding").slice(0, -2),
+    )
 
     useEffect(() => {
         root.style.setProperty("--ContextMenuFontSize", fontSize + "px");
@@ -86,6 +89,7 @@ export const ContextMenu = () => {
         root.style.setProperty("--ContextMenuBorderType", borderType);
         root.style.setProperty("--ContextMenuButtonHoverColor", hoverColor);
         root.style.setProperty("--ContextMenuButtonHoverBkgr", hoverBkgr);
+        root.style.setProperty("--ContextMenuPadding", padding + "px");
     }, [fontSize, 
         fontColor, 
         bkgColor, 
@@ -94,7 +98,8 @@ export const ContextMenu = () => {
         borderRadius, 
         borderType,
         hoverColor,
-        hoverBkgr
+        hoverBkgr,
+        padding
     ]);
     return (
         <>
@@ -175,6 +180,17 @@ export const ContextMenu = () => {
                         <option value="inset">inset</option>
                         <option value="outset">outset</option>
                     </select>
+                </div>
+                <div>
+                    <label>Padding:</label>
+                    <input
+                        type="range"
+                        min={0}
+                        max={20}
+                        step="1"
+                        value={padding}
+                        onChange={(e) => setPadding(e.target.value)}
+                    />
                 </div>
             </fieldset>
             <fieldset>

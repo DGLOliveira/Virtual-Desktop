@@ -6,10 +6,11 @@ context-menu {
     background: var(--ContextMenuBkgr);
     border: var(--ContextMenuBorderWidth) var(--ContextMenuBorderType) var(--ContextMenuBorderColor);
     border-radius: var(--ContextMenuBorderRadius);
-    padding: 5px;
+    padding: var(--ContextMenuPadding);
     color: var(--ContextMenuFontColor);
     font-size: var(--ContextMenuFontSize);
     z-index: 101;
+    overflow: hidden;
 }
 context-menu > button {
     display: flex;
@@ -18,6 +19,7 @@ context-menu > button {
     color: var(--ContextMenuFontColor);
     font-size: var(--ContextMenuFontSize);
     width: 100%;
+    margin:0;
 }
 
 context-menu > button:hover:enabled {

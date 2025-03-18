@@ -88,13 +88,14 @@
 
     "--ContextMenuBkgr": "hsla(0, 0%, 75%, 1)",
     "--ContextMenuFontColor": "hsl(0, 0%, 0%)",
-    "--ContextMenuFontSize": "12px",
+    "--ContextMenuFontSize": "16px",
     "--ContextMenuBorderColor": "hsl(0, 0%, 0%)",
     "--ContextMenuBorderWidth": "1px",
     "--ContextMenuBorderRadius": "0px",
     "--ContextMenuBorderType": "solid",
     "--ContextMenuButtonHoverColor": "hsl(0, 0%, 100%)",
     "--ContextMenuButtonHoverBkgr": "hsla(242, 100%, 35%,1)",
+    "--ContextMenuPadding": "0px",
 
     "--TaskbarBkgr": "hsla(0, 0%, 0%, 0.8)",
     "--TaskbarHeight": "36px",
