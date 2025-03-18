@@ -21,6 +21,7 @@ context-menu > button {
 }
 
 context-menu > button:hover:enabled {
+    color: var(--ContextMenuButtonHoverColor);
     background-color: var(--ContextMenuButtonHoverBkgr);
     cursor: pointer;
 }

@@ -70,6 +70,9 @@ export const ContextMenu = () => {
         getComputedStyle(root).getPropertyValue("--ContextMenuBorderType"),
     );
     const [hoverColor, setHoverColor] = useState(
+        getComputedStyle(root).getPropertyValue("--ContextMenuButtonHoverColor"),
+    );
+    const [hoverBkgr, setHoverBkgr] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuButtonHoverBkgr"),
     );
 
@@ -81,7 +84,8 @@ export const ContextMenu = () => {
         root.style.setProperty("--ContextMenuBorderWidth", borderWidth + "px");
         root.style.setProperty("--ContextMenuBorderRadius", borderRadius + "px");
         root.style.setProperty("--ContextMenuBorderType", borderType);
-        root.style.setProperty("--ContextMenuButtonHoverBkgr", hoverColor);
+        root.style.setProperty("--ContextMenuButtonHoverColor", hoverColor);
+        root.style.setProperty("--ContextMenuButtonHoverBkgr", hoverBkgr);
     }, [fontSize, 
         fontColor, 
         bkgColor, 
@@ -89,7 +93,8 @@ export const ContextMenu = () => {
         borderWidth, 
         borderRadius, 
         borderType,
-        hoverColor
+        hoverColor,
+        hoverBkgr
     ]);
     return (
         <>
@@ -179,6 +184,14 @@ export const ContextMenu = () => {
                     <ColorPicker
                       color={hoverColor}
                       setColor={setHoverColor}
+                      useAlpha={false}
+                    />
+                </div>
+                <div>
+                    <label>Hover Background Color:</label>
+                    <ColorPicker
+                      color={hoverBkgr}
+                      setColor={setHoverBkgr}
                       useAlpha={true}
                     />
                 </div>

@@ -93,6 +93,7 @@
     "--ContextMenuBorderWidth": "1px",
     "--ContextMenuBorderRadius": "0px",
     "--ContextMenuBorderType": "solid",
+    "--ContextMenuButtonHoverColor": "hsl(0, 0%, 75%)",
     "--ContextMenuButtonHoverBkgr": "hsla(0, 0%, 100%, 0.5)",
 
     "--TaskbarBkgr": "hsla(0, 0%, 0%, 0.8)",
