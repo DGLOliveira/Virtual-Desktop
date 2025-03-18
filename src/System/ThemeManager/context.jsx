@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import Aqua from "./Themes/Aqua.json";
 import Default from "./Themes/Default.json";
+import Classic from "./Themes/Classic.json";
 
 export const ThemeContext = createContext({
     theme: "",
@@ -23,13 +24,13 @@ export const ThemeContext = createContext({
 export function ThemeProvider({ children }) {
 
     const [theme, setTheme] = useState("Default");
-    const themeList = ["Default", "Aqua"];
+    const themeList = ["Default", "Aqua", "Classic"];
 
     const [topBarIconTheme, setTopBarIconTheme] = useState("Default");
-    const topBarIconThemeList = ["Default", "Aqua"];
+    const topBarIconThemeList = ["Default", "Aqua", "Classic"];
 
     const [dialogButtonTheme, setDialogButtonTheme] = useState("Default");
-    const dialogButtonThemeList = ["Default", "Aqua"];
+    const dialogButtonThemeList = ["Default", "Aqua", "Classic"];
 
     const [windowBackgroundFX, setWindowBackgroundFX] = useState("none");
     const [dialogBackgroundFX, setDialogBackgroundFX] = useState("none");
@@ -61,8 +62,16 @@ export function ThemeProvider({ children }) {
     const changeRootStyle = (property, value) => {
         document.querySelector(":root").style.setProperty(`${property}`, value);
     };
+    
     const switchTheme = (value) => {
         switch (value) {
+            case "Classic":
+                Object.keys(Classic).forEach((key) => changeRootStyle(key, Classic[key]));
+                setTopBarIconTheme("Classic");
+                setDialogButtonTheme("Classic");
+                setWindowBackgroundFX("None");
+                setDialogBackgroundFX("None");
+                break;
             case "Aqua":
                 Object.keys(Aqua).forEach((key) => changeRootStyle(key, Aqua[key]));
                 setTopBarIconTheme("Aqua");
