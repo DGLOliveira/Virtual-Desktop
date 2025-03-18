@@ -44,6 +44,8 @@
 
     "--WindowMenuFontColor": "hsl(0, 0%, 75%)",
     "--WindowMenuFontSize": "16px",
+    "--WindowMenuNavBkgr": "hsla(0, 0%, 0%, 0)",
+    "--WindowMenuNavBkgrInactive": "hsla(0, 0%, 0%, 0)",
     "--WindowMenuNavButtonBkgr": "hsla(0, 0%, 18%, 0.95)",
     "--WindowMenuNavButtonColor": "hsl(0, 0%, 75%)",
     "--WindowMenuNavButtonBorderColor": "hsl(0, 0%, 50%)",

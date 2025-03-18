@@ -21,8 +21,7 @@ export const MenuPreview = () => {
                 <nav
                     className="appMenuBar"
                     style={{
-                        color: "var(--WindowTopBarFontColor)",
-                        backgroundColor: "var(--WindowTopBarBkgrColor)"
+                        backgroundColor: "var(--WindowMenuNavBkgr)"
                     }}
                 >
                     <Fragment>
@@ -91,6 +90,20 @@ export const MenuPreview = () => {
 export const Menu = () => {
     const root = document.querySelector(":root");
 
+    const [navBkgrColor, setNavBkgrColor] = useState(
+        getComputedStyle(root).getPropertyValue("--WindowMenuNavBkgr"),
+    );
+    useEffect(() => {
+        root.style.setProperty("--WindowMenuNavBkgr", navBkgrColor);
+    }, [navBkgrColor]);
+    //----------------------------------------------------------------------------//
+    const [navBkgrColorInactive, setNavBkgrColorInactive] = useState(
+        getComputedStyle(root).getPropertyValue("--WindowMenuNavBkgrInactive"),
+    );
+    useEffect(() => {
+        root.style.setProperty("--WindowMenuNavBkgrInactive", navBkgrColorInactive);
+    }, [navBkgrColorInactive]);
+    //----------------------------------------------------------------------------//
     const [backgroundColor, setBackgroundColor] = useState(
         getComputedStyle(root).getPropertyValue("--WindowMenuBkgr"),
     );
@@ -216,7 +229,7 @@ export const Menu = () => {
     return (
         <>
             <fieldset>
-                <legend>Font</legend>
+                <legend>Global</legend>
                 <div>
                     <label>Font Size:</label>
                     <input
@@ -226,6 +239,25 @@ export const Menu = () => {
                         step="1"
                         value={fontSize}
                         onChange={(e) => setFontSize(e.target.value)}
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Navigation Bar</legend>
+                <div>
+                    <label>Nav Bar Background:</label>
+                    <ColorPicker
+                        color={navBkgrColor}
+                        setColor={setNavBkgrColor}
+                        useAlpha={true}
+                    />
+                </div>
+                <div>
+                    <label>Nav Bar Background Inactive:</label>
+                    <ColorPicker
+                        color={navBkgrColorInactive}
+                        setColor={setNavBkgrColorInactive}
+                        useAlpha={true}
                     />
                 </div>
             </fieldset>

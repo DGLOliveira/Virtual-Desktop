@@ -52,8 +52,7 @@ export const AppMenuBar = ({ isSelected, setAction, appMenu }) => {
         <nav 
         className="appMenuBar" 
         style={{
-            color: isSelected ? "var(--WindowTopBarFontColor)" : "var(--WindowTopBarFontColorInactive)",
-            backgroundColor: isSelected ? "var(--WindowTopBarBkgrColor)": "var(--WindowTopBarBkgrColorInactive)"}}
+            backgroundColor: isSelected ? "var(--WindowMenuNavBkgr)": "var(--WindowMenuNavBkgrInactive)"}}
         onBlur={(e) => handleBlur(e)}
         >
             {Object.keys(appMenu).map((name, index) => (
