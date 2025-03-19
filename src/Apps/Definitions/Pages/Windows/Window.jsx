@@ -7,8 +7,9 @@ import {
   FaWindowMaximize,
 } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import { RiCloseLargeLine } from "react-icons/ri";
 
-import {ThemeContext} from "../../../../System/ThemeManager/context.jsx";
+import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 
@@ -53,6 +54,19 @@ export const WindowPreview = () => {
               <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed ">
                 <AiOutlineClose />
               </button></>}
+          {themeContext.topBarIconTheme === "Classic" && (
+            <>
+              <button className="appTopBarButtonClassic">
+                <FaWindowMaximize />
+              </button>
+              <button className="appTopBarButtonClassic">
+                <FaRegWindowMinimize />
+              </button>
+              <button className="appTopBarButtonClassic ">
+                <RiCloseLargeLine />
+              </button>
+            </>
+          )}
         </app-top-bar>
         <app-container></app-container>
       </app-window>
@@ -91,7 +105,20 @@ export const WindowPreview = () => {
               </button>
               <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed">
                 <AiOutlineClose />
-              </button></>}
+              </button></>
+          }{themeContext.topBarIconTheme === "Classic" && (
+            <>
+              <button className="appTopBarButtonClassic">
+                <FaWindowMaximize />
+              </button>
+              <button className="appTopBarButtonClassic">
+                <FaRegWindowMinimize />
+              </button>
+              <button className="appTopBarButtonClassic ">
+                <RiCloseLargeLine />
+              </button>
+            </>
+          )}
         </app-top-bar>
         <app-container></app-container>
       </app-window>
@@ -185,7 +212,7 @@ export const Window = () => {
     root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
     root.style.setProperty("--WindowTopBarBkgrColor", topbarBkgColor);
     root.style.setProperty("--WindowTopBarHeight", topBarHeight + "px");
-    root.style.setProperty("--WindowTopBarBkgrColorInactive",inactiveTopBarBkgColor);
+    root.style.setProperty("--WindowTopBarBkgrColorInactive", inactiveTopBarBkgColor);
     root.style.setProperty("--WindowTopBarIconSize", topBarIconSize + "px");
     root.style.setProperty("--WindowBorderWidth", borderWidth + "px");
     root.style.setProperty("--WindowBorderRadius", borderRadius + "px");
@@ -239,24 +266,24 @@ export const Window = () => {
               <option key={backgroundFX} value={backgroundFX}>
                 {backgroundFX}
               </option>
-          ))}
+            ))}
           </select>
         </div>
         <fieldset>
           <legend>Top Bar</legend>
-        <div>
-          <label>Icon Theme:</label>
-          <select
-            value={themeContext.topBarIconTheme}
-            onChange={(e) => themeContext.setTopBarIconTheme(e.target.value)}
-          >
-            {themeContext.topBarIconThemeList.map((iconTheme) => (
-              <option key={iconTheme} value={iconTheme}>
-                {iconTheme}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div>
+            <label>Icon Theme:</label>
+            <select
+              value={themeContext.topBarIconTheme}
+              onChange={(e) => themeContext.setTopBarIconTheme(e.target.value)}
+            >
+              {themeContext.topBarIconThemeList.map((iconTheme) => (
+                <option key={iconTheme} value={iconTheme}>
+                  {iconTheme}
+                </option>
+              ))}
+            </select>
+          </div>
           <div>
             <label>Direction:</label>
             <select
@@ -464,7 +491,7 @@ export const Window = () => {
         </fieldset>
         <fieldset>
           <legend>Inactive Window</legend>
-          
+
           <div>
             <label>Top Bar Background Color: </label>
             <ColorPicker

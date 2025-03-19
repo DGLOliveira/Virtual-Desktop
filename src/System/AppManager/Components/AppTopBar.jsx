@@ -8,6 +8,7 @@ import {
     FaWindowMaximize,
 } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import { RiCloseLargeLine } from "react-icons/ri";
 import { AppIcon } from "./AppIcon.jsx";
 import "../Styles/TopBar.css";
 
@@ -180,6 +181,43 @@ export const AppTopBar = ({ appName, setAction }) => {
                         )}
                         title="Close (Ctrl + Shift + F4)"
                     >x</button>
+                </>
+            )}
+            {themeContext.topBarIconTheme === "Classic" && (
+                <>
+                {appContext.apps[appName].State.isMaximized ? (
+                    <button
+                        className="appTopBarButtonClassic"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMaximized(appName)
+                        )}
+                        title="Restore (Alt + ⇩)">
+                        <FaWindowRestore />
+                    </button>
+                ) : (
+                    <button
+                        className="appTopBarButtonClassic"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMaximized(appName)
+                        )}
+                        title="Maximize (Alt + ⇧)">
+                        <FaWindowMaximize />
+                    </button>
+                )}
+                    <button
+                        className="appTopBarButtonClassic"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMinimized(appName)
+                        )}
+                        title="Minimize (Alt + ⇩)"
+                    ><FaRegWindowMinimize /></button>
+                    <button
+                        className="appTopBarButtonClassic "
+                        onClick={(e) => (
+                            e.stopPropagation(), setAction("Close")
+                        )}
+                        title="Close (Ctrl + Shift + F4)"
+                    ><RiCloseLargeLine /></button>
                 </>
             )}
         </app-top-bar>
