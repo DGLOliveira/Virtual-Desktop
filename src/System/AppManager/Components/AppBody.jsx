@@ -65,7 +65,10 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
               appDialog={appDialog}
             />
           }
-          <app-container>
+          <app-container
+          style={{
+            color: isSelected ? "var(--WindowFontColor)" : "var(--WindowFontColorInactive)",
+          }}>
             <App {...appProps} />
           </app-container>
         </Suspense>

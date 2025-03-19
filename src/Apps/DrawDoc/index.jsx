@@ -21,6 +21,7 @@ export default function DrawDoc(props) {
   const contextMenu = props.contextMenu;
   const canClose = props.canClose;
   const setCanClose = props.setCanClose;
+  const isSelected = props.isSelected;
 
   const context = useContext(Context);
 
@@ -41,6 +42,7 @@ export default function DrawDoc(props) {
           <ToolBar
             setAction={setAction}
             contextMenu={contextMenu}
+            isSelected={isSelected}
           />
           <canvas-container>
             <DrawCanvas

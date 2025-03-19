@@ -3,8 +3,17 @@ button>label {
   cursor: pointer;
 }
 
+#drawDocTopNavBar {
+  color:inherit;
+}
+
+#drawDocTopNavBar>button:enabled {
+  color:inherit;
+}
+
 #drawDocToolBar {
   display: flex;
+  color:inherit;
   flex-direction: column;
   height: 100%;
   width: 30px;
@@ -12,6 +21,7 @@ button>label {
 }
 
 #drawDocToolBar>button {
+  color:inherit;
   font-size: 25px;
 }
 
@@ -51,6 +61,7 @@ canvas-container>textarea {
 }
 
 #drawDocBottomNavBar {
+  color: inherit;
   border-top: 1px var(--GeneralBorderColor) solid;
 }
 

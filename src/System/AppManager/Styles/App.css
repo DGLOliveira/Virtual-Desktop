@@ -19,10 +19,10 @@ app-container>nav {
     height: auto;
     width: 100%;
     font-size: 25px;
-    color: var(--WindowTopBarFontColor);
-    background-color: var(--WindowTopBarBkgrColor);
+    color: var(--WindowMenuNavButtonColor);
+    background-color: var(----WindowMenuNavBkgr);
     padding-left: 0;
-    border-bottom: 1px var(--GeneralBorderColor) solid;
+    border-bottom: 1px var(--WindowMenuNavButtonBorderColor) solid;
 }
 
 app-container>nav>button {

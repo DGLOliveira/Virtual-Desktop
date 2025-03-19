@@ -32,7 +32,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
 
   if (context.view.topNavBar) {
     return (
-      <nav onContextMenu={(event) => handleContextMenu(event)}>
+      <nav id="drawDocTopNavBar" onContextMenu={(event) => handleContextMenu(event)}>
         <button onClick={() => setAction("Undo")} disabled={!context.history.canUndo}>
           <BiUndo title="Undo" />
         </button>

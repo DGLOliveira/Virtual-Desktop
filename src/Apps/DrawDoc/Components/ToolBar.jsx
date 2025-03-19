@@ -12,7 +12,7 @@ import { RxLetterCaseCapitalize } from "react-icons/rx";
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
 import { LuBoxSelect } from "react-icons/lu";
 
-export const ToolBar = ({ setAction, contextMenu }) => {
+export const ToolBar = ({ setAction, contextMenu, isSelected }) => {
     const context = useContext(Context);
     const tool = context.tool;
     const subTool = context.subTool;
@@ -26,7 +26,7 @@ export const ToolBar = ({ setAction, contextMenu }) => {
         Pipette: <CgColorPicker title="Color Picker" />,
         Magnifier: <HiOutlineMagnifyingGlass title="Zoom" />,
         Select: <LuBoxSelect title="Selection" />,
-        Shape: <SubToolIcon subtool={subTool} />,
+        Shape: <SubToolIcon subtool={subTool} isSelected={isSelected}/>,
     };
     const handleContextMenu = (event) => {
         event.preventDefault();
