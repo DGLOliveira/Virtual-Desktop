@@ -1,6 +1,7 @@
 .FileViewerControls{
     align-items: center;
     justify-content: space-between;
+    color:inherit;
 }
 .FileViewerControls>div{
     display: flex;
@@ -10,6 +11,13 @@
     justify-content: center;
     padding-left: 5px;
     padding-right: 5px;
+    color:inherit;
+}
+.FileViewerControls>div>button:enabled{
+    color:inherit;
+}
+.FileViewerControls>div>*>*{
+    color:inherit;
 }
 .FileViewerControls>div:first-child{
     justify-content: start;
@@ -43,6 +51,8 @@
     align-items: center;
     width: 10vh;
     min-height: 10vh;
+    margin:2px;
+    padding:2px;
     overflow: hidden;
 }
 .FileViewerContent>div:hover{

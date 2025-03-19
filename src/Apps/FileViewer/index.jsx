@@ -8,13 +8,9 @@ export default function FileViewer(props) {
 
     return (
         <Provider>
-            <app-container>
                 <NavigationBar />
                 {/*Coming Soon... <ToolBar />*/}
-                <app-body>
                     <Content />
-                </app-body>
-            </app-container>
         </Provider>
 
     )
