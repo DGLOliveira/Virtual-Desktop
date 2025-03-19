@@ -11,6 +11,10 @@ button>label {
   color:inherit;
 }
 
+#drawDocTopNavBar>*>button:enabled {
+  color:inherit;
+}
+
 #drawDocToolBar {
   display: flex;
   color:inherit;
