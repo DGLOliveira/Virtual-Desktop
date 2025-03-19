@@ -15,6 +15,11 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                 setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");
                 setButtonClassClose("appDialogButtonAqua appDialogButtonAquaRed");
                 break;
+            case "Classic":
+                setButtonClassNeutral("appDialogButtonClassic");
+                setButtonClassSuggested("appDialogButtonClassic");
+                setButtonClassClose("appDialogButtonClassic");
+                break;
             default:
                 setButtonClassNeutral("appDialogButtonFluent");
                 setButtonClassSuggested("appDialogButtonFluent");

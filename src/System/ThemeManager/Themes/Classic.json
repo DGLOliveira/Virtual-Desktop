@@ -82,7 +82,7 @@
     "--DialogButtonFontColor": "hsl(0, 0%, 0%)",
     "--DialogButtonFontSize": "12px",
     "--DialogButtonBorderColor": "hsl(0, 0%, 85%)",
-    "--DialogButtonBorderWidth": "3px",
+    "--DialogButtonBorderWidth": "2px",
     "--DialogButtonBorderRadius": "0px",
     "--DialogButtonBorderType": "outset",
 
