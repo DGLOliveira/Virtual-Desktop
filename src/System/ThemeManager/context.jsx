@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import Aqua from "./Themes/Aqua.json";
 import Default from "./Themes/Default.json";
 import Classic from "./Themes/Classic.json";
+import Aero from "./Themes/Aero.json";
 
 export const ThemeContext = createContext({
     theme: "",
@@ -24,18 +25,18 @@ export const ThemeContext = createContext({
 export function ThemeProvider({ children }) {
 
     const [theme, setTheme] = useState("Default");
-    const themeList = ["Default", "Aqua", "Classic"];
+    const themeList = ["Default", "Aero", "Aqua", "Classic"];
 
     const [topBarIconTheme, setTopBarIconTheme] = useState("Default");
-    const topBarIconThemeList = ["Default", "Aqua", "Classic"];
+    const topBarIconThemeList = ["Default", "Aero", "Aqua", "Classic"];
 
     const [dialogButtonTheme, setDialogButtonTheme] = useState("Default");
-    const dialogButtonThemeList = ["Default", "Aqua", "Classic"];
+    const dialogButtonThemeList = ["Default", "Aero", "Aqua", "Classic"];
 
     const [windowBackgroundFX, setWindowBackgroundFX] = useState("none");
     const [dialogBackgroundFX, setDialogBackgroundFX] = useState("none");
 
-    const backgroundFXList = ["None", "Metallic"];
+    const backgroundFXList = ["None", "Metallic", "Translucent"];
     const MetallicFX = {
         BkgrImage: "var(--MetallicFXBkgrImage)",
         BkgrPosition: "var(--MetallicFXBkgrPosition)",
@@ -78,6 +79,13 @@ export function ThemeProvider({ children }) {
                 setDialogButtonTheme("Aqua");
                 setWindowBackgroundFX("Metallic");
                 setDialogBackgroundFX("Metallic");
+                break;
+            case "Aero":
+                Object.keys(Aero).forEach((key) => changeRootStyle(key, Aero[key]));
+                setTopBarIconTheme("Aero");
+                setDialogButtonTheme("Aero");
+                setWindowBackgroundFX("Translucent");
+                setDialogBackgroundFX("Translucent");
                 break;
             default:
                 Object.keys(Default).forEach((key) => changeRootStyle(key, Default[key]));
