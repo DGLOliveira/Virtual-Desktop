@@ -36,13 +36,6 @@ export const WindowPreview = () => {
           }}>
           <FcGlobe />
           <h1>Inactive</h1>
-          {themeContext.topBarIconTheme === "Aqua" && (
-            <>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
-            </>
-          )}
           {themeContext.topBarIconTheme === "Default" &&
             <>
               <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
@@ -53,8 +46,28 @@ export const WindowPreview = () => {
               </button>
               <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed ">
                 <AiOutlineClose />
-              </button></>}
-          {themeContext.topBarIconTheme === "Classic" && (
+              </button></>
+            }
+          {themeContext.topBarIconTheme === "Aero" && 
+            <>
+            <button className="appTopBarButtonAero appTopBarButtonAeroMinimize">
+              <FaRegWindowMinimize />
+            </button>
+            <button className="appTopBarButtonAero appTopBarButtonAeroMaximize">
+              <FaWindowMaximize />
+            </button>
+            <button className="appTopBarButtonAero appTopBarButtonAeroClose ">
+              <AiOutlineClose />
+            </button></>
+          }
+          {themeContext.topBarIconTheme === "Aqua" && 
+            <>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
+            </>
+          }
+          {themeContext.topBarIconTheme === "Classic" && 
             <>
               <button className="appTopBarButtonClassic">
                 <FaWindowMaximize />
@@ -66,7 +79,7 @@ export const WindowPreview = () => {
                 <RiCloseLargeLine />
               </button>
             </>
-          )}
+          }
         </app-top-bar>
         <app-container></app-container>
       </app-window>
@@ -88,13 +101,6 @@ export const WindowPreview = () => {
           }}>
           <FcGlobe />
           <h1>Active</h1>
-          {themeContext.topBarIconTheme === "Aqua" && (
-            <>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
-            </>
-          )}
           {themeContext.topBarIconTheme === "Default" &&
             <>
               <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
@@ -106,7 +112,27 @@ export const WindowPreview = () => {
               <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed">
                 <AiOutlineClose />
               </button></>
-          }{themeContext.topBarIconTheme === "Classic" && (
+          }
+          {themeContext.topBarIconTheme === "Aero" && 
+            <>
+            <button className="appTopBarButtonAero appTopBarButtonAeroMinimize">
+              <FaRegWindowMinimize />
+            </button>
+            <button className="appTopBarButtonAero appTopBarButtonAeroMaximize">
+              <FaWindowMaximize />
+            </button>
+            <button className="appTopBarButtonAero appTopBarButtonAeroClose ">
+              <AiOutlineClose />
+            </button></>
+          }
+          {themeContext.topBarIconTheme === "Aqua" && 
+            <>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
+              <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
+            </>
+          }
+          {themeContext.topBarIconTheme === "Classic" && 
             <>
               <button className="appTopBarButtonClassic">
                 <FaWindowMaximize />
@@ -118,7 +144,7 @@ export const WindowPreview = () => {
                 <RiCloseLargeLine />
               </button>
             </>
-          )}
+          }
         </app-top-bar>
         <app-container></app-container>
       </app-window>
