@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import{useState, useEffect, useContext} from "react";
+import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "../../ThemeManager/context";
 import "../Styles/Dialog.css";
 
@@ -9,7 +9,12 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
     const [buttonClassSuggested, setButtonClassSuggested] = useState("appDialogButtonFluent");
     const [buttonClassClose, setButtonClassClose] = useState("appDialogButtonFluent buttonActiveRed");
     useEffect(() => {
-        switch(theme.dialogButtonTheme) {
+        switch (theme.dialogButtonTheme) {
+            case "Aero":
+                setButtonClassNeutral("appDialogButtonAero");
+                setButtonClassSuggested("appDialogButtonAero");
+                setButtonClassClose("appDialogButtonAero");
+                break;
             case "Aqua":
                 setButtonClassNeutral("appDialogButtonAqua appDialogButtonAquaNeutral");
                 setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");
@@ -26,17 +31,17 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                 setButtonClassClose("appDialogButtonFluent buttonActiveRed");
                 break;
         }
-    },[theme.dialogButtonTheme]);
+    }, [theme.dialogButtonTheme]);
 
     const setButtonClass = (name) => {
-        switch(name){
-         case "Close":
-            return buttonClassClose;
-        case "Save":
-        case "Ok":
-            return buttonClassSuggested;
-        default:
-            return buttonClassNeutral;
+        switch (name) {
+            case "Close":
+                return buttonClassClose;
+            case "Save":
+            case "Ok":
+                return buttonClassSuggested;
+            default:
+                return buttonClassNeutral;
         }
     }
 
@@ -51,15 +56,15 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                         {appDialog.info}
                     </app-dialog-info>
                     <app-dialog-actions>
-                        {Object.keys(appDialog.actions).map((name, index) => 
-                            <button 
-                            key={index}
-                            className={setButtonClass(name)}
-                            onClick={appDialog.actions[name]}
+                        {Object.keys(appDialog.actions).map((name, index) =>
+                            <button
+                                key={index}
+                                className={setButtonClass(name)}
+                                onClick={appDialog.actions[name]}
                             >
                                 {name}
                             </button>
-                            )}
+                        )}
                     </app-dialog-actions>
                 </app-dialog>
                 , document.body)}

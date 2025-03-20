@@ -12,6 +12,11 @@ export const DialogPreview = () => {
   const [buttonClassClose, setButtonClassClose] = useState("appDialogButtonFluent buttonActiveRed");
   useEffect(() => {
     switch (themeContext.dialogButtonTheme) {
+      case "Aero":
+        setButtonClassNeutral("appDialogButtonAero");
+        setButtonClassSuggested("appDialogButtonAero");
+        setButtonClassClose("appDialogButtonAero");
+        break;
       case "Aqua":
         setButtonClassNeutral("appDialogButtonAqua appDialogButtonAquaNeutral");
         setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");

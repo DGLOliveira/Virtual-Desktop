@@ -55,12 +55,62 @@ app-dialog>app-dialog-actions>button {
     cursor: pointer;
 }
 
+app-dialog-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    width: 100%;
+    font-size: var(--DialogTopBarFontSize);
+    color: var(--DialogTopBarFontColor);
+    background: var(--DialogTopBarBkgr);
+    user-select: none;
+}
+
+/*------------------------------------------------------------*/
+/*----------------------Fluent Buttons------------------------*/
+/*------------------------------------------------------------*/
+
 .appDialogButtonFluent {
     background: var(--DialogButtonBkgr);
     font-size: var(--DialogButtonFontSize);
     border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) var(--DialogButtonBorderType);
     border-radius: var(--DialogButtonBorderRadius);
 }
+
+
+/*------------------------------------------------------------*/
+/*------------------------Aero Buttons------------------------*/
+/*------------------------------------------------------------*/
+
+.appDialogButtonAero{
+    background-color: var(--DialogButtonBkgr);
+    background-image: linear-gradient(hsla(0, 0%, 100%, 0.2)0% 40%, hsla(0, 0%, 0%, 0.2) 60% 100%);
+    font-size: var(--DialogButtonFontSize);
+    border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) var(--DialogButtonBorderType);
+    border-radius: var(--DialogButtonBorderRadius);
+    box-shadow: 0 0 2px 0 hsla(0, 0%, 100%, 1) inset;
+    padding-left:10px;
+    padding-right:10px;
+    min-width: 50px;
+    transition: 0.2s;
+}
+
+.appDialogButtonAero:hover:enabled {
+    background-color: var(--DialogButtonBkgr);  
+    background-image: linear-gradient(hsla(190, 100%, 80%, 0.2) 0% 40%, hsla(190, 100%, 20%, 0.2) 60% 100%);
+    box-shadow: 0 0 3px 2px hsla(190, 100%, 70%, 1) inset;
+}
+
+.appDialogButtonAero:active:enabled {
+    background-color: var(--DialogButtonBkgr);  
+    background-image: linear-gradient(hsla(190, 100%, 70%, 0) 0% 40%, hsla(190, 100%, 30%, 0) 60% 100%);
+    box-shadow: 0 0 3px 2px hsla(190, 100%, 70%, 1) inset;
+}
+
+/*------------------------------------------------------------*/
+/*------------------------Aqua Buttons------------------------*/
+/*------------------------------------------------------------*/
 
 .appDialogButtonAqua {
     font-size: var(--DialogButtonFontSize);
@@ -190,6 +240,10 @@ app-dialog>app-dialog-actions>button {
     box-shadow: inset 0 0 20px 0 hsla(0, 0%, 100%, 0.8);
 }
 
+/*------------------------------------------------------------*/
+/*---------------------Classic Buttons------------------------*/
+/*------------------------------------------------------------*/
+
 .appDialogButtonClassic {
     display: flex;
     background: var(--DialogButtonBkgr);
@@ -212,16 +266,4 @@ app-dialog>app-dialog-actions>button {
     color: var(--DialogButtonFontColor);
     background: var(--DialogButtonBkgr);
     border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) inset;
-}
-
-app-dialog-top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    width: 100%;
-    font-size: var(--DialogTopBarFontSize);
-    color: var(--DialogTopBarFontColor);
-    background: var(--DialogTopBarBkgr);
-    user-select: none;
 }
