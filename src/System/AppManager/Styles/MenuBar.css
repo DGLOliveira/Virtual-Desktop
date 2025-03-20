@@ -1,14 +1,17 @@
-app-window>nav {
+.appMenuBar {
     position: relative;
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
+}
+
+app-window>.appMenuBar {
     margin-left: var(--WindowPadding);
     margin-right: var(--WindowPadding);
     margin-bottom: var(--WindowPadding);
 }
 
-app-window>nav>button {
+.appMenuBar>button {
     font-size: var(--WindowMenuFontSize);
     background-color: var(--WindowMenuNavButtonBkgrColor);
     color: var(--WindowMenuNavButtonColor);
@@ -16,7 +19,7 @@ app-window>nav>button {
     border-radius: var(--WindowMenuNavButtonBorderRadius);
 }
 
-app-window>nav>button:hover:enabled {
+.appMenuBar>button:hover:enabled {
     color: var(--WindowMenuNavButtonHoverColor);
     background: var(--WindowMenuNavButtonHoverBkgr);
 }
@@ -73,4 +76,5 @@ drop-down>ul>li>hr{
     border-left: none;
     border-right: none;
     border-top: var(--WindowMenuBorderColor) max(var(--WindowMenuBorderWidth), 1px) solid;
+    font-size: 5px;
 }

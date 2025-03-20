@@ -5,83 +5,89 @@ import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPi
 
 
 export const MenuPreview = () => {
+    const theme = useContext(ThemeContext);
+    const NavMenu = () => <nav
+        className="appMenuBar"
+        style={{
+            backgroundColor: "var(--WindowMenuNavBkgr)"
+        }}
+    >
+        <Fragment>
+            <drop-down>
+                <ul>
+                    <li>
+                        <button>
+                            <div>Button</div>
+                            <span />
+                            <kbd>keybind</kbd>
+                        </button>
+                    </li>
+                    <li>
+                        <button disabled>
+                            <div>Disabled Button</div>
+                            <span />
+                            <kbd>keybind</kbd>
+                        </button>
+                    </li>
+                    <li>
+                        <hr />
+                    </li>
+                    <li>
+                        <button>
+                            <div>Checkbox</div>
+                            <span />
+                            <input type="checkbox" />
+                        </button>
+                    </li>
+                    <li>
+                        <hr />
+                    </li>
+                    <li>
+                        <button>
+                            <div>Checkbox 1</div>
+                            <span />
+                            <input type="radio" name="radio" />
+                        </button>
+                    </li>
+                    <li>
+                        <button>
+                            <div>Checkbox 2</div>
+                            <span />
+                            <input type="radio" name="radio" />
+                        </button>
+                    </li>
+                </ul>
+            </drop-down>
+            <button>
+                Menu 1
+            </button>
+        </Fragment>
+        <button>
+            Menu 3
+        </button>
+        <button>
+            Menu 4
+        </button>
+    </nav>;
+
     return (
         <>
             <app-window
                 style={{
                     position: "absolute",
-                    top: "0",
-                    left: "0",
+                    top: "0px",
+                    left: "0px",
                     width: "80%",
                     height: "100%",
-                    backgroundColor: "var(--WindowBkgrColor)"
+                    backgroundColor: "var(--WindowBkgrColor)",
+                    paddingTop: "var(--WindowPadding)",
                 }}
                 className="app"
             >
-                <nav
-                    className="appMenuBar"
-                    style={{
-                        backgroundColor: "var(--WindowMenuNavBkgr)"
-                    }}
-                >
-                    <Fragment>
-                        <drop-down>
-                            <ul>
-                                <li>
-                                    <button>
-                                        <div>Button</div>
-                                        <span />
-                                        <kbd>keybind</kbd>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button disabled>
-                                        <div>Disabled Button</div>
-                                        <span />
-                                        <kbd>keybind</kbd>
-                                    </button>
-                                </li>
-                                <li>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <button>
-                                        <div>Checkbox</div>
-                                        <span />
-                                        <input type="checkbox" />
-                                    </button>
-                                </li>
-                                <li>
-                                    <hr />
-                                </li>
-                                <li>
-                                    <button>
-                                        <div>Checkbox 1</div>
-                                        <span />
-                                        <input type="radio" name="radio" />
-                                    </button>
-                                </li>
-                                <li>
-                                    <button>
-                                        <div>Checkbox 2</div>
-                                        <span />
-                                        <input type="radio" name="radio" />
-                                    </button>
-                                </li>
-                            </ul>
-                        </drop-down>
-                        <button>
-                            Menu 1
-                        </button>
-                    </Fragment>
-                    <button>
-                        Menu 3
-                    </button>
-                    <button>
-                        Menu 4
-                    </button>
-                </nav>
-                <app-container></app-container>
+                {theme.navMenuLocation === "in top bar" && <NavMenu/>}
+                <app-container>
+                    {theme.navMenuLocation === "in app" && <NavMenu/>}
+                </app-container>
             </app-window>
         </>
     );
@@ -89,7 +95,7 @@ export const MenuPreview = () => {
 
 export const Menu = () => {
     const root = document.querySelector(":root");
-
+    const theme = useContext(ThemeContext);
     const [navBkgrColor, setNavBkgrColor] = useState(
         getComputedStyle(root).getPropertyValue("--WindowMenuNavBkgr"),
     );
@@ -240,6 +246,17 @@ export const Menu = () => {
                         value={fontSize}
                         onChange={(e) => setFontSize(e.target.value)}
                     />
+                </div>
+                <div>
+                    <label>Position:</label>
+                    <select 
+                    value={theme.navMenuLocation} 
+                    onChange={(e) => theme.setNavMenuLocation(e.target.value)}
+                    >
+                        {theme.navMenuLocationList.map((location) => (
+                            <option value={location}>{location}</option>
+                        ))}
+                    </select>
                 </div>
             </fieldset>
             <fieldset>

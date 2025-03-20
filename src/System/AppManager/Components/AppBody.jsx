@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, useCallback, Suspense, lazy } from "react";
 import { ContextMenuContext } from "../../ContextMenuManager/context.jsx";
+import { ThemeContext } from "../../ThemeManager/context.jsx";
 import { AppMenuBar } from "./AppMenuBar.jsx";
 import { AppDialog } from "./AppDialog.jsx";
 import { AppTopBar } from "./AppTopBar.jsx";
@@ -10,6 +11,7 @@ import "../Styles/App.css";
 
 export const AppBody = ({ appName, isSelected, setClose }) => {
   const contextMenu = useContext(ContextMenuContext);
+  const theme = useContext(ThemeContext);
   const [appMenu, setAppMenu] = useState(null);
   const [appDialog, setAppDialog] = useState(null);
   const [canClose, setCanClose] = useState(true);
@@ -51,7 +53,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
       />
       <ErrorBoundary fallback={<ErrorMessage errorMessage={"Something went wrong while loading the App"} />}>
         <Suspense fallback={<Loading message={"App"} />}>
-          {appMenu &&
+          {appMenu && theme.navMenuLocation === "in top bar" &&
             <AppMenuBar
               isSelected={isSelected}
               action={action}
@@ -69,6 +71,13 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
           style={{
             color: isSelected ? "var(--WindowFontColor)" : "var(--WindowFontColorInactive)",
           }}>
+          {appMenu && theme.navMenuLocation === "in app" &&
+            <AppMenuBar
+              isSelected={isSelected}
+              action={action}
+              setAction={setAction}
+              appMenu={appMenu}
+            />}
             <App {...appProps} />
           </app-container>
         </Suspense>
