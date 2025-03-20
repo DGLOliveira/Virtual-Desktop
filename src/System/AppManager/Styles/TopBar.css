@@ -30,6 +30,10 @@ app-top-bar>svg {
     flex-shrink: 0;
 }
 
+/*--------------------------------------------------------------*/
+/*------------------------Fluent Buttons------------------------*/
+/*--------------------------------------------------------------*/
+
 .appTopBarButtonFluent {
     display: flex;
     flex-direction: column;
@@ -62,47 +66,72 @@ app-top-bar>svg {
     color: var(--WindowFontColor);
 }
 
-/*
-.appTopBarButtonNewAqua {
+/*------------------------------------------------------------*/
+/*------------------------Aero Buttons------------------------*/
+/*------------------------------------------------------------*/
+
+.appTopBarButtonAero{
+    position: relative;
     display: flex;
-    flex-direction: column;
-    border: 2px rgba(128, 128, 128, 0.5) solid;
-    border-radius: 50%;
-    outline: none;
-    justify-content: center;
-    align-items: center;
-    color: transparent;
+    top: calc(-1 * var(--WindowTopBarIconSize)/4);
+    color: var(--GeneralButtonFontColor);
     font-family: inherit;
     background: none;
-    margin: 1px;
+    margin:0;
     transition: 0.2s;
     cursor: pointer;
-    height: calc(var(--WindowTopBarIconSize)/3);
-    width: calc(var(--WindowTopBarIconSize)/3);
-    flex-shrink: 0;
-    margin-right: calc(var(--WindowTopBarIconSize)/4);
-    padding: 2px;
+    box-shadow: 0px 0px 0px 1px hsla(0, 0%, 100%, 0.5) inset;
 }
 
-.appTopBarButtonNewAqua>* {
-    color: transparent;
+.appTopBarButtonAero:hover:enabled{
+    background: hsla(0, 0%, 100%, 0.25);
 }
 
-.appTopBarButtonNewAqua:hover {
-    color: black;
+.appTopBarButtonAero:active:enabled{
+    background: hsla(0, 0%, 100%, 0.4);
 }
 
-.appTopBarButtonNewAquaRed {
-    background: red;
+.appTopBarButtonAero>svg{
+    height: calc(var(--WindowTopBarIconSize)/2);
+    width: calc(var(--WindowTopBarIconSize)/2);
+    margin:3px;
+    margin-left: 8px;
+    margin-right:8px;
 }
 
-.appTopBarButtonNewAquaYellow {
-    background: yellow;
+.appTopBarButtonAeroMinimize{
+    border:1px solid black;
+    border-radius: 0 0 0 5px;
+    box-shadow:  0px 0px 0px 1px hsla(0, 0%, 100%, 0.5) inset, -1px 1px 0px 0px hsla(0, 0%, 100%, 0.5);
 }
 
-.appTopBarButtonNewAquaGreen {
-    background: green;
-}*/
+.appTopBarButtonAeroMaximize{
+    border-bottom:1px solid black;
+    box-shadow:  0px 0px 0px 1px hsla(0, 0%, 100%, 0.5) inset, 0px 1px 0px 0px hsla(0, 0%, 100%, 0.5);
+}
+
+.appTopBarButtonAeroMaximize>svg{
+    margin-left: 10px;
+    margin-right:10px;
+}
+
+.appTopBarButtonAeroClose{
+    border:1px solid black;
+    border-radius: 0 0 5px 0;
+    box-shadow:  0px 0px 0px 1px hsla(0, 0%, 100%, 0.5) inset, 1px 1px 0px 0px hsla(0, 0%, 100%, 0.5);
+}
+
+.appTopBarButtonAeroClose:hover:enabled{
+    background: hsla(0, 100%, 50%, 1);
+}
+
+.appTopBarButtonAeroClose:active:enabled{
+    background: hsla(0, 100%, 75%, 1);
+}
+
+/*------------------------------------------------------------*/
+/*------------------------Aqua Buttons------------------------*/
+/*------------------------------------------------------------*/
 
 .appTopBarButtonAqua {
     position: relative;
@@ -250,6 +279,10 @@ app-top-bar>svg {
     background-position: top, bottom center, bottom left, bottom right, center;
     background-repeat: no-repeat;
 }
+
+/*---------------------------------------------------------------*/
+/*------------------------Classic Buttons------------------------*/
+/*---------------------------------------------------------------*/
 
 .appTopBarButtonClassic {
     display: flex;

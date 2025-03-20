@@ -158,6 +158,43 @@ export const AppTopBar = ({ appName, setAction }) => {
                         title="Close (Ctrl + Shift + F4)">
                         <AiOutlineClose />
                     </button></>}
+            {themeContext.topBarIconTheme === "Aero" && (
+                <>
+                    <button
+                        className="appTopBarButtonAero appTopBarButtonAeroMinimize"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMinimized(appName)
+                        )}
+                        title="Minimize (Alt + ⇩)"
+                    ><FaRegWindowMinimize /></button>
+                {appContext.apps[appName].State.isMaximized ? (
+                    <button
+                        className="appTopBarButtonAero appTopBarButtonAeroMaximize"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMaximized(appName)
+                        )}
+                        title="Restore (Alt + ⇩)">
+                        <FaWindowRestore />
+                    </button>
+                ) : (
+                    <button
+                        className="appTopBarButtonAero appTopBarButtonAeroMaximize"
+                        onClick={(e) => (
+                            e.stopPropagation(), appContext.switchMaximized(appName)
+                        )}
+                        title="Maximize (Alt + ⇧)">
+                        <FaWindowMaximize />
+                    </button>
+                )}
+                    <button
+                        className="appTopBarButtonAero appTopBarButtonAeroClose"
+                        onClick={(e) => (
+                            e.stopPropagation(), setAction("Close")
+                        )}
+                        title="Close (Ctrl + Shift + F4)"
+                    ><RiCloseLargeLine /></button>
+                </>
+            )}
             {themeContext.topBarIconTheme === "Aqua" && (
                 <>
                     <button
