@@ -12,6 +12,6 @@ app-window {
     background-position: var(--WindowBkgrPosition);
     background-size: var(--WindowBkgrSize);
     background-repeat: var(--WindowBkgrRepeat);
-    
+    backdrop-filter: var(--WindowBackdropFilter);
   }
   
