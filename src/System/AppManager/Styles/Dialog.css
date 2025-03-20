@@ -22,39 +22,6 @@ app-dialog {
     backdrop-filter: var(--DialogBackdropFilter);
 }
 
-app-dialog>app-dialog-info {
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    font-size: var(--DialogInfoFontSize);
-    color: var(--DialogInfoFontColor);
-    width: calc(100% - 2 * var(--DialogPadding));
-    height: 100%;
-    padding: 10px;
-    background-color: var(--DialogInfoBkgr);
-    border: var(--DialogInfoBorderColor) var(--DialogInfoBorderWidth) var(--DialogInfoBorderType);
-    border-radius: var(--DialogInfoBorderRadius);
-}
-
-app-dialog>app-dialog-actions {
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
-}
-
-app-dialog>app-dialog-actions>button {
-    display: flex;
-    box-sizing: border-box;
-    justify-content: center;
-    margin: 5px;
-    padding: 5px;
-    width: 100%;
-    color: var(--DialogButtonFontColor);
-    cursor: pointer;
-}
-
 app-dialog-top-bar {
     display: flex;
     align-items: center;
@@ -66,6 +33,46 @@ app-dialog-top-bar {
     background: var(--DialogTopBarBkgr);
     user-select: none;
 }
+
+app-dialog-info {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--DialogInfoFontSize);
+    color: var(--DialogInfoFontColor);
+    width: calc(100% - 2 * var(--DialogPadding));
+    height: 100%;
+    background-color: var(--DialogInfoBkgr);
+    border: var(--DialogInfoBorderColor) var(--DialogInfoBorderWidth) var(--DialogInfoBorderType);
+    border-radius: var(--DialogInfoBorderRadius);
+    overflow: hidden;
+}
+
+app-dialog-info>p{
+    margin: 10px;
+}
+
+app-dialog-actions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    background:var(--DialogButtonBarBkgr);
+}
+
+app-dialog-actions>button { 
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+    width: 100%;
+    color: var(--DialogButtonFontColor);
+    cursor: pointer;
+}
+
 
 /*------------------------------------------------------------*/
 /*----------------------Fluent Buttons------------------------*/

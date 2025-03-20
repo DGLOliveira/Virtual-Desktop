@@ -46,6 +46,15 @@ export const DialogPreview = () => {
         return buttonClassNeutral;
     }
   }
+
+  const DialogButtonsBar = () => 
+    <app-dialog-actions>
+      <button className={setButtonClass("Ok")}>Ok</button>
+      <button className={setButtonClass("Cancel")}>Cancel</button>
+      <button className={setButtonClass("Close")}>Close</button>
+    </app-dialog-actions>
+  ;
+
   return (
     <>
       <app-dialog
@@ -59,14 +68,15 @@ export const DialogPreview = () => {
         <app-dialog-top-bar>
           Dialog
         </app-dialog-top-bar>
-        <app-dialog-info>
-          Information
+        <app-dialog-info
+          style={{
+            marginBottom: themeContext.dialogButtonsLocation === "in window" ? "0px" : "var(--DialogPadding)"
+           }}
+        >
+          <p>Information</p>
+        {themeContext.dialogButtonsLocation === "in info container" && <DialogButtonsBar />}
         </app-dialog-info>
-        <app-dialog-actions>
-          <button className={setButtonClass("Ok")}>Ok</button>
-          <button className={setButtonClass("Cancel")}>Cancel</button>
-          <button className={setButtonClass("Close")}>Close</button>
-        </app-dialog-actions>
+        {themeContext.dialogButtonsLocation === "in window" && <DialogButtonsBar />}
       </app-dialog>
     </>
   );
@@ -187,6 +197,13 @@ export const Dialog = () => {
   useEffect(() => {
     root.style.setProperty("--DialogTopBarFontColor", dialogTopBarFontColor);
   }, [dialogTopBarFontColor]);
+  //----------------------------------------------------------------------------//
+  const [dialogButtonBarBkgr, setDialogButtonBarBkgr] = useState(
+    getComputedStyle(root).getPropertyValue("--DialogButtonBarBkgr"),
+  );
+  useEffect(() => {
+    root.style.setProperty("--DialogButtonBarBkgr", dialogButtonBarBkgr);
+  }, [dialogButtonBarBkgr]);
   //----------------------------------------------------------------------------//
   const [dialogButtonBkgr, setDialogButtonBkgr] = useState(
     getComputedStyle(root).getPropertyValue("--DialogButtonBkgr"),
@@ -435,6 +452,19 @@ export const Dialog = () => {
       <fieldset>
         <legend>Button</legend>
         <div>
+          <label>Location: </label>
+          <select
+            value={themeContext.dialogButtonsLocation}
+            onChange={(e) => themeContext.setDialogButtonsLocation(e.target.value)}
+          >
+            {themeContext.dialogButtonsLocationList.map((buttonLocation) => (
+              <option key={buttonLocation} value={buttonLocation}>
+                {buttonLocation}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
           <label>Theme:</label>
           <select
             value={themeContext.dialogButtonTheme}
@@ -446,6 +476,14 @@ export const Dialog = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div>
+          <label>Bar Background Color:</label>
+          <ColorPicker
+            color={dialogButtonBarBkgr}
+            setColor={setDialogButtonBarBkgr}
+            useAlpha={true}
+          />
         </div>
         <div>
           <label>Background:</label>

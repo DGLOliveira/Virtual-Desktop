@@ -78,6 +78,7 @@
     "--DialogTopBarBkgr": "hsla(242, 100%, 35%,1)",
     "--DialogTopBarFontSize": "16px",
     "--DialogTopBarFontColor": "hsl(0, 0%, 90%)",
+    "--DialogButtonBarBkgr": "hsla(0, 0%, 0%, 0)",
     "--DialogButtonBkgr": "hsl(0, 0%, 75%)",
     "--DialogButtonFontColor": "hsl(0, 0%, 0%)",
     "--DialogButtonFontSize": "12px",

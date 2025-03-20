@@ -22,6 +22,9 @@ export const ThemeContext = createContext({
     navMenuLocation: "",
     navMenuLocationList: [],
     setNavMenuLocation: () => { },
+    dialogButtonsLocation: "",
+    dialogButtonsLocationList: [],
+    setDialogButtonsLocation: () => { },
 
 });
 
@@ -35,6 +38,9 @@ export function ThemeProvider({ children }) {
 
     const [dialogButtonTheme, setDialogButtonTheme] = useState("Default");
     const dialogButtonThemeList = ["Default", "Aero", "Aqua", "Classic"];
+
+    const [dialogButtonsLocation, setDialogButtonsLocation] = useState("in window");
+    const dialogButtonsLocationList = ["in info container", "in window"];
 
     const [windowBackgroundFX, setWindowBackgroundFX] = useState("none");
     const [dialogBackgroundFX, setDialogBackgroundFX] = useState("none");
@@ -79,6 +85,7 @@ export function ThemeProvider({ children }) {
                 setWindowBackgroundFX("None");
                 setDialogBackgroundFX("None");
                 setNavMenuLocation("in app");
+                setDialogButtonsLocation("in info container");
                 break;
             case "Aqua":
                 Object.keys(Aqua).forEach((key) => changeRootStyle(key, Aqua[key]));
@@ -87,6 +94,7 @@ export function ThemeProvider({ children }) {
                 setWindowBackgroundFX("Metallic");
                 setDialogBackgroundFX("Metallic");
                 setNavMenuLocation("in top bar");
+                setDialogButtonsLocation("in window");
                 break;
             case "Aero":
                 Object.keys(Aero).forEach((key) => changeRootStyle(key, Aero[key]));
@@ -95,6 +103,7 @@ export function ThemeProvider({ children }) {
                 setWindowBackgroundFX("Translucent");
                 setDialogBackgroundFX("Translucent");
                 setNavMenuLocation("in app");
+                setDialogButtonsLocation("in info container");
                 break;
             default:
                 Object.keys(Default).forEach((key) => changeRootStyle(key, Default[key]));
@@ -103,6 +112,7 @@ export function ThemeProvider({ children }) {
                 setWindowBackgroundFX("None");
                 setDialogBackgroundFX("None");
                 setNavMenuLocation("in top bar");
+                setDialogButtonsLocation("in window");
                 break;
         }
     };
@@ -147,7 +157,10 @@ export function ThemeProvider({ children }) {
         setWindowBackgroundFX,
         navMenuLocation,
         navMenuLocationList,
-        setNavMenuLocation
+        setNavMenuLocation,
+        dialogButtonsLocation,
+        dialogButtonsLocationList,
+        setDialogButtonsLocation,
     };
 
     return (

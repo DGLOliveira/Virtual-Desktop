@@ -52,20 +52,37 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                     <app-dialog-top-bar>
                         {appDialog.title}
                     </app-dialog-top-bar>
-                    <app-dialog-info>
-                        {appDialog.info}
+                    <app-dialog-info
+                        style={{
+                            paddingBottom: theme.dialogButtonsLocation === "in window" ? "5px" : "0px",
+                            marginBottom: theme.dialogButtonsLocation === "in window" ? "0px" : "var(--DialogPadding)"
+                        }}>
+                        <p>{appDialog.info}</p>
+                        {theme.dialogButtonsLocation === "in info container" &&
+                            <app-dialog-actions>
+                                {Object.keys(appDialog.actions).map((name, index) =>
+                                    <button
+                                        key={index}
+                                        className={setButtonClass(name)}
+                                        onClick={appDialog.actions[name]}
+                                    >
+                                        {name}
+                                    </button>
+                                )}
+                            </app-dialog-actions>}
                     </app-dialog-info>
-                    <app-dialog-actions>
-                        {Object.keys(appDialog.actions).map((name, index) =>
-                            <button
-                                key={index}
-                                className={setButtonClass(name)}
-                                onClick={appDialog.actions[name]}
-                            >
-                                {name}
-                            </button>
-                        )}
-                    </app-dialog-actions>
+                    {theme.dialogButtonsLocation === "in window" &&
+                        <app-dialog-actions>
+                            {Object.keys(appDialog.actions).map((name, index) =>
+                                <button
+                                    key={index}
+                                    className={setButtonClass(name)}
+                                    onClick={appDialog.actions[name]}
+                                >
+                                    {name}
+                                </button>
+                            )}
+                        </app-dialog-actions>}
                 </app-dialog>
                 , document.body)}
         </>
