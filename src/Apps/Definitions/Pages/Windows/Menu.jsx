@@ -3,7 +3,6 @@ import { useState, useEffect, useContext, Fragment } from "react";
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
-
 export const MenuPreview = () => {
     const theme = useContext(ThemeContext);
     const NavMenu = () => <nav
@@ -84,9 +83,14 @@ export const MenuPreview = () => {
                 }}
                 className="app"
             >
-                {theme.navMenuLocation === "in top bar" && <NavMenu/>}
-                <app-container>
-                    {theme.navMenuLocation === "in app" && <NavMenu/>}
+                {theme.navMenuLocation === "in top bar" && <NavMenu />}
+                <app-container
+                    style={{
+                        color: "var(--AppFontColor)",
+                        backgroundColor: "var(--AppBkgrColor)",
+                        borderColor: "var(--AppBorderColor)"
+                    }}>
+                    {theme.navMenuLocation === "in app" && <NavMenu />}
                 </app-container>
             </app-window>
         </>
@@ -249,9 +253,9 @@ export const Menu = () => {
                 </div>
                 <div>
                     <label>Position:</label>
-                    <select 
-                    value={theme.navMenuLocation} 
-                    onChange={(e) => theme.setNavMenuLocation(e.target.value)}
+                    <select
+                        value={theme.navMenuLocation}
+                        onChange={(e) => theme.setNavMenuLocation(e.target.value)}
                     >
                         {theme.navMenuLocationList.map((location) => (
                             <option value={location}>{location}</option>

@@ -5,6 +5,7 @@ import { Global } from "./Pages/Global.jsx";
 import { DesktopPreview, Desktop } from "./Pages/Desktop.jsx";
 import { WindowPreview, Window } from "./Pages/Windows/Window.jsx";
 import { MenuPreview, Menu } from "./Pages/Windows/Menu.jsx";
+import { AppPreview, App } from "./Pages/Windows/App.jsx";
 import { DialogPreview, Dialog } from "./Pages/Windows/Dialog.jsx";
 import { TaskbarPreview, Taskbar } from "./Pages/Taskbar.jsx";
 import { ContextMenuPreview, ContextMenu } from "./Pages/ContextMenu.jsx";
@@ -58,6 +59,12 @@ export default function Definitions() {
               {">"}Menu
             </div>
             <div
+              onClick={() => setDefPage("App")}
+              className={defPage === "App" ? "defMenuButtonON" : ""}
+            >
+              {">"}App
+            </div>
+            <div
               onClick={() => setDefPage("Dialog")}
               className={defPage === "Dialog" ? "defMenuButtonON" : ""}
             >
@@ -79,6 +86,7 @@ export default function Definitions() {
           {defPage === "Start" ? <TaskbarPreview /> : <></>}
           {defPage === "Window" ? <WindowPreview /> : <></>}
           {defPage === "Menu" ? <MenuPreview /> : <></>}
+          {defPage === "App" ? <AppPreview /> : <></>}
           {defPage === "Dialog" ? <DialogPreview /> : <></>}
           {defPage === "ContextMenu" ? <ContextMenuPreview /> : <></>}
         </div>
@@ -86,6 +94,7 @@ export default function Definitions() {
         {defPage === "Desktop" ? <Desktop /> : <></>}
         {defPage === "Start" ? <Taskbar /> : <></>}
         {defPage === "Window" ? <Window /> : <></>}
+        {defPage === "App" ? <App /> : <></>}
         {defPage === "Menu" ? <Menu /> : <></>}
         {defPage === "Dialog" ? <Dialog /> : <></>}
         {defPage === "ContextMenu" ? <ContextMenu /> : <></>}

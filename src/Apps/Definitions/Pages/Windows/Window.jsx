@@ -1,5 +1,3 @@
-//Allows to change the style of individual tasks windows
-
 import { useState, useEffect, useContext } from "react";
 import { FcGlobe } from "react-icons/fc";
 import {
@@ -11,7 +9,6 @@ import { RiCloseLargeLine } from "react-icons/ri";
 
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
-
 
 export const WindowPreview = () => {
   const themeContext = useContext(ThemeContext);
@@ -81,7 +78,12 @@ export const WindowPreview = () => {
             </>
           }
         </app-top-bar>
-        <app-container></app-container>
+        <app-container
+          style={{
+            color: "var(--AppFontColorInactive)",
+            backgroundColor: "var(--AppBkgrColorInactive)",
+            borderColor: "var(--AppBorderColorInactive)"
+          }}></app-container>
       </app-window>
       <app-window
         style={{
@@ -146,7 +148,12 @@ export const WindowPreview = () => {
             </>
           }
         </app-top-bar>
-        <app-container></app-container>
+        <app-container
+          style={{
+            color: "var(--AppFontColor)",
+            backgroundColor: "var(--AppBkgrColor)",
+            borderColor: "var(--AppBorderColor)"
+          }}></app-container>
       </app-window>
     </>
   );

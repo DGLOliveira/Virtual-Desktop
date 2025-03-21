@@ -1,5 +1,3 @@
-//Allows personalization of the Context Menu style
-
 import { useState, useEffect } from "react";
 
 import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";

@@ -1,5 +1,3 @@
-//Allows changing desktop shortcuts and background, relying on BackgroundContext
-
 import { useState, useEffect, useContext } from "react";
 import { BackgroundContext } from "../../../System/Desktop/BackgroundContext.js";
 import { FcGlobe } from "react-icons/fc";

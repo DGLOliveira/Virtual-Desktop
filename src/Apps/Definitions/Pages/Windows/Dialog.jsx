@@ -1,9 +1,7 @@
-
 import { useState, useEffect, useContext } from "react";
 
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
-
 
 export const DialogPreview = () => {
   const themeContext = useContext(ThemeContext);
