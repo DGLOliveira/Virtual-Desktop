@@ -62,6 +62,16 @@
     "--WindowMenuHoverColor": "hsl(0, 0%, 100%)",
     "--WindowMenuHoverBkgr": "hsla(242, 100%, 35%,1)",
 
+    "--AppFontColor": "hsl(0, 0%, 75%)",
+    "--AppFontColorInactive": "hsl(0, 0%, 50%)",
+    "--AppBkgrColor": "hsla(0, 0%, 18%, 1)",
+    "--AppBkgrColorInactive": "hsla(0, 0%, 5%, 1)",
+    "--AppBorderColor": "hsla(0, 0%, 18%, 1)",
+    "--AppBorderColorInactive": "hsla(0, 0%, 18%, 1)",
+    "--AppBorderWidth": "2px",
+    "--AppBorderRadius": "0px",
+    "--AppBorderType": "solid",
+    
     "--DialogBkgrColor": "hsla(0, 0%, 75%,1)",
     "--DialogBorderColor": "hsla(0, 0%, 85%, 1)",
     "--DialogBorderWidth": "3px",

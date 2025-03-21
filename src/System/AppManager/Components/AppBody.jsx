@@ -69,7 +69,9 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
           }
           <app-container
           style={{
-            color: isSelected ? "var(--WindowFontColor)" : "var(--WindowFontColorInactive)",
+            color: isSelected ? "var(--AppFontColor)" : "var(--AppFontColorInactive)",
+            backgroundColor: isSelected ? "var(--AppBkgrColor)" : "var(--AppBkgrColorInactive)",
+            borderColor: isSelected ? "var(--AppBorderColor)" : "var(--AppBorderColorInactive)"
           }}>
           {appMenu && theme.navMenuLocation === "in app" &&
             <AppMenuBar

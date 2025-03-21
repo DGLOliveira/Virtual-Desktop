@@ -3,12 +3,13 @@ app-container {
     flex-direction: column;
     width: calc(100% - 2 * var(--WindowPadding));
     height: calc(100% - var(--WindowPadding));
-    box-sizing: border-box;
     margin-left: var(--WindowPadding);
     margin-right: var(--WindowPadding);
     margin-bottom: var(--WindowPadding);
-    border: 1px var(--GeneralBorderColor) solid;
-    border-radius: calc(var(--WindowBorderRadius)/2);
+    box-sizing: border-box;
+    border-width: var(--AppBorderWidth);
+    border-style: var(--AppBorderType);
+    border-radius: var(--AppBorderRadius);
     overflow: hidden;
 }
 
