@@ -6,6 +6,7 @@ app-top-bar {
     width: 100%;
     padding-left: calc(4px + var(--WindowPadding));
     padding-right: calc(4px + var(--WindowPadding));
+    margin-bottom: var(--WindowPadding);
     box-sizing: border-box;
 }
 

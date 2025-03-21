@@ -71,9 +71,9 @@
   --AppFontColorInactive: hsl(0, 0%, 50%);
   --AppBkgrColor: hsla(0, 0%, 18%, 1);
   --AppBkgrColorInactive: hsla(0, 0%, 5%, 1);
-  --AppBorderColor: hsla(0, 0%, 18%, 1);
-  --AppBorderColorInactive: hsla(0, 0%, 18%, 1);
-  --AppBorderWidth: 2px;
+  --AppBorderColor: hsla(0, 0%, 50%);
+  --AppBorderColorInactive: hsla(0, 0%, 25%);
+  --AppBorderWidth: 1px;
   --AppBorderRadius: 0px;
   --AppBorderType: solid;
 

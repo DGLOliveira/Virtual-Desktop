@@ -84,7 +84,7 @@ export function ThemeProvider({ children }) {
                 setDialogButtonTheme("Classic");
                 setWindowBackgroundFX("None");
                 setDialogBackgroundFX("None");
-                setNavMenuLocation("in app");
+                setNavMenuLocation("in top bar");
                 setDialogButtonsLocation("in info container");
                 break;
             case "Aqua":

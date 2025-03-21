@@ -66,12 +66,12 @@
     "--AppFontColorInactive": "hsl(0, 0%, 50%)",
     "--AppBkgrColor": "hsla(0, 0%, 18%, 1)",
     "--AppBkgrColorInactive": "hsla(0, 0%, 5%, 1)",
-    "--AppBorderColor": "hsla(0, 0%, 18%, 1)",
-    "--AppBorderColorInactive": "hsla(0, 0%, 18%, 1)",
+    "--AppBorderColor": "hsla(0, 0%, 18%)",
+    "--AppBorderColorInactive": "hsla(0, 0%, 18%)",
     "--AppBorderWidth": "2px",
     "--AppBorderRadius": "0px",
     "--AppBorderType": "solid",
-    
+
     "--DialogBkgrColor": "hsla(215, 100%, 40%,0.3)",
     "--DialogBorderColor": "hsla(215, 100%, 75%, 0.5)",
     "--DialogBorderWidth": "2px",
