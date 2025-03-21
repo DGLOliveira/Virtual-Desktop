@@ -32,8 +32,9 @@ export const AppPreview = () => {
                     style={{
                         color: "var(--AppFontColorInactive)",
                         backgroundColor: "var(--AppBkgrColorInactive)",
-                        borderColor: "var(--AppBorderColorInactive)"
-                    }}></app-container>
+                        borderColor: "var(--AppBorderColorInactive)",
+                        textAlign: "left"
+                    }}>{"-Content"}</app-container>
             </app-window>
             <app-window
                 style={{
@@ -58,8 +59,9 @@ export const AppPreview = () => {
                     style={{
                         color: "var(--AppFontColor)",
                         backgroundColor: "var(--AppBkgrColor)",
-                        borderColor: "var(--AppBorderColor)"
-                    }}></app-container>
+                        borderColor: "var(--AppBorderColor)",
+                        textAlign:"left"
+                    }}>{"-Content"}</app-container>
             </app-window>
         </>
     );
