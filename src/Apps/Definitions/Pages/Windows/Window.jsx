@@ -47,27 +47,27 @@ export const WindowPreview = () => {
               <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed ">
                 <AiOutlineClose />
               </button></>
-            }
-          {themeContext.topBarIconTheme === "Aero" && 
-            <>
-            <button className="appTopBarButtonAero appTopBarButtonAeroMinimize">
-              <FaRegWindowMinimize />
-            </button>
-            <button className="appTopBarButtonAero appTopBarButtonAeroMaximize">
-              <FaWindowMaximize />
-            </button>
-            <button className="appTopBarButtonAero appTopBarButtonAeroClose ">
-              <AiOutlineClose />
-            </button></>
           }
-          {themeContext.topBarIconTheme === "Aqua" && 
+          {themeContext.topBarIconTheme === "Aero" &&
+            <>
+              <button className="appTopBarButtonAero appTopBarButtonAeroMinimize">
+                <FaRegWindowMinimize />
+              </button>
+              <button className="appTopBarButtonAero appTopBarButtonAeroMaximize">
+                <FaWindowMaximize />
+              </button>
+              <button className="appTopBarButtonAero appTopBarButtonAeroClose ">
+                <AiOutlineClose />
+              </button></>
+          }
+          {themeContext.topBarIconTheme === "Aqua" &&
             <>
               <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
               <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
               <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
             </>
           }
-          {themeContext.topBarIconTheme === "Classic" && 
+          {themeContext.topBarIconTheme === "Classic" &&
             <>
               <button className="appTopBarButtonClassic">
                 <FaWindowMaximize />
@@ -113,26 +113,26 @@ export const WindowPreview = () => {
                 <AiOutlineClose />
               </button></>
           }
-          {themeContext.topBarIconTheme === "Aero" && 
+          {themeContext.topBarIconTheme === "Aero" &&
             <>
-            <button className="appTopBarButtonAero appTopBarButtonAeroMinimize">
-              <FaRegWindowMinimize />
-            </button>
-            <button className="appTopBarButtonAero appTopBarButtonAeroMaximize">
-              <FaWindowMaximize />
-            </button>
-            <button className="appTopBarButtonAero appTopBarButtonAeroClose ">
-              <AiOutlineClose />
-            </button></>
+              <button className="appTopBarButtonAero appTopBarButtonAeroMinimize">
+                <FaRegWindowMinimize />
+              </button>
+              <button className="appTopBarButtonAero appTopBarButtonAeroMaximize">
+                <FaWindowMaximize />
+              </button>
+              <button className="appTopBarButtonAero appTopBarButtonAeroClose ">
+                <AiOutlineClose />
+              </button></>
           }
-          {themeContext.topBarIconTheme === "Aqua" && 
+          {themeContext.topBarIconTheme === "Aqua" &&
             <>
               <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
               <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
               <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
             </>
           }
-          {themeContext.topBarIconTheme === "Classic" && 
+          {themeContext.topBarIconTheme === "Classic" &&
             <>
               <button className="appTopBarButtonClassic">
                 <FaWindowMaximize />
@@ -155,129 +155,175 @@ export const WindowPreview = () => {
 export const Window = () => {
   const themeContext = useContext(ThemeContext);
   var root = document.querySelector(":root");
+
   const [windowFontColor, setWindowFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowFontColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowFontColor", windowFontColor);
+  }, [windowFontColor]);
+  //----------------------------------------------------------------------------//
   const [windowFontColorInactive, setWindowFontColorInactive] = useState(
     getComputedStyle(root).getPropertyValue("--WindowFontColorInactive"),
-  )
+  );
+  useEffect(() => {
+    root.style.setProperty("--WindowFontColorInactive", windowFontColorInactive);
+  }, [windowFontColorInactive]);
+  //----------------------------------------------------------------------------//
   const [fontSize, setFontSize] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontSize").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
+  }, [fontSize]);
+  //----------------------------------------------------------------------------//
   const [topbarTitleAlign, setTopbarTitleAlign] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontAlign"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarFontAlign", topbarTitleAlign);
+  }, [topbarTitleAlign]);
+  //----------------------------------------------------------------------------//
   const [topbarFontColor, setTopbarFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarFontColor", topbarFontColor);
+  }, [topbarFontColor]);
+  //----------------------------------------------------------------------------//
   const [bkgColor, setBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBkgrColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowBkgrColor", bkgColor);
+  }, [bkgColor]);
+  //----------------------------------------------------------------------------//
   const [windowPadding, setWindowPadding] = useState(
     getComputedStyle(root).getPropertyValue("--WindowPadding").slice(0, -2),
-  )
+  );
+  useEffect(() => {
+    root.style.setProperty("--WindowPadding", windowPadding + "px");
+  }, [windowPadding]);
+  //----------------------------------------------------------------------------//
   const [topbarFlexDirection, setTopbarFlexDirection] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFlexDirection"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
+  }, [topbarFlexDirection]);
+  //----------------------------------------------------------------------------//
   const [topbarBkgColor, setTopbarBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarBkgrColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarBkgrColor", topbarBkgColor);
+  }, [topbarBkgColor]);
+  //----------------------------------------------------------------------------//
   const [topBarHeight, setTopBarHeight] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarHeight").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarHeight", topBarHeight + "px");
+  }, [topBarHeight]);
+  //----------------------------------------------------------------------------//
   const [topBarIconSize, setTopBarIconSize] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarIconSize").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarIconSize", topBarIconSize + "px");
+  }, [topBarIconSize]);
+  //----------------------------------------------------------------------------//
   const [borderWidth, setBorderWidth] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBorderWidth").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowBorderWidth", borderWidth + "px");
+  }, [borderWidth]);
+  //----------------------------------------------------------------------------//
   const [borderRadius, setBorderRadius] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBorderRadius").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowBorderRadius", borderRadius + "px");
+  }, [borderRadius]);
+  //----------------------------------------------------------------------------//
   const [borderType, setBorderType] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBorderType"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowBorderType", borderType);
+  }, [borderType]);
+  //----------------------------------------------------------------------------//
   const [borderColor, setBorderColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBorderColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowBorderColor", borderColor);
+  }, [borderColor]);
+  //----------------------------------------------------------------------------//
   const [shadowXOffset, setShadowXOffset] = useState(
     getComputedStyle(root).getPropertyValue("--WindowShadowXOffset").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowShadowXOffset", shadowXOffset + "px");
+  }, [shadowXOffset]);
+  //----------------------------------------------------------------------------//
   const [shadowYOffset, setShadowYOffset] = useState(
     getComputedStyle(root).getPropertyValue("--WindowShadowYOffset").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowShadowYOffset", shadowYOffset + "px");
+  }, [shadowYOffset]);
+  //----------------------------------------------------------------------------//
   const [shadowBlur, setShadowBlur] = useState(
     getComputedStyle(root).getPropertyValue("--WindowShadowBlur").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowShadowBlur", shadowBlur + "px");
+  }, [shadowBlur]);
+  //----------------------------------------------------------------------------//
   const [shadowSpread, setShadowSpread] = useState(
     getComputedStyle(root).getPropertyValue("--WindowShadowSpread").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowShadowSpread", shadowSpread + "px");
+  }, [shadowSpread]);
+  //----------------------------------------------------------------------------//
   const [shadowColor, setShadowColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowShadowColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowShadowColor", shadowColor);
+  }, [shadowColor]);
+  //----------------------------------------------------------------------------//
   const [inactiveBorderColor, setInactiveBorderColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBorderColorInactive"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowBorderColorInactive", inactiveBorderColor);
+  }, [inactiveBorderColor]);
+  //----------------------------------------------------------------------------//
   const [inactiveTopBarBkgColor, setInactiveTopBarBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarBkgrColorInactive"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarBkgrColorInactive", inactiveTopBarBkgColor);
+  }, [inactiveTopBarBkgColor]);
+  //----------------------------------------------------------------------------//
   const [topbarFontColorInactive, setTopbarFontColorInactive] = useState(
     getComputedStyle(root).getPropertyValue("--WindowTopBarFontColorInactive"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WindowTopBarFontColorInactive", topbarFontColorInactive);
+  }, [topbarFontColorInactive]);
+  //----------------------------------------------------------------------------//
   const [inactiveBkgColor, setInactiveBkgColor] = useState(
     getComputedStyle(root).getPropertyValue("--WindowBkgrColorInactive"),
   );
   useEffect(() => {
-    root.style.setProperty("--WindowFontColor", windowFontColor);
-    root.style.setProperty("--WindowFontColorInactive", windowFontColorInactive);
-    root.style.setProperty("--WindowPadding", windowPadding + "px");
-    root.style.setProperty("--WindowTopBarFontSize", fontSize + "px");
-    root.style.setProperty("--WindowTopBarFontAlign", topbarTitleAlign);
-    root.style.setProperty("--WindowTopBarFontColor", topbarFontColor);
-    root.style.setProperty("--WindowBkgrColor", bkgColor);
-    root.style.setProperty("--WindowTopBarFlexDirection", topbarFlexDirection);
-    root.style.setProperty("--WindowTopBarBkgrColor", topbarBkgColor);
-    root.style.setProperty("--WindowTopBarHeight", topBarHeight + "px");
-    root.style.setProperty("--WindowTopBarBkgrColorInactive", inactiveTopBarBkgColor);
-    root.style.setProperty("--WindowTopBarIconSize", topBarIconSize + "px");
-    root.style.setProperty("--WindowBorderWidth", borderWidth + "px");
-    root.style.setProperty("--WindowBorderRadius", borderRadius + "px");
-    root.style.setProperty("--WindowBorderType", borderType);
-    root.style.setProperty("--WindowBorderColor", borderColor);
-    root.style.setProperty("--WindowBorderColorInactive", inactiveBorderColor);
-    root.style.setProperty("--WindowTopBarFontColorInactive", topbarFontColorInactive);
     root.style.setProperty("--WindowBkgrColorInactive", inactiveBkgColor);
-    root.style.setProperty("--WindowShadowXOffset", shadowXOffset + "px");
-    root.style.setProperty("--WindowShadowYOffset", shadowYOffset + "px");
-    root.style.setProperty("--WindowShadowBlur", shadowBlur + "px");
-    root.style.setProperty("--WindowShadowColor", shadowColor);
-    root.style.setProperty("--WindowShadowSpread", shadowSpread + "px");
-  }, [
-    windowFontColor,
-    windowFontColorInactive,
-    windowPadding,
-    fontSize,
-    topbarTitleAlign,
-    topbarFontColor,
-    bkgColor,
-    topbarFlexDirection,
-    topbarBkgColor,
-    topBarHeight,
-    topBarIconSize,
-    borderColor,
-    borderWidth,
-    borderRadius,
-    borderType,
-    shadowXOffset,
-    shadowYOffset,
-    shadowBlur,
-    shadowSpread,
-    shadowColor,
-    inactiveTopBarBkgColor,
-    topbarFontColorInactive,
-    inactiveBkgColor,
-    inactiveBorderColor
-  ]);
+  }, [inactiveBkgColor]);
+
   return (
     <>
       <fieldset>

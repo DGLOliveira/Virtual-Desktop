@@ -48,59 +48,77 @@ export const ContextMenuPreview = () => {
 };
 export const ContextMenu = () => {
     var root = document.querySelector(":root");
+
     const [fontSize, setFontSize] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuFontSize").slice(0, -2),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuFontSize", fontSize + "px");
+    }, [fontSize]);
+    //----------------------------------------------------------------------------//
     const [fontColor, setFontColor] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuFontColor"),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuFontColor", fontColor);
+    }, [fontColor]);
+    //----------------------------------------------------------------------------//
     const [bkgColor, setBkgColor] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuBkgr"),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuBkgr", bkgColor);
+    }, [bkgColor]);
+    //----------------------------------------------------------------------------//
     const [borderColor, setBorderColor] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuBorderColor"),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuBorderColor", borderColor);
+    }, [borderColor]);
+    //----------------------------------------------------------------------------//
     const [borderWidth, setBorderWidth] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuBorderWidth").slice(0, -2),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuBorderWidth", borderWidth + "px");
+    }, [borderWidth]);
+    //----------------------------------------------------------------------------//
     const [borderRadius, setBorderRadius] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuBorderRadius").slice(0, -2),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuBorderRadius", borderRadius + "px");
+    }, [borderRadius]);
+    //----------------------------------------------------------------------------//
     const [borderType, setBorderType] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuBorderType"),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuBorderType", borderType);
+    }, [borderType]);
+    //----------------------------------------------------------------------------//
     const [hoverColor, setHoverColor] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuButtonHoverColor"),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuButtonHoverColor", hoverColor);
+    }, [hoverColor]);
+    //----------------------------------------------------------------------------//
     const [hoverBkgr, setHoverBkgr] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuButtonHoverBkgr"),
     );
+    useEffect(() => {
+        root.style.setProperty("--ContextMenuButtonHoverBkgr", hoverBkgr);
+    }, [hoverBkgr]);
+    //----------------------------------------------------------------------------//
     const [padding, setPadding] = useState(
         getComputedStyle(root).getPropertyValue("--ContextMenuPadding").slice(0, -2),
-    )
-
+    );
     useEffect(() => {
-        root.style.setProperty("--ContextMenuFontSize", fontSize + "px");
-        root.style.setProperty("--ContextMenuFontColor", fontColor);
-        root.style.setProperty("--ContextMenuBkgr", bkgColor);
-        root.style.setProperty("--ContextMenuBorderColor", borderColor);
-        root.style.setProperty("--ContextMenuBorderWidth", borderWidth + "px");
-        root.style.setProperty("--ContextMenuBorderRadius", borderRadius + "px");
-        root.style.setProperty("--ContextMenuBorderType", borderType);
-        root.style.setProperty("--ContextMenuButtonHoverColor", hoverColor);
-        root.style.setProperty("--ContextMenuButtonHoverBkgr", hoverBkgr);
         root.style.setProperty("--ContextMenuPadding", padding + "px");
-    }, [fontSize, 
-        fontColor, 
-        bkgColor, 
-        borderColor, 
-        borderWidth, 
-        borderRadius, 
-        borderType,
-        hoverColor,
-        hoverBkgr,
-        padding
-    ]);
+    }, [padding]);
+
     return (
         <>
             <fieldset>
@@ -108,9 +126,9 @@ export const ContextMenu = () => {
                 <div>
                     <label>Font Color:</label>
                     <ColorPicker
-                      color={fontColor}
-                      setColor={setFontColor}
-                      useAlpha={false}
+                        color={fontColor}
+                        setColor={setFontColor}
+                        useAlpha={false}
                     />
                 </div>
                 <div>
@@ -130,9 +148,9 @@ export const ContextMenu = () => {
                 <div>
                     <label>Background Color:</label>
                     <ColorPicker
-                      color={bkgColor}
-                      setColor={setBkgColor}
-                      useAlpha={true}
+                        color={bkgColor}
+                        setColor={setBkgColor}
+                        useAlpha={true}
                     />
                 </div>
             </fieldset>
@@ -141,9 +159,9 @@ export const ContextMenu = () => {
                 <div>
                     <label>Border Color:</label>
                     <ColorPicker
-                      color={borderColor}
-                      setColor={setBorderColor}
-                      useAlpha={false}
+                        color={borderColor}
+                        setColor={setBorderColor}
+                        useAlpha={false}
                     />
                 </div>
                 <div>
@@ -198,17 +216,17 @@ export const ContextMenu = () => {
                 <div>
                     <label>Hover Color:</label>
                     <ColorPicker
-                      color={hoverColor}
-                      setColor={setHoverColor}
-                      useAlpha={false}
+                        color={hoverColor}
+                        setColor={setHoverColor}
+                        useAlpha={false}
                     />
                 </div>
                 <div>
                     <label>Hover Background Color:</label>
                     <ColorPicker
-                      color={hoverBkgr}
-                      setColor={setHoverBkgr}
-                      useAlpha={true}
+                        color={hoverBkgr}
+                        setColor={setHoverBkgr}
+                        useAlpha={true}
                     />
                 </div>
             </fieldset>

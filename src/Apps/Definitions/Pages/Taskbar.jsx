@@ -130,79 +130,105 @@ export const TaskbarPreview = () => {
 };
 export const Taskbar = () => {
   var root = document.querySelector(":root");
+
   const [taskbarHeight, setTaskbarHeight] = useState(
     getComputedStyle(root).getPropertyValue("--TaskbarHeight").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--TaskbarHeight", taskbarHeight + "px");
+  }, [taskbarHeight]);
+    //----------------------------------------------------------------------------//
   const [taskbarBkgr, setTaskbarBkgr] = useState(
     getComputedStyle(root).getPropertyValue("--TaskbarBkgr"),
   );
+  useEffect(() => {
+    root.style.setProperty("--TaskbarBkgr", taskbarBkgr);
+  }, [taskbarBkgr]);
+  //----------------------------------------------------------------------------//
   const [taskbarIconSize, setTaskbarIconSize] = useState(
     getComputedStyle(root).getPropertyValue("--TaskbarIconSize").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--TaskbarIconSize", taskbarIconSize + "px");
+  }, [taskbarIconSize]);
+  //----------------------------------------------------------------------------//
   const [taskbarFontSize, setTaskbarFontSize] = useState(
     getComputedStyle(root).getPropertyValue("--TaskbarFontSize").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--TaskbarFontSize", taskbarFontSize + "px");
+  }, [taskbarFontSize]);
+  //----------------------------------------------------------------------------//
   const [taskbarFontColor, setTaskbarFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--TaskbarFontColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--TaskbarFontColor", taskbarFontColor);
+  }, [taskbarFontColor]);
+  //----------------------------------------------------------------------------//
   const [startIconColor, setStartIconColor] = useState(
     getComputedStyle(root).getPropertyValue("--StartIconColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--StartIconColor", startIconColor);
+  }, [startIconColor]);
+  //----------------------------------------------------------------------------//
   const [startMenuBkgr, setStartMenuBkgr] = useState(
     getComputedStyle(root).getPropertyValue("--StartMenuBkgr"),
   );
+  useEffect(() => {
+    root.style.setProperty("--StartMenuBkgr", startMenuBkgr);
+  },[startMenuBkgr]);
+  //----------------------------------------------------------------------------//
   const [startMenuFontColor, setStartMenuFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--StartMenuFontColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--StartMenuFontColor", startMenuFontColor);
+  },[startMenuFontColor]);
+  //----------------------------------------------------------------------------//
   const [weatherColor, setWeatherColor] = useState(
     getComputedStyle(root).getPropertyValue("--TaskbarWeatherColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--TaskbarWeatherColor", weatherColor);
+  },[weatherColor]);
+  //----------------------------------------------------------------------------//
   const [weatherBkgr, setWeatherBkgr] = useState(
     getComputedStyle(root).getPropertyValue("--WeatherBkgr"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WeatherBkgr", weatherBkgr);
+  },[weatherBkgr]);
+  //----------------------------------------------------------------------------//
   const [weatherFontColor, setWeatherFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--WeatherFontColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--WeatherFontColor", weatherFontColor);
+  },[weatherFontColor]);
+  //----------------------------------------------------------------------------//
   const [clockColor, setClockColor] = useState(
     getComputedStyle(root).getPropertyValue("--TaskbarClockColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--TaskbarClockColor", clockColor);
+  },[clockColor]);
+  //----------------------------------------------------------------------------//
   const [clockBkgr, setClockBkgr] = useState(
     getComputedStyle(root).getPropertyValue("--ClockBkgr"),
   );
+  useEffect(() => {
+    root.style.setProperty("--ClockBkgr", clockBkgr);
+  },[clockBkgr]);
+  //----------------------------------------------------------------------------//
   const [clockFontColor, setClockFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--ClockFontColor"),
   );
   useEffect(() => {
-    root.style.setProperty("--TaskbarHeight", taskbarHeight + "px");
-    root.style.setProperty("--TaskbarBkgr", taskbarBkgr);
-    root.style.setProperty("--TaskbarIconSize", taskbarIconSize + "px");
-    root.style.setProperty("--TaskbarFontSize", taskbarFontSize + "px");
-    root.style.setProperty("--TaskbarFontColor", taskbarFontColor);
-    root.style.setProperty("--StartMenuBkgr", startMenuBkgr);
-    root.style.setProperty("--StartMenuFontColor", startMenuFontColor);
-    root.style.setProperty("--StartIconColor", startIconColor);
-    root.style.setProperty("--TaskbarWeatherColor", weatherColor);
-    root.style.setProperty("--WeatherBkgr", weatherBkgr);
-    root.style.setProperty("--WeatherFontColor", weatherFontColor);
-    root.style.setProperty("--TaskbarClockColor", clockColor);
-    root.style.setProperty("--ClockBkgr", clockBkgr);
     root.style.setProperty("--ClockFontColor", clockFontColor);
-  }, [
-    taskbarHeight,
-    taskbarBkgr,
-    taskbarIconSize,
-    taskbarFontSize,
-    taskbarFontColor,
-    startMenuBkgr,
-    startMenuFontColor,
-    startIconColor,
-    weatherColor,
-    weatherBkgr,
-    weatherFontColor,
-    clockColor,
-    clockBkgr,
-    clockFontColor,
-  ]);
+  },[clockFontColor]);
+
   return (
     <>
       <fieldset>

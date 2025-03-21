@@ -21,27 +21,57 @@ export const Desktop = () => {
   const background = useContext(BackgroundContext);
   const [backgroundMenu, setBackgroundMenu] = useState(background.state.active);
   var root = document.querySelector(":root");
+
   const [desktopBkgrColor, setDesktopBkgrColor] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrColor"),
   );
+  useEffect(() => {
+    root.style.setProperty("--DesktopBkgrColor", desktopBkgrColor);
+  },[desktopBkgrColor]);
+    //----------------------------------------------------------------------------//
   const [desktopBkgrImage, setDesktopBkgrImage] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrImage"),
   );
+  useEffect(() => {
+    root.style.setProperty("--DesktopBkgrImage", desktopBkgrImage);
+  },[desktopBkgrImage]);
+  //----------------------------------------------------------------------------//
   const [desktopBkgrSize, setDesktopBkgrSize] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrSize"),
   );
+  useEffect(() => {
+    root.style.setProperty("--DesktopBkgrSize", desktopBkgrSize);
+  },[desktopBkgrSize]);
+  //----------------------------------------------------------------------------//
   const [desktopBkgrPosition, setDesktopBkgrPosition] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrPosition"),
   );
+  useEffect(() => {
+    root.style.setProperty("--DesktopBkgrPosition", desktopBkgrPosition);
+  },[desktopBkgrPosition]);
+  //----------------------------------------------------------------------------//
   const [desktopBkgrRepeat, setDesktopBkgrRepeat] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrRepeat"),
   );
+  useEffect(() => {
+    root.style.setProperty("--DesktopBkgrRepeat", desktopBkgrRepeat);
+  },[desktopBkgrRepeat]);
+  //----------------------------------------------------------------------------//
   const [desktopFontSize, setDesktopFontSize] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopFontSize").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--DesktopFontSize", desktopFontSize + "px");
+  },[desktopFontSize]);
+  //----------------------------------------------------------------------------//
   const [desktopIconSize, setDesktopIconSize] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopIconSize").slice(0, -2),
   );
+  useEffect(() => {
+    root.style.setProperty("--DesktopIconSize", desktopIconSize + "px");
+  },[desktopIconSize]);
+  //----------------------------------------------------------------------------//
+
   //Upload Image
   const uploadImage = (file) => {
     const reader = new FileReader();
@@ -55,16 +85,6 @@ export const Desktop = () => {
     }
   };
 
-  //Update styles
-  useEffect(() => {
-    root.style.setProperty("--DesktopBkgrColor", desktopBkgrColor);
-    root.style.setProperty("--DesktopBkgrImage", desktopBkgrImage);
-    root.style.setProperty("--DesktopBkgrSize", desktopBkgrSize);
-    root.style.setProperty("--DesktopBkgrPosition", desktopBkgrPosition);
-    root.style.setProperty("--DesktopBkgrRepeat", desktopBkgrRepeat);
-    root.style.setProperty("--DesktopFontSize", desktopFontSize + "px");
-    root.style.setProperty("--DesktopIconSize", desktopIconSize + "px");
-  }, [desktopBkgrColor, desktopBkgrImage, desktopBkgrSize, desktopBkgrPosition, desktopBkgrRepeat, desktopFontSize, desktopIconSize]);
   //Update background context
   useEffect(() => {
     if (background.state.active === "color") {
