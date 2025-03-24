@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "../../../System/ThemeManager/context.jsx";
 
 import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
@@ -128,6 +129,7 @@ export const TaskbarPreview = () => {
 };
 export const Taskbar = () => {
   var root = document.querySelector(":root");
+  const theme = useContext(ThemeContext);
 
   const [taskbarHeight, setTaskbarHeight] = useState(
     getComputedStyle(root).getPropertyValue("--TaskbarHeight").slice(0, -2),
@@ -231,6 +233,17 @@ export const Taskbar = () => {
     <>
       <fieldset>
         <legend>Taskbar</legend>
+        <div>
+          <label>Background FX:</label>
+          <select
+            value={theme.taskbarBackgroundFX}
+            onChange={(e) => theme.setTaskbarBackgroundFX(e.target.value)}
+          >{
+            theme.backgroundFXList.map((fx) => (
+              <option key={fx} value={fx}>{fx}</option>
+          ))}
+          </select>
+        </div>
         <div>
           <label>Height:</label>
           <input

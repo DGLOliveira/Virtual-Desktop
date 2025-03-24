@@ -6,7 +6,12 @@ task-bar {
   bottom: 0;
   height: var(--TaskbarHeight);
   width: 100%;
-  background: var(--TaskbarBkgr);
+  background-color: var(--TaskbarBkgr);
+  background-image: var(--TaskbarBkgrImage);
+  background-position: var(--TaskbarBkgrPosition);
+  background-size: var(--TaskbarBkgrSize);
+  background-repeat: var(--TaskbarBkgrRepeat);
+  backdrop-filter: var(--TaskbarBackdropFilter);
 }
 
 live-apps {

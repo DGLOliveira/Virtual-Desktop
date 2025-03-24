@@ -118,6 +118,11 @@
   --ContextMenuButtonHoverBkgr: hsla(0, 0%, 100%, 0.2);
   --ContextMenuPadding: 5px;
 
+  --TaskbarBkgrImage: none;
+  --TaskbarBkgrPosition: none;
+  --TaskbarBkgrSize: none;
+  --TaskbarBkgrRepeat: none;
+  --TaskbarBackdropFilter: none;
   --TaskbarBkgr: hsla(0, 0%, 0%, 0.8);
   --TaskbarHeight: 36px;
   --TaskbarIconSize: 28px;
