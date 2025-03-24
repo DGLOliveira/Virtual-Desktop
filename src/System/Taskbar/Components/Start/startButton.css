@@ -1,4 +1,11 @@
+start-button {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
 start-button>button {
+    position: relative;
     display: flex;
     height: 100%;
     color: var(--StartButtonColor);
@@ -22,33 +29,78 @@ start-button>button:hover>svg>.hex1 {
 }
 
 start-button>button:hover>svg>.hex2 {
-    transition: fill 1s ease-in-out;
     fill: #00FF00;
 }
 
 start-button>button:hover>svg>.hex3 {
-    transition: fill 1s ease-in-out;
     fill: #0000FF;
 }
 
-.startButtonClassic{
+/*------------------------------------------------------------*/
+/*-----------------------Classic Button-----------------------*/
+/*------------------------------------------------------------*/
+
+.startButtonClassic {
     height: calc(100% - 6px);
-    margin:3px;
+    margin: 3px;
     border: 2px gray outset;
     border-radius: 0px;
     background: none;
 }
 
-.startButtonClassic:hover:enabled{
+.startButtonClassic:hover:enabled {
     background: none;
 }
 
-.startButtonClassicActive{
+.startButtonClassicActive {
     background: none;
     border: 2px gray inset;
 }
 
-.startButtonClassic:active:enabled{
+.startButtonClassic:active:enabled {
     background: none;
     border: 2px gray inset;
+}
+
+/*------------------------------------------------------------*/
+/*------------------------Aero Button-------------------------*/
+/*------------------------------------------------------------*/
+
+.startButtonAero {
+    width: var(--TaskbarIconSize);
+    height: var(--TaskbarIconSize);
+    margin: 3px;
+    margin-left: 6px;
+    border-radius: 100%;
+    border: 1px solid #4d7bbf;
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+}
+
+.startButtonAero>svg>.hex1 {
+    fill: #FF0000;
+}
+
+.startButtonAero>svg>.hex2 {
+    fill: #00FF00;
+}
+
+.startButtonAero>svg>.hex3 {
+    fill: #0000FF;
+}
+
+.startButtonAero:hover:enabled {
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.5) inset;
+}
+
+.startButtonAero:active:enabled {
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+        box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
+}
+
+.startButtonAeroActive {
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
 }
