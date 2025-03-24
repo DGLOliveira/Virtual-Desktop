@@ -36,24 +36,24 @@ export const StartButton = () => {
     return () => removeEventListener("keydown", handleEventListener);
   }, [handleEventListener])
 
-  const startButtonClass = (isOpen) => {
+  const startButtonClass = (open) => {
     let ans = "";
     switch (themeContext.startButtonTheme) {
       case "Classic":
-        ans= "startButtonClassic";
+        ans = "startButtonClassic";
         break;
       case "Aero":
-        ans= "startButtonAero";
+        ans = "startButtonAero";
         break;
       case "Aqua":
-        ans= "startButtonAqua";
+        ans = "startButtonAqua";
         break;
       case "Default":
       default:
-        ans= "startButtonFluent";
+        ans = "startButtonFluent";
         break;
     }
-    if (isOpen) {
+    if (open) {
       ans += " " + ans + "Active";
     }
     return ans;
@@ -112,11 +112,28 @@ export const StartButton = () => {
         title="Start (Alt + ❖)"
         aria-label="Start Button">
         <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="startButtonAquaRed" gradientTransform="rotate(90)">
+              <stop offset="20%" stop-color="#FF9999" />
+              <stop offset="50%" stop-color="#FF0000" />
+              <stop offset="80%" stop-color="#9F0000" />
+            </linearGradient>
+            <linearGradient id="startButtonAquaGreen" gradientTransform="rotate(90)">
+              <stop offset="20%" stop-color="#99FF99" />
+              <stop offset="50%" stop-color="#00FF00" />
+              <stop offset="80%" stop-color="#009F00" />
+            </linearGradient>
+            <linearGradient id="startButtonAquaBlue" gradientTransform="rotate(90)">
+              <stop offset="20%" stop-color="#9999FF" />
+              <stop offset="50%" stop-color="#0000FF" />
+              <stop offset="80%" stop-color="#00009F" />
+            </linearGradient>
+          </defs>
           <path
             className="hex hex1"
             style={{
               mixBlendMode: "screen",
-              fill: isOpen ? "#FF0000" : "",
+              fill: startButtonClass(false) === "startButtonAqua" ? "url(#startButtonAquaRed)" : isOpen ? "#FF0000" : "",
               transform: isOpen ? "translate(45%, 23%) scale(1.5)" : "",
               transition: "fill 0.5s ease-in-out, transform 0.5s ease-in-out"
             }}
@@ -128,7 +145,7 @@ export const StartButton = () => {
             className="hex hex2"
             style={{
               mixBlendMode: "screen",
-              fill: isOpen ? "#00FF00" : "",
+              fill: startButtonClass(false) === "startButtonAqua" ? "url(#startButtonAquaGreen)" : isOpen ? "#00FF00" : "",
               transform: isOpen ? "translate(-45%, 23%) scale(1.5)" : "",
               transition: "fill 0.5s ease-in-out, transform 0.5s ease-in-out"
             }}
@@ -140,7 +157,7 @@ export const StartButton = () => {
             className="hex hex3"
             style={{
               mixBlendMode: "screen",
-              fill: isOpen ? "#0000FF" : "",
+              fill: startButtonClass(false) === "startButtonAqua" ? "url(#startButtonAquaBlue)" : isOpen ? "#0000FF" : "",
               transform: isOpen ? "translate(0, -45%) scale(1.5)" : "",
               transition: "fill 0.5s ease-in-out, transform 0.5s ease-in-out"
             }}

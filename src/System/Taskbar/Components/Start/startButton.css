@@ -62,6 +62,23 @@ start-button>button:hover>svg>.hex3 {
     border: 2px gray inset;
 }
 
+
+/*------------------------------------------------------------*/
+/*------------------------Aqua Button-------------------------*/
+/*------------------------------------------------------------*/
+
+.startButtonAqua:hover:enabled {
+    background: none;
+}
+
+.startButtonAqua:active:enabled {
+    background: none;
+}
+
+.startButtonAquaActive {
+    background: none;
+}
+
 /*------------------------------------------------------------*/
 /*------------------------Aero Button-------------------------*/
 /*------------------------------------------------------------*/
@@ -96,7 +113,7 @@ start-button>button:hover>svg>.hex3 {
 .startButtonAero:active:enabled {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
-        box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
 }
 
 .startButtonAeroActive {
