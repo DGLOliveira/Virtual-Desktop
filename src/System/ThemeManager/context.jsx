@@ -21,6 +21,9 @@ export const ThemeContext = createContext({
     setDialogBackgroundFX: () => { },
     taskbarBackgroundFX: "",
     setTaskbarBackgroundFX: () => { },
+    startButtonTheme: "",
+    startButtonThemeList: [],
+    setStartButtonTheme: () => { },
     navMenuLocation: "",
     navMenuLocationList: [],
     setNavMenuLocation: () => { },
@@ -34,6 +37,9 @@ export function ThemeProvider({ children }) {
 
     const [theme, setTheme] = useState("Default");
     const themeList = ["Default", "Aero", "Aqua", "Classic"];
+
+    const [startButtonTheme, setStartButtonTheme] = useState("Default");
+    const startButtonThemeList = ["Default", "Aero", "Aqua", "Classic"];
 
     const [topBarIconTheme, setTopBarIconTheme] = useState("Default");
     const topBarIconThemeList = ["Default", "Aero", "Aqua", "Classic"];
@@ -83,6 +89,7 @@ export function ThemeProvider({ children }) {
         switch (value) {
             case "Classic":
                 Object.keys(Classic).forEach((key) => changeRootStyle(key, Classic[key]));
+                setStartButtonTheme("Classic");
                 setTopBarIconTheme("Classic");
                 setDialogButtonTheme("Classic");
                 setWindowBackgroundFX("None");
@@ -93,6 +100,7 @@ export function ThemeProvider({ children }) {
                 break;
             case "Aqua":
                 Object.keys(Aqua).forEach((key) => changeRootStyle(key, Aqua[key]));
+                setStartButtonTheme("Aqua");
                 setTopBarIconTheme("Aqua");
                 setDialogButtonTheme("Aqua");
                 setWindowBackgroundFX("Metallic");
@@ -103,6 +111,7 @@ export function ThemeProvider({ children }) {
                 break;
             case "Aero":
                 Object.keys(Aero).forEach((key) => changeRootStyle(key, Aero[key]));
+                setStartButtonTheme("Aero");
                 setTopBarIconTheme("Aero");
                 setDialogButtonTheme("Aero");
                 setWindowBackgroundFX("Translucent");
@@ -113,6 +122,7 @@ export function ThemeProvider({ children }) {
                 break;
             default:
                 Object.keys(Default).forEach((key) => changeRootStyle(key, Default[key]));
+                setStartButtonTheme("Default");
                 setTopBarIconTheme("Default");
                 setDialogButtonTheme("Default");
                 setWindowBackgroundFX("None");
@@ -154,6 +164,9 @@ export function ThemeProvider({ children }) {
         theme,
         themeList,
         setTheme,
+        startButtonTheme,
+        startButtonThemeList,
+        setStartButtonTheme,
         topBarIconTheme,
         topBarIconThemeList,
         setTopBarIconTheme,

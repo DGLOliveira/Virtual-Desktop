@@ -36,7 +36,7 @@ export default function Definitions() {
         </div>
         <div
           onClick={() => { setDefPage("Taskbar"); setSubMenu("Taskbar") }}
-          className={defPage === "Taskbar" ? "defMenuButtonON" : ""}
+          className={subMenu === "Taskbar" ? "defMenuButtonON" : ""}
         >
           Taskbar
         </div>
@@ -97,7 +97,7 @@ export default function Definitions() {
           </>
         }
         <div
-          onClick={() => setDefPage("ContextMenu")}
+          onClick={() => {setDefPage("ContextMenu"); setSubMenu("none")}}
           className={defPage === "ContextMenu" ? "defMenuButtonON" : ""}
         >
           Context Menu

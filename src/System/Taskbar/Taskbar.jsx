@@ -1,7 +1,7 @@
 // Renders the taskbar, allowing the user to open, minimize, maximize, and close all available apps, 
 // as well as also displays current time and provides a way to close and reload the website
 import { useState, useContext, Suspense, lazy } from "react";
-import { StartButton } from "./Components/StartButton.js";
+import { StartButton } from "./Components/Start/StartButton.js";
 import { LiveApps } from "./Components/LiveApps.js";
 import { TaskbarClock } from "./Components/Clock/index.jsx";
 import { Weather } from "./Components/Weather/index.jsx";

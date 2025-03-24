@@ -1,0 +1,80 @@
+start-list {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    bottom: var(--TaskbarHeight);
+    overflow: hidden;
+    transition: 1s ease-in-out 0s;
+    color: var(--StartMenuFontColor);
+    background: var(--StartMenuBkgr);
+}
+
+start-list>ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding-left: 14px;
+    margin-left: var(--StartMenuIconSize);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+start-list>ul>li {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+}
+
+start-list>ul>li>button {
+    font-size: var(--StartMenuFontSize);
+    display: block;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    text-align: start;
+    align-items: start;
+    width: 100%;
+    padding: 2px;
+    color: var(--StartMenuFontColor);
+}
+
+start-list>ul>li>button>svg {
+    width: var(--StartMenuIconSize);
+    height: var(--StartMenuIconSize);
+}
+
+start-list>div {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    width: calc(var(--StartMenuIconSize) + 10px);
+    height: 100%;
+    border-right: 2px gray solid;
+    margin-bottom: 2px;
+    overflow-x: hidden;
+    transition: 0.3s;
+    transition-delay: 0.3s;
+}
+
+start-list>div:hover {
+    width: 150px;
+    background: var(--StartMenuBkgr);
+}
+
+start-list>div>button {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 150px;
+    font-size: var(--StartMenuIconSize);
+    padding: 4px;
+}
+
+start-list>div>button>svg {
+    padding-right: 10px;
+}

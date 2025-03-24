@@ -6,6 +6,27 @@ import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPi
 import { FcGlobe } from "react-icons/fc";
 
 export const TaskBarPreview = () => {
+    const themeContext = useContext(ThemeContext);
+    const startButtonClass = () => {
+      let ans = "";
+      switch (themeContext.startButtonTheme) {
+        case "Classic":
+          ans= "startButtonClassic";
+          break;
+        case "Aero":
+          ans= "startButtonAero";
+          break;
+        case "Aqua":
+          ans= "startButtonAqua";
+          break;
+        case "Default":
+        default:
+          ans= "startButtonFluent";
+          break;
+      }
+      return ans;
+    }
+  
   return (
     <>
       <div
@@ -24,7 +45,7 @@ export const TaskBarPreview = () => {
       >
         <start-button
         >
-          <button>
+          <button className={startButtonClass()}>
         <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             className="hex hex1"

@@ -1,8 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 
-import { FileContext } from "../../../System/FileManager/context.jsx";
-import { AppContext } from "../../AppManager/Context/context.jsx";
-import { AppIcon } from "../../AppManager/Components/AppIcon.jsx";
+import { FileContext } from "../../../FileManager/context.jsx";
+import { AppContext } from "../../../AppManager/Context/context.jsx";
+import { ThemeContext } from "../../../ThemeManager/context.jsx";
+import { AppIcon } from "../../../AppManager/Components/AppIcon.jsx";
+
+import "./startButton.css";
+import "./startList.css";
 
 import { FaGear } from "react-icons/fa6";
 import { MdOutlineRestartAlt } from "react-icons/md";
@@ -11,6 +15,7 @@ import { RiShutDownLine } from "react-icons/ri";
 export const StartButton = () => {
   const fileContext = useContext(FileContext);
   const appContext = useContext(AppContext);
+  const themeContext = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleBlur = (event) => {
@@ -30,6 +35,29 @@ export const StartButton = () => {
     addEventListener("keydown", handleEventListener);
     return () => removeEventListener("keydown", handleEventListener);
   }, [handleEventListener])
+
+  const startButtonClass = (isOpen) => {
+    let ans = "";
+    switch (themeContext.startButtonTheme) {
+      case "Classic":
+        ans= "startButtonClassic";
+        break;
+      case "Aero":
+        ans= "startButtonAero";
+        break;
+      case "Aqua":
+        ans= "startButtonAqua";
+        break;
+      case "Default":
+      default:
+        ans= "startButtonFluent";
+        break;
+    }
+    if (isOpen) {
+      ans += " " + ans + "Active";
+    }
+    return ans;
+  }
 
   return (
     <start-button
@@ -80,6 +108,7 @@ export const StartButton = () => {
       </start-list>
       <button
         onClick={() => setIsOpen(!isOpen)}
+        className={startButtonClass(isOpen)}
         title="Start (Alt + ❖)"
         aria-label="Start Button">
         <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -9,6 +9,26 @@ import { RiShutDownLine } from "react-icons/ri";
 import { FcGlobe, FcInfo, FcSettings } from "react-icons/fc";
 
 export const StartPreview = () => {
+    const themeContext = useContext(ThemeContext);
+    const startButtonClass = () => {
+      let ans = "";
+      switch (themeContext.startButtonTheme) {
+        case "Classic":
+          ans= "startButtonClassic startButtonClassicActive";
+          break;
+        case "Aero":
+          ans= "startButtonAero startButtonAeroActive";
+          break;
+        case "Aqua":
+          ans= "startButtonAqua startButtonAquaActive";
+          break;
+        case "Default":
+        default:
+          ans= "startButtonFluent startButtonFluentActive";
+          break;
+      }
+      return ans;
+    }
   return (
     <>
       <div
@@ -27,7 +47,7 @@ export const StartPreview = () => {
       >
         <start-button
         >
-          <button>
+          <button className={startButtonClass()}>
         <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             className="hex hex1"
@@ -141,6 +161,21 @@ export const Start = () => {
         <>
             <fieldset>
                 <legend>Start Button</legend>
+                <div>
+                    <label>Button Theme:</label>
+                    <select
+                        value={theme.startButtonTheme}
+                        onChange={(e) => {theme.setStartButtonTheme(e.target.value)}}
+                    >
+                        {theme.startButtonThemeList.map((theme) => {
+                            return (
+                                <option key={theme} value={theme}>
+                                    {theme}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </div>
                 <div>
                     <label>Color:</label>
                     <ColorPicker
