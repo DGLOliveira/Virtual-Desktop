@@ -7,7 +7,9 @@ import { WindowPreview, Window } from "./Pages/Windows/Window.jsx";
 import { MenuPreview, Menu } from "./Pages/Windows/Menu.jsx";
 import { AppPreview, App } from "./Pages/Windows/App.jsx";
 import { DialogPreview, Dialog } from "./Pages/Windows/Dialog.jsx";
-import { TaskbarPreview, Taskbar } from "./Pages/Taskbar.jsx";
+import { TaskBarPreview, TaskBar } from "./Pages/Taskbar/TaskBar.jsx";
+import { StartPreview, Start } from "./Pages/Taskbar/Start.jsx";
+import { TrayPreview, Tray } from "./Pages/Taskbar/Tray.jsx";
 import { ContextMenuPreview, ContextMenu } from "./Pages/ContextMenu.jsx";
 import Scenario from "../../System/Desktop/Scenario.jsx";
 import { BackgroundContext } from "../../System/Desktop/BackgroundContext.js";
@@ -33,11 +35,33 @@ export default function Definitions() {
           Desktop
         </div>
         <div
-          onClick={() => { setDefPage("Start"); setSubMenu("none") }}
-          className={defPage === "Start" ? "defMenuButtonON" : ""}
+          onClick={() => { setDefPage("Taskbar"); setSubMenu("Taskbar") }}
+          className={defPage === "Taskbar" ? "defMenuButtonON" : ""}
         >
           Taskbar
         </div>
+        {subMenu === "Taskbar" &&
+          <>
+            <div
+              onClick={() => setDefPage("Taskbar")}
+              className={defPage === "Taskbar" ? "defMenuButtonON" : ""}
+            >
+              {">"}Taskbar
+            </div>
+            <div
+              onClick={() => setDefPage("Start")}
+              className={defPage === "Start" ? "defMenuButtonON" : ""}
+            >
+              {">"}Start
+            </div>
+            <div
+              onClick={() => setDefPage("Tray")}
+              className={defPage === "Tray" ? "defMenuButtonON" : ""}
+            >
+              {">"}Tray
+            </div>
+          </>
+        }
         <div
           onClick={() => { setDefPage("Window"); setSubMenu("Window") }}
           className={subMenu === "Window" ? "defMenuButtonON" : ""}
@@ -83,7 +107,9 @@ export default function Definitions() {
         <div className="defPreview">
           {background.state.active === "scenario" ? <Scenario /> : <></>}
           {defPage === "Desktop" ? <DesktopPreview /> : <></>}
-          {defPage === "Start" ? <TaskbarPreview /> : <></>}
+          {defPage === "Taskbar" ? <TaskBarPreview /> : <></>}
+          {defPage === "Start" ? <StartPreview /> : <></>}
+          {defPage === "Tray" ? <TrayPreview /> : <></>}
           {defPage === "Window" ? <WindowPreview /> : <></>}
           {defPage === "Menu" ? <MenuPreview /> : <></>}
           {defPage === "App" ? <AppPreview /> : <></>}
@@ -92,7 +118,9 @@ export default function Definitions() {
         </div>
         {defPage === "Global" ? <Global /> : <></>}
         {defPage === "Desktop" ? <Desktop /> : <></>}
-        {defPage === "Start" ? <Taskbar /> : <></>}
+        {defPage === "Taskbar" ? <TaskBar /> : <></>}
+        {defPage === "Start" ? <Start /> : <></>}
+        {defPage === "Tray" ? <Tray /> : <></>}
         {defPage === "Window" ? <Window /> : <></>}
         {defPage === "App" ? <App /> : <></>}
         {defPage === "Menu" ? <Menu /> : <></>}

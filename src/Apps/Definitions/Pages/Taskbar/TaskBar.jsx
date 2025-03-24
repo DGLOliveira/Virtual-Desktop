@@ -1,0 +1,166 @@
+import { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
+
+import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
+
+import { FcGlobe } from "react-icons/fc";
+
+export const TaskBarPreview = () => {
+  return (
+    <>
+      <div
+        style={{
+          position: "absolute",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          bottom: "0",
+          left: "0",
+          width: "100%",
+          height: "var(--TaskbarHeight)",
+          background: "var(--TaskbarBkgr)",
+          zIndex: 1,
+        }}
+      >
+        <start-button
+        >
+          <button>
+        <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            className="hex hex1"
+            d="M41.0481 108.077L105 71.1547L168.952 108.077V181.923L105 218.845L41.0481 181.923V108.077Z"
+            stroke="#808080"
+            strokeWidth="8"
+          />
+          <path
+            className="hex hex2"
+            d="M231.048 108.077L295 71.1547L358.952 108.077V181.923L295 218.845L231.048 181.923V108.077Z"
+            stroke="#808080"
+            strokeWidth="8"
+          />
+          <path
+            className="hex hex3"
+            d="M136.048 273.077L200 236.155L263.952 273.077V346.923L200 383.845L136.048 346.923V273.077Z"
+            stroke="#808080"
+            strokeWidth="8"
+          />
+          <path className="axis" d="M200 200L200 60" stroke="#808080" strokeWidth="8" />
+          <path className="axis" d="M200 200L78.7564 270" stroke="#808080" strokeWidth="8" />
+          <path className="axis" d="M200 200L321.244 270" stroke="#808080" strokeWidth="8" />
+        </svg>
+          </button>
+        </start-button>
+        <live-apps>
+          <button>
+            <FcGlobe />
+          </button>
+        </live-apps>
+      </div>
+    </>
+  );
+};
+
+export const TaskBar = () => {
+
+    var root = document.querySelector(":root");
+    const theme = useContext(ThemeContext);
+
+    const [taskbarHeight, setTaskbarHeight] = useState(
+        getComputedStyle(root).getPropertyValue("--TaskbarHeight").slice(0, -2),
+    );
+    useEffect(() => {
+        root.style.setProperty("--TaskbarHeight", taskbarHeight + "px");
+    }, [taskbarHeight]);
+    //----------------------------------------------------------------------------//
+    const [taskbarIconSize, setTaskbarIconSize] = useState(
+        getComputedStyle(root).getPropertyValue("--TaskbarIconSize").slice(0, -2),
+    );
+    useEffect(() => {
+        root.style.setProperty("--TaskbarIconSize", taskbarIconSize + "px");
+    }, [taskbarIconSize]);
+    //----------------------------------------------------------------------------//
+    const [taskbarBkgr, setTaskbarBkgr] = useState(
+        getComputedStyle(root).getPropertyValue("--TaskbarBkgr"),
+    );
+    useEffect(() => {
+        root.style.setProperty("--TaskbarBkgr", taskbarBkgr);
+    }, [taskbarBkgr]);
+    //----------------------------------------------------------------------------//
+    const [taskbarFontSize, setTaskbarFontSize] = useState(
+        getComputedStyle(root).getPropertyValue("--TaskbarFontSize").slice(0, -2),
+    );
+    useEffect(() => {
+        root.style.setProperty("--TaskbarFontSize", taskbarFontSize + "px");
+    }, [taskbarFontSize]);
+    //----------------------------------------------------------------------------//
+    /*const [taskbarFontColor, setTaskbarFontColor] = useState(
+        getComputedStyle(root).getPropertyValue("--TaskbarFontColor"),
+    );
+    useEffect(() => {
+        root.style.setProperty("--TaskbarFontColor", taskbarFontColor);
+    }, [taskbarFontColor]);*/
+    //----------------------------------------------------------------------------//
+
+    return (
+        <>
+            <fieldset>
+                <legend>Dimentions:</legend>
+                <div>
+                    <label>Height:</label>
+                    <input
+                        type="range"
+                        min={20}
+                        max={60}
+                        step="1"
+                        value={taskbarHeight}
+                        onChange={(e) => setTaskbarHeight(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Font Size:</label>
+                    <input
+                        type="range"
+                        min={10}
+                        max={26}
+                        step="1"
+                        value={taskbarFontSize}
+                        onChange={(e) => setTaskbarFontSize(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Icon Size:</label>
+                    <input
+                        type="range"
+                        min={10}
+                        max={60}
+                        step="1"
+                        value={taskbarIconSize}
+                        onChange={(e) => setTaskbarIconSize(e.target.value)}
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Background:</legend>
+                <div>
+                    <label>Color:</label>
+                    <ColorPicker
+                        color={taskbarBkgr}
+                        setColor={setTaskbarBkgr}
+                        useAlpha={true}
+                    />
+                </div>
+                <div>
+                    <label>Background FX:</label>
+                    <select
+                        value={theme.taskbarBackgroundFX}
+                        onChange={(e) => theme.setTaskbarBackgroundFX(e.target.value)}
+                    >{
+                            theme.backgroundFXList.map((fx) => (
+                                <option key={fx} value={fx}>{fx}</option>
+                            ))}
+                    </select>
+                </div>
+            </fieldset>
+        </>
+    )
+}
