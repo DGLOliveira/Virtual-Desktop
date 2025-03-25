@@ -18,7 +18,12 @@ export const TrayPreview = () => {
                     left: "0",
                     width: "100%",
                     height: "var(--TaskbarHeight)",
-                    background: "var(--TaskbarBkgr)",
+                    backgroundColor: "var(--TaskbarBkgr)",
+                    backgroundImage: "var(--TaskbarBkgrImage)",
+                    backgroundPosition: "var(--TaskbarBkgrPosition)",
+                    backgroundSize: "var(--TaskbarBkgrSize)",
+                    backgroundRepeat: "var(--TaskbarBkgrRepeat)",
+                    backdropFilter: "var(--TaskbarBackdropFilter)",
                     zIndex: 1,
                 }}
             >

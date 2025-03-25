@@ -9,24 +9,26 @@ import { RiShutDownLine } from "react-icons/ri";
 import { FcGlobe, FcInfo, FcSettings } from "react-icons/fc";
 
 export const StartPreview = () => {
+  const [open, setOpen] = useState(false);
   const themeContext = useContext(ThemeContext);
-  const startButtonClass = () => {
+  const startButtonClass = (open) => {
     let ans = "";
     switch (themeContext.startButtonTheme) {
       case "Classic":
-        ans = "startButtonClassic startButtonClassicActive";
+        ans = "startButtonClassic";
         break;
       case "Aero":
-        ans = "startButtonAero startButtonAeroActive";
+        ans = "startButtonAero";
         break;
       case "Aqua":
-        ans = "startButtonAqua startButtonAquaActive";
+        ans = "startButtonAqua";
         break;
       case "Default":
       default:
-        ans = "startButtonFluent startButtonFluentActive";
+        ans = "startButtonFluent";
         break;
     }
+    if (open) { ans += " " + ans + "Active" };
     return ans;
   }
   return (
@@ -41,13 +43,18 @@ export const StartPreview = () => {
           left: "0",
           width: "100%",
           height: "var(--TaskbarHeight)",
-          background: "var(--TaskbarBkgr)",
+          backgroundColor: "var(--TaskbarBkgr)",
+          backgroundImage: "var(--TaskbarBkgrImage)",
+          backgroundPosition: "var(--TaskbarBkgrPosition)",
+          backgroundSize: "var(--TaskbarBkgrSize)",
+          backgroundRepeat: "var(--TaskbarBkgrRepeat)",
+          backdropFilter: "var(--TaskbarBackdropFilter)",
           zIndex: 1,
         }}
       >
         <start-button
         >
-          <button className={startButtonClass()}>
+          <button className={startButtonClass(open)} onClick={() => setOpen(!open)}>
             <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="startButtonAquaRed" gradientTransform="rotate(90)">
@@ -70,8 +77,9 @@ export const StartPreview = () => {
                 className="hex hex1"
                 style={{
                   mixBlendMode: "screen",
-                  fill: startButtonClass() === "startButtonAqua startButtonAquaActive" ? "url(#startButtonAquaRed)" : "#FF0000",
-                  transform: "translate(45%, 23%) scale(1.5)",
+                  fill: startButtonClass(false) === "startButtonAqua" ? "url(#startButtonAquaRed)" : open ? "#FF0000" : "",
+                  transform: open ? "translate(45%, 23%) scale(1.5)" : "",
+                  transition: "fill 0.5s ease-in-out, transform 0.5s ease-in-out"
                 }}
                 d="M41.0481 108.077L105 71.1547L168.952 108.077V181.923L105 218.845L41.0481 181.923V108.077Z"
                 stroke="#808080"
@@ -81,8 +89,9 @@ export const StartPreview = () => {
                 className="hex hex2"
                 style={{
                   mixBlendMode: "screen",
-                  fill: startButtonClass() === "startButtonAqua startButtonAquaActive" ? "url(#startButtonAquaGreen)" : "#00FF00",
-                  transform: "translate(-45%, 23%) scale(1.5)",
+                  fill: startButtonClass(false) === "startButtonAqua" ? "url(#startButtonAquaGreen)" : open ? "#00FF00" : "",
+                  transform: open ? "translate(-45%, 23%) scale(1.5)" : "",
+                  transition: "fill 0.5s ease-in-out, transform 0.5s ease-in-out"
                 }}
                 d="M231.048 108.077L295 71.1547L358.952 108.077V181.923L295 218.845L231.048 181.923V108.077Z"
                 stroke="#808080"
@@ -92,8 +101,9 @@ export const StartPreview = () => {
                 className="hex hex3"
                 style={{
                   mixBlendMode: "screen",
-                  fill: startButtonClass() === "startButtonAqua startButtonAquaActive" ? "url(#startButtonAquaBlue)" : "#0000FF",
-                  transform: "translate(0, -45%) scale(1.5)"
+                  fill: startButtonClass(false) === "startButtonAqua" ? "url(#startButtonAquaBlue)" : open ? "#0000FF" : "",
+                  transform: open ? "translate(0, -45%) scale(1.5)" : "",
+                  transition: "fill 0.5s ease-in-out, transform 0.5s ease-in-out"
                 }}
                 d="M136.048 273.077L200 236.155L263.952 273.077V346.923L200 383.845L136.048 346.923V273.077Z"
                 stroke="#808080"
@@ -105,42 +115,6 @@ export const StartPreview = () => {
             </svg>
             <span>Start</span>
           </button>
-          <start-list class={"expandHeight expandWidth"} style={{ left: 0, transition: "0s" }}>
-            <ul>
-              <li>
-                <button>
-                  <FcGlobe />
-                  {" "}Program 1
-                </button>
-              </li>
-              <li>
-                <button>
-                  <FcInfo />
-                  {" "}Program 2
-                </button>
-              </li>
-              <li>
-                <button>
-                  <FcSettings />
-                  {" "}Program 3
-                </button>
-              </li>
-            </ul>
-            <div style={{ transition: "0s" }}>
-              <button>
-                <FaGear />
-                Settings
-              </button>
-              <button>
-                <MdOutlineRestartAlt />
-                Refresh
-              </button>
-              <button className="buttonActiveRed">
-                <RiShutDownLine />
-                Close
-              </button>
-            </div>
-          </start-list>
         </start-button>
         <live-apps></live-apps>
       </div>
@@ -244,27 +218,11 @@ export const Start = () => {
     root.style.setProperty("--StartButtonFontSize", startButtonFontSize + "px");
   }, [startButtonFontSize]);
   //----------------------------------------------------------------------------//
-  const [startMenuBkgr, setStartMenuBkgr] = useState(
-    getComputedStyle(root).getPropertyValue("--StartMenuBkgr"),
-  );
-  useEffect(() => {
-    root.style.setProperty("--StartMenuBkgr", startMenuBkgr);
-  }, [startMenuBkgr]);
-  //----------------------------------------------------------------------------//
-  const [startMenuFontColor, setStartMenuFontColor] = useState(
-    getComputedStyle(root).getPropertyValue("--StartMenuFontColor"),
-  );
-  useEffect(() => {
-    root.style.setProperty("--StartMenuFontColor", startMenuFontColor);
-  }, [startMenuFontColor]);
-  //----------------------------------------------------------------------------//
 
   return (
     <>
       <fieldset>
-        <legend>Start Button</legend>
-        <fieldset>
-          <legend>Icon</legend>
+        <legend>Icon</legend>
         <div>
           <label>Icon Theme:</label>
           <select
@@ -290,154 +248,134 @@ export const Start = () => {
             onChange={(e) => setStartButtonIconSize(e.target.value)}
           />
         </div>
-        </fieldset>
-        <fieldset>
-          <legend>Background</legend>
-          <div>
-            <label>Base:</label>
-            <ColorPicker
-              color={startButtonBkgr}
-              setColor={setStartButtonBkgr}
-              useAlpha={true}
-            />
-          </div>
-          <div>
-            <label>Hover:</label>
-            <ColorPicker
-              color={startButtonBkgrHover}
-              setColor={setStartButtonBkgrHover}
-              useAlpha={true}
-            />
-          </div>
-          <div>
-            <label>Active:</label>
-            <ColorPicker
-              color={startButtonBkgrActive}
-              setColor={setStartButtonBkgrActive}
-              useAlpha={true}
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Text</legend>
-          <div>
-            <label>Visibility</label>
-            <select
-              value={startButtonFontVisibility}
-              onChange={(e) => setStartButtonFontVisibility(e.target.value)}
-            >
-              <option value="visible">Visible</option>
-              <option value="none">Hidden</option>
-            </select>
-          </div>
-          <div>
-            <label>Color:</label>
-            <ColorPicker
-              color={startButtonFontColor}
-              setColor={setStartButtonFontColor}
-              useAlpha={false}
-            />
-          </div>
-          <div>
-            <label>Size:</label>
-            <input
-              type="range"
-              min={12}
-              max={46}
-              step="1"
-              value={startButtonFontSize}
-              onChange={(e) => setStartButtonFontSize(e.target.value)}
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Border</legend>
-          <div>
-            <label>Color:</label>
-            <ColorPicker
-              color={startButtonBorderColor}
-              setColor={setStartButtonBorderColor}
-              useAlpha={true}
-            />
-          </div>
-          <div>
-            <label>Width:</label>
-            <input
-              type="range"
-              min={0}
-              max={5}
-              step="1"
-              value={startButtonBorderWidth}
-              onChange={(e) => setStartButtonBorderWidth(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Corner Curvature:</label>
-            <input
-              type="range"
-              min={0}
-              max={60}
-              step="1"
-              value={startButtonBorderRadius}
-              onChange={(e) => setStartButtonBorderRadius(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Border Type:</label>
-            <select
-              value={startButtonBorderType}
-              onChange={(e) => setStartButtonBorderType(e.target.value)}
-            >
-              <option value="solid">solid</option>
-              <option value="double">double</option>
-              <option value="dashed">dashed</option>
-              <option value="dotted">dotted</option>
-              <option value="groove">groove</option>
-              <option value="ridge">ridge</option>
-              <option value="inset">inset</option>
-              <option value="outset">outset</option>
-            </select>
-          </div>
-          <div>
-            <label>Margin:</label>
-            <input
-              type="range"
-              min={0}
-              max={10}
-              step="1"
-              value={startButtonMargin}
-              onChange={(e) => setStartButtonMargin(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Padding:</label>
-            <input
-              type="range"
-              min={0}
-              max={20}
-              step="1"
-              value={startButtonPadding}
-              onChange={(e) => setStartButtonPadding(e.target.value)}
-            />
-          </div>
-        </fieldset>
       </fieldset>
       <fieldset>
-        <legend>Start Menu</legend>
+        <legend>Background</legend>
         <div>
-          <label>Font Color:</label>
+          <label>Base:</label>
           <ColorPicker
-            color={startMenuFontColor}
-            setColor={setStartMenuFontColor}
+            color={startButtonBkgr}
+            setColor={setStartButtonBkgr}
+            useAlpha={true}
+          />
+        </div>
+        <div>
+          <label>Hover:</label>
+          <ColorPicker
+            color={startButtonBkgrHover}
+            setColor={setStartButtonBkgrHover}
+            useAlpha={true}
+          />
+        </div>
+        <div>
+          <label>Active:</label>
+          <ColorPicker
+            color={startButtonBkgrActive}
+            setColor={setStartButtonBkgrActive}
+            useAlpha={true}
+          />
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Text</legend>
+        <div>
+          <label>Visibility</label>
+          <select
+            value={startButtonFontVisibility}
+            onChange={(e) => setStartButtonFontVisibility(e.target.value)}
+          >
+            <option value="visible">Visible</option>
+            <option value="none">Hidden</option>
+          </select>
+        </div>
+        <div>
+          <label>Color:</label>
+          <ColorPicker
+            color={startButtonFontColor}
+            setColor={setStartButtonFontColor}
             useAlpha={false}
           />
         </div>
         <div>
-          <label>Background:</label>
+          <label>Size:</label>
+          <input
+            type="range"
+            min={12}
+            max={46}
+            step="1"
+            value={startButtonFontSize}
+            onChange={(e) => setStartButtonFontSize(e.target.value)}
+          />
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Border</legend>
+        <div>
+          <label>Color:</label>
           <ColorPicker
-            color={startMenuBkgr}
-            setColor={setStartMenuBkgr}
+            color={startButtonBorderColor}
+            setColor={setStartButtonBorderColor}
             useAlpha={true}
+          />
+        </div>
+        <div>
+          <label>Width:</label>
+          <input
+            type="range"
+            min={0}
+            max={5}
+            step="1"
+            value={startButtonBorderWidth}
+            onChange={(e) => setStartButtonBorderWidth(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Corner Curvature:</label>
+          <input
+            type="range"
+            min={0}
+            max={60}
+            step="1"
+            value={startButtonBorderRadius}
+            onChange={(e) => setStartButtonBorderRadius(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Border Type:</label>
+          <select
+            value={startButtonBorderType}
+            onChange={(e) => setStartButtonBorderType(e.target.value)}
+          >
+            <option value="solid">solid</option>
+            <option value="double">double</option>
+            <option value="dashed">dashed</option>
+            <option value="dotted">dotted</option>
+            <option value="groove">groove</option>
+            <option value="ridge">ridge</option>
+            <option value="inset">inset</option>
+            <option value="outset">outset</option>
+          </select>
+        </div>
+        <div>
+          <label>Margin:</label>
+          <input
+            type="range"
+            min={0}
+            max={10}
+            step="1"
+            value={startButtonMargin}
+            onChange={(e) => setStartButtonMargin(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Padding:</label>
+          <input
+            type="range"
+            min={0}
+            max={20}
+            step="1"
+            value={startButtonPadding}
+            onChange={(e) => setStartButtonPadding(e.target.value)}
           />
         </div>
       </fieldset>

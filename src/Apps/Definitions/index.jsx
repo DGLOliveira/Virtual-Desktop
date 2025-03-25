@@ -9,6 +9,7 @@ import { AppPreview, App } from "./Pages/Windows/App.jsx";
 import { DialogPreview, Dialog } from "./Pages/Windows/Dialog.jsx";
 import { TaskBarPreview, TaskBar } from "./Pages/Taskbar/TaskBar.jsx";
 import { StartPreview, Start } from "./Pages/Taskbar/Start.jsx";
+import { StartMenuPreview, StartMenu } from "./Pages/Taskbar/StartMenu.jsx";
 import { TrayPreview, Tray } from "./Pages/Taskbar/Tray.jsx";
 import { ContextMenuPreview, ContextMenu } from "./Pages/ContextMenu.jsx";
 import Scenario from "../../System/Desktop/Scenario.jsx";
@@ -53,6 +54,12 @@ export default function Definitions() {
               className={defPage === "Start" ? "defMenuButtonON" : ""}
             >
               {">"}Start
+            </div>
+            <div
+              onClick={() => setDefPage("StartMenu")}
+              className={defPage === "StartMenu" ? "defMenuButtonON" : ""}
+            >
+              {">"}Start Menu
             </div>
             <div
               onClick={() => setDefPage("Tray")}
@@ -109,6 +116,7 @@ export default function Definitions() {
           {defPage === "Desktop" ? <DesktopPreview /> : <></>}
           {defPage === "Taskbar" ? <TaskBarPreview /> : <></>}
           {defPage === "Start" ? <StartPreview /> : <></>}
+          {defPage === "StartMenu" ? <StartMenuPreview /> : <></>}
           {defPage === "Tray" ? <TrayPreview /> : <></>}
           {defPage === "Window" ? <WindowPreview /> : <></>}
           {defPage === "Menu" ? <MenuPreview /> : <></>}
@@ -120,6 +128,7 @@ export default function Definitions() {
         {defPage === "Desktop" ? <Desktop /> : <></>}
         {defPage === "Taskbar" ? <TaskBar /> : <></>}
         {defPage === "Start" ? <Start /> : <></>}
+        {defPage === "StartMenu" ? <StartMenu /> : <></>}
         {defPage === "Tray" ? <Tray /> : <></>}
         {defPage === "Window" ? <Window /> : <></>}
         {defPage === "App" ? <App /> : <></>}
