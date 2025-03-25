@@ -169,6 +169,7 @@ export const StartButton = () => {
           <path className="axis" d="M200 200L78.7564 270" stroke="#808080" strokeWidth="8" />
           <path className="axis" d="M200 200L321.244 270" stroke="#808080" strokeWidth="8" />
         </svg>
+        <span>Start</span>
       </button>
     </start-button>
   )

@@ -7,10 +7,29 @@ start-button {
 start-button>button {
     position: relative;
     display: flex;
+    flex-direction: row;
     height: 100%;
-    color: var(--StartButtonColor);
     font-size: var(--TaskbarIconSize);
     box-sizing: border-box;
+    background-color: var(--StartButtonBkgr);
+    margin: var(--StartButtonMargin);
+    padding: var(--StartButtonPadding);
+    border: var(--StartButtonBorderWidth) var(--StartButtonBorderColor) var(--StartButtonBorderType);
+    border-radius: var(--StartButtonBorderRadius);
+}
+
+start-button>button:hover:enabled {
+    background-color: var(--StartButtonBkgrHover);
+}
+
+start-button>button:active:enabled {
+    background-color: var(--StartButtonBkgrActive);
+}
+
+start-button>button>span {
+    display: var(--StartButtonFontVisibility);
+    color: var(--StartButtonFontColor);
+    font-size: var(--StartButtonFontSize);
 }
 
 start-button>button>svg {
@@ -21,7 +40,6 @@ start-button>button>svg {
 start-button>button>svg>.hex {
     transform-box: fill-box;
     transform-origin: center;
-    transition: fill 0.5s ease-in-out;
 }
 
 start-button>button:hover>svg>.hex1 {
@@ -42,42 +60,23 @@ start-button>button:hover>svg>.hex3 {
 
 .startButtonClassic {
     height: calc(100% - 6px);
-    margin: 3px;
-    border: 2px gray outset;
-    border-radius: 0px;
-    background: none;
-}
-
-.startButtonClassic:hover:enabled {
-    background: none;
 }
 
 .startButtonClassicActive {
-    background: none;
-    border: 2px gray inset;
+    background-color: var(--StartButtonBkgrActive);
+    border: var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset;
 }
 
 .startButtonClassic:active:enabled {
-    background: none;
-    border: 2px gray inset;
+    background-color: var(--StartButtonBkgrActive);
+    border: var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset;
 }
-
 
 /*------------------------------------------------------------*/
 /*------------------------Aqua Button-------------------------*/
 /*------------------------------------------------------------*/
 
-.startButtonAqua:hover:enabled {
-    background: none;
-}
-
-.startButtonAqua:active:enabled {
-    background: none;
-}
-
-.startButtonAquaActive {
-    background: none;
-}
+/*All styling for this button is done by variables and svg definitions*/
 
 /*------------------------------------------------------------*/
 /*------------------------Aero Button-------------------------*/
@@ -86,10 +85,7 @@ start-button>button:hover>svg>.hex3 {
 .startButtonAero {
     width: var(--TaskbarIconSize);
     height: var(--TaskbarIconSize);
-    margin: 3px;
     margin-left: 6px;
-    border-radius: 100%;
-    border: 1px solid #4d7bbf;
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
 }

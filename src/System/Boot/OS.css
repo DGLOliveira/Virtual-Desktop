@@ -131,8 +131,19 @@
   --TaskbarClockColor: hsl(0, 0%, 75%);
   --TaskbarWeatherColor: hsl(0, 0%, 75%);
 
-  --StartButtonColor: hsl(0, 0%, 75%);
-  --StartButtonActiveColor: hsl(195, 100%, 38%);
+  --StartButtonBkgr: hsla(0, 0%, 0%, 0);
+  --StartButtonBkgrHover: hsla(0, 0%, 100%, 0.25);
+  --StartButtonBkgrActive: hsla(0, 0%, 100%, 0.5);
+  --StartButtonMargin: 0px;
+  --StartButtonPadding: 0px;
+  --StartButtonBorderWidth: 0px;
+  --StartButtonBorderType: none;
+  --StartButtonBorderColor: hsla(0, 0%, 0%, 0);
+  --StartButtonBorderRadius: 0px;
+  --StartButtonFontColor: hsl(0, 0%, 75%);
+  --StartButtonFontSize: 16px;
+  --StartButtonFontVisibility: none;
+
   --StartMenuBkgr: hsla(0, 0%, 0%, 0.9);
   --StartMenuFontColor: hsl(0, 0%, 75%);
   --StartMenuFontSize: 24px;
