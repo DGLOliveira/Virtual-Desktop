@@ -108,7 +108,7 @@
     "--ContextMenuButtonHoverBkgr": "hsla(200, 100%, 50%, 1)",
     "--ContextMenuPadding": "1px",
 
-    "--TaskbarBkgr": "hsla(0, 0%, 0%, 0.8)",
+    "--TaskbarBkgr": "hsla(216, 47%, 30%, 0.7)",
     "--TaskbarHeight": "36px",
     "--TaskbarIconSize": "28px",
     "--TaskbarFontColor": "hsl(0, 0%, 75%)",
@@ -119,6 +119,7 @@
     "--StartButtonBkgr": "hsla(0, 0%, 0%, 0)",
     "--StartButtonBkgrHover": "hsla(0, 0%, 100%, 0)",
     "--StartButtonBkgrActive": "hsla(0, 0%, 100%, 0)",
+    "--StartButtonIconSize": "28px",
     "--StartButtonMargin": "3px",
     "--StartButtonPadding": "0px",
     "--StartButtonBorderWidth": "0px",

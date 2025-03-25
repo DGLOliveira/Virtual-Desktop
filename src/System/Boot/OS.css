@@ -134,6 +134,7 @@
   --StartButtonBkgr: hsla(0, 0%, 0%, 0);
   --StartButtonBkgrHover: hsla(0, 0%, 100%, 0.25);
   --StartButtonBkgrActive: hsla(0, 0%, 100%, 0.5);
+  --StartButtonIconSize: 28px;
   --StartButtonMargin: 0px;
   --StartButtonPadding: 0px;
   --StartButtonBorderWidth: 0px;

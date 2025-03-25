@@ -174,6 +174,13 @@ export const Start = () => {
     root.style.setProperty("--StartButtonBkgrActive", startButtonBkgrActive);
   }, [startButtonBkgrActive]);
   //----------------------------------------------------------------------------//
+  const [startButtonIconSize, setStartButtonIconSize] = useState(
+    getComputedStyle(root).getPropertyValue("--StartButtonIconSize").slice(0, -2),
+  );
+  useEffect(() => {
+    root.style.setProperty("--StartButtonIconSize", startButtonIconSize + "px");
+  }, [startButtonIconSize]);
+  //----------------------------------------------------------------------------//
   const [startButtonMargin, setStartButtonMargin] = useState(
     getComputedStyle(root).getPropertyValue("--StartButtonMargin").slice(0, -2),
   );
@@ -256,8 +263,10 @@ export const Start = () => {
     <>
       <fieldset>
         <legend>Start Button</legend>
+        <fieldset>
+          <legend>Icon</legend>
         <div>
-          <label>Button Theme:</label>
+          <label>Icon Theme:</label>
           <select
             value={theme.startButtonTheme}
             onChange={(e) => { theme.setStartButtonTheme(e.target.value) }}
@@ -271,6 +280,17 @@ export const Start = () => {
             })}
           </select>
         </div>
+        <div>
+          <label>Size:</label>
+          <input
+            type="range"
+            min="12"
+            max="46"
+            value={startButtonIconSize}
+            onChange={(e) => setStartButtonIconSize(e.target.value)}
+          />
+        </div>
+        </fieldset>
         <fieldset>
           <legend>Background</legend>
           <div>
