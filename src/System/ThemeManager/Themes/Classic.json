@@ -123,7 +123,7 @@
     "--StartButtonPadding": "1px",
     "--StartButtonBorderWidth": "2px",
     "--StartButtonBorderType": "outset",
-    "--StartButtonBorderColor": "hsl(0, 0%, 50%)",
+    "--StartButtonBorderColor": "hsla(0, 0%, 50%, 1)",
     "--StartButtonBorderRadius": "0px",
     "--StartButtonFontColor": "hsl(0, 0%, 0%)",
     "--StartButtonFontSize": "16px",
