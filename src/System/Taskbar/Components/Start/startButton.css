@@ -72,6 +72,18 @@ start-button>button:hover>svg>.hex3 {
     border: var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset;
 }
 
+.startButtonClassic>svg>.hex1 {
+    fill: #FF0000;
+}
+
+.startButtonClassic>svg>.hex2 {
+    fill: #00FF00;
+}
+
+.startButtonClassic>svg>.hex3 {
+    fill: #0000FF;
+}
+
 /*------------------------------------------------------------*/
 /*------------------------Aqua Button-------------------------*/
 /*------------------------------------------------------------*/
@@ -81,13 +93,14 @@ start-button>button:hover>svg>.hex3 {
 /*------------------------------------------------------------*/
 /*------------------------Aero Button-------------------------*/
 /*------------------------------------------------------------*/
-
-.startButtonAero {
-    width: var(--TaskbarIconSize);
-    height: var(--TaskbarIconSize);
+.startButtonAero{
     margin-left: 6px;
+}
+.startButtonAero>svg {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+    border-radius:50%;
+    border: 1px hsla(216, 47%, 53%, 1) solid;
 }
 
 .startButtonAero>svg>.hex1 {
@@ -102,17 +115,17 @@ start-button>button:hover>svg>.hex3 {
     fill: #0000FF;
 }
 
-.startButtonAero:hover:enabled {
+.startButtonAero>svg:hover:enabled {
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.5) inset;
 }
 
-.startButtonAero:active:enabled {
+.startButtonAero>svg:active:enabled {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
 }
 
-.startButtonAeroActive {
+.startButtonAeroActive>svg {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
