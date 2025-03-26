@@ -2,7 +2,7 @@ live-apps {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    align-items: bottom;
+    align-items: end;
     width: 100%;
 }
 
@@ -30,6 +30,7 @@ live-apps>button>svg {
 live-apps>button>span {
     display: var(--LiveAppsFontVisibility);
     font-size: var(--LiveAppsFontSize);
+    margin-left:2px;
 }
 
 live-apps>button:hover:enabled {
@@ -40,4 +41,19 @@ live-apps>button:hover:enabled {
 live-apps>button:active:enabled {
     color: var(--LiveAppsFontColorActive);
     background-color: var(--LiveAppsBkgrActive);
+}
+
+
+/*------------------------------------------------------------*/
+/*-----------------------Classic Button-----------------------*/
+/*------------------------------------------------------------*/
+
+.liveAppsClassicActive {
+    background-color: var(--LiveAppsBkgrActive);
+    border: var(--LiveAppsBorderWidth) var(--LiveAppsBorderColor) inset;
+}
+
+.liveAppsClassic:active:enabled {
+    background-color: var(--LiveAppsBkgrActive);
+    border: var(--LiveAppsBorderWidth) var(--LiveAppsBorderColor) inset;
 }

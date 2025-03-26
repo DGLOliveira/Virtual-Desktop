@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { ThemeContext } from "../../../ThemeManager/context.jsx";
 import { ContextMenuContext } from "../../../ContextMenuManager/context.jsx";
 import { AppContext } from "../../../AppManager/Context/context.jsx";
 import { AppIcon } from "../../../AppManager/Components/AppIcon.jsx";
@@ -7,6 +8,8 @@ import "./styles.css";
 export const LiveApps = () => {
     const appContext = useContext(AppContext);
     const contextMenu = useContext(ContextMenuContext);
+    const themeContext = useContext(ThemeContext);
+
     const handleClick = (name) => { 
       if(!appContext.apps[name].State.isMinimized && !appContext.apps[name].State.isSelected) {
         appContext.setSelected(name);
@@ -24,6 +27,28 @@ export const LiveApps = () => {
             "Close": {action: () => { appContext.setClose(appName) }}
         })
     };
+    const LiveAppsClass = (isSelected) => {
+      let ans = "";
+      switch (themeContext.startButtonTheme) {
+        case "Classic":
+          ans = "liveAppsClassic";
+          break;
+        case "Aero":
+          ans = "liveAppsAero";
+          break;
+        case "Aqua":
+          ans = "liveAppsAqua";
+          break;
+        case "Default":
+        default:
+          ans = "liveAppsFluent";
+          break;
+      }
+      if (isSelected) {
+        ans += " " + ans + "Active";
+      }
+      return ans;
+    }
     return (
         <live-apps>
           {Object.keys(appContext.apps).map((name, index, arr) =>
@@ -31,10 +56,12 @@ export const LiveApps = () => {
               <button
                 onClick={() => handleClick(name)}
                 onContextMenu={(e) => handleContextMenu(e, name)}
+                className={LiveAppsClass(appContext.apps[name].State.isSelected)}
                 key={name + "liveAppsButton"}
                 aria-label={"Live App" + {name}}
               >
                 <AppIcon appName={name} />
+                <span>{name}</span>
               </button>
             )
           )}

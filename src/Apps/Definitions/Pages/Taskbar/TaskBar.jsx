@@ -107,6 +107,7 @@ export const TaskBarPreview = () => {
         <live-apps>
           <button>
             <FcGlobe />
+            <span>App</span>
           </button>
         </live-apps>
       </div>
