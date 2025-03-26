@@ -94,9 +94,7 @@ start-button>button:hover>svg>.hex3 {
 /*------------------------------------------------------------*/
 /*------------------------Aero Button-------------------------*/
 /*------------------------------------------------------------*/
-.startButtonAero{
-    margin-left: 6px;
-}
+
 .startButtonAero>svg {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);

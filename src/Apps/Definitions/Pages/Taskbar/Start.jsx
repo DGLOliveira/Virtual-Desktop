@@ -116,6 +116,7 @@ export const StartPreview = () => {
             <span>Start</span>
           </button>
         </start-button>
+        <vertical-rect />
         <live-apps></live-apps>
       </div>
     </>

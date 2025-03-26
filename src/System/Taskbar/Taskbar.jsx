@@ -38,8 +38,10 @@ export function Taskbar() {
     <task-bar
       onContextMenu={(e) => handleContextMenu(e)}
     >
-      <StartButton />
-      <LiveApps />
+      <StartButton /> 
+      <vertical-rect />
+      <LiveApps /> 
+      <vertical-rect />
       {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
       {showClock && showWeather && <vertical-rect />}
       {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}

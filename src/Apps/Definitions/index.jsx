@@ -59,7 +59,7 @@ export default function Definitions() {
               onClick={() => setDefPage("StartMenu")}
               className={defPage === "StartMenu" ? "defMenuButtonON" : ""}
             >
-              {">"}Start Menu
+              {">"}Menu
             </div>
             <div
               onClick={() => setDefPage("Tray")}

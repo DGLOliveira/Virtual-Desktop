@@ -147,6 +147,7 @@ export const StartMenuPreview = () => {
             </div>
           </start-list>
         </start-button>
+        <vertical-rect />
         <live-apps></live-apps>
       </div>
     </>

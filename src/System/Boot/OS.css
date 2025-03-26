@@ -130,6 +130,12 @@
   --TaskbarFontSize: 13px;
   --TaskbarClockColor: hsl(0, 0%, 75%);
   --TaskbarWeatherColor: hsl(0, 0%, 75%);
+  --TaskbarVerticalBorderWidth: 2px;
+  --TaskbarVerticalBorderColor: hsla(0, 0%, 50%, 1);
+  --TaskbarVerticalBorderType: solid;
+  --TaskbarHorizontalBorderWidth: 0px;
+  --TaskbarHorizontalBorderColor: hsla(0, 0%, 50%, 1);
+  --TaskbarHorizontalBorderType: solid;
 
   --StartButtonBkgr: hsla(0, 0%, 0%, 0);
   --StartButtonBkgrHover: hsla(0, 0%, 100%, 0.25);

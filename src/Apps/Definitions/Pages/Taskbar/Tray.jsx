@@ -28,6 +28,7 @@ export const TrayPreview = () => {
                 }}
             >
                 <live-apps></live-apps>
+                <vertical-rect />
                 <taskbar-weather>
                     <button>
                         <WiCloudy /> 20°C

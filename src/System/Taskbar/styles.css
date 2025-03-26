@@ -12,14 +12,20 @@ task-bar {
   background-size: var(--TaskbarBkgrSize);
   background-repeat: var(--TaskbarBkgrRepeat);
   backdrop-filter: var(--TaskbarBackdropFilter);
+  border-top: var(--TaskbarHorizontalBorderWidth) var(--TaskbarHorizontalBorderColor) var(--TaskbarHorizontalBorderType);
+}
+
+task-bar>vertical-rect {
+  height: 100%;
+  width:0;
+  border:none;
+  border-left: var(--TaskbarVerticalBorderWidth) var(--TaskbarVerticalBorderColor) var(--TaskbarVerticalBorderType);
 }
 
 live-apps {
   display: flex;
   flex-direction: row;
   width: 100%;
-  border-left: 2px dimgray solid;
-  border-right: 2px dimgray solid;
   margin: 2px;
 }
 
