@@ -1,0 +1,43 @@
+live-apps {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: bottom;
+    width: 100%;
+}
+
+live-apps>button {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: var(--LiveAppsHeight);
+    color: var(--LiveAppsFontColor);
+    background-color: var(--LiveAppsBkgr);
+    padding-left: var(--LiveAppsPadding);
+    padding-right: var(--LiveAppsPadding);
+    margin: var(--LiveAppsMargin);
+    border: var(--LiveAppsBorderWidth) var(--LiveAppsBorderColor) var(--LiveAppsBorderType);
+    border-radius: var(--LiveAppsBorderRadius);
+}
+
+live-apps>button>svg {
+    width: var(--LiveAppsIconSize);
+    height: var(--LiveAppsIconSize);
+}
+
+live-apps>button>span {
+    display: var(--LiveAppsFontVisibility);
+    font-size: var(--LiveAppsFontSize);
+}
+
+live-apps>button:hover:enabled {
+    color: var(--LiveAppsFontColorHover);
+    background-color: var(--LiveAppsBkgrHover);
+}
+
+live-apps>button:active:enabled {
+    color: var(--LiveAppsFontColorActive);
+    background-color: var(--LiveAppsBkgrActive);
+}

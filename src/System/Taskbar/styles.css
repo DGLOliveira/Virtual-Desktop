@@ -21,23 +21,3 @@ task-bar>vertical-rect {
   border:none;
   border-left: var(--TaskbarVerticalBorderWidth) var(--TaskbarVerticalBorderColor) var(--TaskbarVerticalBorderType);
 }
-
-live-apps {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin: 2px;
-}
-
-live-apps>button {
-  display: flex;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: var(--TaskbarFontColor);
-  font-size: var(--TaskbarIconSize);
-}
-
-live-apps>button>svg {
-  width: var(--TaskbarIconSize);
-  height: var(--TaskbarIconSize);
-}

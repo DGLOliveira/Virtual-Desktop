@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { ContextMenuContext } from "../../ContextMenuManager/context.jsx";
-import { AppContext } from "../../AppManager/Context/context.jsx";
-import { AppIcon } from "../../AppManager/Components/AppIcon.jsx";
+import { ContextMenuContext } from "../../../ContextMenuManager/context.jsx";
+import { AppContext } from "../../../AppManager/Context/context.jsx";
+import { AppIcon } from "../../../AppManager/Components/AppIcon.jsx";
+import "./styles.css";
 
 export const LiveApps = () => {
     const appContext = useContext(AppContext);
