@@ -62,6 +62,7 @@ export const LiveApps = () => {
               >
                 <AppIcon appName={name} />
                 <span>{name}</span>
+                {themeContext.startButtonTheme === "Aqua" && <AppIcon appName={name} />}
               </button>
             )
           )}

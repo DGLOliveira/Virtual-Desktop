@@ -57,3 +57,23 @@ live-apps>button:active:enabled {
     background-color: var(--LiveAppsBkgrActive);
     border: var(--LiveAppsBorderWidth) var(--LiveAppsBorderColor) inset;
 }
+
+/*------------------------------------------------------------*/
+/*-------------------------Aqua Button------------------------*/
+/*------------------------------------------------------------*/
+
+.liveAppsAqua>*:last-child {
+    position: absolute;
+    rotate: 180deg;
+    translate: 0 95%;
+    mask-image: linear-gradient(to bottom, transparent 60%, gray 100%);
+}
+
+.liveAppsAquaActive::before {
+    content:"▲";
+    font-size: 16px;
+    position: absolute;
+    bottom:0;
+    color:black;
+    text-shadow: 0 0 4px white;
+}

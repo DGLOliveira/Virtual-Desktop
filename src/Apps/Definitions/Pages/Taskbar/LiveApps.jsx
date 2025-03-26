@@ -8,6 +8,28 @@ import { FcCalculator } from "react-icons/fc";
 
 export const LiveAppsPreview = () => {
     const themeContext = useContext(ThemeContext);
+    const LiveAppsClass = (isSelected) => {
+      let ans = "";
+      switch (themeContext.startButtonTheme) {
+        case "Classic":
+          ans = "liveAppsClassic";
+          break;
+        case "Aero":
+          ans = "liveAppsAero";
+          break;
+        case "Aqua":
+          ans = "liveAppsAqua";
+          break;
+        case "Default":
+        default:
+          ans = "liveAppsFluent";
+          break;
+      }
+      if (isSelected) {
+        ans += " " + ans + "Active";
+      }
+      return ans;
+    }
 
     return (
         <>
@@ -31,13 +53,15 @@ export const LiveAppsPreview = () => {
                 }}
             >
                 <live-apps>
-                    <button>
+                    <button className={LiveAppsClass(true)}>
                         <FcGlobe />
                         <span>Active</span>
+                        {themeContext.startButtonTheme === "Aqua" && <FcGlobe />}
                     </button>
-                    <button>
+                    <button className={LiveAppsClass(false)}>
                         <FcCalculator />
                         <span>Inactive</span>
+                        {themeContext.startButtonTheme === "Aqua" && <FcCalculator />}
                     </button>
                 </live-apps>
             </div>

@@ -26,6 +26,28 @@ export const TaskBarPreview = () => {
     }
     return ans;
   }
+  const LiveAppsClass = (isSelected) => {
+    let ans = "";
+    switch (themeContext.startButtonTheme) {
+      case "Classic":
+        ans = "liveAppsClassic";
+        break;
+      case "Aero":
+        ans = "liveAppsAero";
+        break;
+      case "Aqua":
+        ans = "liveAppsAqua";
+        break;
+      case "Default":
+      default:
+        ans = "liveAppsFluent";
+        break;
+    }
+    if (isSelected) {
+      ans += " " + ans + "Active";
+    }
+    return ans;
+  }
 
   return (
     <>
@@ -105,9 +127,10 @@ export const TaskBarPreview = () => {
         </start-button>
         <vertical-rect />
         <live-apps>
-          <button>
+          <button className={LiveAppsClass(true)}>
             <FcGlobe />
             <span>App</span>
+            {themeContext.startButtonTheme === "Aqua" && <FcGlobe />}
           </button>
         </live-apps>
       </div>
