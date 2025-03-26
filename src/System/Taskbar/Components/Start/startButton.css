@@ -10,7 +10,7 @@ start-button>button {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: var(--StartButtonHeight);
     box-sizing: border-box;
     background-color: var(--StartButtonBkgr);
     margin: var(--StartButtonMargin);
@@ -58,10 +58,6 @@ start-button>button:hover>svg>.hex3 {
 /*------------------------------------------------------------*/
 /*-----------------------Classic Button-----------------------*/
 /*------------------------------------------------------------*/
-
-.startButtonClassic {
-    height: calc(100% - 6px);
-}
 
 .startButtonClassicActive {
     background-color: var(--StartButtonBkgrActive);

@@ -156,6 +156,13 @@ export const Start = () => {
     root.style.setProperty("--StartButtonIconSize", startButtonIconSize + "px");
   }, [startButtonIconSize]);
   //----------------------------------------------------------------------------//
+  const [startButtonHeight, setStartButtonHeight] = useState(
+    getComputedStyle(root).getPropertyValue("--StartButtonHeight").slice(0, -2),
+  );
+  useEffect(() => {
+    root.style.setProperty("--StartButtonHeight", startButtonHeight + "px");
+  }, [startButtonHeight]);
+  //----------------------------------------------------------------------------//
   const [startButtonMargin, setStartButtonMargin] = useState(
     getComputedStyle(root).getPropertyValue("--StartButtonMargin").slice(0, -2),
   );
@@ -222,6 +229,41 @@ export const Start = () => {
 
   return (
     <>
+    <fieldset>
+      <legend>Dimentions:</legend>
+      <div>
+        <label>Height:</label>
+        <input
+          type="range"
+          min="12"
+          max="46"
+          value={startButtonHeight}
+          onChange={(e) => setStartButtonHeight(e.target.value)}
+        />
+      </div>
+        <div>
+          <label>Margin:</label>
+          <input
+            type="range"
+            min={0}
+            max={10}
+            step="1"
+            value={startButtonMargin}
+            onChange={(e) => setStartButtonMargin(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Padding:</label>
+          <input
+            type="range"
+            min={0}
+            max={20}
+            step="1"
+            value={startButtonPadding}
+            onChange={(e) => setStartButtonPadding(e.target.value)}
+          />
+        </div>
+    </fieldset>
       <fieldset>
         <legend>Icon</legend>
         <div>
@@ -356,28 +398,6 @@ export const Start = () => {
             <option value="inset">inset</option>
             <option value="outset">outset</option>
           </select>
-        </div>
-        <div>
-          <label>Margin:</label>
-          <input
-            type="range"
-            min={0}
-            max={10}
-            step="1"
-            value={startButtonMargin}
-            onChange={(e) => setStartButtonMargin(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Padding:</label>
-          <input
-            type="range"
-            min={0}
-            max={20}
-            step="1"
-            value={startButtonPadding}
-            onChange={(e) => setStartButtonPadding(e.target.value)}
-          />
         </div>
       </fieldset>
     </>
