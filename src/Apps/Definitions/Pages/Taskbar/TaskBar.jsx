@@ -76,19 +76,19 @@ export const TaskBarPreview = () => {
             <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="startButtonAquaRed" gradientTransform="rotate(90)">
-                  <stop offset="20%" stop-color="#FF9999" />
-                  <stop offset="50%" stop-color="#FF0000" />
-                  <stop offset="80%" stop-color="#9F0000" />
+                  <stop offset="20%" stopColor="#FF9999" />
+                  <stop offset="50%" stopColor="#FF0000" />
+                  <stop offset="80%" stopColor="#9F0000" />
                 </linearGradient>
                 <linearGradient id="startButtonAquaGreen" gradientTransform="rotate(90)">
-                  <stop offset="20%" stop-color="#99FF99" />
-                  <stop offset="50%" stop-color="#00FF00" />
-                  <stop offset="80%" stop-color="#009F00" />
+                  <stop offset="20%" stopColor="#99FF99" />
+                  <stop offset="50%" stopColor="#00FF00" />
+                  <stop offset="80%" stopColor="#009F00" />
                 </linearGradient>
                 <linearGradient id="startButtonAquaBlue" gradientTransform="rotate(90)">
-                  <stop offset="20%" stop-color="#9999FF" />
-                  <stop offset="50%" stop-color="#0000FF" />
-                  <stop offset="80%" stop-color="#00009F" />
+                  <stop offset="20%" stopColor="#9999FF" />
+                  <stop offset="50%" stopColor="#0000FF" />
+                  <stop offset="80%" stopColor="#00009F" />
                 </linearGradient>
               </defs>
               <path

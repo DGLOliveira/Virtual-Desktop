@@ -3,14 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { FileContext } from "../../../FileManager/context.jsx";
 import { AppContext } from "../../../AppManager/Context/context.jsx";
 import { ThemeContext } from "../../../ThemeManager/context.jsx";
-import { AppIcon } from "../../../AppManager/Components/AppIcon.jsx";
+
+import { StartList } from "./StartList.js";
 
 import "./startButton.css";
-import "./startList.css";
-
-import { FaGear } from "react-icons/fa6";
-import { MdOutlineRestartAlt } from "react-icons/md";
-import { RiShutDownLine } from "react-icons/ri";
 
 export const StartButton = () => {
   const fileContext = useContext(FileContext);
@@ -62,50 +58,7 @@ export const StartButton = () => {
   return (
     <start-button
       onBlur={(e) => handleBlur(e)}>
-      <start-list class={isOpen ? "expandHeight expandWidth" : "collapseHeight collapseWidth"}>
-        <div>
-          <button
-            onClick={() => appContext.setOpen("Definitions")}
-            title="Definitions"
-            aria-label="Definitions Button"
-          >
-            <FaGear />
-            Settings
-          </button>
-          <button
-            onClick={() => window.location.reload()}
-            title="Restart (F5)"
-            aria-label="Restart Button"
-          >
-            <MdOutlineRestartAlt />
-            Refresh
-          </button>
-          <button
-            className="isOpenRed"
-            onClick={() => window.close()}
-            title="Close (Alt + F4)"
-            aria-label="Close Button"
-          >
-            <RiShutDownLine />
-            Close
-          </button>
-        </div>
-        <ul>
-          {Object.keys(fileContext.taskbar).map((name, index) => (
-            name !== "Definitions" &&
-            <li key={name + "startListedApp"} >
-              <button
-                onClick={() => appContext.setOpen(name)}
-                aria-label={"Open " + name + " App"}
-              >
-                <AppIcon appName={name} />
-                {" "}
-                {name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </start-list>
+        <StartList isOpen={isOpen} />
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={startButtonClass(isOpen)}
@@ -114,19 +67,19 @@ export const StartButton = () => {
         <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="startButtonAquaRed" gradientTransform="rotate(90)">
-              <stop offset="20%" stop-color="#FF9999" />
-              <stop offset="50%" stop-color="#FF0000" />
-              <stop offset="80%" stop-color="#9F0000" />
+              <stop offset="20%" stopColor="#FF9999" />
+              <stop offset="50%" stopColor="#FF0000" />
+              <stop offset="80%" stopColor="#9F0000" />
             </linearGradient>
             <linearGradient id="startButtonAquaGreen" gradientTransform="rotate(90)">
-              <stop offset="20%" stop-color="#99FF99" />
-              <stop offset="50%" stop-color="#00FF00" />
-              <stop offset="80%" stop-color="#009F00" />
+              <stop offset="20%" stopColor="#99FF99" />
+              <stop offset="50%" stopColor="#00FF00" />
+              <stop offset="80%" stopColor="#009F00" />
             </linearGradient>
             <linearGradient id="startButtonAquaBlue" gradientTransform="rotate(90)">
-              <stop offset="20%" stop-color="#9999FF" />
-              <stop offset="50%" stop-color="#0000FF" />
-              <stop offset="80%" stop-color="#00009F" />
+              <stop offset="20%" stopColor="#9999FF" />
+              <stop offset="50%" stopColor="#0000FF" />
+              <stop offset="80%" stopColor="#00009F" />
             </linearGradient>
           </defs>
           <path
