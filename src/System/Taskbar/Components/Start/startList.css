@@ -6,7 +6,15 @@ start-list {
     overflow: hidden;
     transition: 1s ease-in-out 0s;
     color: var(--StartMenuFontColor);
-    background: var(--StartMenuBkgr);
+    padding: var(--StartMenuPadding);
+    border: var(--StartMenuBorderWidth) var(--StartMenuBorderColor) var(--StartMenuBorderType);
+    border-radius: var(--StartMenuBorderRadius);
+    background-color: var(--StartMenuBkgrColor);  
+    background-image: var(--StartMenuBkgrImage);
+    background-position: var(--StartMenuBkgrPosition);
+    background-size: var(--StartMenuBkgrSize);
+    background-repeat: var(--StartMenuBkgrRepeat);
+    backdrop-filter: var(--StartMenuBackdropFilter);
     left:0;
 }
 
@@ -14,11 +22,15 @@ start-list>ul {
     display: flex;
     flex-direction: column;
     list-style-type: none;
-    padding-left: 14px;
-    margin-left: var(--StartMenuIconSize);
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    background: var(--StartMenuPrimaryBkgr);
+    margin: var(--StartMenuPrimaryMargin);
+    margin-left: calc(var(--StartMenuPrimaryIconSize) + 12px);
+    padding: var(--StartMenuPrimaryPadding);
+    border: var(--StartMenuPrimaryBorderWidth) var(--StartMenuPrimaryBorderColor) var(--StartMenuPrimaryBorderType);
+    border-radius: var(--StartMenuPrimaryBorderRadius);
 }
 
 start-list>ul>li {
@@ -30,7 +42,6 @@ start-list>ul>li {
 }
 
 start-list>ul>li>button {
-    font-size: var(--StartMenuFontSize);
     display: block;
     flex-wrap: nowrap;
     white-space: nowrap;
@@ -38,12 +49,23 @@ start-list>ul>li>button {
     align-items: start;
     width: 100%;
     padding: 2px;
-    color: var(--StartMenuFontColor);
+    font-size: var(--StartMenuPrimaryFontSize);
+    color: var(--StartMenuPrimaryFontColor);
+}
+
+start-list>ul>li>button:hover:enabled {
+    color: var(--StartMenuPrimaryFontColorHover);
+    background: var(--StartMenuPrimaryBkgrHover);
+}
+
+start-list>ul>li>button:active:enabled {
+    color: var(--StartMenuPrimaryFontColorActive);
+    background: var(--StartMenuPrimaryBkgrActive);
 }
 
 start-list>ul>li>button>svg {
-    width: var(--StartMenuIconSize);
-    height: var(--StartMenuIconSize);
+    width: var(--StartMenuPrimaryIconSize);
+    height: var(--StartMenuPrimaryIconSize);
 }
 
 start-list>div {
@@ -53,9 +75,14 @@ start-list>div {
     flex-direction: column;
     align-items: start;
     justify-content: end;
-    width: calc(var(--StartMenuIconSize) + 10px);
+    width: calc(var(--StartMenuSecondaryIconSize) + 10px);
     height: 100%;
-    border-right: 2px gray solid;
+    box-sizing: border-box;
+    padding: var(--StartMenuSecondaryPadding);
+    margin: var(--StartMenuSecondaryMargin);
+    border: var(--StartMenuSecondaryBorderWidth) var(--StartMenuSecondaryBorderColor) var(--StartMenuSecondaryBorderType);
+    border-radius: var(--StartMenuSecondaryBorderRadius);
+    background: var(--StartMenuSecondaryBkgr);
     margin-bottom: 2px;
     overflow-x: hidden;
     transition: 0.3s;
@@ -72,10 +99,23 @@ start-list>div>button {
     flex-direction: row;
     justify-content: start;
     width: 150px;
-    font-size: var(--StartMenuIconSize);
+    font-size: var(--StartMenuSecondaryFontSize);
+    color: var(--StartMenuSecondaryFontColor);
     padding: 4px;
 }
 
+start-list>div>button:hover:enabled {
+    color: var(--StartMenuSecondaryFontColorHover);
+    background: var(--StartMenuSecondaryBkgrHover);
+}
+
+start-list>div>button:active:enabled {
+    color: var(--StartMenuSecondaryFontColorActive);
+    background: var(--StartMenuSecondaryBkgrActive);
+}
+
 start-list>div>button>svg {
+    width: var(--StartMenuSecondaryIconSize);
+    height: var(--StartMenuSecondaryIconSize);
     padding-right: 10px;
 }

@@ -258,7 +258,7 @@ export const Menu = () => {
                         onChange={(e) => theme.setNavMenuLocation(e.target.value)}
                     >
                         {theme.navMenuLocationList.map((location) => (
-                            <option value={location}>{location}</option>
+                            <option value={location} key={location}>{location}</option>
                         ))}
                     </select>
                 </div>
