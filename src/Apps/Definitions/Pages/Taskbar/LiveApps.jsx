@@ -56,12 +56,12 @@ export const LiveAppsPreview = () => {
                     <button className={LiveAppsClass(true)}>
                         <FcGlobe />
                         <span>Active</span>
-                        {themeContext.startButtonTheme === "Aqua" && <FcGlobe />}
+                        {themeContext.liveAppsTheme === "Aqua" && <FcGlobe />}
                     </button>
                     <button className={LiveAppsClass(false)}>
                         <FcCalculator />
                         <span>Inactive</span>
-                        {themeContext.startButtonTheme === "Aqua" && <FcCalculator />}
+                        {themeContext.liveAppsTheme === "Aqua" && <FcCalculator />}
                     </button>
                 </live-apps>
             </div>

@@ -130,7 +130,7 @@ export const TaskBarPreview = () => {
           <button className={LiveAppsClass(true)}>
             <FcGlobe />
             <span>App</span>
-            {themeContext.startButtonTheme === "Aqua" && <FcGlobe />}
+            {themeContext.liveAppsTheme === "Aqua" && <FcGlobe />}
           </button>
         </live-apps>
       </div>
