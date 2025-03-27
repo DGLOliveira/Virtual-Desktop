@@ -28,7 +28,7 @@ export const TaskBarPreview = () => {
   }
   const LiveAppsClass = (isSelected) => {
     let ans = "";
-    switch (themeContext.startButtonTheme) {
+    switch (themeContext.liveAppsTheme) {
       case "Classic":
         ans = "liveAppsClassic";
         break;

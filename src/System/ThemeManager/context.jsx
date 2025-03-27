@@ -24,6 +24,9 @@ export const ThemeContext = createContext({
     startButtonTheme: "",
     startButtonThemeList: [],
     setStartButtonTheme: () => { },
+    liveAppsTheme: "",
+    liveAppsThemeList: [],
+    setLiveAppsTheme: () => { },
     navMenuLocation: "",
     navMenuLocationList: [],
     setNavMenuLocation: () => { },
@@ -40,6 +43,9 @@ export function ThemeProvider({ children }) {
 
     const [startButtonTheme, setStartButtonTheme] = useState("Default");
     const startButtonThemeList = ["Default", "Aero", "Aqua", "Classic"];
+
+    const [liveAppsTheme, setLiveAppsTheme] = useState("Default");
+    const liveAppsThemeList = ["Default", "Aero", "Aqua", "Classic"];
 
     const [topBarIconTheme, setTopBarIconTheme] = useState("Default");
     const topBarIconThemeList = ["Default", "Aero", "Aqua", "Classic"];
@@ -90,6 +96,7 @@ export function ThemeProvider({ children }) {
             case "Classic":
                 Object.keys(Classic).forEach((key) => changeRootStyle(key, Classic[key]));
                 setStartButtonTheme("Classic");
+                setLiveAppsTheme("Classic");
                 setTopBarIconTheme("Classic");
                 setDialogButtonTheme("Classic");
                 setWindowBackgroundFX("None");
@@ -101,6 +108,7 @@ export function ThemeProvider({ children }) {
             case "Aqua":
                 Object.keys(Aqua).forEach((key) => changeRootStyle(key, Aqua[key]));
                 setStartButtonTheme("Aqua");
+                setLiveAppsTheme("Aqua");
                 setTopBarIconTheme("Aqua");
                 setDialogButtonTheme("Aqua");
                 setWindowBackgroundFX("Metallic");
@@ -112,6 +120,7 @@ export function ThemeProvider({ children }) {
             case "Aero":
                 Object.keys(Aero).forEach((key) => changeRootStyle(key, Aero[key]));
                 setStartButtonTheme("Aero");
+                setLiveAppsTheme("Aero");
                 setTopBarIconTheme("Aero");
                 setDialogButtonTheme("Aero");
                 setWindowBackgroundFX("Translucent");
@@ -123,6 +132,7 @@ export function ThemeProvider({ children }) {
             default:
                 Object.keys(Default).forEach((key) => changeRootStyle(key, Default[key]));
                 setStartButtonTheme("Default");
+                setLiveAppsTheme("Default");
                 setTopBarIconTheme("Default");
                 setDialogButtonTheme("Default");
                 setWindowBackgroundFX("None");
@@ -167,6 +177,9 @@ export function ThemeProvider({ children }) {
         startButtonTheme,
         startButtonThemeList,
         setStartButtonTheme,
+        liveAppsTheme,
+        liveAppsThemeList,
+        setLiveAppsTheme,
         topBarIconTheme,
         topBarIconThemeList,
         setTopBarIconTheme,

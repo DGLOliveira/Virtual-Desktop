@@ -29,7 +29,7 @@ export const LiveApps = () => {
     };
     const LiveAppsClass = (isSelected) => {
       let ans = "";
-      switch (themeContext.startButtonTheme) {
+      switch (themeContext.liveAppsTheme) {
         case "Classic":
           ans = "liveAppsClassic";
           break;

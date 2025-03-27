@@ -9,26 +9,26 @@ import { FcCalculator } from "react-icons/fc";
 export const LiveAppsPreview = () => {
     const themeContext = useContext(ThemeContext);
     const LiveAppsClass = (isSelected) => {
-      let ans = "";
-      switch (themeContext.startButtonTheme) {
-        case "Classic":
-          ans = "liveAppsClassic";
-          break;
-        case "Aero":
-          ans = "liveAppsAero";
-          break;
-        case "Aqua":
-          ans = "liveAppsAqua";
-          break;
-        case "Default":
-        default:
-          ans = "liveAppsFluent";
-          break;
-      }
-      if (isSelected) {
-        ans += " " + ans + "Active";
-      }
-      return ans;
+        let ans = "";
+        switch (themeContext.liveAppsTheme) {
+            case "Classic":
+                ans = "liveAppsClassic";
+                break;
+            case "Aero":
+                ans = "liveAppsAero";
+                break;
+            case "Aqua":
+                ans = "liveAppsAqua";
+                break;
+            case "Default":
+            default:
+                ans = "liveAppsFluent";
+                break;
+        }
+        if (isSelected) {
+            ans += " " + ans + "Active";
+        }
+        return ans;
     }
 
     return (
@@ -195,6 +195,23 @@ export const LiveApps = () => {
 
     return (
         <>
+            <fieldset>
+                <legend>Theme</legend>
+                <div>
+                    <select
+                        value={theme.liveAppsTheme}
+                        onChange={(e) => { theme.setLiveAppsTheme(e.target.value) }}
+                    >
+                        {theme.liveAppsThemeList.map((theme) => {
+                            return (
+                                <option key={theme} value={theme}>
+                                    {theme}
+                                </option>
+                            );
+                        })}
+                    </select>
+                </div>
+            </fieldset>
             <fieldset>
                 <legend>Colors</legend>
                 <fieldset>
