@@ -77,3 +77,20 @@ live-apps>button:active:enabled {
     color:black;
     text-shadow: 0 0 4px white;
 }
+
+/*------------------------------------------------------------*/
+/*------------------------Aero Button-------------------------*/
+/*------------------------------------------------------------*/
+
+.liveAppsAero{
+    box-shadow: 0 0 3px hsla(0, 0%, 100%, 0.5) inset;
+    background-image: linear-gradient(170deg, hsla(0, 0%, 100%, 0.75) 2%, hsla(0, 0%, 100%, 0.4) 15%, transparent 40%, hsla(0, 0%, 100%, 0.1) 90%);
+}
+
+.liveAppsAeroActive {
+    background-color: var(--LiveAppsBkgrActive);
+}
+
+.liveAppsAero>svg{
+    filter: drop-shadow(0 0 2px hsla(0, 0%, 0%, 0.5));
+}
