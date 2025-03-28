@@ -6,8 +6,8 @@ start-list {
     bottom: var(--TaskbarHeight);
     overflow: hidden;
     color: var(--StartMenuFontColor);
-    padding: var(--StartMenuPadding);
     max-height: 0px;
+    padding:0px;
     border-width: 0px;
     border-color: var(--StartMenuBorderColor);
     border-style: var(--StartMenuBorderType);
@@ -19,14 +19,17 @@ start-list {
     background-repeat: var(--StartMenuBkgrRepeat);
     backdrop-filter: var(--StartMenuBackdropFilter);
     transition: 0.5s ease-in-out 0s,
+        padding 0s ease-in-out 0.5s,
         max-height 0.5s ease-in-out 0s,
         border-width 0s linear 0.5s;
 }
 
 .startListOpen {
+    padding: var(--StartMenuPadding);
     max-height: 10000px;
     border-width: var(--StartMenuBorderWidth);
     transition: 0.5s ease-in-out 0s,
+    padding 0s ease-in-out 0s,
     max-height 0.5s ease-in-out 0s,
     border-width 0s linear 0s;
 }
@@ -97,7 +100,7 @@ start-list>div {
     box-sizing: border-box;
     padding: var(--StartMenuSecondaryPadding);
     margin: var(--StartMenuSecondaryMargin);
-    border: var(--StartMenuSecondaryBorderWidth) var(--StartMenuSecondaryBorderColor) var(--StartMenuSecondaryBorderType);
+    border-right: var(--StartMenuSecondaryBorderWidth) var(--StartMenuSecondaryBorderColor) var(--StartMenuSecondaryBorderType);
     border-radius: var(--StartMenuSecondaryBorderRadius);
     background: var(--StartMenuSecondaryBkgr);
     margin-bottom: 2px;

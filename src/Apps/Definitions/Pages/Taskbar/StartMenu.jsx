@@ -230,21 +230,21 @@ export const StartMenu = () => {
     getComputedStyle(root).getPropertyValue("--StartMenuPrimaryFontColor"),
   );
   useEffect(() => {
-    root.style.setProperty("--StartMenuFontPrimaryColor", startMenuPrimaryFontColor);
+    root.style.setProperty("--StartMenuPrimaryFontColor", startMenuPrimaryFontColor);
   }, [startMenuPrimaryFontColor]);
   //----------------------------------------------------------------------------//
   const [startMenuPrimaryFontColorHover, setStartMenuPrimaryFontColorHover] = useState(
     getComputedStyle(root).getPropertyValue("--StartMenuPrimaryFontColorHover"),
   );
   useEffect(() => {
-    root.style.setProperty("--StartMenuFontPrimaryColorHover", startMenuPrimaryFontColorHover);
+    root.style.setProperty("--StartMenuPrimaryFontColorHover", startMenuPrimaryFontColorHover);
   }, [startMenuPrimaryFontColorHover]);
   //----------------------------------------------------------------------------//
   const [startMenuPrimaryFontColorActive, setStartMenuPrimaryFontColorActive] = useState(
     getComputedStyle(root).getPropertyValue("--StartMenuPrimaryFontColorActive"),
   );
   useEffect(() => {
-    root.style.setProperty("--StartMenuFontPrimaryColorActive", startMenuPrimaryFontColorActive);
+    root.style.setProperty("--StartMenuPrimaryFontColorActive", startMenuPrimaryFontColorActive);
   }, [startMenuPrimaryFontColorActive]);
   //----------------------------------------------------------------------------//
   const [startMenuPrimaryFontSize, setStartMenuPrimaryFontSize] = useState(

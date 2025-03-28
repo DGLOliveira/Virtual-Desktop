@@ -177,12 +177,12 @@
   --StartMenuPrimaryBorderRadius: 0px;
   --StartMenuPrimaryBorderColor: hsla(0, 0%, 50%, 1);
   --StartMenuPrimaryBorderType: solid;
-  --StartMenuSecondaryBkgr: hsla(0, 0%, 0%, 0.9);
-  --StartMenuSecondaryBkgrHover: hsla(0, 0%, 0%, 0.9);
-  --StartMenuSecondaryBkgrActive: hsla(0, 0%, 0%, 0.9);
-  --StartMenuSecondaryColorFont: hsl(0, 0%, 75%);
-  --StartMenuSecondaryColorFontHover: hsl(0, 0%, 75%);
-  --StartMenuSecondaryColorFontActive: hsl(0, 0%, 75%);
+  --StartMenuSecondaryBkgr: hsla(0, 0%, 100%, 0);
+  --StartMenuSecondaryBkgrHover: hsla(0, 0%, 100%, 0.25);
+  --StartMenuSecondaryBkgrActive: hsla(0, 0%, 100%, 0.5);
+  --StartMenuSecondaryFontColor: hsl(0, 0%, 75%);
+  --StartMenuSecondaryFontColorHover: hsl(0, 0%, 75%);
+  --StartMenuSecondaryFontColorActive: hsl(0, 0%, 75%);
   --StartMenuSecondaryFontSize: 24px;
   --StartMenuSecondaryIconSize: 24px;
   --StartMenuSecondaryMargin: 0px;
