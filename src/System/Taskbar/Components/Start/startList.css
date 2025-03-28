@@ -42,14 +42,13 @@ start-list>ul>li {
 }
 
 start-list>ul>li>button {
-    display: block;
+    display: flex;
+    flex-direction: row;
     flex-wrap: nowrap;
-    white-space: nowrap;
-    text-align: start;
-    align-items: start;
+    justify-content: start;
+    align-items: center;
     width: 100%;
     padding: 2px;
-    font-size: var(--StartMenuPrimaryFontSize);
     color: var(--StartMenuPrimaryFontColor);
 }
 
@@ -64,8 +63,13 @@ start-list>ul>li>button:active:enabled {
 }
 
 start-list>ul>li>button>svg {
-    width: var(--StartMenuPrimaryIconSize);
     height: var(--StartMenuPrimaryIconSize);
+    width: var(--StartMenuPrimaryIconSize);
+}
+
+start-list>ul>li>button>span {
+    padding-left: 10px;
+    font-size: var(--StartMenuPrimaryFontSize);
 }
 
 start-list>div {

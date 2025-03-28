@@ -55,8 +55,7 @@ export const StartList = ({isOpen}) => {
             aria-label={"Open " + name + " App"}
           >
             <AppIcon appName={name} />
-            {" "}
-            {name}
+            <span>{name}</span>
           </button>
         </li>
       ))}
