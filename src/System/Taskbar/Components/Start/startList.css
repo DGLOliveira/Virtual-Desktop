@@ -2,20 +2,33 @@ start-list {
     position: absolute;
     display: flex;
     flex-direction: row;
+    left: var(--StartMenuBorderWidth);
     bottom: var(--TaskbarHeight);
     overflow: hidden;
-    transition: 1s ease-in-out 0s;
     color: var(--StartMenuFontColor);
     padding: var(--StartMenuPadding);
-    border: var(--StartMenuBorderWidth) var(--StartMenuBorderColor) var(--StartMenuBorderType);
+    max-height: 0px;
+    border-width: 0px;
+    border-color: var(--StartMenuBorderColor);
+    border-style: var(--StartMenuBorderType);
     border-radius: var(--StartMenuBorderRadius);
-    background-color: var(--StartMenuBkgrColor);  
+    background-color: var(--StartMenuBkgrColor);
     background-image: var(--StartMenuBkgrImage);
     background-position: var(--StartMenuBkgrPosition);
     background-size: var(--StartMenuBkgrSize);
     background-repeat: var(--StartMenuBkgrRepeat);
     backdrop-filter: var(--StartMenuBackdropFilter);
-    left:0;
+    transition: 0.5s ease-in-out 0s,
+        max-height 0.5s ease-in-out 0s,
+        border-width 0s linear 0.5s;
+}
+
+.startListOpen {
+    max-height: 10000px;
+    border-width: var(--StartMenuBorderWidth);
+    transition: 0.5s ease-in-out 0s,
+    max-height 0.5s ease-in-out 0s,
+    border-width 0s linear 0s;
 }
 
 start-list>ul {

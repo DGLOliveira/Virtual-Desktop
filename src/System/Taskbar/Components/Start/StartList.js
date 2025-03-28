@@ -18,7 +18,9 @@ export const StartList = ({isOpen}) => {
   const themeContext = useContext(ThemeContext);
 
   return(
-    <start-list class={isOpen ? "expandHeight expandWidth" : "collapseHeight collapseWidth"}>
+    <start-list 
+      class={isOpen ? "startListOpen" : ""}
+    >
     <div>
       <button
         onClick={() => appContext.setOpen("Definitions")}
