@@ -335,6 +335,13 @@ export const StartMenu = () => {
     root.style.setProperty("--StartMenuSecondaryBkgrActive", startMenuSecondaryBkgrActive);
   }, [startMenuSecondaryBkgrActive]);
   //----------------------------------------------------------------------------//
+  const [startMenuSecondaryFontVisibility, setStartMenuSecondaryFontVisibility] = useState(
+    getComputedStyle(root).getPropertyValue("--StartMenuSecondaryFontVisibility"),
+  );
+  useEffect(() => {
+    root.style.setProperty("--StartMenuSecondaryFontVisibility", startMenuSecondaryFontVisibility);
+  }, [startMenuSecondaryFontVisibility]);
+  //----------------------------------------------------------------------------//
   const [startMenuSecondaryFontColor, setStartMenuSecondaryFontColor] = useState(
     getComputedStyle(root).getPropertyValue("--StartMenuSecondaryFontColor"),
   );
@@ -668,6 +675,16 @@ export const StartMenu = () => {
           </fieldset>
           <fieldset>
             <legend>Font</legend>
+            <div>
+              <label>Visibility</label>
+              <select
+                value={startMenuSecondaryFontVisibility}
+                onChange={(e) => setStartMenuSecondaryFontVisibility(e.target.value)}
+              >
+                <option value="visible">visible</option>
+                <option value="none">hidden</option>
+              </select>
+            </div>
             <div>
               <label>Color</label>
               <ColorPicker

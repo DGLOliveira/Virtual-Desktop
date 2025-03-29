@@ -178,6 +178,7 @@
     "--StartMenuSecondaryBkgr": "hsla(0, 0%, 100%, 0)",
     "--StartMenuSecondaryBkgrHover": "hsla(0, 0%, 100%, 0.25)",
     "--StartMenuSecondaryBkgrActive": "hsla(0, 0%, 100%, 0.5)",
+    "--StartMenuSecondaryFontVisibility": "none",
     "--StartMenuSecondaryFontColor": "hsl(0, 0%, 75%)",
     "--StartMenuSecondaryFontColorHover": "hsl(0, 0%, 75%)",
     "--StartMenuSecondaryFontColorActive": "hsl(0, 0%, 75%)",

@@ -108,7 +108,7 @@ start-list>div>button {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    width: 150px;
+    width:100%;
     font-size: var(--StartMenuSecondaryFontSize);
     color: var(--StartMenuSecondaryFontColor);
     padding: 4px;
@@ -127,5 +127,9 @@ start-list>div>button:active:enabled {
 start-list>div>button>svg {
     width: var(--StartMenuSecondaryIconSize);
     height: var(--StartMenuSecondaryIconSize);
-    padding-right: 10px;
+}
+
+start-list>div>button>span {
+    display: var(--StartMenuSecondaryFontVisibility);
+    padding-left: 10px;
 }
