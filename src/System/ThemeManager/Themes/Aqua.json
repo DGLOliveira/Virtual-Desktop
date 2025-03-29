@@ -167,7 +167,7 @@
     "--StartMenuPrimaryFontColor": "hsl(0, 0%, 0%)",
     "--StartMenuPrimaryFontColorHover": "hsl(0, 0%, 0%)",
     "--StartMenuPrimaryFontColorActive": "hsl(0, 0%, 0%)",
-    "--StartMenuPrimaryFontSize": "24px",
+    "--StartMenuPrimaryFontSize": "16px",
     "--StartMenuPrimaryIconSize": "24px",
     "--StartMenuPrimaryMargin": "0px",
     "--StartMenuPrimaryPadding": "0px",

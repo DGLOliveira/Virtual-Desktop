@@ -111,7 +111,7 @@ start-list>div>button {
     width:100%;
     font-size: var(--StartMenuSecondaryFontSize);
     color: var(--StartMenuSecondaryFontColor);
-    padding: 4px;
+    padding: 2px;
 }
 
 start-list>div>button:hover:enabled {

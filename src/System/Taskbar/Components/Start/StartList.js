@@ -39,7 +39,6 @@ export const StartList = ({isOpen}) => {
         <span>Refresh</span>
       </button>
       <button
-        className="isOpenRed"
         onClick={() => window.close()}
         title="Close (Alt + F4)"
         aria-label="Close Button"
