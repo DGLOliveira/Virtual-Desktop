@@ -418,6 +418,17 @@ export const StartMenu = () => {
           />
         </div>
         <div>
+          <label>Background FX:</label>
+          <select
+            value={theme.startMenuBackgroundFX}
+            onChange={(e) => theme.setStartMenuBackgroundFX(e.target.value)}
+          >{
+              theme.backgroundFXList.map((fx) => (
+                <option key={fx} value={fx}>{fx}</option>
+              ))}
+          </select>
+        </div>
+        <div>
           <label>Padding</label>
           <input
             type="range"
