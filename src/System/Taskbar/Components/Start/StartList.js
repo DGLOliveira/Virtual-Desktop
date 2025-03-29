@@ -28,7 +28,7 @@ export const StartList = ({isOpen}) => {
         aria-label="Definitions Button"
       >
         <FaGear />
-        Settings
+        <span>Settings</span>
       </button>
       <button
         onClick={() => window.location.reload()}
@@ -36,7 +36,7 @@ export const StartList = ({isOpen}) => {
         aria-label="Restart Button"
       >
         <MdOutlineRestartAlt />
-        Refresh
+        <span>Refresh</span>
       </button>
       <button
         className="isOpenRed"
@@ -45,7 +45,7 @@ export const StartList = ({isOpen}) => {
         aria-label="Close Button"
       >
         <RiShutDownLine />
-        Close
+        <span>Close</span>
       </button>
     </div>
     <ul>

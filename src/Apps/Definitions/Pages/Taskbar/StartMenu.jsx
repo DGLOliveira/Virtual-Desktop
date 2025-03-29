@@ -166,6 +166,13 @@ export const StartMenu = () => {
     root.style.setProperty("--StartMenuBkgrColor", startMenuBkgr);
   }, [startMenuBkgr]);
   //----------------------------------------------------------------------------//
+  const [startMenuFlexDirection, setStartMenuFlexDirection] = useState(
+    getComputedStyle(root).getPropertyValue("--StartMenuFlexDirection"),
+  );
+  useEffect(() => {
+    root.style.setProperty("--StartMenuFlexDirection", startMenuFlexDirection);
+  }, [startMenuFlexDirection]);
+  //----------------------------------------------------------------------------//
   const [startMenuPadding, setStartMenuPadding] = useState(
     getComputedStyle(root).getPropertyValue("--StartMenuPadding").slice(0, -2),
   );
@@ -426,6 +433,16 @@ export const StartMenu = () => {
               theme.backgroundFXList.map((fx) => (
                 <option key={fx} value={fx}>{fx}</option>
               ))}
+          </select>
+        </div>
+        <div>
+          <label>App List Positon</label>
+          <select
+            value={startMenuFlexDirection}
+            onChange={(e) => setStartMenuFlexDirection(e.target.value)}
+          >
+            <option value="row">Right</option>
+            <option value="row-reverse">Left</option>
           </select>
         </div>
         <div>
