@@ -52,6 +52,42 @@ export const StartMenuPreview = () => {
       >
         <start-button
         >
+          <start-list class={"startListOpen"} style={{  left:0 }}>
+            <div>
+              <button>
+                <FaGear />
+                <span>Settings</span>
+              </button>
+              <button>
+                <MdOutlineRestartAlt />
+                <span>Refresh</span>
+              </button>
+              <button>
+                <RiShutDownLine />
+                <span>Close</span>
+              </button>
+            </div>
+            <ul>
+              <li>
+                <button>
+                  <FcGlobe />
+                  <span>Program 1</span>
+                </button>
+              </li>
+              <li>
+                <button>
+                  <FcInfo />
+                  <span>Program 2</span>
+                </button>
+              </li>
+              <li>
+                <button>
+                  <FcSettings />
+                  <span>Program 3</span>
+                </button>
+              </li>
+            </ul>
+          </start-list>
           <button className={startButtonClass()}>
             <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -110,42 +146,6 @@ export const StartMenuPreview = () => {
             </svg>
             <span>Start</span>
           </button>
-          <start-list class={"expandHeight expandWidth"} style={{ left: 0, transition: "0s" }}>
-            <ul>
-              <li>
-                <button>
-                  <FcGlobe />
-                  {" "}Program 1
-                </button>
-              </li>
-              <li>
-                <button>
-                  <FcInfo />
-                  {" "}Program 2
-                </button>
-              </li>
-              <li>
-                <button>
-                  <FcSettings />
-                  {" "}Program 3
-                </button>
-              </li>
-            </ul>
-            <div style={{ transition: "0s" }}>
-              <button>
-                <FaGear />
-                Settings
-              </button>
-              <button>
-                <MdOutlineRestartAlt />
-                Refresh
-              </button>
-              <button className="buttonActiveRed">
-                <RiShutDownLine />
-                Close
-              </button>
-            </div>
-          </start-list>
         </start-button>
         <vertical-rect />
         <live-apps></live-apps>
