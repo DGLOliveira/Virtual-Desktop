@@ -443,13 +443,15 @@ export const StartMenu = () => {
           </select>
         </div>
         <div>
-          <label>App List Positon</label>
+          <label>Lists Direction</label>
           <select
             value={startMenuFlexDirection}
             onChange={(e) => setStartMenuFlexDirection(e.target.value)}
           >
-            <option value="row">Right</option>
-            <option value="row-reverse">Left</option>
+            <option value="row">Row</option>
+            <option value="row-reverse">Row Reverse</option>
+            <option value="column">Column</option>
+            <option value="column-reverse">Column Reverse</option>
           </select>
         </div>
         <div>
