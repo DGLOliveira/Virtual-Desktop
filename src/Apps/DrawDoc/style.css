@@ -38,13 +38,12 @@ canvas-container {
 
 #drawCanvas {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 1px;
+  left: 1px;
   cursor: none;
   background: white;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  border: 1px solid black;
 }
 
 #previewCanvas {
