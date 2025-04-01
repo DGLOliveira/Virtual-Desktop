@@ -22,6 +22,40 @@ task-bar>vertical-rect {
   border-left: var(--TaskbarVerticalBorderWidth) var(--TaskbarVerticalBorderColor) var(--TaskbarVerticalBorderType);
 }
 
+taskbar-tray {
+  display: flex;
+  flex-direction: row;
+  background: var(--TaskbarTrayBkgr);
+  padding: var(--TaskbarTrayPadding);
+  margin: var(--TaskbarTrayMargin);
+  border: var(--TaskbarTrayBorderColor) var(--TaskbarTrayBorderWidth) var(--TaskbarTrayBorderType);
+  border-radius: var(--TaskbarTrayBorderRadius);
+}
+
+taaskbar-tray>button{
+  color: var(--TaskbarTrayButtonColor);
+  background: var(--TaskbarTrayButtonBkgr);
+  margin: var(--TaskbarTrayButtonMargin);
+  padding: var(--TaskbarTrayButtonPadding);
+  border: var(--TaskbarTrayButtonBorderColor) var(--TaskbarTrayButtonBorderWidth) var(--TaskbarTrayButtonBorderType);
+  border-radius: var(--TaskbarTrayButtonBorderRadius);
+}
+
+taskbar-tray>button:hover{
+  color: var(--TaskbarTrayButtonColorHover);
+  background: var(--TaskbarTrayButtonBkgrHover);
+}
+
+taskbar-tray>button:active{
+  color: var(--TaskbarTrayButtonColorActive);
+  background: var(--TaskbarTrayButtonBkgrActive);
+}
+
+taskbar-tray>button>svg{
+  width: var(--TaskbarIconSize);
+  height: var(--TaskbarIconSize);
+}
+
 taskbar-window {
   display: flex;
   flex-direction: column;

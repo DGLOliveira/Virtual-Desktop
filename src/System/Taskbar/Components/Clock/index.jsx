@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { FaArrowLeft, FaArrowRight, FaCog } from "react-icons/fa";
 import AnalogClock from "./Components/AnalogClock.jsx";
 import "./styles.css";
-export const TaskbarClock = ({contextMenu, setShowClock}) => {
+export const TaskbarClock = ({ contextMenu, setShowClock }) => {
 
   const calendarRef = useRef(null);
   const [formats, setFormats] = useState({
@@ -36,20 +36,23 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
       setDisplaySettings(false);
     }
   };
-  
-  const handleContextMenu = (e) => {  
+
+  const handleContextMenu = (e) => {
     e.preventDefault();
     let content = {
-        "Settings": { action: () => {
+      "Settings": {
+        action: () => {
           setDisplayCalendar(true);
-          setDisplaySettings(true);}},
-        "LineBreak": {},
-        "Hide": { action: () => {setShowClock(false) }, checkbox: true },
-      };
-      contextMenu.setOpen();
-      contextMenu.setPosition(e.clientX, e.clientY);
-      contextMenu.setContent(content);
-    
+          setDisplaySettings(true);
+        }
+      },
+      "LineBreak": {},
+      "Hide": { action: () => { setShowClock(false) }, checkbox: true },
+    };
+    contextMenu.setOpen();
+    contextMenu.setPosition(e.clientX, e.clientY);
+    contextMenu.setContent(content);
+
   }
 
   useEffect(() => {
@@ -144,6 +147,7 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
     setSelectedMonthYear({ month: newMonth, year: newYear });
   }
   const handleCalendarHover = (event) => {
+    let active = true;
     let x = event.clientX;
     let y = event.clientY;
     let calendarRect = calendarRef.current.getBoundingClientRect();
@@ -151,7 +155,12 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
       width: getComputedStyle(document.getElementById("calendar-hover")).getPropertyValue("width").slice(0, -2),
       height: getComputedStyle(document.getElementById("calendar-hover")).getPropertyValue("height").slice(0, -2),
     };
-    setCalendarHover({ active: true, x: x - calendarRect.x - hoverDiv.width / 2, y: y - calendarRect.y - hoverDiv.height / 2 });
+    if(y>calendarRect.y+calendarRect.height-hoverDiv.height/2){
+      active = false;
+    }
+    let newX = x - calendarRect.x - hoverDiv.width / 2;
+    let newY = y - calendarRect.y + hoverDiv.height / 2;
+    setCalendarHover({ active: true, x: newX, y: newY });
   }
   const handleCalendarLeave = (e) => {
     if (e.relatedTarget === null) {
@@ -163,40 +172,37 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
   }
   return (
     <>
-      <task-bar-clock
+      <button
         aria-label="Clock"
         title={hours + " hours, " + minutes + " minutes"}
+        className={displayCalendar ? "buttonActive" : ""}
+        onClick={() => {
+          setDisplayCalendar(!displayCalendar);
+        }}
+        onContextMenu={(e) => handleContextMenu(e)}
       >
-        <button className={displayCalendar ? "buttonActive" : ""}
-          onClick={() => {
-            setDisplayCalendar(!displayCalendar);
-          }}
-          onContextMenu={(e) => handleContextMenu(e)}
-          >
-          {formats.clock === "numeric" ?
-            <>
-              {!formats.hour24 && hours > 12 ? hours-12:hours}:{minutes}{formats.time ==="hh:mm:ss" ? <>:{seconds}</> : ""}{formats.hour24 ?  "" : hours > 12 ? " PM" : " AM"}
-              <br />
-              {formats.date === "dd/mm/yyyy" && <>{day}/{Number(month) + 1}/{year}</>}
-              {formats.date === "mm/dd/yyyy" && <>{Number(month) + 1}/{day}/{year}</>}
-              {formats.date === "yyyy/mm/dd" && <>{year}/{Number(month) + 1}/{day}</>}
-            </> :
-            <div style={{ display: "flex", height: "var(--TaskbarIconSize)", width: "var(--TaskbarIconSize)" }}>
+        {formats.clock === "numeric" ?
+          <>
+            {!formats.hour24 && hours > 12 ? hours - 12 : hours}:{minutes}{formats.time === "hh:mm:ss" ? <>:{seconds}</> : ""}{formats.hour24 ? "" : hours > 12 ? " PM" : " AM"}
+            <br />
+            {formats.date === "dd/mm/yyyy" && <>{day}/{Number(month) + 1}/{year}</>}
+            {formats.date === "mm/dd/yyyy" && <>{Number(month) + 1}/{day}/{year}</>}
+            {formats.date === "yyyy/mm/dd" && <>{year}/{Number(month) + 1}/{day}</>}
+          </> :
+          <div style={{ display: "flex", height: "var(--TaskbarIconSize)", width: "var(--TaskbarIconSize)" }}>
             <AnalogClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
-            </div>}
-        </button>
-      </task-bar-clock>
+          </div>}
+      </button>
       {displayCalendar && createPortal(
         <taskbar-window
           aria-label="Calendar"
-          ref={calendarRef}
           tabindex="0"
-        onBlur={(e)=>handleBlur(e)}
+          onBlur={(e) => handleBlur(e)}
         >
           <taskbar-window-header>
             <calendar-date>
               <div style={{ fontSize: "30px", fontWeight: "bold" }}>
-                {!formats.hour24 && hours > 12 ? hours-12:hours}:{minutes}:{seconds}{formats.hour24 ?  "" : hours > 12 ? " PM" : " AM"}
+                {!formats.hour24 && hours > 12 ? hours - 12 : hours}:{minutes}:{seconds}{formats.hour24 ? "" : hours > 12 ? " PM" : " AM"}
               </div>
               {dayString}{", "}{day}{" of "}{monthString}{", "}{year}
             </calendar-date>
@@ -204,87 +210,88 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
               <AnalogClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
             </calendar-clock>
           </taskbar-window-header>
-            <taskbar-window-nav>
-              <button
-                title="Settings"
-                aria-label="Settings"
-                className={displaySettings ? "buttonActive" : ""}
-                onClick={() => setDisplaySettings(!displaySettings)}><FaCog /></button>
-              <button
-                title="Previous Month"
-                aria-label="Previous Month"
-                onClick={() => changeSelectedMonthYear("previous")}><FaArrowLeft /></button>
-              <button
-                title="Next Month"
-                aria-label="Next Month"
-                onClick={() => changeSelectedMonthYear("next")}><FaArrowRight /></button>
-              {monthList[selectedMonthYear.month]}{", "}{selectedMonthYear.year}
-            </taskbar-window-nav>
-            <taskbar-window-body>
-          <calendar-container>
-            <calendar-container-table
-              onMouseMove={(e) => handleCalendarHover(e)}
-              onMouseOut={(e) => handleCalendarLeave(e)}
-            >
-              <div id="calendar-hover" style={{ left: calendarHover.x, top: calendarHover.y, display: calendarHover.active ? "block" : "none" }} />
-              <table
+          <taskbar-window-nav>
+            <button
+              title="Settings"
+              aria-label="Settings"
+              className={displaySettings ? "buttonActive" : ""}
+              onClick={() => setDisplaySettings(!displaySettings)}><FaCog /></button>
+            <button
+              title="Previous Month"
+              aria-label="Previous Month"
+              onClick={() => changeSelectedMonthYear("previous")}><FaArrowLeft /></button>
+            <button
+              title="Next Month"
+              aria-label="Next Month"
+              onClick={() => changeSelectedMonthYear("next")}><FaArrowRight /></button>
+            {monthList[selectedMonthYear.month]}{", "}{selectedMonthYear.year}
+          </taskbar-window-nav>
+          <taskbar-window-body>
+            <calendar-container>
+              <calendar-container-table
+                onMouseMove={(e) => handleCalendarHover(e)}
+                onMouseOut={(e) => handleCalendarLeave(e)}
+                ref={calendarRef}
               >
-                <thead>
-                  <tr>
-                    {dayList.map(weekDay =>
-                      <th key={weekDay}>{weekDay.slice(0, 3)}</th>
-                    )}
-                  </tr>
-                </thead>
-                <tbody>
-                  {calendarData.map((week, index) =>
-                    <tr key={index}>
-                      {week.map((dayofWeek, jndex) =>
-                        <td key={String(index) + " " + String(jndex)}
-                          style={{
-                            color: dayofWeek.month !== selectedMonthYear.month ? "dimgray" : "",
-                            background: dayofWeek.day === day && dayofWeek.month === month && selectedMonthYear.year === year ? "blue" : ""
-                          }}
-                        >
-                          {dayofWeek.day}
-                        </td>)}
-                    </tr>)
-                  }
-                </tbody>
-              </table>
-            </calendar-container-table>
-          </calendar-container>
-          {displaySettings && <calendar-settings>
-            <button
-              title="Hour Format"
-              aria-label="Hour Format"
-              onClick={() => setFormats({ ...formats, hour24: !formats.hour24 })}>
-              Hour Format:{formats.hour24 ? "24h" : "12h"}
-            </button>
-            <button
-              title="Clock Type"
-              aria-label="Clock Type"
-              onClick={() => setFormats({ ...formats, clock: formats.clock === "numeric" ? "analog" : "numeric" })}>
-              Clock Type: {formats.clock}
-            </button>
-            <div>
-              Date Format:
-            <select value={formats.date} onChange={(e) => setFormats({ ...formats, date: e.target.value })}>
-              <option value="dd/mm/yyyy">dd/mm/yyyy</option>
-              <option value="mm/dd/yyyy">mm/dd/yyyy</option>
-              <option value="yyyy/mm/dd">yyyy/mm/dd</option>
-            </select>
-            </div>
-            <div>
-              Time Format:
-            <select value={formats.time} onChange={(e) => setFormats({ ...formats, time: e.target.value })}>
-              <option value="hh:mm:ss">hh:mm:ss</option>
-              <option value="hh:mm">hh:mm</option>
-            </select>
-            </div>
-          </calendar-settings>
-        }
-        </taskbar-window-body>
+                <div id="calendar-hover" style={{ left: calendarHover.x, top: calendarHover.y, display: calendarHover.active ? "block" : "none" }} />
+                <table
+                >
+                  <thead>
+                    <tr>
+                      {dayList.map(weekDay =>
+                        <th key={weekDay}>{weekDay.slice(0, 3)}</th>
+                      )}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {calendarData.map((week, index) =>
+                      <tr key={index}>
+                        {week.map((dayofWeek, jndex) =>
+                          <td key={String(index) + " " + String(jndex)}
+                            style={{
+                              color: dayofWeek.month !== selectedMonthYear.month ? "dimgray" : "",
+                              background: dayofWeek.day === day && dayofWeek.month === month && selectedMonthYear.year === year ? "blue" : ""
+                            }}
+                          >
+                            {dayofWeek.day}
+                          </td>)}
+                      </tr>)
+                    }
+                  </tbody>
+                </table>
+              </calendar-container-table>
+            </calendar-container>
+            {displaySettings && <calendar-settings>
+              <button
+                title="Hour Format"
+                aria-label="Hour Format"
+                onClick={() => setFormats({ ...formats, hour24: !formats.hour24 })}>
+                Hour Format:{formats.hour24 ? "24h" : "12h"}
+              </button>
+              <button
+                title="Clock Type"
+                aria-label="Clock Type"
+                onClick={() => setFormats({ ...formats, clock: formats.clock === "numeric" ? "analog" : "numeric" })}>
+                Clock Type: {formats.clock}
+              </button>
+              <div>
+                Date Format:
+                <select value={formats.date} onChange={(e) => setFormats({ ...formats, date: e.target.value })}>
+                  <option value="dd/mm/yyyy">dd/mm/yyyy</option>
+                  <option value="mm/dd/yyyy">mm/dd/yyyy</option>
+                  <option value="yyyy/mm/dd">yyyy/mm/dd</option>
+                </select>
+              </div>
+              <div>
+                Time Format:
+                <select value={formats.time} onChange={(e) => setFormats({ ...formats, time: e.target.value })}>
+                  <option value="hh:mm:ss">hh:mm:ss</option>
+                  <option value="hh:mm">hh:mm</option>
+                </select>
+              </div>
+            </calendar-settings>
+            }
+          </taskbar-window-body>
         </taskbar-window>
         , document.getElementById("root"))}
     </>

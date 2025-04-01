@@ -1,22 +1,3 @@
-task-bar-clock {
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-task-bar-clock>button {
-  white-space: nowrap;
-  font-size: var(--TaskbarFontSize);
-  color: var(--TaskbarClockColor);
-  padding-left: 5px;
-  padding-right: 5px;
-}
-task-bar-clock>button>div>canvas {
-  width: 100%;
-}
-
 calendar-date {
   display: flex;
   flex-direction: column;

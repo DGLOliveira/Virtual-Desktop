@@ -227,7 +227,6 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
   },[widgetState]);
   return (
     <>
-      <taskbar-weather>
         <button 
         onClick={() => setShowDetails(!showDetails)}
         onContextMenu={(e) => handleContextMenu(e)}
@@ -239,7 +238,6 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
           </>
           }
         </button>
-      </taskbar-weather>
       {showDetails && createPortal(
         <taskbar-window
           ref={detailsRef}

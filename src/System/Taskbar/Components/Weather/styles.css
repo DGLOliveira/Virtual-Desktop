@@ -1,27 +1,3 @@
-taskbar-weather {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: auto;
-    font-size: var(--TaskbarFontSize);
-    color: var(--TaskbarWeatherColor);
-}
-
-taskbar-weather>button {
-    display: flex;
-    flex-direction: row;
-    padding-left: 2px;
-    padding-right: 2px;
-    color: var(--TaskbarWeatherColor);
-}
-
-taskbar-weather>button>svg {
-    display: flex;
-    width: var(--TaskbarIconSize);
-    height: var(--TaskbarIconSize);
-}
-
 weather-header-now {
     display: flex;
     flex-direction: row;

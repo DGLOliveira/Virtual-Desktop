@@ -224,7 +224,7 @@
   --TaskbarTrayButtonBorderType: solid;
   --TaskbarTrayButtonBorderRadius: 0px;
 
-  --TaskbarTrayGroupBkgr: hsla(0, 0%, 0%, 0);
+  --TaskbarTrayBkgr: hsla(0, 0%, 0%, 0);
   --TaskbarTrayMargin: 0px;
   --TaskbarTrayPadding: 0px;
   --TaskbarTrayBorderWidth: 0px;
