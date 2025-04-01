@@ -187,13 +187,13 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
         </button>
       </task-bar-clock>
       {displayCalendar && createPortal(
-        <calendar-window
+        <taskbar-window
           aria-label="Calendar"
           ref={calendarRef}
           tabindex="0"
         onBlur={(e)=>handleBlur(e)}
         >
-          <calendar-header>
+          <taskbar-window-header>
             <calendar-date>
               <div style={{ fontSize: "30px", fontWeight: "bold" }}>
                 {!formats.hour24 && hours > 12 ? hours-12:hours}:{minutes}:{seconds}{formats.hour24 ?  "" : hours > 12 ? " PM" : " AM"}
@@ -203,9 +203,8 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
             <calendar-clock>
               <AnalogClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
             </calendar-clock>
-          </calendar-header>
-          <calendar-container>
-            <calendar-container-selector >
+          </taskbar-window-header>
+            <taskbar-window-nav>
               <button
                 title="Settings"
                 aria-label="Settings"
@@ -220,7 +219,9 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
                 aria-label="Next Month"
                 onClick={() => changeSelectedMonthYear("next")}><FaArrowRight /></button>
               {monthList[selectedMonthYear.month]}{", "}{selectedMonthYear.year}
-            </calendar-container-selector>
+            </taskbar-window-nav>
+            <taskbar-window-body>
+          <calendar-container>
             <calendar-container-table
               onMouseMove={(e) => handleCalendarHover(e)}
               onMouseOut={(e) => handleCalendarLeave(e)}
@@ -281,8 +282,10 @@ export const TaskbarClock = ({contextMenu, setShowClock}) => {
               <option value="hh:mm">hh:mm</option>
             </select>
             </div>
-          </calendar-settings>}
-        </calendar-window>
+          </calendar-settings>
+        }
+        </taskbar-window-body>
+        </taskbar-window>
         , document.getElementById("root"))}
     </>
   )

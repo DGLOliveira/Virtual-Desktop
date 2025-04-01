@@ -241,11 +241,11 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
         </button>
       </taskbar-weather>
       {showDetails && createPortal(
-        <weather-details
+        <taskbar-window
           ref={detailsRef}
           onBlur={(e) => handleBlur(e)}
           tabIndex="0">
-          <weather-header>
+          <taskbar-window-header>
             <weather-header-now>
               {weatherData === null ?
                 <weather-header-unknown>
@@ -326,36 +326,40 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
                 </>
               }
             </weather-header-now>
-            <weather-header-curr-page>
-              <button onClick={() => { currentWeatherPage === 0 ? setCurrentWeatherPage(2) : setCurrentWeatherPage(0) }} className={currentWeatherPage === 0 ? "buttonActive" : ""}>
-                <FaLocationDot />
-              </button>
-              <button onClick={() => changeWeatherPage(-1)} disabled={weatherData === null || currentWeatherPage < 2}><FaArrowLeft /></button>
-              <div>
-                <div style={{ paddingRight: "5px", color: weatherPages[currentWeatherPage].color }}>
-                  {weatherPages[currentWeatherPage].icon}
-                </div>
-                {" "}{weatherPages[currentWeatherPage].name}
-              </div>
-              <button onClick={() => changeWeatherPage(1)} disabled={weatherData === null || currentWeatherPage < 2}><FaArrowRight /></button>
+          </taskbar-window-header>
+            <taskbar-window-nav>
               <button onClick={() => { currentWeatherPage === 1 ? setCurrentWeatherPage(2) : setCurrentWeatherPage(1) }} className={currentWeatherPage === 1 ? "buttonActive" : ""}>
                 <FaGear />
               </button>
-            </weather-header-curr-page>
-          </weather-header>
-          <weather-body>
+              <button onClick={() => { currentWeatherPage === 0 ? setCurrentWeatherPage(2) : setCurrentWeatherPage(0) }} className={currentWeatherPage === 0 ? "buttonActive" : ""}>
+                <FaLocationDot />
+              </button>
+              <button onClick={() => changeWeatherPage(-1)} disabled={weatherData === null || currentWeatherPage < 2}>
+              <FaArrowLeft />
+              </button>
+              <button onClick={() => changeWeatherPage(1)} disabled={weatherData === null || currentWeatherPage < 2}>
+              <FaArrowRight />
+              </button>
+                <div style={{ paddingRight: "5px", color: weatherPages[currentWeatherPage].color }}>
+                  {weatherPages[currentWeatherPage].icon}
+                </div>
+              <div>
+                {" "}{weatherPages[currentWeatherPage].name}
+              </div>
+            </taskbar-window-nav>
+          <taskbar-window-body>
             <weather-page>
               {weatherPages[currentWeatherPage].component}
             </weather-page>
             <br/>
             <br/>
-          </weather-body>
-          <weather-footer>
+          </taskbar-window-body>
+          <taskbar-window-footer>
             <a href="https://open-meteo.com/" target="_blank">
               Data by Open-Meteo ©
             </a>
-          </weather-footer>
-        </weather-details>
+          </taskbar-window-footer>
+        </taskbar-window>
         , document.getElementById("root"))}
     </>
   )

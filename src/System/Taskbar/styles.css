@@ -21,3 +21,64 @@ task-bar>vertical-rect {
   border:none;
   border-left: var(--TaskbarVerticalBorderWidth) var(--TaskbarVerticalBorderColor) var(--TaskbarVerticalBorderType);
 }
+
+taskbar-window {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  bottom: var(--TaskbarHeight);
+  height: auto;
+  width: auto;
+  max-width:350px;
+  box-sizing: border-box;
+  padding: var(--TaskbarWindowPadding);
+  border: var(--TaskbarWindowBorderColor) var(--TaskbarWindowBorderWidth) var(--TaskbarWindowBorderType);
+  border-radius: var(--TaskbarWindowBorderRadius);
+  color: var(--ClockFontColor);
+  background: var(--TaskbarWindowBkgr);
+  overflow: hidden;
+  transition: 1s ease-in-out 0s;
+}
+
+taskbar-window-header {
+  display: flex;  
+  flex-direction: row;
+  width: 100%;
+  color: var(--TaskbarWindowHeaderColor);
+  background: var(--TaskbarWindowHeaderBkgr);
+  margin: var(--TaskbarWindowHeaderMargin);
+  padding: var(--TaskbarWindowHeaderPadding);
+  border: var(--TaskbarWindowHeaderBorderColor) var(--TaskbarWindowHeaderBorderWidth) var(--TaskbarWindowHeaderBorderType);
+  border-radius: var(--TaskbarWindowHeaderBorderRadius);
+}
+
+taskbar-window-nav {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  color: var(--TaskbarWindowNavColor);
+  background: var(--TaskbarWindowNavBkgr);
+  margin: var(--TaskbarWindowNavMargin);
+  padding: var(--TaskbarWindowNavPadding);
+  border: var(--TaskbarWindowNavBorderColor) var(--TaskbarWindowNavBorderWidth) var(--TaskbarWindowNavBorderType);
+  border-radius: var(--TaskbarWindowNavBorderRadius);
+}
+
+taskbar-window-body {
+  color: var(--TaskbarWindowBodyColor);
+  background: var(--TaskbarWindowBodyBkgr);
+  margin: var(--TaskbarWindowBodyMargin);
+  padding: var(--TaskbarWindowBodyPadding);
+  border: var(--TaskbarWindowBodyBorderColor) var(--TaskbarWindowBodyBorderWidth) var(--TaskbarWindowBodyBorderType);
+  border-radius: var(--TaskbarWindowBodyBorderRadius);
+}
+
+taskbar-window-footer {
+  color: var(--TaskbarWindowFooterColor);
+  background: var(--TaskbarWindowFooterBkgr);
+  margin: var(--TaskbarWindowFooterMargin);
+  padding: var(--TaskbarWindowFooterPadding);
+  border: var(--TaskbarWindowFooterBorderColor) var(--TaskbarWindowFooterBorderWidth) var(--TaskbarWindowFooterBorderType);
+  border-radius: var(--TaskbarWindowFooterBorderRadius);
+}

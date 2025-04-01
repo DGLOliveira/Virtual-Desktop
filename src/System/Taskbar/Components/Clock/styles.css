@@ -17,31 +17,6 @@ task-bar-clock>button>div>canvas {
   width: 100%;
 }
 
-calendar-window {
-  position: absolute;
-  bottom: var(--TaskbarHeight);
-  right: 0;
-  width: 300px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  bottom: var(--TaskbarHeight);
-  overflow: hidden;
-  transition: 1s ease-in-out 0s;
-  color: var(--ClockFontColor);
-  background: var(--ClockBkgr);
-}
-
-calendar-header {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  border-bottom: 1px gray solid;
-  padding-bottom: 2px;
-  background: var(--ClockBkgr);
-  z-index: 2;
-}
-
 calendar-date {
   display: flex;
   flex-direction: column;

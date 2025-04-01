@@ -22,28 +22,6 @@ taskbar-weather>button>svg {
     height: var(--TaskbarIconSize);
 }
 
-weather-details {
-    position: absolute;
-    bottom: var(--TaskbarHeight);
-    right: 0;
-    width: 350px;
-    height: 420px;
-    display: flex;
-    flex-direction: column;
-    bottom: var(--TaskbarHeight);
-    overflow: hidden;
-    transition: 1s ease-in-out 0s;
-    color: var(--WeatherFontColor);
-    background: var(--WeatherBkgr);
-}
-
-weather-header {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 5px;
-    border-bottom: 1px gray solid;
-}
-
 weather-header-now {
     display: flex;
     flex-direction: row;
