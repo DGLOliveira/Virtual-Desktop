@@ -147,7 +147,6 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
     setSelectedMonthYear({ month: newMonth, year: newYear });
   }
   const handleCalendarHover = (event) => {
-    let active = true;
     let x = event.clientX;
     let y = event.clientY;
     let calendarRect = calendarRef.current.getBoundingClientRect();
@@ -155,18 +154,26 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
       width: getComputedStyle(document.getElementById("calendar-hover")).getPropertyValue("width").slice(0, -2),
       height: getComputedStyle(document.getElementById("calendar-hover")).getPropertyValue("height").slice(0, -2),
     };
-    if(y>calendarRect.y+calendarRect.height-hoverDiv.height/2){
-      active = false;
-    }
     let newX = x - calendarRect.x - hoverDiv.width / 2;
-    let newY = y - calendarRect.y + hoverDiv.height / 2;
-    setCalendarHover({ active: true, x: newX, y: newY });
+    let newY = y - calendarRect.y - hoverDiv.height / 2;
+    let calendarTableRect = document.getElementsByTagName("calendar-container-table")[0].getBoundingClientRect();
+    if(x<calendarTableRect.left || x>calendarTableRect.right || y<calendarTableRect.top || y>calendarTableRect.bottom) {
+      setCalendarHover({ active: false, x: 0, y: 0 });
+    }else{
+      setCalendarHover({ active: true, x: newX, y: newY });
+    }
   }
   const handleCalendarLeave = (e) => {
+    let x = e.clientX;
+    let y = e.clientY;
+    let calendarTableRect = document.getElementsByTagName("calendar-container-table")[0].getBoundingClientRect();
     if (e.relatedTarget === null) {
       setCalendarHover({ active: false, x: 0, y: 0 });
     }
     else if (!e.currentTarget.contains(e.relatedTarget)) {
+      setCalendarHover({ active: false, x: 0, y: 0 });
+    }
+    else if(x<calendarTableRect.left || x>calendarTableRect.right || y<calendarTableRect.top || y>calendarTableRect.bottom) {
       setCalendarHover({ active: false, x: 0, y: 0 });
     }
   }
@@ -196,6 +203,7 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
       {displayCalendar && createPortal(
         <taskbar-window
           aria-label="Calendar"
+          ref={calendarRef}
           tabindex="0"
           onBlur={(e) => handleBlur(e)}
         >
@@ -210,7 +218,9 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
               <AnalogClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
             </calendar-clock>
           </taskbar-window-header>
-          <taskbar-window-nav>
+          <taskbar-window-nav
+          style={{ zIndex: "2" }}
+          >
             <button
               title="Settings"
               aria-label="Settings"
@@ -231,7 +241,6 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
               <calendar-container-table
                 onMouseMove={(e) => handleCalendarHover(e)}
                 onMouseOut={(e) => handleCalendarLeave(e)}
-                ref={calendarRef}
               >
                 <div id="calendar-hover" style={{ left: calendarHover.x, top: calendarHover.y, display: calendarHover.active ? "block" : "none" }} />
                 <table
