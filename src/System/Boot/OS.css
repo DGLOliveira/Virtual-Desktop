@@ -271,12 +271,6 @@
   --TaskbarWindowFooterBorderType: solid;
   --TaskbarWindowFooterBorderRadius: 0px;
 
-  --WeatherBkgr: hsla(0, 0%, 10%, 0.95);
-  --WeatherFontColor: hsl(0, 0%, 75%);
-
-  --ClockBkgr: hsla(0, 0%, 10%, 0.95);
-  --ClockFontColor: hsl(0, 0%, 75%);
-
   --TranslucentFXBkgrImage: linear-gradient(60deg,
   hsla(0,0%,100%,0.1),
   hsla(0, 0%, 0%, 0.1),

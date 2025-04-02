@@ -32,7 +32,7 @@ taskbar-tray {
   border-radius: var(--TaskbarTrayBorderRadius);
 }
 
-taaskbar-tray>button{
+taskbar-tray>button{
   color: var(--TaskbarTrayButtonColor);
   background: var(--TaskbarTrayButtonBkgr);
   margin: var(--TaskbarTrayButtonMargin);
