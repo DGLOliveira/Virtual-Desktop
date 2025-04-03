@@ -70,7 +70,12 @@ taskbar-window {
   border: var(--TaskbarWindowBorderColor) var(--TaskbarWindowBorderWidth) var(--TaskbarWindowBorderType);
   border-radius: var(--TaskbarWindowBorderRadius);
   color: var(--ClockFontColor);
-  background: var(--TaskbarWindowBkgr);
+  background-color: var(--TaskbarWindowBkgr);
+  background-image: var(--TaskbarWindowBkgrImage);
+  background-position: var(--TaskbarWindowBkgrPosition);
+  background-size: var(--TaskbarWindowBkgrSize);
+  background-repeat: var(--TaskbarWindowBkgrRepeat);
+  backdrop-filter: var(--TaskbarWindowBackdropFilter);
   overflow: hidden;
   transition: 1s ease-in-out 0s;
 }

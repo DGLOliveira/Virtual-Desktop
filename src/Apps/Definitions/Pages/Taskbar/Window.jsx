@@ -318,8 +318,8 @@ export const TrayWindow = () => {
                     <div>
                         <label>FX:</label>
                         <select
-                            value={theme.taskbarBackgroundFX}
-                            onChange={(e) => theme.setTaskbarBackgroundFX(e.target.value)}
+                            value={theme.taskbarWindowBackgroundFX}
+                            onChange={(e) => theme.setTaskbarWindowBackgroundFX(e.target.value)}
                         >{
                                 theme.backgroundFXList.map((fx) => (
                                     <option key={fx} value={fx}>{fx}</option>

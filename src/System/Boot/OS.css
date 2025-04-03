@@ -232,6 +232,11 @@
   --TaskbarTrayBorderType: solid;
   --TaskbarTrayBorderRadius: 0px;
   
+  --TaskbarWindowBkgrImage: none;
+  --TaskbarWindowBkgrPosition: none;
+  --TaskbarWindowBkgrSize: none;
+  --TaskbarWindowBkgrRepeat: none;
+  --TaskbarWindowBackdropFilter: none;
   --TaskbarWindowBkgr: hsla(0, 0%, 0%, 0.9);
   --TaskbarWindowPadding: 0px;
   --TaskbarWindowBorderColor: hsla(0, 0%, 0%, 0);

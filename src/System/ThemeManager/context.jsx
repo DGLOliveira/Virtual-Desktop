@@ -29,6 +29,8 @@ export const ThemeContext = createContext({
     setLiveAppsTheme: () => { },
     startMenuBackgroundFX: "",
     setStartMenuBackgroundFX: () => { },
+    taskbarWindowBackgroundFX: "",
+    setTaskbarWindowBackgroundFX: () => { },
     navMenuLocation: "",
     navMenuLocationList: [],
     setNavMenuLocation: () => { },
@@ -62,6 +64,7 @@ export function ThemeProvider({ children }) {
     const [dialogBackgroundFX, setDialogBackgroundFX] = useState("none");
     const [taskbarBackgroundFX, setTaskbarBackgroundFX] = useState("none");
     const [startMenuBackgroundFX, setStartMenuBackgroundFX] = useState("none");
+    const [taskbarWindowBackgroundFX, setTaskbarWindowBackgroundFX] = useState("none");
 
     const [navMenuLocation, setNavMenuLocation] = useState("in top bar");
     const navMenuLocationList = ["in app", "in top bar"];
@@ -105,6 +108,7 @@ export function ThemeProvider({ children }) {
                 setWindowBackgroundFX("None");
                 setDialogBackgroundFX("None");
                 setTaskbarBackgroundFX("None");
+                setTaskbarWindowBackgroundFX("None");
                 setStartMenuBackgroundFX("None");
                 setNavMenuLocation("in top bar");
                 setDialogButtonsLocation("in info container");
@@ -119,6 +123,7 @@ export function ThemeProvider({ children }) {
                 setDialogBackgroundFX("Metallic");
                 setTaskbarBackgroundFX("Metallic");
                 setStartMenuBackgroundFX("Metallic");
+                setTaskbarWindowBackgroundFX("Metallic");
                 setNavMenuLocation("in top bar");
                 setDialogButtonsLocation("in window");
                 break;
@@ -131,6 +136,7 @@ export function ThemeProvider({ children }) {
                 setWindowBackgroundFX("Translucent");
                 setDialogBackgroundFX("Translucent");
                 setTaskbarBackgroundFX("Translucent");
+                setTaskbarWindowBackgroundFX("Translucent");
                 setStartMenuBackgroundFX("Translucent");
                 setNavMenuLocation("in app");
                 setDialogButtonsLocation("in info container");
@@ -144,6 +150,7 @@ export function ThemeProvider({ children }) {
                 setWindowBackgroundFX("None");
                 setDialogBackgroundFX("None");
                 setTaskbarBackgroundFX("None");
+                setTaskbarWindowBackgroundFX("None");
                 setStartMenuBackgroundFX("None");
                 setNavMenuLocation("in top bar");
                 setDialogButtonsLocation("in window");
@@ -177,6 +184,7 @@ export function ThemeProvider({ children }) {
     useEffect(() => {switchFX("Dialog", dialogBackgroundFX);}, [dialogBackgroundFX]);
     useEffect(() => {switchFX("Taskbar", taskbarBackgroundFX);}, [taskbarBackgroundFX]);
     useEffect(() => {switchFX("StartMenu", startMenuBackgroundFX);}, [startMenuBackgroundFX]);
+    useEffect(() => {switchFX("TaskbarWindow", taskbarWindowBackgroundFX);}, [taskbarWindowBackgroundFX]);
 
     const contextValue = {
         theme,
@@ -201,6 +209,8 @@ export function ThemeProvider({ children }) {
         setTaskbarBackgroundFX,
         startMenuBackgroundFX,
         setStartMenuBackgroundFX,
+        taskbarWindowBackgroundFX,
+        setTaskbarWindowBackgroundFX,
         dialogBackgroundFX,
         setDialogBackgroundFX,
         navMenuLocation,
