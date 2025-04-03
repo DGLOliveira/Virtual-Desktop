@@ -191,9 +191,24 @@
     "--StartMenuSecondaryBorderColor": "hsla(0, 0%, 50%, 1)",
     "--StartMenuSecondaryBorderType": "solid",
 
-    "--WeatherBkgr" :"hsla(0, 0%, 10%, 0.95)",
-    "--WeatherFontColor": "hsl(0, 0%, 75%)",
-
-    "--ClockBkgr": "hsla(0, 0%, 10%, 0.95)",
-    "--ClockFontColor": "hsl(0, 0%, 75%)"
+    "--TaskbarTrayButtonBkgr": "hsla(0, 0%, 0%, 0)",
+    "--TaskbarTrayButtonBkgrHover": "hsla(0, 0%, 100%, 0.25)",
+    "--TaskbarTrayButtonBkgrActive": "hsla(0, 0%, 100%, 0.5)",
+    "--TaskbarTrayButtonColor": "hsl(0, 0%, 90%)",
+    "--TaskbarTrayButtonColorHover": "hsl(0, 0%, 90%)",
+    "--TaskbarTrayButtonColorActive": "hsl(0, 0%, 90%)",
+    "--TaskbarTrayButtonMargin": "0px",
+    "--TaskbarTrayButtonPadding": "0px",
+    "--TaskbarTrayButtonBorderWidth": "0px",
+    "--TaskbarTrayButtonBorderColor": "hsla(0, 0%, 0%, 0)",
+    "--TaskbarTrayButtonBorderType": "solid",
+    "--TaskbarTrayButtonBorderRadius": "0px",
+  
+    "--TaskbarTrayBkgr": "hsla(0, 0%, 0%, 0)",
+    "--TaskbarTrayMargin": "0px",
+    "--TaskbarTrayPadding": "0px",
+    "--TaskbarTrayBorderWidth": "0px",
+    "--TaskbarTrayBorderColor": "hsla(0, 0%, 0%, 0)",
+    "--TaskbarTrayBorderType": "solid",
+    "--TaskbarTrayBorderRadius":" 0px"
 }
