@@ -258,8 +258,8 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
                         {week.map((dayofWeek, jndex) =>
                           <td key={String(index) + " " + String(jndex)}
                             style={{
-                              color: dayofWeek.month !== selectedMonthYear.month ? "dimgray" : "",
-                              background: dayofWeek.day === day && dayofWeek.month === month && selectedMonthYear.year === year ? "blue" : ""
+                              opacity: dayofWeek.month !== selectedMonthYear.month ? "0.5" : "1",
+                              filter: dayofWeek.day === day && dayofWeek.month === month && selectedMonthYear.year === year ? "invert(1)" : ""
                             }}
                           >
                             {dayofWeek.day}

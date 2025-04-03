@@ -230,6 +230,7 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
         <button 
         onClick={() => setShowDetails(!showDetails)}
         onContextMenu={(e) => handleContextMenu(e)}
+        style={{display: "flex", flexDirection: "row"}}
         >
           {weatherData === null ? <WiUmbrella /> : <>
             {WeatherCode(weatherData.hourly.weathercode[currentHour]).icon}

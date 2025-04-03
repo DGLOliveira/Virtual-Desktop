@@ -198,7 +198,7 @@
     "--TaskbarTrayButtonColorHover": "hsl(0, 0%, 0%)",
     "--TaskbarTrayButtonColorActive": "hsl(0, 0%, 0%)",
     "--TaskbarTrayButtonMargin": "0px",
-    "--TaskbarTrayButtonPadding": "0px",
+    "--TaskbarTrayButtonPadding": "5px",
     "--TaskbarTrayButtonBorderWidth": "0px",
     "--TaskbarTrayButtonBorderColor": "hsla(0, 0%, 0%, 0)",
     "--TaskbarTrayButtonBorderType": "solid",
