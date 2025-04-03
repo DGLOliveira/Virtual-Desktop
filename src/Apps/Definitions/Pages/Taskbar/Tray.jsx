@@ -247,7 +247,7 @@ export const Tray = () => {
                         <ColorPicker
                             color={taskbarTrayBorderColor}
                             setColor={setTaskbarTrayBorderColor}
-                            alpha={true}
+                            useAlpha={true}
                         />
                     </div>
                     <div>

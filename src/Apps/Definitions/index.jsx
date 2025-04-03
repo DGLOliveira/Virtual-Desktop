@@ -12,6 +12,7 @@ import { StartPreview, Start } from "./Pages/Taskbar/Start.jsx";
 import { StartMenuPreview, StartMenu } from "./Pages/Taskbar/StartMenu.jsx";
 import { LiveAppsPreview, LiveApps } from "./Pages/Taskbar/LiveApps.jsx";
 import { TrayPreview, Tray } from "./Pages/Taskbar/Tray.jsx";
+import { TrayWindowPreview, TrayWindow } from "./Pages/Taskbar/Window.jsx";
 import { ContextMenuPreview, ContextMenu } from "./Pages/ContextMenu.jsx";
 import Scenario from "../../System/Desktop/Scenario.jsx";
 import { BackgroundContext } from "../../System/Desktop/BackgroundContext.js";
@@ -74,6 +75,12 @@ export default function Definitions() {
             >
               {">"}Tray
             </div>
+            <div
+              onClick={() => setDefPage("TrayWindow")}
+              className={defPage === "TrayWindow" ? "defMenuButtonON" : ""}
+            >
+              {">"}Tray Window
+            </div>
           </>
         }
         <div
@@ -126,6 +133,7 @@ export default function Definitions() {
           {defPage === "StartMenu" ? <StartMenuPreview /> : <></>}
           {defPage === "LiveApps" ? <LiveAppsPreview /> : <></>}
           {defPage === "Tray" ? <TrayPreview /> : <></>}
+          {defPage === "TrayWindow" ? <TrayWindowPreview /> : <></>}
           {defPage === "Window" ? <WindowPreview /> : <></>}
           {defPage === "Menu" ? <MenuPreview /> : <></>}
           {defPage === "App" ? <AppPreview /> : <></>}
@@ -138,7 +146,8 @@ export default function Definitions() {
         {defPage === "Start" ? <Start /> : <></>}
         {defPage === "StartMenu" ? <StartMenu /> : <></>}
         {defPage === "LiveApps" ? <LiveApps /> : <></>}
-        {defPage === "Tray" ? <Tray /> : <></>}
+        {defPage === "Tray" ? <Tray /> : <></>}        
+        {defPage === "TrayWindow" ? <TrayWindow /> : <></>}
         {defPage === "Window" ? <Window /> : <></>}
         {defPage === "App" ? <App /> : <></>}
         {defPage === "Menu" ? <Menu /> : <></>}
