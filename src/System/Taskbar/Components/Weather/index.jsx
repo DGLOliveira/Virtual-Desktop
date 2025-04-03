@@ -350,8 +350,6 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
             <weather-page>
               {weatherPages[currentWeatherPage].component}
             </weather-page>
-            <br/>
-            <br/>
           </taskbar-window-body>
           <taskbar-window-footer>
             <a href="https://open-meteo.com/" target="_blank">

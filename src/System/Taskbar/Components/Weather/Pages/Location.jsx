@@ -66,7 +66,7 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
 
     return (
         <weather-location>
-            <div style={{ display: "flex", width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "center", fontSize: "12px", background: "black" }}>
+            <div style={{ display: "flex", width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "center", fontSize: "12px"}}>
                 <FaLocationDot /> {
                     widgetState === "Done" ? <>
                         {location.source === "Code" && <>
@@ -82,7 +82,7 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
             </div>
             <div style={{ display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between" }}>
                 <flex-column-start>
-                    <button style={{ flexDirection: "row", justifyContent: "space-evenly", width: "100%", border: "1px silver solid", borderRadius: "5px" }}
+                    <button style={{ flexDirection: "row", justifyContent: "space-evenly", width: "100%", border: "1px silver solid", borderRadius: "5px", color: "inherit" }}
                         onClick={() => setLocation({ ...newLocation, status: "Success" })}>
                         <FaArrowRotateRight />
                         Confirm / Update

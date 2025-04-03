@@ -106,6 +106,10 @@ taskbar-window-nav {
   border-radius: var(--TaskbarWindowNavBorderRadius);
 }
 
+taskbar-window-nav>button{
+  color: inherit;
+}
+
 taskbar-window-body {
   box-sizing: border-box;
   width: 100%;

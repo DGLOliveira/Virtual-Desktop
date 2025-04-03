@@ -62,8 +62,6 @@ weather-header-curr-page {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background: black;
-    color: silver;
     font-size: 16px;
     padding: 1px;
 }
