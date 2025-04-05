@@ -347,7 +347,6 @@ export default function SpaceInvaders({ controls, isSelected, gameState, setGame
     }, [controls, frameCount]);
     //Game time
     useEffect(() => {
-        console.log(gameState);
         if (gameState === "Restart") {
             setTime(0);
         } else if (gameState === "Play") {

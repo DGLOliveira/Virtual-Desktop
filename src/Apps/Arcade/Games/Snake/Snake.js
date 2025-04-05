@@ -232,7 +232,6 @@ const Snake = ({ controls, isSelected, gameState, setGameState }) => {
     ctx.fillText("Time: " + Math.floor(time/1000), 7 * blockWidth, 20 * blockHeight, 500);
     ctx.font = "16px monospace";
     ctx.fillText("Press Play to Restart", 5.5 * blockWidth, 25 * blockHeight, 500);
-    console.log(time);
   };
 
   const drawPauseGame = (ctx, blockWidth, blockHeight) => {
