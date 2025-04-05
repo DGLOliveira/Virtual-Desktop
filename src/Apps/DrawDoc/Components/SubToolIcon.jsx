@@ -140,8 +140,8 @@ export const SubToolIcon = ({ subtool }) => {
         const height = context.canvas.height;
         const width = context.canvas.width;
         context.clearRect(0, 0, width, height);
-        context.fillStyle = "lightgray";
-        context.strokeStyle = "white";
+        context.fillStyle = getComputedStyle(document.getElementById("drawDocToolBar")).color;
+        context.strokeStyle = getComputedStyle(document.getElementById("drawDocToolBar")).color;
         context.lineWidth = 2;
         functionList["draw"+subtool.shape+"Icon"](context, width, height);
     }, [subtool]);
