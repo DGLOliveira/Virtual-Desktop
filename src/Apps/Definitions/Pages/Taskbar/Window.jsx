@@ -77,6 +77,41 @@ export const TrayWindow = () => {
         root.style.setProperty("--TaskbarWindowBorderType", taskbarWindowBorderType);
     }, [taskbarWindowBorderType]);
     //----------------------------------------------------------------------------//
+    const [taskbarWindowShadowXOffset, setTaskbarWindowShadowXOffset] = useState(
+      getComputedStyle(root).getPropertyValue("--TaskbarWindowShadowXOffset").slice(0, -2),
+    );
+    useEffect(() => {
+      root.style.setProperty("--TaskbarWindowShadowXOffset", taskbarWindowShadowXOffset + "px");
+    }, [taskbarWindowShadowXOffset]);
+    //----------------------------------------------------------------------------//
+    const [taskbarWindowShadowYOffset, setTaskbarWindowShadowYOffset] = useState(
+      getComputedStyle(root).getPropertyValue("--TaskbarWindowShadowYOffset").slice(0, -2),
+    );
+    useEffect(() => {
+      root.style.setProperty("--TaskbarWindowShadowYOffset", taskbarWindowShadowYOffset + "px");
+    }, [taskbarWindowShadowYOffset]);
+    //----------------------------------------------------------------------------//
+    const [taskbarWindowShadowBlur, setTaskbarWindowShadowBlur] = useState(
+      getComputedStyle(root).getPropertyValue("--TaskbarWindowShadowBlur").slice(0, -2),
+    );
+    useEffect(() => {
+      root.style.setProperty("--TaskbarWindowShadowBlur", taskbarWindowShadowBlur + "px");
+    }, [taskbarWindowShadowBlur]);
+    //----------------------------------------------------------------------------//
+    const [taskbarWindowShadowSpread, setTaskbarWindowShadowSpread] = useState(
+      getComputedStyle(root).getPropertyValue("--TaskbarWindowShadowSpread").slice(0, -2),
+    );
+    useEffect(() => {
+      root.style.setProperty("--TaskbarWindowShadowSpread", taskbarWindowShadowSpread + "px");
+    }, [taskbarWindowShadowSpread]);
+    //----------------------------------------------------------------------------//
+    const [taskbarWindowShadowColor, setTaskbarWindowShadowColor] = useState(
+      getComputedStyle(root).getPropertyValue("--TaskbarWindowShadowColor"),
+    );
+    useEffect(() => {
+      root.style.setProperty("--TaskbarWindowShadowColor", taskbarWindowShadowColor);
+    }, [taskbarWindowShadowColor]);
+    //----------------------------------------------------------------------------//
     const [taskbarWindowHeaderBkgr, setTaskbarWindowHeaderBkgr] = useState(
         getComputedStyle(root).getPropertyValue("--TaskbarWindowHeaderBkgr")
     );
@@ -390,6 +425,61 @@ export const TrayWindow = () => {
                         </select>
                     </div>
                 </fieldset>
+        <fieldset>
+          <legend>Shadow</legend>
+          <div>
+            <label>Y-Offset</label>
+            <input
+              type="number"
+              min={-50}
+              max={50}
+              step="1"
+              value={taskbarWindowShadowYOffset}
+              onChange={(e) => setTaskbarWindowShadowYOffset(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>X-Offset</label>
+            <input
+              type="number"
+              min={-50}
+              max={50}
+              step="1"
+              value={taskbarWindowShadowXOffset}
+              onChange={(e) => setTaskbarWindowShadowXOffset(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Spread</label>
+            <input
+              type="number"
+              min={0}
+              max={50}
+              step="1"
+              value={taskbarWindowShadowSpread}
+              onChange={(e) => setTaskbarWindowShadowSpread(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Blur</label>
+            <input
+              type="number"
+              min={0}
+              max={50}
+              step="1"
+              value={taskbarWindowShadowBlur}
+              onChange={(e) => setTaskbarWindowShadowBlur(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Color</label>
+            <ColorPicker
+              color={taskbarWindowShadowColor}
+              setColor={setTaskbarWindowShadowColor}
+              useAlpha={true}
+            />
+          </div>
+        </fieldset>
             </fieldset>
             <fieldset>
                 <legend>Header</legend>

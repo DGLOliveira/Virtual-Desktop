@@ -17,8 +17,8 @@ task-bar {
 
 task-bar>vertical-rect {
   height: 100%;
-  width:0;
-  border:none;
+  width: 0;
+  border: none;
   border-left: var(--TaskbarVerticalBorderWidth) var(--TaskbarVerticalBorderColor) var(--TaskbarVerticalBorderType);
 }
 
@@ -32,7 +32,7 @@ taskbar-tray {
   border-radius: var(--TaskbarTrayBorderRadius);
 }
 
-taskbar-tray>button{
+taskbar-tray>button {
   color: var(--TaskbarTrayButtonColor);
   background: var(--TaskbarTrayButtonBkgr);
   margin: var(--TaskbarTrayButtonMargin);
@@ -41,17 +41,17 @@ taskbar-tray>button{
   border-radius: var(--TaskbarTrayButtonBorderRadius);
 }
 
-taskbar-tray>button:hover{
+taskbar-tray>button:hover {
   color: var(--TaskbarTrayButtonColorHover);
   background: var(--TaskbarTrayButtonBkgrHover);
 }
 
-taskbar-tray>button:active{
+taskbar-tray>button:active {
   color: var(--TaskbarTrayButtonColorActive);
   background: var(--TaskbarTrayButtonBkgrActive);
 }
 
-taskbar-tray>button>svg{
+taskbar-tray>button>svg {
   width: var(--TaskbarIconSize);
   height: var(--TaskbarIconSize);
 }
@@ -64,7 +64,7 @@ taskbar-window {
   bottom: var(--TaskbarHeight);
   height: auto;
   width: auto;
-  max-width:350px;
+  max-width: 350px;
   box-sizing: border-box;
   padding: var(--TaskbarWindowPadding);
   border: var(--TaskbarWindowBorderColor) var(--TaskbarWindowBorderWidth) var(--TaskbarWindowBorderType);
@@ -76,12 +76,13 @@ taskbar-window {
   background-size: var(--TaskbarWindowBkgrSize);
   background-repeat: var(--TaskbarWindowBkgrRepeat);
   backdrop-filter: var(--TaskbarWindowBackdropFilter);
+  box-shadow: var(--TaskbarWindowShadowXOffset) var(--TaskbarWindowShadowYOffset) var(--TaskbarWindowShadowBlur) var(--TaskbarWindowShadowSpread) var(--TaskbarWindowShadowColor);
   overflow: hidden;
   transition: 1s ease-in-out 0s;
 }
 
 taskbar-window-header {
-  display: flex;  
+  display: flex;
   flex-direction: row;
   box-sizing: border-box;
   width: 100%;
@@ -106,7 +107,7 @@ taskbar-window-nav {
   border-radius: var(--TaskbarWindowNavBorderRadius);
 }
 
-taskbar-window-nav>button{
+taskbar-window-nav>button {
   color: inherit;
 }
 
@@ -132,6 +133,6 @@ taskbar-window-footer {
   border-radius: var(--TaskbarWindowFooterBorderRadius);
 }
 
-taskbar-window-footer>*{
+taskbar-window-footer>* {
   color: var(--TaskbarWindowFooterColor);
 }
