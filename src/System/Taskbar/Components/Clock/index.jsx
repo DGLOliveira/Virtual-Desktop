@@ -12,7 +12,6 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
     time: "hh:mm",
     clock: "numeric"
   });
-  const [date, setDate] = useState(new Date());
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [monthString, setMonthString] = useState("");
@@ -58,7 +57,6 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       const newDate = new Date();
-      setDate(newDate);
       setYear(newDate.getFullYear());
       let letMonth = newDate.getMonth();
       setMonthString(monthList[Number(letMonth)]);

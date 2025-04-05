@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { CircleFlag } from "react-circle-flags";
 
 import { GeoLocation } from "./Services/GeoLocation.js";
 import { OpenMeteo } from "./Services/OpenMeteo.js";
@@ -8,7 +7,7 @@ import { OpenMeteo } from "./Services/OpenMeteo.js";
 import { WeatherCode } from "./Components/WeatherCode.jsx";
 
 import { WiUmbrella, WiBarometer } from "react-icons/wi";
-import { FaArrowDown, FaArrowLeft, FaArrowRight, FaSearch, FaUmbrella } from "react-icons/fa";
+import { FaArrowDown, FaArrowLeft, FaArrowRight, FaUmbrella } from "react-icons/fa";
 import { FaLocationDot, FaTemperatureHalf, FaWind, FaDroplet, FaCloud, FaSun, FaGear } from "react-icons/fa6";
 import { GiHeavyRain } from "react-icons/gi";
 
@@ -25,9 +24,7 @@ import { UltraViolet } from "./Pages/UltraViolet.jsx";
 
 import { handleUnitConversion } from "./Handlers/handleUnitConversion.js";
 
-
 import "./styles.css";
-
 
 export const Weather = ({ contextMenu, setShowWeather }) => {
   const detailsRef = useRef(null);
@@ -41,10 +38,8 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
     source: "empty",
     status: "empty",
   });
-  const [weatherTime, setWeatherTime] = useState("Now");
   const [widgetState, setWidgetState] = useState("none");
   const [currentHour, setCurrentHour] = useState(null);
-  const [weatherCode, setWeatherCode] = useState(null);
   const [hourlyData, setHourlyData] = useState(null);
   const [dailyData, setDailyData] = useState(null);
   const [units, setUnits] = useState({
@@ -211,20 +206,17 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
   }, [weatherData, units]);
   //Display/Update Weather Data
   useEffect(() => {
-    console.log(weatherCode);
     if (dailyData !== null && hourlyData !== null, latestDataIndex !== null) {
       setWidgetState("Done");
     }
-  }, [dailyData, hourlyData, latestDataIndex, weatherTime]);
+  }, [dailyData, hourlyData, latestDataIndex]);
 
   const handleBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       setShowDetails(false);
     }
   };
-  useEffect(() => {
-      console.log(widgetState);    
-  },[widgetState]);
+  
   return (
     <>
         <button 
