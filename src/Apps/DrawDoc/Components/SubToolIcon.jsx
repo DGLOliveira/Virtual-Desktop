@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-export const SubToolIcon = ({ subtool }) => {
+export const SubToolIcon = ({ subtool, isSelected }) => {
     let canvasSubToolRef = useRef(null);
 
     const drawCircleIcon = (context, width, height) => {
@@ -144,7 +144,8 @@ export const SubToolIcon = ({ subtool }) => {
         context.strokeStyle = getComputedStyle(document.getElementById("drawDocToolBar")).color;
         context.lineWidth = 2;
         functionList["draw"+subtool.shape+"Icon"](context, width, height);
-    }, [subtool]);
+    }, [subtool, isSelected]);
+
 
     return <canvas ref={canvasSubToolRef} id="shapeCanvas" width="25" height="25"  title="Custom Shape"/>
 }
