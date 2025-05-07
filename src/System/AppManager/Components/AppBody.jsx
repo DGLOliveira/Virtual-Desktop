@@ -4,6 +4,7 @@ import { ThemeContext } from "../../ThemeManager/context.jsx";
 import { AppMenuBar } from "./AppMenuBar.jsx";
 import { AppDialog } from "./AppDialog.jsx";
 import { AppTopBar } from "./AppTopBar.jsx";
+import { AppResizer } from "./AppResizer.jsx";
 import Loading from "./../../GlobalComponents/Loading.jsx";
 import ErrorBoundary from "./../../GlobalComponents/ErrorBoundary.jsx";
 import ErrorMessage from "./../../GlobalComponents/ErrorMessage.jsx";
@@ -84,6 +85,9 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
           </app-container>
         </Suspense>
       </ErrorBoundary>
+      <AppResizer 
+        appName={appName}
+      />
     </>
   );
 }

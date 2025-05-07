@@ -1,4 +1,4 @@
-export const switchMaximizedHandler = (name, appStatus, setAppStatus) => {
+export const switchMaximizedHandler = (name, appStatus, setAppStatus, MIN_WIDTH, MIN_HEIGHT) => {
   let newAppStatus = {};
   if (appStatus[name].State.isSelected) {
     if (!appStatus[name].State.isMaximized) {
@@ -25,6 +25,10 @@ export const switchMaximizedHandler = (name, appStatus, setAppStatus) => {
             Current:{
             width: "100%",
             height: "100%",
+            },
+            Previous:{
+              width: appStatus[name].Size.Current.width > MIN_WIDTH ? appStatus[name].Size.Current.width : MIN_WIDTH,
+              height: appStatus[name].Size.Current.height > MIN_HEIGHT ? appStatus[name].Size.Current.height : MIN_HEIGHT
             }
           }
         },
@@ -84,8 +88,8 @@ export const switchMaximizedHandler = (name, appStatus, setAppStatus) => {
                   height: "100%"
                 },
                 Previous:{
-                  width: appStatus[name].Size.Current.width,
-                  height: appStatus[name].Size.Current.height
+                  width: appStatus[name].Size.Current.width > MIN_WIDTH ? appStatus[name].Size.Current.width : MIN_WIDTH,
+                  height: appStatus[name].Size.Current.height > MIN_HEIGHT ? appStatus[name].Size.Current.height : MIN_HEIGHT
                 }
               }
             };

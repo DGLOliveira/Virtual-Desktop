@@ -1,0 +1,83 @@
+app-resize-n {
+    position: absolute;
+    top: calc(-1* var(--WindowBorderWidth));
+    right: 0;
+    height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    min-height: 6px;
+    width: inherit;
+    cursor: n-resize;
+}
+
+app-resize-s {
+    position: absolute;
+    bottom: calc(-1* var(--WindowBorderWidth));
+    right: 0;
+    height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    min-height: 6px;
+    width: inherit;
+    cursor: s-resize;
+}
+
+app-resize-w {
+    position: absolute;
+    top: calc(-1* var(--WindowBorderWidth));
+    left: calc(-1* var(--WindowBorderWidth));
+    height: inherit;
+    width: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    min-width: 6px;
+    cursor: w-resize;
+}
+
+app-resize-e {
+    position: absolute;
+    top: calc(-1* var(--WindowBorderWidth));
+    right: calc(-1* var(--WindowBorderWidth));
+    height: inherit;
+    width: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    min-width: 6px;
+    cursor: e-resize;
+}
+
+app-resize-nw {
+    position: absolute;
+    top: calc(-1* var(--WindowBorderWidth));
+    left: calc(-1* var(--WindowBorderWidth));
+    height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    width: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    min-height: 6px;
+    min-width: 6px;
+    cursor: nw-resize;
+}
+
+app-resize-ne {
+    position: absolute;
+    top: calc(-1* var(--WindowBorderWidth));
+    right: calc(-1* var(--WindowBorderWidth));
+    height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    width: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    min-height: 6px;
+    min-width: 6px;
+    cursor: ne-resize;
+}
+
+app-resize-se {
+    position: absolute;
+    bottom: calc(-1* var(--WindowBorderWidth));
+    right: calc(-1* var(--WindowBorderWidth));
+    height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    width: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    min-height: 6px;
+    min-width: 6px;
+    cursor: se-resize;
+}
+
+app-resize-sw {
+    position: absolute;
+    bottom: calc(-1* var(--WindowBorderWidth));
+    left: calc(-1* var(--WindowBorderWidth));
+    height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    width: calc(var(--WindowBorderWidth) + var(--WindowPadding));
+    min-height: 6px;
+    min-width: 6px;
+    cursor: sw-resize;
+}

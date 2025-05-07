@@ -1,4 +1,4 @@
-export const setSizeDefaultHandler = (name, appStatus, setAppStatus, width, height) => {
+export const setSizeDefaultHandler = (name, appStatus, setAppStatus, width, height, MIN_WIDTH, MIN_HEIGHT) => {
     setAppStatus({
       ...appStatus,
       [name]: {
@@ -6,8 +6,8 @@ export const setSizeDefaultHandler = (name, appStatus, setAppStatus, width, heig
         Size:{
           ...appStatus[name].Size,
           Previous:{
-            width: width,
-            height: height,
+            width: width > MIN_WIDTH ? width : MIN_WIDTH,
+            height: height > MIN_HEIGHT ? height : MIN_HEIGHT,
           }
         }
       },
