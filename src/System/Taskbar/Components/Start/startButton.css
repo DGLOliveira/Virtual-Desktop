@@ -34,6 +34,7 @@ start-button>button>span {
 }
 
 start-button>button>svg {
+    isolation: isolate;
     width: var(--StartButtonIconSize);
     height: var(--StartButtonIconSize);
 }
@@ -91,7 +92,7 @@ start-button>button:hover>svg>.hex3 {
 /*------------------------Aero Button-------------------------*/
 /*------------------------------------------------------------*/
 
-.startButtonAero>svg {
+.startButtonAero {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
     border-radius:50%;
@@ -112,17 +113,17 @@ start-button>button:hover>svg>.hex3 {
     fill: #0000FF;
 }
 
-.startButtonAero:hover:enabled>svg {
+.startButtonAero:hover:enabled {
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.5) inset;
 }
 
-.startButtonAero:active:enabled>svg {
+.startButtonAero:active:enabled {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
 }
 
-.startButtonAeroActive>svg {
+.startButtonAeroActive {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;

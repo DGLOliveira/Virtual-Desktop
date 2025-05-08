@@ -70,10 +70,11 @@ export const TaskBarPreview = () => {
           zIndex: 1,
         }}
       >
+
         <start-button
         >
           <button className={startButtonClass()}>
-            <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg style={{isolation: "isolate"}} width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="startButtonAquaRed" gradientTransform="rotate(90)">
                   <stop offset="20%" stopColor="#FF9999" />
