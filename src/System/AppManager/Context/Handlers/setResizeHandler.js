@@ -1,4 +1,4 @@
-export const setResizeHandler = (name, appStatus, setAppStatus, direction, x, y, startHeight, startWidth, MIN_WIDTH, MIN_HEIGHT) => {
+export const setResizeHandler = (name, appStatus, setAppStatus, direction, x, y, startHeight, startWidth, startTop, startLeft, MIN_WIDTH, MIN_HEIGHT) => {
     const currPosTop = appStatus[name].Location.Current.top;
     const currPosLeft = appStatus[name].Location.Current.left;
     const currSizeWidth = appStatus[name].Size.Current.width;
@@ -13,7 +13,7 @@ export const setResizeHandler = (name, appStatus, setAppStatus, direction, x, y,
             case "n":
                 if (startHeight + y > MIN_HEIGHT) {
                     newSizeHeight = startHeight + y;
-                    newPosTop = currPosTop - y;
+                    newPosTop = startTop - y;
                 } else {
                     newSizeHeight = MIN_HEIGHT;
                     newPosTop = currPosTop;
@@ -35,11 +35,11 @@ export const setResizeHandler = (name, appStatus, setAppStatus, direction, x, y,
                 break;
             case "w":
                 if (startWidth + x > MIN_WIDTH) {
-                    newPosLeft = currPosLeft - x;
                     newSizeWidth = startWidth + x;
+                    newPosLeft = startLeft - x;
                 } else {
-                    newPosLeft = currPosLeft;
                     newSizeWidth = MIN_WIDTH;
+                    newPosLeft = currPosLeft;
                 }
                 break;
             default:

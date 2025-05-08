@@ -6,6 +6,7 @@ import "../Styles/Resizer.css";
 export const AppResizer = ({ appName }) => {
     const appContext = useContext(AppContext);
     const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+    const [startWindowPos, setStartWindowPos] = useState({ x: 0, y: 0 });
     const [startSize, setStartSize] = useState({ x: 0, y: 0 });
 
     const resizeStart = (e) => {
@@ -24,6 +25,10 @@ export const AppResizer = ({ appName }) => {
             x: appContext.apps[appName].Size.Current.width,
             y: appContext.apps[appName].Size.Current.height
         });
+        setStartWindowPos({
+            x: appContext.apps[appName].Location.Current.left,
+            y: appContext.apps[appName].Location.Current.top
+        })
     };
 
     const resize = (e, direction) => {
@@ -39,7 +44,7 @@ export const AppResizer = ({ appName }) => {
         if (e.clientX !== 0 && e.clientY !== 0) {
         let x = startPos.x - clientX;
         let y = startPos.y - clientY;
-        appContext.setResize(appName, direction, x, y, startSize.y, startSize.x);
+        appContext.setResize(appName, direction, x, y, startSize.y, startSize.x, startWindowPos.y, startWindowPos.x);
         }
     };
 
@@ -48,6 +53,7 @@ export const AppResizer = ({ appName }) => {
         resize(e, direction);
         setStartPos({ x: 0, y: 0 });
         setStartSize({ x: 0, y: 0 });
+        setStartWindowPos({ x: 0, y: 0 });
     };
 
     const directions = ["n", "e", "s", "w", "ne", "se", "sw", "nw"];
