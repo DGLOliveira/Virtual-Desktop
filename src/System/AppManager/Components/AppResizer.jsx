@@ -50,7 +50,7 @@ export const AppResizer = ({ appName }) => {
         setStartSize({ x: 0, y: 0 });
     };
 
-    const directions = ["n", "ne", "e", "se", "s", "sw", "w", "nw"];
+    const directions = ["n", "e", "s", "w", "ne", "se", "sw", "nw"];
 
     return <>
         {!appContext.apps[appName].State.isMaximized &&
