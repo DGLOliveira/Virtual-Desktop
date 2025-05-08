@@ -34,7 +34,7 @@ export const setResizeHandler = (name, appStatus, setAppStatus, direction, x, y,
                 }
                 break;
             case "w":
-                if (startWidth > MIN_WIDTH) {
+                if (startWidth + x > MIN_WIDTH) {
                     newPosLeft = currPosLeft - x;
                     newSizeWidth = startWidth + x;
                 } else {
