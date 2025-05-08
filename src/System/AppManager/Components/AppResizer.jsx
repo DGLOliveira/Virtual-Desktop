@@ -50,74 +50,27 @@ export const AppResizer = ({ appName }) => {
         setStartSize({ x: 0, y: 0 });
     };
 
+    const directions = ["n", "ne", "e", "se", "s", "sw", "w", "nw"];
+
     return <>
         {!appContext.apps[appName].State.isMaximized &&
             !appContext.apps[appName].State.isMinimized &&
-            <>
-                <app-resize-n
-                    draggable={true}
-                    onDragStart={(e) => resizeStart(e)}
-                    onDrag={(e) => resize(e, "n")}
-                    onDragEnd={(e) => resizeEnd(e, "n")}
-                    onTouchStart={(e) => resizeStart(e)}
-                    onTouchMove={(e) => resize(e, "n")}
-                />
-                <app-resize-e
-                    draggable={true}
-                    onDragStart={(e) => resizeStart(e)}
-                    onDrag={(e) => resize(e, "e")}
-                    onDragEnd={(e) => resizeEnd(e, "e")}
-                    onTouchStart={(e) => resizeStart(e)}
-                    onTouchMove={(e) => resize(e, "e")}
-                />
-                <app-resize-s
-                    draggable={true}
-                    onDragStart={(e) => resizeStart(e)}
-                    onDrag={(e) => resize(e, "s")}
-                    onDragEnd={(e) => resizeEnd(e, "s")}
-                    onTouchStart={(e) => resizeStart(e)}
-                    onTouchMove={(e) => resize(e, "s")}
-                />
-                <app-resize-w
-                    draggable={true}
-                    onDragStart={(e) => resizeStart(e)}
-                    onDrag={(e) => resize(e, "w")}
-                    onDragEnd={(e) => resizeEnd(e, "w")}
-                    onTouchStart={(e) => resizeStart(e)}
-                    onTouchMove={(e) => resize(e, "w")}
-                />
-                <app-resize-ne
-                    draggable={true}
-                    onDragStart={(e) => resizeStart(e)}
-                    onDrag={(e) => resize(e, "ne")}
-                    onDragEnd={(e) => resizeEnd(e, "ne")}
-                    onTouchStart={(e) => resizeStart(e)}
-                    onTouchMove={(e) => resize(e, "ne")}
-                />
-                <app-resize-nw
-                    draggable={true}
-                    onDragStart={(e) => resizeStart(e)}
-                    onDrag={(e) => resize(e, "nw")}
-                    onDragEnd={(e) => resizeEnd(e, "nw")}
-                    onTouchStart={(e) => resizeStart(e)}
-                    onTouchMove={(e) => resize(e, "nw")}
-                />
-                <app-resize-sw
-                    draggable={true}
-                    onDragStart={(e) => resizeStart(e)}
-                    onDrag={(e) => resize(e, "sw")}
-                    onDragEnd={(e) => resizeEnd(e, "sw")}
-                    onTouchStart={(e) => resizeStart(e)}
-                    onTouchMove={(e) => resize(e, "sw")}
-                />
-                <app-resize-se
-                    draggable={true}
-                    onDragStart={(e) => resizeStart(e)}
-                    onDrag={(e) => resize(e, "se")}
-                    onDragEnd={(e) => resizeEnd(e, "se")}
-                    onTouchStart={(e) => resizeStart(e)}
-                    onTouchMove={(e) => resize(e, "se")}
-                />
+            <>{
+                directions.map((direction) => {
+                    return (
+                        <app-resizer
+                            class={direction}
+                            key={direction}
+                            draggable
+                            onDragStart={(e) => resizeStart(e)}
+                            onDrag={(e) => resize(e, direction)}
+                            onDragEnd={(e) => resizeEnd(e, direction)}
+                            onTouchStart={(e) => resizeStart(e)}
+                            onTouchEnd={(e) => resize(e, direction)}
+                        ></app-resizer>
+                    );
+                })
+            }
             </>}
     </>;
 };

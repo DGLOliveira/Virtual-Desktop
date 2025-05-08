@@ -1,5 +1,8 @@
-app-resize-n {
+app-resizer {
     position: absolute;
+}
+
+app-resizer.n {
     top: calc(-1* var(--WindowBorderWidth));
     right: 0;
     height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
@@ -8,8 +11,7 @@ app-resize-n {
     cursor: n-resize;
 }
 
-app-resize-s {
-    position: absolute;
+app-resizer.s {
     bottom: calc(-1* var(--WindowBorderWidth));
     right: 0;
     height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
@@ -18,8 +20,7 @@ app-resize-s {
     cursor: s-resize;
 }
 
-app-resize-w {
-    position: absolute;
+app-resizer.w {
     top: calc(-1* var(--WindowBorderWidth));
     left: calc(-1* var(--WindowBorderWidth));
     height: inherit;
@@ -28,8 +29,7 @@ app-resize-w {
     cursor: w-resize;
 }
 
-app-resize-e {
-    position: absolute;
+app-resizer.e {
     top: calc(-1* var(--WindowBorderWidth));
     right: calc(-1* var(--WindowBorderWidth));
     height: inherit;
@@ -38,8 +38,7 @@ app-resize-e {
     cursor: e-resize;
 }
 
-app-resize-nw {
-    position: absolute;
+app-resizer.nw {
     top: calc(-1* var(--WindowBorderWidth));
     left: calc(-1* var(--WindowBorderWidth));
     height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
@@ -49,8 +48,7 @@ app-resize-nw {
     cursor: nw-resize;
 }
 
-app-resize-ne {
-    position: absolute;
+app-resizer.ne {
     top: calc(-1* var(--WindowBorderWidth));
     right: calc(-1* var(--WindowBorderWidth));
     height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
@@ -60,8 +58,7 @@ app-resize-ne {
     cursor: ne-resize;
 }
 
-app-resize-se {
-    position: absolute;
+app-resizer.se {
     bottom: calc(-1* var(--WindowBorderWidth));
     right: calc(-1* var(--WindowBorderWidth));
     height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
@@ -71,8 +68,7 @@ app-resize-se {
     cursor: se-resize;
 }
 
-app-resize-sw {
-    position: absolute;
+app-resizer.sw {
     bottom: calc(-1* var(--WindowBorderWidth));
     left: calc(-1* var(--WindowBorderWidth));
     height: calc(var(--WindowBorderWidth) + var(--WindowPadding));
