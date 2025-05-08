@@ -69,9 +69,9 @@ export function AppProvider({ children }) {
     setSizeDefaultHandler(name, appStatus, setAppStatus, width, height);
   }
   //resizes width and height of a given live task, and adjusts location based on the resize direction, to be used when a live task is not maximized or minimized
-  const setResize = (name, direction, top, left) => {
+  const setResize = (name, direction, x, y, startHeight, startWidth) => {
     if(!appStatus[name].State.isMaximized && !appStatus[name].State.isMinimized){
-    setResizeHandler(name, appStatus, setAppStatus, direction, top, left, MIN_WIDTH, MIN_HEIGHT);
+    setResizeHandler(name, appStatus, setAppStatus, direction, x, y, startHeight, startWidth, MIN_WIDTH, MIN_HEIGHT);
     }
   }
   // switches the maximized state of a given app and sets to selected if not, storing the current position and size as default upon maximization, and using the default position and size upon restoration

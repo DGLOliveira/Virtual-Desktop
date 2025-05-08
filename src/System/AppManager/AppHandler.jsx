@@ -33,8 +33,6 @@ export function AppHandler() {
             visibility: appContext.apps[name].State.isMinimized
               ? "hidden"
               : "visible",
-            resize: appContext.apps[name].State.isMaximized
-              ? "none" : "both"
           }}
           key={name + "AppHandler"}
           onClick={() => appContext.setSelected(name)}
