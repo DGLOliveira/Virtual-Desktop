@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { FaArrowLeft, FaArrowRight, FaCog } from "react-icons/fa";
-import AnalogClock from "./Components/AnalogClock.jsx";
+import SVGClock from "./Components/SVGClock.jsx";
 import "./styles.css";
 export const TaskbarClock = ({ contextMenu, setShowClock }) => {
 
@@ -195,7 +195,7 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
             {formats.date === "yyyy/mm/dd" && <>{year}/{Number(month) + 1}/{day}</>}
           </> :
           <div style={{ display: "flex", height: "var(--TaskbarIconSize)", width: "var(--TaskbarIconSize)" }}>
-            <AnalogClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
+            <SVGClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
           </div>}
       </button>
       {displayCalendar && createPortal(
@@ -213,7 +213,7 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
               {dayString}{", "}{day}{" of "}{monthString}{", "}{year}
             </calendar-date>
             <calendar-clock>
-              <AnalogClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
+              <SVGClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
             </calendar-clock>
           </taskbar-window-header>
           <taskbar-window-nav

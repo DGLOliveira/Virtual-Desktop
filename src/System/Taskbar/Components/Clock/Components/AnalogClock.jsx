@@ -1,3 +1,6 @@
+// Depreceated in favor of SVGClock
+// Canvas is more resource intensive than SVG + CSS
+
 import { useState, useEffect, useRef } from "react";
 
 export default function AnalogClock({ time }) {
