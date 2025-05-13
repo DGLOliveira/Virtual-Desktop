@@ -21,7 +21,8 @@
     "react-scripts": "^5.0.1",
     "sanitize-html": "latest",
     "three": "latest",
-    "three-stdlib": "latest"
+    "three-stdlib": "latest",
+    "ua-parser-js": "^2.0.3"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
