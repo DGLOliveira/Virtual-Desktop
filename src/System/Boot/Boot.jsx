@@ -4,6 +4,11 @@ import StartupScreen from "./StartupScreen.jsx";
 
 export default function Boot() {
   const [ready, setReady] = useState(false);
+  let deviceInfo = {};
+  let browserInfo = {};
+  const uap = new UAParser();
+  const bootTerminal = document.getElementById("bootTerminal");
+
   const OS = lazy(() => import("./OS.jsx").catch(
     (error) => {
       console.error(error);
@@ -11,50 +16,70 @@ export default function Boot() {
     }
   ));
 
-  const uap = new UAParser();
-  const message = document.getElementById("bootTerminal");
+  function createList(title, info) {
+    const container = document.createElement("figure");
+    const titleElement = document.createElement("figcaption");
+    titleElement.append("Checking " + title + "...");
+    container.append(titleElement);
+    const listElement = document.createElement("ul");
+    container.append(listElement);
+    Object.keys(info).forEach((key) => {
+      const listItem = document.createElement("li");
+      let text = "";
+      if(typeof info[key] === "object") {
+        text = key + ": ";
+        Object.keys(info[key]).forEach((subkey) => {
+          text += info[key][subkey] + " ";
+        });
+      }else{
+        text = key + ": " + info[key];
+      }
+      listItem.append(text);
+      listElement.append(listItem);
+    });
+    bootTerminal.append(container);
+  }
+
+  function checkFalsy(value) {
+    if (value) {
+      return value;
+    } else {
+      return "Unknown";
+    }
+  }
 
   function checkDevice() {
-    const deviceInfo = document.createElement("p");
-    message.append(deviceInfo);
-    if (!uap.getDevice().type) {
-      deviceInfo.append("Device: Unknown");
-    }
-    else {
-      deviceInfo.append("Device: " + uap.getDevice().type);
-    }
-    const cpuInfo = document.createElement("p");
-    message.append(cpuInfo);
-    cpuInfo.append("CPU: " + uap.getCPU());
-    const osInfo = document.createElement("p");
-    message.append(osInfo);
-    osInfo.append("OS: " + uap.getOS().name + " " + uap.getOS().version);
-    const touchInfo = document.createElement("p");
-    message.append(touchInfo);
-    if (('ontouchstart' in window) ||
+    const touch = (('ontouchstart' in window) ||
       (navigator.maxTouchPoints > 0) ||
-      (navigator.msMaxTouchPoints > 0)) {
-      touchInfo.append("Touch: Yes");
-    } else {
-      touchInfo.append("Touch: No");
+      (navigator.msMaxTouchPoints > 0)) ? "Yes" : "No";
+
+    deviceInfo = {
+      "Device": checkFalsy(uap.getDevice().type),
+      "CPU Architecture": checkFalsy(uap.getCPU().architecture),
+      "OS": {
+        name: checkFalsy(uap.getOS().name),
+        version: checkFalsy(uap.getOS().version)
+      },
+      "Touch Support": touch
     }
+    return deviceInfo;
   }
 
   function checkBrowser() {
-    const browserCheck = document.createElement("h5");
-    message.append(browserCheck);
-    browserCheck.append("Checking Browser...");
-    const browserInfo = document.createElement("p");
-    message.append(browserInfo);
-    browserInfo.append("Browser: " + uap.getBrowser().name + " v" + uap.getBrowser().version);
-    const darkMode = document.createElement("p");
-    message.append(darkMode);
-    darkMode.append("Dark Mode: " + window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "Yes" : "No";
+    browserInfo = {
+      "Browser": {
+        name: checkFalsy(uap.getBrowser().name),
+        version: checkFalsy(uap.getBrowser().version)
+      },
+      "Dark Mode": darkMode
+    }
+    return browserInfo;
   }
 
   useEffect(() => {
-    checkDevice();
-    checkBrowser();
+    createList("Device", checkDevice());
+    createList("Browser", checkBrowser());
   })
 
   /*setTimeout(() => {

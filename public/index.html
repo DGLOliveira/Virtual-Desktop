@@ -75,18 +75,31 @@
             font-style: italic;
         }
 
-        #bootTerminal{
+        #bootTerminal {
             font-family: monospace;
         }
 
-        #bootTerminal>h5 {
+        #bootTerminal>figure {
+            margin: 0;
+            margin-left:5px;
+        }
+
+        #bootTerminal>figure>figcaption {
             margin: 5px 0 5px 0;
             font-size: medium;
         }
 
-        #bootTerminal>p {
+        #bootTerminal>figure>ul {
             margin: 0;
-            margin-left: 10px;
+            padding-left: 20px;
+        }
+
+        #bootTerminal>figure>ul>li {
+            margin: 0;
+        }
+
+        #bootTerminal>figure>ul>li::marker {
+            content: "> ";
         }
     </style>
 </head>
@@ -117,7 +130,6 @@
             </div>
         </div>
         <div id="bootTerminal">
-            <h5>Checking Device...</h5>
             <noscript>You need to enable JavaScript to run this app.</noscript>
         </div>
     </div>
