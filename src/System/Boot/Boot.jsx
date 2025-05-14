@@ -18,6 +18,7 @@ export default function Boot() {
 
   function createList(title, info) {
     const container = document.createElement("figure");
+    bootTerminal.append(container);
     const titleElement = document.createElement("figcaption");
     titleElement.append("Checking " + title + "...");
     container.append(titleElement);
@@ -26,25 +27,24 @@ export default function Boot() {
     Object.keys(info).forEach((key) => {
       const listItem = document.createElement("li");
       let text = "";
-      if(typeof info[key] === "object") {
+      if (typeof info[key] === "object") {
         let flag = false;
         text = key + ": ";
         Object.keys(info[key]).forEach((subkey) => {
-          if(info[key][subkey] !== "Unknown"){
-          text += info[key][subkey] + " ";
+          if (info[key][subkey] !== "Unknown") {
+            text += info[key][subkey] + " ";
             flag = true;
           };
         });
-        if(!flag){
+        if (!flag) {
           text += "Unknown";
         }
-      }else{
+      } else {
         text = key + ": " + info[key];
       }
       listItem.append(text);
       listElement.append(listItem);
     });
-    bootTerminal.append(container);
   }
 
   function checkFalsy(value) {
@@ -64,6 +64,7 @@ export default function Boot() {
     //RAM values currently not available in Firefox and Safari
     //https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API
     const ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "Unknown";
+    //Note: hardware concurrency does not necessally mean number of cores
     deviceInfo = {
       "Device": {
         name: checkFalsy(uap.getDevice().model),
@@ -71,12 +72,14 @@ export default function Boot() {
       },
       "Type": checkFalsy(uap.getDevice().type),
       "CPU Architecture": checkFalsy(uap.getCPU().architecture),
+      "Hardware Concurrency": navigator.hardwareConcurrency,
       "RAM": ram,
       "OS": {
         name: checkFalsy(uap.getOS().name),
         version: checkFalsy(uap.getOS().version)
       },
-      "Touch Support": touch
+      "Touch Support": touch,
+      "Gamepads": navigator.getGamepads().length
     }
     return deviceInfo;
   }
@@ -89,11 +92,13 @@ export default function Boot() {
         name: checkFalsy(uap.getBrowser().name),
         version: checkFalsy(uap.getBrowser().version)
       },
+      "Engine": checkFalsy(uap.getEngine().name),
       "Dark Mode": darkMode,
       "Cookies Enabled": cookiesEnabled,
     }
     return browserInfo;
   }
+
 
   //-----------------------------------------------------------//
   //-----------------------------------------------------------//
@@ -105,14 +110,14 @@ export default function Boot() {
 
   //Currently not available in Firefox and Safari
   //https://developer.mozilla.org/en-US/docs/Web/API/BatteryManager
-  if(navigator.getBattery){
+  if (navigator.getBattery) {
     navigator.getBattery().then((battery) => {
       console.log(battery);
     });
   }
 
   //No current or future use expected
-  if(navigator.mediaDevices){
+  if (navigator.mediaDevices) {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
       console.log(devices);
     });
@@ -121,7 +126,7 @@ export default function Boot() {
   //No current or future use expected
   //Currently experimental feature, only parcially available in Chrome
   //https://developer.mozilla.org/en-US/docs/Web/API/Navigator/bluetooth
-  if(navigator.bluetooth){
+  if (navigator.bluetooth) {
     navigator.bluetooth.getAvailability().then((availability) => {
       console.log("bluetooth: " + availability);
     })
@@ -130,11 +135,26 @@ export default function Boot() {
   //No current or future use expected
   //Currently experimental feature, compatibility table unknown
   //https://developer.mozilla.org/en-US/docs/Web/API/WebUSB_API
-  if(navigator.usb){
+  if (navigator.usb) {
     navigator.usb.getDevices().then((devices) => {
       console.log(devices);
     });
   }
+
+  //Should be replaced when web app is eventually converted to fullstack
+  //Disabled to avoid IP leak
+  /*
+  async function getIP() {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching IP address:', error);
+    }
+  }
+  getIP();
+  */
 
   //-----------------------------------------------------------//
   //-----------------------------------------------------------//
