@@ -6,22 +6,16 @@ export default function Boot() {
   const [ready, setReady] = useState(false);
   const OS = lazy(() => import("./OS.jsx").catch(
     (error) => {
-      let errorMessage = "Failed to load 3d Scene";
       console.error(error);
       return { default: () => <h1>{"Something Went Wrong :("}</h1> };
     }
   ));
 
   const uap = new UAParser();
-  useEffect(() => {
-    const message = document.getElementById("bootTerminal");
-    const browserInfo = document.createElement("div");
-    message.append(browserInfo);
-    browserInfo.append("Browser: " + uap.getBrowser().name + " v" + uap.getBrowser().version);
-    const cpuInfo = document.createElement("div");
-    message.append(cpuInfo);
-    cpuInfo.append("CPU: " + uap.getCPU());
-    const deviceInfo = document.createElement("div");
+  const message = document.getElementById("bootTerminal");
+
+  function checkDevice() {
+    const deviceInfo = document.createElement("p");
     message.append(deviceInfo);
     if (!uap.getDevice().type) {
       deviceInfo.append("Device: Unknown");
@@ -29,25 +23,45 @@ export default function Boot() {
     else {
       deviceInfo.append("Device: " + uap.getDevice().type);
     }
-    const osInfo = document.createElement("div");
+    const cpuInfo = document.createElement("p");
+    message.append(cpuInfo);
+    cpuInfo.append("CPU: " + uap.getCPU());
+    const osInfo = document.createElement("p");
     message.append(osInfo);
     osInfo.append("OS: " + uap.getOS().name + " " + uap.getOS().version);
+    const touchInfo = document.createElement("p");
+    message.append(touchInfo);
+    if (('ontouchstart' in window) ||
+      (navigator.maxTouchPoints > 0) ||
+      (navigator.msMaxTouchPoints > 0)) {
+      touchInfo.append("Touch: Yes");
+    } else {
+      touchInfo.append("Touch: No");
+    }
+  }
+
+  function checkBrowser() {
+    const browserCheck = document.createElement("h5");
+    message.append(browserCheck);
+    browserCheck.append("Checking Browser...");
+    const browserInfo = document.createElement("p");
+    message.append(browserInfo);
+    browserInfo.append("Browser: " + uap.getBrowser().name + " v" + uap.getBrowser().version);
+    const darkMode = document.createElement("p");
+    message.append(darkMode);
+    darkMode.append("Dark Mode: " + window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }
+
+  useEffect(() => {
+    checkDevice();
+    checkBrowser();
   })
 
   /*setTimeout(() => {
     setReady(true);
   }, 5000);*/
+
   return (<>
-    {!ready &&
-      <div style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%", color: "white", background: "black", cursor: "wait" }}>
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around" }}>
-          <div>Header left placeholder</div>
-          <div>Header right placeholder</div>
-        </div>
-        <div id="bootTerminal" style={{ display: "flex", flexDirection: "column" }}>
-          <div>Checking Device...</div>
-        </div>
-      </div>}
     {ready && <Suspense fallback={<StartupScreen />}>
       <OS />
     </Suspense>}
