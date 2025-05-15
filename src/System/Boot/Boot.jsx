@@ -20,12 +20,13 @@ export default function Boot() {
     const container = document.createElement("figure");
     bootTerminal.append(container);
     const titleElement = document.createElement("figcaption");
-    titleElement.append("Checking " + title + "...");
+    titleElement.append(title + " Specs:");
     container.append(titleElement);
     const listElement = document.createElement("ul");
     container.append(listElement);
     Object.keys(info).forEach((key) => {
       const listItem = document.createElement("li");
+      listItem.setAttribute("id", key);
       let text = "";
       if (typeof info[key] === "object") {
         let flag = false;
@@ -56,6 +57,9 @@ export default function Boot() {
   }
 
   function checkDevice() {
+    const checkingDevice = document.createElement("h5");
+    checkingDevice.append("Checking Device...");
+    bootTerminal.append(checkingDevice);
     //There is no follproof way to check for touch support across all devices
     //Touch interface should always be included when needed
     const touch = (('ontouchstart' in window) ||
@@ -85,6 +89,9 @@ export default function Boot() {
   }
 
   function checkBrowser() {
+    const checkingBrowser = document.createElement("h5");
+    checkingBrowser.append("Checking Browser...");
+    bootTerminal.append(checkingBrowser);
     const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "Yes" : "No";
     const cookiesEnabled = navigator.cookieEnabled ? "Yes" : "No";
     browserInfo = {
@@ -114,15 +121,20 @@ export default function Boot() {
     navigator.getBattery().then((battery) => {
       console.log(battery);
     });
+  }else{
+    console.log("Battery API not available");
   }
 
   //No current or future use expected
   if (navigator.mediaDevices) {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
-      console.log(devices);
+      console.log({"Media Devices":devices});
     });
+  }else{
+    console.log("Media Devices API not available");
   }
 
+  //Detects available USB devices for WebUSB 
   //No current or future use expected
   //Currently experimental feature, only parcially available in Chrome
   //https://developer.mozilla.org/en-US/docs/Web/API/Navigator/bluetooth
@@ -130,15 +142,56 @@ export default function Boot() {
     navigator.bluetooth.getAvailability().then((availability) => {
       console.log("bluetooth: " + availability);
     })
+  }else{
+    console.log("Bluetooth API not available");
   }
 
   //No current or future use expected
   //Currently experimental feature, compatibility table unknown
   //https://developer.mozilla.org/en-US/docs/Web/API/WebUSB_API
+
   if (navigator.usb) {
-    navigator.usb.getDevices().then((devices) => {
-      console.log(devices);
+      navigator.usb.getDevices().then(devices => {
+        console.log({"USB": devices});
+      });
+  }else{
+    console.log("WebUSB API not available");
+  }
+
+  //No current or future use expected
+  //Currently experimental feature, only available in Edge
+  //https://developer.mozilla.org/en-US/docs/Web/API/Navigator/serial
+
+  if (navigator.serial) {
+    navigator.serial.getPorts().then((ports) => {
+      console.log({"Serial":ports});
     });
+  }else{
+    console.log("Serial ports API not available");
+  }
+
+  //Detects available Human Interface Devices
+  //No current or future use expected
+  //Currently experimental feature, only available in Edge
+  //Web page should be compatible with these devices by default, do not resort to detection
+  //https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API
+  if(navigator.hid){
+    navigator.hid.getDevices().then((devices) => {
+      console.log({"HID": devices});
+    })
+  }else{
+    console.log("WebHID API not available");
+  }
+
+  //Detects if device screen is in a folded state
+  //No current or future use expected
+  //Not available in Firefox and Safari
+  //https://developer.mozilla.org/en-US/docs/Web/API/DevicePosture
+  if (navigator.devicePosture) {
+    console.log(navigator.devicePosture);
+    //continuous or folded
+  }else{
+    console.log("Device Posture API not available");
   }
 
   //Should be replaced when web app is eventually converted to fullstack
