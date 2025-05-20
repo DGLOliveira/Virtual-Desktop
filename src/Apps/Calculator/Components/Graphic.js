@@ -67,7 +67,7 @@ export const Graphic = (graph) => {
       incrementX =
         -(Math.abs(data.window.x[1]) - Math.abs(data.window.x[0])) / cols;
     }
-    return incrementX
+    return Number(incrementX.toPrecision(15))
   };
   const getYincrement = () => {
     let incrementY = 0;
@@ -81,7 +81,7 @@ export const Graphic = (graph) => {
       incrementY =
         -(Math.abs(data.window.y[1]) - Math.abs(data.window.y[0])) / rows;
     }
-    return incrementY
+    return Number(incrementY.toPrecision(15));
   };
   const getZeroOffset = () => {
     let zeroOffset = 0;
@@ -96,7 +96,7 @@ export const Graphic = (graph) => {
       zeroOffset =
         -(data.window.y[1] * rows) / (Math.abs(data.window.y[1]) - Math.abs(data.window.y[0]));
     }
-    return zeroOffset;
+    return Number(zeroOffset.toPrecision(15));
   };
   const clearGraph = (ctx, canvasWidth, canvasHeight) => {
     ctx.fillStyle = "#000000";
@@ -188,7 +188,6 @@ export const Graphic = (graph) => {
     let pixelWidth = (context.canvas.width / cols) * 2;
     let pixelHeight = context.canvas.height / rows * 10;
     let animationFrameId;
-    console.log(data);
     clearGraph(context, context.canvas.width, context.canvas.height);
     drawXAxis(
       context,

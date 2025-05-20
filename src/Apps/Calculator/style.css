@@ -89,6 +89,7 @@
   font-size: 4vh;
   padding: 5px;
   background: lightgray;
+  color: black;
   border-radius: 0% 0% 10px 10px;
   overflow-y: scroll;
   scroll-snap-type: y proximity;

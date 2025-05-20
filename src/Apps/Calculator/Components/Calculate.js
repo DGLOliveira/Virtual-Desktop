@@ -340,7 +340,7 @@ export const Calculate = (array, flag) => {
     if (arr.length === 0) {
       return 0;
     }
-    return arr[0];
+    return Number(arr[0].toPrecision(15));
   };
   return calculate(array, flag);
 };
