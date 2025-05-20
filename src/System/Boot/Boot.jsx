@@ -67,8 +67,11 @@ export default function Boot() {
       (navigator.msMaxTouchPoints > 0)) ? "Yes" : "No";
     //RAM values currently not available in Firefox and Safari
     //https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API
-    const ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "Unknown";
     //Note: hardware concurrency does not necessally mean number of cores
+    const ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "Unknown";
+    //Note: Sometimes browser reports an array of null gamepads
+    let gamepadAvailable = 0;
+    const gamepads = navigator.getGamepads().forEach((gamepad) => gamepad !== null ? gamepadAvailable++ : gamepadAvailable);
     deviceInfo = {
       "Device": {
         name: checkFalsy(uap.getDevice().model),
@@ -83,7 +86,7 @@ export default function Boot() {
         version: checkFalsy(uap.getOS().version)
       },
       "Touch Support": touch,
-      "Gamepads": navigator.getGamepads().length
+      "Gamepads": gamepadAvailable
     }
     return deviceInfo;
   }
@@ -106,121 +109,32 @@ export default function Boot() {
     return browserInfo;
   }
 
-
-  //-----------------------------------------------------------//
-  //-----------------------------------------------------------//
-  //-----------------------------------------------------------//
-  // Functions bellow under construction and/or for testing
-
-  console.log(navigator);
-  console.log(uap.getResult());
-
-  //Currently not available in Firefox and Safari
-  //https://developer.mozilla.org/en-US/docs/Web/API/BatteryManager
-  if (navigator.getBattery) {
-    navigator.getBattery().then((battery) => {
-      console.log(battery);
-    });
-  }else{
-    console.log("Battery API not available");
-  }
-
-  //No current or future use expected
-  if (navigator.mediaDevices) {
-    navigator.mediaDevices.enumerateDevices().then((devices) => {
-      console.log({"Media Devices":devices});
-    });
-  }else{
-    console.log("Media Devices API not available");
-  }
-
-  //Detects available USB devices for WebUSB 
-  //No current or future use expected
-  //Currently experimental feature, only parcially available in Chrome
-  //https://developer.mozilla.org/en-US/docs/Web/API/Navigator/bluetooth
-  if (navigator.bluetooth) {
-    navigator.bluetooth.getAvailability().then((availability) => {
-      console.log("bluetooth: " + availability);
-    })
-  }else{
-    console.log("Bluetooth API not available");
-  }
-
-  //No current or future use expected
-  //Currently experimental feature, compatibility table unknown
-  //https://developer.mozilla.org/en-US/docs/Web/API/WebUSB_API
-
-  if (navigator.usb) {
-      navigator.usb.getDevices().then(devices => {
-        console.log({"USB": devices});
-      });
-  }else{
-    console.log("WebUSB API not available");
-  }
-
-  //No current or future use expected
-  //Currently experimental feature, only available in Edge
-  //https://developer.mozilla.org/en-US/docs/Web/API/Navigator/serial
-
-  if (navigator.serial) {
-    navigator.serial.getPorts().then((ports) => {
-      console.log({"Serial":ports});
-    });
-  }else{
-    console.log("Serial ports API not available");
-  }
-
-  //Detects available Human Interface Devices
-  //No current or future use expected
-  //Currently experimental feature, only available in Edge
-  //Web page should be compatible with these devices by default, do not resort to detection
-  //https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API
-  if(navigator.hid){
-    navigator.hid.getDevices().then((devices) => {
-      console.log({"HID": devices});
-    })
-  }else{
-    console.log("WebHID API not available");
-  }
-
-  //Detects if device screen is in a folded state
-  //No current or future use expected
-  //Not available in Firefox and Safari
-  //https://developer.mozilla.org/en-US/docs/Web/API/DevicePosture
-  if (navigator.devicePosture) {
-    console.log(navigator.devicePosture);
-    //continuous or folded
-  }else{
-    console.log("Device Posture API not available");
-  }
-
-  //Should be replaced when web app is eventually converted to fullstack
-  //Disabled to avoid IP leak
-  /*
-  async function getIP() {
-    try {
-      const response = await fetch('https://api.ipify.org?format=json');
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching IP address:', error);
+  function countdown() {
+    let count = 3;
+    const countdownElement = document.createElement("h5");
+    countdownElement.append("Ready in " + count + " seconds...");
+    bootTerminal.append(countdownElement);
+    function tick() {
+      if(count > 0) {
+        countdownElement.innerHTML = "Starting in " + count + " seconds...";
+        count--;
+        setTimeout(tick, 1000);
+      }else{
+        countdownElement.innerHTML = "Initializing...";
+        document.getElementById("bootScreen").style.zIndex = -1;
+        setReady(true);
+      }
     }
+    tick();
   }
-  getIP();
-  */
-
-  //-----------------------------------------------------------//
-  //-----------------------------------------------------------//
-  //-----------------------------------------------------------//
 
   useEffect(() => {
+    if(!ready){
     createList("Device", checkDevice());
     createList("Browser", checkBrowser());
+    countdown();
+    }
   })
-
-  /*setTimeout(() => {
-    setReady(true);
-  }, 5000);*/
 
   return (<>
     {ready && <Suspense fallback={<StartupScreen />}>

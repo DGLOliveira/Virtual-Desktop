@@ -24,6 +24,8 @@
             color: white;
             background: black;
             cursor: wait;
+            justify-content: center;
+            align-items: start;
         }
 
         #bootTerminal {
@@ -49,23 +51,23 @@
             transform: scale(1.25);
         }
 
-        .hex {
+        #bootLogo>.hex {
             mix-blend-mode: screen;
             transform-box: fill-box;
             transform-origin: center;
         }
 
-        .hex1 {
+        #bootLogo>.hex1 {
             fill: #FF0000;
             transform: translate(45%, 23%) scale(1.5);
         }
 
-        .hex2 {
+        #bootLogo>.hex2 {
             fill: #00FF00;
             transform: translate(-45%, 23%) scale(1.5);
         }
 
-        .hex3 {
+        #bootLogo>.hex3 {
             fill: #0000FF;
             transform: translate(0, -45%) scale(1.5);
         }
@@ -90,7 +92,7 @@
 
         #bootTerminal>figure {
             margin: 0;
-            margin-left:5px;
+            margin-left: 5px;
             margin-bottom: 5px;
         }
 
@@ -140,6 +142,7 @@
             </div>
         </div>
         <div id="bootTerminal">
+            <h5>Booting...</h5>
             <noscript>You need to enable JavaScript to run this app.</noscript>
         </div>
     </div>
