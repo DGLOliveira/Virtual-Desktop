@@ -28,5 +28,11 @@
             "Desktop": false,
             "Taskbar": false
         }
+    },
+    "Compass": {
+        "shortcuts": {
+            "Desktop": false,
+            "Taskbar": false
+        }
     }
 }

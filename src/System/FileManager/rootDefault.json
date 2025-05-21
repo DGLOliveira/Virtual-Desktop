@@ -98,6 +98,12 @@
                             "icon": "Apps/FileViewer/icon.js",
                             "path": "Apps/FileViewer/index.js",
                             "read/write": "read"
+                        },
+                        "Compass":{
+                            "type": "App",
+                            "icon": "Apps/Compass/icon.js",
+                            "path": "Apps/Compass/index.js",
+                            "read/write": "read"
                         }
                     }
                 }
