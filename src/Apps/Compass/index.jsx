@@ -10,7 +10,10 @@ export default function Compass() {
         sensor.start();
         sensor.onreading = () => {
             console.log(sensor);
-            const { x, y, z, w } = sensor.quaternion;
+            const x = sensor.quaternion[0];
+            const y = sensor.quaternion[1];
+            const z = sensor.quaternion[2];
+            const w = sensor.quaternion[3];
             const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
             //const pitch = Math.asin(2 * (x * z - w * y));
             //const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
