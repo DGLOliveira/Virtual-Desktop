@@ -4,12 +4,13 @@ export default function Compass() {
     const [state, setState] = useState("ready");
     const [angle, setAngle] = useState(0);
 
+    //TODO: Stop sensor on unmount
+
     function runSensors() {
-        const options = { frequency: 2, referenceFrame: "device" };
+        const options = { frequency: 60, referenceFrame: "device" };
         const sensor = new AbsoluteOrientationSensor(options);
         sensor.start();
         sensor.onreading = () => {
-            console.log(sensor);
             const x = sensor.quaternion[0];
             const y = sensor.quaternion[1];
             const z = sensor.quaternion[2];
@@ -17,8 +18,6 @@ export default function Compass() {
             const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
             //const pitch = Math.asin(2 * (x * z - w * y));
             //const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
-            console.log(heading);
-            console.log(heading * 180 / Math.PI);
             setAngle(heading * 180 / Math.PI);
         }
     }
