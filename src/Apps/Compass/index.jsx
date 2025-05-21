@@ -2,28 +2,42 @@ import { useState, useEffect } from "react";
 
 export default function Compass() {
     const [state, setState] = useState("ready");
+    const [angle, setAngle] = useState(0);
+
+    function runSensors() {
+        const options = { frequency: 60, referenceFrame: "device" };
+        const sensor = new AbsoluteOrientationSensor(options);
+        sensor.start();
+        sensor.onreading = () => {
+            const { x, y, z, w } = sensor.quaternion;
+            const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
+            //const pitch = Math.asin(2 * (x * z - w * y));
+            //const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
+            setAngle(heading * 180 / Math.PI);
+        }
+    }
 
     useEffect(() => {
         if (state === "start") {
             if ("AbsoluteOrientationSensor" in window) {
-                console.log("AbsoluteOrientationSensor is supported.");
-                const sensor = new AbsoluteOrientationSensor();
                 Promise.all([
                     navigator.permissions.query({ name: "accelerometer" }),
                     navigator.permissions.query({ name: "magnetometer" }),
                     navigator.permissions.query({ name: "gyroscope" }),
                 ]).then((results) => {
                     if (results.every((result) => result.state === "granted")) {
-                        //sensor.start();
-                        console.log("Permissions granted to use AbsoluteOrientationSensor.");
+                        setState("running");
                     } else {
-                        console.log("No permissions to use AbsoluteOrientationSensor.");
+                        setState("not allowed");
                     }
                 });
             } else {
                 setState("not supported");
             }
 
+        }
+        if(state === "running") {
+            runSensors();
         }
     }, [state]);
 
@@ -43,8 +57,14 @@ export default function Compass() {
                     This feature is not supported on your device and/or browser
                 </div>
             }
+            {state === "not allowed" &&
+                <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", color: "red", backgroundColor: "white", border: "1px black solid", padding: "5px", boxSizing: "border-box" }}>
+                    This feature does not have permission to access your device sensors
+                </div>
+            }
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: "5px", boxSizing: "border-box" }}>
                 <svg style={{ width: "inherit", height: "inherit" }} width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="49" fill="lightgray" stroke="black" strokeWidth="1" />
                     <circle cx="50" cy="50" r="34" fill="white" stroke="black" strokeWidth="1" />
                     <circle cx="50" cy="50" r="30" stroke="black" strokeWidth="1" />
                     <rect style={{ transformOrigin: "center", transform: `rotate(15deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
@@ -87,8 +107,8 @@ export default function Compass() {
                     <polygon style={{ transformOrigin: "center", transform: `rotate(180deg)` }} points="50,90 43,56 50,50" fill="black" />
                     <polygon style={{ transformOrigin: "center", transform: `rotate(270deg)` }} points="50,90 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
                     <polygon style={{ transformOrigin: "center", transform: `rotate(270deg)` }} points="50,90 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(180deg)` }} points="50,82 45,50 50,50 55,50" fill="red" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(0deg)` }} points="50,75 45,50 50,50 55,50" fill="dodgerblue" />
+                    <polygon style={{ transformOrigin: "center", transform: `rotate(${angle + 180}deg)` }} points="50,82 45,50 50,50 55,50" fill="red" />
+                    <polygon style={{ transformOrigin: "center", transform: `rotate(${angle}deg)` }} points="50,75 45,50 50,50 55,50" fill="dodgerblue" />
                     <circle cx="50" cy="50" r="5" fill="black" />
                     <circle cx="50" cy="50" r="3" fill="white" />
                 </svg>
