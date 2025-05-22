@@ -141,26 +141,26 @@ export default function Compass() {
                 </div>
             }
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: "5px", boxSizing: "border-box" }}>
-                <svg style={{ width: "inherit", height: "inherit", transformOrigin: "center", transition: "transform 0.5s" }} shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style={{ width: "inherit", height: "inherit" }} shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <text x="100" y="5" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill="red" >{angles.heading * 180 / Math.PI}°</text>
                     <circle cx="100" cy="100" r="90" fill="lightgray" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="70" fill="white" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="60" fill="lightgray" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="50.5" stroke="gray" strokeWidth="0.5" />
                     <circle cx="100" cy="100" r="40.5" stroke="gray" strokeWidth="0.5" />
-                    <g id="rose" style={{ transform: `rotate(${angles.heading})` }}>
+                    <g id="rose" style={{transformOrigin: "center", rotate: `${angles.heading}rad`, transition: "rotate 0.5s" }}>
                         {compassRosePoints.map((val, index) => {
                             return (
                                 <>
-                                    <polygon key={index + "a"} points={val[0]} fill="white" stroke="black" strokeWidth="1" style={{ transform: `rotate(${angles.heading})` }} />
-                                    <polygon key={index + "b"} points={val[1]} fill="black" style={{ transform: `rotate(${angles.heading})` }} />
+                                    <polygon key={index + "a"} points={val[0]} fill="white" stroke="black" strokeWidth="1"/>
+                                    <polygon key={index + "b"} points={val[1]} fill="black"/>
                                 </>
                             )
                         })}
-                        <polygon points="100,30 96,45 100,50 104,45" fill="white" stroke="black" strokeWidth="1" style={{ transform: `rotate(${angles.heading})` }} />
-                        <polygon points="100,30 104,45 100,45" fill="black" style={{ transform: `rotate(${angles.heading})` }} />
-                        <polygon points="100,45 96,45 100,50" fill="black" style={{ transform: `rotate(${angles.heading})` }} />
-                        <rect x="96" y="48" width="8" height="2" fill="white" stroke="black" strokeWidth="1" rx="1" style={{ transform: `rotate(${angles.heading})` }} />
+                        <polygon points="100,30 96,45 100,50 104,45" fill="white" stroke="black" strokeWidth="1"/>
+                        <polygon points="100,30 104,45 100,45" fill="black"/>
+                        <polygon points="100,45 96,45 100,50" fill="black"/>
+                        <rect x="96" y="48" width="8" height="2" fill="white" stroke="black" strokeWidth="1" rx="1"/>
                     </g>
                     <g id="degrees">
                         {compassDegreePointers.map((val, index) => {
@@ -193,14 +193,14 @@ export default function Compass() {
                             cy={Math.sin(angles.roll) * 5 + 100}
                             r="5"
                             fill="black"
-                            style={{ mixBlendMode: "difference", filter: " invert(100%)" }}
+                            style={{transition: "all 0.5s", mixBlendMode: "difference", filter: " invert(100%)" }}
                         />
                         <circle
                             cx={-Math.sin(angles.pitch) * 5.5 + 100}
                             cy={-Math.sin(angles.roll) * 5.5 + 100}
                             r="4.5"
                             fill="black"
-                            style={{ mixBlendMode: "difference", filter: "invert(100%)" }}
+                            style={{transition: "all 0.5s", mixBlendMode: "difference", filter: "invert(100%)" }}
                         />
                     </g>
                 </svg>
