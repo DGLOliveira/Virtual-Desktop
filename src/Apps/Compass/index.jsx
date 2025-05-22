@@ -123,7 +123,7 @@ export default function Compass() {
         <>
             {state === "ready" &&
                 <button
-                    style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+                    style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", color: "black", backgroundColor: "lightgray", border: "1px black solid", padding: "5px", boxSizing: "border-box", fontSize: "20px" }}
                     onClick={() => setState("start")}
                     title="Start"
                 >
@@ -142,6 +142,7 @@ export default function Compass() {
             }
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: "5px", boxSizing: "border-box" }}>
                 <svg style={{ width: "inherit", height: "inherit", transformOrigin: "center", transition: "transform 0.5s" }} shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <text x="100" y="5" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill="red" >{angles.heading}°</text>
                     <circle cx="100" cy="100" r="90" fill="lightgray" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="70" fill="white" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="60" fill="lightgray" stroke="black" strokeWidth="1" />
