@@ -150,7 +150,7 @@ export default function Compass() {
                     <circle cx="100" cy="100" r="60" fill="lightgray" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="50.5" stroke="gray" strokeWidth="0.5" />
                     <circle cx="100" cy="100" r="40.5" stroke="gray" strokeWidth="0.5" />
-                    <g id="rose" style={{transformOrigin: "center", rotate: `${angles.heading >= 0 ? angles.heading : angles.heading + Math.PI}rad`, transition: `rotate ${TRANSITION_TIME}s ease-in-out` }}>
+                    <g id="rose" style={{transformOrigin: "center", rotate: `${angles.heading >= 0 ? angles.heading : angles.heading + Math.PI*2}rad`, transition: `rotate ${TRANSITION_TIME}s ease-in-out` }}>
                         {compassRosePoints.map((val, index) => {
                             return (
                                 <>
