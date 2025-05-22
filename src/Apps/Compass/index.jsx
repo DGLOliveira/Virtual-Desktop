@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 
 export default function Compass() {
     const [state, setState] = useState("ready");
-    const [angle, setAngle] = useState(0);
+    const [angles, setAngles] = useState({ heading: 0, pitch: 0, roll: 0 });
     const sensor = null;
 
+    // generate compass rose
     var compassRosePoints = [];
     function compassRosePointsCalc() {
         compassRosePoints = [];
@@ -39,6 +40,7 @@ export default function Compass() {
     }
     compassRosePointsCalc();
 
+    // generate compass degree pointers
     var compassDegreePointers = [];
     function compassDegreesPointersCalc() {
         compassDegreePointers = [];
@@ -62,6 +64,7 @@ export default function Compass() {
     };
     compassDegreesPointersCalc();
 
+    // start absolute orientation sensors
     function runSensors() {
         const options = { frequency: 2, referenceFrame: "device" };
         sensor = new AbsoluteOrientationSensor(options);
@@ -72,13 +75,17 @@ export default function Compass() {
             const z = sensor.quaternion[2];
             const w = sensor.quaternion[3];
             const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
-            //const pitch = Math.asin(2 * (x * z - w * y));
-            //const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
-            setAngle(heading * 180 / Math.PI);
+            const pitch = Math.asin(2 * (x * z - w * y));
+            const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
+            setAngles({
+                heading: heading,
+                pitch: pitch,
+                roll: roll
+            });
         }
     }
 
-    // start sensor
+    // state machine
     useEffect(() => {
         if (state === "start") {
             if ("AbsoluteOrientationSensor" in window) {
@@ -134,105 +141,66 @@ export default function Compass() {
                 </div>
             }
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: "5px", boxSizing: "border-box" }}>
-                <svg style={{ width: "inherit", height: "inherit" }} shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style={{ width: "inherit", height: "inherit", transformOrigin: "center", transition: "transform 0.5s" }} shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="100" cy="100" r="90" fill="lightgray" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="70" fill="white" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="60" fill="lightgray" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="50.5" stroke="gray" strokeWidth="0.5" />
                     <circle cx="100" cy="100" r="40.5" stroke="gray" strokeWidth="0.5" />
-                    {compassRosePoints.map((val, index) => {
-                        return (
-                            <>
-                                <polygon
-                                    key={index + "a"}
-                                    points={val[0]}
-                                    fill="white"
-                                    stroke="black"
+                    <g id="rose" style={{ transform: `rotate(${angles.heading})` }}>
+                        {compassRosePoints.map((val, index) => {
+                            return (
+                                <>
+                                    <polygon key={index + "a"} points={val[0]} fill="white" stroke="black" strokeWidth="1" />
+                                    <polygon key={index + "b"} points={val[1]} fill="black" />
+                                </>
+                            )
+                        })}
+                        <polygon points="100,30 96,45 100,50 104,45" fill="white" stroke="black" strokeWidth="1" />
+                        <polygon points="100,30 104,45 100,45" fill="black" />
+                        <polygon points="100,45 96,45 100,50" fill="black" />
+                        <rect x="96" y="48" width="8" height="2" fill="white" stroke="black" strokeWidth="1" rx="1" />
+                    </g>
+                    <g id="degrees">
+                        {compassDegreePointers.map((val, index) => {
+                            return (
+                                <line
+                                    key={index}
+                                    x1={Math.cos(index * (Math.PI / 180)) * (90 - val[0]) + 100}
+                                    y1={Math.sin(index * (Math.PI / 180)) * (90 - val[1]) + 100}
+                                    x2={Math.cos(index * (Math.PI / 180)) * 90 + 100}
+                                    y2={Math.sin(index * (Math.PI / 180)) * 90 + 100}
+                                    stroke={index === 270 ? "red" : "black"}
                                     strokeWidth="1"
-                                    style={{
-                                        transformOrigin: "center",
-                                        transform: `rotate(${angle}deg)`,
-                                        transition: "transform 0.5s"
-                                    }}
                                 />
-                                <polygon
-                                    key={index + "b"}
-                                    points={val[1]}
-                                    fill="black"
-                                    style={{
-                                        transformOrigin: "center",
-                                        transform: `rotate(${angle}deg)`,
-                                        transition: "transform 0.5s"
-                                    }}
-                                />
-                            </>
-                        )
-                    })}
-                    <polygon
-                        points="100,30 96,45 100,50 104,45"
-                        fill="white"
-                        stroke="black"
-                        strokeWidth="1"
-                        style={{
-                            transformOrigin: "center",
-                            transform: `rotate(${angle}deg)`,
-                            transition: "transform 0.5s"
-                        }}
-                    />
-                    <polygon
-                        points="100,30 104,45 100,45"
-                        fill="black"
-                        style={{
-                            transformOrigin: "center",
-                            transform: `rotate(${angle}deg)`,
-                            transition: "transform 0.5s"
-                        }}
-                    />
-                    <polygon
-                        points="100,45 96,45 100,50"
-                        fill="black"
-                        style={{
-                            transformOrigin: "center",
-                            transform: `rotate(${angle}deg)`,
-                            transition: "transform 0.5s"
-                        }}
-                    />
-                    <rect
-                        x="96"
-                        y="48"
-                        width="8"
-                        height="2"
-                        fill="white"
-                        stroke="black"
-                        strokeWidth="1"
-                        rx="1"
-                        style={{
-                            transformOrigin: "center",
-                            transform: `rotate(${angle}deg)`,
-                            transition: "transform 0.5s",
-                        }}
-                    />
-                    {compassDegreePointers.map((val, index) => {
-                        return (
-                            <line
-                                key={index}
-                                x1={Math.cos(index * (Math.PI / 180)) * (90 - val[0]) + 100}
-                                y1={Math.sin(index * (Math.PI / 180)) * (90 - val[1]) + 100}
-                                x2={Math.cos(index * (Math.PI / 180)) * 90 + 100}
-                                y2={Math.sin(index * (Math.PI / 180)) * 90 + 100}
-                                stroke={index === 270 ? "red" : "black"}
-                                strokeWidth="1"
-                            />
-                        )
-                    })}
-                    <polygon
-                        points="100,30 96,20 100,22 104,20"
-                        fill="red"
-                    />
-                    <circle cx="100" cy="100" r="13" fill="white" stroke="black" strokeWidth="2" />
-                    <g style={{ isolation: "isolate", filter:" invert(100%)" }}>
-                        <circle cx="100" cy="100" r="5" fill="black" style={{ mixBlendMode: "difference", filter:" invert(100%)"}} />
-                        <circle cx="100" cy="100" r="4.5" fill="black" style={{ mixBlendMode: "difference", filter: "invert(100%)"}} />
+                            )
+                        })}
+                        <polygon points="100,30 96,20 100,22 104,20" fill="red" />
+                    </g>
+                    <g id="rollPitch" style={{ isolation: "isolate", filter: " invert(100%)" }}>
+                        <circle
+                            cx="100"
+                            cy="100"
+                            r="13"
+                            fill="white"
+                            stroke="black"
+                            strokeWidth="2"
+                            style={{ filter: " invert(100%)" }}
+                        />
+                        <circle
+                            cx={Math.sin(angles.pitch) * 5 + 100}
+                            cy={Math.sin(angles.roll) * 5 + 100}
+                            r="5"
+                            fill="black"
+                            style={{ mixBlendMode: "difference", filter: " invert(100%)" }}
+                        />
+                        <circle
+                            cx={-Math.sin(angles.pitch) * 5.5 + 100}
+                            cy={-Math.sin(angles.roll) * 5.5 + 100}
+                            r="4.5"
+                            fill="black"
+                            style={{ mixBlendMode: "difference", filter: "invert(100%)" }}
+                        />
                     </g>
                 </svg>
             </div>
