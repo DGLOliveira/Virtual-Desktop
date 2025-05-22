@@ -4,6 +4,8 @@ export default function Compass() {
     const [state, setState] = useState("ready");
     const [angles, setAngles] = useState({ heading: 0, pitch: 0, roll: 0 });
     var sensor = null;
+    const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
+    const TRANSITION_TIME = 0.25; //seconds
 
     // generate compass rose
     var compassRosePoints = [];
@@ -66,7 +68,7 @@ export default function Compass() {
 
     // start absolute orientation sensors
     function runSensors() {
-        const options = { frequency: 2, referenceFrame: "device" };
+        const options = { frequency: SENSOR_UPDATE_FREQUENCY, referenceFrame: "device" };
         sensor = new AbsoluteOrientationSensor(options);
         sensor.start();
         sensor.onreading = () => {
@@ -148,7 +150,7 @@ export default function Compass() {
                     <circle cx="100" cy="100" r="60" fill="lightgray" stroke="black" strokeWidth="1" />
                     <circle cx="100" cy="100" r="50.5" stroke="gray" strokeWidth="0.5" />
                     <circle cx="100" cy="100" r="40.5" stroke="gray" strokeWidth="0.5" />
-                    <g id="rose" style={{transformOrigin: "center", rotate: `${angles.heading}rad`, transition: "rotate 0.5s" }}>
+                    <g id="rose" style={{transformOrigin: "center", rotate: `${angles.heading >= 0 ? angles.heading : angles.heading + 360}rad`, transition: `rotate ${TRANSITION_TIME}s ease-in-out` }}>
                         {compassRosePoints.map((val, index) => {
                             return (
                                 <>
@@ -193,14 +195,14 @@ export default function Compass() {
                             cy={Math.sin(angles.roll) * 5 + 100}
                             r="5"
                             fill="black"
-                            style={{transition: "all 0.5s", mixBlendMode: "difference", filter: " invert(100%)" }}
+                            style={{transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }}
                         />
                         <circle
                             cx={-Math.sin(angles.pitch) * 5.5 + 100}
                             cy={-Math.sin(angles.roll) * 5.5 + 100}
                             r="4.5"
                             fill="black"
-                            style={{transition: "all 0.5s", mixBlendMode: "difference", filter: "invert(100%)" }}
+                            style={{transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: "invert(100%)" }}
                         />
                     </g>
                 </svg>
