@@ -3,12 +3,68 @@ import { useState, useEffect } from "react";
 export default function Compass() {
     const [state, setState] = useState("ready");
     const [angle, setAngle] = useState(0);
+    const sensor = null;
 
-    //TODO: Stop sensor on unmount
+    var compassRosePoints = [];
+    function compassRosePointsCalc() {
+        compassRosePoints = [];
+        const center = 100;
+        let ptx1, pty1, ptx2, pty2, ptx3, pty3, ptx4, pty4, points1, points2, deg, distLong, distShort;
+        for (let i = 0; i < 16; i++) {
+            if (i >= 12) {
+                deg = i * 90;
+                distLong = 60;
+                distShort = 15;
+            } else if (i >= 8) {
+                deg = i * 90 - 45;
+                distLong = 50;
+                distShort = 12.5;
+            } else {
+                deg = i * 360 / 8 + 360 / 16;
+                distLong = 40;
+                distShort = 10;
+            }
+            ptx1 = Math.cos(deg * (Math.PI / 180)) * distLong + center;
+            pty1 = Math.sin(deg * (Math.PI / 180)) * distLong + center;
+            ptx2 = Math.cos((deg + 45) * (Math.PI / 180)) * distShort + center;
+            pty2 = Math.sin((deg + 45) * (Math.PI / 180)) * distShort + center;
+            ptx3 = center;
+            pty3 = center;
+            ptx4 = Math.cos((deg - 45) * (Math.PI / 180)) * distShort + center;
+            pty4 = Math.sin((deg - 45) * (Math.PI / 180)) * distShort + center;
+            points1 = ptx1 + "," + pty1 + " " + ptx2 + "," + pty2 + " " + ptx3 + "," + pty3 + " " + ptx4 + "," + pty4;
+            points2 = ptx1 + "," + pty1 + " " + ptx2 + "," + pty2 + " " + ptx3 + "," + pty3;
+            compassRosePoints.push([points1, points2]);
+        }
+    }
+    compassRosePointsCalc();
+
+    var compassDegreePointers = [];
+    function compassDegreesPointersCalc() {
+        compassDegreePointers = [];
+        for (let i = 0; i < 360; i++) {
+            var xHeight, yHeight;
+            if (i % 90 === 0) {
+                xHeight = 20;
+                yHeight = 20;
+            } else if ((i + 45) % 90 === 0) {
+                xHeight = 15;
+                yHeight = 15;
+            } else if (i % 15 === 0) {
+                xHeight = 10;
+                yHeight = 10;
+            } else {
+                xHeight = 5;
+                yHeight = 5;
+            }
+            compassDegreePointers.push([xHeight, yHeight]);
+        }
+    };
+    compassDegreesPointersCalc();
 
     function runSensors() {
-        const options = { frequency: 60, referenceFrame: "device" };
-        const sensor = new AbsoluteOrientationSensor(options);
+        const options = { frequency: 2, referenceFrame: "device" };
+        sensor = new AbsoluteOrientationSensor(options);
         sensor.start();
         sensor.onreading = () => {
             const x = sensor.quaternion[0];
@@ -22,6 +78,7 @@ export default function Compass() {
         }
     }
 
+    // start sensor
     useEffect(() => {
         if (state === "start") {
             if ("AbsoluteOrientationSensor" in window) {
@@ -41,10 +98,19 @@ export default function Compass() {
             }
 
         }
-        if(state === "running") {
+        if (state === "running") {
             runSensors();
         }
     }, [state]);
+
+    // cleanup sensor
+    useEffect(() => {
+        return () => {
+            if (sensor) {
+                sensor.stop();
+            }
+        }
+    }, []);
 
     return (
         <>
@@ -68,54 +134,106 @@ export default function Compass() {
                 </div>
             }
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: "5px", boxSizing: "border-box" }}>
-                <svg style={{ width: "inherit", height: "inherit" }} width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="49" fill="lightgray" stroke="black" strokeWidth="1" />
-                    <circle cx="50" cy="50" r="34" fill="white" stroke="black" strokeWidth="1" />
-                    <circle cx="50" cy="50" r="30" stroke="black" strokeWidth="1" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(15deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(30deg)` }} x="49" y="80" width="1" height="9" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(45deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(60deg)` }} x="49" y="80" width="1" height="9" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(75deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(105deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(120deg)` }} x="49" y="80" width="1" height="9" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(135deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(150deg)` }} x="49" y="80" width="1" height="9" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(165deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(195deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(210deg)` }} x="49" y="80" width="1" height="9" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(225deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(240deg)` }} x="49" y="80" width="1" height="9" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(255deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(285deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(300deg)` }} x="49" y="80" width="1" height="9" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(315deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(330deg)` }} x="49" y="80" width="1" height="9" fill="black" />
-                    <rect style={{ transformOrigin: "center", transform: `rotate(345deg)` }} x="49" y="83.5" width="1" height="4" fill="black" />
-                    <text x="47" y="8.5" fill="black" fontSize="8" style={{ fontFamily: "times new roman", fontWeight: "bold" }}>N</text>
-                    <text x="48" y="97" fill="black" fontSize="7" style={{ fontFamily: "times new roman", fontWeight: "bold" }}>S</text>
-                    <text x="92" y="52.5" fill="black" fontSize="7" style={{ fontFamily: "times new roman", fontWeight: "bold" }}>E</text>
-                    <text x="2" y="52.5" fill="black" fontSize="7" style={{ fontFamily: "times new roman", fontWeight: "bold" }}>W</text>
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(45deg)` }} points="50,80 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(45deg)` }} points="50,80 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(135deg)` }} points="50,80 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(135deg)` }} points="50,80 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(225deg)` }} points="50,80 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(225deg)` }} points="50,80 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(315deg)` }} points="50,80 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(315deg)` }} points="50,80 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(0deg)` }} points="50,90 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(0deg)` }} points="50,90 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(90deg)` }} points="50,90 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(90deg)` }} points="50,90 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(180deg)` }} points="50,90 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(180deg)` }} points="50,90 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(270deg)` }} points="50,90 56,57 50,50 43,56" fill="white" stroke="black" strokeWidth="1" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(270deg)` }} points="50,90 43,56 50,50" fill="black" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(${angle + 180}deg)` }} points="50,82 45,50 50,50 55,50" fill="red" />
-                    <polygon style={{ transformOrigin: "center", transform: `rotate(${angle}deg)` }} points="50,75 45,50 50,50 55,50" fill="dodgerblue" />
-                    <circle cx="50" cy="50" r="5" fill="black" />
-                    <circle cx="50" cy="50" r="3" fill="white" />
+                <svg style={{ width: "inherit", height: "inherit" }} shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="90" fill="lightgray" stroke="black" strokeWidth="1" />
+                    <circle cx="100" cy="100" r="70" fill="white" stroke="black" strokeWidth="1" />
+                    <circle cx="100" cy="100" r="60" fill="lightgray" stroke="black" strokeWidth="1" />
+                    <circle cx="100" cy="100" r="50.5" stroke="gray" strokeWidth="0.5" />
+                    <circle cx="100" cy="100" r="40.5" stroke="gray" strokeWidth="0.5" />
+                    {compassRosePoints.map((val, index) => {
+                        return (
+                            <>
+                                <polygon
+                                    key={index + "a"}
+                                    points={val[0]}
+                                    fill="white"
+                                    stroke="black"
+                                    strokeWidth="1"
+                                    style={{
+                                        transformOrigin: "center",
+                                        transform: `rotate(${angle}deg)`,
+                                        transition: "transform 0.5s"
+                                    }}
+                                />
+                                <polygon
+                                    key={index + "b"}
+                                    points={val[1]}
+                                    fill="black"
+                                    style={{
+                                        transformOrigin: "center",
+                                        transform: `rotate(${angle}deg)`,
+                                        transition: "transform 0.5s"
+                                    }}
+                                />
+                            </>
+                        )
+                    })}
+                    <polygon
+                        points="100,30 96,45 100,50 104,45"
+                        fill="white"
+                        stroke="black"
+                        strokeWidth="1"
+                        style={{
+                            transformOrigin: "center",
+                            transform: `rotate(${angle}deg)`,
+                            transition: "transform 0.5s"
+                        }}
+                    />
+                    <polygon
+                        points="100,30 104,45 100,45"
+                        fill="black"
+                        style={{
+                            transformOrigin: "center",
+                            transform: `rotate(${angle}deg)`,
+                            transition: "transform 0.5s"
+                        }}
+                    />
+                    <polygon
+                        points="100,45 96,45 100,50"
+                        fill="black"
+                        style={{
+                            transformOrigin: "center",
+                            transform: `rotate(${angle}deg)`,
+                            transition: "transform 0.5s"
+                        }}
+                    />
+                    <rect
+                        x="96"
+                        y="48"
+                        width="8"
+                        height="2"
+                        fill="white"
+                        stroke="black"
+                        strokeWidth="1"
+                        rx="1"
+                        style={{
+                            transformOrigin: "center",
+                            transform: `rotate(${angle}deg)`,
+                            transition: "transform 0.5s",
+                        }}
+                    />
+                    {compassDegreePointers.map((val, index) => {
+                        return (
+                            <line
+                                key={index}
+                                x1={Math.cos(index * (Math.PI / 180)) * (90 - val[0]) + 100}
+                                y1={Math.sin(index * (Math.PI / 180)) * (90 - val[1]) + 100}
+                                x2={Math.cos(index * (Math.PI / 180)) * 90 + 100}
+                                y2={Math.sin(index * (Math.PI / 180)) * 90 + 100}
+                                stroke={index === 270 ? "red" : "black"}
+                                strokeWidth="1"
+                            />
+                        )
+                    })}
+                    <polygon
+                        points="100,30 96,20 100,22 104,20"
+                        fill="red"
+                    />
+                    <circle cx="100" cy="100" r="13" fill="white" stroke="black" strokeWidth="2" />
+                    <g style={{ isolation: "isolate", filter:" invert(100%)" }}>
+                        <circle cx="100" cy="100" r="5" fill="black" style={{ mixBlendMode: "difference", filter:" invert(100%)"}} />
+                        <circle cx="100" cy="100" r="4.5" fill="black" style={{ mixBlendMode: "difference", filter: "invert(100%)"}} />
+                    </g>
                 </svg>
             </div>
         </>
