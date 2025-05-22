@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export default function Compass() {
     const [state, setState] = useState("ready");
     const [angles, setAngles] = useState({ heading: 0, pitch: 0, roll: 0 });
-    const sensor = null;
+    var sensor = null;
 
     // generate compass rose
     var compassRosePoints = [];
