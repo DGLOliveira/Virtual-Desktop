@@ -4,12 +4,17 @@ import RoseFull from "./Components/Pointers/RoseFull.jsx";
 import RoseSimple from "./Components/Pointers/RoseSimple.jsx";
 import MagnetPointer from "./Components/Pointers/MagnetPointer.jsx";
 import Arrow from "./Components/Pointers/Arrow.jsx";
+import Modern from "./Components/Pointers/Modern.jsx";
 import DoubleSphere from "./Components/RollPitch/DoubleSphere.jsx";
 import Target from "./Components/RollPitch/Target.jsx";
 import Bubble from "./Components/RollPitch/Bubble.jsx";
 import "./style.css";
 
-export default function Compass() {
+export default function Compass(props) {
+    const action = props.action;
+    const setAction = props.setAction;
+    const appMenu = props.appMenu;
+    const setAppMenu = props.setAppMenu;
     const [state, setState] = useState("ready");
     //Note: all angles are in radians
     //cumulativeRotation is used to prevent compass from doing a full 360 rotation
@@ -119,7 +124,7 @@ export default function Compass() {
                     {(angles.heading * 180 / Math.PI).toFixed(2)}°
                 </text>
                 <DegreesFull />
-                <RoseFull TRANSITION_TIME={TRANSITION_TIME} rotation={angles.heading+angles.cumulativeRotation} />
+                <RoseFull TRANSITION_TIME={TRANSITION_TIME} rotation={angles.heading + angles.cumulativeRotation} />
                 <DoubleSphere pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />
             </svg>
         </>
