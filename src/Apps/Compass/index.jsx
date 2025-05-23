@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import RoseFull from "./Components/Pointers/RoseFull.jsx";
-import DoubleSphere from "./Components/RollPitch/DoubleSphere.jsx";
 import DegreesFull from "./Components/Degrees/DegreesFull.jsx";
+import RoseFull from "./Components/Pointers/RoseFull.jsx";
+import RoseSimple from "./Components/Pointers/RoseSimple.jsx";
+import MagnetPointer from "./Components/Pointers/MagnetPointer.jsx";
+import Arrow from "./Components/Pointers/Arrow.jsx";
+import DoubleSphere from "./Components/RollPitch/DoubleSphere.jsx";
 import Target from "./Components/RollPitch/Target.jsx";
 import Bubble from "./Components/RollPitch/Bubble.jsx";
 import "./style.css";
@@ -116,7 +119,7 @@ export default function Compass() {
                     {(angles.heading * 180 / Math.PI).toFixed(2)}°
                 </text>
                 <DegreesFull />
-                <RoseFull TRANSITION_TIME={TRANSITION_TIME} rotation={angles.heading} />
+                <RoseFull TRANSITION_TIME={TRANSITION_TIME} rotation={angles.heading+angles.cumulativeRotation} />
                 <DoubleSphere pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />
             </svg>
         </>
