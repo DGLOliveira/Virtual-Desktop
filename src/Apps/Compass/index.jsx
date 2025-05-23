@@ -1,70 +1,48 @@
 import { useState, useEffect } from "react";
+import RoseFull from "./Components/Pointers/RoseFull.jsx";
+import DoubleSphere from "./Components/RollPitch/DoubleSphere.jsx";
+import DegreesFull from "./Components/Degrees/DegreesFull.jsx";
+import "style.css";
 
 export default function Compass() {
     const [state, setState] = useState("ready");
-    const [angles, setAngles] = useState({ heading: 0, pitch: 0, roll: 0 });
+    //Note: all angles are in radians
+    //cumulativeRotation is used to prevent compass from doing a full 360 rotation
+    //when heading goes from -PI to PI, and makes this number go from 0 to 2PI at the start
+    const [angles, setAngles] = useState({
+        heading: 0,
+        pitch: 0,
+        roll: 0,
+        cumulativeRotation: Math.PI * 2
+    });
     var sensor = null;
     const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
     const TRANSITION_TIME = 0.25; //seconds
 
-    // generate compass rose
-    var compassRosePoints = [];
-    function compassRosePointsCalc() {
-        compassRosePoints = [];
-        const center = 100;
-        let ptx1, pty1, ptx2, pty2, ptx3, pty3, ptx4, pty4, points1, points2, deg, distLong, distShort;
-        for (let i = 0; i < 16; i++) {
-            if (i >= 12) {
-                deg = i * 90;
-                distLong = 60;
-                distShort = 15;
-            } else if (i >= 8) {
-                deg = i * 90 - 45;
-                distLong = 50;
-                distShort = 12.5;
-            } else {
-                deg = i * 360 / 8 + 360 / 16;
-                distLong = 40;
-                distShort = 10;
-            }
-            ptx1 = Math.cos(deg * (Math.PI / 180)) * distLong + center;
-            pty1 = Math.sin(deg * (Math.PI / 180)) * distLong + center;
-            ptx2 = Math.cos((deg + 45) * (Math.PI / 180)) * distShort + center;
-            pty2 = Math.sin((deg + 45) * (Math.PI / 180)) * distShort + center;
-            ptx3 = center;
-            pty3 = center;
-            ptx4 = Math.cos((deg - 45) * (Math.PI / 180)) * distShort + center;
-            pty4 = Math.sin((deg - 45) * (Math.PI / 180)) * distShort + center;
-            points1 = ptx1 + "," + pty1 + " " + ptx2 + "," + pty2 + " " + ptx3 + "," + pty3 + " " + ptx4 + "," + pty4;
-            points2 = ptx1 + "," + pty1 + " " + ptx2 + "," + pty2 + " " + ptx3 + "," + pty3;
-            compassRosePoints.push([points1, points2]);
+    //converts quaternion to angles in radians and updates angles
+    //compensates for heading going from -PI to PI
+    function quaternionToAngles() {
+        const x = sensor.quaternion[0];
+        const y = sensor.quaternion[1];
+        const z = sensor.quaternion[2];
+        const w = sensor.quaternion[3];
+        const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
+        const pitch = Math.asin(2 * (x * z - w * y));
+        const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
+        let cumulativeRotation = angles.cumulativeRotation;
+        if (angles.heading < 0 && heading > 0) {
+            cumulativeRotation += Math.PI * 2;
         }
+        else if (angles.heading > 0 && heading < 0) {
+            cumulativeRotation -= Math.PI * 2;
+        }
+        setAngles({
+            heading: heading,
+            pitch: pitch,
+            roll: roll,
+            cumulativeRotation: cumulativeRotation
+        });
     }
-    compassRosePointsCalc();
-
-    // generate compass degree pointers
-    var compassDegreePointers = [];
-    function compassDegreesPointersCalc() {
-        compassDegreePointers = [];
-        for (let i = 0; i < 360; i++) {
-            var xHeight, yHeight;
-            if (i % 90 === 0) {
-                xHeight = 20;
-                yHeight = 20;
-            } else if ((i + 45) % 90 === 0) {
-                xHeight = 15;
-                yHeight = 15;
-            } else if (i % 15 === 0) {
-                xHeight = 10;
-                yHeight = 10;
-            } else {
-                xHeight = 5;
-                yHeight = 5;
-            }
-            compassDegreePointers.push([xHeight, yHeight]);
-        }
-    };
-    compassDegreesPointersCalc();
 
     // start absolute orientation sensors
     function runSensors() {
@@ -72,18 +50,7 @@ export default function Compass() {
         sensor = new AbsoluteOrientationSensor(options);
         sensor.start();
         sensor.onreading = () => {
-            const x = sensor.quaternion[0];
-            const y = sensor.quaternion[1];
-            const z = sensor.quaternion[2];
-            const w = sensor.quaternion[3];
-            const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
-            const pitch = Math.asin(2 * (x * z - w * y));
-            const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
-            setAngles({
-                heading: heading,
-                pitch: pitch,
-                roll: roll
-            });
+            quaternionToAngles();
         }
     }
 
@@ -119,13 +86,13 @@ export default function Compass() {
                 sensor.stop();
             }
         }
-    }, []);
+    });
 
     return (
         <>
             {state === "ready" &&
                 <button
-                    style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", color: "black", backgroundColor: "lightgray", border: "1px black solid", padding: "5px", boxSizing: "border-box", fontSize: "20px" }}
+                    className="compassStartButton"
                     onClick={() => setState("start")}
                     title="Start"
                 >
@@ -133,80 +100,23 @@ export default function Compass() {
                 </button>
             }
             {state === "not supported" &&
-                <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", color: "red", backgroundColor: "white", border: "1px black solid", padding: "5px", boxSizing: "border-box" }}>
+                <div className="compassWarning">
                     This feature is not supported on your device and/or browser
                 </div>
             }
             {state === "not allowed" &&
-                <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", color: "red", backgroundColor: "white", border: "1px black solid", padding: "5px", boxSizing: "border-box" }}>
+                <div className="compassWarning">
                     This feature does not have permission to access your device sensors
                 </div>
             }
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: "5px", boxSizing: "border-box" }}>
-                <svg style={{ width: "inherit", height: "inherit" }} shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <text x="100" y="5" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill="red" >{angles.heading * 180 / Math.PI}°</text>
-                    <circle cx="100" cy="100" r="90" fill="lightgray" stroke="black" strokeWidth="1" />
-                    <circle cx="100" cy="100" r="70" fill="white" stroke="black" strokeWidth="1" />
-                    <circle cx="100" cy="100" r="60" fill="lightgray" stroke="black" strokeWidth="1" />
-                    <circle cx="100" cy="100" r="50.5" stroke="gray" strokeWidth="0.5" />
-                    <circle cx="100" cy="100" r="40.5" stroke="gray" strokeWidth="0.5" />
-                    <g id="rose" style={{transformOrigin: "center", rotate: `${angles.heading >= 0 ? angles.heading : angles.heading + Math.PI*2}rad`, transition: `rotate ${TRANSITION_TIME}s ease-in-out` }}>
-                        {compassRosePoints.map((val, index) => {
-                            return (
-                                <>
-                                    <polygon key={index + "a"} points={val[0]} fill="white" stroke="black" strokeWidth="1"/>
-                                    <polygon key={index + "b"} points={val[1]} fill="black"/>
-                                </>
-                            )
-                        })}
-                        <polygon points="100,30 96,45 100,50 104,45" fill="white" stroke="black" strokeWidth="1"/>
-                        <polygon points="100,30 104,45 100,45" fill="black"/>
-                        <polygon points="100,45 96,45 100,50" fill="black"/>
-                        <rect x="96" y="48" width="8" height="2" fill="white" stroke="black" strokeWidth="1" rx="1"/>
-                    </g>
-                    <g id="degrees">
-                        {compassDegreePointers.map((val, index) => {
-                            return (
-                                <line
-                                    key={index}
-                                    x1={Math.cos(index * (Math.PI / 180)) * (90 - val[0]) + 100}
-                                    y1={Math.sin(index * (Math.PI / 180)) * (90 - val[1]) + 100}
-                                    x2={Math.cos(index * (Math.PI / 180)) * 90 + 100}
-                                    y2={Math.sin(index * (Math.PI / 180)) * 90 + 100}
-                                    stroke={index === 270 ? "red" : "black"}
-                                    strokeWidth="1"
-                                />
-                            )
-                        })}
-                        <polygon points="100,30 96,20 100,22 104,20" fill="red" />
-                    </g>
-                    <g id="rollPitch" style={{ isolation: "isolate", filter: " invert(100%)" }}>
-                        <circle
-                            cx="100"
-                            cy="100"
-                            r="13"
-                            fill="white"
-                            stroke="black"
-                            strokeWidth="2"
-                            style={{ filter: " invert(100%)" }}
-                        />
-                        <circle
-                            cx={Math.sin(angles.pitch) * 5 + 100}
-                            cy={Math.sin(angles.roll) * 5 + 100}
-                            r="5"
-                            fill="black"
-                            style={{transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }}
-                        />
-                        <circle
-                            cx={-Math.sin(angles.pitch) * 5.5 + 100}
-                            cy={-Math.sin(angles.roll) * 5.5 + 100}
-                            r="4.5"
-                            fill="black"
-                            style={{transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: "invert(100%)" }}
-                        />
-                    </g>
-                </svg>
-            </div>
+            <svg className="compassContainer" shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <text x="100" y="5" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill="red" >
+                    {(angles.heading * 180 / Math.PI).toPrecision(2)}°
+                </text>
+                <DegreesFull />
+                <RoseFull TRANSITION_TIME={TRANSITION_TIME} rotation={angles.heading} />
+                <DoubleSphere pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />
+            </svg>
         </>
     );
 }

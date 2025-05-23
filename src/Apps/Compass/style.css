@@ -1,0 +1,35 @@
+.compassStartButton{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black; 
+    background-color: lightgray;
+     border: 1px black solid; 
+     padding: 5px; 
+     box-sizing: border-box; 
+     font-size: 20px; 
+}
+
+.compassWarning{ 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: red; 
+    background-color: white; 
+    border: 1px black solid; 
+    padding: 5px; 
+    box-sizing: border-box;
+}
+
+.compassContainer{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    width: 100%; 
+    height: 100%; 
+    padding: 5px; 
+    box-sizing: border-box;
+}
