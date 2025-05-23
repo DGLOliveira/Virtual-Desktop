@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import RoseFull from "./Components/Pointers/RoseFull.jsx";
 import DoubleSphere from "./Components/RollPitch/DoubleSphere.jsx";
 import DegreesFull from "./Components/Degrees/DegreesFull.jsx";
+import Target from "./Components/RollPitch/Target.jsx";
 import "./style.css";
 
 export default function Compass() {
@@ -111,11 +112,12 @@ export default function Compass() {
             }
             <svg className="compassContainer" shapeRendering="geometricprecision" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <text x="100" y="5" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill="red" >
-                    {(angles.heading * 180 / Math.PI).toPrecision(2)}°
+                    {(angles.heading * 180 / Math.PI).toFixed(2)}°
                 </text>
                 <DegreesFull />
                 <RoseFull TRANSITION_TIME={TRANSITION_TIME} rotation={angles.heading} />
-                <DoubleSphere pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />
+                {/*<Target pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />*/}
+                {<DoubleSphere pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />}
             </svg>
         </>
     );
