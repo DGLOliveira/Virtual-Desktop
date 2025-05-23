@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import RoseFull from "./Components/Pointers/RoseFull.jsx";
 import DoubleSphere from "./Components/RollPitch/DoubleSphere.jsx";
 import DegreesFull from "./Components/Degrees/DegreesFull.jsx";
-import "style.css";
+import "./style.css";
 
 export default function Compass() {
     const [state, setState] = useState("ready");

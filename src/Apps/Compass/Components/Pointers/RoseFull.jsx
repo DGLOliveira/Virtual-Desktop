@@ -44,6 +44,15 @@ export default function RoseFull({ TRANSITION_TIME, rotation }) {
                     <>
                         <polygon key={index + "a"} points={val[0]} fill="white" stroke="black" strokeWidth="1" />
                         <polygon key={index + "b"} points={val[1]} fill="black" />
+                        {index>=12 && index<16 ?
+                        <line key={index + "c"}
+                        x1={Math.cos((index-12) * (Math.PI / 2)) * 60 + 100}
+                        y1={Math.sin((index-12) * (Math.PI / 2)) * 60 + 100}
+                        x2={Math.cos((index-12) * (Math.PI / 2)) * 70 + 100}
+                        y2={Math.sin((index-12) * (Math.PI / 2)) * 70 + 100}
+                        stroke="black" 
+                        strokeWidth="0.5" />
+                        :null}
                     </>
                 )
             })}
