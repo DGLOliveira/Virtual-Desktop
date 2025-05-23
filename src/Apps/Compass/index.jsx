@@ -3,6 +3,7 @@ import RoseFull from "./Components/Pointers/RoseFull.jsx";
 import DoubleSphere from "./Components/RollPitch/DoubleSphere.jsx";
 import DegreesFull from "./Components/Degrees/DegreesFull.jsx";
 import Target from "./Components/RollPitch/Target.jsx";
+import Bubble from "./Components/RollPitch/Bubble.jsx";
 import "./style.css";
 
 export default function Compass() {
@@ -116,8 +117,7 @@ export default function Compass() {
                 </text>
                 <DegreesFull />
                 <RoseFull TRANSITION_TIME={TRANSITION_TIME} rotation={angles.heading} />
-                {/*<Target pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />*/}
-                {<DoubleSphere pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />}
+                <DoubleSphere pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />
             </svg>
         </>
     );
