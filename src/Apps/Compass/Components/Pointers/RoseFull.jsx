@@ -1,5 +1,10 @@
 //Generates a complete compass rose
+import {useState, useEffect} from "react";
 export default function RoseFull({ TRANSITION_TIME, rotation }) {
+    const [rot, setRot] = useState(rotation);
+    useEffect(() => {
+        setRot(rotation);
+    },[rotation]);
     var compassRosePoints = [];
     function compassRosePointsCalc() {
         compassRosePoints = [];
