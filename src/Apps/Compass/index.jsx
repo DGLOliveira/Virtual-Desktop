@@ -93,7 +93,9 @@ export default function Compass(props) {
         const options = { frequency: SENSOR_UPDATE_FREQUENCY, referenceFrame: "device" };
         sensor = new AbsoluteOrientationSensor(options);
         sensor.start();
+        console.log("sensor started");
         sensor.onreading = () => {
+        console.log(sensor);
         const x = sensor.quaternion[0];
         const y = sensor.quaternion[1];
         const z = sensor.quaternion[2];
@@ -114,6 +116,7 @@ export default function Compass(props) {
             roll: roll,
             cumulativeRotation: cumulativeRotation
         });
+        console.log(heading, pitch, roll, cumulativeRotation);
         }
     };
 
@@ -147,6 +150,7 @@ export default function Compass(props) {
         return () => {
             if (sensor) {
                 sensor.stop();
+                console.log("stopped sensor");
             }
         }
     });
