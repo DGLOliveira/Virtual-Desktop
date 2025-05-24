@@ -36,9 +36,9 @@ export default function Compass(props) {
     const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
     const TRANSITION_TIME = 0.25; //seconds
 
-    const pointerProps = { 
-        TRANSITION_TIME: TRANSITION_TIME, 
-        rotation: angles.heading + angles.cumulativeRotation 
+    const pointerProps = {
+        TRANSITION_TIME: TRANSITION_TIME,
+        rotation: angles.heading + angles.cumulativeRotation
     };
     const POINTERS_COMPONENTS = {
         RoseFull: <RoseFull {...pointerProps} />,
@@ -48,9 +48,9 @@ export default function Compass(props) {
         Modern: <Modern {...pointerProps} />
     };
 
-    const rollPitchProps = { 
-        pitch: angles.pitch, 
-        roll: angles.roll,  
+    const rollPitchProps = {
+        pitch: angles.pitch,
+        roll: angles.roll,
         TRANSITION_TIME: TRANSITION_TIME
     };
     const ROLLPITCH_COMPONENTS = {
@@ -65,11 +65,7 @@ export default function Compass(props) {
 
     //converts quaternion to angles in radians and updates angles
     //compensates for heading going from -PI to PI
-    function quaternionToAngles() {
-        const x = sensor.quaternion[0];
-        const y = sensor.quaternion[1];
-        const z = sensor.quaternion[2];
-        const w = sensor.quaternion[3];
+    function quaternionToAngles(x, y, z, w) {
         const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
         const pitch = Math.asin(2 * (x * z - w * y));
         const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
@@ -95,28 +91,12 @@ export default function Compass(props) {
         sensor.start();
         console.log("sensor started");
         sensor.onreading = () => {
-        console.log(sensor);
-        const x = sensor.quaternion[0];
-        const y = sensor.quaternion[1];
-        const z = sensor.quaternion[2];
-        const w = sensor.quaternion[3];
-        const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
-        const pitch = Math.asin(2 * (x * z - w * y));
-        const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
-        let cumulativeRotation = angles.cumulativeRotation;
-        if (angles.heading < 0 && heading > 0) {
-            cumulativeRotation += Math.PI * 2;
-        }
-        else if (angles.heading > 0 && heading < 0) {
-            cumulativeRotation -= Math.PI * 2;
-        }
-        setAngles({
-            heading: heading,
-            pitch: pitch,
-            roll: roll,
-            cumulativeRotation: cumulativeRotation
-        });
-        console.log(heading, pitch, roll, cumulativeRotation);
+            quaternionToAngles(
+                sensor.quaternion[0],
+                sensor.quaternion[1],
+                sensor.quaternion[2],
+                sensor.quaternion[3]
+            );
         }
     };
 
@@ -153,7 +133,7 @@ export default function Compass(props) {
                 console.log("stopped sensor");
             }
         }
-    });
+    }, []);
 
     const args = {
         style: style,
@@ -161,10 +141,10 @@ export default function Compass(props) {
     };
     useEffect(() => {
         handleAction(action, setAction, args);
-    },[action]);
+    }, [action]);
     useEffect(() => {
         handleTopMenu(appMenu, setAppMenu, args);
-    },[style]);
+    }, [style]);
 
     return (
         <>
