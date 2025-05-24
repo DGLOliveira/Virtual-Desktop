@@ -27,7 +27,7 @@ export default function Bubble({ pitch, roll, TRANSITION_TIME }) {
                 cx={deltaX + 100}
                 cy={deltaY + 100}
                 r="5"
-                fill="dodgerblue"
+                fill="deepskyblue"
                 stroke="black"
                 strokeWidth="0.5"
                 style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`}}
