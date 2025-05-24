@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import handleAction from "./Handlers/handleAction.js";
+import handleTopMenu from "./Handlers/handleTopMenu.js";
 import DegreesFull from "./Components/Degrees/DegreesFull.jsx";
 import RoseFull from "./Components/Pointers/RoseFull.jsx";
 import RoseSimple from "./Components/Pointers/RoseSimple.jsx";
@@ -16,6 +18,11 @@ export default function Compass(props) {
     const appMenu = props.appMenu;
     const setAppMenu = props.setAppMenu;
     const [state, setState] = useState("ready");
+    const [style, setStyle] = useState({
+        degrees: "DegreesFull",
+        pointer: "RoseFull",
+        rollpitch: "DoubleSphere"
+    });
     //Note: all angles are in radians
     //cumulativeRotation is used to prevent compass from doing a full 360 rotation
     //when heading goes from -PI to PI, and makes this number go from 0 to 2PI at the start
@@ -28,6 +35,33 @@ export default function Compass(props) {
     var sensor = null;
     const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
     const TRANSITION_TIME = 0.25; //seconds
+
+    const pointerProps = { 
+        TRANSITION_TIME: TRANSITION_TIME, 
+        rotation: angles.heading + angles.cumulativeRotation 
+    };
+    const POINTERS_COMPONENTS = {
+        RoseFull: <RoseFull {...pointerProps} />,
+        RoseSimple: <RoseSimple {...pointerProps} />,
+        MagnetPointer: <MagnetPointer {...pointerProps} />,
+        Arrow: <Arrow {...pointerProps} />,
+        Modern: <Modern {...pointerProps} />
+    };
+
+    const rollPitchProps = { 
+        pitch: angles.pitch, 
+        roll: angles.roll,  
+        TRANSITION_TIME: TRANSITION_TIME
+    };
+    const ROLLPITCH_COMPONENTS = {
+        DoubleSphere: <DoubleSphere {...rollPitchProps} />,
+        Target: <Target {...rollPitchProps} />,
+        Bubble: <Bubble {...rollPitchProps} />
+    };
+
+    const DEGREES_COMPONENTS = {
+        DegreesFull: <DegreesFull />,
+    };
 
     //converts quaternion to angles in radians and updates angles
     //compensates for heading going from -PI to PI
@@ -52,7 +86,7 @@ export default function Compass(props) {
             roll: roll,
             cumulativeRotation: cumulativeRotation
         });
-    }
+    };
 
     // start absolute orientation sensors
     function runSensors() {
@@ -62,7 +96,7 @@ export default function Compass(props) {
         sensor.onreading = () => {
             quaternionToAngles();
         }
-    }
+    };
 
     // state machine
     useEffect(() => {
@@ -98,6 +132,17 @@ export default function Compass(props) {
         }
     });
 
+    const args = {
+        style: style,
+        setStyle: setStyle,
+    };
+    useEffect(() => {
+        handleAction(action, setAction, args);
+    },[action]);
+    useEffect(() => {
+        handleTopMenu(appMenu, setAppMenu, args);
+    },[style]);
+
     return (
         <>
             {state === "ready" &&
@@ -123,9 +168,9 @@ export default function Compass(props) {
                 <text x="100" y="5" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill="red" >
                     {(angles.heading * 180 / Math.PI).toFixed(2)}°
                 </text>
-                <DegreesFull />
-                <RoseFull TRANSITION_TIME={TRANSITION_TIME} rotation={angles.heading + angles.cumulativeRotation} />
-                <DoubleSphere pitch={angles.pitch} roll={angles.roll} TRANSITION_TIME={TRANSITION_TIME} />
+                {DEGREES_COMPONENTS[style.degrees]}
+                {POINTERS_COMPONENTS[style.pointer]}
+                {ROLLPITCH_COMPONENTS[style.rollpitch]}
             </svg>
         </>
     );
