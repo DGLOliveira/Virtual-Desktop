@@ -41,7 +41,9 @@ export default function Compass(props) {
         rotation: angles.heading + angles.cumulativeRotation 
     };
     const POINTERS_COMPONENTS = {
-        RoseFull: <RoseFull {...pointerProps} />,
+        RoseFull: <RoseFull 
+        TRANSITION_TIME={TRANSITION_TIME} 
+        rotation={angles.heading + angles.cumulativeRotation}  />,
         RoseSimple: <RoseSimple {...pointerProps} />,
         MagnetPointer: <MagnetPointer {...pointerProps} />,
         Arrow: <Arrow {...pointerProps} />,
