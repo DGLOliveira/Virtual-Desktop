@@ -36,23 +36,23 @@ export default function Compass(props) {
     const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
     const TRANSITION_TIME = 0.25; //seconds
 
-    const pointerProps = { 
-        TRANSITION_TIME: TRANSITION_TIME, 
-        rotation: angles.heading + angles.cumulativeRotation 
+    const pointerProps = {
+        TRANSITION_TIME: TRANSITION_TIME,
+        rotation: angles.heading + angles.cumulativeRotation
     };
     const POINTERS_COMPONENTS = {
-        RoseFull: <RoseFull 
-        TRANSITION_TIME={TRANSITION_TIME} 
-        rotation={angles.heading + angles.cumulativeRotation}  />,
+        RoseFull: <RoseFull
+            TRANSITION_TIME={TRANSITION_TIME}
+            rotation={angles.heading + angles.cumulativeRotation} />,
         RoseSimple: <RoseSimple {...pointerProps} />,
         MagnetPointer: <MagnetPointer {...pointerProps} />,
         Arrow: <Arrow {...pointerProps} />,
         Modern: <Modern {...pointerProps} />
     };
 
-    const rollPitchProps = { 
-        pitch: angles.pitch, 
-        roll: angles.roll,  
+    const rollPitchProps = {
+        pitch: angles.pitch,
+        roll: angles.roll,
         TRANSITION_TIME: TRANSITION_TIME
     };
     const ROLLPITCH_COMPONENTS = {
@@ -140,10 +140,10 @@ export default function Compass(props) {
     };
     useEffect(() => {
         handleAction(action, setAction, args);
-    },[action]);
+    }, [action]);
     useEffect(() => {
         handleTopMenu(appMenu, setAppMenu, args);
-    },[style]);
+    }, [style]);
 
     return (
         <>
@@ -171,7 +171,9 @@ export default function Compass(props) {
                     {(angles.heading * 180 / Math.PI).toFixed(2)}°
                 </text>
                 {DEGREES_COMPONENTS[style.degrees]}
-                {POINTERS_COMPONENTS[style.pointer]}
+                <RoseFull
+                    TRANSITION_TIME={TRANSITION_TIME}
+                    rotation={angles.heading + angles.cumulativeRotation} />
                 {ROLLPITCH_COMPONENTS[style.rollpitch]}
             </svg>
         </>
