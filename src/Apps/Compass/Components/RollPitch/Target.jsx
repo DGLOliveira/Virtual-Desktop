@@ -1,7 +1,7 @@
 //Generates two targets that used to visualize roll and pitch
 export default function Target({ pitch, roll, TRANSITION_TIME }) {
     const deltaX = Math.sin(pitch) * 5;
-    const deltaY = Math.sin(roll) * 5;
+    const deltaY = -Math.sin(roll) * 5;
     return (
         <g id="rollPitch" style={{ isolation: "isolate", filter: " invert(100%)" }}>
             <circle
