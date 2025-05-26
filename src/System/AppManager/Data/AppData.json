@@ -5,6 +5,12 @@
             "Taskbar": false
         }
     },
+    "NoteDoc": {
+        "shortcuts": {
+            "Desktop": false,
+            "Taskbar": false
+        }
+    },
     "Arcade": {
         "shortcuts": {
             "Desktop": false,

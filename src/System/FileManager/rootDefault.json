@@ -93,6 +93,12 @@
                             "path": "Apps/DrawDoc/index.js",
                             "read/write": "read"
                         },
+                        "NoteDoc":{
+                            "type": "App",
+                            "icon": "Apps/NoteDoc/icon.js",
+                            "path": "Apps/NoteDoc/index.js",
+                            "read/write": "read"
+                        },
                         "FileViewer":{
                             "type": "App",
                             "icon": "Apps/FileViewer/icon.js",
