@@ -4,6 +4,7 @@
     resize: none;
     border: none;
     margin: 0;
+    padding:5px;
     overflow: scroll;
 }
 #noteDoc:focus{
