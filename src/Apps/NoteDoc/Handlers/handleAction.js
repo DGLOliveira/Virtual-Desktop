@@ -16,6 +16,24 @@ export default function handleAction(action, setAction, args) {
             document.execCommand("redo");
             setAction(false);
             break;
+        case "Zoom In":
+            if (args.settings.zoom < args.MAX_ZOOM) {
+                args.setSettings({ ...args.settings, zoom: args.settings.zoom * 2 });
+            }
+            setAction(false);
+            break;
+        case "Zoom Out":
+            if (args.settings.zoom > args.MIN_ZOOM) {
+                args.setSettings({ ...args.settings, zoom: args.settings.zoom / 2 });
+            }
+            setAction(false);
+            break;
+        case "Zoom Reset":
+            if (args.settings.zoom !== 1) {
+                args.setSettings({ ...args.settings, zoom: 1 });
+            }
+            setAction(false);
+            break;
         case "System":
             args.setSettings({
                 ...args.settings,

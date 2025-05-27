@@ -54,18 +54,18 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
         "View": {
             "Zoom In": {
                 "action": "Zoom In",
-                "keybind": "Ctrl++",
-                "disabled": true
+                "keybind": "Alt++",
+                "disabled": args.settings.zoom >= args.MAX_ZOOM ? true : false
             },
             "Zoom Out": {
                 "action": "Zoom Out",
-                "keybind": "Ctrl+-",
-                "disabled": true
+                "keybind": "Alt+-",
+                "disabled": args.settings.zoom <= args.MIN_ZOOM ? true : false
             },
             "Zoom Reset": {
                 "action": "Zoom Reset",
-                "keybind": "Ctrl+0",
-                "disabled": true
+                "keybind": "Alt+0",
+                "disabled": args.settings.zoom === 1 ? true : false
             },
             "LineBreak1": {},
             "Text Wrap": {
@@ -116,6 +116,18 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
             ...appTopBar,
             "View": {
                 ...appTopBar["View"],
+                "Zoom In": {
+                    ...appTopBar["View"]["Zoom In"],
+                    "disabled": args.settings.zoom >= args.MAX_ZOOM ? true : false
+                },
+                "Zoom Out": {
+                    ...appTopBar["View"]["Zoom Out"],
+                    "disabled": args.settings.zoom <= args.MIN_ZOOM ? true : false
+                },
+                "Zoom Reset": {
+                    ...appTopBar["View"]["Zoom Reset"],
+                    "disabled": args.settings.zoom === 1 ? true : false
+                },
                 "Text Wrap": {
                     ...appTopBar["View"]["Text Wrap"],
                     "checkbox": args.settings.textWrap==="nowrap" ? false : true

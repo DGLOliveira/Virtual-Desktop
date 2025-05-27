@@ -15,6 +15,9 @@ export default function NoteDoc(props) {
         },
         zoom: 1
     });
+    const MAX_ZOOM = 4;
+    const MIN_ZOOM = 0.25;
+    
     const action = props.action;
     const setAction = props.setAction;
     const appMenu = props.appMenu;
@@ -32,7 +35,9 @@ export default function NoteDoc(props) {
         settings,
         setSettings,
         text,
-        setText
+        setText,
+        MAX_ZOOM,
+        MIN_ZOOM
     };
     
     useEffect(() => { 
