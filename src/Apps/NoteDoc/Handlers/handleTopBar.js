@@ -10,17 +10,12 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
             "Open": {
                 "action": "Open",
                 "keybind": "Alt+O",
-                "disabled": true
+                "disabled": false
             },
             "Save": {
                 "action": "Save",
                 "keybind": "Alt+S",
-                "disabled": true
-            },
-            "Save As": {
-                "action": "Save As",
-                "keybind": "Alt+Shift+S",
-                "disabled": true
+                "disabled": args.text === "" ? true : false
             },
             "LineBreak0": {},
             "Change Title": {
@@ -135,6 +130,10 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 ...appTopBar["File"],
                 "New": {
                     ...appTopBar["File"]["New"],
+                    "disabled": args.text === "" ? true : false
+                },
+                "Save": {
+                    ...appTopBar["File"]["Save"],
                     "disabled": args.text === "" ? true : false
                 },
             },

@@ -21,8 +21,27 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             setAction(false);
             break;
         case "Open":
+            let uploadLink = document.createElement("input");
+            uploadLink.setAttribute("type", "file");
+            uploadLink.setAttribute("accept", ".txt");
+            uploadLink.click();
+            uploadLink.onchange = () => {
+                let reader = new FileReader();
+                reader.onload = () => {
+                    args.setText(reader.result);
+                };
+                reader.readAsText(uploadLink.files[0]);
+                args.setSettings({ ...args.settings, title: uploadLink.files[0].name });
+                setTitle(uploadLink.files[0].name.slice(0, uploadLink.files[0].name.length - 4));
+            };
+            setAction(false);
+            break;
         case "Save":
-        case "Save As":
+            let downloadLink = document.createElement("a");
+            downloadLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(args.text));
+            downloadLink.setAttribute('download', args.settings.title + ".txt");
+            downloadLink.click();
+            setAction(false);
             break;
         case "Change Title":
             dialogChangeName(setAction, setAppDialog, args);
@@ -52,7 +71,7 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
         case "Cut":
             args.ref.current.focus();
             var text = args.ref.current.value.substring(
-                    args.ref.current.selectionStart, args.ref.current.selectionEnd);
+                args.ref.current.selectionStart, args.ref.current.selectionEnd);
             navigator.clipboard.writeText(text);
             document.execCommand("delete", false);
             setAction(false);
@@ -60,7 +79,7 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
         case "Copy":
             args.ref.current.focus();
             var text = args.ref.current.value.substring(
-                    args.ref.current.selectionStart, args.ref.current.selectionEnd);
+                args.ref.current.selectionStart, args.ref.current.selectionEnd);
             navigator.clipboard.writeText(text);
             console.log(args.selectedText);
             setAction(false);
