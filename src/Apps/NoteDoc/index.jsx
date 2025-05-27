@@ -34,29 +34,31 @@ export default function NoteDoc(props) {
         text,
         setText
     };
-    useEffect(() => {
+    
+    useEffect(() => { 
+        console.log(action);
         if (action) {
             handleAction(action, setAction, args);
         }
     }, [action]);
     useEffect(() => {
         handleTopBar(appMenu, setAppMenu, args);
-    },[settings]);
+    }, [settings]);
 
     return (
-        <textarea
-            onContextMenu={(e) => e.stopPropagation()}
-            id="noteDoc"
-            style={{
-                fontSize: settings.fontSize,
-                fontFamily: settings.fontFamily,
-                textWrap: settings.textWrap,
-                zoom: settings.zoom,
-                backgroundColor: settings.theme.backgroundColor,
-                color: settings.theme.color
-            }}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-        />
+            <textarea
+                onContextMenu={(e) => e.stopPropagation()}
+                id="noteDoc"
+                style={{
+                    fontSize: settings.fontSize,
+                    fontFamily: settings.fontFamily,
+                    textWrap: settings.textWrap,
+                    zoom: settings.zoom,
+                    backgroundColor: settings.theme.backgroundColor,
+                    color: settings.theme.color
+                }}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+            />
     )
 }

@@ -31,7 +31,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
             },
             "Redo": {
                 "action": "Redo",
-                "keybind": "Ctrl+Y",
+                "keybind": "Ctrl+Shift+Z",
                 "disabled": false
             },
             "LineBreak1": {},

@@ -6,6 +6,16 @@ export default function handleAction(action, setAction, args) {
         case "Save":
         case "Save As":
             break;
+        case "Undo":
+            document.getElementById("noteDoc").focus();
+            document.execCommand("undo");
+            setAction(false);
+            break;
+        case "Redo":
+            document.getElementById("noteDoc").focus();
+            document.execCommand("redo");
+            setAction(false);
+            break;
         case "System":
             args.setSettings({
                 ...args.settings,
