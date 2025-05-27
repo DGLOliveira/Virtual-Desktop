@@ -3,7 +3,8 @@ export default function parseKeybinds( appMenu ) {
     let keystrings = {};
     Object.keys(appMenu).map((name) => {
         Object.keys(appMenu[name]).map((subname) => {
-            if (appMenu[name][subname].keybind) {
+            if (appMenu[name][subname].keybind 
+                && !("keybindDisabled" in appMenu[name][subname])) {
                 keystrings[subname] = appMenu[name][subname].keybind
             }
         })

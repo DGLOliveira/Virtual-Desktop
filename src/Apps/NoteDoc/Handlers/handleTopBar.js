@@ -39,28 +39,33 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
             "Undo": {
                 "action": "Undo",
                 "keybind": "Ctrl+Z",
-                "disabled": false
+                "disabled": false,
+                "keybindDisabled": true
             },
             "Redo": {
                 "action": "Redo",
                 "keybind": "Ctrl+Shift+Z",
-                "disabled": false
+                "disabled": false,
+                "keybindDisabled": true
             },
             "LineBreak1": {},
             "Cut": {
                 "action": "Cut",
                 "keybind": "Ctrl+X",
-                "disabled": true
+                "disabled": false,
+                "keybindDisabled": true
             },
             "Copy": {
                 "action": "Copy",
                 "keybind": "Ctrl+C",
-                "disabled": true
+                "disabled": false,
+                "keybindDisabled": true
             },
             "Paste": {
                 "action": "Paste",
                 "keybind": "Ctrl+V",
-                "disabled": true
+                "disabled": false,
+                "keybindDisabled": true
             },
         },
         "View": {

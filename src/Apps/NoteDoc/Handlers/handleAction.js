@@ -40,13 +40,37 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             setAction(false);
             break;
         case "Undo":
-            document.getElementById("noteDoc").focus();
-            document.execCommand("undo", true);
+            args.ref.current.focus();
+            document.execCommand("undo", false);
             setAction(false);
             break;
         case "Redo":
-            document.getElementById("noteDoc").focus();
-            document.execCommand("redo", true);
+            args.ref.current.focus();
+            document.execCommand("redo", false);
+            setAction(false);
+            break;
+        case "Cut":
+            args.ref.current.focus();
+            var text = args.ref.current.value.substring(
+                    args.ref.current.selectionStart, args.ref.current.selectionEnd);
+            navigator.clipboard.writeText(text);
+            document.execCommand("delete", false);
+            setAction(false);
+            break;
+        case "Copy":
+            args.ref.current.focus();
+            var text = args.ref.current.value.substring(
+                    args.ref.current.selectionStart, args.ref.current.selectionEnd);
+            navigator.clipboard.writeText(text);
+            console.log(args.selectedText);
+            setAction(false);
+            break;
+        case "Paste":
+            args.ref.current.focus();
+            navigator.clipboard.readText().then((text) => {
+                console.log(text);
+                document.execCommand("insertText", false, text);
+            })
             setAction(false);
             break;
         case "Zoom In":

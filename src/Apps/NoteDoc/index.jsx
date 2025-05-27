@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from "react"
 import handleAction from "./Handlers/handleAction";
 import handleTopBar from "./Handlers/handleTopBar";
 import "./style.css"
+
 export default function NoteDoc(props) {
+    const ref = useRef(null);
     const [text, setText] = useState("");
     const [settings, setSettings] = useState({
         fontSize: "14px",
@@ -36,6 +38,7 @@ export default function NoteDoc(props) {
 
     //Handles window actions
     const args = {
+        ref,
         settings,
         setSettings,
         text,
@@ -43,31 +46,34 @@ export default function NoteDoc(props) {
         MAX_ZOOM,
         MIN_ZOOM
     };
-    
-    useEffect(() => { 
+
+    useEffect(() => {
         console.log(action);
         if (action) {
             handleAction(action, setAction, setAppDialog, setTitle, args);
         }
     }, [action]);
+
     useEffect(() => {
         handleTopBar(appMenu, setAppMenu, args);
     }, [settings, text]);
 
+
     return (
-            <textarea
-                onContextMenu={(e) => e.stopPropagation()}
-                id="noteDoc"
-                style={{
-                    fontSize: settings.fontSize,
-                    fontFamily: settings.fontFamily,
-                    textWrap: settings.textWrap,
-                    zoom: settings.zoom,
-                    backgroundColor: settings.theme.backgroundColor,
-                    color: settings.theme.color
-                }}
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-            />
+        <textarea
+            ref={ref}
+            onContextMenu={(e) => e.stopPropagation()}
+            id="noteDoc"
+            style={{
+                fontSize: settings.fontSize,
+                fontFamily: settings.fontFamily,
+                textWrap: settings.textWrap,
+                zoom: settings.zoom,
+                backgroundColor: settings.theme.backgroundColor,
+                color: settings.theme.color
+            }}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+        />
     )
 }
