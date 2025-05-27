@@ -1,4 +1,6 @@
-export default function handleAction(action, setAction, args) {
+import dialogChangeName from "../Dialog/changeName.jsx";
+
+export default function handleAction(action, setAction, setAppDialog, args) {
 
     switch (action) {
         case "New":
@@ -6,14 +8,28 @@ export default function handleAction(action, setAction, args) {
         case "Save":
         case "Save As":
             break;
+        case "Change Title":
+            dialogChangeName(setAction, setAppDialog, args);
+            setAction(false);
+            break;
+        case "Change Title Confirm":
+            args.setSettings({ ...args.settings, title: args.settings.newTitle });
+            setAppDialog(null);
+            setAction(false);
+            break;
+        case "Change Title Cancel":
+            args.setSettings({ ...args.settings, newTitle: "" });
+            setAppDialog(null);
+            setAction(false);
+            break;
         case "Undo":
             document.getElementById("noteDoc").focus();
-            document.execCommand("undo");
+            document.execCommand("undo", true);
             setAction(false);
             break;
         case "Redo":
             document.getElementById("noteDoc").focus();
-            document.execCommand("redo");
+            document.execCommand("redo", true);
             setAction(false);
             break;
         case "Zoom In":

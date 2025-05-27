@@ -13,11 +13,13 @@ export default function NoteDoc(props) {
             backgroundColor: "var(--AppBkgrColor)",
             color: "var(--AppFontColor)"
         },
-        zoom: 1
+        zoom: 1,
+        title: "Untitled",
+        newTitle: "Untitled"
     });
     const MAX_ZOOM = 4;
     const MIN_ZOOM = 0.25;
-    
+
     const action = props.action;
     const setAction = props.setAction;
     const appMenu = props.appMenu;
@@ -43,7 +45,7 @@ export default function NoteDoc(props) {
     useEffect(() => { 
         console.log(action);
         if (action) {
-            handleAction(action, setAction, args);
+            handleAction(action, setAction, setAppDialog, args);
         }
     }, [action]);
     useEffect(() => {

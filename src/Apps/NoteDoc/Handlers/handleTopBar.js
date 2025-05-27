@@ -22,6 +22,18 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 "keybind": "Alt+Shift+S",
                 "disabled": true
             },
+            "LineBreak0": {},
+            "Change Title": {
+                "action": "Change Title",
+                "keybind": "F2",
+                "disabled": false
+            },
+            "LineBreak1": {},
+            "Close": {
+                "action": "Close",
+                "keybind": "Alt+Shift+F4",
+                "disabled": false
+            }
         },
         "Edit": {
             "Undo": {
