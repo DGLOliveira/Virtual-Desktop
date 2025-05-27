@@ -52,7 +52,7 @@ export default function NoteDoc(props) {
     }, [action]);
     useEffect(() => {
         handleTopBar(appMenu, setAppMenu, args);
-    }, [settings]);
+    }, [settings, text]);
 
     return (
             <textarea

@@ -1,9 +1,25 @@
 import dialogChangeName from "../Dialog/changeName.jsx";
+import dialogNew from "../Dialog/new.jsx";
 
 export default function handleAction(action, setAction, setAppDialog, setTitle, args) {
 
     switch (action) {
         case "New":
+            dialogNew(setAction, setAppDialog, args);
+            setAction(false);
+            break;
+        case "New Confirm":
+            args.setSettings({ ...args.settings, title: args.settings.newTitle });
+            setTitle(args.settings.newTitle);
+            args.setText("");
+            setAppDialog(null);
+            setAction(false);
+            break;
+        case "New Cancel":
+            args.setSettings({ ...args.settings, newTitle: "" });
+            setAppDialog(null);
+            setAction(false);
+            break;
         case "Open":
         case "Save":
         case "Save As":

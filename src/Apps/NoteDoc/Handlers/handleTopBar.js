@@ -5,7 +5,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
             "New": {
                 "action": "New",
                 "keybind": "Alt+N",
-                "disabled": true
+                "disabled": args.text === "" ? true : false
             },
             "Open": {
                 "action": "Open",
@@ -82,7 +82,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
             "LineBreak1": {},
             "Text Wrap": {
                 "action": "Text Wrap",
-                "checkbox": args.settings.textWrap==="nowrap" ? false : true,
+                "checkbox": args.settings.textWrap === "nowrap" ? false : true,
                 "disabled": false
             },
         },
@@ -123,9 +123,16 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
     };
     if (!appTopBar) {
         setAppTopBar(defaultTopBar);
-    }else{
+    } else {
         setAppTopBar({
             ...appTopBar,
+            "File": {
+                ...appTopBar["File"],
+                "New": {
+                    ...appTopBar["File"]["New"],
+                    "disabled": args.text === "" ? true : false
+                },
+            },
             "View": {
                 ...appTopBar["View"],
                 "Zoom In": {
@@ -142,7 +149,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 },
                 "Text Wrap": {
                     ...appTopBar["View"]["Text Wrap"],
-                    "checkbox": args.settings.textWrap==="nowrap" ? false : true
+                    "checkbox": args.settings.textWrap === "nowrap" ? false : true
                 }
             },
             "Theme": {
