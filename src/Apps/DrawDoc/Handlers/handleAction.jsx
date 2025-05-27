@@ -5,7 +5,7 @@ import { handleTopMenu } from "./handleTopMenu.js";
 
 import { dialogNew } from "../Dialog/new.jsx";
 import { dialogChangeName } from "../Dialog/changeName.jsx";
-export const handleAction = (canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canCLose, setCanClose) => {
+export const handleAction = (canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canCLose, setCanClose, title, setTitle) => {
   let args = {};
   switch (action) {
     case "Startup":
@@ -34,6 +34,7 @@ export const handleAction = (canvas, ctx, params, action, setAction, context, ap
       setAction(false);
       break;
     case "Change Name Confirm":
+      setTitle(context.name);
       setAppDialog(null);
       setAction(false);
       break;

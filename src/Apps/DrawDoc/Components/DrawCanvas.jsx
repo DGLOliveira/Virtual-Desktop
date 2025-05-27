@@ -1,7 +1,7 @@
 import { useRef, useContext, useEffect } from "react";
 import { Context } from "../Context.jsx";
 import { handleAction } from "../Handlers/handleAction.jsx";
-export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose }) => {
+export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle }) => {
   const canvasMainRef = useRef(null);
   const context = useContext(Context);
     const tool = context.tool;
@@ -40,7 +40,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
     let ctx = canvas.getContext("2d", {
       willReadFrequently: true,
     });
-    handleAction(canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose );
+    handleAction(canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle );
   }, [context.cursor, action]);
   useEffect(() => {
     let offsetX = (context.dimention.width / 2 - context.zoom * context.dimention.width / 2) * -1 / context.zoom;

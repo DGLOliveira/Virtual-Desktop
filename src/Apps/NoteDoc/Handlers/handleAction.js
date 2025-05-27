@@ -1,6 +1,6 @@
 import dialogChangeName from "../Dialog/changeName.jsx";
 
-export default function handleAction(action, setAction, setAppDialog, args) {
+export default function handleAction(action, setAction, setAppDialog, setTitle, args) {
 
     switch (action) {
         case "New":
@@ -14,6 +14,7 @@ export default function handleAction(action, setAction, setAppDialog, args) {
             break;
         case "Change Title Confirm":
             args.setSettings({ ...args.settings, title: args.settings.newTitle });
+            setTitle(args.settings.newTitle);
             setAppDialog(null);
             setAction(false);
             break;

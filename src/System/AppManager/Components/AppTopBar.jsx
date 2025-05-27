@@ -12,7 +12,7 @@ import { RiCloseLargeLine } from "react-icons/ri";
 import { AppIcon } from "./AppIcon.jsx";
 import "../Styles/TopBar.css";
 
-export const AppTopBar = ({ appName, setAction }) => {
+export const AppTopBar = ({ appName, title, setAction }) => {
     const appContext = useContext(AppContext);
     const contextMenu = useContext(ContextMenuContext);
     const themeContext = useContext(ThemeContext);
@@ -120,7 +120,9 @@ export const AppTopBar = ({ appName, setAction }) => {
             <h1
                 onDoubleClick={(e) => (
                     e.stopPropagation(), appContext.switchMaximized(appName)
-                )}>{appName}</h1>
+                )}>
+                    {title==="" || title==="Untitled" ? appName : `${title}`}
+                </h1>
             {themeContext.topBarIconTheme === "Default" &&
                 <>
                     <button

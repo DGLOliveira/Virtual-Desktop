@@ -16,6 +16,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
   const [appMenu, setAppMenu] = useState(null);
   const [appDialog, setAppDialog] = useState(null);
   const [canClose, setCanClose] = useState(true);
+  const [title, setTitle] = useState("");
   const [action, setAction] = useState("Startup");
   useEffect(() => {
     if (action === "Close" && canClose) {
@@ -42,6 +43,8 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
     appDialog,
     setAppDialog,
     contextMenu,
+    title,
+    setTitle,
     canClose,
     setCanClose
   };
@@ -50,6 +53,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
     <>
       <AppTopBar
         appName={appName}
+        title={title}
         setAction={setAction}
       />
       <ErrorBoundary fallback={<ErrorMessage errorMessage={"Something went wrong while loading the App"} />}>

@@ -22,6 +22,8 @@ export default function DrawDoc(props) {
   const canClose = props.canClose;
   const setCanClose = props.setCanClose;
   const isSelected = props.isSelected;
+  const title = props.title;
+  const setTitle = props.setTitle;
 
   const context = useContext(Context);
 
@@ -55,6 +57,8 @@ export default function DrawDoc(props) {
               contextMenu={contextMenu}
               canClose={canClose}
               setCanClose={setCanClose}
+              title={title}
+              setTitle={setTitle}
             />
             <PreviewCanvas
               setAction={setAction}

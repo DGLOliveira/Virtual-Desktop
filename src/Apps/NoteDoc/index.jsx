@@ -29,6 +29,8 @@ export default function NoteDoc(props) {
     const contextMenu = props.contextMenu;
     const setContextMenu = props.setContextMenu;
     const isSelected = props.isSelected;
+    const title = props.title;
+    const setTitle = props.setTitle;
     const canClose = props.canClose;
     const setCanClose = props.setCanClose;
 
@@ -45,7 +47,7 @@ export default function NoteDoc(props) {
     useEffect(() => { 
         console.log(action);
         if (action) {
-            handleAction(action, setAction, setAppDialog, args);
+            handleAction(action, setAction, setAppDialog, setTitle, args);
         }
     }, [action]);
     useEffect(() => {
