@@ -60,8 +60,9 @@ export default function NoteDoc(props) {
 
 
     return (
-        <textarea
+        <div
             ref={ref}
+            contentEditable="plaintext-only"
             onContextMenu={(e) => e.stopPropagation()}
             id="noteDoc"
             style={{
@@ -72,8 +73,6 @@ export default function NoteDoc(props) {
                 backgroundColor: settings.theme.backgroundColor,
                 color: settings.theme.color
             }}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
         />
     )
 }
