@@ -70,26 +70,19 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             break;
         case "Cut":
             args.ref.current.focus();
-            var text = args.ref.current.value.substring(
-                args.ref.current.selectionStart, args.ref.current.selectionEnd);
-            navigator.clipboard.writeText(text);
-            document.execCommand("delete", false);
+            document.execCommand("cut", false);
             setAction(false);
             break;
         case "Copy":
             args.ref.current.focus();
-            var text = args.ref.current.value.substring(
-                args.ref.current.selectionStart, args.ref.current.selectionEnd);
-            navigator.clipboard.writeText(text);
-            console.log(args.selectedText);
+            document.execCommand("copy", false);
             setAction(false);
             break;
         case "Paste":
             args.ref.current.focus();
             navigator.clipboard.readText().then((text) => {
-                console.log(text);
                 document.execCommand("insertText", false, text);
-            })
+            }).catch((e) => {console.log(e); alert(e.message)});
             setAction(false);
             break;
         case "Zoom In":

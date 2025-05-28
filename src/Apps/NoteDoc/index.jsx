@@ -66,8 +66,11 @@ export default function NoteDoc(props) {
             setCanClose(false);
         }*/
     });
-    observer.observe(ref.current, { attributes: true, childList: true, subtree: true });
 
+    useEffect(() => {
+        observer.observe(ref.current, { attributes: true, childList: true, subtree: true });
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <div
