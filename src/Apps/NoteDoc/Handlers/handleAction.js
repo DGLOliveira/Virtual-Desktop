@@ -1,7 +1,7 @@
 import dialogChangeName from "../Dialog/changeName.jsx";
 import dialogNew from "../Dialog/new.jsx";
 
-export default function handleAction(action, setAction, setAppDialog, setTitle, args) {
+export default function handleAction(action, setAction, setAppDialog, setTitle, canClose, setCanClose, args) {
 
     switch (action) {
         case "New":
@@ -29,7 +29,7 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
                 let reader = new FileReader();
                 reader.onload = () => {
                     console.log(reader.result);
-                    args.ref.current.innerText=reader.result;
+                    args.ref.current.innerText = reader.result;
                 };
                 reader.readAsText(uploadLink.files[0]);
                 args.setSettings({ ...args.settings, title: uploadLink.files[0].name.slice(0, uploadLink.files[0].name.length - 4) });
@@ -83,7 +83,7 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             args.ref.current.focus();
             navigator.clipboard.readText().then((text) => {
                 document.execCommand("insertText", false, text);
-            }).catch((e) => {console.log(e); alert(e.message)});
+            }).catch((e) => { console.log(e); alert(e.message) });
             setAction(false);
             break;
         case "Zoom In":
@@ -128,6 +128,29 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
         case "Text Wrap":
             args.setSettings({ ...args.settings, textWrap: args.settings.textWrap === "wrap" ? "nowrap" : "wrap" });
             setAction(false);
+            break;
+        case "Close":
+            if (!canClose) {
+                setAppDialog({
+                    title: "Warning",
+                    info: "Do you want to download the file before closing?",
+                    actions: {
+                        Save: () => {
+                            setAction("Save");
+                            setCanClose(true);
+                            setAppDialog(null);
+                        },
+                        Close: () => {
+                            setCanClose(true);
+                            setAppDialog(null);
+                        },
+                        Cancel: () => {
+                            setAppDialog(null);
+                            setAction(false);
+                        }
+                    }
+                });
+            }
             break;
         case false:
             break;

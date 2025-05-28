@@ -50,7 +50,7 @@ export default function NoteDoc(props) {
     useEffect(() => {
         console.log(action);
         if (action) {
-            handleAction(action, setAction, setAppDialog, setTitle, args);
+            handleAction(action, setAction, setAppDialog, setTitle, canClose, setCanClose, args);
         }
     }, [action]);
 
@@ -60,11 +60,11 @@ export default function NoteDoc(props) {
 
     const observer = new MutationObserver(() => {
         setText(ref.current.innerHTML);
-        /*if (ref.current.innerHTML === "") {
+        if (ref.current.innerHTML === "") {
             setCanClose(true);
         } else {
             setCanClose(false);
-        }*/
+        }
     });
 
     useEffect(() => {
