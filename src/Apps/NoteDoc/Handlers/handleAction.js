@@ -11,7 +11,7 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
         case "New Confirm":
             args.setSettings({ ...args.settings, title: args.settings.newTitle });
             setTitle(args.settings.newTitle);
-            args.setText("");
+            args.ref.current.innerHTML = "";
             setAppDialog(null);
             setAction(false);
             break;
@@ -28,17 +28,17 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             uploadLink.onchange = () => {
                 let reader = new FileReader();
                 reader.onload = () => {
-                    args.setText(reader.result);
+                    args.ref.current.innerHTML=reader.result;
                 };
                 reader.readAsText(uploadLink.files[0]);
-                args.setSettings({ ...args.settings, title: uploadLink.files[0].name });
+                args.setSettings({ ...args.settings, title: uploadLink.files[0].name.slice(0, uploadLink.files[0].name.length - 4) });
                 setTitle(uploadLink.files[0].name.slice(0, uploadLink.files[0].name.length - 4));
             };
             setAction(false);
             break;
         case "Save":
             let downloadLink = document.createElement("a");
-            downloadLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(args.text));
+            downloadLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(args.ref.current.innerHTML));
             downloadLink.setAttribute('download', args.settings.title + ".txt");
             downloadLink.click();
             setAction(false);

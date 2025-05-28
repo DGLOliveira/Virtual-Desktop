@@ -58,6 +58,16 @@ export default function NoteDoc(props) {
         handleTopBar(appMenu, setAppMenu, args);
     }, [settings, text]);
 
+    const observer = new MutationObserver(() => {
+        setText(ref.current.innerHTML);
+        /*if (ref.current.innerHTML === "") {
+            setCanClose(true);
+        } else {
+            setCanClose(false);
+        }*/
+    });
+    observer.observe(ref.current, { attributes: true, childList: true, subtree: true });
+
 
     return (
         <div
@@ -73,6 +83,7 @@ export default function NoteDoc(props) {
                 backgroundColor: settings.theme.backgroundColor,
                 color: settings.theme.color
             }}
+            onChange={(e) => setText(e.target.innerHTML)}
         />
     )
 }
