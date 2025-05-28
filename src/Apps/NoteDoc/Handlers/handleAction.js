@@ -28,7 +28,8 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             uploadLink.onchange = () => {
                 let reader = new FileReader();
                 reader.onload = () => {
-                    args.ref.current.innerHTML=reader.result;
+                    console.log(reader.result);
+                    args.ref.current.innerText=reader.result;
                 };
                 reader.readAsText(uploadLink.files[0]);
                 args.setSettings({ ...args.settings, title: uploadLink.files[0].name.slice(0, uploadLink.files[0].name.length - 4) });
@@ -38,7 +39,7 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             break;
         case "Save":
             let downloadLink = document.createElement("a");
-            downloadLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(args.ref.current.innerHTML));
+            downloadLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(args.ref.current.innerText));
             downloadLink.setAttribute('download', args.settings.title + ".txt");
             downloadLink.click();
             setAction(false);
