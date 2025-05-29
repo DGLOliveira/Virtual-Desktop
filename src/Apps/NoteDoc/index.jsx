@@ -18,7 +18,13 @@ export default function NoteDoc(props) {
         zoom: 1,
         title: "Untitled",
         newTitle: "Untitled",
-        findString: "",
+        searchParams: {
+            string:"",
+            results: [],
+            index: 0,
+            caseSensitive: false,
+            wholeWord: false,
+        }
     });
     const MAX_ZOOM = 4;
     const MIN_ZOOM = 0.25;

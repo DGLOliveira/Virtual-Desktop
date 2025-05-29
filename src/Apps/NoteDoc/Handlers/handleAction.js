@@ -92,12 +92,13 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             dialogFind(setAction, setAppDialog, args);
             setAction(false);
             break;
-        case "Search Find":
-            handleFind(args);
+        case "Find Next":
+        case "Find Previous":
+            handleFind(action, args);
             setAction(false);
             break;
         case "Close Find":
-            args.setSettings({ ...args.settings, findString: "" });
+            args.setSettings({ ...args.settings, searchParams: { ...args.settings.searchParams, string: "", results: [], index: -1 } });
             setAppDialog(null);
             setAction(false);
             break;
