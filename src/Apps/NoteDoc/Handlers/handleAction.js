@@ -1,5 +1,7 @@
 import dialogChangeName from "../Dialog/changeName.jsx";
 import dialogNew from "../Dialog/new.jsx";
+import dialogFind from "../Dialog/find.jsx";
+import handleFind from "./handleFind.js";
 
 export default function handleAction(action, setAction, setAppDialog, setTitle, canClose, setCanClose, args) {
 
@@ -84,6 +86,19 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             navigator.clipboard.readText().then((text) => {
                 document.execCommand("insertText", false, text);
             }).catch((e) => { console.log(e); alert(e.message) });
+            setAction(false);
+            break;
+        case "Find":
+            dialogFind(setAction, setAppDialog, args);
+            setAction(false);
+            break;
+        case "Search Find":
+            handleFind(args);
+            setAction(false);
+            break;
+        case "Close Find":
+            args.setSettings({ ...args.settings, findString: "" });
+            setAppDialog(null);
             setAction(false);
             break;
         case "Zoom In":

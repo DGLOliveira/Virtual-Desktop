@@ -43,7 +43,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 "disabled": false,
                 "keybindDisabled": true
             },
-            "LineBreak1": {},
+            "LineBreak0": {},
             "Cut": {
                 "action": "Cut",
                 "keybind": "Ctrl+X",
@@ -61,6 +61,12 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 "keybind": "Ctrl+V",
                 "disabled": false,
                 "keybindDisabled": true
+            },
+            "LineBreak1": {},
+            "Find": {
+                "action": "Find",
+                "keybind": "Ctrl+Alt+F",
+                "disabled": false
             },
         },
         "View": {
