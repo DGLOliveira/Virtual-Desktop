@@ -31,7 +31,6 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             uploadLink.onchange = () => {
                 let reader = new FileReader();
                 reader.onload = () => {
-                    console.log(reader.result);
                     args.ref.current.innerText = reader.result;
                 };
                 reader.readAsText(uploadLink.files[0]);
