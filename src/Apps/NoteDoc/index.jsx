@@ -24,6 +24,8 @@ export default function NoteDoc(props) {
             index: 0,
             caseSensitive: false,
             wholeWord: false,
+            replace: false,
+            replaceString: ""
         }
     });
     const MAX_ZOOM = 4;
@@ -55,7 +57,6 @@ export default function NoteDoc(props) {
     };
 
     useEffect(() => {
-        console.log(action);
         if (action) {
             handleAction(action, setAction, setAppDialog, setTitle, canClose, setCanClose, args);
         }

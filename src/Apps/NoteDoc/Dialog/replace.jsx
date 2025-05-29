@@ -1,12 +1,12 @@
-export default function dialogFind(setAction, setAppDialog, args) {
+export default function dialogReplace(setAction, setAppDialog, args) {
 
-    const title = "Find";
+    const title = "Replace";
 
     const info = <>
-        <label htmlFor="Find">Find</label>
+        <label htmlFor="Target">Target</label>
         <br />
         <input
-            id="Find"
+            id="Target"
             type="text"
             value={args.settings.searchParams.string}
             onChange={(e) => {
@@ -16,11 +16,30 @@ export default function dialogFind(setAction, setAppDialog, args) {
                         ...args.settings.searchParams,
                         string: e.target.value,
                         results: [],
-                        index: -1,
-                        replace: false
+                        index: -1
                     }
                 });
-                setAction("Find")
+                setAction("Replace")
+            }} />
+        <br />
+        <label htmlFor="Replace">Replace</label>
+        <br />
+        <input
+            id="Replace"
+            type="text"
+            value={args.settings.searchParams.replaceString}
+            onChange={(e) => {
+                args.setSettings({
+                    ...args.settings,
+                    searchParams: {
+                        ...args.settings.searchParams,
+                        replace: true,
+                        replaceString: e.target.value,
+                        results: [],
+                        index: -1
+                    }
+                });
+                setAction("Replace")
             }} />
         <br />
         <input
@@ -37,7 +56,7 @@ export default function dialogFind(setAction, setAppDialog, args) {
                         index: -1
                     }
                 });
-                setAction("Find");
+                setAction("Replace");
             }}
         />
         <label htmlFor="Case Sensitive">Case Sensitive</label>
@@ -56,21 +75,18 @@ export default function dialogFind(setAction, setAppDialog, args) {
                         index: -1
                     }
                 });
-                setAction("Find");
+                setAction("Replace");
             }}
         />
         <label htmlFor="Whole Word">Whole Word</label>
     </>;
 
     const actions = {
-        "Find Next": () => {
-            setAction("Find Next");
-        },
-        "Find Previous": () => {
-            setAction("Find Previous");
+        "Replace Next": () => {
+            setAction("Replace Next");
         },
         Close: () => {
-            setAction("Close Find");
+            setAction("Close Replace");
         }
     };
 

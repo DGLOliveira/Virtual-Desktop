@@ -1,7 +1,8 @@
 import dialogChangeName from "../Dialog/changeName.jsx";
 import dialogNew from "../Dialog/new.jsx";
 import dialogFind from "../Dialog/find.jsx";
-import handleFind from "./handleFind.js";
+import dialogReplace from "../Dialog/replace.jsx";
+import handleFindReplace from "./handleFindReplace.js";
 
 export default function handleAction(action, setAction, setAppDialog, setTitle, canClose, setCanClose, args) {
 
@@ -94,11 +95,25 @@ export default function handleAction(action, setAction, setAppDialog, setTitle, 
             break;
         case "Find Next":
         case "Find Previous":
-            handleFind(action, args);
+            handleFindReplace(action, args);
             setAction(false);
             break;
         case "Close Find":
-            args.setSettings({ ...args.settings, searchParams: { ...args.settings.searchParams, string: "", results: [], index: -1 } });
+            args.setSettings({ ...args.settings, searchParams: { ...args.settings.searchParams, results: [], index: -1 } });
+            setAppDialog(null);
+            setAction(false);
+            break;
+        case "Replace":
+            dialogReplace(setAction, setAppDialog, args);
+            setAction(false);
+            break;
+        case "Replace Next":
+        case "Replace Previous":
+            handleFindReplace(action, args);
+            setAction(false);
+            break;
+        case "Close Replace":
+            args.setSettings({ ...args.settings, searchParams: { ...args.settings.searchParams, results: [], index: -1 } });
             setAppDialog(null);
             setAction(false);
             break;

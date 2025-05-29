@@ -68,6 +68,11 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 "keybind": "Ctrl+Alt+F",
                 "disabled": false
             },
+            "Replace": {
+                "action": "Replace",
+                "keybind": "Ctrl+Alt+R",
+                "disabled": false
+            },
         },
         "View": {
             "Zoom In": {
