@@ -33,7 +33,7 @@ export default function Gyroscope() {
             }
             if (externalGimbal !== undefined && internalGimbal !== undefined && axis !== undefined) {
                 let alpha = angles.roll + Math.PI;
-                let beta = angles.pitch + Math.PI / 2 +accDelta;
+                let beta = angles.pitch + Math.PI / 2 + accDelta;
                 let gama = accDelta;
                 externalGimbal.quaternion.w = Math.cos(alpha / 2);
                 externalGimbal.quaternion.y = Math.sin(alpha / 2);
@@ -67,7 +67,7 @@ export default function Gyroscope() {
     //runs gyroscope
     const runGyroscope = () => {
         const options = { frequency: SENSOR_UPDATE_FREQUENCY, referenceFrame: "device" };
-        sensor = new Gyroscope(options);
+        sensor = new RelativeOrientationSensor(options);
         sensor.start();
         console.log("gyroscope started");
         sensor.onreading = () => {
@@ -84,8 +84,10 @@ export default function Gyroscope() {
     useEffect(() => {
         if (state === "start") {
             if ("AbsoluteOrientationSensor" in window) {
-                Promise(navigator.permissions.query({ name: "gyroscope" })
-                ).then((results) => {
+                Promise.all([
+                    navigator.permissions.query({ name: "gyroscope" }),
+                    navigator.permissions.query({ name: "accelerometer" })
+                ]).then((results) => {
                     if (results.every((result) => result.state === "granted")) {
                         setState("running");
                     } else {
