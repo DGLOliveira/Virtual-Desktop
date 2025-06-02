@@ -110,6 +110,12 @@
                             "icon": "Apps/Compass/icon.js",
                             "path": "Apps/Compass/index.js",
                             "read/write": "read"
+                        },
+                        "Gyroscope":{
+                            "type": "App",
+                            "icon": "Apps/Gyroscope/icon.js",
+                            "path": "Apps/Gyroscope/index.js",
+                            "read/write": "read"
                         }
                     }
                 }
