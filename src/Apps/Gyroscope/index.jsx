@@ -38,17 +38,17 @@ export default function Gyroscope() {
                 let alpha, beta;
                 let gama = accDelta;
                 if (angles.screenOrientationAngle === 90) {
-                    alpha = -angles.roll + Math.PI;
-                    beta = angles.pitch + Math.PI / 2;
+                    alpha = -angles.pitch + Math.PI;
+                    beta = angles.roll + Math.PI / 2;
                 } else if (angles.screenOrientationAngle === 270) {
-                    alpha = -angles.roll + Math.PI;
-                    beta = -angles.pitch + Math.PI / 2;
+                    alpha = -angles.pitch + Math.PI;
+                    beta = -angles.roll + Math.PI / 2;
                 } else if (angles.screenOrientationAngle === 0) {
                     alpha = angles.pitch + Math.PI;
-                    beta = angles.roll + Math.PI / 2;
+                    beta = -angles.roll;
                 } else {
                     alpha = angles.pitch + Math.PI;
-                    beta = -angles.roll + Math.PI / 2;
+                    beta = angles.roll;
                 }
                 externalGimbal.quaternion.w = Math.cos(alpha / 2);
                 externalGimbal.quaternion.y = Math.sin(alpha / 2);
