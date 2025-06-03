@@ -30,7 +30,7 @@ export default function Gyroscope() {
         //Animates 3D model
         //Sensor quaternion values cannot be used directly, they must be converted to euler angles in order to use their individual angles
         //Note that euler angles must be converted back to quaternion in order to prevent Gimbal lock
-        useFrame((delta) => {
+        useFrame((stt, delta) => {
             if (state === "running") {
                 accDelta += delta * 10;
             }
