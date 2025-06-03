@@ -82,7 +82,7 @@ export default function Gyroscope() {
             let newOrientationType = screen.orientation.type;
             let newOrientationAngle = screen.orientation.angle;
             setAngles({...newAngles, newOrientationType, newOrientationAngle});
-            console.log(angles);
+            console.log({...newAngles, newOrientationType, newOrientationAngle});
         }
     };
 
@@ -114,6 +114,7 @@ export default function Gyroscope() {
         return () => {
             if (sensor) {
                 sensor.stop();
+                console.log("stopped sensor");
             }
         }
     },[]);
