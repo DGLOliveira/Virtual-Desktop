@@ -9,7 +9,6 @@ export default function Gyroscope() {
         heading: 0,
         pitch: 0,
         roll: 0,
-        screenOrientationType: screen.orientation.type,
         screenOrientationAngle: screen.orientation.angle
     });
     var sensor = null;
@@ -29,14 +28,26 @@ export default function Gyroscope() {
         //Animates 3D model
         //Sensor quaternion values cannot be used directly, they must be converted to euler angles in order to use their individual angles
         //Note that euler angles must be converted back to quaternion in order to prevent Gimbal lock
-        useFrame((state, delta) => {
+        useFrame((delta) => {
             if (state === "running") {
                 accDelta += delta * 10;
             }
             if (externalGimbal !== undefined && internalGimbal !== undefined && axis !== undefined) {
-                let alpha = angles.roll + Math.PI;
-                let beta = angles.pitch + Math.PI / 2 + accDelta;
+                let alpha, beta;
                 let gama = accDelta;
+                if (angles.screenOrientationAngle === 90) {
+                    alpha = -angles.roll + Math.PI;
+                    beta = angles.pitch + Math.PI / 2;
+                } else if (screenOrientationAngle === 270) {
+                    alpha = -angles.roll + Math.PI;
+                    beta = -angles.pitch + Math.PI / 2;
+                } else if (screenOrientationAngle === 0) {
+                    alpha = angles.pitch + Math.PI;
+                    beta = angles.roll + Math.PI / 2;
+                } else {
+                    alpha = angles.pitch + Math.PI;
+                    beta = -angles.roll + Math.PI / 2;
+                }
                 externalGimbal.quaternion.w = Math.cos(alpha / 2);
                 externalGimbal.quaternion.y = Math.sin(alpha / 2);
                 externalGimbal.quaternion.x = 0;
@@ -79,10 +90,9 @@ export default function Gyroscope() {
                 sensor.quaternion[2],
                 sensor.quaternion[3]
             );
-            let newOrientationType = screen.orientation.type;
             let newOrientationAngle = screen.orientation.angle;
-            setAngles({...newAngles, newOrientationType, newOrientationAngle});
-            console.log({...newAngles, newOrientationType, newOrientationAngle});
+            setAngles({ ...newAngles, newOrientationAngle });
+            console.log({ ...newAngles, newOrientationAngle });
         }
     };
 
@@ -117,7 +127,7 @@ export default function Gyroscope() {
                 console.log("stopped sensor");
             }
         }
-    },[]);
+    }, []);
 
     return (<>
         <Canvas>
