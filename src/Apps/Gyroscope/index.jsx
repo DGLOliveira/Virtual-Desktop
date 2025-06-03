@@ -8,7 +8,9 @@ export default function Gyroscope() {
     const [angles, setAngles] = useState({
         heading: 0,
         pitch: 0,
-        roll: 0
+        roll: 0,
+        screenOrientationType: screen.orientation.type,
+        screenOrientationAngle: screen.orientation.angle
     });
     var sensor = null;
     const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
@@ -25,7 +27,7 @@ export default function Gyroscope() {
         })
         let accDelta = 0;
         //Animates 3D model
-        //Sensor quaternion values cannot be used directly
+        //Sensor quaternion values cannot be used directly, they must be converted to euler angles in order to use their individual angles
         //Note that euler angles must be converted back to quaternion in order to prevent Gimbal lock
         useFrame((state, delta) => {
             if (state === "running") {
@@ -57,11 +59,11 @@ export default function Gyroscope() {
         const heading = Math.atan2(2 * (x * y + z * w), 1 - 2 * (y * y + z * z));
         const pitch = Math.asin(2 * (x * z - w * y));
         const roll = Math.atan2(2 * (x * w + y * z), 1 - 2 * (x * x + y * y));
-        setAngles({
+        return {
             heading: heading,
             pitch: pitch,
             roll: roll,
-        });
+        };
     };
 
     //runs gyroscope
@@ -71,12 +73,16 @@ export default function Gyroscope() {
         sensor.start();
         console.log("gyroscope started");
         sensor.onreading = () => {
-            quaternionToAngles(
+            let newAngles = quaternionToAngles(
                 sensor.quaternion[0],
                 sensor.quaternion[1],
                 sensor.quaternion[2],
                 sensor.quaternion[3]
             );
+            let newOrientationType = screen.orientation.type;
+            let newOrientationAngle = screen.orientation.angle;
+            setAngles({...newAngles, newOrientationType, newOrientationAngle});
+            console.log(angles);
         }
     };
 
@@ -103,6 +109,14 @@ export default function Gyroscope() {
             runGyroscope();
         }
     }, [state]);
+
+    useEffect(() => {
+        return () => {
+            if (sensor) {
+                sensor.stop();
+            }
+        }
+    })
 
     return (<>
         <Canvas>
