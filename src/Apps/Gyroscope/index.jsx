@@ -116,7 +116,7 @@ export default function Gyroscope() {
                 sensor.stop();
             }
         }
-    })
+    },[]);
 
     return (<>
         <Canvas>
