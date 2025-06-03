@@ -3,6 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, OrthographicCamera } from "@react-three/drei";
 import GyroscopeObject from "./Assets/Gyroscope.glb";
 import "./style.css";
+import { set } from "ol/transform";
 export default function Gyroscope() {
     const [state, setState] = useState("ready");
     const [angles, setAngles] = useState({
@@ -12,6 +13,7 @@ export default function Gyroscope() {
         screenOrientationAngle: screen.orientation.angle
     });
     var sensor = null;
+    var zoom = 50;
     const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
 
     //3D model of Gyroscope
@@ -38,10 +40,10 @@ export default function Gyroscope() {
                 if (angles.screenOrientationAngle === 90) {
                     alpha = -angles.roll + Math.PI;
                     beta = angles.pitch + Math.PI / 2;
-                } else if (screenOrientationAngle === 270) {
+                } else if (angles.screenOrientationAngle === 270) {
                     alpha = -angles.roll + Math.PI;
                     beta = -angles.pitch + Math.PI / 2;
-                } else if (screenOrientationAngle === 0) {
+                } else if (angles.screenOrientationAngle === 0) {
                     alpha = angles.pitch + Math.PI;
                     beta = angles.roll + Math.PI / 2;
                 } else {
@@ -130,11 +132,13 @@ export default function Gyroscope() {
     }, []);
 
     return (<>
-        <Canvas>
+        <Canvas
+            id="gyroscopeCanvas"
+        >
             <ambientLight intensity={1} />
             <pointLight position={[-10, -10, 10]} intensity={500} />
             <Gyro />
-            <OrthographicCamera makeDefault={true} zoom={50} position={[0, 0, 10]} />
+            <OrthographicCamera makeDefault={true} zoom={zoom} position={[0, 0, 10]} />
         </Canvas>
         {state === "ready" &&
             <button className="gyroscopeStartButton" onClick={() => setState('start')}>
