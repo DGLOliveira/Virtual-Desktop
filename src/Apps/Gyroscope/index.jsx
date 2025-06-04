@@ -38,11 +38,11 @@ export default function Gyroscope() {
                 let gama = accDelta;
                 console.log(angles);
                 if (angles.screenOrientationAngle === 90) {
-                    alpha = -angles.pitch + Math.PI;
-                    beta = angles.roll + Math.PI / 2;
+                    alpha = angles.roll + Math.PI / 2;
+                    beta = -angles.pitch + Math.PI;
                 } else if (angles.screenOrientationAngle === 270) {
-                    alpha = -angles.pitch + Math.PI;
-                    beta = -angles.roll - Math.PI / 2;
+                    alpha = -angles.roll - Math.PI / 2;
+                    beta = -angles.pitch + Math.PI;
                 } else if (angles.screenOrientationAngle === 0) {
                     alpha = angles.pitch + Math.PI;
                     beta = angles.roll + Math.PI / 2;
