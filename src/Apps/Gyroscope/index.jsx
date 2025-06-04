@@ -37,8 +37,6 @@ export default function Gyroscope() {
                 let alpha, beta;
                 let gama = accDelta;
                 console.log(angles);
-                    alpha = angles.pitch + Math.PI;
-                    beta = -angles.roll + Math.PI / 2;/*
                 if (angles.screenOrientationAngle === 90) {
                     alpha = -angles.pitch + Math.PI;
                     beta = angles.roll + Math.PI / 2;
@@ -46,10 +44,12 @@ export default function Gyroscope() {
                     alpha = -angles.pitch + Math.PI;
                     beta = -angles.roll - Math.PI / 2;
                 } else if (angles.screenOrientationAngle === 0) {
-                } else {
                     alpha = angles.pitch + Math.PI;
                     beta = angles.roll + Math.PI / 2;
-                }*/
+                } else {
+                    alpha = angles.pitch + Math.PI;
+                    beta = -angles.roll + Math.PI / 2;
+                }
                 externalGimbal.quaternion.w = Math.cos(alpha / 2);
                 externalGimbal.quaternion.y = Math.sin(alpha / 2);
                 externalGimbal.quaternion.x = 0;
@@ -93,7 +93,7 @@ export default function Gyroscope() {
                 sensor.quaternion[3]
             );
             let newOrientationAngle = screen.orientation.angle;
-            setAngles({ ...newAngles, newOrientationAngle });
+            setAngles({ ...newAngles, screenOrientationAngle: newOrientationAngle });
         }
     };
 
