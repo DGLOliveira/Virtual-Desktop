@@ -3,7 +3,6 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, OrthographicCamera } from "@react-three/drei";
 import GyroscopeObject from "./Assets/Gyroscope.glb";
 import "./style.css";
-import { set } from "ol/transform";
 export default function Gyroscope() {
     const [state, setState] = useState("ready");
     const [angles, setAngles] = useState({
@@ -37,18 +36,19 @@ export default function Gyroscope() {
             if (externalGimbal !== undefined && internalGimbal !== undefined && axis !== undefined) {
                 let alpha, beta;
                 let gama = accDelta;
+                console.log(angles);
                 if (angles.screenOrientationAngle === 90) {
                     alpha = -angles.pitch + Math.PI;
                     beta = angles.roll + Math.PI / 2;
                 } else if (angles.screenOrientationAngle === 270) {
                     alpha = -angles.pitch + Math.PI;
-                    beta = -angles.roll + Math.PI / 2;
+                    beta = -angles.roll - Math.PI / 2;
                 } else if (angles.screenOrientationAngle === 0) {
                     alpha = angles.pitch + Math.PI;
-                    beta = -angles.roll;
+                    beta = -angles.roll + Math.PI / 2;
                 } else {
                     alpha = angles.pitch + Math.PI;
-                    beta = angles.roll;
+                    beta = angles.roll + Math.PI / 2;
                 }
                 externalGimbal.quaternion.w = Math.cos(alpha / 2);
                 externalGimbal.quaternion.y = Math.sin(alpha / 2);
@@ -94,7 +94,6 @@ export default function Gyroscope() {
             );
             let newOrientationAngle = screen.orientation.angle;
             setAngles({ ...newAngles, newOrientationAngle });
-            console.log({ ...newAngles, newOrientationAngle });
         }
     };
 
