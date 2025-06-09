@@ -1,6 +1,6 @@
 //Generates two spheres that invert their colors when interceptin each other,
 //used to visualize roll and pitch
-export default function DoubleSphere({ pitch, roll, TRANSITION_TIME }) {
+export default function DoubleSphere({ deltaX, deltaY, TRANSITION_TIME }) {
     return (
         <g id="rollPitch" style={{ isolation: "isolate", filter: " invert(100%)" }}>
             <circle
@@ -13,15 +13,15 @@ export default function DoubleSphere({ pitch, roll, TRANSITION_TIME }) {
                 style={{ filter: " invert(100%)" }}
             />
             <circle
-                cx={Math.sin(pitch) * 5 + 100}
-                cy={Math.sin(roll) * 5 + 100}
+                cx={deltaX * 5 + 100}
+                cy={deltaY * 5 + 100}
                 r="5"
                 fill="black"
                 style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }}
             />
             <circle
-                cx={-Math.sin(pitch) * 5.5 + 100}
-                cy={-Math.sin(roll) * 5.5 + 100}
+                cx={-deltaX * 5.5 + 100}
+                cy={-deltaY * 5.5 + 100}
                 r="4.5"
                 fill="black"
                 style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: "invert(100%)" }}

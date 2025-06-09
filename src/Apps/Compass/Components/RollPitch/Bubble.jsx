@@ -1,7 +1,8 @@
 //Generates a bubble and its correct placement to visualize roll and pitch
-export default function Bubble({ pitch, roll, TRANSITION_TIME }) {
-    const deltaX = Math.sin(pitch) * 7;
-    const deltaY = -Math.sin(roll) * 7;
+export default function Bubble({ deltaX, deltaY, TRANSITION_TIME }) {
+    const radius = 7;
+    const shiftX = deltaX * radius;
+    const shiftY = deltaY * radius;
     return (
         <g id="rollPitch" style={{ isolation: "isolate" }}>
             <circle
@@ -13,8 +14,8 @@ export default function Bubble({ pitch, roll, TRANSITION_TIME }) {
                 strokeWidth="2"
             />
             <circle
-                cx={deltaX + 100}
-                cy={deltaY + 100}
+                cx={shiftX + 100}
+                cy={shiftY + 100}
                 r="5"
                 fill="deepskyblue"
                 stroke="black"
@@ -23,10 +24,10 @@ export default function Bubble({ pitch, roll, TRANSITION_TIME }) {
             />
             <path
                 d={
-                    `M ${deltaX + 100.5} ${deltaY + 97.5} 
-                    C ${deltaX + 101.75} ${deltaY + 97.5}, 
-                    ${deltaX + 102.5} ${deltaY + 98.25}, 
-                    ${deltaX + 102.5} ${deltaY + 99.5} `
+                    `M ${shiftX + 100.5} ${shiftY + 97.5} 
+                    C ${shiftX + 101.75} ${shiftY + 97.5}, 
+                    ${shiftX + 102.5} ${shiftY + 98.25}, 
+                    ${shiftX + 102.5} ${shiftY + 99.5} `
                 }
                 stroke="black"
                 strokeWidth="0.5"

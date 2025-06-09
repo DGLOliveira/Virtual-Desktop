@@ -1,7 +1,8 @@
 //Generates two targets that used to visualize roll and pitch
-export default function Target({ pitch, roll, TRANSITION_TIME }) {
-    const deltaX = Math.sin(pitch) * 5;
-    const deltaY = -Math.sin(roll) * 5;
+export default function Target({ deltaX, deltaY, TRANSITION_TIME }) {
+    const radius = 5;
+    const shiftX = deltaX * radius;
+    const shiftY = deltaY * radius;
     return (
         <g id="rollPitch" style={{ isolation: "isolate", filter: " invert(100%)" }}>
             <circle
@@ -18,21 +19,21 @@ export default function Target({ pitch, roll, TRANSITION_TIME }) {
             <line x1="87" y1="100" x2="113" y2="100" stroke="black" strokeWidth="1"
                 style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
             <g>
-                <line x1={101+deltaX} y1={101+deltaY} x2={106+deltaX} y2={101+deltaY} stroke="black" strokeWidth="1"
+                <line x1={101+shiftX} y1={101+shiftY} x2={106+shiftX} y2={101+shiftY} stroke="black" strokeWidth="1"
                     style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
-                <line x1={101+deltaX} y1={101+deltaY} x2={101+deltaX} y2={106+deltaY} stroke="black" strokeWidth="1"
+                <line x1={101+shiftX} y1={101+shiftY} x2={101+shiftX} y2={106+shiftY} stroke="black" strokeWidth="1"
                     style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
-                <line x1={101+deltaX} y1={99+deltaY} x2={101+deltaX} y2={94+deltaY} stroke="black" strokeWidth="1"
+                <line x1={101+shiftX} y1={99+shiftY} x2={101+shiftX} y2={94+shiftY} stroke="black" strokeWidth="1"
                     style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
-                <line x1={101+deltaX} y1={99+deltaY} x2={106+deltaX} y2={99+deltaY} stroke="black" strokeWidth="1"
+                <line x1={101+shiftX} y1={99+shiftY} x2={106+shiftX} y2={99+shiftY} stroke="black" strokeWidth="1"
                     style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
-                <line x1={99+deltaX} y1={101+deltaY} x2={99+deltaX} y2={106+deltaY} stroke="black" strokeWidth="1"
+                <line x1={99+shiftX} y1={101+shiftY} x2={99+shiftX} y2={106+shiftY} stroke="black" strokeWidth="1"
                     style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
-                <line x1={99+deltaX} y1={101+deltaY} x2={94+deltaX} y2={101+deltaY} stroke="black" strokeWidth="1"
+                <line x1={99+shiftX} y1={101+shiftY} x2={94+shiftX} y2={101+shiftY} stroke="black" strokeWidth="1"
                     style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
-                <line x1={99+deltaX} y1={99+deltaY} x2={94+deltaX} y2={99+deltaY} stroke="black" strokeWidth="1"
+                <line x1={99+shiftX} y1={99+shiftY} x2={94+shiftX} y2={99+shiftY} stroke="black" strokeWidth="1"
                     style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
-                <line x1={99+deltaX} y1={99+deltaY} x2={99+deltaX} y2={94+deltaY} stroke="black" strokeWidth="1"
+                <line x1={99+shiftX} y1={99+shiftY} x2={99+shiftX} y2={94+shiftY} stroke="black" strokeWidth="1"
                     style={{ transition: `all ${TRANSITION_TIME}s ease-in-out`, mixBlendMode: "difference", filter: " invert(100%)" }} />
             </g>
         </g>

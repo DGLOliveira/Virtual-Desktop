@@ -49,9 +49,37 @@ export default function Compass(props) {
         Modern: <Modern {...pointerProps} />
     };
 
+    //returns horizontal offset based on screen orientation and pitch/roll angles
+    const getDeltaX = () => {
+        switch (angles.screenOrientationAngle) {
+            case 0:
+                return Math.sin(angles.pitch);
+            case Math.PI / 2:
+                return -Math.sin(angles.roll);
+            case Math.PI:
+                return -Math.sin(angles.pitch);
+            case Math.PI * 3 / 2:
+                return Math.sin(angles.roll);
+        }
+    }
+
+    //returns vertical offset based on screen orientation and pitch/roll angles
+    //Note: Y axis is inverted
+    const getDeltaY = () => {
+        switch (angles.screenOrientationAngle) {
+            case 0:
+                return -Math.sin(angles.roll);
+            case Math.PI / 2:
+                return Math.sin(angles.pitch);
+            case Math.PI:
+                return Math.sin(angles.roll);
+            case Math.PI * 3 / 2:
+                return -Math.sin(angles.pitch);
+        }
+    }
     const rollPitchProps = {
-        pitch: angles.pitch,
-        roll: angles.roll,
+        deltaX: getDeltaX(),
+        deltaY: getDeltaY(),
         TRANSITION_TIME: TRANSITION_TIME
     };
     const ROLLPITCH_COMPONENTS = {
@@ -134,7 +162,7 @@ export default function Compass(props) {
     // cleanup sensor
     useEffect(() => {
         return () => {
-            if (sensor) {
+            if (sensor !== null) {
                 sensor.stop();
                 console.log("stopped sensor");
             }
