@@ -60,6 +60,8 @@ export default function Compass(props) {
                 return -Math.sin(angles.pitch);
             case Math.PI * 3 / 2:
                 return Math.sin(angles.roll);
+            default:
+                return Math.sin(angles.pitch);
         }
     }
 
@@ -70,11 +72,13 @@ export default function Compass(props) {
             case 0:
                 return -Math.sin(angles.roll);
             case Math.PI / 2:
-                return Math.sin(angles.pitch);
+                return -Math.sin(angles.pitch);
             case Math.PI:
                 return Math.sin(angles.roll);
             case Math.PI * 3 / 2:
-                return -Math.sin(angles.pitch);
+                return Math.sin(angles.pitch);
+            default:
+                return -Math.sin(angles.roll);
         }
     }
     const rollPitchProps = {
