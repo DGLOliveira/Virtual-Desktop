@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, OrthographicCamera } from "@react-three/drei";
-import GyroscopeObject from "./Assets/Gyroscope.glb";
+import { useState, useEffect, Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrthographicCamera } from "@react-three/drei";
+import Gyro from "./Components/Gyro.jsx";
 import "./style.css";
+
 export default function Gyroscope() {
     const [state, setState] = useState("ready");
     const [angles, setAngles] = useState({
@@ -16,56 +17,6 @@ export default function Gyroscope() {
     const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
 
     //3D model of Gyroscope
-    const Gyro = () => {
-        const object = useGLTF(GyroscopeObject);
-        const ref = useRef();
-        let externalGimbal, internalGimbal, axis, rotor;
-        object.scene.children.forEach((child) => {
-            child.name === "External_Gimbal" ? (externalGimbal = child) : null;
-            child.name === "Internal_Gimbal" ? (internalGimbal = child) : null;
-            child.name === "Axis" ? (axis = child) : null;
-        })
-        let accDelta = 0;
-        //Animates 3D model
-        //Sensor quaternion values cannot be used directly, they must be converted to euler angles in order to use their individual angles
-        //Note that euler angles must be converted back to quaternion in order to prevent Gimbal lock
-        useFrame((stt, delta) => {
-            if (state === "running") {
-                accDelta += delta * 10;
-            }
-            if (externalGimbal !== undefined && internalGimbal !== undefined && axis !== undefined) {
-                let alpha, beta;
-                let gama = accDelta;
-                console.log(angles);
-                if (angles.screenOrientationAngle === 90) {
-                    alpha = -angles.roll + Math.PI;
-                    beta = angles.pitch + Math.PI/2;
-                } else if (angles.screenOrientationAngle === 270) {
-                    alpha = angles.roll - Math.PI;
-                    beta = -angles.pitch + Math.PI/2;
-                } else if (angles.screenOrientationAngle === 0) {
-                    alpha = angles.pitch + Math.PI;
-                    beta = angles.roll + Math.PI / 2;
-                } else {
-                    alpha = angles.pitch + Math.PI;
-                    beta = -angles.roll + Math.PI / 2;
-                }
-                externalGimbal.quaternion.w = Math.cos(alpha / 2);
-                externalGimbal.quaternion.y = Math.sin(alpha / 2);
-                externalGimbal.quaternion.x = 0;
-                externalGimbal.quaternion.z = 0;
-                internalGimbal.quaternion.w = Math.cos(alpha / 2) * Math.cos(beta / 2);
-                internalGimbal.quaternion.y = Math.sin(alpha / 2) * Math.cos(beta / 2);
-                internalGimbal.quaternion.x = Math.cos(alpha / 2) * Math.sin(beta / 2);
-                internalGimbal.quaternion.z = - Math.sin(alpha / 2) * Math.sin(beta / 2);
-                axis.quaternion.w = Math.cos(alpha / 2) * Math.cos((beta + Math.PI / 2) / 2) * Math.cos(gama / 2) + Math.sin(alpha / 2) * Math.sin((beta + Math.PI / 2) / 2) * Math.sin(gama / 2);
-                axis.quaternion.y = Math.sin(alpha / 2) * Math.cos((beta + Math.PI / 2) / 2) * Math.cos(gama / 2) - Math.cos(alpha / 2) * Math.sin((beta + Math.PI / 2) / 2) * Math.sin(gama / 2);
-                axis.quaternion.x = Math.cos(alpha / 2) * Math.sin((beta + Math.PI / 2) / 2) * Math.cos(gama / 2) + Math.sin(alpha / 2) * Math.cos((beta + Math.PI / 2) / 2) * Math.sin(gama / 2);
-                axis.quaternion.z = Math.cos(alpha / 2) * Math.cos((beta + Math.PI / 2) / 2) * Math.sin(gama / 2) - Math.sin(alpha / 2) * Math.sin((beta + Math.PI / 2) / 2) * Math.cos(gama / 2);
-            }
-        })
-        return <primitive ref={ref} object={object.scene} scale={1.6} />
-    }
 
     //converts quaternion to angles in radians
     function quaternionToAngles(x, y, z, w) {
@@ -136,7 +87,9 @@ export default function Gyroscope() {
         >
             <ambientLight intensity={1} />
             <pointLight position={[-10, -10, 10]} intensity={500} />
-            <Gyro />
+            <Suspense fallback={null}>
+                <Gyro state={state} angles={angles} />
+            </Suspense>
             <OrthographicCamera makeDefault={true} zoom={zoom} position={[0, 0, 10]} />
         </Canvas>
         {state === "ready" &&
