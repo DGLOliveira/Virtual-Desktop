@@ -30,7 +30,8 @@ export default function Compass(props) {
         heading: 0,
         pitch: 0,
         roll: 0,
-        cumulativeRotation: Math.PI * 2
+        cumulativeRotation: Math.PI * 2,
+        screenOrientationAngle: screen.orientation.angle * (Math.PI / 180)
     });
     var sensor = null;
     const SENSOR_UPDATE_FREQUENCY = 4; //keep value low to avoid battery drain
@@ -38,7 +39,7 @@ export default function Compass(props) {
 
     const pointerProps = {
         TRANSITION_TIME: TRANSITION_TIME,
-        rotation: angles.heading + angles.cumulativeRotation
+        rotation: angles.heading + angles.cumulativeRotation - angles.screenOrientationAngle
     };
     const POINTERS_COMPONENTS = {
         RoseFull: <RoseFull {...pointerProps} />,
@@ -76,12 +77,12 @@ export default function Compass(props) {
         else if (angles.heading > 0 && heading < 0) {
             cumulativeRotation -= Math.PI * 2;
         }
-        setAngles({
+        return {
             heading: heading,
             pitch: pitch,
             roll: roll,
             cumulativeRotation: cumulativeRotation
-        });
+        }
     };
 
     // start absolute orientation sensors
@@ -91,12 +92,17 @@ export default function Compass(props) {
         sensor.start();
         console.log("sensor started");
         sensor.onreading = () => {
-            quaternionToAngles(
+            let newAngles = quaternionToAngles(
                 sensor.quaternion[0],
                 sensor.quaternion[1],
                 sensor.quaternion[2],
                 sensor.quaternion[3]
             );
+            let newScreenOrientationAngle = screen.orientation.angle * (Math.PI / 180);
+            setAngles({
+                ...newAngles,
+                screenOrientationAngle: newScreenOrientationAngle
+            });
         }
     };
 
