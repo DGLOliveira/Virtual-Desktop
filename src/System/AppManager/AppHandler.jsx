@@ -4,11 +4,13 @@ For each App that is currently open, this component generates a window for it.
 
 import { useContext } from "react";
 import { AppContext } from "./Context/context.jsx";
+import { DeviceContext } from "../DeviceManager/context.jsx";
 import { AppBody } from "./Components/AppBody.jsx";
 import "./Styles/Window.css";
 
 export function AppHandler() {
   const appContext = useContext(AppContext);
+  const deviceContext = useContext(DeviceContext);
 
   return (
     <>
@@ -17,10 +19,18 @@ export function AppHandler() {
         <app-window
           style={{
             zIndex: appContext.apps[name].Location.zIndex,
-            top: appContext.apps[name].Location.Current.top,
-            left: appContext.apps[name].Location.Current.left,
-            width: appContext.apps[name].Size.Current.width,
-            height: appContext.apps[name].Size.Current.height,
+            top: deviceContext.deviceMode !== "Desktop"
+              ? "0"
+              : appContext.apps[name].Location.Current.top,
+            left: deviceContext.deviceMode !== "Desktop"
+              ? "0"
+              : appContext.apps[name].Location.Current.left,
+            width: deviceContext.deviceMode !== "Desktop"
+              ? "100%"
+              : appContext.apps[name].Size.Current.width,
+            height: deviceContext.deviceMode !== "Desktop"
+              ? "100%"
+              : appContext.apps[name].Size.Current.height,
             backgroundColor: appContext.apps[name].State.isSelected
               ? "var(--WindowBkgrColor)"
               : "var(--WindowBkgrColorInactive)",

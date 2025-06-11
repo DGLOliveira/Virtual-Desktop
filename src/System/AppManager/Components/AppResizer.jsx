@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../Context/context.jsx";
+import { DeviceContext } from "../../DeviceManager/context.jsx";
 
 import "../Styles/Resizer.css";
 
 export const AppResizer = ({ appName }) => {
     const appContext = useContext(AppContext);
+    const deviceContext = useContext(DeviceContext);
     const [startPos, setStartPos] = useState({ x: 0, y: 0 });
     const [startWindowPos, setStartWindowPos] = useState({ x: 0, y: 0 });
     const [startSize, setStartSize] = useState({ x: 0, y: 0 });
@@ -61,6 +63,7 @@ export const AppResizer = ({ appName }) => {
     return <>
         {!appContext.apps[appName].State.isMaximized &&
             !appContext.apps[appName].State.isMinimized &&
+            deviceContext.deviceMode === "Desktop" &&
             <>{
                 directions.map((direction) => {
                     return (

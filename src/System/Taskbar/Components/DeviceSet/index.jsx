@@ -19,8 +19,8 @@ export const DeviceSet = () => {
 
     function changeDeviceMode() {
         if(device.deviceMode === "Desktop") {
-            device.setDeviceMode("smartTV");
-        }else if(device.deviceMode === "smartTV") {
+            device.setDeviceMode("TV");
+        }else if(device.deviceMode === "TV") {
             device.setDeviceMode("Tablet");
         }else if(device.deviceMode === "Tablet") {
             device.setDeviceMode("Mobile");
