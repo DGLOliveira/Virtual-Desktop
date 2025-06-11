@@ -21,13 +21,13 @@ export function DeviceProvider({ children }) {
             browser[child.id] = child.attributes["data-info"].nodeValue;});
         //Set device mode based on browser data
         switch(device["Type"]){
-            case "Tablet":
+            case "tablet":
                 setDeviceMode("Tablet");
                 break;
-            case "Mobile":
+            case "mobile":
                 setDeviceMode("Mobile");
                 break;
-            case "smartTV":
+            case "smarttv":
                 setDeviceMode("TV");
                 break;
             default:

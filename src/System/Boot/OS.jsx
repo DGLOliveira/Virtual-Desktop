@@ -1,5 +1,5 @@
 //Sets up the Computer window
-import DeviceProvider from "./../DeviveManager/context.jsx";
+import DeviceProvider from "../DeviceManager/context.jsx";
 import ThemeProvider from "./../ThemeManager/context.jsx";
 import FileProvider from "./../FileManager/context.jsx";
 import AppProvider from "./../AppManager/Context/context.jsx";
