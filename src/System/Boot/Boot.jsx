@@ -23,27 +23,33 @@ export default function Boot() {
     titleElement.append(title + " Specs:");
     container.append(titleElement);
     const listElement = document.createElement("ul");
+    listElement.setAttribute("id", title + "Specs");
     container.append(listElement);
     Object.keys(info).forEach((key) => {
       const listItem = document.createElement("li");
       listItem.setAttribute("id", key);
       let text = "";
+      let data = "";
       if (typeof info[key] === "object") {
         let flag = false;
         text = key + ": ";
         Object.keys(info[key]).forEach((subkey) => {
           if (info[key][subkey] !== "Unknown") {
             text += info[key][subkey] + " ";
+            data += info[key][subkey] + " ";
             flag = true;
           };
         });
         if (!flag) {
           text += "Unknown";
+          data = "Unknown";
         }
       } else {
+        data = info[key];
         text = key + ": " + info[key];
       }
       listItem.append(text);
+      listItem.setAttribute("data-info", data);
       listElement.append(listItem);
     });
   }
