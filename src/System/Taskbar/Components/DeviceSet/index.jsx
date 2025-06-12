@@ -11,27 +11,27 @@ export const DeviceSet = () => {
     const device = useContext(DeviceContext);
 
     const deviceIcons = {
-        "Desktop": <TbDeviceDesktop title="Device Mode: Desktop"/>,
-        "TV": <TbDeviceTv title="Device Mode: Smart TV"/>,
-        "Mobile": <TbDeviceMobile title="Device Mode: Mobile"/>,
-        "Tablet": <TbDeviceTablet title="Device Mode: Tablet"/>
+        "Desktop": <TbDeviceDesktop title="Device Type: Desktop"/>,
+        "TV": <TbDeviceTv title="Device Type: Smart TV"/>,
+        "Mobile": <TbDeviceMobile title="Device Type: Mobile"/>,
+        "Tablet": <TbDeviceTablet title="Device Type: Tablet"/>
     }
 
-    function changeDeviceMode() {
-        if(device.deviceMode === "Desktop") {
-            device.setDeviceMode("TV");
-        }else if(device.deviceMode === "TV") {
-            device.setDeviceMode("Tablet");
-        }else if(device.deviceMode === "Tablet") {
-            device.setDeviceMode("Mobile");
-        }else if(device.deviceMode === "Mobile") {
-            device.setDeviceMode("Desktop");
+    function changeDeviceType() {
+        if(device.deviceType === "Desktop") {
+            device.setDeviceType("TV");
+        }else if(device.deviceType === "TV") {
+            device.setDeviceType("Tablet");
+        }else if(device.deviceType === "Tablet") {
+            device.setDeviceType("Mobile");
+        }else if(device.deviceType === "Mobile") {
+            device.setDeviceType("Desktop");
         }
     }
 
     return(<>
-        <button onClick={changeDeviceMode}>
-            {deviceIcons[device.deviceMode]}
+        <button onClick={changeDeviceType}>
+            {deviceIcons[device.deviceType]}
         </button>
     </>)
 }

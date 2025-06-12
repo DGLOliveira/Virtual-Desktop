@@ -63,7 +63,7 @@ export const AppResizer = ({ appName }) => {
     return <>
         {!appContext.apps[appName].State.isMaximized &&
             !appContext.apps[appName].State.isMinimized &&
-            deviceContext.deviceMode === "Desktop" &&
+            deviceContext.deviceType === "Desktop" &&
             <>{
                 directions.map((direction) => {
                     return (

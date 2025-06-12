@@ -5,6 +5,9 @@ import Classic from "./Themes/Classic.json";
 import Aero from "./Themes/Aero.json";
 
 export const ThemeContext = createContext({
+    mode: "",
+    setMode: () => { },
+    modeList: [],
     theme: "",
     themeList: [],
     setTheme: () => { },
@@ -41,6 +44,9 @@ export const ThemeContext = createContext({
 });
 
 export function ThemeProvider({ children }) {
+
+    const [mode, setMode] = useState("System");
+    const modeList = ["Light", "Dark", "System", "None"];
 
     const [theme, setTheme] = useState("Default");
     const themeList = ["Default", "Aero", "Aqua", "Classic"];
@@ -187,6 +193,9 @@ export function ThemeProvider({ children }) {
     useEffect(() => {switchFX("TaskbarWindow", taskbarWindowBackgroundFX);}, [taskbarWindowBackgroundFX]);
 
     const contextValue = {
+        mode,
+        modeList,
+        setMode,
         theme,
         themeList,
         setTheme,

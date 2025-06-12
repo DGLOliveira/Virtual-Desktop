@@ -3,14 +3,16 @@ import { useState, useEffect, createContext } from "react";
 export const DeviceContext = createContext({
     device: {},
     browser: {},
-    deviceMode: "Desktop",
-    setDeviceMode: () => {}
+    deviceType: "Desktop",
+    setDeviceType: () => {},
+    deviceTypeList: [],
 });
 
 export function DeviceProvider({ children }) {
     let device = {};
     let browser = {};
-    const [deviceMode, setDeviceMode] = useState("Desktop");
+    const [deviceType, setDeviceType] = useState("Desktop");
+    const deviceTypeList = ["Desktop", "TV", "Mobile", "Tablet"];
 
     useEffect(() => {
         //Populate device and browser info from initial boot screen
@@ -19,19 +21,19 @@ export function DeviceProvider({ children }) {
         });
         Array.from(document.getElementById("BrowserSpecs").children).forEach((child) => {
             browser[child.id] = child.attributes["data-info"].nodeValue;});
-        //Set device mode based on browser data
+        //Set device Type based on browser data
         switch(device["Type"]){
             case "tablet":
-                setDeviceMode("Tablet");
+                setDeviceType("Tablet");
                 break;
             case "mobile":
-                setDeviceMode("Mobile");
+                setDeviceType("Mobile");
                 break;
             case "smarttv":
-                setDeviceMode("TV");
+                setDeviceType("TV");
                 break;
             default:
-                setDeviceMode("Desktop");
+                setDeviceType("Desktop");
                 break;
         }
     }, []);
@@ -39,8 +41,9 @@ export function DeviceProvider({ children }) {
   const contextValue = {
     device,
     browser,
-    deviceMode,
-    setDeviceMode
+    deviceType,
+    setDeviceType,
+    deviceTypeList
   };
 
   return (

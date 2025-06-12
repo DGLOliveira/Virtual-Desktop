@@ -23,7 +23,7 @@ export const AppTopBar = ({ appName, title, setAction }) => {
 
     const dragWindow = (event, appName) => {
         event.preventDefault();
-        if(deviceContext.deviceMode !== "Desktop") return;
+        if(deviceContext.deviceType !== "Desktop") return;
         setCursor("grabbing");
         let x, y;
         if (!appContext.apps[appName].isMaximized) {
@@ -44,7 +44,7 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         setCursor("grab");
     };
     const dragStart = (event, appName) => {
-        if(deviceContext.deviceMode !== "Desktop") return;
+        if(deviceContext.deviceType !== "Desktop") return;
         let windowX = appContext.apps[appName].Location.Current.left;
         let windowY = appContext.apps[appName].Location.Current.top;
         let x, y;
@@ -67,7 +67,7 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         contextMenu.setOpen();
         contextMenu.setPosition(e.clientX, e.clientY);
         let content = {};
-        if (deviceContext.deviceMode === "Desktop") {
+        if (deviceContext.deviceType === "Desktop") {
             if (!appContext.apps[appName].State.isMaximized) {
                 content = {
                     "Minimize": { action: () => { appContext.switchMinimized(appName); } },
@@ -175,10 +175,10 @@ export const AppTopBar = ({ appName, title, setAction }) => {
                     ? "var(--WindowTopBarFontColor)" : "var(--WindowTopBarFontColorInactive)",
                 backgroundColor: appContext.apps[appName].State.isSelected
                     ? "var(--WindowTopBarBkgrColor)" : "var(--WindowTopBarBkgrColorInactive)",
-                cursor: appContext.apps[appName].State.isMaximized || deviceContext.deviceMode !== "Desktop"
+                cursor: appContext.apps[appName].State.isMaximized || deviceContext.deviceType !== "Desktop"
                     ? "default" : cursor
             }}
-            draggable={!appContext.apps[appName].State.isMaximized && deviceContext.deviceMode === "Desktop"}
+            draggable={!appContext.apps[appName].State.isMaximized && deviceContext.deviceType === "Desktop"}
             onDragStart={(e) => dragStart(e, appName)}
             onDrag={(e) => dragWindow(e, appName)}
             onDragEnd={(e) => dragWindow(e, appName)}
@@ -201,7 +201,7 @@ export const AppTopBar = ({ appName, title, setAction }) => {
                     )}
                     title="Minimize (Alt + ⇩)"
                 >{minimizeContent[themeContext.theme]}</button>
-                {deviceContext.deviceMode === "Desktop" &&
+                {deviceContext.deviceType === "Desktop" &&
                     (appContext.apps[appName].State.isMaximized ? (
                         <button
                             className={restoreClass[themeContext.theme]}

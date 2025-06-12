@@ -19,16 +19,16 @@ export function AppHandler() {
         <app-window
           style={{
             zIndex: appContext.apps[name].Location.zIndex,
-            top: deviceContext.deviceMode !== "Desktop"
+            top: deviceContext.deviceType !== "Desktop"
               ? "0"
               : appContext.apps[name].Location.Current.top,
-            left: deviceContext.deviceMode !== "Desktop"
+            left: deviceContext.deviceType !== "Desktop"
               ? "0"
               : appContext.apps[name].Location.Current.left,
-            width: deviceContext.deviceMode !== "Desktop"
+            width: deviceContext.deviceType !== "Desktop"
               ? "100%"
               : appContext.apps[name].Size.Current.width,
-            height: deviceContext.deviceMode !== "Desktop"
+            height: deviceContext.deviceType !== "Desktop"
               ? "100%"
               : appContext.apps[name].Size.Current.height,
             backgroundColor: appContext.apps[name].State.isSelected
