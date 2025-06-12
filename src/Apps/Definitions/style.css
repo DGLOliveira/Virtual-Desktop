@@ -18,16 +18,65 @@ settings-container>nav>* {
   justify-content: left;
   text-align: start;
   align-items: center;
+}
+
+.defSubMenu {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: 0.3s;
+  max-height: 100%;
+  overflow-x: hidden;
+}
+
+.defSubMenuHidden{
+  max-height:0;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.defSubMenu>*{
+  border-left:5px solid;
+  margin-left:5px;
+}
+
+.defSubMenu:hover{
+  background:none;
+}
+
+.defMenu {
+  display: flex;
+  justify-content: space-around;
+}
+
+.defMenuButton {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: left;
+  text-align: start;
+  align-items: center;
   padding: 4px;
   padding-left: 10px;
   padding-right: 10px;
   border-bottom: 1px  solid;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-settings-container>nav>*:hover {
+.defMenuButton:hover {
   background: rgb(140, 140, 140);
-  cursor: pointer;
 }
+
+.defMenuButtonON {
+  background: white;
+  color: black;
+}
+
+/*------------------------------------------*/
+/*------------------------------------------*/
+/*------------------------------------------*/
 
 settings-container>form {
   width: 100%;
@@ -154,12 +203,9 @@ settings-container>form>fieldset>fieldset>fieldset>div>label{
   position: sticky;
   top:0;
   left:0;
-  width:95%;
   height:200px;
   display: flex;
   box-sizing: border-box;
-  flex-shrink: 0;
-  justify-self: space-around;
   border: 1px  solid;
   border-radius: 5px;
   background-color: var(--DesktopBkgrColor);
@@ -170,29 +216,6 @@ settings-container>form>fieldset>fieldset>fieldset>div>label{
   background-attachment: var(--DesktopBkgrAttachment);
   overflow: hidden;
   margin: 10px;
-  margin-right:50px;
-}
-
-.defMenu {
-  display: flex;
-  justify-content: space-around;
-}
-
-.defMenuButton {
-  padding: 5px;
-  border: 2px white solid;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.defMenuButton:hover {
-  background: white;
-  color: black;
-}
-
-.defMenuButtonON {
-  background: white;
-  color: black;
 }
 
 @media (max-width: 600px) {

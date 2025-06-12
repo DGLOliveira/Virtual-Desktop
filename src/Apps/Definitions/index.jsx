@@ -22,107 +22,55 @@ export default function Definitions() {
   const [subMenu, setSubMenu] = useState("none");
   const [defPage, setDefPage] = useState("Global");
   const background = useContext(BackgroundContext);
+  const menuList = [
+    "Global",
+    "Desktop",
+    ["Taskbar",["Taskbar", "Start", "StartMenu", "LiveApps"]],
+    ["Windows",["Window", "Menu", "App", "Dialog"]],
+    "Tray",
+    "ContextMenu",
+  ];
   return (
     <settings-container>
       <nav>
-        <div
-          onClick={() => { setDefPage("Global"); setSubMenu("none") }}
-          className={defPage === "Global" ? "defMenuButtonON" : ""}
-        >
-          Global
-        </div>
-        <div
-          onClick={() => { setDefPage("Desktop"); setSubMenu("none") }}
-          className={defPage === "Desktop" ? "defMenuButtonON" : ""}
-        >
-          Desktop
-        </div>
-        <div
-          onClick={() => { setDefPage("Taskbar"); setSubMenu("Taskbar") }}
-          className={subMenu === "Taskbar" ? "defMenuButtonON" : ""}
-        >
-          Taskbar
-        </div>
-        {subMenu === "Taskbar" &&
-          <>
-            <div
-              onClick={() => setDefPage("Taskbar")}
-              className={defPage === "Taskbar" ? "defMenuButtonON" : ""}
-            >
-              {">"}Taskbar
-            </div>
-            <div
-              onClick={() => setDefPage("Start")}
-              className={defPage === "Start" ? "defMenuButtonON" : ""}
-            >
-              {">"}Start
-            </div>
-            <div
-              onClick={() => setDefPage("StartMenu")}
-              className={defPage === "StartMenu" ? "defMenuButtonON" : ""}
-            >
-              {">"}Menu
-            </div>
-            <div
-              onClick={() => setDefPage("LiveApps")}
-              className={defPage === "LiveApps" ? "defMenuButtonON" : ""}
-            >
-              {">"}Live Apps
-            </div>
-            <div
-              onClick={() => setDefPage("Tray")}
-              className={defPage === "Tray" ? "defMenuButtonON" : ""}
-            >
-              {">"}Tray
-            </div>
-            <div
-              onClick={() => setDefPage("TrayWindow")}
-              className={defPage === "TrayWindow" ? "defMenuButtonON" : ""}
-            >
-              {">"}Tray Window
-            </div>
-          </>
-        }
-        <div
-          onClick={() => { setDefPage("Window"); setSubMenu("Window") }}
-          className={subMenu === "Window" ? "defMenuButtonON" : ""}
-        >
-          Windows
-        </div>
-        {subMenu === "Window" &&
-          <>
-            <div
-              onClick={() => setDefPage("Window")}
-              className={defPage === "Window" ? "defMenuButtonON" : ""}
-            >
-              {">"}Window
-            </div>
-            <div
-              onClick={() => setDefPage("Menu")}
-              className={defPage === "Menu" ? "defMenuButtonON" : ""}
-            >
-              {">"}Menu
-            </div>
-            <div
-              onClick={() => setDefPage("App")}
-              className={defPage === "App" ? "defMenuButtonON" : ""}
-            >
-              {">"}App
-            </div>
-            <div
-              onClick={() => setDefPage("Dialog")}
-              className={defPage === "Dialog" ? "defMenuButtonON" : ""}
-            >
-              {">"}Dialog
-            </div>
-          </>
-        }
-        <div
-          onClick={() => {setDefPage("ContextMenu"); setSubMenu("none")}}
-          className={defPage === "ContextMenu" ? "defMenuButtonON" : ""}
-        >
-          Context Menu
-        </div>
+        {menuList.map((menu, index) => {
+          if (typeof menu !== "string") {
+            return (
+              <>
+                <div
+                  key={index}
+                  className={subMenu === menu[0] ? "defMenuButton defMenuButtonON" : "defMenuButton"}
+                  onClick={() => {setDefPage(menu[0]);setSubMenu(menu[0])}}
+                >{menu[0]}
+                </div>
+                <div
+                  key={index+"sub"}
+                  className={subMenu === menu[0] ? "defSubMenu" : "defSubMenu defSubMenuHidden"}
+                >
+                  {menu[1].map((submenu, index) => (
+                    <div
+                      key={index}
+                      className={defPage === submenu ? "defMenuButton defMenuButtonON" : "defMenuButton"}
+                      onClick={() => setDefPage(submenu)}
+                    >
+                      {submenu}
+                    </div>
+                  ))}
+                </div>
+              </>
+            );
+          } else {
+            return (
+              <div
+                key={index}
+                className={defPage === menu ? "defMenuButton defMenuButtonON" : "defMenuButton"}
+                onClick={() => {setDefPage(menu); setSubMenu("none")}}
+              >
+                {menu}
+              </div>
+            );
+          }
+        })}
       </nav>
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="defPreview">
@@ -146,17 +94,13 @@ export default function Definitions() {
         {defPage === "Start" ? <Start /> : <></>}
         {defPage === "StartMenu" ? <StartMenu /> : <></>}
         {defPage === "LiveApps" ? <LiveApps /> : <></>}
-        {defPage === "Tray" ? <Tray /> : <></>}        
+        {defPage === "Tray" ? <Tray /> : <></>}
         {defPage === "TrayWindow" ? <TrayWindow /> : <></>}
         {defPage === "Window" ? <Window /> : <></>}
         {defPage === "App" ? <App /> : <></>}
         {defPage === "Menu" ? <Menu /> : <></>}
         {defPage === "Dialog" ? <Dialog /> : <></>}
         {defPage === "ContextMenu" ? <ContextMenu /> : <></>}
-        <br />
-        <br />
-        <br />
-        <br />
       </form>
     </settings-container>
   );
