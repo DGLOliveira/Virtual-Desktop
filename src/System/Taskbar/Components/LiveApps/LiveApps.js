@@ -39,7 +39,7 @@ export const LiveApps = () => {
         case "Aqua":
           ans = "liveAppsAqua";
           break;
-        case "Default":
+        case "Fluent":
         default:
           ans = "liveAppsFluent";
           break;

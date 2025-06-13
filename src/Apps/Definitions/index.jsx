@@ -25,10 +25,10 @@ export default function Definitions() {
   const menuList = [
     "Global",
     "Desktop",
-    ["Taskbar",["Taskbar", "Start", "StartMenu", "LiveApps"]],
+    ["Taskbar",["Taskbar", "Start", "Start Menu", "Live Apps"]],
     ["Windows",["Window", "Menu", "App", "Dialog"]],
     "Tray",
-    "ContextMenu",
+    "Context Menu",
   ];
   return (
     <settings-container>

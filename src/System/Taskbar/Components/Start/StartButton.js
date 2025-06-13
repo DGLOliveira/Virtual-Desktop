@@ -44,7 +44,7 @@ export const StartButton = () => {
       case "Aqua":
         ans = "startButtonAqua";
         break;
-      case "Default":
+      case "Fluent":
       default:
         ans = "startButtonFluent";
         break;

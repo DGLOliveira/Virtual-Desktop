@@ -120,49 +120,49 @@ export const AppTopBar = ({ appName, title, setAction }) => {
     }, [handleKeybinds]);
 
     const minimizeClass = {
-        "Default": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
+        "Fluent": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
         "Aero": "appTopBarButtonAero appTopBarButtonAeroMinimize",
         "Aqua": "appTopBarButtonAqua appTopBarButtonAquaGreen",
         "Classic": "appTopBarButtonClassic"
     }
     const minimizeContent = {
-        "Default": <FaRegWindowMinimize />,
+        "Fluent": <FaRegWindowMinimize />,
         "Aero": <FaRegWindowMinimize />,
         "Aqua": "-",
         "Classic": <FaRegWindowMinimize />
     }
     const maximizeClass = {
-        "Default": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
+        "Fluent": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
         "Aero": "appTopBarButtonAero appTopBarButtonAeroMaximize",
         "Aqua": "appTopBarButtonAqua appTopBarButtonAquaYellow",
         "Classic": "appTopBarButtonClassic"
     }
     const maximizeContent = {
-        "Default": <FaWindowMaximize />,
+        "Fluent": <FaWindowMaximize />,
         "Aero": <FaWindowMaximize />,
         "Aqua": "+",
         "Classic": <FaWindowMaximize />
     }
     const restoreClass = {
-        "Default": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
+        "Fluent": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
         "Aero": "appTopBarButtonAero appTopBarButtonAeroMaximize",
         "Aqua": "appTopBarButtonAqua appTopBarButtonAquaYellow",
         "Classic": "appTopBarButtonClassic"
     }
     const restoreContent = {
-        "Default": <FaWindowRestore />,
+        "Fluent": <FaWindowRestore />,
         "Aero": <FaWindowRestore />,
         "Aqua": "+",
         "Classic": <FaWindowRestore />
     }
     const closeClass = {
-        "Default": "appTopBarButtonFluent appTopBarButtonFluentHoverRed",
+        "Fluent": "appTopBarButtonFluent appTopBarButtonFluentHoverRed",
         "Aero": "appTopBarButtonAero appTopBarButtonAeroClose",
         "Aqua": "appTopBarButtonAqua appTopBarButtonAquaRed",
         "Classic": "appTopBarButtonClassic"
     }
     const closeContent = {
-        "Default": <AiOutlineClose />,
+        "Fluent": <AiOutlineClose />,
         "Aero": <RiCloseLargeLine />,
         "Aqua": "x",
         "Classic": <RiCloseLargeLine />

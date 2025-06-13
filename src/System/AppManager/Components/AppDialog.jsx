@@ -25,7 +25,7 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                 setButtonClassSuggested("appDialogButtonClassic");
                 setButtonClassClose("appDialogButtonClassic");
                 break;
-            default:
+            case "Fluent":
                 setButtonClassNeutral("appDialogButtonFluent");
                 setButtonClassSuggested("appDialogButtonFluent");
                 setButtonClassClose("appDialogButtonFluent buttonActiveRed");
