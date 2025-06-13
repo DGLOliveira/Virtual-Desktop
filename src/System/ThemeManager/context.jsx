@@ -228,7 +228,7 @@ export function ThemeProvider({ children }) {
         }
     };
 
-    useEffect(() => {switchTheme(theme);}, [theme]);
+    useEffect(() => {switchTheme(theme);}, [theme, mode]);
 
     useEffect(() => {switchFX("Window", windowBackgroundFX);}, [windowBackgroundFX]);
     useEffect(() => {switchFX("Dialog", dialogBackgroundFX);}, [dialogBackgroundFX]);

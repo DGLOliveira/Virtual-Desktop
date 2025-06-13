@@ -78,29 +78,29 @@ export default function Definitions() {
           {defPage === "Desktop" ? <DesktopPreview /> : <></>}
           {defPage === "Taskbar" ? <TaskBarPreview /> : <></>}
           {defPage === "Start" ? <StartPreview /> : <></>}
-          {defPage === "StartMenu" ? <StartMenuPreview /> : <></>}
-          {defPage === "LiveApps" ? <LiveAppsPreview /> : <></>}
+          {defPage === "Start Menu" ? <StartMenuPreview /> : <></>}
+          {defPage === "Live Apps" ? <LiveAppsPreview /> : <></>}
           {defPage === "Tray" ? <TrayPreview /> : <></>}
-          {defPage === "TrayWindow" ? <TrayWindowPreview /> : <></>}
+          {defPage === "Tray Window" ? <TrayWindowPreview /> : <></>}
           {defPage === "Window" ? <WindowPreview /> : <></>}
           {defPage === "Menu" ? <MenuPreview /> : <></>}
           {defPage === "App" ? <AppPreview /> : <></>}
           {defPage === "Dialog" ? <DialogPreview /> : <></>}
-          {defPage === "ContextMenu" ? <ContextMenuPreview /> : <></>}
+          {defPage === "Context Menu" ? <ContextMenuPreview /> : <></>}
         </div>
         {defPage === "Global" ? <Global /> : <></>}
         {defPage === "Desktop" ? <Desktop /> : <></>}
         {defPage === "Taskbar" ? <TaskBar /> : <></>}
         {defPage === "Start" ? <Start /> : <></>}
-        {defPage === "StartMenu" ? <StartMenu /> : <></>}
-        {defPage === "LiveApps" ? <LiveApps /> : <></>}
+        {defPage === "Start Menu" ? <StartMenu /> : <></>}
+        {defPage === "Live Apps" ? <LiveApps /> : <></>}
         {defPage === "Tray" ? <Tray /> : <></>}
-        {defPage === "TrayWindow" ? <TrayWindow /> : <></>}
+        {defPage === "Tray Window" ? <TrayWindow /> : <></>}
         {defPage === "Window" ? <Window /> : <></>}
         {defPage === "App" ? <App /> : <></>}
         {defPage === "Menu" ? <Menu /> : <></>}
         {defPage === "Dialog" ? <Dialog /> : <></>}
-        {defPage === "ContextMenu" ? <ContextMenu /> : <></>}
+        {defPage === "Context Menu" ? <ContextMenu /> : <></>}
       </form>
     </settings-container>
   );
