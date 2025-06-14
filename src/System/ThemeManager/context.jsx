@@ -51,6 +51,10 @@ export function ThemeProvider({ children }) {
 
     const [mode, setMode] = useState("System");
     const modeList = ["Light", "Dark", "System"];
+    const [systemDarkMode, setSystemDarkMode] = useState(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
+        event.matches ? setSystemDarkMode(true) : setSystemDarkMode(false);
+    });
 
     const [theme, setTheme] = useState("Fluent");
     const themeList = ["Fluent", "Aero", "Aqua", "Classic"];
@@ -115,7 +119,7 @@ export function ThemeProvider({ children }) {
                 } else if(mode === "Dark") {
                     Object.keys(ClassicDark).forEach((key) => changeRootStyle(key, ClassicDark[key]));
                 } else if(mode === "System") {
-                    if(window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    if(systemDarkMode) {
                         Object.keys(ClassicDark).forEach((key) => changeRootStyle(key, ClassicDark[key]));
                     } else {
                         Object.keys(ClassicLight).forEach((key) => changeRootStyle(key, ClassicLight[key]));
@@ -229,6 +233,7 @@ export function ThemeProvider({ children }) {
     };
 
     useEffect(() => {switchTheme(theme);}, [theme, mode]);
+    useEffect(() => {if(mode==="System") switchTheme(theme);}, [systemDarkMode]);
 
     useEffect(() => {switchFX("Window", windowBackgroundFX);}, [windowBackgroundFX]);
     useEffect(() => {switchFX("Dialog", dialogBackgroundFX);}, [dialogBackgroundFX]);
