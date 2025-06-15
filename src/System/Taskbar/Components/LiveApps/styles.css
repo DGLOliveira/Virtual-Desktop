@@ -1,3 +1,11 @@
+/*------------------------------------------------------------*/
+/*------------------------------------------------------------*/
+/*------------------------------------------------------------*/
+/*-------------------Desktop Version--------------------------*/
+/*------------------------------------------------------------*/
+/*------------------------------------------------------------*/
+/*------------------------------------------------------------*/
+
 live-apps {
     display: flex;
     flex-direction: row;
@@ -30,7 +38,7 @@ live-apps>button>svg {
 live-apps>button>span {
     display: var(--LiveAppsFontVisibility);
     font-size: var(--LiveAppsFontSize);
-    margin-left:2px;
+    margin-left: 2px;
 }
 
 live-apps>button:hover:enabled {
@@ -70,11 +78,11 @@ live-apps>button:active:enabled {
 }
 
 .liveAppsAquaActive::before {
-    content:"▲";
+    content: "▲";
     font-size: 16px;
     position: absolute;
-    bottom:0;
-    color:black;
+    bottom: 0;
+    color: black;
     text-shadow: 0 0 4px white;
 }
 
@@ -82,7 +90,7 @@ live-apps>button:active:enabled {
 /*------------------------Aero Button-------------------------*/
 /*------------------------------------------------------------*/
 
-.liveAppsAero{
+.liveAppsAero {
     box-shadow: 0 0 3px hsla(0, 0%, 100%, 0.5) inset;
     background-image: linear-gradient(170deg, hsla(0, 0%, 100%, 0.75) 2%, hsla(0, 0%, 100%, 0.4) 15%, transparent 40%, hsla(0, 0%, 100%, 0.1) 90%);
 }
@@ -91,6 +99,95 @@ live-apps>button:active:enabled {
     background-color: var(--LiveAppsBkgrActive);
 }
 
-.liveAppsAero>svg{
+.liveAppsAero>svg {
     filter: drop-shadow(0 0 2px hsla(0, 0%, 0%, 0.5));
+}
+
+/*------------------------------------------------------------*/
+/*------------------------------------------------------------*/
+/*------------------------------------------------------------*/
+/*--------------------Mobile Version--------------------------*/
+/*------------------------------------------------------------*/
+/*------------------------------------------------------------*/
+/*------------------------------------------------------------*/
+
+live-apps-button {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: var(--LiveAppsFontColor);
+    background-color: var(--LiveAppsBkgr);
+    margin: var(--LiveAppsMargin);
+    border: var(--LiveAppsBorderWidth) var(--LiveAppsBorderColor) var(--LiveAppsBorderType);
+    border-radius: var(--LiveAppsBorderRadius);
+}
+
+live-apps-button>button {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: var(--LiveAppsIconSize);
+    width: var(--LiveAppsIconSize);
+    margin: 0;
+    padding: 0;
+}
+
+live-apps-button>button>div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+live-apps-button>button:hover:enabled{
+    background: none;
+}
+
+live-apps-button-circle {
+    width: calc(var(--LiveAppsIconSize)/3);
+    height: calc(var(--LiveAppsIconSize)/3);
+    border-radius: 50%;
+    border: 1px dimgray solid;
+    background: transparent;
+    transition: 0.15s;
+}
+
+
+live-apps-button:hover>button>div:first-child>live-apps-button-circle:first-child {
+    background-color: hsla(0, 100%, 50%, 1);
+}
+
+live-apps-button:hover>button>div:first-child>live-apps-button-circle:last-child {
+    background-color: hsla(120, 61%, 50%, 1);
+}
+
+live-apps-button:hover>button>div:last-child>live-apps-button-circle:first-child {
+    background-color: hsla(240, 100%, 50%, 1);
+}
+
+live-apps-button:hover>button>div:last-child>live-apps-button-circle:last-child {
+    background-color: hsla(0, 0%, 100%, 1);
+}
+
+.live-apps-button-circle-off{
+    background-color: transparent;
+}
+
+.live-apps-button-circle-red{
+    background-color: hsla(0, 100%, 50%, 1);
+}
+.live-apps-button-circle-blue{
+    background-color: hsla(240, 100%, 50%, 1);
+}
+.live-apps-button-circle-green{
+    background-color: hsla(120, 61%, 50%, 1);
+}
+.live-apps-button-circle-white{
+    background-color: hsla(0, 0%, 100%, 1);
 }
