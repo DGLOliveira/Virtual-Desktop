@@ -25,49 +25,49 @@ export const Desktop = () => {
   );
   useEffect(() => {
     root.style.setProperty("--DesktopBkgrColor", desktopBkgrColor);
-  },[desktopBkgrColor]);
-    //----------------------------------------------------------------------------//
+  }, [desktopBkgrColor]);
+  //----------------------------------------------------------------------------//
   const [desktopBkgrImage, setDesktopBkgrImage] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrImage"),
   );
   useEffect(() => {
     root.style.setProperty("--DesktopBkgrImage", desktopBkgrImage);
-  },[desktopBkgrImage]);
+  }, [desktopBkgrImage]);
   //----------------------------------------------------------------------------//
   const [desktopBkgrSize, setDesktopBkgrSize] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrSize"),
   );
   useEffect(() => {
     root.style.setProperty("--DesktopBkgrSize", desktopBkgrSize);
-  },[desktopBkgrSize]);
+  }, [desktopBkgrSize]);
   //----------------------------------------------------------------------------//
   const [desktopBkgrPosition, setDesktopBkgrPosition] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrPosition"),
   );
   useEffect(() => {
     root.style.setProperty("--DesktopBkgrPosition", desktopBkgrPosition);
-  },[desktopBkgrPosition]);
+  }, [desktopBkgrPosition]);
   //----------------------------------------------------------------------------//
   const [desktopBkgrRepeat, setDesktopBkgrRepeat] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopBkgrRepeat"),
   );
   useEffect(() => {
     root.style.setProperty("--DesktopBkgrRepeat", desktopBkgrRepeat);
-  },[desktopBkgrRepeat]);
+  }, [desktopBkgrRepeat]);
   //----------------------------------------------------------------------------//
   const [desktopFontSize, setDesktopFontSize] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopFontSize").slice(0, -2),
   );
   useEffect(() => {
     root.style.setProperty("--DesktopFontSize", desktopFontSize + "px");
-  },[desktopFontSize]);
+  }, [desktopFontSize]);
   //----------------------------------------------------------------------------//
   const [desktopIconSize, setDesktopIconSize] = useState(
     getComputedStyle(root).getPropertyValue("--DesktopIconSize").slice(0, -2),
   );
   useEffect(() => {
     root.style.setProperty("--DesktopIconSize", desktopIconSize + "px");
-  },[desktopIconSize]);
+  }, [desktopIconSize]);
   //----------------------------------------------------------------------------//
 
   //Upload Image
@@ -122,101 +122,110 @@ export const Desktop = () => {
           </div></legend>
         {backgroundMenu === "color" ? (
           <>
-            <div
+            <button
               className={
                 background.state.active === "color"
-                  ? "defMenuButton defMenuButtonON"
-                  : "defMenuButton"
+                  ? "defFormButtonON"
+                  : "defFormButton"
               }
               onClick={() => background.setActive("color")}
             >
               Use Simple Color
-            </div>
-            <label>Set Background Color: </label>
-            <ColorPicker
-              color={desktopBkgrColor}
-              setColor={setDesktopBkgrColor}
-              useAlpha={false}
-            />
+            </button>
+            <div>
+              <label>Set Background Color: </label>
+              <ColorPicker
+                color={desktopBkgrColor}
+                setColor={setDesktopBkgrColor}
+                useAlpha={false}
+              /></div>
           </>
         ) : (
           <></>
         )}
         {backgroundMenu === "image" ? (
           <>
-            <div
+            <button
               className={
                 background.state.active === "image"
-                  ? "defMenuButton defMenuButtonON"
-                  : "defMenuButton"
+                  ? "defFormButtonON"
+                  : "defFormButton"
               }
               onClick={() => background.setActive("image")}
             >
               Use Image
+            </button>
+            <div>
+              <label htmlFor="imageUpload">Upload Image: </label>
+              <input
+                id="imageUpload"
+                type="file"
+                accept="image/*"
+                onChange={(e) => { uploadImage(e.target.files[0]) }} />
             </div>
-            <label htmlFor="imageUpload">Upload Image: </label>
-            <input
-              id="imageUpload"
-              type="file"
-              accept="image/*"
-              onChange={(e) => { uploadImage(e.target.files[0]) }} />
-            <label htmlFor="imagePosition">Position: </label>
-            <select id="imagePosition"
-              value={background.state.image.position}
-              onChange={(e) => {
-                background.setImage(
-                  background.state.image.file,
-                  e.target.value,
-                  background.state.image.size,
-                  background.state.image.repeat
-                );
-                setDesktopBkgrPosition(e.target.value);
-              }}>
-              <option value="top">Top</option>
-              <option value="left top">Top Left</option>
-              <option value="right top">Top Right</option>
-              <option value="center">Center</option>
-              <option value="bottom">Bottom</option>
-              <option value="left bottom">Bottom Left</option>
-              <option value="right bottom">Bottom Right</option>
-              <option value="left">Left</option>
-              <option value="right">Right</option>
-            </select>
-            <label htmlFor="imageSize">Size: </label>
-            <select id="imageSize"
-              value={background.state.image.size}
-              onChange={(e) => {
-                background.setImage(
-                  background.state.image.file,
-                  background.state.image.position,
-                  e.target.value,
-                  background.state.image.repeat
-                );
-                setDesktopBkgrSize(e.target.value);
-              }}>
-              <option value="auto">Auto</option>
-              <option value="contain">Contain</option>
-              <option value="cover">Cover</option>
-              <option value="100vw 100vh">Stretch</option>
-            </select>
-            <label htmlFor="imageRepeat">Repeat: </label>
-            <select id="imageRepeat"
-              value={background.state.image.repeat}
-              onChange={(e) => {
-                background.setImage(
-                  background.state.image.file,
-                  background.state.image.position,
-                  background.state.image.size,
-                  e.target.value
-                );
-                setDesktopBkgrRepeat(e.target.value);
-              }}
-            >
-              <option value="no-repeat">No Repeat</option>
-              <option value="repeat">Repeat</option>
-              <option value="repeat-x">Repeat X</option>
-              <option value="repeat-y">Repeat Y</option>
-            </select>
+            <div>
+              <label htmlFor="imagePosition">Position: </label>
+              <select id="imagePosition"
+                value={background.state.image.position}
+                onChange={(e) => {
+                  background.setImage(
+                    background.state.image.file,
+                    e.target.value,
+                    background.state.image.size,
+                    background.state.image.repeat
+                  );
+                  setDesktopBkgrPosition(e.target.value);
+                }}>
+                <option value="top">Top</option>
+                <option value="left top">Top Left</option>
+                <option value="right top">Top Right</option>
+                <option value="center">Center</option>
+                <option value="bottom">Bottom</option>
+                <option value="left bottom">Bottom Left</option>
+                <option value="right bottom">Bottom Right</option>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="imageSize">Size: </label>
+              <select id="imageSize"
+                value={background.state.image.size}
+                onChange={(e) => {
+                  background.setImage(
+                    background.state.image.file,
+                    background.state.image.position,
+                    e.target.value,
+                    background.state.image.repeat
+                  );
+                  setDesktopBkgrSize(e.target.value);
+                }}>
+                <option value="auto">Auto</option>
+                <option value="contain">Contain</option>
+                <option value="cover">Cover</option>
+                <option value="100vw 100vh">Stretch</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="imageRepeat">Repeat: </label>
+              <select id="imageRepeat"
+                value={background.state.image.repeat}
+                onChange={(e) => {
+                  background.setImage(
+                    background.state.image.file,
+                    background.state.image.position,
+                    background.state.image.size,
+                    e.target.value
+                  );
+                  setDesktopBkgrRepeat(e.target.value);
+                }}
+              >
+                <option value="no-repeat">No Repeat</option>
+                <option value="repeat">Repeat</option>
+                <option value="repeat-x">Repeat X</option>
+                <option value="repeat-y">Repeat Y</option>
+              </select>
+            </div>
           </>
         ) : (
           <></>
@@ -224,21 +233,21 @@ export const Desktop = () => {
         {backgroundMenu === "Shader" ? <></> : <></>}
         {backgroundMenu === "scenario" ? (
           <>
-            <div
+            <button
               className={
                 background.state.active === "scenario"
-                  ? "defMenuButton defMenuButtonON"
-                  : "defMenuButton"
+                  ? "defFormButtonON"
+                  : "defFormButton"
               }
               onClick={() => background.setActive("scenario")}
             >
               Use Scenario
-            </div>
+            </button>
             <fieldset>
               <legend
-              style={{cursor:"pointer"}}
-              onClick={() => background.setScenario("sun", "isActive", !background.state["scenario"]["sun"].isActive)}
-              > 
+                style={{ cursor: "pointer" }}
+                onClick={() => background.setScenario("sun", "isActive", !background.state["scenario"]["sun"].isActive)}
+              >
                 <input
                   type="checkbox"
                   checked={background.state["scenario"]["sun"].isActive}
@@ -347,7 +356,7 @@ export const Desktop = () => {
                 <label>Color:</label>
                 <ColorPicker
                   color={background.state["scenario"]["ambientLight"].color}
-                  setColor={(color) => 
+                  setColor={(color) =>
                     background.setScenario("ambientLight", "color", color)}
                   useAlpha={false}
                 />
@@ -380,12 +389,12 @@ export const Desktop = () => {
               <legend>Directional Light</legend>
               <div>
                 <label>Color:</label>
-                    <ColorPicker
-                      color={background.state["scenario"]["directionalLight"].color}
-                      setColor={(color) => 
-                        background.setScenario("directionalLight", "color", color)}
-                      useAlpha={false}
-                    />
+                <ColorPicker
+                  color={background.state["scenario"]["directionalLight"].color}
+                  setColor={(color) =>
+                    background.setScenario("directionalLight", "color", color)}
+                  useAlpha={false}
+                />
               </div>
               <div>
                 <label>Intensity:</label>
@@ -408,9 +417,9 @@ export const Desktop = () => {
               </div>
             </fieldset>
             <fieldset>
-              <legend 
-              style={{cursor:"pointer"}}
-              onClick={() => background.setScenario("stars", "isActive", !background.state["scenario"]["stars"].isActive)}
+              <legend
+                style={{ cursor: "pointer" }}
+                onClick={() => background.setScenario("stars", "isActive", !background.state["scenario"]["stars"].isActive)}
               >
                 <input
                   type="checkbox"
@@ -436,9 +445,9 @@ export const Desktop = () => {
                 </>}
             </fieldset>
             <fieldset>
-              <legend 
-              style={{cursor:"pointer"}}
-              onClick={() => background.setScenario("fog", "isActive", !background.state["scenario"]["fog"].isActive)}>
+              <legend
+                style={{ cursor: "pointer" }}
+                onClick={() => background.setScenario("fog", "isActive", !background.state["scenario"]["fog"].isActive)}>
                 <input
                   type="checkbox"
                   checked={background.state["scenario"]["fog"].isActive}
@@ -508,16 +517,16 @@ export const Desktop = () => {
               <legend> Terrain </legend>
               <div>
                 <label>Sea:</label>
-                <input type="checkbox" 
-                checked={background.state["scenario"]["ocean"].isActive} 
-                onChange={() => background.setScenario("ocean", "isActive", !background.state["scenario"]["ocean"].isActive)}
+                <input type="checkbox"
+                  checked={background.state["scenario"]["ocean"].isActive}
+                  onChange={() => background.setScenario("ocean", "isActive", !background.state["scenario"]["ocean"].isActive)}
                 />
               </div>
               <div>
                 <label>Dunes:</label>
-                <input type="checkbox" 
-                checked={background.state["scenario"]["desert"].isActive} 
-                onChange={() => background.setScenario("desert", "isActive", !background.state["scenario"]["desert"].isActive)}
+                <input type="checkbox"
+                  checked={background.state["scenario"]["desert"].isActive}
+                  onChange={() => background.setScenario("desert", "isActive", !background.state["scenario"]["desert"].isActive)}
                 />
               </div>
             </fieldset>

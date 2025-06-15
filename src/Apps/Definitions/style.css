@@ -29,19 +29,19 @@ settings-container>nav>* {
   overflow-x: hidden;
 }
 
-.defSubMenuHidden{
-  max-height:0;
+.defSubMenuHidden {
+  max-height: 0;
   overflow: hidden;
   transition: 0.3s;
 }
 
-.defSubMenu>*{
-  border-left:5px solid;
-  margin-left:5px;
+.defSubMenu>* {
+  border-left: 5px solid;
+  margin-left: 5px;
 }
 
-.defSubMenu:hover{
-  background:none;
+.defSubMenu:hover {
+  background: none;
 }
 
 .defMenu {
@@ -59,7 +59,7 @@ settings-container>nav>* {
   padding: 4px;
   padding-left: 10px;
   padding-right: 10px;
-  border-bottom: 1px  solid;
+  border-bottom: 1px solid;
   box-sizing: border-box;
   cursor: pointer;
   transition: 0.3s;
@@ -78,6 +78,63 @@ settings-container>nav>* {
 /*------------------------------------------*/
 /*------------------------------------------*/
 
+.defFormButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+  background: black;
+}
+
+.defFormButton:hover {
+  background: dimgray;
+  color: white;
+}
+
+.defFormButton:active {
+  background: white;
+  color: black;
+}
+
+.defFormButton:hover:active {
+  background: white;
+  color: black;
+}
+
+.defFormButtonON {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: 0.3s;
+  background: white;
+  color: black;
+}
+.defFormButtonON:hover:enabled {
+  background: white;
+  color: black;
+}
+.defFormButtonON:active:enabled {
+  background: white;
+  color: black;
+}
+.defFormButtonON:hover:active:enabled {
+  background: white;
+  color: black;
+}
+
 settings-container>form {
   width: 100%;
   height: 100%;
@@ -93,12 +150,12 @@ settings-container>form>fieldset {
 }
 
 settings-container>form>fieldset>legend {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 5px;
-  border: 1px  solid;
+  border: 1px solid;
   border-radius: 5px;
   font-weight: bold;
 }
@@ -108,18 +165,18 @@ settings-container>form>fieldset>div {
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  width:fit-content;
+  width: fit-content;
   margin: 5px;
   padding: 5px;
-  border-bottom: 1px  solid;
+  border-bottom: 1px solid;
   border-radius: 5px;
 }
 
-settings-container>form>fieldset>div>label{
-  display:flex;
+settings-container>form>fieldset>div>label {
+  display: flex;
   justify-content: start;
   align-items: center;
-  width:200px;
+  width: 200px;
 }
 
 settings-container>form>fieldset>fieldset {
@@ -131,12 +188,12 @@ settings-container>form>fieldset>fieldset {
 }
 
 settings-container>form>fieldset>fieldset>legend {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 5px;
-  border: 1px  solid;
+  border: 1px solid;
   border-radius: 5px;
   font-weight: bold;
 }
@@ -146,20 +203,21 @@ settings-container>form>fieldset>fieldset>div {
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  width:fit-content;
+  width: fit-content;
   margin: 5px;
   padding: 5px;
-  border-bottom: 1px  solid;
+  border-bottom: 1px solid;
   border-radius: 5px;
 
 }
 
-settings-container>form>fieldset>fieldset>div>label{
-  display:flex;
+settings-container>form>fieldset>fieldset>div>label {
+  display: flex;
   justify-content: start;
   align-items: center;
-  width:200px;
+  width: 200px;
 }
+
 settings-container>form>fieldset>fieldset>fieldset {
   display: flex;
   flex-direction: column;
@@ -169,12 +227,12 @@ settings-container>form>fieldset>fieldset>fieldset {
 }
 
 settings-container>form>fieldset>fieldset>fieldset>legend {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 5px;
-  border: 1px  solid;
+  border: 1px solid;
   border-radius: 5px;
   font-weight: bold;
 }
@@ -184,29 +242,29 @@ settings-container>form>fieldset>fieldset>fieldset>div {
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  width:fit-content;
+  width: fit-content;
   margin: 5px;
   padding: 5px;
-  border-bottom: 1px  solid;
+  border-bottom: 1px solid;
   border-radius: 5px;
 
 }
 
-settings-container>form>fieldset>fieldset>fieldset>div>label{
-  display:flex;
+settings-container>form>fieldset>fieldset>fieldset>div>label {
+  display: flex;
   justify-content: start;
   align-items: center;
-  width:200px;
+  width: 200px;
 }
 
 .defPreview {
   position: sticky;
-  top:0;
-  left:0;
-  height:200px;
+  top: 0;
+  left: 0;
+  height: 200px;
   display: flex;
   box-sizing: border-box;
-  border: 1px  solid;
+  border: 1px solid;
   border-radius: 5px;
   background-color: var(--DesktopBkgrColor);
   background-image: var(--DesktopBkgrImage);

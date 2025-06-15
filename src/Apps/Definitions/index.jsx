@@ -26,7 +26,7 @@ export default function Definitions() {
     "Global",
     "Desktop",
     ["Taskbar",["Taskbar", "Start", "Start Menu", "Live Apps"]],
-    ["Windows",["Window", "Menu", "App", "Dialog"]],
+    ["Window",["Window", "Menu", "App", "Dialog"]],
     ["Tray",["Tray", "Tray Window"]],
     "Context Menu",
   ];
