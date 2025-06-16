@@ -1,0 +1,78 @@
+{
+    "Fluent": {
+        "Mode": {
+            "Light": "Fluent/Root_Light.json",
+            "Dark": "Fluent/Root_Dark.json"
+        },
+        "FX": {
+            "Backgrounds": {
+                "Window": "None",
+                "Dialog": "None",
+                "Taskbar": "None",
+                "TaskbarWindow": "None",
+                "StartMenu": "None"
+            }
+        },
+        "Locations": {
+            "NavMenu": "in top bar",
+            "DialogButtons": "in window"
+        }
+    },
+    "Aero": {
+        "Mode": {
+            "Light": "Aero/Root_Light.json",
+            "Dark": "Aero/Root_Dark.json"
+        },
+        "FX": {
+            "Backgrounds": {
+                "Window": "Translucent",
+                "Dialog": "Translucent",
+                "Taskbar": "Translucent",
+                "TaskbarWindow": "Translucent",
+                "StartMenu": "Translucent"
+            }
+        },
+        "Locations": {
+            "NavMenu": "in app",
+            "DialogButtons": "in window"
+        }
+    },
+    "Aqua": {
+        "Mode": {
+            "Light": "Aqua/Root_Light.json",
+            "Dark": "Aqua/Root_Dark.json"
+        },
+        "FX": {
+            "Backgrounds": {
+                "Window": "Metallic",
+                "Dialog": "Metallic",
+                "Taskbar": "Metallic",
+                "TaskbarWindow": "Metallic",
+                "StartMenu": "Metallic"
+            }
+        },
+        "Locations": {
+            "NavMenu": "in top bar",
+            "DialogButtons": "in window"
+        }
+    },
+    "Classic": {
+        "Mode": {
+            "Light": "Classic/Root_Light.json",
+            "Dark": "Classic/Root_Dark.json"
+        },
+        "FX": {
+            "Backgrounds": {
+                "Window": "None",
+                "Dialog": "None",
+                "Taskbar": "None",
+                "TaskbarWindow": "None",
+                "StartMenu": "None"
+            }
+        },
+        "Locations": {
+            "NavMenu": "in top bar",
+            "DialogButtons": "in info container"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "Backgrounds":{
+        "Metallic":"Metallic.json",
+        "Translucent":"Translucent.json",
+        "None":"None.json"
+    }
+}

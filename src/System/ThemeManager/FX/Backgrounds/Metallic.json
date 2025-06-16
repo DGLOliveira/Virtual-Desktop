@@ -1,0 +1,7 @@
+{
+  "BkgrImage": "-webkit-repeating-linear-gradient(top, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0)   6%, hsla(0,0%,100%, .05) 7%),-webkit-repeating-linear-gradient(top, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   4%, hsla(0,0%,  0%,.03) 4.25%),-webkit-repeating-linear-gradient(top, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.07) 1.8%),-webkit-repeating-linear-gradient(45deg, hsla(0, 0%, 100%, 0.1) 0%, hsla(0, 0%, 0%, 0.1) 10%, hsla(0, 0%, 100%, 0.1) 20%)",
+  "BkgrPosition": "top left",
+  "BkgrRepeat": "repeat",
+  "BkgrSize": "contain",
+  "BackdropFilter": "none"
+}

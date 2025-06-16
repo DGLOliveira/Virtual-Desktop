@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import registery from "./registery.json";
+import themeRegistry from "./Themes/registry.json";
+import fxRegistry from "./FX/registry.json";
 
 export const ThemeContext = createContext({
     mode: "",
@@ -48,71 +49,56 @@ export function ThemeProvider({ children }) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
         event.matches ? setSystemDarkMode(true) : setSystemDarkMode(false);
     });
-
-    const [theme, setTheme] = useState("Fluent");
+    const DEFAULT_THEME = "Fluent";
+    const [theme, setTheme] = useState(DEFAULT_THEME);
     const themeList = [];
 
-    const [startButtonTheme, setStartButtonTheme] = useState("Fluent");
+    const [startButtonTheme, setStartButtonTheme] = useState(DEFAULT_THEME);
     const startButtonThemeList = [];
 
-    const [liveAppsTheme, setLiveAppsTheme] = useState("Fluent");
+    const [liveAppsTheme, setLiveAppsTheme] = useState(DEFAULT_THEME);
     const liveAppsThemeList = [];
 
-    const [topBarIconTheme, setTopBarIconTheme] = useState("Fluent");
+    const [topBarIconTheme, setTopBarIconTheme] = useState(DEFAULT_THEME);
     const topBarIconThemeList = [];
 
-    const [dialogButtonTheme, setDialogButtonTheme] = useState("Fluent");
+    const [dialogButtonTheme, setDialogButtonTheme] = useState(DEFAULT_THEME);
     const dialogButtonThemeList = [];
 
-    // Populate theme lists with registery
-    Object.keys(registery).forEach((value, _key) => {
+    // Populate theme lists with themeRegistry keys
+    Object.keys(themeRegistry).forEach((value, _key) => {
         themeList.push(value);
         startButtonThemeList.push(value);
         liveAppsThemeList.push(value);
         topBarIconThemeList.push(value);
         dialogButtonThemeList.push(value);
     });
+    
+    const [windowBackgroundFX, setWindowBackgroundFX] =
+        useState(themeRegistry[theme]["FX"]["Backgrounds"]["Window"]);
+    const [dialogBackgroundFX, setDialogBackgroundFX] =
+        useState(themeRegistry[theme]["FX"]["Backgrounds"]["Dialog"]);
+    const [taskbarBackgroundFX, setTaskbarBackgroundFX] =
+        useState(themeRegistry[theme]["FX"]["Backgrounds"]["Taskbar"]);
+    const [taskbarWindowBackgroundFX, setTaskbarWindowBackgroundFX] =
+        useState(themeRegistry[theme]["FX"]["Backgrounds"]["TaskbarWindow"]);
+    const [startMenuBackgroundFX, setStartMenuBackgroundFX] =
+        useState(themeRegistry[theme]["FX"]["Backgrounds"]["StartMenu"]);
 
     const [dialogButtonsLocation, setDialogButtonsLocation] = useState("in window");
     const dialogButtonsLocationList = ["in info container", "in window"];
-
-    const [windowBackgroundFX, setWindowBackgroundFX] = useState("none");
-    const [dialogBackgroundFX, setDialogBackgroundFX] = useState("none");
-    const [taskbarBackgroundFX, setTaskbarBackgroundFX] = useState("none");
-    const [startMenuBackgroundFX, setStartMenuBackgroundFX] = useState("none");
-    const [taskbarWindowBackgroundFX, setTaskbarWindowBackgroundFX] = useState("none");
-
     const [navMenuLocation, setNavMenuLocation] = useState("in top bar");
     const navMenuLocationList = ["in app", "in top bar"];
 
-    const backgroundFXList = ["None", "Metallic", "Translucent"];
-    const MetallicFX = {
-        BkgrImage: "var(--MetallicFXBkgrImage)",
-        BkgrPosition: "var(--MetallicFXBkgrPosition)",
-        BkgrSize: "var(--MetallicFXBkgrSize)",
-        BkgrRepeat: "var(--MetallicFXBkgrRepeat)",
-        BackdropFilter: "var(--MetallicFXBackdropFilter)",
-    };
-    // Translucent FX needs to be refined
-    const TranslucentFX = {
-        BkgrImage: "var(--TranslucentFXBkgrImage)",
-        BkgrPosition: "var(--TranslucentFXBkgrPosition)",
-        BkgrSize: "var(--TranslucentFXBkgrSize)",
-        BkgrRepeat: "var(--TranslucentFXBkgrRepeat)",
-        BackdropFilter: "var(--TranslucentFXBackdropFilter)",
-    };
-    const NoneFX = {
-        BkgrImage: "none",
-        BkgrPosition: "none",
-        BkgrSize: "none",
-        BkgrRepeat: "none",
-        BackdropFilter: "none",
-    };
+    const backgroundFXList = [];
+    Object.keys(fxRegistry["Backgrounds"]).forEach((value, _key) => {
+        backgroundFXList.push(value);
+    });
 
     //Imports new root variables from specified theme folder
     function getNewRootVars(value, darkmode) {
         return new Promise((resolve) => {
-            resolve(import(`./Themes/${value}/Root_${darkmode}.json`));
+            resolve(import(`./Themes/${themeRegistry[value]["Mode"][darkmode]}`));
         })
     };
     //Changes root variables according to imported json
@@ -135,64 +121,26 @@ export function ThemeProvider({ children }) {
         setLiveAppsTheme(value);
         setTopBarIconTheme(value);
         setDialogButtonTheme(value);
-        switch (value) {
-            case "Classic":
-                setWindowBackgroundFX("None");
-                setDialogBackgroundFX("None");
-                setTaskbarBackgroundFX("None");
-                setTaskbarWindowBackgroundFX("None");
-                setStartMenuBackgroundFX("None");
-                setNavMenuLocation("in top bar");
-                setDialogButtonsLocation("in info container");
-                break;
-            case "Aqua":
-                setWindowBackgroundFX("Metallic");
-                setDialogBackgroundFX("Metallic");
-                setTaskbarBackgroundFX("Metallic");
-                setStartMenuBackgroundFX("Metallic");
-                setTaskbarWindowBackgroundFX("Metallic");
-                setNavMenuLocation("in top bar");
-                setDialogButtonsLocation("in window");
-                break;
-            case "Aero":
-                setWindowBackgroundFX("Translucent");
-                setDialogBackgroundFX("Translucent");
-                setTaskbarBackgroundFX("Translucent");
-                setTaskbarWindowBackgroundFX("Translucent");
-                setStartMenuBackgroundFX("Translucent");
-                setNavMenuLocation("in app");
-                setDialogButtonsLocation("in info container");
-                break;
-            case "Fluent":
-                setWindowBackgroundFX("None");
-                setDialogBackgroundFX("None");
-                setTaskbarBackgroundFX("None");
-                setTaskbarWindowBackgroundFX("None");
-                setStartMenuBackgroundFX("None");
-                setNavMenuLocation("in top bar");
-                setDialogButtonsLocation("in window");
-                break;
-        }
+        setWindowBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["Window"]);
+        setDialogBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["Dialog"]);
+        setTaskbarBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["Taskbar"]);
+        setTaskbarWindowBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["TaskbarWindow"]);
+        setStartMenuBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["StartMenu"]);
+        setNavMenuLocation(themeRegistry[value]["Locations"]["NavMenu"]);
+        setDialogButtonsLocation(themeRegistry[value]["Locations"]["DialogButtons"]);
     };
 
-    const changeRootStyleFX = (target, property, value) => {
-        document.querySelector(":root").style.setProperty(`--${target}${property}`, value);
-    };
-    const switchFX = (target, value) => {
-        switch (value) {
-            case "Metallic":
-                Object.keys(MetallicFX).forEach((key) => changeRootStyleFX(target, key, MetallicFX[key]));
-                break;
-            case "Translucent":
-                Object.keys(TranslucentFX).forEach((key) => changeRootStyleFX(target, key, TranslucentFX[key]));
-                break;
-            case "None":
-                Object.keys(NoneFX).forEach((key) => changeRootStyleFX(target, key, NoneFX[key]));
-                break;
-            default:
-                Object.keys(NoneFX).forEach((key) => changeRootStyleFX(target, key, NoneFX[key]));
-                break;
-        }
+    function getFXvalues(value) {
+        return new Promise((resolve) => {
+            resolve(import(`./FX/Backgrounds/${fxRegistry["Backgrounds"][value]}`));
+        })
+    }
+
+    async function switchFX(target, value) {
+        const newFX = await getFXvalues(value);
+        Object.keys(newFX).forEach((key) => 
+            document.querySelector(":root").style.setProperty(`--${target}${key}`, newFX[key])
+        );
     };
 
     useEffect(() => { switchTheme(theme); }, [theme, mode]);
