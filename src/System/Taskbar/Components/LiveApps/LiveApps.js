@@ -4,7 +4,6 @@ import { ThemeContext } from "../../../ThemeManager/context.jsx";
 import { ContextMenuContext } from "../../../ContextMenuManager/context.jsx";
 import { AppContext } from "../../../AppManager/Context/context.jsx";
 import { AppIcon } from "../../../AppManager/Components/AppIcon.jsx";
-import { HiSquares2X2 } from "react-icons/hi2";
 import "./styles.css";
 
 export const LiveApps = () => {

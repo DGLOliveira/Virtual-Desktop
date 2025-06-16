@@ -1,0 +1,18 @@
+{
+    "Fluent":{
+        "Light": "Fluent/Root_Light.json",
+        "Dark": "Fluent/Root_Dark.json"
+    },
+    "Aero":{
+        "Light": "Aero/Root_Light.json",
+        "Dark": "Aero/Root_Dark.json"
+    },
+    "Aqua":{
+        "Light": "Aqua/Root_Light.json",
+        "Dark": "Aqua/Root_Dark.json"
+    },
+    "Classic":{
+        "Light": "Classic/Root_Light.json",
+        "Dark": "Classic/Root_Dark.json"
+    }
+}

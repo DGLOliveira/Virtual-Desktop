@@ -1,12 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import AquaDark from "./Themes/Aqua/Root_Dark.json";
-import AquaLight from "./Themes/Aqua/Root_Light.json";
-import FluentDark from "./Themes/Fluent/Root_Dark.json";
-import FluentLight from "./Themes/Fluent/Root_Light.json";
-import ClassicDark from "./Themes/Classic/Root_Dark.json";
-import ClassicLight from "./Themes/Classic/Root_Light.json";
-import AeroDark from "./Themes/Aero/Root_Dark.json";
-import AeroLight from "./Themes/Aero/Root_Light.json";
+import registery from "./registery.json";
 
 export const ThemeContext = createContext({
     mode: "",
@@ -57,19 +50,28 @@ export function ThemeProvider({ children }) {
     });
 
     const [theme, setTheme] = useState("Fluent");
-    const themeList = ["Fluent", "Aero", "Aqua", "Classic"];
+    const themeList = [];
 
     const [startButtonTheme, setStartButtonTheme] = useState("Fluent");
-    const startButtonThemeList = ["Fluent", "Aero", "Aqua", "Classic"];
+    const startButtonThemeList = [];
 
     const [liveAppsTheme, setLiveAppsTheme] = useState("Fluent");
-    const liveAppsThemeList = ["Fluent", "Aero", "Aqua", "Classic"];
+    const liveAppsThemeList = [];
 
     const [topBarIconTheme, setTopBarIconTheme] = useState("Fluent");
-    const topBarIconThemeList = ["Fluent", "Aero", "Aqua", "Classic"];
+    const topBarIconThemeList = [];
 
     const [dialogButtonTheme, setDialogButtonTheme] = useState("Fluent");
-    const dialogButtonThemeList = ["Fluent", "Aero", "Aqua", "Classic"];
+    const dialogButtonThemeList = [];
+
+    // Populate theme lists with registery
+    Object.keys(registery).forEach((value, _key) => {
+        themeList.push(value);
+        startButtonThemeList.push(value);
+        liveAppsThemeList.push(value);
+        topBarIconThemeList.push(value);
+        dialogButtonThemeList.push(value);
+    });
 
     const [dialogButtonsLocation, setDialogButtonsLocation] = useState("in window");
     const dialogButtonsLocationList = ["in info container", "in window"];
@@ -107,28 +109,34 @@ export function ThemeProvider({ children }) {
         BackdropFilter: "none",
     };
 
-    const changeRootStyle = (property, value) => {
-        document.querySelector(":root").style.setProperty(`${property}`, value);
+    //Imports new root variables from specified theme folder
+    function getNewRootVars(value, darkmode) {
+        return new Promise((resolve) => {
+            resolve(import(`./Themes/${value}/Root_${darkmode}.json`));
+        })
     };
-    
+    //Changes root variables according to imported json
+    async function changeRootVars(value) {
+        let darkmode;
+        if (mode === "System") {
+            darkmode = systemDarkMode ? "Dark" : "Light";
+        } else {
+            darkmode = mode;
+        }
+        const newRootVars = await getNewRootVars(value, darkmode);
+        Object.keys(newRootVars).forEach((key) =>
+            document.querySelector(":root").style.setProperty(`${key}`, newRootVars[key])
+        );
+    };
+
     const switchTheme = (value) => {
+        changeRootVars(value);
+        setStartButtonTheme(value);
+        setLiveAppsTheme(value);
+        setTopBarIconTheme(value);
+        setDialogButtonTheme(value);
         switch (value) {
             case "Classic":
-                if(mode === "Light") { 
-                    Object.keys(ClassicLight).forEach((key) => changeRootStyle(key, ClassicLight[key])); 
-                } else if(mode === "Dark") {
-                    Object.keys(ClassicDark).forEach((key) => changeRootStyle(key, ClassicDark[key]));
-                } else if(mode === "System") {
-                    if(systemDarkMode) {
-                        Object.keys(ClassicDark).forEach((key) => changeRootStyle(key, ClassicDark[key]));
-                    } else {
-                        Object.keys(ClassicLight).forEach((key) => changeRootStyle(key, ClassicLight[key]));
-                    }
-                }
-                setStartButtonTheme("Classic");
-                setLiveAppsTheme("Classic");
-                setTopBarIconTheme("Classic");
-                setDialogButtonTheme("Classic");
                 setWindowBackgroundFX("None");
                 setDialogBackgroundFX("None");
                 setTaskbarBackgroundFX("None");
@@ -138,21 +146,6 @@ export function ThemeProvider({ children }) {
                 setDialogButtonsLocation("in info container");
                 break;
             case "Aqua":
-                if(mode === "Light") { 
-                    Object.keys(AquaLight).forEach((key) => changeRootStyle(key, AquaLight[key])); 
-                } else if(mode === "Dark") {
-                    Object.keys(AquaDark).forEach((key) => changeRootStyle(key, AquaDark[key]));
-                } else if(mode === "System") {
-                    if(window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                        Object.keys(AquaDark).forEach((key) => changeRootStyle(key, AquaDark[key]));
-                    } else {
-                        Object.keys(AquaLight).forEach((key) => changeRootStyle(key, AquaLight[key]));
-                    }
-                }
-                setStartButtonTheme("Aqua");
-                setLiveAppsTheme("Aqua");
-                setTopBarIconTheme("Aqua");
-                setDialogButtonTheme("Aqua");
                 setWindowBackgroundFX("Metallic");
                 setDialogBackgroundFX("Metallic");
                 setTaskbarBackgroundFX("Metallic");
@@ -162,21 +155,6 @@ export function ThemeProvider({ children }) {
                 setDialogButtonsLocation("in window");
                 break;
             case "Aero":
-                if(mode === "Light") { 
-                    Object.keys(AeroLight).forEach((key) => changeRootStyle(key, AeroLight[key])); 
-                } else if(mode === "Dark") {
-                    Object.keys(AeroDark).forEach((key) => changeRootStyle(key, AeroDark[key]));
-                } else if(mode === "System") {
-                    if(window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                        Object.keys(AeroDark).forEach((key) => changeRootStyle(key, AeroDark[key]));
-                    } else {
-                        Object.keys(AeroLight).forEach((key) => changeRootStyle(key, AeroLight[key]));
-                    }
-                }
-                setStartButtonTheme("Aero");
-                setLiveAppsTheme("Aero");
-                setTopBarIconTheme("Aero");
-                setDialogButtonTheme("Aero");
                 setWindowBackgroundFX("Translucent");
                 setDialogBackgroundFX("Translucent");
                 setTaskbarBackgroundFX("Translucent");
@@ -186,21 +164,6 @@ export function ThemeProvider({ children }) {
                 setDialogButtonsLocation("in info container");
                 break;
             case "Fluent":
-                if(mode === "Light") { 
-                    Object.keys(FluentLight).forEach((key) => changeRootStyle(key, FluentLight[key])); 
-                } else if(mode === "Dark") {
-                    Object.keys(FluentDark).forEach((key) => changeRootStyle(key, FluentDark[key]));
-                } else if(mode === "System") {
-                    if(window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                        Object.keys(FluentDark).forEach((key) => changeRootStyle(key, FluentDark[key]));
-                    } else {
-                        Object.keys(FluentLight).forEach((key) => changeRootStyle(key, FluentLight[key]));
-                    }
-                }
-                setStartButtonTheme("Fluent");
-                setLiveAppsTheme("Fluent");
-                setTopBarIconTheme("Fluent");
-                setDialogButtonTheme("Fluent");
                 setWindowBackgroundFX("None");
                 setDialogBackgroundFX("None");
                 setTaskbarBackgroundFX("None");
@@ -232,14 +195,14 @@ export function ThemeProvider({ children }) {
         }
     };
 
-    useEffect(() => {switchTheme(theme);}, [theme, mode]);
-    useEffect(() => {if(mode==="System") switchTheme(theme);}, [systemDarkMode]);
+    useEffect(() => { switchTheme(theme); }, [theme, mode]);
+    useEffect(() => { if (mode === "System") switchTheme(theme); }, [systemDarkMode]);
 
-    useEffect(() => {switchFX("Window", windowBackgroundFX);}, [windowBackgroundFX]);
-    useEffect(() => {switchFX("Dialog", dialogBackgroundFX);}, [dialogBackgroundFX]);
-    useEffect(() => {switchFX("Taskbar", taskbarBackgroundFX);}, [taskbarBackgroundFX]);
-    useEffect(() => {switchFX("StartMenu", startMenuBackgroundFX);}, [startMenuBackgroundFX]);
-    useEffect(() => {switchFX("TaskbarWindow", taskbarWindowBackgroundFX);}, [taskbarWindowBackgroundFX]);
+    useEffect(() => { switchFX("Window", windowBackgroundFX); }, [windowBackgroundFX]);
+    useEffect(() => { switchFX("Dialog", dialogBackgroundFX); }, [dialogBackgroundFX]);
+    useEffect(() => { switchFX("Taskbar", taskbarBackgroundFX); }, [taskbarBackgroundFX]);
+    useEffect(() => { switchFX("StartMenu", startMenuBackgroundFX); }, [startMenuBackgroundFX]);
+    useEffect(() => { switchFX("TaskbarWindow", taskbarWindowBackgroundFX); }, [taskbarWindowBackgroundFX]);
 
     const contextValue = {
         mode,
