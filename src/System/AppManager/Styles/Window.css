@@ -3,8 +3,7 @@ app-window {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: var(--WindowBorderWidth) var(--WindowBorderColor) var(--WindowBorderType);
-    border-radius: var(--WindowBorderRadius);
+    border-style: var(--WindowBorderType);
     box-shadow: var(--WindowShadowXOffset) var(--WindowShadowYOffset) var(--WindowShadowBlur) var(--WindowShadowSpread) var(--WindowShadowColor);
     transition: 0.2s;
     box-sizing: border-box;

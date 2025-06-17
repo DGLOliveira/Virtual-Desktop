@@ -1,6 +1,4 @@
-/*
-For each App that is currently open, this component generates a window for it.
-*/
+//For each App that is currently open, this component generates a window for it.
 
 import { useContext } from "react";
 import { AppContext } from "./Context/context.jsx";
@@ -37,9 +35,16 @@ export function AppHandler() {
             color: appContext.apps[name].State.isSelected
               ? "var(--WindowFontColor)"
               : "var(--WindowFontColorInactive)",
+            borderWidth: deviceContext.deviceType !== "Desktop"
+              ? "0"
+              : "var(--WindowBorderWidth)",
             borderColor: appContext.apps[name].State.isSelected
               ? "var(--WindowBorderColor)"
               : "var(--WindowBorderColorInactive)",
+            borderRadius: (deviceContext.deviceType !== "Desktop"
+              || appContext.apps[name].State.isMaximized)
+              ? "0"
+              : "var(--WindowBorderRadius)",
             visibility: appContext.apps[name].State.isMinimized
               ? "hidden"
               : "visible",

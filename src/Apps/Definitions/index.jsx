@@ -1,6 +1,6 @@
-// Definitions allows for user personalization of the app aspect and style. See individual components for reference.
+// Definitions allows for user personalization of the app aspect and style. See individual Fragments for reference.
 
-import { useState, useContext } from "react";
+import { useState, useContext, Fragment } from "react";
 import { Global } from "./Pages/Global.jsx";
 import { DesktopPreview, Desktop } from "./Pages/Desktop.jsx";
 import { WindowPreview, Window } from "./Pages/Windows/Window.jsx";
@@ -36,15 +36,13 @@ export default function Definitions() {
         {menuList.map((menu, index) => {
           if (typeof menu !== "string") {
             return (
-              <>
+              <Fragment key={index}>
                 <div
-                  key={index}
                   className={subMenu === menu[0] ? "defMenuButton defMenuButtonON" : "defMenuButton"}
                   onClick={() => {setDefPage(menu[0]);setSubMenu(menu[0])}}
                 >{menu[0]}
                 </div>
                 <div
-                  key={index+"sub"}
                   className={subMenu === menu[0] ? "defSubMenu" : "defSubMenu defSubMenuHidden"}
                 >
                   {menu[1].map((submenu, index) => (
@@ -57,7 +55,7 @@ export default function Definitions() {
                     </div>
                   ))}
                 </div>
-              </>
+              </Fragment>
             );
           } else {
             return (

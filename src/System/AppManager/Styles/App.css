@@ -1,11 +1,6 @@
 app-container {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 2 * var(--WindowPadding));
-    height: calc(100% - var(--WindowPadding));
-    margin-left: var(--WindowPadding);
-    margin-right: var(--WindowPadding);
-    margin-bottom: var(--WindowPadding);
     box-sizing: border-box;
     border-width: var(--AppBorderWidth);
     border-style: var(--AppBorderType);
