@@ -1,5 +1,4 @@
-import React, { useState, createContext } from "react";
-
+import { useState, createContext } from "react";
 import { setOpenHandler } from "./Handlers/setOpenHandler.js";
 import { setCloseHandler } from "./Handlers/setCloseHandler.js";
 import { setActionHandler } from "./Handlers/setActionHandler.js";

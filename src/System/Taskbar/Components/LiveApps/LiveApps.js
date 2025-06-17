@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { createPortal } from "react-dom";
 import { DeviceContext } from "../../../DeviceManager/context.jsx";
 import { ThemeContext } from "../../../ThemeManager/context.jsx";
 import { ContextMenuContext } from "../../../ContextMenuManager/context.jsx";
@@ -13,13 +14,22 @@ export const LiveApps = () => {
   const themeContext = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
 
-  const handleClick = (name) => {
+  const handleTaskbarClick = (name) => {
     if (!appContext.apps[name].State.isMinimized && !appContext.apps[name].State.isSelected) {
       appContext.setSelected(name);
     } else {
       appContext.switchMinimized(name);
     }
   };
+
+  const handlePreviewClick = (name) => {
+    appContext.setSelected(name);
+    if(appContext.apps[name].State.isMinimized){ 
+      appContext.switchMinimized(name)
+    };
+    setOpen(false);
+  };
+
   const handleContextMenu = (e, appName) => {
     e.preventDefault();
     contextMenu.setOpen();
@@ -59,7 +69,7 @@ export const LiveApps = () => {
         {Object.keys(appContext.apps).map((name, index, arr) =>
         (
           <button
-            onClick={() => handleClick(name)}
+            onClick={() => handleTaskbarClick(name)}
             onContextMenu={(e) => handleContextMenu(e, name)}
             className={LiveAppsClass(appContext.apps[name].State.isSelected)}
             key={name + "liveAppsButton"}
@@ -86,6 +96,26 @@ export const LiveApps = () => {
             <live-apps-button-circle class={open ? "live-apps-button-circle-white" : "live-apps-button-circle-off"} />
           </div>
         </button>
+        {open && createPortal(
+          <live-apps-menu style={{ display:"flex",justifyContent:"center",alignItems:"center",position: "absolute", left: "0", top: "0", width: "100%", height: "100%", background: "hsla(0, 0%, 0%, 1)", zIndex: "999" }}>
+            {Object.keys(appContext.apps).map((name, index, arr) =>
+            (
+              <button
+                onClick={() => handlePreviewClick(name)}
+                onContextMenu={(e) => handleContextMenu(e, name)}
+                className={LiveAppsClass(appContext.apps[name].State.isSelected)}
+                key={name + "liveAppsButton"}
+                aria-label={"Live App" + { name }}
+              >
+                <AppIcon appName={name} />
+                <span>{name}</span>
+                {themeContext.liveAppsTheme === "Aqua" && <AppIcon appName={name} />}
+              </button>
+            )
+            )}
+          </live-apps-menu>,
+          document.getElementsByTagName("desk-top")[0]
+        )}
       </live-apps-button>}
   </>
   );
