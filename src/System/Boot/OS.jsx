@@ -8,16 +8,16 @@ import ContextMenuProvider from "./../ContextMenuManager/context.jsx";
 import WorkScreen from "./WorkScreen.jsx";
 import "./OS.css";
 
-export default function OS() {
+export default function OS(props) {
   return (
     <>
-      <DeviceProvider>
+      <DeviceProvider browserInfo={props.browserInfo} deviceInfo={props.deviceInfo}>
         <ThemeProvider>
           <FileProvider>
             <AppProvider>
               <BackgroundProvider>
                 <ContextMenuProvider>
-                  <WorkScreen />
+                  <WorkScreen/>
                 </ContextMenuProvider>
               </BackgroundProvider>
             </AppProvider>

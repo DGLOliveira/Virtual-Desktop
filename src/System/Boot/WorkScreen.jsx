@@ -10,27 +10,27 @@ import ErrorBoundary from "./../GlobalComponents/ErrorBoundary.jsx";
 import ErrorMessage from "./../GlobalComponents/ErrorMessage.jsx";
 
 export default function WorkScreen() {
-    const background = useContext(BackgroundContext);
-    const Scenario = useCallback((
-      lazy(() => import(`../Desktop/Scenario.jsx`).catch(
-        (error) => {
-          let errorMessage = "Failed to load 3d Scene";
-          console.error(error);
-          return { default: () => <ErrorMessage errorMessage={errorMessage} /> };
-        }
-      ))
-    ), []);
+  const background = useContext(BackgroundContext);
+  const Scenario = useCallback((
+    lazy(() => import(`../Desktop/Scenario.jsx`).catch(
+      (error) => {
+        let errorMessage = "Failed to load 3d Scene";
+        console.error(error);
+        return { default: () => <ErrorMessage errorMessage={errorMessage} /> };
+      }
+    ))
+  ), []);
 
-    return (
-        <>
-        <ErrorBoundary fallback={<ErrorMessage errorMessage="Failed to load 3d Scene" />}>
-          <Suspense fallback={<Loading message={"3D Scene"}/>}>
-            {background.state.active === "scenario" && <Scenario />}
-          </Suspense>
-        </ErrorBoundary>
-        <Desktop />
-        <Taskbar />
-        <ContextMenu />
-        </>
-    );
+  return (
+    <>
+      <ErrorBoundary fallback={<ErrorMessage errorMessage="Failed to load 3d Scene" />}>
+        <Suspense fallback={<Loading message={"3D Scene"} />}>
+          {background.state.active === "scenario" && <Scenario />}
+        </Suspense>
+      </ErrorBoundary>
+      <Desktop />
+      <Taskbar />
+      <ContextMenu />
+    </>
+  );
 }

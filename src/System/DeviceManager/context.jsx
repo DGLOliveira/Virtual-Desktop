@@ -1,55 +1,49 @@
+import { get } from "ol/proj";
 import { useState, useEffect, createContext } from "react";
 
 export const DeviceContext = createContext({
     device: {},
+    setDevice: () => { },
     browser: {},
+    setBrowser: () => { },
     deviceType: "Desktop",
-    setDeviceType: () => {},
+    setDeviceType: () => { },
     deviceTypeList: [],
 });
 
-export function DeviceProvider({ children }) {
-    let device = {};
-    let browser = {};
-    const [deviceType, setDeviceType] = useState("Desktop");
+export function DeviceProvider({ browserInfo, deviceInfo, children }) {
+    const [device, setDevice] = useState(deviceInfo);
+    const [browser, setBrowser] = useState(browserInfo);
+    const getDeviceType = () => {
+        switch (deviceInfo.type) {
+            case "tablet":
+                return "Tablet";
+            case "mobile":
+                return "Mobile";
+            case "smarttv":
+                return "TV";
+            default:
+                return "Desktop";
+        }
+    };
+    const [deviceType, setDeviceType] = useState(getDeviceType);
     const deviceTypeList = ["Desktop", "TV", "Mobile", "Tablet"];
 
-    useEffect(() => {
-        //Populate device and browser info from initial boot screen
-        Array.from(document.getElementById("DeviceSpecs").children).forEach((child) => {
-            device[child.id] = child.attributes["data-info"].nodeValue;
-        });
-        Array.from(document.getElementById("BrowserSpecs").children).forEach((child) => {
-            browser[child.id] = child.attributes["data-info"].nodeValue;});
-        //Set device Type based on browser data
-        switch(device["Type"]){
-            case "tablet":
-                setDeviceType("Tablet");
-                break;
-            case "mobile":
-                setDeviceType("Mobile");
-                break;
-            case "smarttv":
-                setDeviceType("TV");
-                break;
-            default:
-                setDeviceType("Desktop");
-                break;
-        }
-    }, []);
 
-  const contextValue = {
-    device,
-    browser,
-    deviceType,
-    setDeviceType,
-    deviceTypeList
-  };
+    const contextValue = {
+        device,
+        setDevice,
+        browser,
+        setBrowser,
+        deviceType,
+        setDeviceType,
+        deviceTypeList
+    };
 
-  return (
-    <DeviceContext.Provider value={contextValue}>
-      {children}
-    </DeviceContext.Provider>
-  );
+    return (
+        <DeviceContext.Provider value={contextValue}>
+            {children}
+        </DeviceContext.Provider>
+    );
 }
 export default DeviceProvider;

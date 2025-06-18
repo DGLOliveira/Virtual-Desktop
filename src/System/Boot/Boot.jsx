@@ -4,8 +4,8 @@ import StartupScreen from "./StartupScreen.jsx";
 
 export default function Boot() {
   const [ready, setReady] = useState(false);
-  let deviceInfo = {};
-  let browserInfo = {};
+  const [deviceInfo, setDeviceInfo] = useState({});
+  const [browserInfo, setBrowserInfo] = useState({});
   const uap = new UAParser();
   const bootTerminal = document.getElementById("bootTerminal");
 
@@ -49,7 +49,6 @@ export default function Boot() {
         text = key + ": " + info[key];
       }
       listItem.append(text);
-      listItem.setAttribute("data-info", data);
       listElement.append(listItem);
     });
   }
@@ -78,7 +77,7 @@ export default function Boot() {
     //Note: Sometimes browser reports an array of null gamepads
     let gamepadAvailable = 0;
     const gamepads = navigator.getGamepads().forEach((gamepad) => gamepad !== null ? gamepadAvailable++ : gamepadAvailable);
-    deviceInfo = {
+    const newdeviceInfo = {
       "Device": {
         name: checkFalsy(uap.getDevice().model),
         vendor: checkFalsy(uap.getDevice().vendor),
@@ -94,7 +93,8 @@ export default function Boot() {
       "Touch Support": touch,
       "Gamepads": gamepadAvailable
     }
-    return deviceInfo;
+    setDeviceInfo(newdeviceInfo);
+    return newdeviceInfo;
   }
 
   function checkBrowser() {
@@ -103,7 +103,7 @@ export default function Boot() {
     bootTerminal.append(checkingBrowser);
     const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "Yes" : "No";
     const cookiesEnabled = navigator.cookieEnabled ? "Yes" : "No";
-    browserInfo = {
+    const newBrowserInfo = {
       "Browser": {
         name: checkFalsy(uap.getBrowser().name),
         version: checkFalsy(uap.getBrowser().version)
@@ -112,7 +112,8 @@ export default function Boot() {
       "Dark Mode": darkMode,
       "Cookies Enabled": cookiesEnabled,
     }
-    return browserInfo;
+    setBrowserInfo(newBrowserInfo);
+    return newBrowserInfo;
   }
 
   function countdown() {
@@ -122,11 +123,11 @@ export default function Boot() {
     bootTerminal.append(countdownElement);
     function tick() {
       if(count > 0) {
-        countdownElement.innerHTML = "Starting in " + count + " seconds...";
+        countdownElement.innerText = "Starting in " + count + " seconds...";
         count--;
         setTimeout(tick, 1000);
       }else{
-        countdownElement.innerHTML = "Initializing...";
+        countdownElement.innerText = "Initializing...";
         document.getElementById("bootScreen").style.zIndex = -1;
         setReady(true);
       }
@@ -140,11 +141,11 @@ export default function Boot() {
     createList("Browser", checkBrowser());
     countdown();
     }
-  })
+  },[]);
 
   return (<>
     {ready && <Suspense fallback={<StartupScreen />}>
-      <OS />
+      <OS browserInfo={browserInfo} deviceInfo={deviceInfo}/>
     </Suspense>}
   </>
   );
