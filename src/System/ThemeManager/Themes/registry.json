@@ -16,6 +16,9 @@
         "Locations": {
             "NavMenu": "in top bar",
             "DialogButtons": "in window"
+        },
+        "Components": {
+            "StartButton": "Fluent/StartButton/content.jsx"
         }
     },
     "Aero": {
@@ -35,6 +38,9 @@
         "Locations": {
             "NavMenu": "in app",
             "DialogButtons": "in window"
+        },
+        "Components": {
+            "StartButton": "Aero/StartButton/content.jsx"
         }
     },
     "Aqua": {
@@ -54,6 +60,9 @@
         "Locations": {
             "NavMenu": "in top bar",
             "DialogButtons": "in window"
+        },
+        "Components": {
+            "StartButton": "Aqua/StartButton/content.jsx"
         }
     },
     "Classic": {
@@ -73,6 +82,9 @@
         "Locations": {
             "NavMenu": "in top bar",
             "DialogButtons": "in info container"
+        },
+        "Components": {
+            "StartButton": "Classic/StartButton/content.jsx"
         }
     }
 }

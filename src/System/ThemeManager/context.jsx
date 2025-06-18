@@ -25,6 +25,7 @@ export const ThemeContext = createContext({
     startButtonTheme: "",
     startButtonThemeList: [],
     setStartButtonTheme: () => { },
+    StartButtonPath: () => { },
     liveAppsTheme: "",
     liveAppsThemeList: [],
     setLiveAppsTheme: () => { },
@@ -55,6 +56,8 @@ export function ThemeProvider({ children }) {
 
     const [startButtonTheme, setStartButtonTheme] = useState(DEFAULT_THEME);
     const startButtonThemeList = [];
+    const [StartButtonPath, setStartButtonPath] = 
+    useState(`Themes/${themeRegistry[startButtonTheme]["Components"]["StartButton"]}`);
 
     const [liveAppsTheme, setLiveAppsTheme] = useState(DEFAULT_THEME);
     const liveAppsThemeList = [];
@@ -152,6 +155,8 @@ export function ThemeProvider({ children }) {
     useEffect(() => { switchFX("StartMenu", startMenuBackgroundFX); }, [startMenuBackgroundFX]);
     useEffect(() => { switchFX("TaskbarWindow", taskbarWindowBackgroundFX); }, [taskbarWindowBackgroundFX]);
 
+    useEffect(() => { setStartButtonPath(`Themes/${themeRegistry[startButtonTheme]["Components"]["StartButton"]}`);},[startButtonTheme]);
+
     const contextValue = {
         mode,
         modeList,
@@ -162,6 +167,7 @@ export function ThemeProvider({ children }) {
         startButtonTheme,
         startButtonThemeList,
         setStartButtonTheme,
+        StartButtonPath,
         liveAppsTheme,
         liveAppsThemeList,
         setLiveAppsTheme,

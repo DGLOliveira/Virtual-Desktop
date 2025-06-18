@@ -1,0 +1,36 @@
+start-button>button:has(.startButtonAero) {
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+    border-radius:50%;
+    border: 1px hsla(216, 47%, 53%, 1) solid;
+    box-shadow: 0 0 0px 0px hsla(0, 0%, 100%, 0.5) inset;
+    transition: 0.5s;
+}
+
+.startButtonAero>.hex1 {
+    fill: #FF0000;
+}
+
+.startButtonAero>.hex2 {
+    fill: #00FF00;
+}
+
+.startButtonAero>.hex3 {
+    fill: #0000FF;
+}
+
+start-button>button:hover:enabled:has(.startButtonAero){
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.5) inset;
+}
+
+start-button>button:active:enabled:has(.startButtonAero) {
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
+}
+
+start-button>button:active:enabled:has(.startButtonAeroActive) {
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
+}

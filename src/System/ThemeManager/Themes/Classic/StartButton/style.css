@@ -1,0 +1,20 @@
+start-button>button:has(.startButtonClassicActive) {
+    background-color: var(--StartButtonBkgrActive);
+    border: var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset;
+}
+start-button>button:active:enabled:has(.startButtonClassic){
+    background-color: var(--StartButtonBkgrActive);
+    border: var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset;
+}
+
+.startButtonClassic>.hex1 {
+    fill: #FF0000;
+}
+
+.startButtonClassic>.hex2 {
+    fill: #00FF00;
+}
+
+.startButtonClassic>.hex3 {
+    fill: #0000FF;
+}
