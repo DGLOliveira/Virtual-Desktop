@@ -109,35 +109,37 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         close: "Close (Ctrl + Shift + F4)"
     };
 
-    const TopBarButtonsDefault =
+    const TopBarButtonsDefault = ({ click, title, isMaximized }) =>{
+        return(
         <>
             <button
-                onClick={(e) => (e.stopPropagation(), handleTopBarButtonClick("Minimize"))}
+                onClick={(e) => (e.stopPropagation(), click("Minimize"))}
                 title={title.minimize}>
                 <FaRegWindowMinimize />
             </button>
             <button
-                onClick={(e) => (e.stopPropagation(), handleTopBarButtonClick("Maximize"))}
-                title={appContext.apps[appName].State.isMaximized ? title.restore : title.maximize}>
-                {appContext.apps[appName].State.isMaximized ? (
+                onClick={(e) => (e.stopPropagation(), click("Maximize"))}
+                title={isMaximized ? title.restore : title.maximize}>
+                {isMaximized ? (
                     <FaWindowRestore />
                 ) : (
                     <FaWindowMaximize />
                 )}
             </button>
             <button
-                onClick={(e) => (e.stopPropagation(), handleTopBarButtonClick("Close"))}
+                onClick={(e) => (e.stopPropagation(), click("Close"))}
                 title={title.close}>
                 <RiCloseLargeLine />
             </button>
-        </>;
+        </>
+    )};
 
     const TopBarButtons = useCallback((
         lazy(() => import(`../../ThemeManager/${themeContext.TopBarButtonsPath}`).catch(
             (error) => {
                 console.error("Failed to import thematic top bar buttons");
                 return {
-                    default: () => <TopBarButtonsDefault />
+                    default: TopBarButtonsDefault
                 }
             }))
     ), [themeContext.TopBarButtonsPath]);
