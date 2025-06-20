@@ -1,16 +1,14 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { AppContext } from "../Context/context.jsx";
 import { ContextMenuContext } from "../../ContextMenuManager/context.jsx";
 import { ThemeContext } from "../../ThemeManager/context.jsx";
 import { DeviceContext } from "../../DeviceManager/context.jsx";
-import {
+import { AppIcon } from "./AppIcon.jsx"; import {
     FaRegWindowMinimize,
     FaWindowRestore,
     FaWindowMaximize,
 } from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
 import { RiCloseLargeLine } from "react-icons/ri";
-import { AppIcon } from "./AppIcon.jsx";
 import "../Styles/TopBar.css";
 
 export const AppTopBar = ({ appName, title, setAction }) => {
@@ -23,7 +21,7 @@ export const AppTopBar = ({ appName, title, setAction }) => {
 
     const dragWindow = (event, appName) => {
         event.preventDefault();
-        if(deviceContext.deviceType !== "Desktop") return;
+        if (deviceContext.deviceType !== "Desktop") return;
         setCursor("grabbing");
         let x, y;
         if (!appContext.apps[appName].isMaximized) {
@@ -44,7 +42,7 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         setCursor("grab");
     };
     const dragStart = (event, appName) => {
-        if(deviceContext.deviceType !== "Desktop") return;
+        if (deviceContext.deviceType !== "Desktop") return;
         let windowX = appContext.apps[appName].Location.Current.left;
         let windowY = appContext.apps[appName].Location.Current.top;
         let x, y;
@@ -90,6 +88,60 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         contextMenu.setContent(content);
     };
 
+    const handleTopBarButtonClick = (target) => {
+        switch (target) {
+            case "Minimize":
+                appContext.switchMinimized(appName);
+                break;
+            case "Maximize":
+                appContext.switchMaximized(appName);
+                break;
+            case "Close":
+                setAction("Close");
+                break;
+        }
+    };
+
+    const topBarButtonTitles = {
+        minimize: "Minimize (Alt + ⇩)",
+        maximize: "Maximize (Alt + ⇧)",
+        restore: "Restore (Alt + ⇩)",
+        close: "Close (Ctrl + Shift + F4)"
+    };
+
+    const TopBarButtonsDefault =
+        <>
+            <button
+                onClick={(e) => (e.stopPropagation(), handleTopBarButtonClick("Minimize"))}
+                title={title.minimize}>
+                <FaRegWindowMinimize />
+            </button>
+            <button
+                onClick={(e) => (e.stopPropagation(), handleTopBarButtonClick("Maximize"))}
+                title={appContext.apps[appName].State.isMaximized ? title.restore : title.maximize}>
+                {appContext.apps[appName].State.isMaximized ? (
+                    <FaWindowRestore />
+                ) : (
+                    <FaWindowMaximize />
+                )}
+            </button>
+            <button
+                onClick={(e) => (e.stopPropagation(), handleTopBarButtonClick("Close"))}
+                title={title.close}>
+                <RiCloseLargeLine />
+            </button>
+        </>;
+
+    const TopBarButtons = useCallback((
+        lazy(() => import(`../../ThemeManager/${themeContext.TopBarButtonsPath}`).catch(
+            (error) => {
+                console.error("Failed to import thematic top bar buttons");
+                return {
+                    default: () => <TopBarButtonsDefault />
+                }
+            }))
+    ), [themeContext.TopBarButtonsPath]);
+
     const handleKeybinds = (event) => {
         if (appContext.apps[appName].State.isSelected) {
             if (event.ctrlKey && event.shiftKey && event.key === "F4") {
@@ -119,55 +171,6 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         return () => document.removeEventListener("keydown", handleKeybinds);
     }, [handleKeybinds]);
 
-    const minimizeClass = {
-        "Fluent": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
-        "Aero": "appTopBarButtonAero appTopBarButtonAeroMinimize",
-        "Aqua": "appTopBarButtonAqua appTopBarButtonAquaGreen",
-        "Classic": "appTopBarButtonClassic"
-    }
-    const minimizeContent = {
-        "Fluent": <FaRegWindowMinimize />,
-        "Aero": <FaRegWindowMinimize />,
-        "Aqua": "-",
-        "Classic": <FaRegWindowMinimize />
-    }
-    const maximizeClass = {
-        "Fluent": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
-        "Aero": "appTopBarButtonAero appTopBarButtonAeroMaximize",
-        "Aqua": "appTopBarButtonAqua appTopBarButtonAquaYellow",
-        "Classic": "appTopBarButtonClassic"
-    }
-    const maximizeContent = {
-        "Fluent": <FaWindowMaximize />,
-        "Aero": <FaWindowMaximize />,
-        "Aqua": "+",
-        "Classic": <FaWindowMaximize />
-    }
-    const restoreClass = {
-        "Fluent": "appTopBarButtonFluent appTopBarButtonFluentHoverGray",
-        "Aero": "appTopBarButtonAero appTopBarButtonAeroMaximize",
-        "Aqua": "appTopBarButtonAqua appTopBarButtonAquaYellow",
-        "Classic": "appTopBarButtonClassic"
-    }
-    const restoreContent = {
-        "Fluent": <FaWindowRestore />,
-        "Aero": <FaWindowRestore />,
-        "Aqua": "+",
-        "Classic": <FaWindowRestore />
-    }
-    const closeClass = {
-        "Fluent": "appTopBarButtonFluent appTopBarButtonFluentHoverRed",
-        "Aero": "appTopBarButtonAero appTopBarButtonAeroClose",
-        "Aqua": "appTopBarButtonAqua appTopBarButtonAquaRed",
-        "Classic": "appTopBarButtonClassic"
-    }
-    const closeContent = {
-        "Fluent": <AiOutlineClose />,
-        "Aero": <RiCloseLargeLine />,
-        "Aqua": "x",
-        "Classic": <RiCloseLargeLine />
-    }
-
     return (
         <app-top-bar
             style={{
@@ -193,42 +196,15 @@ export const AppTopBar = ({ appName, title, setAction }) => {
                 )}>
                 {title === "" || title === "Untitled" ? appName : `${title}`}
             </h1>
-            <>
-                <button
-                    className={minimizeClass[themeContext.theme]}
-                    onClick={(e) => (
-                        e.stopPropagation(), appContext.switchMinimized(appName)
-                    )}
-                    title="Minimize (Alt + ⇩)"
-                >{minimizeContent[themeContext.theme]}</button>
-                {deviceContext.deviceType === "Desktop" &&
-                    (appContext.apps[appName].State.isMaximized ? (
-                        <button
-                            className={restoreClass[themeContext.theme]}
-                            onClick={(e) => (
-                                e.stopPropagation(), appContext.switchMaximized(appName)
-                            )}
-                            title="Restore (Alt + ⇩)">
-                            {restoreContent[themeContext.theme]}
-                        </button>
-                    ) : (
-                        <button
-                            className={maximizeClass[themeContext.theme]}
-                            onClick={(e) => (
-                                e.stopPropagation(), appContext.switchMaximized(appName)
-                            )}
-                            title="Maximize (Alt + ⇧)">
-                            {maximizeContent[themeContext.theme]}
-                        </button>
-                    ))}
-                <button
-                    className={closeClass[themeContext.theme]}
-                    onClick={(e) => (
-                        e.stopPropagation(), setAction("Close")
-                    )}
-                    title="Close (Ctrl + Shift + F4)"
-                >{closeContent[themeContext.theme]}</button>
-            </>
+            {deviceContext.deviceType === "Desktop" &&
+                <Suspense fallback={null}>
+                    <TopBarButtons
+                        title={topBarButtonTitles}
+                        click={handleTopBarButtonClick}
+                        isMaximized={appContext.apps[appName].State.isMaximized}
+                    />
+                </Suspense>
+            }
         </app-top-bar>
     )
 

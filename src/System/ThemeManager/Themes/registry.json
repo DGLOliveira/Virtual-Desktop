@@ -18,7 +18,8 @@
             "DialogButtons": "in window"
         },
         "Components": {
-            "StartButton": "Fluent/StartButton/content.jsx"
+            "StartButton": "Fluent/StartButton/content.jsx",
+            "TopBarButtons": "Fluent/TopBarButtons/content.jsx"
         }
     },
     "Aero": {
@@ -40,7 +41,8 @@
             "DialogButtons": "in window"
         },
         "Components": {
-            "StartButton": "Aero/StartButton/content.jsx"
+            "StartButton": "Aero/StartButton/content.jsx",
+            "TopBarButtons": "Aero/TopBarButtons/content.jsx"
         }
     },
     "Aqua": {
@@ -62,7 +64,8 @@
             "DialogButtons": "in window"
         },
         "Components": {
-            "StartButton": "Aqua/StartButton/content.jsx"
+            "StartButton": "Aqua/StartButton/content.jsx",
+            "TopBarButtons": "Aqua/TopBarButtons/content.jsx"
         }
     },
     "Classic": {
@@ -84,7 +87,8 @@
             "DialogButtons": "in info container"
         },
         "Components": {
-            "StartButton": "Classic/StartButton/content.jsx"
+            "StartButton": "Classic/StartButton/content.jsx",
+            "TopBarButtons": "Classic/TopBarButtons/content.jsx"
         }
     }
 }

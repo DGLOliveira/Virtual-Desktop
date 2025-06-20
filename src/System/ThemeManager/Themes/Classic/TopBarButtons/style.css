@@ -1,0 +1,29 @@
+.appTopBarButtonClassic {
+    display: flex;
+    height: var(--WindowTopBarIconSize);
+    width: var(--WindowTopBarIconSize);
+    color: var(--GeneralButtonFontColor);
+    font-family: inherit;
+    font-size: var(--WindowTopBarIconSize);
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+    color:black;
+    background-color: hsl(0, 0%, 70%);
+    border: 2px hsl(0, 0%, 85%) outset;
+}
+
+.appTopBarButtonClassic>svg{
+    color:black;
+}
+
+.appTopBarButtonClassic:hover:enabled {
+    color:black;
+    background-color: hsl(0, 0%, 70%);
+}
+
+.appTopBarButtonClassic:active:enabled {
+    color:black;
+    background-color: hsl(0, 0%, 70%);
+    border: 2px hsl(0, 0%, 85%) inset;
+}

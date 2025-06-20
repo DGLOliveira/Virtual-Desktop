@@ -1,0 +1,59 @@
+
+.appTopBarButtonAero{
+    position: relative;
+    display: flex;
+    top: calc(-1 * var(--WindowTopBarIconSize)/4);
+    color: var(--GeneralButtonFontColor);
+    font-family: inherit;
+    background: none;
+    margin:0;
+    transition: 0.2s;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 1px hsla(0, 0%, 100%, 0.5) inset;
+}
+
+.appTopBarButtonAero:hover:enabled{
+    background: hsla(0, 0%, 100%, 0.25);
+}
+
+.appTopBarButtonAero:active:enabled{
+    background: hsla(0, 0%, 100%, 0.4);
+}
+
+.appTopBarButtonAero>svg{
+    height: calc(var(--WindowTopBarIconSize)/2);
+    width: calc(var(--WindowTopBarIconSize)/2);
+    margin:3px;
+    margin-left: 8px;
+    margin-right:8px;
+}
+
+.appTopBarButtonAeroMinimize{
+    border:1px solid black;
+    border-radius: 0 0 0 5px;
+    box-shadow:  0px 0px 0px 1px hsla(0, 0%, 100%, 0.5) inset, -1px 1px 0px 0px hsla(0, 0%, 100%, 0.5);
+}
+
+.appTopBarButtonAeroMaximize{
+    border-bottom:1px solid black;
+    box-shadow:  0px 0px 0px 1px hsla(0, 0%, 100%, 0.5) inset, 0px 1px 0px 0px hsla(0, 0%, 100%, 0.5);
+}
+
+.appTopBarButtonAeroMaximize>svg{
+    margin-left: 10px;
+    margin-right:10px;
+}
+
+.appTopBarButtonAeroClose{
+    border:1px solid black;
+    border-radius: 0 0 5px 0;
+    box-shadow:  0px 0px 0px 1px hsla(0, 0%, 100%, 0.5) inset, 1px 1px 0px 0px hsla(0, 0%, 100%, 0.5);
+}
+
+.appTopBarButtonAeroClose:hover:enabled{
+    background: hsla(0, 100%, 50%, 1);
+}
+
+.appTopBarButtonAeroClose:active:enabled{
+    background: hsla(0, 100%, 75%, 1);
+}

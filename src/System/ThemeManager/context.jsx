@@ -12,6 +12,7 @@ export const ThemeContext = createContext({
     topBarIconTheme: "",
     topBarIconThemeList: [],
     setTopBarIconTheme: () => { },
+    TopBarButtonsPath: () => { },
     dialogButtonTheme: "",
     dialogButtonThemeList: [],
     setDialogButtonTheme: () => { },
@@ -64,6 +65,8 @@ export function ThemeProvider({ children }) {
 
     const [topBarIconTheme, setTopBarIconTheme] = useState(DEFAULT_THEME);
     const topBarIconThemeList = [];
+    const [TopBarButtonsPath, setTopBarButtonsPath] = 
+    useState(`Themes/${themeRegistry[topBarIconTheme]["Components"]["TopBarButtons"]}`);
 
     const [dialogButtonTheme, setDialogButtonTheme] = useState(DEFAULT_THEME);
     const dialogButtonThemeList = [];
@@ -156,6 +159,9 @@ export function ThemeProvider({ children }) {
     useEffect(() => { switchFX("TaskbarWindow", taskbarWindowBackgroundFX); }, [taskbarWindowBackgroundFX]);
 
     useEffect(() => { setStartButtonPath(`Themes/${themeRegistry[startButtonTheme]["Components"]["StartButton"]}`);},[startButtonTheme]);
+    //useEffect(() => { setLiveAppsPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["LiveApps"]}`);},[liveAppsTheme]);
+    useEffect(() => { setTopBarButtonsPath(`Themes/${themeRegistry[topBarIconTheme]["Components"]["TopBarButtons"]}`);},[topBarIconTheme]);
+    //useEffect(() => { setDialogButtonsPath(`Themes/${themeRegistry[dialogButtonTheme]["Components"]["DialogButtons"]}`);},[dialogButtonTheme]);
 
     const contextValue = {
         mode,
@@ -174,6 +180,7 @@ export function ThemeProvider({ children }) {
         topBarIconTheme,
         topBarIconThemeList,
         setTopBarIconTheme,
+        TopBarButtonsPath,
         dialogButtonTheme,
         dialogButtonThemeList,
         setDialogButtonTheme,

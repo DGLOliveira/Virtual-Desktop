@@ -1,0 +1,31 @@
+.appTopBarButtonFluent {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    outline: none;
+    justify-content: center;
+    align-items: center;
+    color: var(--GeneralButtonFontColor);
+    font-family: inherit;
+    background: none;
+    margin: 1px;
+    transition: 0.2s;
+    cursor: pointer;
+    margin-left: 4px;
+    padding: 2px;
+}
+
+.appTopBarButtonFluentHoverGray:hover:enabled {
+    background: rgba(128, 128, 128, 0.5);
+}
+
+.appTopBarButtonFluentHoverRed:hover:enabled {
+    background: red;
+}
+
+.appTopBarButtonFluent>svg {
+    height: var(--WindowTopBarIconSize);
+    width: var(--WindowTopBarIconSize);
+    padding: 2px;
+    color: var(--WindowFontColor);
+}
