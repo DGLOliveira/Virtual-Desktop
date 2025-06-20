@@ -1,49 +1,41 @@
 import { createPortal } from "react-dom";
-import { useState, useEffect, useContext } from "react";
+import { useContext, useCallback, lazy, Suspense, Fragment } from "react";
 import { ThemeContext } from "../../ThemeManager/context";
 import "../Styles/Dialog.css";
 
 export const AppDialog = ({ action, setAction, appDialog }) => {
     const theme = useContext(ThemeContext);
-    const [buttonClassNeutral, setButtonClassNeutral] = useState("appDialogButtonFluent");
-    const [buttonClassSuggested, setButtonClassSuggested] = useState("appDialogButtonFluent");
-    const [buttonClassClose, setButtonClassClose] = useState("appDialogButtonFluent buttonActiveRed");
-    useEffect(() => {
-        switch (theme.dialogButtonTheme) {
-            case "Aero":
-                setButtonClassNeutral("appDialogButtonAero");
-                setButtonClassSuggested("appDialogButtonAero");
-                setButtonClassClose("appDialogButtonAero");
-                break;
-            case "Aqua":
-                setButtonClassNeutral("appDialogButtonAqua appDialogButtonAquaNeutral");
-                setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");
-                setButtonClassClose("appDialogButtonAqua appDialogButtonAquaRed");
-                break;
-            case "Classic":
-                setButtonClassNeutral("appDialogButtonClassic");
-                setButtonClassSuggested("appDialogButtonClassic");
-                setButtonClassClose("appDialogButtonClassic");
-                break;
-            case "Fluent":
-                setButtonClassNeutral("appDialogButtonFluent");
-                setButtonClassSuggested("appDialogButtonFluent");
-                setButtonClassClose("appDialogButtonFluent buttonActiveRed");
-                break;
-        }
-    }, [theme.dialogButtonTheme]);
 
-    const setButtonClass = (name) => {
+    const setButtonType = (name) => {
         switch (name) {
+            case "Exit":
             case "Close":
-                return buttonClassClose;
+                return "Warning";
             case "Save":
             case "Ok":
-                return buttonClassSuggested;
+                return "Suggested";
             default:
-                return buttonClassNeutral;
+                return "Neutral";
         }
-    }
+    };
+
+    const ButtonDefault = ({ _type, name, click }) => {
+        return (
+            <button onClick={click}>
+                {name}
+            </button>
+        )
+    };
+
+    const Button = useCallback((
+        lazy(() => import(`../../ThemeManager/${theme.DialogButtonPath}`).catch(
+            (_error) => {
+                console.error("Failed to import thematic dialog buttons");
+                return {
+                    default: ButtonDefault
+                }
+            }))
+    ), [theme.DialogButtonPath]);
 
     return (
         <>
@@ -61,26 +53,30 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                         {theme.dialogButtonsLocation === "in info container" &&
                             <app-dialog-actions>
                                 {Object.keys(appDialog.actions).map((name, index) =>
-                                    <button
-                                        key={index}
-                                        className={setButtonClass(name)}
-                                        onClick={appDialog.actions[name]}
-                                    >
-                                        {name}
-                                    </button>
+                                    <Fragment key={index}>
+                                        <Suspense fallback={null}>
+                                            <Button
+                                                type={setButtonType(name)}
+                                                name={name}
+                                                click={appDialog.actions[name]}
+                                            />
+                                        </Suspense>
+                                    </Fragment>
                                 )}
                             </app-dialog-actions>}
                     </app-dialog-info>
                     {theme.dialogButtonsLocation === "in window" &&
                         <app-dialog-actions>
                             {Object.keys(appDialog.actions).map((name, index) =>
-                                <button
-                                    key={index}
-                                    className={setButtonClass(name)}
-                                    onClick={appDialog.actions[name]}
-                                >
-                                    {name}
-                                </button>
+                                <Fragment key={index}>
+                                    <Suspense fallback={null}>
+                                        <Button
+                                            type={setButtonType(name)}
+                                            name={name}
+                                            click={appDialog.actions[name]}
+                                        />
+                                    </Suspense>
+                                </Fragment>
                             )}
                         </app-dialog-actions>}
                 </app-dialog>

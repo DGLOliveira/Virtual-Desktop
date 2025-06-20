@@ -16,6 +16,7 @@ export const ThemeContext = createContext({
     dialogButtonTheme: "",
     dialogButtonThemeList: [],
     setDialogButtonTheme: () => { },
+    DialogButtonPath: () => { },
     backgroundFXList: [],
     windowBackgroundFX: "",
     setWindowBackgroundFX: () => { },
@@ -70,6 +71,8 @@ export function ThemeProvider({ children }) {
 
     const [dialogButtonTheme, setDialogButtonTheme] = useState(DEFAULT_THEME);
     const dialogButtonThemeList = [];
+    const [DialogButtonPath, setDialogButtonPath] = 
+    useState(`Themes/${themeRegistry[dialogButtonTheme]["Components"]["DialogButton"]}`);
 
     // Populate theme lists with themeRegistry keys
     Object.keys(themeRegistry).forEach((value, _key) => {
@@ -161,7 +164,7 @@ export function ThemeProvider({ children }) {
     useEffect(() => { setStartButtonPath(`Themes/${themeRegistry[startButtonTheme]["Components"]["StartButton"]}`);},[startButtonTheme]);
     //useEffect(() => { setLiveAppsPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["LiveApps"]}`);},[liveAppsTheme]);
     useEffect(() => { setTopBarButtonsPath(`Themes/${themeRegistry[topBarIconTheme]["Components"]["TopBarButtons"]}`);},[topBarIconTheme]);
-    //useEffect(() => { setDialogButtonsPath(`Themes/${themeRegistry[dialogButtonTheme]["Components"]["DialogButtons"]}`);},[dialogButtonTheme]);
+    useEffect(() => { setDialogButtonPath(`Themes/${themeRegistry[dialogButtonTheme]["Components"]["DialogButton"]}`);},[dialogButtonTheme]);
 
     const contextValue = {
         mode,
@@ -184,6 +187,7 @@ export function ThemeProvider({ children }) {
         dialogButtonTheme,
         dialogButtonThemeList,
         setDialogButtonTheme,
+        DialogButtonPath,
         backgroundFXList,
         windowBackgroundFX,
         setWindowBackgroundFX,

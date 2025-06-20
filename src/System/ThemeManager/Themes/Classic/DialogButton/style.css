@@ -1,0 +1,24 @@
+
+.appDialogButtonClassic {
+    display: flex;
+    background: var(--DialogButtonBkgr);
+    font-size: var(--DialogButtonFontSize);
+    border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) var(--DialogButtonBorderType);
+    border-radius: var(--DialogButtonBorderRadius);
+    color: var(--DialogButtonFontColor);
+    font-family: inherit;
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.appDialogButtonClassic:hover:enabled {
+    color: var(--DialogButtonFontColor);
+    background: var(--DialogButtonBkgr);
+}
+
+.appDialogButtonClassic:active:enabled {
+    color: var(--DialogButtonFontColor);
+    background: var(--DialogButtonBkgr);
+    border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) inset;
+}

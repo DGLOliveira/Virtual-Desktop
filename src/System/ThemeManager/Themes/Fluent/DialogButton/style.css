@@ -1,0 +1,11 @@
+.appDialogButtonFluent {
+    background: var(--DialogButtonBkgr);
+    font-size: var(--DialogButtonFontSize);
+    border: var(--DialogButtonBorderWidth) var(--DialogButtonBorderColor) var(--DialogButtonBorderType);
+    border-radius: var(--DialogButtonBorderRadius);
+}
+
+.appDialogButtonFluentRed:hover:enabled {
+    color: white;
+    background: red;
+}
