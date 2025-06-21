@@ -1,0 +1,9 @@
+.liveAppsClassicActive {
+    background-color: var(--LiveAppsBkgrActive);
+    border: var(--LiveAppsBorderWidth) var(--LiveAppsBorderColor) inset;
+}
+
+.liveAppsClassic:active:enabled {
+    background-color: var(--LiveAppsBkgrActive);
+    border: var(--LiveAppsBorderWidth) var(--LiveAppsBorderColor) inset;
+}

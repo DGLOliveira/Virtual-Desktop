@@ -20,7 +20,8 @@
         "Components": {
             "StartButton": "Fluent/StartButton/content.jsx",
             "TopBarButtons": "Fluent/TopBarButtons/content.jsx",
-            "DialogButton": "Fluent/DialogButton/content.jsx"
+            "DialogButton": "Fluent/DialogButton/content.jsx",
+            "LiveAppButton": "Fluent/LiveAppButton/content.jsx"
         }
     },
     "Aero": {
@@ -44,7 +45,8 @@
         "Components": {
             "StartButton": "Aero/StartButton/content.jsx",
             "TopBarButtons": "Aero/TopBarButtons/content.jsx",
-            "DialogButton": "Aero/DialogButton/content.jsx"
+            "DialogButton": "Aero/DialogButton/content.jsx",
+            "LiveAppButton": "Aero/LiveAppButton/content.jsx"
         }
     },
     "Aqua": {
@@ -68,7 +70,8 @@
         "Components": {
             "StartButton": "Aqua/StartButton/content.jsx",
             "TopBarButtons": "Aqua/TopBarButtons/content.jsx",
-            "DialogButton": "Aqua/DialogButton/content.jsx"
+            "DialogButton": "Aqua/DialogButton/content.jsx",
+            "LiveAppButton": "Aqua/LiveAppButton/content.jsx"
         }
     },
     "Classic": {
@@ -92,7 +95,8 @@
         "Components": {
             "StartButton": "Classic/StartButton/content.jsx",
             "TopBarButtons": "Classic/TopBarButtons/content.jsx",
-            "DialogButton": "Classic/DialogButton/content.jsx"
+            "DialogButton": "Classic/DialogButton/content.jsx",
+            "LiveAppButton": "Classic/LiveAppButton/content.jsx"
         }
     }
 }
