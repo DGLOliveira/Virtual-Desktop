@@ -198,7 +198,6 @@ export const AppTopBar = ({ appName, title, setAction }) => {
                 )}>
                 {title === "" || title === "Untitled" ? appName : `${title}`}
             </h1>
-            {deviceContext.deviceType === "Desktop" &&
                 <Suspense fallback={null}>
                     <TopBarButtons
                         title={topBarButtonTitles}
@@ -206,7 +205,6 @@ export const AppTopBar = ({ appName, title, setAction }) => {
                         isMaximized={appContext.apps[appName].State.isMaximized}
                     />
                 </Suspense>
-            }
         </app-top-bar>
     )
 

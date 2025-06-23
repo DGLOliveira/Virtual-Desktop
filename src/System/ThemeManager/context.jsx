@@ -127,6 +127,7 @@ export function ThemeProvider({ children }) {
         );
     };
 
+    //Updates all variables when global theme is changed
     const switchTheme = (value) => {
         changeRootVars(value);
         setStartButtonTheme(value);
@@ -142,12 +143,14 @@ export function ThemeProvider({ children }) {
         setDialogButtonsLocation(themeRegistry[value]["Locations"]["DialogButtons"]);
     };
 
+    //Gets CSS variables for background FX
     function getFXvalues(value) {
         return new Promise((resolve) => {
             resolve(import(`./FX/Backgrounds/${fxRegistry["Backgrounds"][value]}`));
         })
     }
 
+    //Updates CSS variables for background FX
     async function switchFX(target, value) {
         const newFX = await getFXvalues(value);
         Object.keys(newFX).forEach((key) => 

@@ -1,6 +1,8 @@
 //For each App that is currently open, this component generates a window for it.
+/*For mobile devices, this can also acts as a display for all the open apps at the same time
+ as a substitute for the taskbar live apps component, as well as the close function for each app*/
 
-import { useContext } from "react";
+ import { useContext } from "react";
 import { AppContext } from "./Context/context.jsx";
 import { DeviceContext } from "../DeviceManager/context.jsx";
 import { AppBody } from "./Components/AppBody.jsx";
@@ -10,12 +12,26 @@ export function AppHandler() {
   const appContext = useContext(AppContext);
   const deviceContext = useContext(DeviceContext);
 
+  const handleClick = (e, name) =>{
+    if(deviceContext.virtualOSState.display === "liveApps"){
+      e.stopPropagation();
+      deviceContext.setVirtualOSState({...deviceContext.virtualOSState, display: "none"});
+    }
+    appContext.setSelected(name);
+  }
+
   return (
-    <>
-      {Object.keys(appContext.apps).map((name) =>
+    <windows-container
+      style={{
+        background: deviceContext.virtualOSState.display == "liveApps" ? "hsla(0, 0%, 0%, 0.5)" : "transparent",
+        boxShadow: deviceContext.virtualOSState.display == "liveApps" ? "0 0 200px 0 hsla(0, 0%, 0%, 1) inset" : "none",
+      }}
+    >
+      {Object.keys(appContext.apps).sort((a, b) => appContext.apps[b].Location.zIndex - appContext.apps[a].Location.zIndex).map((name) =>
       (
         <app-window
           style={{
+            position: deviceContext.virtualOSState.display == "liveApps" ? "relative" : "absolute",
             zIndex: appContext.apps[name].Location.zIndex,
             top: deviceContext.deviceType !== "Desktop"
               ? "0"
@@ -45,12 +61,13 @@ export function AppHandler() {
               || appContext.apps[name].State.isMaximized)
               ? "0"
               : "var(--WindowBorderRadius)",
-            visibility: appContext.apps[name].State.isMinimized
-              ? "hidden"
-              : "visible",
+            visibility: deviceContext.virtualOSState.display == "liveApps" ? 
+            "visible" :  
+            (appContext.apps[name].State.isMinimized ? "hidden" : "visible"),
+            scale: deviceContext.virtualOSState.display == "liveApps" ? "0.8" : "1",
           }}
           key={name + "AppHandler"}
-          onClick={() => appContext.setSelected(name)}
+          onClick={(e) => handleClick(e, name)}
           onContextMenu={(e) => e.preventDefault()}
           onDrop={(e) => e.preventDefault()}
         >
@@ -62,6 +79,6 @@ export function AppHandler() {
         </app-window>
       )
       )}
-    </>
+    </windows-container>
   );
 }

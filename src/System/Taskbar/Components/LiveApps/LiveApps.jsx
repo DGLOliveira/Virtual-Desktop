@@ -1,5 +1,4 @@
 import { useState, useContext, useCallback, lazy, Suspense, Fragment } from "react";
-import { createPortal } from "react-dom";
 import { DeviceContext } from "../../../DeviceManager/context.jsx";
 import { ThemeContext } from "../../../ThemeManager/context.jsx";
 import { ContextMenuContext } from "../../../ContextMenuManager/context.jsx";
@@ -27,7 +26,6 @@ export const LiveApps = () => {
     if (appContext.apps[name].State.isMinimized) {
       appContext.switchMinimized(name)
     };
-    setOpen(false);
   };
 
   const handleContextMenu = (e, appName) => {
@@ -46,7 +44,7 @@ export const LiveApps = () => {
       <button
         onClick={click}
         onContextMenu={(e) => { context(e) }}
-        aria-label={"Live App" + name }
+        aria-label={"Live App" + name}
       >
         <AppIcon appName={name} />
         <span>{name}</span>
@@ -87,36 +85,21 @@ export const LiveApps = () => {
         deviceContext.deviceType === "Mobile" ||
         deviceContext.deviceType === "TV") &&
         <live-apps-button>
-          <button onClick={() => setOpen(!open)}>
+          <button
+            onClick={() => deviceContext.setVirtualOSState({
+              ...deviceContext.virtualOSState,
+              display: deviceContext.virtualOSState.display === "none" ? "liveApps" : "none"
+            })}
+          >
             <div>
-              <live-apps-button-circle class={open ? "live-apps-button-circle-red" : "live-apps-button-circle-off"} />
-              <live-apps-button-circle class={open ? "live-apps-button-circle-green" : "live-apps-button-circle-off"} />
+              <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-red" : "live-apps-button-circle-off"} />
+              <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-green" : "live-apps-button-circle-off"} />
             </div>
             <div>
-              <live-apps-button-circle class={open ? "live-apps-button-circle-blue" : "live-apps-button-circle-off"} />
-              <live-apps-button-circle class={open ? "live-apps-button-circle-white" : "live-apps-button-circle-off"} />
+              <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-blue" : "live-apps-button-circle-off"} />
+              <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-white" : "live-apps-button-circle-off"} />
             </div>
           </button>
-          {open && createPortal(
-            <live-apps-menu style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", left: "0", top: "0", width: "100%", height: "100%", background: "hsla(0, 0%, 0%, 1)", zIndex: "999" }}>
-              {Object.keys(appContext.apps).map((name, index, arr) =>
-              (
-                <button
-                  onClick={() => handlePreviewClick(name)}
-                  onContextMenu={(e) => handleContextMenu(e, name)}
-                  className={LiveAppsClass(appContext.apps[name].State.isSelected)}
-                  key={name + "liveAppsButton"}
-                  aria-label={"Live App" + { name }}
-                >
-                  <AppIcon appName={name} />
-                  <span>{name}</span>
-                  {themeContext.liveAppsTheme === "Aqua" && <AppIcon appName={name} />}
-                </button>
-              )
-              )}
-            </live-apps-menu>,
-            document.getElementsByTagName("desk-top")[0]
-          )}
         </live-apps-button>}
     </>
   );

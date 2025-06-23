@@ -1,4 +1,3 @@
-import { get } from "ol/proj";
 import { useState, useEffect, createContext } from "react";
 
 export const DeviceContext = createContext({
@@ -9,6 +8,11 @@ export const DeviceContext = createContext({
     deviceType: "Desktop",
     setDeviceType: () => { },
     deviceTypeList: [],
+    virtualOSState: {
+        isBusy: false,
+        display: "none",
+    },
+    setVirtualOSState: () => { },
 });
 
 export function DeviceProvider({ browserInfo, deviceInfo, children }) {
@@ -28,6 +32,10 @@ export function DeviceProvider({ browserInfo, deviceInfo, children }) {
     };
     const [deviceType, setDeviceType] = useState(getDeviceType);
     const deviceTypeList = ["Desktop", "TV", "Mobile", "Tablet"];
+    const [virtualOSState, setVirtualOSState] = useState({
+        isBusy: false,
+        display: "none",
+    });
 
 
     const contextValue = {
@@ -37,7 +45,9 @@ export function DeviceProvider({ browserInfo, deviceInfo, children }) {
         setBrowser,
         deviceType,
         setDeviceType,
-        deviceTypeList
+        deviceTypeList,
+        virtualOSState,
+        setVirtualOSState
     };
 
     return (

@@ -1,5 +1,13 @@
+windows-container{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+}
+
 app-window {
-    position: absolute;
     display: flex;
     flex-direction: column;
     overflow: hidden;
