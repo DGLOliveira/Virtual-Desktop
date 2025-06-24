@@ -86,18 +86,23 @@ export const LiveApps = () => {
         deviceContext.deviceType === "TV") &&
         <live-apps-button>
           <button
+            style={{
+              width: deviceContext.deviceType === "Desktop" ? "auto" : "100%"
+            }}
             onClick={() => deviceContext.setVirtualOSState({
               ...deviceContext.virtualOSState,
               display: deviceContext.virtualOSState.display === "none" ? "liveApps" : "none"
             })}
           >
             <div>
-              <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-red" : "live-apps-button-circle-off"} />
-              <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-green" : "live-apps-button-circle-off"} />
-            </div>
-            <div>
-              <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-blue" : "live-apps-button-circle-off"} />
-              <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-white" : "live-apps-button-circle-off"} />
+              <div>
+                <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-red" : "live-apps-button-circle-off"} />
+                <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-green" : "live-apps-button-circle-off"} />
+              </div>
+              <div>
+                <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-blue" : "live-apps-button-circle-off"} />
+                <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-white" : "live-apps-button-circle-off"} />
+              </div>
             </div>
           </button>
         </live-apps-button>}

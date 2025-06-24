@@ -79,22 +79,26 @@ live-apps-button>button {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: var(--LiveAppsIconSize);
-    width: var(--LiveAppsIconSize);
+    height: 100%;
     margin: 0;
     padding: 0;
 }
 
-live-apps-button>button>div {
+live-apps-button>button>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: var(--TaskbarHeight);
+    width: var(--TaskbarHeight);
+}
+
+live-apps-button>button>div>div {
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-}
-
-live-apps-button>button:hover:enabled{
-    background: none;
 }
 
 live-apps-button-circle {
@@ -102,29 +106,29 @@ live-apps-button-circle {
     height: calc(var(--LiveAppsIconSize)/3);
     border-radius: 50%;
     border: 1px dimgray solid;
-    background: transparent;
-    transition: 0.15s;
+    background: hsla(0, 0%, 0%, 0);
+    transition: 0.3s;
 }
 
 
-live-apps-button:hover>button>div:first-child>live-apps-button-circle:first-child {
+live-apps-button:hover>button>div>div:first-child>live-apps-button-circle:first-child {
     background-color: hsla(0, 100%, 50%, 1);
 }
 
-live-apps-button:hover>button>div:first-child>live-apps-button-circle:last-child {
+live-apps-button:hover>button>div>div:first-child>live-apps-button-circle:last-child {
     background-color: hsla(120, 61%, 50%, 1);
 }
 
-live-apps-button:hover>button>div:last-child>live-apps-button-circle:first-child {
+live-apps-button:hover>button>div>div:last-child>live-apps-button-circle:first-child {
     background-color: hsla(240, 100%, 50%, 1);
 }
 
-live-apps-button:hover>button>div:last-child>live-apps-button-circle:last-child {
+live-apps-button:hover>button>div>div:last-child>live-apps-button-circle:last-child {
     background-color: hsla(0, 0%, 100%, 1);
 }
 
 .live-apps-button-circle-off{
-    background-color: transparent;
+    background-color: hsla(0, 0%, 0%, 0);
 }
 
 .live-apps-button-circle-red{

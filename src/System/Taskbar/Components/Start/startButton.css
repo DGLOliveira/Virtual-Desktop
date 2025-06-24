@@ -42,16 +42,17 @@ start-button>button>svg {
 start-button>button>svg>.hex {
     transform-box: fill-box;
     transform-origin: center;
+    fill:#00000000;
 }
 
 start-button>button:hover>svg>.hex1 {
-    fill: #FF0000;
+    fill: #FF0000FF;
 }
 
 start-button>button:hover>svg>.hex2 {
-    fill: #00FF00;
+    fill: #00FF00FF;
 }
 
 start-button>button:hover>svg>.hex3 {
-    fill: #0000FF;
+    fill: #0000FFFF;
 }
