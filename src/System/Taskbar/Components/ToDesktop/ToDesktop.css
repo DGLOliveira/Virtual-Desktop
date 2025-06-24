@@ -1,5 +1,9 @@
+to-desktop-button{
+    min-width: calc(var(--TaskbarHeight)/1.5);
+}
 to-desktop-button>button{
     height: 100%;
     width: 100%;
     writing-mode:vertical-rl;
+    font-size: calc(var(--TaskbarHeight)/3);
 }

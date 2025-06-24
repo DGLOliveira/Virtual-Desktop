@@ -10,6 +10,7 @@ import { setSizeDefaultHandler } from "./Handlers/setSizeDefaultHandler.js";
 import { setResizeHandler } from "./Handlers/setResizeHandler.js";
 import { switchMinimizedHandler } from "./Handlers/switchMinimizedHandler.js";
 import { switchMaximizedHandler } from "./Handlers/switchMaximizedHandler.js";
+import { setMinimizeAll } from "./Handlers/minimizeAll.js";
 
 export const AppContext = createContext({
   apps: {},
@@ -24,6 +25,7 @@ export const AppContext = createContext({
   setDefaultSize: () => {},
   switchMinimized: () => {},
   switchMaximized: () => {},
+  minimizeAll: () => {},
 });
 
 export function AppProvider({ children }) {
@@ -82,6 +84,10 @@ export function AppProvider({ children }) {
     switchMinimizedHandler(name, appStatus, setAppStatus);
   }
 
+  const minimizeAll = () => {
+    setMinimizeAll(appStatus, setAppStatus);
+  }
+
   const contextValue = {
     apps: appStatus,
     setOpen,
@@ -95,6 +101,7 @@ export function AppProvider({ children }) {
     setDefaultSize,
     switchMinimized,
     switchMaximized,
+    minimizeAll
   };
 
   return (

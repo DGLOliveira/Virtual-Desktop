@@ -8,9 +8,7 @@ export const ToDesktop = () => {
     const appContext = useContext(AppContext);
     const handleClick = () => {
         deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: "none" });
-        Object.keys(appContext.apps).forEach((name) => {
-            !appContext.apps[name].State.isMinimized && appContext.switchMinimized(name);
-        });
+        appContext.minimizeAll();
     }
 
     return (
@@ -25,7 +23,7 @@ export const ToDesktop = () => {
                 onClick={handleClick}
                 title="To Desktop (Ctrl + ❖)"
             >
-                {deviceContext.deviceType !== "Desktop" && ">>>"}
+                {">>>"}
                 </button>
         </to-desktop-button>
     );
