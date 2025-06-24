@@ -304,6 +304,7 @@
 
 body {
   background-color: var(--DesktopBkgrColor);
+  overscroll-behavior: contain;
 }
 
 body>* {
