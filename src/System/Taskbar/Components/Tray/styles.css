@@ -1,0 +1,71 @@
+taskbar-tray {
+  display: flex;
+  flex-direction: row;
+  background: var(--TaskbarTrayBkgr);
+  padding: var(--TaskbarTrayPadding);
+  margin: var(--TaskbarTrayMargin);
+  border: var(--TaskbarTrayBorderColor) var(--TaskbarTrayBorderWidth) var(--TaskbarTrayBorderType);
+  border-radius: var(--TaskbarTrayBorderRadius);
+}
+
+taskbar-tray>button {
+  color: var(--TaskbarTrayButtonColor);
+  background: var(--TaskbarTrayButtonBkgr);
+  margin: var(--TaskbarTrayButtonMargin);
+  padding: var(--TaskbarTrayButtonPadding);
+  border: var(--TaskbarTrayButtonBorderColor) var(--TaskbarTrayButtonBorderWidth) var(--TaskbarTrayButtonBorderType);
+  border-radius: var(--TaskbarTrayButtonBorderRadius);
+}
+
+taskbar-tray>button:hover {
+  color: var(--TaskbarTrayButtonColorHover);
+  background: var(--TaskbarTrayButtonBkgrHover);
+}
+
+taskbar-tray>button:active {
+  color: var(--TaskbarTrayButtonColorActive);
+  background: var(--TaskbarTrayButtonBkgrActive);
+}
+
+taskbar-tray>button>svg {
+  width: var(--TaskbarIconSize);
+  height: var(--TaskbarIconSize);
+}
+
+mobile-tray {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  order: -1;
+  background-color: var(--TaskbarBkgr);
+  background-image: var(--TaskbarBkgrImage);
+  background-position: var(--TaskbarBkgrPosition);
+  background-size: var(--TaskbarBkgrSize);
+  background-repeat: var(--TaskbarBkgrRepeat);
+  backdrop-filter: var(--TaskbarBackdropFilter);
+  border-top: var(--TaskbarHorizontalBorderWidth) var(--TaskbarHorizontalBorderColor) var(--TaskbarHorizontalBorderType);
+}
+
+mobile-tray>button {
+  color: var(--TaskbarTrayButtonColor);
+  background: var(--TaskbarTrayButtonBkgr);
+  margin: var(--TaskbarTrayButtonMargin);
+  padding: var(--TaskbarTrayButtonPadding);
+  border: var(--TaskbarTrayButtonBorderColor) var(--TaskbarTrayButtonBorderWidth) var(--TaskbarTrayButtonBorderType);
+  border-radius: var(--TaskbarTrayButtonBorderRadius);
+}
+
+mobile-tray>button:hover {
+  color: var(--TaskbarTrayButtonColorHover);
+  background: var(--TaskbarTrayButtonBkgrHover);
+}
+
+mobile-tray>button:active {
+  color: var(--TaskbarTrayButtonColorActive);
+  background: var(--TaskbarTrayButtonBkgrActive);
+}
+
+mobile-tray>button>svg {
+  width: var(--TaskbarIconSize);
+  height: var(--TaskbarIconSize);
+}

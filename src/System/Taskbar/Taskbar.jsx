@@ -3,9 +3,7 @@
 import { useState, useContext } from "react";
 import { StartButton } from "./Components/Start/StartButton.jsx";
 import { LiveApps } from "./Components/LiveApps/LiveApps.jsx";
-import { TaskbarClock } from "./Components/Clock/index.jsx";
-import { Weather } from "./Components/Weather/index.jsx";
-import { DeviceSet } from "./Components/DeviceSet/index.jsx";
+import { Tray } from "./Components/Tray/Tray.jsx";
 import { ToDesktop } from "./Components/ToDesktop/ToDesktop.jsx";
 import { ContextMenuContext } from "../ContextMenuManager/context.jsx";
 import { AppContext } from "./../AppManager/Context/context.jsx";
@@ -44,12 +42,13 @@ export function Taskbar() {
       <vertical-rect />
       <LiveApps />
       <vertical-rect />
-      <taskbar-tray>
-        {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
-        <DeviceSet />
-        {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}
-      </taskbar-tray>
-      <vertical-rect />
+      <Tray
+        showWeather={showWeather}
+        setShowWeather={setShowWeather}
+        showClock={showClock}
+        setShowClock={setShowClock}
+        contextMenu={contextMenu}
+      />
       <ToDesktop />
     </task-bar>
   );
