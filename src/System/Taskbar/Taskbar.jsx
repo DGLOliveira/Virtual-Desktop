@@ -6,6 +6,7 @@ import { LiveApps } from "./Components/LiveApps/LiveApps.jsx";
 import { TaskbarClock } from "./Components/Clock/index.jsx";
 import { Weather } from "./Components/Weather/index.jsx";
 import { DeviceSet } from "./Components/DeviceSet/index.jsx";
+import { ToDesktop } from "./Components/ToDesktop/ToDesktop.jsx";
 import { ContextMenuContext } from "../ContextMenuManager/context.jsx";
 import { AppContext } from "./../AppManager/Context/context.jsx";
 import "./styles.css";
@@ -48,6 +49,8 @@ export function Taskbar() {
         <DeviceSet />
         {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}
       </taskbar-tray>
+      <vertical-rect />
+      <ToDesktop />
     </task-bar>
   );
 }
