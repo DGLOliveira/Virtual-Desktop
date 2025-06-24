@@ -2,7 +2,7 @@
 /*For mobile devices, this can also acts as a display for all the open apps at the same time
  as a substitute for the taskbar live apps component, as well as the close function for each app*/
 
- import { useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "./Context/context.jsx";
 import { DeviceContext } from "../DeviceManager/context.jsx";
 import { AppBody } from "./Components/AppBody.jsx";
@@ -24,9 +24,12 @@ export function AppHandler() {
     <windows-container
       style={{
         background: deviceContext.virtualOSState.display == "liveApps" ? "hsla(0, 0%, 0%, 0.5)" : "transparent",
-        boxShadow: deviceContext.virtualOSState.display == "liveApps" ? "0 0 200px 0 hsla(0, 0%, 0%, 1) inset" : "none",
+        boxShadow: deviceContext.virtualOSState.display == "liveApps" ? "0 0 200px 0 hsla(0, 0%, 0%, 1) inset" : "0 0 0px 0 hsla(0, 0%, 0%, 1) inset",
       }}
     >
+      {Object.keys(appContext.apps).length === 0 && deviceContext.virtualOSState.display === "liveApps" && (
+        <no-apps>No apps open</no-apps>
+      )}
       {Object.keys(appContext.apps).sort((a, b) => appContext.apps[b].Location.zIndex - appContext.apps[a].Location.zIndex).map((name) =>
       (
         <app-window
