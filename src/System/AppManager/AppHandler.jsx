@@ -18,13 +18,17 @@ export function AppHandler() {
       deviceContext.setVirtualOSState({...deviceContext.virtualOSState, display: "none"});
     }
     appContext.setSelected(name);
+    if(appContext.apps[name].State.isMinimized){
+      appContext.switchMinimized(name);
+    };
   }
-
+  
   return (
     <windows-container
       style={{
-        background: deviceContext.virtualOSState.display == "liveApps" ? "hsla(0, 0%, 0%, 0.5)" : "transparent",
-        boxShadow: deviceContext.virtualOSState.display == "liveApps" ? "0 0 200px 0 hsla(0, 0%, 0%, 1) inset" : "0 0 0px 0 hsla(0, 0%, 0%, 1) inset",
+        background: deviceContext.virtualOSState.display === "liveApps" ? "hsla(0, 0%, 0%, 0.5)" : "transparent",
+        boxShadow: deviceContext.virtualOSState.display === "liveApps" ? "0 0 200px 0 hsla(0, 0%, 0%, 1) inset" : "0 0 0px 0 hsla(0, 0%, 0%, 1) inset",
+        pointerEvents: deviceContext.virtualOSState.display === "liveApps" ? "all" : "none",
       }}
     >
       {Object.keys(appContext.apps).length === 0 && deviceContext.virtualOSState.display === "liveApps" && (
@@ -68,6 +72,7 @@ export function AppHandler() {
             "visible" :  
             (appContext.apps[name].State.isMinimized ? "hidden" : "visible"),
             scale: deviceContext.virtualOSState.display == "liveApps" ? "0.8" : "1",
+            pointerEvents: "all",
           }}
           key={name + "AppHandler"}
           onClick={(e) => handleClick(e, name)}

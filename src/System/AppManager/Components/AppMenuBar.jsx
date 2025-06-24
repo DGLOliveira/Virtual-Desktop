@@ -4,11 +4,13 @@ It receives the action to be triggered when the user clicks on the menu bar.
 It also receives the content of the menu bar as a json object in order to be displayed.
 */
 
-import { useState, useEffect, useCallback, Fragment } from "react";
+import { useState, useEffect, useCallback, useContext, Fragment } from "react";
+import { DeviceContext } from "./../../../System/DeviceManager/context.jsx";
 import parseKeybinds from "./../Handlers/parseKeybinds.js";
 import "../Styles/MenuBar.css";
 
 export const AppMenuBar = ({ isSelected, setAction, appMenu }) => {
+    const device = useContext(DeviceContext);
     const [menuState, setMenuState] = useState(false);
     /*useEffect(() => {
         (import(`./../../../Apps/${appName}/appData.json`)).then(appData => {setAppMenu(appData.default.menu)}).catch(
@@ -52,7 +54,9 @@ export const AppMenuBar = ({ isSelected, setAction, appMenu }) => {
         <nav 
         className="appMenuBar" 
         style={{
-            backgroundColor: isSelected ? "var(--WindowMenuNavBkgr)": "var(--WindowMenuNavBkgrInactive)"}}
+            backgroundColor: isSelected ? "var(--WindowMenuNavBkgr)": "var(--WindowMenuNavBkgrInactive)",
+              pointerEvents: device.virtualOSState.display === "liveApps" ? "none" : "all"
+            }}
         onBlur={(e) => handleBlur(e)}
         >
             {Object.keys(appMenu).map((name, index) => (

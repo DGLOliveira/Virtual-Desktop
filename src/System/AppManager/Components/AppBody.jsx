@@ -85,6 +85,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
               marginBottom: device.deviceType !== "Desktop" ? "0" : "var(--WindowPadding)",
               height: device.deviceType !== "Desktop" ? "100%" : "calc(100% - var(--WindowPadding))",
               width: device.deviceType !== "Desktop" ? "100%" : "calc(100% -  2 *var(--WindowPadding))",
+              pointerEvents: device.virtualOSState.display === "liveApps" ? "none" : "all",
             }}>
             {appMenu && theme.navMenuLocation === "in app" &&
               <AppMenuBar
