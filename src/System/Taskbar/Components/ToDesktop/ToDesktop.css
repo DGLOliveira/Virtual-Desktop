@@ -1,4 +1,5 @@
-to-desktop>button{
+to-desktop-button>button{
     height: 100%;
     width: 100%;
+    writing-mode:vertical-rl;
 }

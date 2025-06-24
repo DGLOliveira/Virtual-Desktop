@@ -14,11 +14,19 @@ export const ToDesktop = () => {
     }
 
     return (
-        <to-desktop>
+        <to-desktop-button
+            style={{
+                display: deviceContext.deviceType !== "Desktop" ? "flex" : "auto",
+                width: deviceContext.deviceType !== "Desktop" ? "100%" : "auto",
+            }}
+        >
             <button
+
                 onClick={handleClick}
                 title="To Desktop (Ctrl + ❖)"
-            />
-        </to-desktop>
+            >
+                {deviceContext.deviceType !== "Desktop" && ">>>"}
+                </button>
+        </to-desktop-button>
     );
 }
