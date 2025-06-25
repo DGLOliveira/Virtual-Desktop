@@ -90,7 +90,7 @@ export const LiveApps = () => {
             }}
             onClick={() => deviceContext.setVirtualOSState({
               ...deviceContext.virtualOSState,
-              display: deviceContext.virtualOSState.display === "none" ? "liveApps" : "none"
+              display: deviceContext.virtualOSState.display === "liveApps" ? "none" : "liveApps"
             })}
           >
             <div>

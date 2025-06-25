@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useCallback, lazy, Suspense } from "re
 import { DeviceContext } from "../../../DeviceManager/context.jsx";
 import { ThemeContext } from "../../../ThemeManager/context.jsx";
 import { StartList } from "./StartList.js";
+import { StartListMobile } from "./StartListMobile.jsx";
 import "./startButton.css";
 
 export const StartButton = () => {
@@ -67,16 +68,16 @@ export const StartButton = () => {
 
 
   const handleBlur = (event) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
+    if (!event.currentTarget.contains(event.relatedTarget)
+    && deviceContext.deviceType === "Desktop") {
       setIsOpen(false);
     }
   }
 
   const handleClick = () => {
     setIsOpen(!isOpen);
-    if(deviceContext.virtualOSState.display === "liveApps"){
-      deviceContext.setVirtualOSState({...deviceContext.virtualOSState, display: "none"});
-    };
+    deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: isOpen ? "none" : "startList" });
+
   };
 
   const handleEventListener = (event) => {
@@ -92,13 +93,23 @@ export const StartButton = () => {
     return () => removeEventListener("keydown", handleEventListener);
   }, [handleEventListener])
 
+  useEffect(()=>{
+    if(deviceContext.virtualOSState.display !== "startList"){
+      setIsOpen(false);
+    }
+  },[deviceContext.virtualOSState.display])
+
   return (
     <start-button
       style={{
         width: deviceContext.deviceType === "Desktop" ? "auto" : "100%"
       }}
-      onBlur={(e) => handleBlur(e)}>
-      <StartList isOpen={isOpen} />
+      onBlur={(e) => handleBlur(e)
+      }>
+      {deviceContext.deviceType === "Desktop"
+        ? <StartList isOpen={isOpen} />
+        : <StartListMobile isOpen={isOpen} setIsOpen={setIsOpen} />
+      }
       <button
         onClick={handleClick}
         style={{
