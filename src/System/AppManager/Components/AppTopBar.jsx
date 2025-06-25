@@ -16,6 +16,11 @@ export const AppTopBar = ({ appName, title, setAction }) => {
     const appContext = useContext(AppContext);
     const contextMenu = useContext(ContextMenuContext);
     const themeContext = useContext(ThemeContext);
+    const [showButtons, setShowButtons] = useState({
+        close: true,
+        minimize: true,
+        maximize: true,
+    });
     const [cursor, setCursor] = useState("grab");
     const [cursorToWindowDiff, setCursorToWindowDiff] = useState({ x: 0, y: 0 });
 
@@ -109,14 +114,15 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         close: "Close (Ctrl + Shift + F4)"
     };
 
-    const TopBarButtonsDefault = ({ click, title, isMaximized }) =>{
+    const TopBarButtonsDefault = ({ click, title, isMaximized, showButtons }) =>{
         return(
         <>
-            <button
+            {showButtons.minimize && <button
                 onClick={(e) => (e.stopPropagation(), click("Minimize"))}
                 title={title.minimize}>
                 <FaRegWindowMinimize />
-            </button>
+            </button>}
+            {showButtons.maximize && 
             <button
                 onClick={(e) => (e.stopPropagation(), click("Maximize"))}
                 title={isMaximized ? title.restore : title.maximize}>
@@ -125,12 +131,13 @@ export const AppTopBar = ({ appName, title, setAction }) => {
                 ) : (
                     <FaWindowMaximize />
                 )}
-            </button>
+            </button>}
+            {showButtons.close && 
             <button
                 onClick={(e) => (e.stopPropagation(), click("Close"))}
                 title={title.close}>
                 <RiCloseLargeLine />
-            </button>
+            </button>}
         </>
     )};
 
@@ -173,6 +180,14 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         return () => document.removeEventListener("keydown", handleKeybinds);
     }, [handleKeybinds]);
 
+    useEffect(() => {
+        if(deviceContext.deviceType !== "Desktop") {
+            setShowButtons({ close: true, minimize: false, maximize: false });
+        }else{
+            setShowButtons({ close: true, minimize: true, maximize: true });
+        }
+    }, [deviceContext.deviceType]);
+
     return (
         <app-top-bar
             style={{
@@ -203,6 +218,7 @@ export const AppTopBar = ({ appName, title, setAction }) => {
                         title={topBarButtonTitles}
                         click={handleTopBarButtonClick}
                         isMaximized={appContext.apps[appName].State.isMaximized}
+                        showButtons={showButtons}
                     />
                 </Suspense>
         </app-top-bar>

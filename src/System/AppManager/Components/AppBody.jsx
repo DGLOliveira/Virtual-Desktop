@@ -53,7 +53,7 @@ export const AppBody = ({ appName, isSelected, setClose }) => {
 
   return (
     <>
-      {device.deviceType === "Desktop" &&
+      {(device.deviceType === "Desktop" || device.virtualOSState.display === "liveApps") &&
         <AppTopBar
           appName={appName}
           title={title}
