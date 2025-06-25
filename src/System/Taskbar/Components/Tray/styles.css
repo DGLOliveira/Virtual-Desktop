@@ -69,3 +69,18 @@ mobile-tray>button>svg {
   width: var(--TaskbarIconSize);
   height: var(--TaskbarIconSize);
 }
+
+mobile-tray-fullscreen {
+  position: absolute;
+  left:0;
+  width:100%;
+  height:100%;
+  background: var(--TaskbarBkgr);
+  background-image: var(--TaskbarBkgrImage);
+  background-position: var(--TaskbarBkgrPosition);
+  background-size: var(--TaskbarBkgrSize);
+  background-repeat: var(--TaskbarBkgrRepeat);
+  backdrop-filter: var(--TaskbarBackdropFilter);
+  border-top: var(--TaskbarHorizontalBorderWidth) var(--TaskbarHorizontalBorderColor) var(--TaskbarHorizontalBorderType);
+  transition: 0.3s;
+}
