@@ -44,6 +44,7 @@ mobile-tray {
   background-repeat: var(--TaskbarBkgrRepeat);
   backdrop-filter: var(--TaskbarBackdropFilter);
   border-top: var(--TaskbarHorizontalBorderWidth) var(--TaskbarHorizontalBorderColor) var(--TaskbarHorizontalBorderType);
+  cursor: grab;
 }
 
 mobile-tray>button {
@@ -53,16 +54,7 @@ mobile-tray>button {
   padding: var(--TaskbarTrayButtonPadding);
   border: var(--TaskbarTrayButtonBorderColor) var(--TaskbarTrayButtonBorderWidth) var(--TaskbarTrayButtonBorderType);
   border-radius: var(--TaskbarTrayButtonBorderRadius);
-}
-
-mobile-tray>button:hover {
-  color: var(--TaskbarTrayButtonColorHover);
-  background: var(--TaskbarTrayButtonBkgrHover);
-}
-
-mobile-tray>button:active {
-  color: var(--TaskbarTrayButtonColorActive);
-  background: var(--TaskbarTrayButtonBkgrActive);
+  pointer-events: none;
 }
 
 mobile-tray>button>svg {
@@ -83,4 +75,30 @@ mobile-tray-fullscreen {
   backdrop-filter: var(--TaskbarBackdropFilter);
   border-top: var(--TaskbarHorizontalBorderWidth) var(--TaskbarHorizontalBorderColor) var(--TaskbarHorizontalBorderType);
   transition: 0.3s;
+}
+mobile-tray-fullscreen>div:first-child{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  order: -1;
+}
+mobile-tray-fullscreen>div:last-child{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+mobile-tray-fullscreen>div>button {
+  color: var(--TaskbarTrayButtonColor);
+  background: var(--TaskbarTrayButtonBkgr);
+  margin: var(--TaskbarTrayButtonMargin);
+  padding: var(--TaskbarTrayButtonPadding);
+  border: var(--TaskbarTrayButtonBorderColor) var(--TaskbarTrayButtonBorderWidth) var(--TaskbarTrayButtonBorderType);
+  border-radius: var(--TaskbarTrayButtonBorderRadius);
+}
+mobile-tray-fullscreen>div>button>svg {
+  width: var(--TaskbarIconSize);
+  height: var(--TaskbarIconSize);
 }
