@@ -79,20 +79,22 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                                     ? (dragY.current - dragY.start > 0 ? `${-heightOffset + dragY.current - dragY.start}px` : "0")
                                     : (dragY.current - dragY.start < 0 ? "calc(-100% + var(--MobileTrayHeight) + var(--TaskbarHeight))" : `${-heightOffset - availableHeight + dragY.current - dragY.start}px`)
                                 : device.virtualOSState.display === "tray" ? "0" : "calc(-100% + var(--MobileTrayHeight) + var(--TaskbarHeight))",
+                            borderRadius: device.virtualOSState.display === "tray" ? "0 0 0 0" : " 0 0 var(--MobileTrayHorizontalBorderRadius) var(--MobileTrayHorizontalBorderRadius)"
                         }}
                         draggable="true"
                         onDragStart={(e) => handleDragStart(e)}
                         onDrag={(e) => handleDrag(e)}
                         onDragEnd={(e) => handleDragEnd(e)}
                     >
-                        <div>
+                        <mobile-tray-system>
+                            <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />
+                            <DeviceSet />
                             <button
                                 onClick={() => app.setOpen("Definitions")}
                                 title="Definitions"
                                 aria-label="Definitions Button"
                             >
                                 <FaGear />
-                                <span>Settings</span>
                             </button>
                             <button
                                 onClick={() => window.location.reload()}
@@ -100,7 +102,6 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                                 aria-label="Restart Button"
                             >
                                 <MdOutlineRestartAlt />
-                                <span>Refresh</span>
                             </button>
                             <button
                                 onClick={() => window.close()}
@@ -108,13 +109,12 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                                 aria-label="Close Button"
                             >
                                 <RiShutDownLine />
-                                <span>Close</span>
                             </button>
-                        </div>
+                        </mobile-tray-system>
+                        <mobile-tray-fullscreen-clock>
+                            <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />
+                        </mobile-tray-fullscreen-clock>
                         <div>
-                            {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
-                            <DeviceSet />
-                            {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}
                         </div>
                     </mobile-tray-fullscreen>
                     <mobile-tray
