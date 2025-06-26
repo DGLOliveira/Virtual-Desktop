@@ -72,6 +72,51 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
             </>
             : createPortal(
                 <>
+                    <mobile-tray-fullscreen
+                        style={{
+                            top: dragY.current - dragY.start !== 0 ?
+                                device.virtualOSState.display === "tray"
+                                    ? (dragY.current - dragY.start > 0 ? `${-heightOffset + dragY.current - dragY.start}px` : "0")
+                                    : (dragY.current - dragY.start < 0 ? "calc(-100% + var(--MobileTrayHeight) + var(--TaskbarHeight))" : `${-heightOffset - availableHeight + dragY.current - dragY.start}px`)
+                                : device.virtualOSState.display === "tray" ? "0" : "calc(-100% + var(--MobileTrayHeight) + var(--TaskbarHeight))",
+                        }}
+                        draggable="true"
+                        onDragStart={(e) => handleDragStart(e)}
+                        onDrag={(e) => handleDrag(e)}
+                        onDragEnd={(e) => handleDragEnd(e)}
+                    >
+                        <div>
+                            <button
+                                onClick={() => app.setOpen("Definitions")}
+                                title="Definitions"
+                                aria-label="Definitions Button"
+                            >
+                                <FaGear />
+                                <span>Settings</span>
+                            </button>
+                            <button
+                                onClick={() => window.location.reload()}
+                                title="Restart (F5)"
+                                aria-label="Restart Button"
+                            >
+                                <MdOutlineRestartAlt />
+                                <span>Refresh</span>
+                            </button>
+                            <button
+                                onClick={() => window.close()}
+                                title="Close (Alt + F4)"
+                                aria-label="Close Button"
+                            >
+                                <RiShutDownLine />
+                                <span>Close</span>
+                            </button>
+                        </div>
+                        <div>
+                            {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
+                            <DeviceSet />
+                            {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}
+                        </div>
+                    </mobile-tray-fullscreen>
                     <mobile-tray
                         draggable="true"
                         onDragStart={(e) => handleDragStart(e)}
@@ -82,54 +127,6 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                         <DeviceSet />
                         {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}
                     </mobile-tray>
-                    {createPortal(
-                        <mobile-tray-fullscreen
-                            style={{
-                                top: dragY.current - dragY.start !== 0 ?
-                                    device.virtualOSState.display === "tray"
-                                        ? (dragY.current - dragY.start > 0 ? `${-heightOffset + dragY.current - dragY.start}px` : "0")
-                                        : (dragY.current - dragY.start < 0 ? "-100%" : `${-heightOffset - availableHeight + dragY.current - dragY.start}px`)
-                                    : device.virtualOSState.display === "tray" ? "0" : "-100%",
-                            }}
-                            draggable="true"
-                            onDragStart={(e) => handleDragStart(e)}
-                            onDrag={(e) => handleDrag(e)}
-                            onDragEnd={(e) => handleDragEnd(e)}
-                        >
-                            <div>
-                                <button
-                                    onClick={() => app.setOpen("Definitions")}
-                                    title="Definitions"
-                                    aria-label="Definitions Button"
-                                >
-                                    <FaGear />
-                                    <span>Settings</span>
-                                </button>
-                                <button
-                                    onClick={() => window.location.reload()}
-                                    title="Restart (F5)"
-                                    aria-label="Restart Button"
-                                >
-                                    <MdOutlineRestartAlt />
-                                    <span>Refresh</span>
-                                </button>
-                                <button
-                                    onClick={() => window.close()}
-                                    title="Close (Alt + F4)"
-                                    aria-label="Close Button"
-                                >
-                                    <RiShutDownLine />
-                                    <span>Close</span>
-                                </button>
-                            </div>
-                            <div>
-                                {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
-                                <DeviceSet />
-                                {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}
-                            </div>
-                        </mobile-tray-fullscreen>
-                        , document.getElementsByTagName("desk-top")[0])
-                    }
                 </>
                 , document.getElementById("root"))
         }

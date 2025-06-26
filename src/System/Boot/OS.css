@@ -280,6 +280,23 @@
   --TaskbarWindowFooterBorderWidth: 0px;
   --TaskbarWindowFooterBorderType: solid;
   --TaskbarWindowFooterBorderRadius: 0px;
+
+  --MobileTrayBkgrImage: none;
+  --MobileTrayBkgrPosition: none;
+  --MobileTrayBkgrSize: none;
+  --MobileTrayBkgrRepeat: none;
+  --MobileTrayBackdropFilter: none;
+  --MobileTrayBkgr: "none";
+  --MobileTrayColor: hsl(0, 0%, 75%);
+  --MobileTrayHeight: 40px;
+  --MobileTrayVerticalPadding: 0px;
+  --MobileTrayHorizontalPadding: 0px;
+  --MobileTrayHorizontalBorderWidth: 0px;
+  --MobileTrayHorizontalBorderColor: hsla(0, 0%, 0%, 0);
+  --MobileTrayHorizontalBorderType: solid;
+  --MobileTrayHorizontalBorderRadius: 0px;
+  --MobileTrayIconSize: 25px;
+  --MobileTrayFontSize: 15px;
 }
 
 #root{

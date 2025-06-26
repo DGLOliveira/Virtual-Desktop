@@ -36,37 +36,40 @@ mobile-tray {
   display: flex;
   flex-direction: row;
   justify-content: end;
+  height: var(--MobileTrayHeight);
   order: -1;
-  background-color: var(--TaskbarBkgr);
-  background-image: var(--TaskbarBkgrImage);
-  background-position: var(--TaskbarBkgrPosition);
-  background-size: var(--TaskbarBkgrSize);
-  background-repeat: var(--TaskbarBkgrRepeat);
-  backdrop-filter: var(--TaskbarBackdropFilter);
-  border-top: var(--TaskbarHorizontalBorderWidth) var(--TaskbarHorizontalBorderColor) var(--TaskbarHorizontalBorderType);
+  padding: var(--MobileTrayVerticalPadding) var(--MobileTrayHorizontalPadding);
+  color: var(--MobileTrayColor);
+  background-color: var(--MobileTrayBkgr);
+  background-image: var(--MobileTrayImage);
+  background-position: var(--MobileTrayBkgrPosition);
+  background-size: var(--MobileTrayBkgrSize);
+  background-repeat: var(--MobileTrayBkgrRepeat);
+  backdrop-filter: var(--MobileTrayBackdropFilter);
+  border-bottom: var(--MobileTrayHorizontalBorderWidth) var(--TMobileTrayHorizontalBorderColor) var(--MobileTrayHorizontalBorderType);
+  border-radius: 0 0 var(--MobileTrayHorizontalBorderRadius) var(--MobileTrayHorizontalBorderRadius);
   cursor: grab;
+  z-index:1;
 }
 
 mobile-tray>button {
-  color: var(--TaskbarTrayButtonColor);
-  background: var(--TaskbarTrayButtonBkgr);
-  margin: var(--TaskbarTrayButtonMargin);
-  padding: var(--TaskbarTrayButtonPadding);
-  border: var(--TaskbarTrayButtonBorderColor) var(--TaskbarTrayButtonBorderWidth) var(--TaskbarTrayButtonBorderType);
-  border-radius: var(--TaskbarTrayButtonBorderRadius);
+  font-size: var(--MobileTrayFontSize);
   pointer-events: none;
 }
 
 mobile-tray>button>svg {
-  width: var(--TaskbarIconSize);
-  height: var(--TaskbarIconSize);
+  width: var(--MobileTrayIconSize);
+  height: var(--MobileTrayIconSize);
 }
 
 mobile-tray-fullscreen {
   position: absolute;
   left:0;
   width:100%;
-  height:100%;
+  height:calc(100% - var(--TaskbarHeight));
+  box-sizing: border-box;
+  padding-top: var(--MobileTrayHeight);
+  padding-bottom: var(--MobileTrayHeight);
   background: var(--TaskbarBkgr);
   background-image: var(--TaskbarBkgrImage);
   background-position: var(--TaskbarBkgrPosition);
