@@ -96,6 +96,8 @@ export function ThemeProvider({ children }) {
         useState(themeRegistry[theme]["FX"]["Backgrounds"]["TaskbarWindow"]);
     const [startMenuBackgroundFX, setStartMenuBackgroundFX] =
         useState(themeRegistry[theme]["FX"]["Backgrounds"]["StartMenu"]);
+    const [startMenuMobileBackgroundFX, setStartMenuMobileBackgroundFX] =
+        useState(themeRegistry[theme]["FX"]["Backgrounds"]["StartMenuMobile"]);
 
     const [dialogButtonsLocation, setDialogButtonsLocation] = useState("in window");
     const dialogButtonsLocationList = ["in info container", "in window"];
@@ -139,6 +141,7 @@ export function ThemeProvider({ children }) {
         setTaskbarBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["Taskbar"]);
         setTaskbarWindowBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["TaskbarWindow"]);
         setStartMenuBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["StartMenu"]);
+        setStartMenuMobileBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["StartMenuMobile"]);
         setNavMenuLocation(themeRegistry[value]["Locations"]["NavMenu"]);
         setDialogButtonsLocation(themeRegistry[value]["Locations"]["DialogButtons"]);
     };
@@ -165,6 +168,7 @@ export function ThemeProvider({ children }) {
     useEffect(() => { switchFX("Dialog", dialogBackgroundFX); }, [dialogBackgroundFX]);
     useEffect(() => { switchFX("Taskbar", taskbarBackgroundFX); }, [taskbarBackgroundFX]);
     useEffect(() => { switchFX("StartMenu", startMenuBackgroundFX); }, [startMenuBackgroundFX]);
+    useEffect(() => { switchFX("StartMenuMobileInner", startMenuMobileBackgroundFX); }, [startMenuMobileBackgroundFX]);
     useEffect(() => { switchFX("TaskbarWindow", taskbarWindowBackgroundFX); }, [taskbarWindowBackgroundFX]);
 
     useEffect(() => { setStartButtonPath(`Themes/${themeRegistry[startButtonTheme]["Components"]["StartButton"]}`);},[startButtonTheme]);

@@ -7,7 +7,7 @@ start-list-mobile {
     height: 100%;
     padding:var(--StartMenuMobileOuterPadding);
     box-sizing: border-box;
-    transition: var(--StartMenuMobileTransition);
+    transition: box-shadow var(--StartMenuMobileTransition) ease-in-out;
     box-shadow: 0 0 var(--StartMenuMobileOuterShadowBlur) var(--StartMenuMobileOuterShadowSpread) var(--StartMenuMobileOuterShadowColor) inset;
     z-index: 100;
 }
@@ -23,7 +23,12 @@ start-list-mobile-container {
     box-sizing: border-box;
     border: var(--StartMenuMobileInnerBorderWidth) var(--StartMenuMobileInnerBorderColor) var(--StartMenuMobileInnerBorderType);
     border-radius: var(--StartMenuMobileInnerBorderRadius);
-    background: var(--StartMenuMobileInnerBkgr);
+    background-color: var(--StartMenuMobileInnerBkgr);
+    background-image: var(--StartMenuMobileInnerBkgrImage);
+    background-position: var(--StartMenuMobileInnerBkgrPosition);
+    background-size: var(--StartMenuMobileInnerBkgrSize);
+    background-repeat: var(--StartMenuMobileInnerBkgrRepeat);
+    backdrop-filter: var(--StartMenuMobileInnerBackdropFilter);
     transition: var(--StartMenuMobileTransition);
     overflow-y: auto;
     overflow-x: hidden;

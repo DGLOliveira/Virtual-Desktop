@@ -202,6 +202,11 @@
   --StartMenuMobileOuterPadding: 20px;
   --StartMenuMobileInnerColor: hsl(0, 0%, 75%);
   --StartMenuMobileInnerBkgr: hsla(0, 0%, 0%, 0.5);
+  --StartMenuMobileInnerImage: none;
+  --StartMenuMobileInnerPosition: none;
+  --StartMenuMobileInnerBkgrSize: none;
+  --StartMenuMobileInnerBkgrRepeat: none;
+  --StartMenuMobileInnerBackdropFilter: none;
   --StartMenuMobileInnerBorderColor: hsla(0, 0%, 0%, 0);
   --StartMenuMobileInnerBorderWidth: 0px;
   --StartMenuMobileInnerBorderType: none;

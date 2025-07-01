@@ -18,15 +18,30 @@ export const StartListMobile = ({ isOpen, setIsOpen }) => {
     const file = useContext(FileContext);
     const app = useContext(AppContext);
     const theme = useContext(ThemeContext);
+    const [zIndex, setZIndex] = useState(100);
+
+    useEffect(() => {
+        const timeout =
+            setTimeout(() => {
+            setZIndex(-1);
+            }, getComputedStyle(document.querySelector(":root")).getPropertyValue("--StartMenuMobileTransition").slice(0, -1) * 1000);
+        if(!isOpen) {
+            timeout;
+        }else {
+            setZIndex(100);
+            clearTimeout(timeout);
+        }
+    },[isOpen]);
 
     return (
         <>
             {createPortal(
-                <start-list-mobile 
+                <start-list-mobile
                 style={{
                     background: isOpen ? "var(--StartMenuMobileOuterBkgr)" : "hsla(0, 0%, 0%, 0)",
                     boxShadow: isOpen ? " 0 0 var(--StartMenuMobileOuterShadowBlur) var(--StartMenuMobileOuterShadowSpread) var(--StartMenuMobileOuterShadowColor) inset" 
-                                        : " 0 0 0 0 hsla(0, 0%, 0%, 0) inset"
+                                        : " 0 0 0 0 hsla(0, 0%, 0%, 0) inset",
+                    zIndex: zIndex,
                 }}
                 >
                     <start-list-mobile-container 

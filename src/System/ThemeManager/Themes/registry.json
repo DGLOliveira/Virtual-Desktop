@@ -10,7 +10,8 @@
                 "Dialog": "None",
                 "Taskbar": "None",
                 "TaskbarWindow": "None",
-                "StartMenu": "None"
+                "StartMenu": "None",
+                "StartMenuMobile": "None"
             }
         },
         "Locations": {
@@ -35,7 +36,8 @@
                 "Dialog": "Translucent",
                 "Taskbar": "Translucent",
                 "TaskbarWindow": "Translucent",
-                "StartMenu": "Translucent"
+                "StartMenu": "Translucent",
+                "StartMenuMobile": "Translucent"
             }
         },
         "Locations": {
@@ -60,7 +62,8 @@
                 "Dialog": "Metallic",
                 "Taskbar": "Metallic",
                 "TaskbarWindow": "Metallic",
-                "StartMenu": "Metallic"
+                "StartMenu": "Metallic",
+                "StartMenuMobile": "Metallic"
             }
         },
         "Locations": {
@@ -85,7 +88,8 @@
                 "Dialog": "None",
                 "Taskbar": "None",
                 "TaskbarWindow": "None",
-                "StartMenu": "None"
+                "StartMenu": "None",
+                "StartMenuMobile": "None"
             }
         },
         "Locations": {
