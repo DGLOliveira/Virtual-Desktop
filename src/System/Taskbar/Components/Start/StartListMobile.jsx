@@ -23,7 +23,7 @@ export const StartListMobile = ({ isOpen, setIsOpen }) => {
     useEffect(() => {
         const timeout =
             setTimeout(() => {
-            setZIndex(-1);
+            setZIndex(-100);
             }, getComputedStyle(document.querySelector(":root")).getPropertyValue("--StartMenuMobileTransition").slice(0, -1) * 1000);
         if(!isOpen) {
             timeout;
