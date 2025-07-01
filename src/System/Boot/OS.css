@@ -194,6 +194,7 @@
   --StartMenuSecondaryBorderColor: hsla(0, 0%, 50%, 1);
   --StartMenuSecondaryBorderType: solid;
 
+  --StartMenuMobileTransition: 0.3s;
   --StartMenuMobileOuterBkgr: hsla(0, 0%, 0%, 0.5);
   --StartMenuMobileOuterShadowColor: hsla(0, 0%, 0%, 1);
   --StartMenuMobileOuterShadowBlur: 50px;

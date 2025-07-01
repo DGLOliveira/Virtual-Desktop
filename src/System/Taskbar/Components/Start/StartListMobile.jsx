@@ -21,9 +21,19 @@ export const StartListMobile = ({ isOpen, setIsOpen }) => {
 
     return (
         <>
-            {device.virtualOSState.display === "startList" && createPortal(
-                <start-list-mobile>
-                    <start-list-mobile-container>
+            {createPortal(
+                <start-list-mobile 
+                style={{
+                    background: isOpen ? "var(--StartMenuMobileOuterBkgr)" : "hsla(0, 0%, 0%, 0)",
+                    boxShadow: isOpen ? " 0 0 var(--StartMenuMobileOuterShadowBlur) var(--StartMenuMobileOuterShadowSpread) var(--StartMenuMobileOuterShadowColor) inset" 
+                                        : " 0 0 0 0 hsla(0, 0%, 0%, 0) inset"
+                }}
+                >
+                    <start-list-mobile-container 
+                    style={{
+                        top: isOpen ? "0" : "calc(100% + var(--StartMenuMobileOuterPadding) + var(--TaskbarHeight))",
+                    }}
+                    >
                     {Object.keys(file.taskbar).map((name) => (
                         <button
                             key={name}
