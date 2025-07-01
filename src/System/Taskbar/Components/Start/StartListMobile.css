@@ -39,6 +39,9 @@ start-list-mobile-container>button{
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    box-sizing: border-box;
+    padding: var(--StartMenuMobileButtonPadding);
+    margin: var(--StartMenuMobileButtonMargin);
     width: var(--StartMenuMobileButtonSize);
     height: var(--StartMenuMobileButtonSize);
     color: var(--StartMenuMobileButtonFontColor);
