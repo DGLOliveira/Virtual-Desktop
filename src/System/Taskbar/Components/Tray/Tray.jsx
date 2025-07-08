@@ -117,16 +117,16 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                         <div>
                         </div>
                     </mobile-tray-fullscreen>
-                    <mobile-tray
-                        draggable="true"
-                        onDragStart={(e) => handleDragStart(e)}
-                        onDrag={(e) => handleDrag(e)}
-                        onDragEnd={(e) => handleDragEnd(e)}
-                    >
-                        {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
-                        <DeviceSet />
-                        {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}
-                    </mobile-tray>
+                        <mobile-tray
+                            draggable="true"
+                            onDragStart={(e) => handleDragStart(e)}
+                            onDrag={(e) => handleDrag(e)}
+                            onDragEnd={(e) => handleDragEnd(e)}
+                        >
+                            {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
+                            <DeviceSet />
+                            {showClock && <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />}
+                        </mobile-tray>
                 </>
                 , document.getElementById("root"))
         }
