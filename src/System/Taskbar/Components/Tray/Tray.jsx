@@ -90,7 +90,7 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                             <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />
                             <DeviceSet />
                             <button
-                                onClick={() => app.setOpen("Definitions")}
+                                onClick={() => {app.setOpen("Definitions"); device.setVirtualOSState({ ...device.virtualOSState, display: "none" })}}
                                 title="Definitions"
                                 aria-label="Definitions Button"
                             >

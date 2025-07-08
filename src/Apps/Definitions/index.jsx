@@ -11,6 +11,7 @@ import { TaskBarPreview, TaskBar } from "./Pages/Taskbar/TaskBar.jsx";
 import { StartPreview, Start } from "./Pages/Taskbar/Start.jsx";
 import { StartMenuPreview, StartMenu } from "./Pages/Taskbar/StartMenu.jsx";
 import { LiveAppsPreview, LiveApps } from "./Pages/Taskbar/LiveApps.jsx";
+import { TaskbarMobileBottomPreview, TaskbarMobileBottom } from "./Pages/TaskbarMobile/Bottom.jsx";
 import { TrayPreview, Tray } from "./Pages/Taskbar/Tray.jsx";
 import { TrayWindowPreview, TrayWindow } from "./Pages/Taskbar/Window.jsx";
 import { ContextMenuPreview, ContextMenu } from "./Pages/ContextMenu.jsx";
@@ -26,6 +27,7 @@ export default function Definitions() {
     "Global",
     "Desktop",
     ["Taskbar",["Taskbar", "Start", "Start Menu", "Live Apps"]],
+    ["TaskbarMobile",["Bottom"]],
     ["Window",["Window", "Menu", "App", "Dialog"]],
     ["Tray",["Tray", "Tray Window"]],
     "Context Menu",
@@ -75,6 +77,7 @@ export default function Definitions() {
           {background.state.active === "scenario" ? <Scenario /> : <></>}
           {defPage === "Desktop" ? <DesktopPreview /> : <></>}
           {defPage === "Taskbar" ? <TaskBarPreview /> : <></>}
+          {defPage === "TaskbarMobile" ? <TaskbarMobileBottomPreview /> : <></>}
           {defPage === "Start" ? <StartPreview /> : <></>}
           {defPage === "Start Menu" ? <StartMenuPreview /> : <></>}
           {defPage === "Live Apps" ? <LiveAppsPreview /> : <></>}
@@ -89,6 +92,7 @@ export default function Definitions() {
         {defPage === "Global" ? <Global /> : <></>}
         {defPage === "Desktop" ? <Desktop /> : <></>}
         {defPage === "Taskbar" ? <TaskBar /> : <></>}
+        {defPage === "TaskbarMobile" ? <TaskbarMobileBottom /> : <></>}
         {defPage === "Start" ? <Start /> : <></>}
         {defPage === "Start Menu" ? <StartMenu /> : <></>}
         {defPage === "Live Apps" ? <LiveApps /> : <></>}
