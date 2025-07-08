@@ -12,16 +12,16 @@ export const DeviceSet = () => {
 
     const deviceIcons = {
         "Desktop": <TbDeviceDesktop title="Device Type: Desktop"/>,
-        "TV": <TbDeviceTv title="Device Type: Smart TV"/>,
+        /*"TV": <TbDeviceTv title="Device Type: Smart TV"/>,*/
         "Mobile": <TbDeviceMobile title="Device Type: Mobile"/>,
         "Tablet": <TbDeviceTablet title="Device Type: Tablet"/>
     }
 
     function changeDeviceType() {
         if(device.deviceType === "Desktop") {
-            device.setDeviceType("TV");
-        }else if(device.deviceType === "TV") {
             device.setDeviceType("Tablet");
+        /*}else if(device.deviceType === "TV") {
+            device.setDeviceType("Tablet");*/
         }else if(device.deviceType === "Tablet") {
             device.setDeviceType("Mobile");
         }else if(device.deviceType === "Mobile") {
