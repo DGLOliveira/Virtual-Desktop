@@ -1,5 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback, lazy, Suspense } from "react";
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
+import DefaultLogo from "../../../../System/Taskbar/Components/Start/DefaultLogo.jsx";
 
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
@@ -10,25 +11,15 @@ import { FcGlobe, FcInfo, FcSettings } from "react-icons/fc";
 
 export const StartMenuPreview = () => {
   const themeContext = useContext(ThemeContext);
-  const startButtonClass = () => {
-    let ans = "";
-    switch (themeContext.startButtonTheme) {
-      case "Classic":
-        ans = "startButtonClassic startButtonClassicActive";
-        break;
-      case "Aero":
-        ans = "startButtonAero startButtonAeroActive";
-        break;
-      case "Aqua":
-        ans = "startButtonAqua startButtonAquaActive";
-        break;
-      case "Default":
-      default:
-        ans = "startButtonFluent startButtonFluentActive";
-        break;
-    }
-    return ans;
-  }
+  const Logo = useCallback((
+    lazy(() => import(`../../../../System/ThemeManager/${themeContext.StartButtonPath}`).catch(
+      (error) => {
+        let errorMessage = "Failed to load Start Button Logo";
+        console.error(errorMessage);
+        return { default: DefaultLogo }
+      }
+    ))
+  ), [themeContext.StartButtonPath]);
   return (
     <>
       <div
@@ -52,7 +43,7 @@ export const StartMenuPreview = () => {
       >
         <start-button
         >
-          <start-list class={"startListOpen"} style={{  left:0 }}>
+          <start-list class={"startListOpen"} style={{ left: 0 }}>
             <div>
               <button>
                 <FaGear />
@@ -88,62 +79,10 @@ export const StartMenuPreview = () => {
               </li>
             </ul>
           </start-list>
-          <button className={startButtonClass()}>
-            <svg style={{isolation: "isolate"}} width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="startButtonAquaRed" gradientTransform="rotate(90)">
-                  <stop offset="20%" stopColor="#FF9999" />
-                  <stop offset="50%" stopColor="#FF0000" />
-                  <stop offset="80%" stopColor="#9F0000" />
-                </linearGradient>
-                <linearGradient id="startButtonAquaGreen" gradientTransform="rotate(90)">
-                  <stop offset="20%" stopColor="#99FF99" />
-                  <stop offset="50%" stopColor="#00FF00" />
-                  <stop offset="80%" stopColor="#009F00" />
-                </linearGradient>
-                <linearGradient id="startButtonAquaBlue" gradientTransform="rotate(90)">
-                  <stop offset="20%" stopColor="#9999FF" />
-                  <stop offset="50%" stopColor="#0000FF" />
-                  <stop offset="80%" stopColor="#00009F" />
-                </linearGradient>
-              </defs>
-              <path
-                className="hex hex1"
-                style={{
-                  mixBlendMode: "screen",
-                  fill: startButtonClass() === "startButtonAqua startButtonAquaActive" ? "url(#startButtonAquaRed)" : "#FF0000",
-                  transform: "translate(45%, 23%) scale(1.5)",
-                }}
-                d="M41.0481 108.077L105 71.1547L168.952 108.077V181.923L105 218.845L41.0481 181.923V108.077Z"
-                stroke="#808080"
-                strokeWidth="8"
-              />
-              <path
-                className="hex hex2"
-                style={{
-                  mixBlendMode: "screen",
-                  fill: startButtonClass() === "startButtonAqua startButtonAquaActive" ? "url(#startButtonAquaGreen)" : "#00FF00",
-                  transform: "translate(-45%, 23%) scale(1.5)",
-                }}
-                d="M231.048 108.077L295 71.1547L358.952 108.077V181.923L295 218.845L231.048 181.923V108.077Z"
-                stroke="#808080"
-                strokeWidth="8"
-              />
-              <path
-                className="hex hex3"
-                style={{
-                  mixBlendMode: "screen",
-                  fill: startButtonClass() === "startButtonAqua startButtonAquaActive" ? "url(#startButtonAquaBlue)" : "#0000FF",
-                  transform: "translate(0, -45%) scale(1.5)"
-                }}
-                d="M136.048 273.077L200 236.155L263.952 273.077V346.923L200 383.845L136.048 346.923V273.077Z"
-                stroke="#808080"
-                strokeWidth="8"
-              />
-              <path className="axis" d="M200 200L200 60" stroke="#808080" strokeWidth="8" />
-              <path className="axis" d="M200 200L78.7564 270" stroke="#808080" strokeWidth="8" />
-              <path className="axis" d="M200 200L321.244 270" stroke="#808080" strokeWidth="8" />
-            </svg>
+          <button>
+            <Suspense fallback={<DefaultLogo />}>
+              <Logo isOpen={true} />
+            </Suspense>
             <span>Start</span>
           </button>
         </start-button>
@@ -425,10 +364,10 @@ export const StartMenu = () => {
         <legend>Start Menu</legend>
         <div>
           <label>Background Color</label>
-          <ColorPicker 
-          color={startMenuBkgr} 
-          setColor={setStartMenuBkgr} 
-          useAlpha={true} 
+          <ColorPicker
+            color={startMenuBkgr}
+            setColor={setStartMenuBkgr}
+            useAlpha={true}
           />
         </div>
         <div>
@@ -465,10 +404,10 @@ export const StartMenu = () => {
         </div>
         <div>
           <label>Border Color</label>
-          <ColorPicker 
-          color={startMenuBorderColor} 
-          setColor={setStartMenuBorderColor} 
-          useAlpha={true} 
+          <ColorPicker
+            color={startMenuBorderColor}
+            setColor={setStartMenuBorderColor}
+            useAlpha={true}
           />
         </div>
         <div>

@@ -1,5 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback, lazy, Suspense } from "react";
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
+import DefaultLogo from "../../../../System/Taskbar/Components/Start/DefaultLogo.jsx";
 
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
@@ -7,47 +8,15 @@ import { FcGlobe } from "react-icons/fc";
 
 export const TaskBarPreview = () => {
   const themeContext = useContext(ThemeContext);
-  const startButtonClass = () => {
-    let ans = "";
-    switch (themeContext.startButtonTheme) {
-      case "Classic":
-        ans = "startButtonClassic";
-        break;
-      case "Aero":
-        ans = "startButtonAero";
-        break;
-      case "Aqua":
-        ans = "startButtonAqua";
-        break;
-      case "Default":
-      default:
-        ans = "startButtonFluent";
-        break;
-    }
-    return ans;
-  }
-  const LiveAppsClass = (isSelected) => {
-    let ans = "";
-    switch (themeContext.liveAppsTheme) {
-      case "Classic":
-        ans = "liveAppsClassic";
-        break;
-      case "Aero":
-        ans = "liveAppsAero";
-        break;
-      case "Aqua":
-        ans = "liveAppsAqua";
-        break;
-      case "Default":
-      default:
-        ans = "liveAppsFluent";
-        break;
-    }
-    if (isSelected) {
-      ans += " " + ans + "Active";
-    }
-    return ans;
-  }
+  const Logo = useCallback((
+    lazy(() => import(`../../../../System/ThemeManager/${themeContext.StartButtonPath}`).catch(
+      (error) => {
+        let errorMessage = "Failed to load Start Button Logo";
+        console.error(errorMessage);
+        return { default: DefaultLogo }
+      }
+    ))
+  ), [themeContext.StartButtonPath]);
 
   return (
     <>
@@ -70,65 +39,17 @@ export const TaskBarPreview = () => {
           zIndex: 1,
         }}
       >
-
-        <start-button
-        >
-          <button className={startButtonClass()}>
-            <svg style={{isolation: "isolate"}} width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="startButtonAquaRed" gradientTransform="rotate(90)">
-                  <stop offset="20%" stopColor="#FF9999" />
-                  <stop offset="50%" stopColor="#FF0000" />
-                  <stop offset="80%" stopColor="#9F0000" />
-                </linearGradient>
-                <linearGradient id="startButtonAquaGreen" gradientTransform="rotate(90)">
-                  <stop offset="20%" stopColor="#99FF99" />
-                  <stop offset="50%" stopColor="#00FF00" />
-                  <stop offset="80%" stopColor="#009F00" />
-                </linearGradient>
-                <linearGradient id="startButtonAquaBlue" gradientTransform="rotate(90)">
-                  <stop offset="20%" stopColor="#9999FF" />
-                  <stop offset="50%" stopColor="#0000FF" />
-                  <stop offset="80%" stopColor="#00009F" />
-                </linearGradient>
-              </defs>
-              <path
-                className="hex hex1"
-                style={{
-                  fill: startButtonClass() === "startButtonAqua" ? "url(#startButtonAquaRed)" : ""
-                }}
-                d="M41.0481 108.077L105 71.1547L168.952 108.077V181.923L105 218.845L41.0481 181.923V108.077Z"
-                stroke="#808080"
-                strokeWidth="8"
-              />
-              <path
-                className="hex hex2"
-                style={{
-                  fill: startButtonClass() === "startButtonAqua" ? "url(#startButtonAquaGreen)" : ""
-                }}
-                d="M231.048 108.077L295 71.1547L358.952 108.077V181.923L295 218.845L231.048 181.923V108.077Z"
-                stroke="#808080"
-                strokeWidth="8"
-              />
-              <path
-                className="hex hex3"
-                style={{
-                  fill: startButtonClass() === "startButtonAqua" ? "url(#startButtonAquaBlue)" : ""
-                }}
-                d="M136.048 273.077L200 236.155L263.952 273.077V346.923L200 383.845L136.048 346.923V273.077Z"
-                stroke="#808080"
-                strokeWidth="8"
-              />
-              <path className="axis" d="M200 200L200 60" stroke="#808080" strokeWidth="8" />
-              <path className="axis" d="M200 200L78.7564 270" stroke="#808080" strokeWidth="8" />
-              <path className="axis" d="M200 200L321.244 270" stroke="#808080" strokeWidth="8" />
-            </svg>
+        <start-button>
+          <button>
+            <Suspense fallback={<DefaultLogo />}>
+              <Logo isOpen={false} />
+            </Suspense>
             <span>Start</span>
           </button>
         </start-button>
         <vertical-rect />
         <live-apps>
-          <button className={LiveAppsClass(true)}>
+          <button >
             <FcGlobe />
             <span>App</span>
             {themeContext.liveAppsTheme === "Aqua" && <FcGlobe />}
