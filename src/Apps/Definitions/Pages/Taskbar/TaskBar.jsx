@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, useCallback, lazy, Suspense } from "react";
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import DefaultLogo from "../../../../System/Taskbar/Components/Start/DefaultLogo.jsx";
+import DefaultButton from "../../../../System/Taskbar/Components/LiveApps/DefaultButton.jsx";
 
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
@@ -8,6 +9,7 @@ import { FcGlobe } from "react-icons/fc";
 
 export const TaskBarPreview = () => {
   const themeContext = useContext(ThemeContext);
+
   const Logo = useCallback((
     lazy(() => import(`../../../../System/ThemeManager/${themeContext.StartButtonPath}`).catch(
       (error) => {
@@ -17,6 +19,16 @@ export const TaskBarPreview = () => {
       }
     ))
   ), [themeContext.StartButtonPath]);
+
+  const AppButton = useCallback((
+    lazy(() => import(`../../../../System/ThemeManager/${themeContext.LiveAppButtonPath}`).catch(
+      (_error) => {
+        console.error("Failed to import thematic Live App buttons");
+        return {
+          default: DefaultButton
+        }
+      }))
+  ), [themeContext.LiveAppButtonPath]);
 
   return (
     <>
@@ -49,11 +61,15 @@ export const TaskBarPreview = () => {
         </start-button>
         <vertical-rect />
         <live-apps>
-          <button >
-            <FcGlobe />
-            <span>App</span>
-            {themeContext.liveAppsTheme === "Aqua" && <FcGlobe />}
-          </button>
+          <Suspense fallback={null}>
+            <AppButton
+              name={""}
+              click={() => {}}
+              context={(e) => {}}
+              AppIcon={FcGlobe}
+              isSelected={true}
+            />
+          </Suspense>
         </live-apps>
       </div>
     </>

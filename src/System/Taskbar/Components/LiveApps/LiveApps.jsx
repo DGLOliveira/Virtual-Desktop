@@ -4,6 +4,7 @@ import { ThemeContext } from "../../../ThemeManager/context.jsx";
 import { ContextMenuContext } from "../../../ContextMenuManager/context.jsx";
 import { AppContext } from "../../../AppManager/Context/context.jsx";
 import { AppIcon } from "../../../AppManager/Components/AppIcon.jsx";
+import DefaultButton from "./DefaultButton.jsx";
 import "./styles.css";
 
 export const LiveApps = () => {
@@ -38,18 +39,7 @@ export const LiveApps = () => {
     })
   };
 
-  const DefaultButton = ({ name, click, context, AppIcon, isSelected }) => {
-    return (
-      <button
-        onClick={click}
-        onContextMenu={(e) => { context(e) }}
-        aria-label={"Live App" + name}
-      >
-        <AppIcon appName={name} />
-        <span>{name}</span>
-      </button>
-    );
-  };
+
 
   const Button = useCallback((
     lazy(() => import(`../../../ThemeManager/${themeContext.LiveAppButtonPath}`).catch(

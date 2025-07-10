@@ -1,5 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback, lazy, Suspense } from "react";
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
+
+import DefaultButton from "../../../../System/Taskbar/Components/LiveApps/DefaultButton.jsx";
 
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
@@ -8,28 +10,17 @@ import { FcCalculator } from "react-icons/fc";
 
 export const LiveAppsPreview = () => {
     const themeContext = useContext(ThemeContext);
-    const LiveAppsClass = (isSelected) => {
-        let ans = "";
-        switch (themeContext.liveAppsTheme) {
-            case "Classic":
-                ans = "liveAppsClassic";
-                break;
-            case "Aero":
-                ans = "liveAppsAero";
-                break;
-            case "Aqua":
-                ans = "liveAppsAqua";
-                break;
-            case "Default":
-            default:
-                ans = "liveAppsFluent";
-                break;
-        }
-        if (isSelected) {
-            ans += " " + ans + "Active";
-        }
-        return ans;
-    }
+    
+      const AppButton = useCallback((
+        lazy(() => import(`../../../../System/ThemeManager/${themeContext.LiveAppButtonPath}`).catch(
+          (_error) => {
+            console.error("Failed to import thematic Live App buttons");
+            return {
+              default: DefaultButton
+            }
+          }))
+      ), [themeContext.LiveAppButtonPath]);
+    
 
     return (
         <>
@@ -53,16 +44,24 @@ export const LiveAppsPreview = () => {
                 }}
             >
                 <live-apps>
-                    <button className={LiveAppsClass(true)}>
-                        <FcGlobe />
-                        <span>Active</span>
-                        {themeContext.liveAppsTheme === "Aqua" && <FcGlobe />}
-                    </button>
-                    <button className={LiveAppsClass(false)}>
-                        <FcCalculator />
-                        <span>Inactive</span>
-                        {themeContext.liveAppsTheme === "Aqua" && <FcCalculator />}
-                    </button>
+                          <Suspense fallback={null}>
+                            <AppButton
+                              name={""}
+                              click={() => {}}
+                              context={(e) => {}}
+                              AppIcon={FcGlobe}
+                              isSelected={true}
+                            />
+                          </Suspense>
+                          <Suspense fallback={null}>
+                            <AppButton
+                              name={""}
+                              click={() => {}}
+                              context={(e) => {}}
+                              AppIcon={FcCalculator}
+                              isSelected={false}
+                            />
+                          </Suspense>
                 </live-apps>
             </div>
         </>
