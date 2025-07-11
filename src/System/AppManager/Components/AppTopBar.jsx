@@ -3,12 +3,8 @@ import { AppContext } from "../Context/context.jsx";
 import { ContextMenuContext } from "../../ContextMenuManager/context.jsx";
 import { ThemeContext } from "../../ThemeManager/context.jsx";
 import { DeviceContext } from "../../DeviceManager/context.jsx";
-import { AppIcon } from "./AppIcon.jsx"; import {
-    FaRegWindowMinimize,
-    FaWindowRestore,
-    FaWindowMaximize,
-} from "react-icons/fa";
-import { RiCloseLargeLine } from "react-icons/ri";
+import { AppIcon } from "./AppIcon.jsx"; 
+import TopBarButtonsDefault from "./AppTopBarButtonsDefault.jsx";
 import "../Styles/TopBar.css";
 
 export const AppTopBar = ({ appName, title, setAction }) => {
@@ -113,33 +109,6 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         restore: "Restore (Alt + ⇩)",
         close: "Close (Ctrl + Shift + F4)"
     };
-
-    const TopBarButtonsDefault = ({ click, title, isMaximized, showButtons }) =>{
-        return(
-        <>
-            {showButtons.minimize && <button
-                onClick={(e) => (e.stopPropagation(), click("Minimize"))}
-                title={title.minimize}>
-                <FaRegWindowMinimize />
-            </button>}
-            {showButtons.maximize && 
-            <button
-                onClick={(e) => (e.stopPropagation(), click("Maximize"))}
-                title={isMaximized ? title.restore : title.maximize}>
-                {isMaximized ? (
-                    <FaWindowRestore />
-                ) : (
-                    <FaWindowMaximize />
-                )}
-            </button>}
-            {showButtons.close && 
-            <button
-                onClick={(e) => (e.stopPropagation(), click("Close"))}
-                title={title.close}>
-                <RiCloseLargeLine />
-            </button>}
-        </>
-    )};
 
     const TopBarButtons = useCallback((
         lazy(() => import(`../../ThemeManager/${themeContext.TopBarButtonsPath}`).catch(

@@ -1,17 +1,36 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback, lazy, Suspense } from "react";
 import { FcGlobe } from "react-icons/fc";
-import {
-  FaRegWindowMinimize,
-  FaWindowMaximize,
-} from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
-import { RiCloseLargeLine } from "react-icons/ri";
+import TopBarButtonsDefault from "../../../../System/AppManager/Components/AppTopBarButtonsDefault.jsx";
 
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 export const WindowPreview = () => {
   const themeContext = useContext(ThemeContext);
+
+  const TopBarButtons = useCallback((
+    lazy(() => import(`../../../../System/ThemeManager/${themeContext.TopBarButtonsPath}`).catch(
+      (error) => {
+        console.error("Failed to import thematic top bar buttons");
+        return {
+          default: TopBarButtonsDefault
+        }
+      }))
+  ), [themeContext.TopBarButtonsPath]);
+
+    const topBarButtonTitles = {
+        minimize: "Minimize (Alt + ⇩)",
+        maximize: "Maximize (Alt + ⇧)",
+        restore: "Restore (Alt + ⇩)",
+        close: "Close (Ctrl + Shift + F4)"
+    };
+
+    const showButtons = {
+        minimize: true,
+        maximize: true,
+        close: true
+    };
+
   return (
     <>
       <app-window
@@ -33,50 +52,14 @@ export const WindowPreview = () => {
           }}>
           <FcGlobe />
           <h1>Inactive</h1>
-          {themeContext.topBarIconTheme === "Default" &&
-            <>
-              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
-                <FaRegWindowMinimize />
-              </button>
-              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
-                <FaWindowMaximize />
-              </button>
-              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed ">
-                <AiOutlineClose />
-              </button></>
-          }
-          {themeContext.topBarIconTheme === "Aero" &&
-            <>
-              <button className="appTopBarButtonAero appTopBarButtonAeroMinimize">
-                <FaRegWindowMinimize />
-              </button>
-              <button className="appTopBarButtonAero appTopBarButtonAeroMaximize">
-                <FaWindowMaximize />
-              </button>
-              <button className="appTopBarButtonAero appTopBarButtonAeroClose ">
-                <AiOutlineClose />
-              </button></>
-          }
-          {themeContext.topBarIconTheme === "Aqua" &&
-            <>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
-            </>
-          }
-          {themeContext.topBarIconTheme === "Classic" &&
-            <>
-              <button className="appTopBarButtonClassic">
-                <FaWindowMaximize />
-              </button>
-              <button className="appTopBarButtonClassic">
-                <FaRegWindowMinimize />
-              </button>
-              <button className="appTopBarButtonClassic ">
-                <RiCloseLargeLine />
-              </button>
-            </>
-          }
+          <Suspense fallback={null}>
+            <TopBarButtons
+              title={topBarButtonTitles}
+              click={() => {}}
+              isMaximized={false}
+              showButtons={showButtons}
+            />
+          </Suspense>
         </app-top-bar>
         <app-container
           style={{
@@ -103,50 +86,14 @@ export const WindowPreview = () => {
           }}>
           <FcGlobe />
           <h1>Active</h1>
-          {themeContext.topBarIconTheme === "Default" &&
-            <>
-              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
-                <FaRegWindowMinimize />
-              </button>
-              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverGray">
-                <FaWindowMaximize />
-              </button>
-              <button className="appTopBarButtonFluent appTopBarButtonFluentHoverRed">
-                <AiOutlineClose />
-              </button></>
-          }
-          {themeContext.topBarIconTheme === "Aero" &&
-            <>
-              <button className="appTopBarButtonAero appTopBarButtonAeroMinimize">
-                <FaRegWindowMinimize />
-              </button>
-              <button className="appTopBarButtonAero appTopBarButtonAeroMaximize">
-                <FaWindowMaximize />
-              </button>
-              <button className="appTopBarButtonAero appTopBarButtonAeroClose ">
-                <AiOutlineClose />
-              </button></>
-          }
-          {themeContext.topBarIconTheme === "Aqua" &&
-            <>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaGreen">+</button>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaYellow">-</button>
-              <button className="appTopBarButtonAqua appTopBarButtonAquaRed">x</button>
-            </>
-          }
-          {themeContext.topBarIconTheme === "Classic" &&
-            <>
-              <button className="appTopBarButtonClassic">
-                <FaWindowMaximize />
-              </button>
-              <button className="appTopBarButtonClassic">
-                <FaRegWindowMinimize />
-              </button>
-              <button className="appTopBarButtonClassic ">
-                <RiCloseLargeLine />
-              </button>
-            </>
-          }
+          <Suspense fallback={null}>
+            <TopBarButtons
+              title={topBarButtonTitles}
+              click={() => {}}
+              isMaximized={false}
+              showButtons={showButtons}
+            />
+          </Suspense>
         </app-top-bar>
         <app-container
           style={{
