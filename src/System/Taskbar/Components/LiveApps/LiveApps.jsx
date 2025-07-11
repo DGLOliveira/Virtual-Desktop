@@ -5,6 +5,7 @@ import { ContextMenuContext } from "../../../ContextMenuManager/context.jsx";
 import { AppContext } from "../../../AppManager/Context/context.jsx";
 import { AppIcon } from "../../../AppManager/Components/AppIcon.jsx";
 import DefaultButton from "./DefaultButton.jsx";
+import DefaultIcon from "./DefaultIcon.jsx";
 import "./styles.css";
 
 export const LiveApps = () => {
@@ -21,13 +22,6 @@ export const LiveApps = () => {
     }
   };
 
-  const handlePreviewClick = (name) => {
-    appContext.setSelected(name);
-    if (appContext.apps[name].State.isMinimized) {
-      appContext.switchMinimized(name)
-    };
-  };
-
   const handleContextMenu = (e, appName) => {
     e.preventDefault();
     contextMenu.setOpen();
@@ -39,7 +33,11 @@ export const LiveApps = () => {
     })
   };
 
-
+  const handleMobileButton = () =>
+    deviceContext.setVirtualOSState({
+      ...deviceContext.virtualOSState,
+      display: deviceContext.virtualOSState.display === "liveApps" ? "none" : "liveApps"
+    });
 
   const Button = useCallback((
     lazy(() => import(`../../../ThemeManager/${themeContext.LiveAppButtonPath}`).catch(
@@ -74,25 +72,10 @@ export const LiveApps = () => {
         deviceContext.deviceType === "Mobile" ||
         deviceContext.deviceType === "TV") &&
         <live-apps-button>
-          <button
-            style={{
-              width: deviceContext.deviceType === "Desktop" ? "auto" : "100%"
-            }}
-            onClick={() => deviceContext.setVirtualOSState({
-              ...deviceContext.virtualOSState,
-              display: deviceContext.virtualOSState.display === "liveApps" ? "none" : "liveApps"
-            })}
-          >
-            <div>
-              <div>
-                <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-red" : "live-apps-button-circle-off"} />
-                <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-green" : "live-apps-button-circle-off"} />
-              </div>
-              <div>
-                <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-blue" : "live-apps-button-circle-off"} />
-                <live-apps-button-circle class={deviceContext.virtualOSState.display === "liveApps" ? "live-apps-button-circle-white" : "live-apps-button-circle-off"} />
-              </div>
-            </div>
+          <button onClick={handleMobileButton} style={{ width: "100%" }}>
+            <DefaultIcon
+              isActive={deviceContext.virtualOSState.display === "liveApps"}
+            />
           </button>
         </live-apps-button>}
     </>
