@@ -76,12 +76,15 @@ export const MenuPreview = () => {
                     position: "absolute",
                     top: "0px",
                     left: "0px",
-                    width: "80%",
+                    width: "100%",
                     height: "100%",
+                    color: "var(--WindowFontColor)",
                     backgroundColor: "var(--WindowBkgrColor)",
-                    paddingTop: "var(--WindowPadding)",
+                    borderWidth: "var(--WindowBorderWidth)",
+                    borderColor: "var(--WindowBorderColor)",
+                    borderRadius: "var(--WindowBorderRadius)",
+                    borderColor: "var(--WindowBorderColor)"
                 }}
-                className="app"
             >
                 {theme.navMenuLocation === "in top bar" && <NavMenu />}
                 <app-container

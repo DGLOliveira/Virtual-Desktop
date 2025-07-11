@@ -40,10 +40,13 @@ export const WindowPreview = () => {
           left: "10px",
           width: "80%",
           height: "120px",
+          color: "var(--WindowFontColorInactive)",
           backgroundColor: "var(--WindowBkgrColorInactive)",
+          borderWidth: "var(--WindowBorderWidth)",
+          borderColor: "var(--WindowBorderColorInactive)",
+          borderRadius: "var(--WindowBorderRadius)",
           borderColor: "var(--WindowBorderColorInactive)"
         }}
-        className="app appInactive"
       >
         <app-top-bar
           style={{
@@ -75,9 +78,13 @@ export const WindowPreview = () => {
           left: "60px",
           width: "80%",
           height: "120px",
-          backgroundColor: "var(--WindowBkgrColor)"
+          color: "var(--WindowFontColor)",
+          backgroundColor: "var(--WindowBkgrColor)",
+          borderWidth: "var(--WindowBorderWidth)",
+          borderColor: "var(--WindowBorderColor)",
+          borderRadius: "var(--WindowBorderRadius)",
+          borderColor: "var(--WindowBorderColor)"
         }}
-        className="app"
       >
         <app-top-bar
           style={{
