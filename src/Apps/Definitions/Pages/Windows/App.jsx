@@ -2,23 +2,27 @@ import { useState, useEffect, useContext } from "react";
 import { FcGlobe } from "react-icons/fc";
 
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
+import { DeviceContext } from "../../../../System/DeviceManager/context.jsx";
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 export const AppPreview = () => {
     const themeContext = useContext(ThemeContext);
+    const deviceContext = useContext(DeviceContext);
     return (
         <>
-            <app-window
+            {deviceContext.deviceType === "Desktop" && <app-window
                 style={{
                     position: "absolute",
                     top: "10px",
                     left: "10px",
                     width: "80%",
                     height: "120px",
+                    color: "var(--WindowFontColorInactive)",
                     backgroundColor: "var(--WindowBkgrColorInactive)",
-                    borderColor: "var(--WindowBorderColorInactive)"
+                    borderWidth: "var(--WindowBorderWidth)",
+                    borderColor: "var(--WindowBorderColorInactive)",
+                    borderRadius: "var(--WindowBorderRadius)",
                 }}
-                className="app appInactive"
             >
                 <app-top-bar
                     style={{
@@ -30,38 +34,52 @@ export const AppPreview = () => {
                 </app-top-bar>
                 <app-container
                     style={{
+                        textAlign: "left",
                         color: "var(--AppFontColorInactive)",
                         backgroundColor: "var(--AppBkgrColorInactive)",
                         borderColor: "var(--AppBorderColorInactive)",
-                        textAlign: "left"
-                    }}>{"-Content"}</app-container>
-            </app-window>
+                        marginLeft: "var(--WindowPadding)",
+                        marginRight: "var(--WindowPadding)",
+                        marginBottom: "var(--WindowPadding)",
+                        height: "calc(100% - var(--WindowPadding))",
+                        width: "calc(100% -  2 *var(--WindowPadding))",
+                    }}>{"-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}</app-container>
+            </app-window>}
             <app-window
                 style={{
                     position: "absolute",
-                    top: "50px",
-                    left: "60px",
-                    width: "80%",
-                    height: "120px",
-                    backgroundColor: "var(--WindowBkgrColor)"
+                    backgroundColor: "var(--WindowBkgrColor)",
+                    top: deviceContext.deviceType !== "Desktop" ? "0" : "50px",
+                    left: deviceContext.deviceType !== "Desktop" ? "0" : "60px",
+                    width: deviceContext.deviceType !== "Desktop" ? "100%" : "80%",
+                    height: deviceContext.deviceType !== "Desktop" ? "100%" : "120px",
+                    backgroundColor: "var(--WindowBkgrColor)",
+                    color: "var(--WindowFontColor)",
+                    borderWidth: deviceContext.deviceType !== "Desktop" ? "0" : "var(--WindowBorderWidth)",
+                    borderColor: "var(--WindowBorderColor)",
+                    borderRadius: deviceContext.deviceType !== "Desktop" ? "0" : "var(--WindowBorderRadius)"
                 }}
-                className="app"
             >
-                <app-top-bar
+                {deviceContext.deviceType === "Desktop" && <app-top-bar
                     style={{
                         color: "var(--WindowTopBarFontColor)",
                         backgroundColor: "var(--WindowTopBarBkgrColor)"
                     }}>
                     <FcGlobe />
                     <h1>Active</h1>
-                </app-top-bar>
+                </app-top-bar>}
                 <app-container
                     style={{
+                        textAlign: "left",
                         color: "var(--AppFontColor)",
                         backgroundColor: "var(--AppBkgrColor)",
                         borderColor: "var(--AppBorderColor)",
-                        textAlign:"left"
-                    }}>{"-Content"}</app-container>
+                        marginLeft: deviceContext.deviceType !== "Desktop" ? "0" : "var(--WindowPadding)",
+                        marginRight: deviceContext.deviceType !== "Desktop" ? "0" : "var(--WindowPadding)",
+                        marginBottom: deviceContext.deviceType !== "Desktop" ? "0" : "var(--WindowPadding)",
+                        height: deviceContext.deviceType !== "Desktop" ? "100%" : "calc(100% - var(--WindowPadding))",
+                        width: deviceContext.deviceType !== "Desktop" ? "100%" : "calc(100% -  2 *var(--WindowPadding))",
+                    }}>{"-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}</app-container>
             </app-window>
         </>
     );

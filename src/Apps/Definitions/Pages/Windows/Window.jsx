@@ -18,18 +18,18 @@ export const WindowPreview = () => {
       }))
   ), [themeContext.TopBarButtonsPath]);
 
-    const topBarButtonTitles = {
-        minimize: "Minimize (Alt + ⇩)",
-        maximize: "Maximize (Alt + ⇧)",
-        restore: "Restore (Alt + ⇩)",
-        close: "Close (Ctrl + Shift + F4)"
-    };
+  const topBarButtonTitles = {
+    minimize: "Minimize (Alt + ⇩)",
+    maximize: "Maximize (Alt + ⇧)",
+    restore: "Restore (Alt + ⇩)",
+    close: "Close (Ctrl + Shift + F4)"
+  };
 
-    const showButtons = {
-        minimize: true,
-        maximize: true,
-        close: true
-    };
+  const showButtons = {
+    minimize: true,
+    maximize: true,
+    close: true
+  };
 
   return (
     <>
@@ -55,7 +55,7 @@ export const WindowPreview = () => {
           <Suspense fallback={null}>
             <TopBarButtons
               title={topBarButtonTitles}
-              click={() => {}}
+              click={() => { }}
               isMaximized={false}
               showButtons={showButtons}
             />
@@ -89,7 +89,7 @@ export const WindowPreview = () => {
           <Suspense fallback={null}>
             <TopBarButtons
               title={topBarButtonTitles}
-              click={() => {}}
+              click={() => { }}
               isMaximized={false}
               showButtons={showButtons}
             />
