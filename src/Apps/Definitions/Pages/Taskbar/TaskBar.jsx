@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext, useCallback, lazy, Suspense } from "react";
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
+import { DeviceContext } from "../../../../System/DeviceManager/context.jsx";
+import DefaultIcon from "../../../../System/Taskbar/Components/LiveApps/DefaultIcon.jsx";
 import DefaultLogo from "../../../../System/Taskbar/Components/Start/DefaultLogo.jsx";
 import DefaultButton from "../../../../System/Taskbar/Components/LiveApps/DefaultButton.jsx";
 
@@ -9,10 +11,13 @@ import { FcGlobe } from "react-icons/fc";
 
 export const TaskBarPreview = () => {
   const themeContext = useContext(ThemeContext);
+  const deviceContext = useContext(DeviceContext);
+  const [isStartListOpen, setIsStartListOpen] = useState(false);
+  const [isLiveAppsOpen, setIsLiveAppsOpen] = useState(false);
 
   const Logo = useCallback((
     lazy(() => import(`../../../../System/ThemeManager/${themeContext.StartButtonPath}`).catch(
-      (error) => {
+      (_error) => {
         let errorMessage = "Failed to load Start Button Logo";
         console.error(errorMessage);
         return { default: DefaultLogo }
@@ -51,26 +56,54 @@ export const TaskBarPreview = () => {
           zIndex: 1,
         }}
       >
-        <start-button>
-          <button>
+        <start-button
+            style={{ width: deviceContext.deviceType === "Desktop" ? "auto" : "100%"}}>
+          <button
+            style={{width: deviceContext.deviceType === "Desktop" ? "auto" : "100%"}}
+            onClick={() => { setIsStartListOpen(!isStartListOpen); setIsLiveAppsOpen(false); }}
+            >
             <Suspense fallback={<DefaultLogo />}>
-              <Logo isOpen={false} />
+              <Logo isOpen={isStartListOpen} />
             </Suspense>
             <span>Start</span>
           </button>
         </start-button>
         <vertical-rect />
-        <live-apps>
-          <Suspense fallback={null}>
-            <AppButton
-              name={""}
-              click={() => {}}
-              context={(e) => {}}
-              AppIcon={FcGlobe}
-              isSelected={true}
-            />
-          </Suspense>
-        </live-apps>
+        {deviceContext.deviceType === "Desktop" ?
+          <live-apps>
+            <Suspense fallback={null}>
+              <AppButton
+                name={""}
+                click={() => {}}
+                context={(e) => { }}
+                AppIcon={FcGlobe}
+                isSelected={false}
+              />
+            </Suspense>
+          </live-apps> :
+          <live-apps-button>
+            <button
+              onClick={() => { setIsLiveAppsOpen(!isLiveAppsOpen); setIsStartListOpen(false); }}
+              style={{ width: "100%" }}
+            >
+              <DefaultIcon isActive={isLiveAppsOpen} />
+            </button>
+          </live-apps-button>
+        }
+        <vertical-rect />
+        <to-desktop-button
+            style={{
+                display: deviceContext.deviceType !== "Desktop" ? "flex" : "auto",
+                width: deviceContext.deviceType !== "Desktop" ? "100%" : "auto",
+            }}
+        >
+            <button
+                onClick={() => {setIsLiveAppsOpen(false); setIsStartListOpen(false); }}
+                title="To Desktop (Ctrl + ❖)"
+            >
+                {">>>"}
+                </button>
+        </to-desktop-button>
       </div>
     </>
   );
