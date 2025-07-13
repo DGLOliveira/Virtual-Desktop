@@ -13,6 +13,8 @@ import { StartMenuPreview, StartMenu } from "./Pages/Taskbar/StartMenu.jsx";
 import { AppListPreview, AppList } from "./Pages/Taskbar/AppList.jsx";
 import { LiveAppsPreview, LiveApps } from "./Pages/Taskbar/LiveApps.jsx";
 import { TrayPreview, Tray } from "./Pages/Taskbar/Tray.jsx";
+import { TrayCollapsedPreview, TrayCollapsed } from "./Pages/Taskbar/TrayCollapsed.jsx";
+import { TrayExpandedPreview, TrayExpanded } from "./Pages/Taskbar/TrayExpanded.jsx";
 import { TrayWindowPreview, TrayWindow } from "./Pages/Taskbar/Window.jsx";
 import { ContextMenuPreview, ContextMenu } from "./Pages/ContextMenu.jsx";
 import Scenario from "../../System/Desktop/Scenario.jsx";
@@ -28,7 +30,7 @@ export default function Definitions() {
     "Desktop",
     ["Taskbar",["Taskbar", "Start", "Start Menu", "Live Apps", "Apps List"]],
     ["Window",["Window", "Menu", "App", "Dialog"]],
-    ["Tray",["Tray", "Tray Window"]],
+    ["Tray",["Tray", "Tray Window", "Tray Collapsed", "Tray Expanded"]],
     "Context Menu",
   ];
   return (
@@ -82,6 +84,8 @@ export default function Definitions() {
           {defPage === "Live Apps" ? <LiveAppsPreview /> : <></>}
           {defPage === "Tray" ? <TrayPreview /> : <></>}
           {defPage === "Tray Window" ? <TrayWindowPreview /> : <></>}
+          {defPage === "Tray Collapsed" ? <TrayCollapsedPreview /> : <></>}
+          {defPage === "Tray Expanded" ? <TrayExpandedPreview /> : <></>}
           {defPage === "Window" ? <WindowPreview /> : <></>}
           {defPage === "Menu" ? <MenuPreview /> : <></>}
           {defPage === "App" ? <AppPreview /> : <></>}
@@ -97,6 +101,8 @@ export default function Definitions() {
         {defPage === "Live Apps" ? <LiveApps /> : <></>}
         {defPage === "Tray" ? <Tray /> : <></>}
         {defPage === "Tray Window" ? <TrayWindow /> : <></>}
+        {defPage === "Tray Collapsed" ? <TrayCollapsed /> : <></>}
+        {defPage === "Tray Expanded" ? <TrayExpanded /> : <></>}
         {defPage === "Window" ? <Window /> : <></>}
         {defPage === "App" ? <App /> : <></>}
         {defPage === "Menu" ? <Menu /> : <></>}

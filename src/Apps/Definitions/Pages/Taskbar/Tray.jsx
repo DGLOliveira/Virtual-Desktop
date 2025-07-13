@@ -190,7 +190,7 @@ export const Tray = () => {
                     <ColorPicker
                         color={taskbarTrayBkgr}
                         setColor={setTaskbarTrayBkgr}
-                        alpha={true}
+                        useAlpha={true}
                     />
                 </div>
                 <fieldset>
@@ -302,7 +302,7 @@ export const Tray = () => {
                         <ColorPicker
                             color={taskbarTrayButtonBkgr}
                             setColor={setTaskbarTrayButtonBkgr}
-                            alpha={true}
+                            useAlpha={true}
                         />
                     </div>
                     <div>
@@ -310,7 +310,7 @@ export const Tray = () => {
                         <ColorPicker
                             color={taskbarTrayButtonBkgrHover}
                             setColor={setTaskbarTrayButtonBkgrHover}
-                            alpha={true}
+                            useAlpha={true}
                         />
                     </div>
                     <div>
@@ -318,7 +318,7 @@ export const Tray = () => {
                         <ColorPicker
                             color={taskbarTrayButtonBkgrActive}
                             setColor={setTaskbarTrayButtonBkgrActive}
-                            alpha={true}
+                            useAlpha={true}
                         />
                     </div>
                 </fieldset>
@@ -329,7 +329,7 @@ export const Tray = () => {
                         <ColorPicker
                             color={taskbarTrayButtonColor}
                             setColor={setTaskbarTrayButtonColor}
-                            alpha={true}
+                            useAlpha={false}
                         />
                     </div>
                     <div>
@@ -337,7 +337,7 @@ export const Tray = () => {
                         <ColorPicker
                             color={taskbarTrayButtonColorHover}
                             setColor={setTaskbarTrayButtonColorHover}
-                            alpha={true}
+                            useAlpha={false}
                         />
                     </div>
                     <div>
@@ -345,7 +345,7 @@ export const Tray = () => {
                         <ColorPicker
                             color={taskbarTrayButtonColorActive}
                             setColor={setTaskbarTrayButtonColorActive}
-                            alpha={true}
+                            useAlpha={false}
                         />
                     </div>
                 </fieldset>
@@ -378,7 +378,7 @@ export const Tray = () => {
                         <ColorPicker
                             color={taskbarTrayButtonBorderColor}
                             setColor={setTaskbarTrayButtonBorderColor}
-                            alpha={true}
+                            useAlpha={true}
                         />
                     </div>
                     <div>
