@@ -10,6 +10,7 @@ import { DialogPreview, Dialog } from "./Pages/Windows/Dialog.jsx";
 import { TaskBarPreview, TaskBar } from "./Pages/Taskbar/TaskBar.jsx";
 import { StartPreview, Start } from "./Pages/Taskbar/Start.jsx";
 import { StartMenuPreview, StartMenu } from "./Pages/Taskbar/StartMenu.jsx";
+import { AppListPreview, AppList } from "./Pages/Taskbar/AppList.jsx";
 import { LiveAppsPreview, LiveApps } from "./Pages/Taskbar/LiveApps.jsx";
 import { TrayPreview, Tray } from "./Pages/Taskbar/Tray.jsx";
 import { TrayWindowPreview, TrayWindow } from "./Pages/Taskbar/Window.jsx";
@@ -25,7 +26,7 @@ export default function Definitions() {
   const menuList = [
     "Global",
     "Desktop",
-    ["Taskbar",["Taskbar", "Start", "Start Menu", "Live Apps"]],
+    ["Taskbar",["Taskbar", "Start", "Start Menu", "Live Apps", "Apps List"]],
     ["Window",["Window", "Menu", "App", "Dialog"]],
     ["Tray",["Tray", "Tray Window"]],
     "Context Menu",
@@ -77,6 +78,7 @@ export default function Definitions() {
           {defPage === "Taskbar" ? <TaskBarPreview /> : <></>}
           {defPage === "Start" ? <StartPreview /> : <></>}
           {defPage === "Start Menu" ? <StartMenuPreview /> : <></>}
+          {defPage === "Apps List" ? <AppListPreview /> : <></>}
           {defPage === "Live Apps" ? <LiveAppsPreview /> : <></>}
           {defPage === "Tray" ? <TrayPreview /> : <></>}
           {defPage === "Tray Window" ? <TrayWindowPreview /> : <></>}
@@ -91,6 +93,7 @@ export default function Definitions() {
         {defPage === "Taskbar" ? <TaskBar /> : <></>}
         {defPage === "Start" ? <Start /> : <></>}
         {defPage === "Start Menu" ? <StartMenu /> : <></>}
+        {defPage === "Apps List" ? <AppList /> : <></>}
         {defPage === "Live Apps" ? <LiveApps /> : <></>}
         {defPage === "Tray" ? <Tray /> : <></>}
         {defPage === "Tray Window" ? <TrayWindow /> : <></>}
