@@ -38,6 +38,7 @@ mobile-tray {
   justify-content: end;
   height: var(--MobileTrayHeight);
   order: -1;
+  box-sizing: border-box;
   padding: var(--MobileTrayVerticalPadding) var(--MobileTrayHorizontalPadding);
   color: var(--MobileTrayColor);
   background-color: var(--MobileTrayBkgr);
@@ -46,13 +47,14 @@ mobile-tray {
   background-size: var(--MobileTrayBkgrSize);
   background-repeat: var(--MobileTrayBkgrRepeat);
   backdrop-filter: var(--MobileTrayBackdropFilter);
-  border-bottom: var(--MobileTrayHorizontalBorderWidth) var(--TMobileTrayHorizontalBorderColor) var(--MobileTrayHorizontalBorderType);
+  border-bottom: var(--MobileTrayHorizontalBorderWidth) transparent var(--MobileTrayHorizontalBorderType);
   border-radius: 0 0 var(--MobileTrayHorizontalBorderRadius) var(--MobileTrayHorizontalBorderRadius);
   cursor: grab;
   z-index:1;
 }
 
 mobile-tray>button {
+  color: var(--MobileTrayColor);
   font-size: var(--MobileTrayFontSize);
   pointer-events: none;
 }
@@ -81,7 +83,7 @@ mobile-tray-fullscreen {
   background-repeat: var(--MobileTrayFullBkgrRepeat);
   backdrop-filter: var(--MobileTrayFullBackdropFilter);
   border-top: var(--TaskbarHorizontalBorderWidth) var(--TaskbarHorizontalBorderColor) var(--TaskbarHorizontalBorderType);
-  border-bottom: var(--MobileTrayHorizontalBorderWidth) var(--TMobileTrayHorizontalBorderColor) var(--MobileTrayHorizontalBorderType);
+  border-bottom: var(--MobileTrayHorizontalBorderWidth) var(--MobileTrayHorizontalBorderColor) var(--MobileTrayHorizontalBorderType);
   border-radius: 0 0 var(--MobileTrayHorizontalBorderRadius) var(--MobileTrayHorizontalBorderRadius);
   transition: 0.3s;
 }

@@ -46,6 +46,10 @@ export const TrayExpandedPreview = () => {
 }
 
 export const TrayExpanded = () => {
+
+    var root = document.querySelector(":root");
+
+
     return (<>
         Under Construction
     </>);
