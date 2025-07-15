@@ -229,6 +229,12 @@ export const AppList = () => {
                 <label>Background</label>
                 <ColorPicker color={startMenuInnerBkgr} setColor={setStartMenuInnerBkgr} useAlpha={true} />
             </div>
+            <div>
+                <label>background FX</label>
+                <select value={theme.startMenuMobileBackgroundFX} onChange={(e) => { theme.setStartMenuMobileBackgroundFX(e.target.value) }}>
+                    {theme.backgroundFXList.map((backgroundFX) => (<option key={backgroundFX} value={backgroundFX}>{backgroundFX}</option>))}
+                </select>
+            </div>
             <fieldset>
                 <legend>Border</legend>
                 <div>
@@ -282,18 +288,18 @@ export const AppList = () => {
             </fieldset>
             <fieldset>
                 <legend>Background</legend>
-            <div>
-                <label>Normal</label>
-                <ColorPicker color={startMenuButtonBkgr} setColor={setStartMenuButtonBkgr} useAlpha={true} />
-            </div>
-            <div>
-                <label>On Hover</label>
-                <ColorPicker color={startMenuButtonBkgrHover} setColor={setStartMenuButtonBkgrHover} useAlpha={true} />
-            </div>
-            <div>
-                <label>On Click</label>
-                <ColorPicker color={startMenuButtonBkgrActive} setColor={setStartMenuButtonBkgrActive} useAlpha={true} />
-            </div>
+                <div>
+                    <label>Normal</label>
+                    <ColorPicker color={startMenuButtonBkgr} setColor={setStartMenuButtonBkgr} useAlpha={true} />
+                </div>
+                <div>
+                    <label>On Hover</label>
+                    <ColorPicker color={startMenuButtonBkgrHover} setColor={setStartMenuButtonBkgrHover} useAlpha={true} />
+                </div>
+                <div>
+                    <label>On Click</label>
+                    <ColorPicker color={startMenuButtonBkgrActive} setColor={setStartMenuButtonBkgrActive} useAlpha={true} />
+                </div>
             </fieldset>
             <fieldset>
                 <legend>Border</legend>
@@ -323,12 +329,12 @@ export const AppList = () => {
                         <option value="outset">outset</option>
                     </select>
                 </div>
-                </fieldset>
-                <fieldset>
+            </fieldset>
+            <fieldset>
                 <legend>Text</legend>
                 <div>
                     <label>Display</label>
-                    <input type="checkbox" checked={startMenuButtonFontDisplay==="visible" ? true : false} onChange={(e) => { startMenuButtonFontDisplay==="visible" ? setStartMenuButtonFontDisplay("none") : setStartMenuButtonFontDisplay("visible") }} />
+                    <input type="checkbox" checked={startMenuButtonFontDisplay === "visible" ? true : false} onChange={(e) => { startMenuButtonFontDisplay === "visible" ? setStartMenuButtonFontDisplay("none") : setStartMenuButtonFontDisplay("visible") }} />
                 </div>
                 <div>
                     <label>Color</label>
