@@ -41,12 +41,6 @@ mobile-tray {
   box-sizing: border-box;
   padding: var(--MobileTrayVerticalPadding) var(--MobileTrayHorizontalPadding);
   color: var(--MobileTrayColor);
-  background-color: var(--MobileTrayBkgr);
-  background-image: var(--MobileTrayImage);
-  background-position: var(--MobileTrayBkgrPosition);
-  background-size: var(--MobileTrayBkgrSize);
-  background-repeat: var(--MobileTrayBkgrRepeat);
-  backdrop-filter: var(--MobileTrayBackdropFilter);
   border-bottom: var(--MobileTrayHorizontalBorderWidth) transparent var(--MobileTrayHorizontalBorderType);
   border-radius: 0 0 var(--MobileTrayHorizontalBorderRadius) var(--MobileTrayHorizontalBorderRadius);
   cursor: grab;
@@ -77,8 +71,8 @@ mobile-tray-fullscreen {
   padding-bottom: var(--MobileTrayHeight);
   color: var(--MobileTrayFullColor);
   background-color: var(--MobileTrayFullBkgr);
-  background-image: var(--MobileTrayFullImage);
-  background-position: var(--MobileTrayBFullkgrPosition);
+  background-image: var(--MobileTrayFullBkgrImage);
+  background-position: var(--MobileTrayFullBkgrPosition);
   background-size: var(--MobileTrayFullBkgrSize);
   background-repeat: var(--MobileTrayFullBkgrRepeat);
   backdrop-filter: var(--MobileTrayFullBackdropFilter);

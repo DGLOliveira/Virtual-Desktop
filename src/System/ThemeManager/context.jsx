@@ -36,6 +36,10 @@ export const ThemeContext = createContext({
     setStartMenuBackgroundFX: () => { },
     taskbarWindowBackgroundFX: "",
     setTaskbarWindowBackgroundFX: () => { },
+    startMenuMobileBackgroundFX: "",
+    setStartMenuMobileBackgroundFX: () => { },
+    mobileTrayBackgroundFX: "",
+    setMobileTrayBackgroundFX: () => { },
     navMenuLocation: "",
     navMenuLocationList: [],
     setNavMenuLocation: () => { },
@@ -98,6 +102,8 @@ export function ThemeProvider({ children }) {
         useState(themeRegistry[theme]["FX"]["Backgrounds"]["StartMenu"]);
     const [startMenuMobileBackgroundFX, setStartMenuMobileBackgroundFX] =
         useState(themeRegistry[theme]["FX"]["Backgrounds"]["StartMenuMobile"]);
+    const [mobileTrayBackgroundFX, setMobileTrayBackgroundFX] =
+        useState(themeRegistry[theme]["FX"]["Backgrounds"]["MobileTray"]);
 
     const [dialogButtonsLocation, setDialogButtonsLocation] = useState("in window");
     const dialogButtonsLocationList = ["in info container", "in window"];
@@ -142,6 +148,7 @@ export function ThemeProvider({ children }) {
         setTaskbarWindowBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["TaskbarWindow"]);
         setStartMenuBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["StartMenu"]);
         setStartMenuMobileBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["StartMenuMobile"]);
+        setMobileTrayBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["MobileTray"]);
         setNavMenuLocation(themeRegistry[value]["Locations"]["NavMenu"]);
         setDialogButtonsLocation(themeRegistry[value]["Locations"]["DialogButtons"]);
     };
@@ -170,6 +177,7 @@ export function ThemeProvider({ children }) {
     useEffect(() => { switchFX("StartMenu", startMenuBackgroundFX); }, [startMenuBackgroundFX]);
     useEffect(() => { switchFX("StartMenuMobileInner", startMenuMobileBackgroundFX); }, [startMenuMobileBackgroundFX]);
     useEffect(() => { switchFX("TaskbarWindow", taskbarWindowBackgroundFX); }, [taskbarWindowBackgroundFX]);
+    useEffect(() => { switchFX("MobileTrayFull", mobileTrayBackgroundFX); }, [mobileTrayBackgroundFX]);
 
     useEffect(() => { setStartButtonPath(`Themes/${themeRegistry[startButtonTheme]["Components"]["StartButton"]}`);},[startButtonTheme]);
     useEffect(() => { setLiveAppButtonPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["LiveAppButton"]}`);},[liveAppsTheme]);
@@ -210,6 +218,10 @@ export function ThemeProvider({ children }) {
         setTaskbarWindowBackgroundFX,
         dialogBackgroundFX,
         setDialogBackgroundFX,
+        startMenuMobileBackgroundFX,
+        setStartMenuMobileBackgroundFX,
+        mobileTrayBackgroundFX,
+        setMobileTrayBackgroundFX,
         navMenuLocation,
         navMenuLocationList,
         setNavMenuLocation,

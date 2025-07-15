@@ -283,12 +283,6 @@
     "--TaskbarWindowFooterBorderType": "solid",
     "--TaskbarWindowFooterBorderRadius": "0px",
     
-    "--MobileTrayBkgrImage": "none",
-    "--MobileTrayBkgrPosition": "none",
-    "--MobileTrayBkgrSize": "none",
-    "--MobileTrayBkgrRepeat": "none",
-    "--MobileTrayBackdropFilter": "none",
-    "--MobileTrayBkgr": "none",
     "--MobileTrayColor": "hsl(0, 0%, 90%)",
     "--MobileTrayHeight": "40px",
     "--MobileTrayVerticalPadding": "0px",
@@ -299,12 +293,7 @@
     "--MobileTrayHorizontalBorderRadius": "0px",
     "--MobileTrayIconSize": "25px",
     "--MobileTrayFontSize": "15px",
-    
-    "--MobileTrayFullBkgrImage": "none",
-    "--MobileTrayFullBkgrPosition": "none",
-    "--MobileTrayFullBkgrSize": "none",
-    "--MobileTrayFullBkgrRepeat": "none",
-    "--MobileTrayFullBackdropFilter": "none",
+
     "--MobileTrayFullBkgr": "hsla(216, 47%, 10%, 0.9)",
     "--MobileTrayFullColor": "hsl(0, 0%, 90%)",
     

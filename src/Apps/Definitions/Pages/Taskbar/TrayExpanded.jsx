@@ -134,91 +134,99 @@ export const TrayExpanded = () => {
     }, [systemClockColor]);
 
     return (<>
-    <fieldset>
-        <legend>Colors</legend>
-        <div>
-            <label>Background</label>
-            <ColorPicker color={background} setColor={setBackground} useAlpha={true} />
-        </div>
-        <div>
-            <label>Font & Icon Color</label>
-            <ColorPicker color={systemColor} setColor={setSystemColor} useAlpha={false} />
-        </div>
-    </fieldset>
-    <fieldset>
-        <legend>System Buttons</legend>
-        <div>
-            <label>Size</label>
-            <input type="range" min="20" max="100" value={systemButtonSize} onChange={(e) => setSystemButtonSize(e.target.value)} />
-            <input type="number" min="20" max="100" value={systemButtonSize} onChange={(e) => setSystemButtonSize(e.target.value)} />
-        </div>
-        <div>
-            <label>Margin</label>
-            <input type="range" min="0" max="20" value={systemButtonMargin} onChange={(e) => setSystemButtonMargin(e.target.value)} />
-            <input type="number" min="0" max="20" value={systemButtonMargin} onChange={(e) => setSystemButtonMargin(e.target.value)} />
-        </div>
-        <div>
-            <label>Padding</label>
-            <input type="range" min="0" max="20" value={systemButtonPadding} onChange={(e) => setSystemButtonPadding(e.target.value)} />
-            <input type="number" min="0" max="20" value={systemButtonPadding} onChange={(e) => setSystemButtonPadding(e.target.value)} />
-        </div>
-        <div>
-            <label>Background</label>
-            <ColorPicker color={systemButtonBackground} setColor={setSystemButtonBackground} useAlpha={true} />
-        </div>
-        <div>
-            <label>Icon Size</label>
-            <input type="range" min="10" max="40" value={systemButtonIconSize} onChange={(e) => setSystemButtonIconSize(e.target.value)} />
-            <input type="number" min="10" max="40" value={systemButtonIconSize} onChange={(e) => setSystemButtonIconSize(e.target.value)} />
-        </div>
         <fieldset>
-            <legend>Border</legend>
+            <legend>Colors</legend>
             <div>
-                <label>Width</label>
-                <input type="range" min="0" max="10" value={systemButtonBorderWidth} onChange={(e) => setSystemButtonBorderWidth(e.target.value)} />
-                <input type="number" min="0" max="10" value={systemButtonBorderWidth} onChange={(e) => setSystemButtonBorderWidth(e.target.value)} />
+                <label>Background</label>
+                <ColorPicker color={background} setColor={setBackground} useAlpha={true} />
             </div>
             <div>
-                <label>Type</label>
-                <select value={systemButtonBorderType} onChange={(e) => setSystemButtonBorderType(e.target.value)} >
-                    <option value="none">None</option>
-                    <option value="solid">Solid</option>
-                    <option value="dashed">Dashed</option>
-                    <option value="dotted">Dotted</option>
-                    <option value="double">Double</option>
-                    <option value="groove">Groove</option>
-                    <option value="ridge">Ridge</option>
-                    <option value="inset">Inset</option>
-                    <option value="outset">Outset</option>
+                <label>Background FX</label>
+                <select value={theme.mobileTrayBackgroundFX} onChange={(e) => theme.setMobileTrayBackgroundFX(e.target.value)}>
+                    {theme.backgroundFXList.map((backgroundFX) =>
+                        <option key={backgroundFX} value={backgroundFX}>{backgroundFX}</option>
+                    )}
                 </select>
             </div>
             <div>
-                <label>Color</label>
-                <ColorPicker color={systemButtonBorderColor} setColor={setSystemButtonBorderColor} useAlpha={true} />
-            </div>
-            <div>
-                <label>Border Radius</label>
-                <input type="range" min="0" max="20" value={systemButtonBorderRadius} onChange={(e) => setSystemButtonBorderRadius(e.target.value)} />
-                <input type="number" min="0" max="20" value={systemButtonBorderRadius} onChange={(e) => setSystemButtonBorderRadius(e.target.value)} />
+                <label>Font & Icon Color</label>
+                <ColorPicker color={systemColor} setColor={setSystemColor} useAlpha={false} />
             </div>
         </fieldset>
-    </fieldset>
-    <fieldset>
-        <legend>System Clock</legend>
-        <div>
-            <label>Size</label>
-            <input type="range" min="10" max="50" value={systemClockFontSize} onChange={(e) => setSystemClockFontSize(e.target.value)} />
-            <input type="number" min="10" max="50" value={systemClockFontSize} onChange={(e) => setSystemClockFontSize(e.target.value)} />
-        </div>
-        <div>
-            <label>Padding</label>
-            <input type="range" min="0" max="20" value={systemClockPadding} onChange={(e) => setSystemClockPadding(e.target.value)} />
-            <input type="number" min="0" max="20" value={systemClockPadding} onChange={(e) => setSystemClockPadding(e.target.value)} />
-        </div>
-        <div>
-            <label>Color</label>
-            <ColorPicker color={systemClockColor} setColor={setSystemClockColor} useAlpha={false} />
-        </div>
-    </fieldset>
+        <fieldset>
+            <legend>System Buttons</legend>
+            <div>
+                <label>Size</label>
+                <input type="range" min="20" max="100" value={systemButtonSize} onChange={(e) => setSystemButtonSize(e.target.value)} />
+                <input type="number" min="20" max="100" value={systemButtonSize} onChange={(e) => setSystemButtonSize(e.target.value)} />
+            </div>
+            <div>
+                <label>Margin</label>
+                <input type="range" min="0" max="20" value={systemButtonMargin} onChange={(e) => setSystemButtonMargin(e.target.value)} />
+                <input type="number" min="0" max="20" value={systemButtonMargin} onChange={(e) => setSystemButtonMargin(e.target.value)} />
+            </div>
+            <div>
+                <label>Padding</label>
+                <input type="range" min="0" max="20" value={systemButtonPadding} onChange={(e) => setSystemButtonPadding(e.target.value)} />
+                <input type="number" min="0" max="20" value={systemButtonPadding} onChange={(e) => setSystemButtonPadding(e.target.value)} />
+            </div>
+            <div>
+                <label>Background</label>
+                <ColorPicker color={systemButtonBackground} setColor={setSystemButtonBackground} useAlpha={true} />
+            </div>
+            <div>
+                <label>Icon Size</label>
+                <input type="range" min="10" max="40" value={systemButtonIconSize} onChange={(e) => setSystemButtonIconSize(e.target.value)} />
+                <input type="number" min="10" max="40" value={systemButtonIconSize} onChange={(e) => setSystemButtonIconSize(e.target.value)} />
+            </div>
+            <fieldset>
+                <legend>Border</legend>
+                <div>
+                    <label>Width</label>
+                    <input type="range" min="0" max="10" value={systemButtonBorderWidth} onChange={(e) => setSystemButtonBorderWidth(e.target.value)} />
+                    <input type="number" min="0" max="10" value={systemButtonBorderWidth} onChange={(e) => setSystemButtonBorderWidth(e.target.value)} />
+                </div>
+                <div>
+                    <label>Type</label>
+                    <select value={systemButtonBorderType} onChange={(e) => setSystemButtonBorderType(e.target.value)} >
+                        <option value="none">None</option>
+                        <option value="solid">Solid</option>
+                        <option value="dashed">Dashed</option>
+                        <option value="dotted">Dotted</option>
+                        <option value="double">Double</option>
+                        <option value="groove">Groove</option>
+                        <option value="ridge">Ridge</option>
+                        <option value="inset">Inset</option>
+                        <option value="outset">Outset</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Color</label>
+                    <ColorPicker color={systemButtonBorderColor} setColor={setSystemButtonBorderColor} useAlpha={true} />
+                </div>
+                <div>
+                    <label>Border Radius</label>
+                    <input type="range" min="0" max="20" value={systemButtonBorderRadius} onChange={(e) => setSystemButtonBorderRadius(e.target.value)} />
+                    <input type="number" min="0" max="20" value={systemButtonBorderRadius} onChange={(e) => setSystemButtonBorderRadius(e.target.value)} />
+                </div>
+            </fieldset>
+        </fieldset>
+        <fieldset>
+            <legend>System Clock</legend>
+            <div>
+                <label>Size</label>
+                <input type="range" min="10" max="50" value={systemClockFontSize} onChange={(e) => setSystemClockFontSize(e.target.value)} />
+                <input type="number" min="10" max="50" value={systemClockFontSize} onChange={(e) => setSystemClockFontSize(e.target.value)} />
+            </div>
+            <div>
+                <label>Padding</label>
+                <input type="range" min="0" max="20" value={systemClockPadding} onChange={(e) => setSystemClockPadding(e.target.value)} />
+                <input type="number" min="0" max="20" value={systemClockPadding} onChange={(e) => setSystemClockPadding(e.target.value)} />
+            </div>
+            <div>
+                <label>Color</label>
+                <ColorPicker color={systemClockColor} setColor={setSystemClockColor} useAlpha={false} />
+            </div>
+        </fieldset>
     </>);
 }

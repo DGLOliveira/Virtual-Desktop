@@ -313,12 +313,6 @@
   --TaskbarWindowFooterBorderType: solid;
   --TaskbarWindowFooterBorderRadius: 0px;
 
-  --MobileTrayBkgrImage: none;
-  --MobileTrayBkgrPosition: none;
-  --MobileTrayBkgrSize: none;
-  --MobileTrayBkgrRepeat: none;
-  --MobileTrayBackdropFilter: none;
-  --MobileTrayBkgr: "none";
   --MobileTrayColor: hsl(0, 0%, 75%);
   --MobileTrayHeight: 40px;
   --MobileTrayVerticalPadding: 0px;
