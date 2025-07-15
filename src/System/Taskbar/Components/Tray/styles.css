@@ -122,6 +122,7 @@ mobile-tray-fullscreen-clock{
 }
 
 mobile-tray-fullscreen-clock>button{
+  color: var(--MobileTrayFullClockColor);
   font-size: var(--MobileTrayFullClockFontSize);
 }
 

@@ -126,6 +126,12 @@ export const TrayExpanded = () => {
     useEffect(() => {
         root.style.setProperty("--MobileTrayFullClockPadding", systemClockPadding + "px");
     }, [systemClockPadding]);
+    //----------------------------------------------------------------------------//
+    const [systemClockColor, setSystemClockColor] = useState(
+        getComputedStyle(root).getPropertyValue("--MobileTrayFullClockColor"));
+    useEffect(() => {
+        root.style.setProperty("--MobileTrayFullClockColor", systemClockColor);
+    }, [systemClockColor]);
 
     return (<>
     <fieldset>
@@ -208,6 +214,10 @@ export const TrayExpanded = () => {
             <label>Padding</label>
             <input type="range" min="0" max="20" value={systemClockPadding} onChange={(e) => setSystemClockPadding(e.target.value)} />
             <input type="number" min="0" max="20" value={systemClockPadding} onChange={(e) => setSystemClockPadding(e.target.value)} />
+        </div>
+        <div>
+            <label>Color</label>
+            <ColorPicker color={systemClockColor} setColor={setSystemClockColor} useAlpha={false} />
         </div>
     </fieldset>
     </>);

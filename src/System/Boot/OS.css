@@ -354,6 +354,7 @@
   --MobileTrayFullSystemButtonIconSize: 30px;
   --MobileTrayFullClockFontSize: 20px;
   --MobileTrayFullClockPadding: 10px;
+  --MobileTrayFullClockColor: hsl(0, 0%, 75%);
 }
 
 #root{
