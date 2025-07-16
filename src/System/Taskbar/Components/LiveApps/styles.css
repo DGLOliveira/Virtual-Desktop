@@ -61,27 +61,32 @@ live-apps>button:active:enabled {
 
 live-apps-button {
     display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
-    align-items: center;
+    align-items: end;
     justify-content: center;
-    color: var(--LiveAppsFontColor);
-    background-color: var(--LiveAppsBkgr);
-    margin: var(--LiveAppsMargin);
-    border: var(--LiveAppsBorderWidth) var(--LiveAppsBorderColor) var(--LiveAppsBorderType);
-    border-radius: var(--LiveAppsBorderRadius);
+    width: 100%;
 }
 
 live-apps-button>button {
+    position: relative;
     display: flex;
-    flex-shrink: 0;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    height: var(--StartButtonHeight);
+    box-sizing: border-box;
+    background-color: var(--StartButtonBkgr);
+    margin: var(--StartButtonMargin);
+    padding: var(--StartButtonPadding);
+    border: var(--StartButtonBorderWidth) var(--StartButtonBorderColor) var(--StartButtonBorderType);
+    border-radius: var(--StartButtonBorderRadius);
+}
+
+live-apps-button>button:hover:enabled {
+    background-color: var(--StartButtonBkgrHover);
+}
+
+live-apps-button>button:active:enabled {
+    background-color: var(--StartButtonBkgrActive);
 }
 
 live-apps-button>button>div{
