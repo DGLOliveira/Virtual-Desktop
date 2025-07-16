@@ -1,4 +1,4 @@
-start-button>button:has(.startButtonAero) {
+live-apps-button>button:has(.liveAppsButtonAero) {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
     width:var(--StartButtonHeight) !important;
@@ -7,30 +7,22 @@ start-button>button:has(.startButtonAero) {
     box-shadow: 0 0 0px 0px hsla(0, 0%, 100%, 0.5) inset;
     transition: 0.5s;
 }
-
-.startButtonAero>.hex1 {
-    fill: #FF0000;
+live-apps-button>button:has(.liveAppsButtonAero)>svg {
+    width: calc(var(--StartButtonIconSize)*0.9);
+    height: calc(var(--StartButtonIconSize)*0.9);    
 }
 
-.startButtonAero>.hex2 {
-    fill: #00FF00;
-}
-
-.startButtonAero>.hex3 {
-    fill: #0000FF;
-}
-
-start-button>button:hover:enabled:has(.startButtonAero){
+live-apps-button>button:hover:enabled:has(.liveAppsButtonAero){
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.5) inset;
 }
 
-start-button>button:active:enabled:has(.startButtonAero) {
+live-apps-button>button:active:enabled:has(.liveAppsButtonAero) {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
 }
 
-start-button>button:active:enabled:has(.startButtonAeroActive) {
+live-apps-button>button:active:enabled:has(.liveAppsButtonAeroActive) {
     background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
         radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
     box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;

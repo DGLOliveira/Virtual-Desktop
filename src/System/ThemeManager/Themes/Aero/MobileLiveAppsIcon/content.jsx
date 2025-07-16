@@ -2,7 +2,7 @@ import "./style.css";
 export default function Icon({ isActive, darkMode }) {
 
   return (
-    <svg className={isActive ? "liveAppsMobileClassic liveAppsMobileClassicActive" : "liveAppsMobileClassic"}  width="400" height="400" viewBox="0 0 400 400"
+    <svg className="liveAppsButtonAero"  width="400" height="400" viewBox="0 0 400 400"
       fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         className="hex combMagenta"
