@@ -23,7 +23,8 @@
             "StartButton": "Fluent/StartButton/content.jsx",
             "TopBarButtons": "Fluent/TopBarButtons/content.jsx",
             "DialogButton": "Fluent/DialogButton/content.jsx",
-            "LiveAppButton": "Fluent/LiveAppButton/content.jsx"
+            "LiveAppButton": "Fluent/LiveAppButton/content.jsx",
+            "MobileLiveAppsIcon": "Fluent/MobileLiveAppsIcon/content.jsx"
         }
     },
     "Aero": {
@@ -50,7 +51,8 @@
             "StartButton": "Aero/StartButton/content.jsx",
             "TopBarButtons": "Aero/TopBarButtons/content.jsx",
             "DialogButton": "Aero/DialogButton/content.jsx",
-            "LiveAppButton": "Aero/LiveAppButton/content.jsx"
+            "LiveAppButton": "Aero/LiveAppButton/content.jsx",
+            "MobileLiveAppsIcon": "Aero/MobileLiveAppsIcon/content.jsx"
         }
     },
     "Aqua": {
@@ -77,7 +79,8 @@
             "StartButton": "Aqua/StartButton/content.jsx",
             "TopBarButtons": "Aqua/TopBarButtons/content.jsx",
             "DialogButton": "Aqua/DialogButton/content.jsx",
-            "LiveAppButton": "Aqua/LiveAppButton/content.jsx"
+            "LiveAppButton": "Aqua/LiveAppButton/content.jsx",
+            "MobileLiveAppsIcon": "Aqua/MobileLiveAppsIcon/content.jsx"
         }
     },
     "Classic": {
@@ -104,7 +107,8 @@
             "StartButton": "Classic/StartButton/content.jsx",
             "TopBarButtons": "Classic/TopBarButtons/content.jsx",
             "DialogButton": "Classic/DialogButton/content.jsx",
-            "LiveAppButton": "Classic/LiveAppButton/content.jsx"
+            "LiveAppButton": "Classic/LiveAppButton/content.jsx",
+            "MobileLiveAppsIcon": "Classic/MobileLiveAppsIcon/content.jsx"
         }
     }
 }
