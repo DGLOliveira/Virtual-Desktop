@@ -33,6 +33,7 @@ export const ThemeContext = createContext({
     liveAppsThemeList: [],
     setLiveAppsTheme: () => { },
     LiveAppButtonPath: () => { },
+    LiveAppsMobileIconPath: () => { },
     startMenuBackgroundFX: "",
     setStartMenuBackgroundFX: () => { },
     taskbarWindowBackgroundFX: "",
@@ -71,6 +72,9 @@ export function ThemeProvider({ children }) {
     const liveAppsThemeList = [];
     const [LiveAppButtonPath, setLiveAppButtonPath] = 
     useState(`Themes/${themeRegistry[liveAppsTheme]["Components"]["LiveAppButton"]}`);
+
+    const [LiveAppsMobileIconPath, setLiveAppsMobileIconPath] = 
+    useState(`Themes/${themeRegistry[liveAppsTheme]["Components"]["MobileLiveAppsIcon"]}`);
 
     const [topBarIconTheme, setTopBarIconTheme] = useState(DEFAULT_THEME);
     const topBarIconThemeList = [];
@@ -141,6 +145,7 @@ export function ThemeProvider({ children }) {
         changeRootVars(value);
         setStartButtonTheme(value);
         setLiveAppsTheme(value);
+
         setTopBarIconTheme(value);
         setDialogButtonTheme(value);
         setWindowBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["Window"]);
@@ -152,6 +157,7 @@ export function ThemeProvider({ children }) {
         setMobileTrayBackgroundFX(themeRegistry[value]["FX"]["Backgrounds"]["MobileTray"]);
         setNavMenuLocation(themeRegistry[value]["Locations"]["NavMenu"]);
         setDialogButtonsLocation(themeRegistry[value]["Locations"]["DialogButtons"]);
+
     };
 
     //Gets CSS variables for background FX
@@ -184,6 +190,7 @@ export function ThemeProvider({ children }) {
     useEffect(() => { setLiveAppButtonPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["LiveAppButton"]}`);},[liveAppsTheme]);
     useEffect(() => { setTopBarButtonsPath(`Themes/${themeRegistry[topBarIconTheme]["Components"]["TopBarButtons"]}`);},[topBarIconTheme]);
     useEffect(() => { setDialogButtonPath(`Themes/${themeRegistry[dialogButtonTheme]["Components"]["DialogButton"]}`);},[dialogButtonTheme]);
+    useEffect(() => { setLiveAppsMobileIconPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["MobileLiveAppsIcon"]}`);},[liveAppsTheme]);
 
     const contextValue = {
         mode,
@@ -201,6 +208,7 @@ export function ThemeProvider({ children }) {
         liveAppsThemeList,
         setLiveAppsTheme,
         LiveAppButtonPath,
+        LiveAppsMobileIconPath,
         topBarIconTheme,
         topBarIconThemeList,
         setTopBarIconTheme,

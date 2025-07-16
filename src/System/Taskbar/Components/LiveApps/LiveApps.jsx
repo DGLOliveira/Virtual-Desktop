@@ -51,6 +51,16 @@ export const LiveApps = () => {
       }))
   ), [themeContext.LiveAppButtonPath]);
 
+  const Icon = useCallback((
+    lazy(() => import(`../../../ThemeManager/${themeContext.LiveAppsMobileIconPath}`).catch(
+      (_error) => {
+        console.error("Failed to import thematic Live App buttons");
+        return {
+          default: DefaultIcon
+        }
+      }))
+  ), [themeContext.LiveAppsMobileIconPath]);
+
   useEffect(() => {
     let flag = false;
     switch (themeContext.mode) {
@@ -89,10 +99,12 @@ export const LiveApps = () => {
         deviceContext.deviceType === "TV") &&
         <live-apps-button>
           <button onClick={handleMobileButton} style={{ width: "100%" }}>
-            <DefaultIcon
-              isActive={deviceContext.virtualOSState.display === "liveApps"}
-              darkMode={isDarkMode}
-            />
+            <Suspense fallback={null}>
+              <Icon
+                isActive={deviceContext.virtualOSState.display === "liveApps"}
+                darkMode={isDarkMode}
+              />
+            </Suspense>
           </button>
         </live-apps-button>}
     </>
