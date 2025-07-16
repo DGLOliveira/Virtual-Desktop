@@ -1,4 +1,4 @@
-import { useContext, useCallback, lazy, Suspense, Fragment } from "react";
+import { useState, useContext, useCallback, lazy, Suspense, Fragment, useEffect } from "react";
 import { DeviceContext } from "../../../DeviceManager/context.jsx";
 import { ThemeContext } from "../../../ThemeManager/context.jsx";
 import { ContextMenuContext } from "../../../ContextMenuManager/context.jsx";
@@ -13,6 +13,8 @@ export const LiveApps = () => {
   const deviceContext = useContext(DeviceContext);
   const contextMenu = useContext(ContextMenuContext);
   const themeContext = useContext(ThemeContext);
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleTaskbarClick = (name) => {
     if (!appContext.apps[name].State.isMinimized && !appContext.apps[name].State.isSelected) {
@@ -49,6 +51,20 @@ export const LiveApps = () => {
       }))
   ), [themeContext.LiveAppButtonPath]);
 
+  useEffect(() => {
+    let flag = false;
+    switch (themeContext.mode) {
+      case "Light":
+        flag = false;
+        break;
+      case "Dark":
+        flag = true;
+        break;
+      case "System":
+        flag = themeContext.systemDarkMode;
+    }
+    setIsDarkMode(flag);
+  }, [themeContext.mode, themeContext.systemDarkMode]);
 
   return (
     <>
@@ -75,6 +91,7 @@ export const LiveApps = () => {
           <button onClick={handleMobileButton} style={{ width: "100%" }}>
             <DefaultIcon
               isActive={deviceContext.virtualOSState.display === "liveApps"}
+              darkMode={isDarkMode}
             />
           </button>
         </live-apps-button>}

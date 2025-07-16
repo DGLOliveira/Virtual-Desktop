@@ -89,62 +89,47 @@ live-apps-button>button:active:enabled {
     background-color: var(--StartButtonBkgrActive);
 }
 
-live-apps-button>button>div{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: var(--TaskbarHeight);
-    width: var(--TaskbarHeight);
+live-apps-button>button>svg {
+    isolation: isolate;
+    width: var(--StartButtonIconSize);
+    height: var(--StartButtonIconSize);
 }
 
-live-apps-button>button>div>div {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
+live-apps-button>button>svg>.hex {
+    transform-box: fill-box;
+    transform-origin: center;
+    fill:#00000000;
+    transition: fill 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
-live-apps-button-circle {
-    width: calc(var(--LiveAppsIconSize)/3);
-    height: calc(var(--LiveAppsIconSize)/3);
-    border-radius: 50%;
-    border: 1px dimgray solid;
-    background: hsla(0, 0%, 0%, 0);
-    transition: 0.3s;
+live-apps-button>button:hover>svg>.combRed {
+    fill: #FF0000CC;
 }
 
-
-live-apps-button:hover>button>div>div:first-child>live-apps-button-circle:first-child {
-    background-color: hsla(0, 100%, 50%, 1);
+live-apps-button>button:hover>svg>.combGreen {
+    fill: #00FF00CC;
 }
 
-live-apps-button:hover>button>div>div:first-child>live-apps-button-circle:last-child {
-    background-color: hsla(120, 61%, 50%, 1);
+live-apps-button>button:hover>svg>.combBlue {
+    fill: #0000FFCC;
 }
 
-live-apps-button:hover>button>div>div:last-child>live-apps-button-circle:first-child {
-    background-color: hsla(240, 100%, 50%, 1);
+live-apps-button>button:hover>svg>.combYellow {
+    fill: #FFFF00CC;
 }
 
-live-apps-button:hover>button>div>div:last-child>live-apps-button-circle:last-child {
-    background-color: hsla(0, 0%, 100%, 1);
+live-apps-button>button:hover>svg>.combCyan {
+    fill: #00FFFFCC;
 }
 
-.live-apps-button-circle-off{
-    background-color: hsla(0, 0%, 0%, 0);
+live-apps-button>button:hover>svg>.combMagenta {
+    fill: #FF00FFCC;
 }
 
-.live-apps-button-circle-red{
-    background-color: hsla(0, 100%, 50%, 1);
+live-apps-button>button:hover>svg>.combWhite {
+    fill: #FFFFFFCC;
 }
-.live-apps-button-circle-blue{
-    background-color: hsla(240, 100%, 50%, 1);
-}
-.live-apps-button-circle-green{
-    background-color: hsla(120, 61%, 50%, 1);
-}
-.live-apps-button-circle-white{
-    background-color: hsla(0, 0%, 100%, 1);
+
+live-apps-button>button:hover>svg>.combBlack {
+    fill: #000000CC;
 }
