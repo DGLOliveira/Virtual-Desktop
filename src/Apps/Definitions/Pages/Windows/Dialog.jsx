@@ -1,57 +1,37 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback, lazy, Suspense } from "react";
 
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 export const DialogPreview = () => {
-  const themeContext = useContext(ThemeContext);
-  const [buttonClassNeutral, setButtonClassNeutral] = useState("appDialogButtonFluent");
-  const [buttonClassSuggested, setButtonClassSuggested] = useState("appDialogButtonFluent");
-  const [buttonClassClose, setButtonClassClose] = useState("appDialogButtonFluent buttonActiveRed");
-  useEffect(() => {
-    switch (themeContext.dialogButtonTheme) {
-      case "Aero":
-        setButtonClassNeutral("appDialogButtonAero");
-        setButtonClassSuggested("appDialogButtonAero");
-        setButtonClassClose("appDialogButtonAero");
-        break;
-      case "Aqua":
-        setButtonClassNeutral("appDialogButtonAqua appDialogButtonAquaNeutral");
-        setButtonClassSuggested("appDialogButtonAqua appDialogButtonAquaBlue");
-        setButtonClassClose("appDialogButtonAqua appDialogButtonAquaRed");
-        break;
-      case "Classic":
-        setButtonClassNeutral("appDialogButtonClassic");
-        setButtonClassSuggested("appDialogButtonClassic");
-        setButtonClassClose("appDialogButtonClassic");
-        break;
-      default:
-        setButtonClassNeutral("appDialogButtonFluent");
-        setButtonClassSuggested("appDialogButtonFluent");
-        setButtonClassClose("appDialogButtonFluent buttonActiveRed");
-        break;
-    }
-  }, [themeContext.dialogButtonTheme]);
+  const theme = useContext(ThemeContext);
 
-  const setButtonClass = (name) => {
-    switch (name) {
-      case "Close":
-        return buttonClassClose;
-      case "Save":
-      case "Ok":
-        return buttonClassSuggested;
-      default:
-        return buttonClassNeutral;
-    }
-  }
+  const ButtonDefault = ({ _type, name, click }) => {
+    return (
+      <button onClick={click}>
+        {name}
+      </button>
+    )
+  };
+  const Button = useCallback((
+    lazy(() => import(`../../../../System/ThemeManager/${theme.DialogButtonPath}`).catch(
+      (_error) => {
+        console.error("Failed to import thematic dialog buttons");
+        return {
+          default: ButtonDefault
+        }
+      }))
+  ), [theme.DialogButtonPath]);
 
-  const DialogButtonsBar = () => 
-    <app-dialog-actions>
-      <button className={setButtonClass("Ok")}>Ok</button>
-      <button className={setButtonClass("Cancel")}>Cancel</button>
-      <button className={setButtonClass("Close")}>Close</button>
-    </app-dialog-actions>
-  ;
+  const DialogButtonsBar = () =>
+    <Suspense fallback={null}>
+      <app-dialog-actions>
+        <Button type="Suggested" name="Ok" click={() => { }} />
+        <Button type="Neutral" name="Cancel" click={() => { }} />
+        <Button type="Warning" name="Close" click={() => { }} />
+      </app-dialog-actions >
+    </Suspense>
+    ;
 
   return (
     <>
@@ -68,20 +48,20 @@ export const DialogPreview = () => {
         </app-dialog-top-bar>
         <app-dialog-info
           style={{
-            marginBottom: themeContext.dialogButtonsLocation === "in window" ? "0px" : "var(--DialogPadding)"
-           }}
+            marginBottom: theme.dialogButtonsLocation === "in window" ? "0px" : "var(--DialogPadding)"
+          }}
         >
           <p>Information</p>
-        {themeContext.dialogButtonsLocation === "in info container" && <DialogButtonsBar />}
+          {theme.dialogButtonsLocation === "in info container" && <DialogButtonsBar />}
         </app-dialog-info>
-        {themeContext.dialogButtonsLocation === "in window" && <DialogButtonsBar />}
+        {theme.dialogButtonsLocation === "in window" && <DialogButtonsBar />}
       </app-dialog>
     </>
   );
 };
 
 export const Dialog = () => {
-  const themeContext = useContext(ThemeContext);
+  const theme = useContext(ThemeContext);
   var root = document.querySelector(":root");
   //----------------------------------------------------------------------------//
   const [dialogBkgrColor, setDialogBkgrColor] = useState(
@@ -268,10 +248,10 @@ export const Dialog = () => {
       <div>
         <label>Background Effect:</label>
         <select
-          value={themeContext.windowBackgroundFX}
-          onChange={(e) => themeContext.setWindowBackgroundFX(e.target.value)}
+          value={theme.windowBackgroundFX}
+          onChange={(e) => theme.setWindowBackgroundFX(e.target.value)}
         >
-          {themeContext.backgroundFXList.map((backgroundFX) => (
+          {theme.backgroundFXList.map((backgroundFX) => (
             <option key={backgroundFX} value={backgroundFX}>
               {backgroundFX}
             </option>
@@ -452,10 +432,10 @@ export const Dialog = () => {
         <div>
           <label>Location: </label>
           <select
-            value={themeContext.dialogButtonsLocation}
-            onChange={(e) => themeContext.setDialogButtonsLocation(e.target.value)}
+            value={theme.dialogButtonsLocation}
+            onChange={(e) => theme.setDialogButtonsLocation(e.target.value)}
           >
-            {themeContext.dialogButtonsLocationList.map((buttonLocation) => (
+            {theme.dialogButtonsLocationList.map((buttonLocation) => (
               <option key={buttonLocation} value={buttonLocation}>
                 {buttonLocation}
               </option>
@@ -465,10 +445,10 @@ export const Dialog = () => {
         <div>
           <label>Theme:</label>
           <select
-            value={themeContext.dialogButtonTheme}
-            onChange={(e) => themeContext.setDialogButtonTheme(e.target.value)}
+            value={theme.dialogButtonTheme}
+            onChange={(e) => theme.setDialogButtonTheme(e.target.value)}
           >
-            {themeContext.dialogButtonThemeList.map((buttonTheme) => (
+            {theme.dialogButtonThemeList.map((buttonTheme) => (
               <option key={buttonTheme} value={buttonTheme}>
                 {buttonTheme}
               </option>
