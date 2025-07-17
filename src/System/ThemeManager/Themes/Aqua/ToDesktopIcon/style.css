@@ -1,0 +1,46 @@
+.animate-to-desktop-small-hexagon-aqua {
+    animation: to-desktop-center-small-hexagon-aqua 1s linear 1;
+}
+
+.animate-to-desktop-medium-hexagon-aqua {
+    animation: to-desktop-center-medium-hexagon-aqua 1s linear 1;
+}
+
+@keyframes to-desktop-center-small-hexagon-aqua {
+    0% {
+        translate: 0 0;
+        scale: 1;
+    }
+
+    40%,
+    60% {
+        translate: 0 140%;
+        scale: 0.65;
+    }
+
+    100% {
+        translate: 0 0;
+        scale: 1;
+    }
+}
+
+@keyframes to-desktop-center-medium-hexagon-aqua {
+
+    0%,
+    20% {
+        translate: 0 0;
+        scale: 1;
+    }
+
+    40%,
+    60% {
+        translate: 0 55%;
+        scale: 0.90;
+    }
+
+    100% {
+        translate: 0 0;
+        scale: 1;
+    }
+
+}
