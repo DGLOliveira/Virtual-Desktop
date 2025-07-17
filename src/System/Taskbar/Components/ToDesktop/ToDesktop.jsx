@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { DeviceContext } from "../../../DeviceManager/context.jsx";
 import { AppContext } from "../../../AppManager/Context/context.jsx";
 import DefaultIcon from "./DefaultIcon.jsx";
@@ -7,9 +7,12 @@ import "./ToDesktop.css";
 export const ToDesktop = () => {
     const deviceContext = useContext(DeviceContext);
     const appContext = useContext(AppContext);
+    const [clicked, setClicked] = useState(false);
     const handleClick = () => {
         deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: "none" });
         appContext.minimizeAll();
+        setClicked(true);
+        setTimeout(() => setClicked(false), 2000);
     }
 
     return (
@@ -24,7 +27,7 @@ export const ToDesktop = () => {
                 onClick={handleClick}
                 title="To Desktop (Ctrl + ❖)"
             >
-                <DefaultIcon />
+                <DefaultIcon isActive={clicked}/>
                 </button>
         </to-desktop-button>
     );

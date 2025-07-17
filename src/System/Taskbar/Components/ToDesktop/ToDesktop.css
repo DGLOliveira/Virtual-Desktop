@@ -1,13 +1,14 @@
-to-desktop-button{
+to-desktop-button {
     display: flex;
     align-items: end;
     justify-content: center;
     min-width: calc(var(--TaskbarHeight)/1.5);
 }
-to-desktop-button>button{
+
+to-desktop-button>button {
     height: 100%;
     width: 100%;
-    writing-mode:vertical-rl;
+    writing-mode: vertical-rl;
     font-size: calc(var(--TaskbarHeight)/3);
     position: relative;
     display: flex;
@@ -23,14 +24,21 @@ to-desktop-button>button{
     border-radius: var(--StartButtonBorderRadius);
 }
 
-to-desktop-button>button>svg{
+to-desktop-button>button>svg {
     isolation: isolate;
     width: var(--StartButtonIconSize);
     height: var(--StartButtonIconSize);
 }
 
+to-desktop-button>button>svg>.hex {
+    transform-box: fill-box;
+    transform-origin: center;
+    fill: #00000000;
+}
+
 to-desktop-button>button:hover>svg>.hex1 {
     fill: #FF0000FF;
+
 }
 
 to-desktop-button>button:hover>svg>.hex2 {
@@ -40,3 +48,88 @@ to-desktop-button>button:hover>svg>.hex2 {
 to-desktop-button>button:hover>svg>.hex3 {
     fill: #0000FFFF;
 }
+
+.animate-to-desktop-large-hexagon {
+    animation: to-desktop-center-large-hexagon 2s linear infinite;
+}
+
+.animate-to-desktop-medium-hexagon {
+    animation: to-desktop-center-medium-hexagon 2s linear infinite;
+}
+
+.animate-to-desktop-small-hexagon {
+    animation: to-desktop-center-small-hexagon 2s linear infinite;
+}
+
+@keyframes to-desktop-center-small-hexagon {
+    0% {
+        translate: 0 0;
+        scale: 1;
+        fill: #FF0000FF;
+    }
+
+    40%,
+    60% {
+        translate: 0 130%;
+        scale: 0.65;
+        fill: #FF0000FF;
+    }
+
+    100% {
+        translate: 0 0;
+        scale: 1;
+    }
+}
+
+@keyframes to-desktop-center-medium-hexagon {
+
+    0%,
+    20% {
+        translate: 0 0;
+        scale: 1;
+        fill: #00FF00FF;
+    }
+
+    40%,
+    60% {
+        translate: 0 55%;
+        scale: 0.90;
+        fill: #00FF00FF;
+    }
+
+    100% {
+        translate: 0 0;
+        scale: 1;
+    }
+
+}
+
+@keyframes to-desktop-center-large-hexagon {
+
+    0%,
+    60% {
+        fill: #0000FFFF;
+    }
+
+    100% {}
+
+}
+
+/*
+@keyframes to-desktop-center-large-hexagon {
+    0%, 20% {
+        translate: 0 0;
+        scale: 1;
+    }
+
+    40%,
+    80% {
+        translate: 0 -40%;
+        scale: 1.25;
+    }
+
+    100% {
+        translate: 0 0;
+        scale: 1;
+    }
+}*/
