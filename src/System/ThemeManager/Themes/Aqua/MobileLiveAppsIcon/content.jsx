@@ -50,6 +50,8 @@ export default function Icon({ isActive, darkMode }) {
         d="M55.6543 202H128.344L164.689 264.953L128.345 327.904H55.6543L19.3096 264.952L55.6543 202Z"
         style={{
           fill: "url(#liveAppsAquaMagenta)",
+          scale: isActive ? "1" : "0.75",
+          transition: "fill 0.3s ease-in-out, scale 0.3s ease-in-out"
         }}
         stroke="#808080"
         stroke-width="8" />
@@ -58,6 +60,8 @@ export default function Icon({ isActive, darkMode }) {
         d="M163.654 262.048H236.345L272.689 325L236.345 387.952H163.654L127.31 325L163.654 262.048Z"
         style={{
           fill: "url(#liveAppsAquaBlue)",
+          scale: isActive ? "1" : "0.75",
+          transition: "fill 0.3s ease-in-out, scale 0.3s ease-in-out"
         }}
         stroke="#808080"
         stroke-width="8" />
@@ -66,6 +70,8 @@ export default function Icon({ isActive, darkMode }) {
         d="M163.654 12.0479H236.345L272.689 75L236.345 137.952H163.654L127.31 75L163.654 12.0479Z"
         style={{
           fill: "url(#liveAppsAquaYellow)",
+          scale: isActive ? "1" : "0.75",
+          transition: "fill 0.3s ease-in-out, scale 0.3s ease-in-out"
         }}
         stroke="#808080"
         stroke-width="8" />
@@ -74,6 +80,8 @@ export default function Icon({ isActive, darkMode }) {
         d="M271.654 75.0479H344.345L380.689 138L344.345 200.952H271.654L235.31 138L271.654 75.0479Z"
         style={{
           fill: "url(#liveAppsAquaGreen)",
+          scale: isActive ? "1" : "0.75",
+          transition: "fill 0.3s ease-in-out, scale 0.3s ease-in-out"
         }}
         stroke="#808080"
         stroke-width="8" />
@@ -82,6 +90,8 @@ export default function Icon({ isActive, darkMode }) {
         d="M55.6543 75.0479H128.345L164.689 138L128.345 200.952H55.6543L19.3096 138L55.6543 75.0479Z"
         style={{
           fill: "url(#liveAppsAquaRed)",
+          scale: isActive ? "1" : "0.75",
+          transition: "fill 0.3s ease-in-out, scale 0.3s ease-in-out"
         }}
         stroke="#808080"
         stroke-width="8" />
@@ -90,6 +100,8 @@ export default function Icon({ isActive, darkMode }) {
         d="M271.655 202H344.344L380.689 264.953L344.345 327.904H271.654L235.31 264.953L271.655 202Z"
         style={{
           fill: "url(#liveAppsAquaCyan)",
+          scale: isActive ? "1" : "0.75",
+          transition: "fill 0.3s ease-in-out, scale 0.3s ease-in-out"
         }}
         stroke="#808080"
         stroke-width="8" />
@@ -98,6 +110,8 @@ export default function Icon({ isActive, darkMode }) {
         d="M163.654 137.048H236.345L272.689 200L236.345 262.952H163.654L127.31 200L163.654 137.048Z"
         style={{
           fill: darkMode ? "url(#liveAppsAquaWhite)" : "url(#liveAppsAquaBlack)",
+          scale: isActive ? "1" : "0.75",
+          transition: "fill 0.3s ease-in-out, scale 0.3s ease-in-out"
         }}
         stroke="#808080"
         stroke-width="8" />

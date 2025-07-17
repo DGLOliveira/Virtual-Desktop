@@ -99,7 +99,6 @@ live-apps-button>button>svg>.hex {
     transform-box: fill-box;
     transform-origin: center;
     fill:#00000000;
-    transition: fill 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 live-apps-button>button:hover>svg>.combRed {
