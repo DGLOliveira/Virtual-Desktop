@@ -24,7 +24,8 @@
             "TopBarButtons": "Fluent/TopBarButtons/content.jsx",
             "DialogButton": "Fluent/DialogButton/content.jsx",
             "LiveAppButton": "Fluent/LiveAppButton/content.jsx",
-            "MobileLiveAppsIcon": "Fluent/MobileLiveAppsIcon/content.jsx"
+            "MobileLiveAppsIcon": "Fluent/MobileLiveAppsIcon/content.jsx",
+            "ToDesktopIcon": "Fluent/ToDesktopIcon/content.jsx"
         }
     },
     "Aero": {
@@ -52,7 +53,8 @@
             "TopBarButtons": "Aero/TopBarButtons/content.jsx",
             "DialogButton": "Aero/DialogButton/content.jsx",
             "LiveAppButton": "Aero/LiveAppButton/content.jsx",
-            "MobileLiveAppsIcon": "Aero/MobileLiveAppsIcon/content.jsx"
+            "MobileLiveAppsIcon": "Aero/MobileLiveAppsIcon/content.jsx",
+            "ToDesktopIcon": "Aero/ToDesktopIcon/content.jsx"
         }
     },
     "Aqua": {
@@ -80,7 +82,8 @@
             "TopBarButtons": "Aqua/TopBarButtons/content.jsx",
             "DialogButton": "Aqua/DialogButton/content.jsx",
             "LiveAppButton": "Aqua/LiveAppButton/content.jsx",
-            "MobileLiveAppsIcon": "Aqua/MobileLiveAppsIcon/content.jsx"
+            "MobileLiveAppsIcon": "Aqua/MobileLiveAppsIcon/content.jsx",
+            "ToDesktopIcon": "Aqua/ToDesktopIcon/content.jsx"
         }
     },
     "Classic": {
@@ -108,7 +111,8 @@
             "TopBarButtons": "Classic/TopBarButtons/content.jsx",
             "DialogButton": "Classic/DialogButton/content.jsx",
             "LiveAppButton": "Classic/LiveAppButton/content.jsx",
-            "MobileLiveAppsIcon": "Classic/MobileLiveAppsIcon/content.jsx"
+            "MobileLiveAppsIcon": "Classic/MobileLiveAppsIcon/content.jsx",
+            "ToDesktopIcon": "Classic/ToDesktopIcon/content.jsx"
         }
     }
 }

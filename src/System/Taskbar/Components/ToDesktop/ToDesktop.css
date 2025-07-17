@@ -50,15 +50,15 @@ to-desktop-button>button:hover>svg>.hex3 {
 }
 
 .animate-to-desktop-large-hexagon {
-    animation: to-desktop-center-large-hexagon 2s linear infinite;
+    animation: to-desktop-center-large-hexagon 1s linear 1;
 }
 
 .animate-to-desktop-medium-hexagon {
-    animation: to-desktop-center-medium-hexagon 2s linear infinite;
+    animation: to-desktop-center-medium-hexagon 1s linear 1;
 }
 
 .animate-to-desktop-small-hexagon {
-    animation: to-desktop-center-small-hexagon 2s linear infinite;
+    animation: to-desktop-center-small-hexagon 1s linear 1;
 }
 
 @keyframes to-desktop-center-small-hexagon {

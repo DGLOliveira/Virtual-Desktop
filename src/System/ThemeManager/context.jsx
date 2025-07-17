@@ -34,6 +34,7 @@ export const ThemeContext = createContext({
     setLiveAppsTheme: () => { },
     LiveAppButtonPath: () => { },
     LiveAppsMobileIconPath: () => { },
+    ToDesktopIconPath: () => { },
     startMenuBackgroundFX: "",
     setStartMenuBackgroundFX: () => { },
     taskbarWindowBackgroundFX: "",
@@ -75,6 +76,9 @@ export function ThemeProvider({ children }) {
 
     const [LiveAppsMobileIconPath, setLiveAppsMobileIconPath] = 
     useState(`Themes/${themeRegistry[liveAppsTheme]["Components"]["MobileLiveAppsIcon"]}`);
+
+    const [ToDesktopIconPath, setToDesktopIconPath] = 
+    useState(`Themes/${themeRegistry[liveAppsTheme]["Components"]["ToDesktopIcon"]}`);
 
     const [topBarIconTheme, setTopBarIconTheme] = useState(DEFAULT_THEME);
     const topBarIconThemeList = [];
@@ -191,6 +195,7 @@ export function ThemeProvider({ children }) {
     useEffect(() => { setTopBarButtonsPath(`Themes/${themeRegistry[topBarIconTheme]["Components"]["TopBarButtons"]}`);},[topBarIconTheme]);
     useEffect(() => { setDialogButtonPath(`Themes/${themeRegistry[dialogButtonTheme]["Components"]["DialogButton"]}`);},[dialogButtonTheme]);
     useEffect(() => { setLiveAppsMobileIconPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["MobileLiveAppsIcon"]}`);},[liveAppsTheme]);
+    useEffect(() => { setToDesktopIconPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["ToDesktopIcon"]}`);},[liveAppsTheme]);
 
     const contextValue = {
         mode,
@@ -209,6 +214,7 @@ export function ThemeProvider({ children }) {
         setLiveAppsTheme,
         LiveAppButtonPath,
         LiveAppsMobileIconPath,
+        ToDesktopIconPath,
         topBarIconTheme,
         topBarIconThemeList,
         setTopBarIconTheme,

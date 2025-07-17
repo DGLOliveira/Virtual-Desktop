@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback, lazy, Suspense } from "react";
 import { DeviceContext } from "../../../DeviceManager/context.jsx";
+import { ThemeContext } from "../../../ThemeManager/context.jsx";
 import { AppContext } from "../../../AppManager/Context/context.jsx";
 import DefaultIcon from "./DefaultIcon.jsx";
 import "./ToDesktop.css";
@@ -7,13 +8,24 @@ import "./ToDesktop.css";
 export const ToDesktop = () => {
     const deviceContext = useContext(DeviceContext);
     const appContext = useContext(AppContext);
+    const theme = useContext(ThemeContext);
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
         deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: "none" });
         appContext.minimizeAll();
         setClicked(true);
-        setTimeout(() => setClicked(false), 2000);
+        setTimeout(() => setClicked(false), 1000);
     }
+
+      const Icon = useCallback((
+        lazy(() => import(`../../../ThemeManager/${theme.toDesktopIconPath}`).catch(
+          (error) => {
+            let errorMessage = "Failed to load toDesktop Button Icon";
+            console.error(errorMessage);
+            return { default: DefaultIcon }
+          }
+        ))
+      ), [theme.toDesktopIconPath]);
 
     return (
         <to-desktop-button
@@ -27,7 +39,9 @@ export const ToDesktop = () => {
                 onClick={handleClick}
                 title="To Desktop (Ctrl + ❖)"
             >
-                <DefaultIcon isActive={clicked}/>
+                <Suspense fallback={null}>
+                    <Icon isActive={clicked} />
+                </Suspense>
                 </button>
         </to-desktop-button>
     );
