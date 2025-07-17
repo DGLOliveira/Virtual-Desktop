@@ -18,14 +18,14 @@ export const ToDesktop = () => {
     }
 
       const Icon = useCallback((
-        lazy(() => import(`../../../ThemeManager/${theme.toDesktopIconPath}`).catch(
+        lazy(() => import(`../../../ThemeManager/${theme.ToDesktopIconPath}`).catch(
           (error) => {
             let errorMessage = "Failed to load toDesktop Button Icon";
             console.error(errorMessage);
             return { default: DefaultIcon }
           }
         ))
-      ), [theme.toDesktopIconPath]);
+      ), [theme.ToDesktopIconPath]);
 
     return (
         <to-desktop-button
