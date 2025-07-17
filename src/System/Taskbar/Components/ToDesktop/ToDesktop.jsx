@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { DeviceContext } from "../../../DeviceManager/context.jsx";
 import { AppContext } from "../../../AppManager/Context/context.jsx";
+import DefaultIcon from "./DefaultIcon.jsx";
 import "./ToDesktop.css";
 
 export const ToDesktop = () => {
@@ -23,7 +24,7 @@ export const ToDesktop = () => {
                 onClick={handleClick}
                 title="To Desktop (Ctrl + ❖)"
             >
-                {">>>"}
+                <DefaultIcon />
                 </button>
         </to-desktop-button>
     );

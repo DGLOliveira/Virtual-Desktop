@@ -22,3 +22,21 @@ to-desktop-button>button{
     border: var(--StartButtonBorderWidth) var(--StartButtonBorderColor) var(--StartButtonBorderType);
     border-radius: var(--StartButtonBorderRadius);
 }
+
+to-desktop-button>button>svg{
+    isolation: isolate;
+    width: var(--StartButtonIconSize);
+    height: var(--StartButtonIconSize);
+}
+
+to-desktop-button>button:hover>svg>.hex1 {
+    fill: #FF0000FF;
+}
+
+to-desktop-button>button:hover>svg>.hex2 {
+    fill: #00FF00FF;
+}
+
+to-desktop-button>button:hover>svg>.hex3 {
+    fill: #0000FFFF;
+}
