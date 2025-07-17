@@ -1,0 +1,107 @@
+to-desktop-button>button:has(.toDesktopIconAero) {
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+    width:var(--StartButtonHeight) !important;
+    border-radius:calc(var(--StartButtonHeight)/2);
+    border: 1px hsla(216, 47%, 53%, 1) solid;
+    box-shadow: 0 0 0px 0px hsla(0, 0%, 100%, 0.5) inset;
+    transition: 0.5s;
+}
+
+.toDesktopIconAero>.hex1 {
+    fill: #FF0000;
+}
+
+.toDesktopIconAero>.hex2 {
+    fill: #00FF00;
+}
+
+.toDesktopIconAero>.hex3 {
+    fill: #0000FF;
+}
+
+to-desktop-button>button:hover:enabled:has(.toDesktopIconAero){
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.5) inset;
+}
+
+to-desktop-button>button:active:enabled:has(.toDesktopIconAero) {
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
+}
+
+to-desktop-button>button:active:enabled:has(.toDesktopIconAeroActive) {
+    background: linear-gradient(#0000 30%, #042c8b 70%, #80f1f9),
+        radial-gradient(circle, #3069b2, #bbc6e0 70.7%);
+    box-shadow: 0 0 5px 2px hsla(0, 0%, 100%, 0.75) inset;
+}
+
+.animate-to-desktop-large-hexagon-aero {
+    animation: to-desktop-center-large-hexagon-aero 1s linear 1;
+}
+
+.animate-to-desktop-medium-hexagon-aero {
+    animation: to-desktop-center-medium-hexagon-aero 1s linear 1;
+}
+
+.animate-to-desktop-small-hexagon-aero {
+    animation: to-desktop-center-small-hexagon-aero 1s linear 1;
+}
+
+@keyframes to-desktop-center-small-hexagon-aero {
+    0% {
+        translate: 0 0;
+        scale: 1;
+        fill: #FF0000FF;
+    }
+
+    40%,
+    60% {
+        translate: 0 130%;
+        scale: 0.65;
+        fill: #FF0000FF;
+    }
+
+    100% {
+        translate: 0 0;
+        scale: 1;
+        fill: #FF0000FF;
+    }
+}
+
+@keyframes to-desktop-center-medium-hexagon-aero {
+
+    0%,
+    20% {
+        translate: 0 0;
+        scale: 1;
+        fill: #00FF00FF;
+    }
+
+    40%,
+    60% {
+        translate: 0 55%;
+        scale: 0.90;
+        fill: #00FF00FF;
+    }
+
+    100% {
+        translate: 0 0;
+        scale: 1;
+        fill: #00FF00FF;
+    }
+
+}
+
+@keyframes to-desktop-center-large-hexagon-aero {
+
+    0%,
+    60% {
+        fill: #0000FFFF;
+    }
+
+    100% {
+        fill: #0000FFFF;
+    }
+
+}

@@ -2,7 +2,6 @@ to-desktop-button {
     display: flex;
     align-items: end;
     justify-content: center;
-    min-width: calc(var(--TaskbarHeight)/1.5);
 }
 
 to-desktop-button>button {
@@ -113,22 +112,3 @@ to-desktop-button>button:hover>svg>.hex3 {
     100% {}
 
 }
-
-/*
-@keyframes to-desktop-center-large-hexagon {
-    0%, 20% {
-        translate: 0 0;
-        scale: 1;
-    }
-
-    40%,
-    80% {
-        translate: 0 -40%;
-        scale: 1.25;
-    }
-
-    100% {
-        translate: 0 0;
-        scale: 1;
-    }
-}*/
