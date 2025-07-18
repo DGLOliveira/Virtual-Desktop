@@ -26,7 +26,7 @@ export default function Icon({ isActive }) {
                     fill: "url(#toDesktopAquaRed)"
                 }}
                 stroke="#808080"
-                stroke-width="8"
+                strokeWidth="8"
             />
             <path
                 className={isActive ? "hex hex2 animate-to-desktop-medium-hexagon-aqua" : "hex hex2"}
@@ -35,7 +35,7 @@ export default function Icon({ isActive }) {
                     fill: "url(#toDesktopAquaGreen)"
                 }}
                 stroke="#808080"
-                stroke-width="8"
+                strokeWidth="8"
             />
             <path
                 className={isActive ? "hex hex1 animate-to-desktop-small-hexagon-aqua" : "hex hex1"}
@@ -44,7 +44,7 @@ export default function Icon({ isActive }) {
                     fill: "url(#toDesktopAquaBlue)"
                 }}
                 stroke="#808080"
-                stroke-width="8"
+                strokeWidth="8"
             />
         </svg>
     );
