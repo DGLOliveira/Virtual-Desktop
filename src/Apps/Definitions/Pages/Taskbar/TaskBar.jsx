@@ -147,7 +147,6 @@ export const TaskBarPreview = () => {
         >
           <button
             onClick={handleToDesktopClick}
-            title="To Desktop (Ctrl + ❖)"
           >
             <Suspense fallback={null}>
               <ToDesktopIcon isActive={toDesktopClicked} />

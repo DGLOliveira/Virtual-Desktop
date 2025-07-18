@@ -76,6 +76,21 @@ export const LiveApps = () => {
     setIsDarkMode(flag);
   }, [themeContext.mode, themeContext.systemDarkMode]);
 
+
+  const handleEventListener = (event) => {
+    if (!event.ctrlKey && !event.altKey && event.shiftKey &&  event.metaKey) {
+      handleMobileButton();
+    }
+  }
+  useEffect(() => {
+    if (deviceContext.deviceType !== "Desktop") {
+      addEventListener("keydown", handleEventListener);
+      return () => removeEventListener("keydown", handleEventListener);
+    }else{
+      return;
+    }
+  }, [handleEventListener, deviceContext.deviceType]);
+
   return (
     <>
       {deviceContext.deviceType === "Desktop" &&
@@ -98,7 +113,10 @@ export const LiveApps = () => {
         deviceContext.deviceType === "Mobile" ||
         deviceContext.deviceType === "TV") &&
         <live-apps-button>
-          <button onClick={handleMobileButton} style={{ width: "100%" }}>
+          <button 
+          onClick={handleMobileButton} 
+          style={{ width: "100%" }} 
+          title="Live Apps (Shift + ❖)">
             <Suspense fallback={null}>
               <Icon
                 isActive={deviceContext.virtualOSState.display === "liveApps"}

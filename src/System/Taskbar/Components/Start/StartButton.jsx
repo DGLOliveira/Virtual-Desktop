@@ -36,10 +36,12 @@ export const StartButton = () => {
   };
 
   const handleEventListener = (event) => {
-    if (event.altKey && event.key === "Meta") {
+    if (!event.ctrlKey && event.altKey && !event.shiftKey &&  event.metaKey ) {
+      deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: "startList" });
       setIsOpen(!isOpen);
     }
     if (event.key === "Escape") {
+      deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: "none" });
       setIsOpen(false);
     }
   }
