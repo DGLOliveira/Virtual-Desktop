@@ -19,7 +19,7 @@ export function DeviceProvider({ browserInfo, deviceInfo, children }) {
     const [device, setDevice] = useState(deviceInfo);
     const [browser, setBrowser] = useState(browserInfo);
     const getDeviceType = () => {
-        switch (deviceInfo.type) {
+        switch (deviceInfo.Type) {
             case "tablet":
                 //Disabled Tablet mode for now
                 return "Mobile";
