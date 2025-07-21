@@ -100,7 +100,16 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                         onTouchCancel={(e) => handleDragEnd(e)}
                         onDoubleClick={switchTray}
                     >
-                        <mobile-tray-system>
+                        <mobile-tray-system
+                        onDragStart={(e) => handleDragStart(e)}
+                        onDrag={(e) => handleDrag(e)}
+                        onDragEnd={(e) => handleDragEnd(e)}
+                        onMouseDown={(e) => handleDragStart(e)}
+                        onTouchStart={(e) => handleDragStart(e)}
+                        onTouchMove={(e) => handleDrag(e)}
+                        onTouchEnd={(e) => handleDragEnd(e)}
+                        onTouchCancel={(e) => handleDragEnd(e)}
+                        onDoubleClick={switchTray}>
                             <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />
                             <DeviceSet />
                             <button
@@ -125,10 +134,28 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                                 <RiShutDownLine />
                             </button>
                         </mobile-tray-system>
-                        <mobile-tray-fullscreen-clock>
+                        <mobile-tray-fullscreen-clock
+                        onDragStart={(e) => handleDragStart(e)}
+                        onDrag={(e) => handleDrag(e)}
+                        onDragEnd={(e) => handleDragEnd(e)}
+                        onMouseDown={(e) => handleDragStart(e)}
+                        onTouchStart={(e) => handleDragStart(e)}
+                        onTouchMove={(e) => handleDrag(e)}
+                        onTouchEnd={(e) => handleDragEnd(e)}
+                        onTouchCancel={(e) => handleDragEnd(e)}
+                        onDoubleClick={switchTray}>
                             <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />
                         </mobile-tray-fullscreen-clock>
-                        <div>
+                        <div
+                        onDragStart={(e) => handleDragStart(e)}
+                        onDrag={(e) => handleDrag(e)}
+                        onDragEnd={(e) => handleDragEnd(e)}
+                        onMouseDown={(e) => handleDragStart(e)}
+                        onTouchStart={(e) => handleDragStart(e)}
+                        onTouchMove={(e) => handleDrag(e)}
+                        onTouchEnd={(e) => handleDragEnd(e)}
+                        onTouchCancel={(e) => handleDragEnd(e)}
+                        onDoubleClick={switchTray}>
                         </div>
                     </mobile-tray-fullscreen>
                     <mobile-tray
