@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpc=self.webpackChunkpc||[]).push([[3833],{3833:e=>{e.exports=JSON.parse('{"BkgrImage":"none","BkgrPosition":"none","BkgrRepeat":"none","BkgrSize":"none","BackdropFilter":"none"}')}}]);

@@ -1,0 +1,2 @@
+to-desktop-button>button:has(.toDesktopIconClassicActive){background-color:var(--StartButtonBkgrActive);border:var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset}to-desktop-button>button:active:enabled:has(.toDesktopIconClassic){background-color:var(--StartButtonBkgrActive);border:var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset}.toDesktopIconClassic>.hex1{fill:red}.toDesktopIconClassic>.hex2{fill:#0f0}.toDesktopIconClassic>.hex3{fill:#00f}
+/*# sourceMappingURL=1884.de183cf5.chunk.css.map*/

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpc=self.webpackChunkpc||[]).push([[8672,9957],{8672:(e,s,c)=>{c.r(s),c.d(s,{default:()=>p});c(9957);var l=c(579);function p(e){let{name:s,click:c,context:p,AppIcon:a,isSelected:n}=e;return(0,l.jsxs)("button",{onClick:c,onContextMenu:e=>{p(e)},className:n?"liveAppsClassic liveAppsClassicActive":"liveAppsClassic","aria-label":"Live App"+s,children:[(0,l.jsx)(a,{appName:s}),(0,l.jsx)("span",{children:s})]})}},9957:(e,s,c)=>{c.r(s),c.d(s,{default:()=>l});const l={}}}]);
+//# sourceMappingURL=8672.5fa84c15.chunk.js.map

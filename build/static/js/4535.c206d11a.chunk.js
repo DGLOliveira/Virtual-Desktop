@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpc=self.webpackChunkpc||[]).push([[4535,7782],{4535:(t,n,e)=>{e.r(n),e.d(n,{default:()=>l});e(7782);var a=e(579);function l(t){let{type:n,click:e,name:l}=t;return(0,a.jsx)("button",{className:"Warning"===n?"appDialogButtonFluent appDialogButtonFluentRed":"appDialogButtonFluent",onClick:e,children:l})}},7782:(t,n,e)=>{e.r(n),e.d(n,{default:()=>a});const a={}}}]);
+//# sourceMappingURL=4535.c206d11a.chunk.js.map

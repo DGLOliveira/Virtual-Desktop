@@ -1,0 +1,2 @@
+live-apps-button>button:has(.liveAppsMobileClassicActive){background-color:var(--StartButtonBkgrActive);border:var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset}live-apps-button>button:active:enabled:has(.liveAppsMobileClassic){background-color:var(--StartButtonBkgrActive);border:var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset}
+/*# sourceMappingURL=3151.875afa6b.chunk.css.map*/

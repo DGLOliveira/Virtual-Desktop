@@ -1,0 +1,2 @@
+start-button>button:has(.startButtonClassicActive){background-color:var(--StartButtonBkgrActive);border:var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset}start-button>button:active:enabled:has(.startButtonClassic){background-color:var(--StartButtonBkgrActive);border:var(--StartButtonBorderWidth) var(--StartButtonBorderColor) inset}.startButtonClassic>.hex1{fill:red}.startButtonClassic>.hex2{fill:#0f0}.startButtonClassic>.hex3{fill:#00f}
+/*# sourceMappingURL=8930.d93c4a2e.chunk.css.map*/

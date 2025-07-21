@@ -1,0 +1,2 @@
+.appTopBarButtonClassic{background-color:#b3b3b3;border:2px outset #d9d9d9;color:var(--GeneralButtonFontColor);color:#000;cursor:pointer;display:flex;font-family:inherit;font-size:var(--WindowTopBarIconSize);font-weight:700;height:var(--WindowTopBarIconSize);transition:.2s;width:var(--WindowTopBarIconSize)}.appTopBarButtonClassic>svg{color:#000}.appTopBarButtonClassic:hover:enabled{background-color:#b3b3b3;color:#000}.appTopBarButtonClassic:active:enabled{background-color:#b3b3b3;border:2px inset #d9d9d9;color:#000}
+/*# sourceMappingURL=6185.9a2fd022.chunk.css.map*/

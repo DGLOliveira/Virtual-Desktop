@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/8610.c48b3893.chunk.js","mappings":"sHAEA,Q,QAA6B,G","sources":["Apps/FileViewer/icon.js"],"sourcesContent":["import { FcOpenedFolder } from \"react-icons/fc\";\r\n\r\nexport default FcOpenedFolder"],"names":[],"sourceRoot":""}

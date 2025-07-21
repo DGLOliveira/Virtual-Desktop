@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpc=self.webpackChunkpc||[]).push([[920],{920:(e,n,c)=>{c.r(n),c.d(n,{default:()=>p});var t=c(579);function p(e){let{name:n,click:c,context:p,AppIcon:a,isSelected:l}=e;return(0,t.jsxs)("button",{onClick:c,onContextMenu:e=>{p(e)},"aria-label":"Live App"+n,children:[(0,t.jsx)(a,{appName:n}),(0,t.jsx)("span",{children:n})]})}}}]);
+//# sourceMappingURL=920.49872e4a.chunk.js.map

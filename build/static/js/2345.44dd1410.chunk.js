@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpc=self.webpackChunkpc||[]).push([[2345,7754],{2345:(e,p,c)=>{c.r(p),c.d(p,{default:()=>s});c(7754);var n=c(579);function s(e){let{name:p,click:c,context:s,AppIcon:l,isSelected:t}=e;return(0,n.jsxs)("button",{onClick:c,onContextMenu:e=>{s(e)},className:t?"liveAppsAero liveAppsAeroActive":"liveAppsAero","aria-label":"Live App"+p,children:[(0,n.jsx)(l,{appName:p}),(0,n.jsx)("span",{children:p})]})}},7754:(e,p,c)=>{c.r(p),c.d(p,{default:()=>n});const n={}}}]);
+//# sourceMappingURL=2345.44dd1410.chunk.js.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/7788.4eb5e19c.chunk.js","mappings":"sHAEA,Q,QAAwB,G","sources":["Apps/DrawDoc/icon.js"],"sourcesContent":["import { FcPicture } from \"react-icons/fc\";\r\n\r\nexport default FcPicture"],"names":[],"sourceRoot":""}

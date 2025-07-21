@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpc=self.webpackChunkpc||[]).push([[1396,4929],{4929:(a,t,u)=>{u.r(t),u.d(t,{default:()=>n});u(1396);var e=u(579);function n(a){let{type:t,click:u,name:n}=a;return(0,e.jsx)("button",{className:function(){switch(t){case"Warning":return"appDialogButtonAqua appDialogButtonAquaRed";case"Suggested":return"appDialogButtonAqua appDialogButtonAquaBlue";default:return"appDialogButtonAqua appDialogButtonAquaNeutral"}}(),onClick:u,children:n})}},1396:(a,t,u)=>{u.r(t),u.d(t,{default:()=>e});const e={}}}]);
+//# sourceMappingURL=4929.05444893.chunk.js.map

@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/586.2ab5a71a.chunk.js","mappings":"qHAEA,Q,QAAyB,G","sources":["Apps/NoteDoc/icon.js"],"sourcesContent":["import { TfiNotepad } from \"react-icons/tfi\";\r\n\r\nexport default TfiNotepad"],"names":[],"sourceRoot":""}
