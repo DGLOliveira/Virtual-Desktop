@@ -21,18 +21,19 @@ export function DeviceProvider({ browserInfo, deviceInfo, children }) {
     const getDeviceType = () => {
         switch (deviceInfo.type) {
             case "tablet":
-                return "Tablet";
+                //Disabled Tablet mode for now
+                return "Mobile";
             case "mobile":
                 return "Mobile";
             case "smarttv":
                 //Disabled TV mode for now
-                return "Tablet";
+                return "Mobile";
             default:
                 return "Desktop";
         }
     };
     const [deviceType, setDeviceType] = useState(getDeviceType);
-    const deviceTypeList = ["Desktop", "Tablet", "Mobile"];
+    const deviceTypeList = ["Desktop", "Mobile"];
     const [virtualOSState, setVirtualOSState] = useState({
         isBusy: false,
         display: "none",
