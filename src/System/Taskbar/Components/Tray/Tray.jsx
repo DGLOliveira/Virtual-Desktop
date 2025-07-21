@@ -21,6 +21,14 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
     const [availableHeight, setAvailableHeight] = useState(0);
     const [heightOffset, setHeightOffset] = useState(0);
 
+    const switchTray = () => {
+        if (device.virtualOSState.display === "tray") {
+            device.setVirtualOSState({ ...device.virtualOSState, display: "none" })
+        } else {
+            device.setVirtualOSState({ ...device.virtualOSState, display: "tray" })
+        }
+    }
+
     const handleDragStart = (e) => {
         setAvailableHeight(document.getElementsByTagName("desk-top")[0].clientHeight);
         setHeightOffset(document.getElementsByTagName("mobile-tray")[0].clientHeight);
@@ -47,11 +55,11 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
             endY = e.touches[0].clientY;
         }
         if (device.virtualOSState.display === "tray") {
-            if (window.innerHeight * 0.2 < dragY.start - endY) {
+            if (heightOffset < dragY.start - endY) {
                 device.setVirtualOSState({ ...device.virtualOSState, display: "none" })
             }
         } else {
-            if (window.innerHeight * 0.2 < endY - dragY.start) {
+            if (heightOffset < endY - dragY.start) {
                 device.setVirtualOSState({ ...device.virtualOSState, display: "tray" })
             }
         }
@@ -85,6 +93,12 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                         onDragStart={(e) => handleDragStart(e)}
                         onDrag={(e) => handleDrag(e)}
                         onDragEnd={(e) => handleDragEnd(e)}
+                        onMouseDown={(e) => handleDragStart(e)}
+                        onTouchStart={(e) => handleDragStart(e)}
+                        onTouchMove={(e) => handleDrag(e)}
+                        onTouchEnd={(e) => handleDragEnd(e)}
+                        onTouchCancel={(e) => handleDragEnd(e)}
+                        onDoubleClick={switchTray}
                     >
                         <mobile-tray-system>
                             <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />
@@ -122,6 +136,7 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                         onDragStart={(e) => handleDragStart(e)}
                         onDrag={(e) => handleDrag(e)}
                         onDragEnd={(e) => handleDragEnd(e)}
+                        onDoubleClick={switchTray}
                     >
                         {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
                         <DeviceSet />
