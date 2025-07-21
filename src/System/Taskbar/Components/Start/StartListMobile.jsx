@@ -19,6 +19,17 @@ export const StartListMobile = ({ isOpen, setIsOpen }) => {
     const app = useContext(AppContext);
     const theme = useContext(ThemeContext);
     const [zIndex, setZIndex] = useState(100);
+    const [doesDesktopExist, setDoesDesktopExist] = useState(false);
+    const [desktoptimer, setDesktopTimer] = useState(null);
+
+    const checkIfDeskTopExists = () => {
+        const desktop = document.getElementsByTagName("desk-top")[0];
+        if(desktop) {
+            return setDoesDesktopExist(true);
+        }
+        setDesktopTimer(setTimeout(checkIfDeskTopExists, 500));
+        return setDoesDesktopExist(false);
+    }
 
     useEffect(() => {
         const timeout =
@@ -35,7 +46,7 @@ export const StartListMobile = ({ isOpen, setIsOpen }) => {
 
     return (
         <>
-            {createPortal(
+            {doesDesktopExist && createPortal(
                 <start-list-mobile
                 style={{
                     background: isOpen ? "var(--StartMenuMobileOuterBkgr)" : "hsla(0, 0%, 0%, 0)",
