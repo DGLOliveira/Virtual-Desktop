@@ -12,6 +12,13 @@ export function AppHandler() {
   const appContext = useContext(AppContext);
   const deviceContext = useContext(DeviceContext);
 
+  const handleClickOutside = (e) => {
+    if (deviceContext.virtualOSState.display === "liveApps") {
+      deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: "none" });
+    }
+    appContext.minimizeAll();
+  };
+
   const handleClick = (e, name) =>{
     if(deviceContext.virtualOSState.display === "liveApps"){
       e.stopPropagation();
@@ -29,7 +36,9 @@ export function AppHandler() {
         background: deviceContext.virtualOSState.display === "liveApps" ? "hsla(0, 0%, 0%, 0.5)" : "transparent",
         boxShadow: deviceContext.virtualOSState.display === "liveApps" ? "0 0 200px 0 hsla(0, 0%, 0%, 1) inset" : "0 0 0px 0 hsla(0, 0%, 0%, 1) inset",
         pointerEvents: deviceContext.virtualOSState.display === "liveApps" ? "all" : "none",
+        overflowY: deviceContext.virtualOSState.display === "liveApps" ? "auto" : "hidden",
       }}
+      onClick={handleClickOutside}
     >
       {Object.keys(appContext.apps).length === 0 && deviceContext.virtualOSState.display === "liveApps" && (
         <no-apps>No apps open</no-apps>
