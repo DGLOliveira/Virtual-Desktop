@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { createPortal } from "react-dom";
 
 import { DeviceContext } from "../../../DeviceManager/context.jsx";
@@ -20,6 +20,21 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
     const [dragY, setDragY] = useState({ start: 0, current: 0 });
     const [availableHeight, setAvailableHeight] = useState(0);
     const [heightOffset, setHeightOffset] = useState(0);
+    const [doesDesktopAndTaskbarExist, setDoesDesktopAndTaskbarExist] = useState(false);
+
+    //Assures that the tray elements are last children in the root element
+    const checkIfDeskTopAndTaskbarExists = () => {
+        const desktop = document.getElementsByTagName("desk-top")[0];
+        const taskbar = document.getElementsByTagName("task-bar")[0];
+        if (desktop && taskbar) {
+            return setDoesDesktopAndTaskbarExist(true);
+        }
+        setTimeout(checkIfDeskTopAndTaskbarExists, 500);
+    }
+    //Checks if the <desk-top> and <task-bar> element exists, usually it does not exist on first render on mobile
+    useEffect(() => {
+        checkIfDeskTopAndTaskbarExists();
+    }, []);
 
     const switchTray = () => {
         if (device.virtualOSState.display === "tray") {
@@ -30,6 +45,7 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
     }
 
     const handleDragStart = (e) => {
+        console.log(e);
         setAvailableHeight(document.getElementsByTagName("desk-top")[0].clientHeight);
         setHeightOffset(document.getElementsByTagName("mobile-tray")[0].clientHeight);
         if (e.type === "touchstart") {
@@ -40,7 +56,6 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
         }
     };
     const handleDrag = (e) => {
-        e.preventDefault();
         if (e.type.includes("drag")) {
             setDragY({ ...dragY, current: e.clientY });
         } else {
@@ -52,7 +67,7 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
         if (e.type.includes("drag")) {
             endY = e.clientY;
         } else {
-            endY = e.touches[0].clientY;
+            endY = e.changedTouches[0].clientY;
         }
         if (device.virtualOSState.display === "tray") {
             if (heightOffset < dragY.start - endY) {
@@ -78,7 +93,7 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
             </taskbar-tray>
                 <vertical-rect />
             </>
-            : createPortal(
+            : doesDesktopAndTaskbarExist && createPortal(
                 <>
                     <mobile-tray-fullscreen
                         style={{
@@ -101,15 +116,15 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                         onDoubleClick={switchTray}
                     >
                         <mobile-tray-system
-                        onDragStart={(e) => handleDragStart(e)}
-                        onDrag={(e) => handleDrag(e)}
-                        onDragEnd={(e) => handleDragEnd(e)}
-                        onMouseDown={(e) => handleDragStart(e)}
-                        onTouchStart={(e) => handleDragStart(e)}
-                        onTouchMove={(e) => handleDrag(e)}
-                        onTouchEnd={(e) => handleDragEnd(e)}
-                        onTouchCancel={(e) => handleDragEnd(e)}
-                        onDoubleClick={switchTray}>
+                            onDragStart={(e) => handleDragStart(e)}
+                            onDrag={(e) => handleDrag(e)}
+                            onDragEnd={(e) => handleDragEnd(e)}
+                            onMouseDown={(e) => handleDragStart(e)}
+                            onTouchStart={(e) => handleDragStart(e)}
+                            onTouchMove={(e) => handleDrag(e)}
+                            onTouchEnd={(e) => handleDragEnd(e)}
+                            onTouchCancel={(e) => handleDragEnd(e)}
+                            onDoubleClick={switchTray}>
                             <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />
                             <DeviceSet />
                             <button
@@ -135,27 +150,27 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                             </button>
                         </mobile-tray-system>
                         <mobile-tray-fullscreen-clock
-                        onDragStart={(e) => handleDragStart(e)}
-                        onDrag={(e) => handleDrag(e)}
-                        onDragEnd={(e) => handleDragEnd(e)}
-                        onMouseDown={(e) => handleDragStart(e)}
-                        onTouchStart={(e) => handleDragStart(e)}
-                        onTouchMove={(e) => handleDrag(e)}
-                        onTouchEnd={(e) => handleDragEnd(e)}
-                        onTouchCancel={(e) => handleDragEnd(e)}
-                        onDoubleClick={switchTray}>
+                            onDragStart={(e) => handleDragStart(e)}
+                            onDrag={(e) => handleDrag(e)}
+                            onDragEnd={(e) => handleDragEnd(e)}
+                            onMouseDown={(e) => handleDragStart(e)}
+                            onTouchStart={(e) => handleDragStart(e)}
+                            onTouchMove={(e) => handleDrag(e)}
+                            onTouchEnd={(e) => handleDragEnd(e)}
+                            onTouchCancel={(e) => handleDragEnd(e)}
+                            onDoubleClick={switchTray}>
                             <TaskbarClock contextMenu={contextMenu} setShowClock={setShowClock} />
                         </mobile-tray-fullscreen-clock>
                         <div
-                        onDragStart={(e) => handleDragStart(e)}
-                        onDrag={(e) => handleDrag(e)}
-                        onDragEnd={(e) => handleDragEnd(e)}
-                        onMouseDown={(e) => handleDragStart(e)}
-                        onTouchStart={(e) => handleDragStart(e)}
-                        onTouchMove={(e) => handleDrag(e)}
-                        onTouchEnd={(e) => handleDragEnd(e)}
-                        onTouchCancel={(e) => handleDragEnd(e)}
-                        onDoubleClick={switchTray}>
+                            onDragStart={(e) => handleDragStart(e)}
+                            onDrag={(e) => handleDrag(e)}
+                            onDragEnd={(e) => handleDragEnd(e)}
+                            onMouseDown={(e) => handleDragStart(e)}
+                            onTouchStart={(e) => handleDragStart(e)}
+                            onTouchMove={(e) => handleDrag(e)}
+                            onTouchEnd={(e) => handleDragEnd(e)}
+                            onTouchCancel={(e) => handleDragEnd(e)}
+                            onDoubleClick={switchTray}>
                         </div>
                     </mobile-tray-fullscreen>
                     <mobile-tray
@@ -163,6 +178,10 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                         onDragStart={(e) => handleDragStart(e)}
                         onDrag={(e) => handleDrag(e)}
                         onDragEnd={(e) => handleDragEnd(e)}
+                        onTouchStart={(e) => handleDragStart(e)}
+                        onTouchMove={(e) => handleDrag(e)}
+                        onTouchEnd={(e) => handleDragEnd(e)}
+                        onTouchCancel={(e) => handleDragEnd(e)}
                         onDoubleClick={switchTray}
                     >
                         {showWeather && <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />}
