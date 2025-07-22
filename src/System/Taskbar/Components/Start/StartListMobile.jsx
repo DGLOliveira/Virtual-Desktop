@@ -20,17 +20,22 @@ export const StartListMobile = ({ isOpen, setIsOpen }) => {
     const theme = useContext(ThemeContext);
     const [zIndex, setZIndex] = useState(100);
     const [doesDesktopExist, setDoesDesktopExist] = useState(false);
-    const [desktoptimer, setDesktopTimer] = useState(null);
 
+    //Prevents the start menu from being rendered if the <desk-top> element doesn't exist
     const checkIfDeskTopExists = () => {
         const desktop = document.getElementsByTagName("desk-top")[0];
         if(desktop) {
             return setDoesDesktopExist(true);
         }
-        setDesktopTimer(setTimeout(checkIfDeskTopExists, 500));
-        return setDoesDesktopExist(false);
+        setTimeout(checkIfDeskTopExists, 500);
     }
+    //Checks if the <desk-top> element exists, usually it does not exist on first render
+    useEffect(() => {
+        checkIfDeskTopExists();
+    }, []);
 
+    //Handles the z-index of the start menu  by placing it behind the desktop when it is not open
+    //This allows the Y position transition to be smooth
     useEffect(() => {
         const timeout =
             setTimeout(() => {
@@ -43,6 +48,7 @@ export const StartListMobile = ({ isOpen, setIsOpen }) => {
             clearTimeout(timeout);
         }
     },[isOpen]);
+
 
     return (
         <>
