@@ -95,6 +95,13 @@ live-apps-button>button>svg {
     height: var(--StartButtonIconSize);
 }
 
+live-apps-button>button>span {
+    display: var(--StartButtonFontVisibility);
+    color: var(--StartButtonFontColor);
+    font-size: var(--StartButtonFontSize);
+}
+
+
 live-apps-button>button>svg>.hex {
     transform-box: fill-box;
     transform-origin: center;

@@ -123,6 +123,7 @@ export const LiveApps = () => {
                 darkMode={isDarkMode}
               />
             </Suspense>
+            <span>Live</span>
           </button>
         </live-apps-button>}
     </>

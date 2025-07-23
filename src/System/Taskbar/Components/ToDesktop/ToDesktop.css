@@ -7,8 +7,6 @@ to-desktop-button {
 to-desktop-button>button {
     height: 100%;
     width: 100%;
-    writing-mode: vertical-rl;
-    font-size: calc(var(--TaskbarHeight)/3);
     position: relative;
     display: flex;
     flex-direction: row;
@@ -27,6 +25,12 @@ to-desktop-button>button>svg {
     isolation: isolate;
     width: var(--StartButtonIconSize);
     height: var(--StartButtonIconSize);
+}
+
+to-desktop-button>button>span {
+    display: var(--StartButtonFontVisibility);
+    color: var(--StartButtonFontColor);
+    font-size: var(--StartButtonFontSize);
 }
 
 to-desktop-button>button>svg>.hex {

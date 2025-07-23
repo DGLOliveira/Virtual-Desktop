@@ -52,6 +52,7 @@ export const ToDesktop = () => {
         <Suspense fallback={null}>
           <Icon isActive={clicked} />
         </Suspense>
+        {deviceContext.deviceType !== "Desktop" && <span>Desktop</span>}
       </button>
     </to-desktop-button>
   );
