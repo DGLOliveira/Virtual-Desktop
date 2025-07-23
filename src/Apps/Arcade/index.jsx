@@ -208,10 +208,10 @@ export default function Arcade(props) {
               className={controls.left ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
               onMouseDown={() => handleScreenButton("left", "keydown", true)}
               onMouseUp={() => handleScreenButton("left", "keyup", true)}
-              onTouchStart={(e) => {e.preventDefault();handleTouchEvent(e, "left")}}
-              onTouchMove={(e) => {e.preventDefault();handleTouchEvent(e, "left")}}
-              onTouchEnd={(e) => {e.preventDefault();handleTouchEvent(e, "left")}}
-              onTouchCancel={(e) => {e.preventDefault();handleTouchEvent(e, "left")}}
+              onTouchStart={(e) => {handleTouchEvent(e, "left")}}
+              onTouchMove={(e) => {handleTouchEvent(e, "left")}}
+              onTouchEnd={(e) => {handleTouchEvent(e, "left")}}
+              onTouchCancel={(e) => {handleTouchEvent(e, "left")}}
             >
               <FaArrowLeft />
             </div>
@@ -221,10 +221,10 @@ export default function Arcade(props) {
                 className={controls.up ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
                 onMouseDown={() => handleScreenButton("up", "keydown", true)}
                 onMouseUp={() => handleScreenButton("up", "keyup", true)}
-                onTouchStart={(e) => {e.preventDefault();handleTouchEvent(e, "up")}}
-                onTouchMove={(e) => {e.preventDefault();handleTouchEvent(e, "up")}}
-                onTouchEnd={(e) => {e.preventDefault();handleTouchEvent(e, "up")}}
-                onTouchCancel={(e) => {e.preventDefault();handleTouchEvent(e, "up")}}
+                onTouchStart={(e) => {handleTouchEvent(e, "up")}}
+                onTouchMove={(e) => {handleTouchEvent(e, "up")}}
+                onTouchEnd={(e) => {handleTouchEvent(e, "up")}}
+                onTouchCancel={(e) => {handleTouchEvent(e, "up")}}
               >
                 <FaArrowUp />
               </div>
@@ -233,10 +233,10 @@ export default function Arcade(props) {
                 className={controls.down ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
                 onMouseDown={() => handleScreenButton("down", "keydown", true)}
                 onMouseUp={() => handleScreenButton("down", "keyup", true)}
-                onTouchStart={(e) => {e.preventDefault();handleTouchEvent(e, "down")}}
-                onTouchMove={(e) => {e.preventDefault();handleTouchEvent(e, "down")}}
-                onTouchEnd={(e) => {e.preventDefault();handleTouchEvent(e, "down")}}
-                onTouchCancel={(e) => {e.preventDefault();handleTouchEvent(e, "down")}}
+                onTouchStart={(e) => {handleTouchEvent(e, "down")}}
+                onTouchMove={(e) => {handleTouchEvent(e, "down")}}
+                onTouchEnd={(e) => {handleTouchEvent(e, "down")}}
+                onTouchCancel={(e) => {handleTouchEvent(e, "down")}}
               >
                 <FaArrowDown />
               </div>
@@ -246,10 +246,10 @@ export default function Arcade(props) {
               className={controls.right ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
               onMouseDown={() => handleScreenButton("right", "keydown", true)}
               onMouseUp={() => handleScreenButton("right", "keyup", true)}
-              onTouchStart={(e) => {e.preventDefault();handleTouchEvent(e, "right")}}
-              onTouchMove={(e) => {e.preventDefault();handleTouchEvent(e, "right")}}
-              onTouchEnd={(e) => {e.preventDefault();handleTouchEvent(e, "right")}}
-              onTouchCancel={(e) => {e.preventDefault();handleTouchEvent(e, "right")}}
+              onTouchStart={(e) => {handleTouchEvent(e, "right")}}
+              onTouchMove={(e) => {handleTouchEvent(e, "right")}}
+              onTouchEnd={(e) => {handleTouchEvent(e, "right")}}
+              onTouchCancel={(e) => {handleTouchEvent(e, "right")}}
             >
               <FaArrowRight />
             </div>
@@ -259,19 +259,19 @@ export default function Arcade(props) {
               className={controls.one ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
               onMouseDown={() => handleScreenButton("one", "keydown", true)}
               onMouseUp={() => handleScreenButton("one", "keyup", true)}
-              onTouchStart={(e) => {e.preventDefault();handleTouchEvent(e, "one")}}
-              onTouchMove={(e) => {e.preventDefault();handleTouchEvent(e, "one")}}
-              onTouchEnd={(e) => {e.preventDefault();handleTouchEvent(e, "one")}}
-              onTouchCancel={(e) => {e.preventDefault();handleTouchEvent(e, "one")}}
+              onTouchStart={(e) => {handleTouchEvent(e, "one")}}
+              onTouchMove={(e) => {handleTouchEvent(e, "one")}}
+              onTouchEnd={(e) => {handleTouchEvent(e, "one")}}
+              onTouchCancel={(e) => {handleTouchEvent(e, "one")}}
             >A</div>
             <div id="arcadeButtonB"
               className={controls.two ? "arcadeButton arcadeButtonOn" : "arcadeButton arcadeButtonOff"}
               onMouseDown={() => handleScreenButton("two", "keydown", true)}
               onMouseUp={() => handleScreenButton("two", "keyup", true)}
-              onTouchStart={(e) => {e.preventDefault();handleTouchEvent(e, "two")}}
-              onTouchMove={(e) => {e.preventDefault();handleTouchEvent(e, "two")}}
-              onTouchEnd={(e) => {e.preventDefault();handleTouchEvent(e, "two")}}
-              onTouchCancel={(e) => {e.preventDefault();handleTouchEvent(e, "two")}}
+              onTouchStart={(e) => {handleTouchEvent(e, "two")}}
+              onTouchMove={(e) => {handleTouchEvent(e, "two")}}
+              onTouchEnd={(e) => {handleTouchEvent(e, "two")}}
+              onTouchCancel={(e) => {handleTouchEvent(e, "two")}}
             >B</div>
           </div>
         </>

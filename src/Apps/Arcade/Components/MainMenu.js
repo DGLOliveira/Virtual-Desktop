@@ -16,7 +16,7 @@ export default function MainMenu({ controls, setGameState, setGameChoice }) {
             setCurrentSelection(currentSelection + 1);
         }else if(controls.up && currentSelection > 0) {
             setCurrentSelection(currentSelection - 1);
-        }else if(controls.one) {
+        }else if(controls.one || controls.pause) {
             setGameState("Start");
             setGameChoice(Object.keys(gamelist)[currentSelection]);
         }
