@@ -8,6 +8,7 @@ import { TaskbarClock } from "../../Components/Clock/index.jsx";
 import { Weather } from "../../Components/Weather/index.jsx";
 import { DeviceSet } from "../../Components/DeviceSet/index.jsx";
 
+import { WiUmbrella } from "react-icons/wi";
 import { FaGear } from "react-icons/fa6";
 import { MdOutlineRestartAlt } from "react-icons/md";
 import { RiShutDownLine } from "react-icons/ri";
@@ -81,7 +82,7 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
         setDragY({ start: 0, current: 0 });
     };
 
-
+    const openWeatherTray = () => document.getElementById("WeatherButton").click();
 
 
     return (<>
@@ -125,7 +126,13 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
                             onTouchEnd={(e) => handleDragEnd(e)}
                             onTouchCancel={(e) => handleDragEnd(e)}
                             onDoubleClick={switchTray}>
-                            <Weather contextMenu={contextMenu} setShowWeather={setShowWeather} />
+                            <button
+                                onClick={openWeatherTray}
+                                title="Weather"
+                                aria-label="Weather Button"
+                            >
+                                <WiUmbrella />
+                            </button>
                             <DeviceSet />
                             <button
                                 onClick={() => { app.setOpen("Definitions"); device.setVirtualOSState({ ...device.virtualOSState, display: "none" }) }}

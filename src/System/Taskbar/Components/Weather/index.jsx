@@ -220,6 +220,7 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
   return (
     <>
         <button 
+        id="WeatherButton"
         onClick={() => setShowDetails(!showDetails)}
         onContextMenu={(e) => handleContextMenu(e)}
         style={{display: "flex", flexDirection: "row"}}
