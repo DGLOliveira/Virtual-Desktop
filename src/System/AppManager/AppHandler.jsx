@@ -15,21 +15,21 @@ export function AppHandler() {
   const handleClickOutside = (e) => {
     if (deviceContext.virtualOSState.display === "liveApps") {
       deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: "none" });
+      appContext.minimizeAll();
     }
-    appContext.minimizeAll();
   };
 
-  const handleClick = (e, name) =>{
-    if(deviceContext.virtualOSState.display === "liveApps"){
+  const handleClick = (e, name) => {
+    if (deviceContext.virtualOSState.display === "liveApps") {
       e.stopPropagation();
-      deviceContext.setVirtualOSState({...deviceContext.virtualOSState, display: "none"});
+      deviceContext.setVirtualOSState({ ...deviceContext.virtualOSState, display: "none" });
     }
     appContext.setSelected(name);
-    if(appContext.apps[name].State.isMinimized){
+    if (appContext.apps[name].State.isMinimized) {
       appContext.switchMinimized(name);
     };
   }
-  
+
   return (
     <windows-container
       style={{
@@ -77,9 +77,9 @@ export function AppHandler() {
               || appContext.apps[name].State.isMaximized)
               ? "0"
               : "var(--WindowBorderRadius)",
-            visibility: deviceContext.virtualOSState.display == "liveApps" ? 
-            "visible" :  
-            (appContext.apps[name].State.isMinimized ? "hidden" : "visible"),
+            visibility: deviceContext.virtualOSState.display == "liveApps" ?
+              "visible" :
+              (appContext.apps[name].State.isMinimized ? "hidden" : "visible"),
             scale: deviceContext.virtualOSState.display == "liveApps" ? "0.8" : "1",
             pointerEvents: "all",
           }}
