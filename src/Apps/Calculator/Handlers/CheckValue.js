@@ -1,4 +1,4 @@
-export const CheckValue = (type, input) => {
+export default function CheckValue(type, input) {
   const isNumber = (value) => {
     return !isNaN(Number(value));
   };

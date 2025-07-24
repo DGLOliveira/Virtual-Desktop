@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from "react";
-import { CheckValue } from "./CheckValue.js";
-import { Calculate } from "./Calculate.js";
+import CheckValue from "../Handlers/CheckValue.js";
+import Calculate from "../Handlers/Calculate.js";
 
-export const Graphic = (graph) => {
+export default function Graphic(graph) {
   let data = graph.graph;
   const canvasRef = useRef(null);
   const canvasPreviewRef = useRef(null);

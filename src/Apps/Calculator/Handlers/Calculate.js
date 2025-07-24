@@ -1,6 +1,6 @@
-import { CheckValue } from "./CheckValue.js";
+import CheckValue from "./CheckValue.js";
 
-export const Calculate = (array, flag) => {
+export default function Calculate(array, flag) {
   const findDecimals = (arr) => {
     let decArr = [];
     arr.forEach((value, index) => {
