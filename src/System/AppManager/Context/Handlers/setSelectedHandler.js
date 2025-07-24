@@ -25,7 +25,7 @@ export const setSelectedHandler = (name, appStatus, setAppStatus) => {
       setAppStatus(newAppStatus);
     }
   }
-  //Select app
+  //Select app and set minimization to false
   else if (!appStatus[name].State.isSelected) {
     let newAppStatus = {};
     Object.keys(appStatus).forEach((app) => {
@@ -35,6 +35,7 @@ export const setSelectedHandler = (name, appStatus, setAppStatus) => {
           State: {
             ...appStatus[app].State,
             isSelected: true,
+            isMinimized: false,
           },
           Location: {
             ...appStatus[app].Location,

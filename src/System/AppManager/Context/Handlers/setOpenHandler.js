@@ -1,6 +1,5 @@
 export const setOpenHandler = (name, appStatus, setAppStatus) => {
   let newAppStatus = {};
-  //Check if app is not open, else set it to selected
   //Set all open apps to not selected and reduce the z-index
   Object.keys(appStatus).forEach((app) => {
     newAppStatus = {
