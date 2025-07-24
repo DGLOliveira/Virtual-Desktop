@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { handleCanvasBorders } from "../../Handlers/handleCanvasBorders.js";
-import { set } from "ol/transform.js";
 
 const frequency = 4; //Hertz
 const frameRate = 1000 / frequency; // frames / milisecond

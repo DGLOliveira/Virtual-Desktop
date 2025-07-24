@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-export default function Controls(isSelected, keyboard) {
+export default function Controls(keyboard) {
 
   var [command, setCommand] = useState({
     up: false,
@@ -53,12 +53,6 @@ export default function Controls(isSelected, keyboard) {
       document.removeEventListener("keyup", handleKeyRelease);
     };
   }, [handleKeyRelease]);
-
-  useEffect(() => {
-    if (!isSelected) {
-      setCommand({ ...command, pause: true });
-    }
-  }, [isSelected]);
 
   return command;
 }

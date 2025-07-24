@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import LevelsJSON from "./Breakout_Maps.json";
 import { handleCanvasBorders } from "../../Handlers/handleCanvasBorders.js";
 

@@ -5,37 +5,44 @@
   height: 100%;
   flex-direction: column;
   overflow: hidden;
-  color:silver;
+  color: silver;
   background: black;
 }
-#arcadeContaier>*>*{
-  background:black;
+
+#arcadeContaier>*>* {
+  background: black;
 }
-#gameMenu{
-  background:black;
-  color:silver;
+
+#gameMenu {
+  background: black;
+  color: silver;
 }
-.arcadeButtonOn{
-  color:deepskyblue;
+
+.arcadeButtonOn {
+  color: deepskyblue;
 }
-.arcadeButtonOff{
-  color:rgba(128, 128, 128, 0.5);
+
+.arcadeButtonOff {
+  color: rgba(128, 128, 128, 0.5);
 }
-.arcadeButton{
+
+.arcadeButton {
   display: flex;
   border: 1px silver solid;
-  margin:1px;
+  margin: 1px;
   font-size: 36pt;
   justify-content: center;
   align-items: center;
-  cursor:pointer;
-  -webkit-user-select: none; 
-  -ms-user-select: none; 
-  user-select: none; 
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-.arcadeButton:active{
-  color:deepskyblue;
+
+.arcadeButton:active {
+  color: deepskyblue;
 }
+
 #arcadeMainMenu {
   display: flex;
   flex-direction: column;
@@ -46,6 +53,7 @@
   align-items: center;
   border: 1px silver solid;
 }
+
 #arcadeSplashScreen {
   display: flex;
   flex-direction: column;
@@ -54,133 +62,161 @@
   justify-content: center;
   align-items: center;
   border: 1px silver solid;
-  -webkit-user-select: none; 
-  -ms-user-select: none; 
+  -webkit-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
-#arcadeGameList{
+
+#arcadeSplashScreen>img {
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+#arcadeGameList {
   display: flex;
   flex-direction: column;
-  width: auto;
   height: 100%;
+  min-height: 90px;  
   width: 100%;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
 }
-#arcadeGameList>div{
+
+#arcadeGameList>div {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 100%;
+  min-height: 30px;
+  box-sizing: border-box;
   justify-content: center;
   align-items: center;
   border: 1px silver solid;
-  cursor:pointer;
-  -webkit-user-select: none; 
-  -ms-user-select: none; 
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
 #arcadeCanvasContainer {
   position: absolute;
   display: flex;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
   background: black;
 }
-#arcadeCanvasContainer > * {
+
+#arcadeCanvasContainer>* {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+
 #arcadeZoomControls {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  top:5pt;
-  left:5pt;
+  top: 5pt;
+  left: 5pt;
 }
+
 #arcadeZoomInButton {
   width: 52pt;
   height: 52pt;
   border-radius: 10%;
-  margin-right:16pt;
+  margin-right: 16pt;
 }
-#arcadeZoomOutButton{
+
+#arcadeZoomOutButton {
   width: 52pt;
   height: 52pt;
   border-radius: 10%;
 }
+
 #arcadeStateControls {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  top:5pt;
-  right:5pt;
+  top: 5pt;
+  right: 5pt;
 }
+
 #arcadePlayButton {
   width: 52pt;
   height: 52pt;
   border-radius: 20%;
-  margin-left:16pt;
+  margin-left: 16pt;
 }
-#arcadeEjectButton{
+
+#arcadeEjectButton {
   width: 52pt;
   height: 52pt;
   border-radius: 20%;
 }
+
 #arcadeArrowControls {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   bottom: 5pt;
-  left:5pt;
+  left: 5pt;
 }
+
 #arcadeButtonLeft {
-  width:48pt;
-  height:48pt;
+  width: 48pt;
+  height: 48pt;
   border-radius: 10% 50% 50% 10%;
-  margin-right:-14pt;
+  margin-right: -14pt;
 }
+
 #arcadeButtonRight {
-  width:48pt;
-  height:48pt;
+  width: 48pt;
+  height: 48pt;
   border-radius: 50% 10% 10% 50%;
-  margin-left:-14pt;
+  margin-left: -14pt;
 }
+
 #arcadeButtonUp {
-  width:48pt;
-  height:48pt;
+  width: 48pt;
+  height: 48pt;
   border-radius: 10% 10% 50% 50%;
   margin-bottom: 28pt;
 }
+
 #arcadeButtonDown {
-  width:48pt;
-  height:48pt;
+  width: 48pt;
+  height: 48pt;
   border-radius: 50% 50% 10% 10%;
 }
+
 #arcadeFireControls {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   bottom: 5pt;
-  right:5pt;
+  right: 5pt;
 }
+
 #arcadeButtonA {
   border-radius: 50%;
   margin-bottom: -48pt;
   width: 52pt;
   height: 52pt;
 }
+
 #arcadeButtonB {
   border-radius: 50%;
   margin-bottom: 64pt;
