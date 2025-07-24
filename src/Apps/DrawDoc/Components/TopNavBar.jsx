@@ -33,22 +33,22 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
   if (context.view.topNavBar) {
     return (
       <nav id="drawDocTopNavBar" onContextMenu={(event) => handleContextMenu(event)}>
-        <button onClick={() => setAction("Undo")} disabled={!context.history.canUndo}>
-          <BiUndo title="Undo" />
+        <button title="Undo" onClick={() => setAction("Undo")} disabled={!context.history.canUndo}>
+          <BiUndo />
         </button>
-        <button onClick={() => setAction("Redo")} disabled={!context.history.canRedo}>
-          <BiRedo title="Redo" />
+        <button title="Redo" onClick={() => setAction("Redo")} disabled={!context.history.canRedo}>
+          <BiRedo />
         </button>
         <vertical-rect ></vertical-rect>
-        <button onClick={() => setAction("New")}>
-          <TfiFile title="New File" />
+        <button title="New File" onClick={() => setAction("New")}>
+          <TfiFile />
         </button>
-        <button onClick={() => setAction("Save")} disabled={!(context.history.canRedo || context.history.canUndo)}>
-          <TfiSave title="Save File" />
+        <button title="Download File" onClick={() => setAction("Save")} disabled={!(context.history.canRedo || context.history.canUndo)}>
+          <TfiSave />
         </button>
         <vertical-rect ></vertical-rect>
         <div style={{ display: "flex" }}>
-          <button className={context.color.selected === context.color[1] ? "buttonActive" : ""}
+          <button title="Color 1" className={context.color.selected === context.color[1] ? "buttonActive" : ""}
             onClick={() => context.setColor({ ...context.color, selected: context.color[1] })}>
             <label htmlFor="drawColor1" onClick={(e) => e.preventDefault()}>1</label>
           </button>
@@ -60,7 +60,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
         </div>
         <vertical-rect ></vertical-rect>
         <div style={{ display: "flex" }}>
-          <button className={context.color.selected === context.color[2] ? "buttonActive" : ""}
+          <button title="Color 2" className={context.color.selected === context.color[2] ? "buttonActive" : ""}
             onClick={() => context.setColor({ ...context.color, selected: context.color[2] })}>
             <label htmlFor="drawColor2" onClick={(e) => e.preventDefault()}>2</label>
           </button>

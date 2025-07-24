@@ -12,7 +12,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 "keybind": "Alt+O",
                 "disabled": false
             },
-            "Save": {
+            "Download File": {
                 "action": "Save",
                 "keybind": "Alt+S",
                 "disabled": args.ref.current.innerHTML === "" ? true : false
@@ -116,7 +116,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 "name": "theme",
                 "disabled": false
             },
-        },
+        }/*,
         "Help": {
             "Help": {
                 "action": "help",
@@ -130,7 +130,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                 "disabled": true,
                 "title": "Not Implemented"
             },
-        }
+        }*/
     };
     if (!appTopBar) {
         setAppTopBar(defaultTopBar);
@@ -143,7 +143,7 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
                     ...appTopBar["File"]["New"],
                     "disabled": args.ref.current.innerHTML === "" ? true : false
                 },
-                "Save": {
+                "Download": {
                     ...appTopBar["File"]["Save"],
                     "disabled": args.ref.current.innerHTML === "" ? true : false
                 },

@@ -6,24 +6,24 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "action": "New",
                 "keybind": "Alt+N",
                 "disabled": false
-            },
+            },/*
             "Open": {
                 "action": "Open",
                 "keybind": "Alt+O",
                 "disabled": true,
                 "title": "Not Implemented"
-            },
-            "Save": {
+            },*/
+            "Download": {
                 "action": "Save",
                 "keybind": "Ctrl+Alt+S",
                 "disabled": true
-            },
-            "Save As": {
+            }/*,
+            "Download As": {
                 "action": "Save As",
                 "keybind": "Ctrl+Alt+Shift+S",
                 "disabled": true,
                 "title": "Not Implemented"
-            },
+            }*/,
             "Change Name": {
                 "action": "Change Name",
                 "keybind": "F2",
@@ -45,7 +45,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "action": "Redo",
                 "keybind": "Ctrl+Y",
                 "disabled": false
-            },
+            }/*,
             "LineBreak1":{},
             "Cut": {
                 "action": "Cut",
@@ -77,7 +77,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "keybind": "Ctrl+Shift+C",
                 "disabled": true,
                 "title": "Not Implemented"
-            }
+            }*/
         },
         "View": {
             "Zoom In": {
@@ -111,7 +111,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "checkbox": true,
                 "disabled": false
             }
-        },
+        }/*,
         "Help": {
             "Help": {
                 "action": "help",
@@ -124,7 +124,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "disabled": true,
                 "title": "Not Implemented"
             }
-        }
+        }*/
     }
     if (appMenu === null) {
         setAppMenu(defaultAppMenu);
@@ -138,14 +138,14 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                     ...updatedAppMenu,
                     "File": {
                         ...updatedAppMenu["File"],
-                        "Save": {
+                        "Download": {
                             ...updatedAppMenu["File"]["Save"],
                             "disabled": !hasHistory
-                        },
-                        "Save As": {
+                        }/*,
+                        "Download As": {
                             ...updatedAppMenu["File"]["Save As"],
                             "disabled": !hasHistory
-                        }
+                        }*/
                     },
                     "Edit": {
                         ...updatedAppMenu["Edit"],

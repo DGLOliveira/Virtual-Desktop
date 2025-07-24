@@ -52,7 +52,7 @@ export default function handleTopMenu(appMenu, setAppMenu, args) {
                 "name": "rollpitch",
                 "disabled": false
             }
-        },
+        }/*,
         "Help": {
             "Help": {
                 "action": "help",
@@ -65,7 +65,7 @@ export default function handleTopMenu(appMenu, setAppMenu, args) {
                 "disabled": true,
                 "title": "Not Implemented"
             }
-        }
+        }*/
     }
     if (appMenu === null) {
         setAppMenu(defaultAppMenu);

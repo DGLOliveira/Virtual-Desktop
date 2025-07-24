@@ -30,7 +30,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args) => {
                 "checkbox": true,
                 "disabled": false
             }
-        },
+        }/*,
         "Help": {
             "Help": {
                 "action": "help",
@@ -43,7 +43,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args) => {
                 "disabled": true,
                 "title": "Not Implemented"
             }
-        }
+        }*/
     }
     if (appMenu === null) {
         setAppMenu(defaultAppMenu);

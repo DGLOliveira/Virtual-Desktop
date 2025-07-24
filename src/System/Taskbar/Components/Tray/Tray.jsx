@@ -46,7 +46,6 @@ export const Tray = ({ showWeather, setShowWeather, showClock, setShowClock, con
     }
 
     const handleDragStart = (e) => {
-        console.log(e);
         setAvailableHeight(document.getElementsByTagName("desk-top")[0].clientHeight);
         setHeightOffset(document.getElementsByTagName("mobile-tray")[0].clientHeight);
         if (e.type === "touchstart") {

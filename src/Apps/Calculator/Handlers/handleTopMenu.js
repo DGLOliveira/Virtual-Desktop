@@ -20,7 +20,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args) => {
                 "name": "type",
                 "disabled": false
             }
-        },
+        }/*,
         "Help": {
             "Help": {
                 "action": "help",
@@ -33,7 +33,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args) => {
                 "disabled": true,
                 "title": "Not Implemented"
             }
-        }
+        }*/
     }
     if (appMenu === null) {
         setAppMenu(defaultAppMenu);
