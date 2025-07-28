@@ -4,7 +4,7 @@ import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 import { FaGear } from "react-icons/fa6";
 import { MdOutlineRestartAlt } from "react-icons/md";
 import { RiShutDownLine } from "react-icons/ri";
-import { WiCloudy } from "react-icons/wi";
+import { WiUmbrella } from "react-icons/wi";
 import { TbDeviceMobile } from "react-icons/tb";
 
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
@@ -16,7 +16,7 @@ export const TrayExpandedPreview = () => {
         >
             <mobile-tray-system>
                 <button>
-                    <WiCloudy /> 20°C
+                    <WiUmbrella />
                 </button>
                 <button>
                     <TbDeviceMobile />

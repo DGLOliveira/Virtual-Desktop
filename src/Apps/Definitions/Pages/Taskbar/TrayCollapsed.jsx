@@ -11,7 +11,7 @@ export const TrayCollapsedPreview = () => {
             style={{ top: "calc(-100% + var(--MobileTrayHeight) + var(--TaskbarHeight))" }}
         ></mobile-tray-fullscreen>
         <mobile-tray style={{ width: "100%" }}>
-            <button>
+            <button style={{ flexDirection: "row" }}>
                 <WiCloudy /> 20°C
             </button>
             <button>

@@ -3,6 +3,7 @@ import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
 
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
+import { TbDeviceDesktop } from "react-icons/tb";
 import { WiCloudy } from "react-icons/wi";
 
 export const TrayPreview = () => {
@@ -32,6 +33,9 @@ export const TrayPreview = () => {
                 <taskbar-tray>
                     <button>
                         <WiCloudy /> 20°C
+                    </button>
+                    <button>
+                        <TbDeviceDesktop />
                     </button>
                     <button>
                         11:59
