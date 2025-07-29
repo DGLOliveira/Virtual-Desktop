@@ -8,7 +8,7 @@ import { MenuPreview, Menu } from "./Pages/Windows/Menu.jsx";
 import { AppPreview, App } from "./Pages/Windows/App.jsx";
 import { DialogPreview, Dialog } from "./Pages/Windows/Dialog.jsx";
 import { TaskBarPreview, TaskBar } from "./Pages/Taskbar/TaskBar.jsx";
-import { StartPreview, Start } from "./Pages/Taskbar/Start.jsx";
+import { MainButtonsPreview, MainButtons } from "./Pages/Taskbar/MainButtons.jsx";
 import { StartMenuPreview, StartMenu } from "./Pages/Taskbar/StartMenu.jsx";
 import { AppListPreview, AppList } from "./Pages/Taskbar/AppList.jsx";
 import { LiveAppsPreview, LiveApps } from "./Pages/Taskbar/LiveApps.jsx";
@@ -42,7 +42,7 @@ useEffect(()=>{
       setMenuList([
         "Global",
         "Desktop",
-        ["Taskbar",["Taskbar", "Start", "Start Menu", "Live Apps"]],
+        ["Taskbar",["Taskbar", "Main Buttons", "Start Menu", "Live Apps"]],
         ["Window",["Window", "Menu", "App", "Dialog"]],
         ["Tray",["Tray", "Tray Window"]],
         "Context Menu",
@@ -52,7 +52,7 @@ useEffect(()=>{
       setMenuList([
         "Global",
         "Desktop",
-        ["Taskbar",["Taskbar", "Start", "Apps List"]],
+        ["Taskbar",["Taskbar", "Main Buttons", "Apps List"]],
         ["Window",[ "App", "Menu", "Dialog"]],
         ["Tray",["Tray Collapsed", "Tray Expanded", "Tray Window"]],
         "Context Menu",
@@ -106,7 +106,7 @@ useEffect(()=>{
           {background.state.active === "scenario" ? <Scenario /> : <></>}
           {defPage === "Desktop" ? <DesktopPreview /> : <></>}
           {defPage === "Taskbar" ? <TaskBarPreview /> : <></>}
-          {defPage === "Start" ? <StartPreview /> : <></>}
+          {defPage === "Main Buttons" ? <MainButtonsPreview /> : <></>}
           {defPage === "Start Menu" ? <StartMenuPreview /> : <></>}
           {defPage === "Apps List" ? <AppListPreview /> : <></>}
           {defPage === "Live Apps" ? <LiveAppsPreview /> : <></>}
@@ -123,7 +123,7 @@ useEffect(()=>{
         {defPage === "Global" ? <Global /> : <></>}
         {defPage === "Desktop" ? <Desktop /> : <></>}
         {defPage === "Taskbar" ? <TaskBar /> : <></>}
-        {defPage === "Start" ? <Start /> : <></>}
+        {defPage === "Main Buttons" ? <MainButtons /> : <></>}
         {defPage === "Start Menu" ? <StartMenu /> : <></>}
         {defPage === "Apps List" ? <AppList /> : <></>}
         {defPage === "Live Apps" ? <LiveApps /> : <></>}

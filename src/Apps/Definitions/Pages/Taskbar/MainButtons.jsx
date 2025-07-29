@@ -1,12 +1,47 @@
 import { useState, useEffect, useContext, useCallback, lazy, Suspense } from "react";
 import { ThemeContext } from "../../../../System/ThemeManager/context.jsx";
+import { DeviceContext } from "../../../../System/DeviceManager/context.jsx";
 import DefaultLogo from "../../../../System/Taskbar/Components/Start/DefaultLogo.jsx";
+import DefaultIcon from "../../../../System/Taskbar/Components/LiveApps/DefaultIcon.jsx";
+import Icon from "../../../../System/Taskbar/Components/ToDesktop/DefaultIcon.jsx";
 
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
-export const StartPreview = () => {
-  const [open, setOpen] = useState(false);
+export const MainButtonsPreview = () => {
+  const [toDesktopClicked, setToDesktopClicked] = useState(false);
+  const [isLiveAppsOpen, setIsLiveAppsOpen] = useState(false);
+  const [isStartListOpen, setIsStartListOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const themeContext = useContext(ThemeContext);
+  const deviceContext = useContext(DeviceContext);
+
+  const handleToDesktopClick = () => {
+    setIsStartListOpen(false);
+    setIsLiveAppsOpen(false);
+    setToDesktopClicked(true);
+    setTimeout(() => setToDesktopClicked(false), 1000);
+  }
+
+  const ToDesktopIcon = useCallback((
+    lazy(() => import(`../../../../System/ThemeManager/${themeContext.ToDesktopIconPath}`).catch(
+      (_error) => {
+        console.error("Failed to import thematic toDesktop button icon");
+        return {
+          default: Icon
+        }
+      }))
+  ), [themeContext.ToDesktopIconPath]);
+
+
+  const LiveAppsIcon = useCallback((
+    lazy(() => import(`../../../../System/ThemeManager/${themeContext.LiveAppsMobileIconPath}`).catch(
+      (_error) => {
+        console.error("Failed to import thematic mobile Live Apps button icon");
+        return {
+          default: DefaultIcon
+        }
+      }))
+  ), [themeContext.LiveAppsMobileIconPath]);
 
   const Logo = useCallback((
     lazy(() => import(`../../../../System/ThemeManager/${themeContext.StartButtonPath}`).catch(
@@ -17,6 +52,22 @@ export const StartPreview = () => {
       }
     ))
   ), [themeContext.StartButtonPath]);
+
+  useEffect(() => {
+    let flag = false;
+    switch (themeContext.mode) {
+      case "Light":
+        flag = false;
+        break;
+      case "Dark":
+        flag = true;
+        break;
+      case "System":
+        flag = themeContext.systemDarkMode;
+    }
+    setIsDarkMode(flag);
+  }, [themeContext.mode, themeContext.systemDarkMode]);
+
   return (
     <>
       <div
@@ -39,22 +90,55 @@ export const StartPreview = () => {
         }}
       >
         <start-button
+          style={{ width: deviceContext.deviceType === "Desktop" ? "auto" : "100%" }}
         >
-          <button onClick={() => setOpen(!open)}>
+          <button
+            style={{ width: deviceContext.deviceType === "Desktop" ? "auto" : "100%" }}
+            onClick={() => { setIsStartListOpen(!isStartListOpen); setIsLiveAppsOpen(false); }}
+          >
             <Suspense fallback={<DefaultLogo />}>
-              <Logo isOpen={open} />
+              <Logo isOpen={isStartListOpen} />
             </Suspense>
-            <span>Start</span>
           </button>
+            <span>Start</span>
         </start-button>
         <vertical-rect />
-        <live-apps></live-apps>
+        {deviceContext.deviceType === "Desktop" ?
+          <live-apps></live-apps> :
+          <live-apps-button>
+            <button
+              onClick={() => { setIsLiveAppsOpen(!isLiveAppsOpen); setIsStartListOpen(false); }}
+              style={{ width: "100%" }}
+            >
+              <Suspense fallback={null}>
+                <LiveAppsIcon isActive={isLiveAppsOpen} darkMode={isDarkMode} />
+              </Suspense>
+            </button>
+            <span>Live</span>
+          </live-apps-button>
+        }
+        <vertical-rect />
+        <to-desktop-button
+          style={{
+            display: deviceContext.deviceType !== "Desktop" ? "flex" : "auto",
+            width: deviceContext.deviceType !== "Desktop" ? "100%" : "auto",
+          }}
+        >
+          <button
+            onClick={handleToDesktopClick}
+          >
+            <Suspense fallback={null}>
+              <ToDesktopIcon isActive={toDesktopClicked} />
+            </Suspense>
+          </button>
+            <span>Desktop</span>
+        </to-desktop-button>
       </div>
     </>
   );
 };
 
-export const Start = () => {
+export const MainButtons = () => {
 
   var root = document.querySelector(":root");
   const theme = useContext(ThemeContext);

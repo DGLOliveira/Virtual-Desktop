@@ -9,7 +9,6 @@ import Icon from "../../../../System/Taskbar/Components/ToDesktop/DefaultIcon.js
 import ColorPicker from "../../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
 import { FcGlobe } from "react-icons/fc";
-import { set } from "ol/transform.js";
 
 export const TaskBarPreview = () => {
   const themeContext = useContext(ThemeContext);
