@@ -99,8 +99,8 @@ export const MainButtonsPreview = () => {
             <Suspense fallback={<DefaultLogo />}>
               <Logo isOpen={isStartListOpen} />
             </Suspense>
-          </button>
             <span>Start</span>
+          </button>
         </start-button>
         <vertical-rect />
         {deviceContext.deviceType === "Desktop" ?
@@ -113,8 +113,8 @@ export const MainButtonsPreview = () => {
               <Suspense fallback={null}>
                 <LiveAppsIcon isActive={isLiveAppsOpen} darkMode={isDarkMode} />
               </Suspense>
-            </button>
             <span>Live</span>
+            </button>
           </live-apps-button>
         }
         <vertical-rect />
@@ -130,8 +130,8 @@ export const MainButtonsPreview = () => {
             <Suspense fallback={null}>
               <ToDesktopIcon isActive={toDesktopClicked} />
             </Suspense>
-          </button>
             <span>Desktop</span>
+          </button>
         </to-desktop-button>
       </div>
     </>

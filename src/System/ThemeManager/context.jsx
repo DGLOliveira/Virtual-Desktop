@@ -191,11 +191,11 @@ export function ThemeProvider({ children }) {
     useEffect(() => { switchFX("MobileTrayFull", mobileTrayBackgroundFX); }, [mobileTrayBackgroundFX]);
 
     useEffect(() => { setStartButtonPath(`Themes/${themeRegistry[startButtonTheme]["Components"]["StartButton"]}`);},[startButtonTheme]);
+    useEffect(() => { setLiveAppsMobileIconPath(`Themes/${themeRegistry[startButtonTheme]["Components"]["MobileLiveAppsIcon"]}`);},[startButtonTheme]);
+    useEffect(() => { setToDesktopIconPath(`Themes/${themeRegistry[startButtonTheme]["Components"]["ToDesktopIcon"]}`);},[startButtonTheme]);
     useEffect(() => { setLiveAppButtonPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["LiveAppButton"]}`);},[liveAppsTheme]);
     useEffect(() => { setTopBarButtonsPath(`Themes/${themeRegistry[topBarIconTheme]["Components"]["TopBarButtons"]}`);},[topBarIconTheme]);
     useEffect(() => { setDialogButtonPath(`Themes/${themeRegistry[dialogButtonTheme]["Components"]["DialogButton"]}`);},[dialogButtonTheme]);
-    useEffect(() => { setLiveAppsMobileIconPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["MobileLiveAppsIcon"]}`);},[liveAppsTheme]);
-    useEffect(() => { setToDesktopIconPath(`Themes/${themeRegistry[liveAppsTheme]["Components"]["ToDesktopIcon"]}`);},[liveAppsTheme]);
 
     const contextValue = {
         mode,
