@@ -1,14 +1,15 @@
-![start screen](docs/start_screen.jpg)
+<div align=center>
+<img src="https://github.com/user-attachments/assets/4335c8be-3670-414e-8377-22f638e700f5" />
+  
+A mock operating system on a webpage
 
 [Live Website](https://dgloliveira.github.io/Virtual-Desktop/)
+</div>
 
-<h1>Portfolio</h1>
-
-Welcome, this is my personal portfolio for showcasing some of my works and habilities, and doubles as a side project meant to grow with time in both features and functionality.
 
 # Summary
 
-This is a Front End React App based on the style and features present in a typical Operating System, in this case and for the moment, the Microsoft Windows 10. The major focus of this app is to replicate a GUI that embraces high user customization, and is capable of reliably showing other apps inside it withing either dynamic windows, or taskbar widgets, enhancing them with features such as top menu hooks, context menu hooks, dialog windows hooks, and awareness of user focus, keybind triggers and cursor actions that specifically impact it. 
+This is a Web App based on the style and features present in a typical Operating System. The major focus of this app is to replicate a GUI that embraces high user customization, and is capable of running other apps inside it within a dynamic window, as if a program on your computer or mobile. 
 
 # Featured
 
