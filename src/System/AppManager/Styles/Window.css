@@ -11,7 +11,6 @@ windows-container {
 app-window {
         display: flex;
         flex-direction: column;
-        overflow: hidden;
         border-style: var(--WindowBorderType);
         box-shadow: var(--WindowShadowXOffset) var(--WindowShadowYOffset) var(--WindowShadowBlur) var(--WindowShadowSpread) var(--WindowShadowColor);
         transition: 0.2s;
