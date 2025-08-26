@@ -9,26 +9,42 @@ A mock operating system on a webpage
 
 # Summary
 
-This is a Web App based on the style and features present in a typical Operating System. The major focus of this app is to replicate a GUI that embraces high user customization, and is capable of running other apps inside it within a dynamic window, as if a program on your computer or mobile. 
+This is a Web App based on the style and features present in a typical Operating System. The major focus of this app is to replicate a GUI that embraces high user customization, and is capable of running other apps inside it within a dynamic window, as if a program on your computer or mobile. Its design is heavily influenced by MS Windows and Android operating systems, and adapts itself depending on the device being used, with the possibility of manually changing it by pressing a button in the system tray, identifiable by a monitor or phone icon, or by opening the ⚙️Settings app.
+
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/Desktop_Mobile.png" width="24%"/>
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/Desktop_PC.png" width="73%"/>
+|
 
 # Featured
 
 ### Customization
 
-Within the Settings app, present in the Start Menu on the Taskbar, there is a wide array of styling options for the user to play around, ranging from changing the color, size and style of several application components, all the way to making round corners, dashed borders and blurry window shadows. 
+Within the Settings app, identifiable by the ⚙️(Gear) Icon present in the Start Menu on the Taskbar, or by sliding down the top bar on mobile, there is a wide array of prebuilt themes to select. 
 
-![Window personalization](docs/3d_background_personalization_window.jpg)
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/Mobile_Themes_Light.png" width="48%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/Mobile_Themes_Dark.png" width="48%" />
+|
 
-The most notable feature here is the background, while it is possible to keep it a simple plain color or upload an image to your liking, the unique feature is the animated 3D background, and the hability to personalize it, its possible to turn off or on features such as the stars or the water, change the color of the landscape by changing the color of the light, mess with the fog, and generate different skies, such as night or twilight. 
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/PC_Themes_Light.png" width="48%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/PC_Themes_Dark.png" width="48%" />
+|
 
-![3D Scenario Personalization](docs/3d_background_personalization_scenario.jpg)
+It is also possible to heavily stylize a prebuilt theme by changing a comprehensive list of CSS values and even mix buttons and icons from other themes. 
+
+![Window personalization](docs/Customized_UI.png)
+
+The most unique feature here is the background, while it is possible to keep it a simple plain color or upload an image to your liking, the unique feature is the animated 3D background, and the hability to personalize it, its possible to turn off or on features such as the stars or the water, change the color of the landscape by changing the color of the light, mess with the fog, and generate different skies, such as night or twilight. 
+
+![3D Scenario Personalization](docs/Customized_3DBackground.png)
+
+⚠️Warning: This feature makes use of 3D models and GPU calculations and may significantly slow down some devices, depending on the device capacity and browser used.
 
 Future plans: 
 <br/>-For the animated background, include presets daytime and weather systems, more landscapes, the moon, and eventually the hability of syncronize it with the Weather data from a provided location;
-<br/>-More Star button icons and animations
+<br/>-✅More Start button icons and animations
 <br/>-Customizable Cursor
 <br/>-OS sound effects
-<br/>-Other OS styles, such as Apple or Linux Ubuntu
+<br/>-✅Other OS styles, such as Apple or Linux Ubuntu
 
 # Widgets
 
@@ -74,14 +90,15 @@ This app is currently in development, as some of its features are currently not 
 A package of remade famous games, wrapped in a single app, with the hability to change keybinds. Currently includes Snake, Breakout, and Space Invaders. These are not faithfull remakes, and besides Snake, they include some twist or modification that make them slightly different than the original. For Breakout, it currently includes only 3 levels, and has no notable features. For Space Invaders, the graphics have been altered and the obstacles have been replaced with indestructible asteroids, and the game is finite, once all invaders are defeated, its over. 
 
 
-|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_snake.jpg" width="28%" />
-|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_breakout.jpg" width="28%" />
-|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/arcade_space_invaders.jpg" width="39%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/Arcade_Snake.png" width="32%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/Arcade_Breakout.png" width="32%" />
+|<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/Arcade_SpaceInvaders.png" width="32%" />
 |
 
 Future plans: 
 <br/>-Develop upon current game logic into a more fullfledge versions; 
-<br/>-Introduce splash screens, sound effects and soundtracks.
+<br/>-✅Introduce splash screens
+<br/>-Insert Sound effects and soundtracks.
 <br/>-Expand the rooster; 
 
 ### Calculator
@@ -95,7 +112,8 @@ The only notable mention here is not visible, but rather within the code itself,
 |
 
 Future plans:
-<br/>-Expand upon graphic mode, in order to track cursor position and calculate intersection points of multiple function.
+<br/>-✅Expand upon graphic mode, in order to track cursor position
+<br/>-Calculate intersection points of multiple functions.
 <br/>-Introduce a plotting mode, where it is possible to draw shapes by means of pure mathematical logic.
 <br/>-Introduce a 3D graphic mode, capable of rendering functions with 2 variables.
 
@@ -113,11 +131,11 @@ Currently, while the buttons are present for the apps within the menu bar, there
 <br/>-Preview window for minimized Apps.
 <br/>-Use of local storage, allowing user customizations to persist outside of current session.
 <br/>-Enhanced clipboard functionality, expanding user ability to copy and paste across apps to include data other than strings and numbers.
-<br/>-File system and File explorer.
+<br/>-⚠️File system and File explorer. (currently only a placeholder app is available)
 
 ### Near Future Apps:
 
-<br/>-Simple text editor, in the style of Notepad.
+<br/>-✅Simple text editor, in the style of Notepad.
 <br/>-Package of famous boardgames and card games, such as Mahjong and Solitaire.
 <br/>-Magnifying tool, essentially an on screen magnifying glass.
 <br/>-ASCII character map, faithfull to the MS Character map included in most versions of Windows.
