@@ -3,7 +3,6 @@ import CheckValue from "./CheckValue.js";
 
 export default function InputCalc(sign, displayState, setDisplayState, calculatorState) {
     let carry = 0;
-    console.log(displayState);
     if (sign === "C") {
       setDisplayState({
         ...displayState,

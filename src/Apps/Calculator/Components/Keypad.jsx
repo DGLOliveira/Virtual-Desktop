@@ -1,4 +1,4 @@
-export default function Keypad({ handleInput, calculatorState }) {
+export default function Keypad({ handleInput, calculatorState, setCalculatorState }) {
     return (
         <div
             id="calculatorKeyboard"

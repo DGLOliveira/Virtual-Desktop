@@ -111,6 +111,7 @@ export default function Calculator(props) {
       <Keypad
         handleInput={handleInput}
         calculatorState={calculatorState}
+        setCalculatorState={setCalculatorState}
       />
     </div>
   );
