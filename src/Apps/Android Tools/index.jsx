@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { GiSpinningTop } from "react-icons/gi";
-import { GiCompass } from "react-icons/gi";
+import Tool from "./Components/Tool.jsx";
+import ToolIcon from "./Components/ToolIcon.jsx";
 import handleTopMenu from "./Handlers/handleTopMenu.js";
 import handleAction from "./Handlers/handleAction.js";
-import Compass from "./Tools/Compass/index.jsx";
-import Gyroscope from "./Tools/Gyroscope/index.jsx";
-
+import "./style.css";
 
 export default function Android_Tools(props) {
     const action = props.action;
@@ -15,6 +13,8 @@ export default function Android_Tools(props) {
     const [tool, setTool] = useState("Home");
     const [subAction, setSubAction] = useState(false);
     const [subMenu, setSubMenu] = useState(null);
+
+    const TOOLS = ["Compass", "Gyroscope"];
 
     useEffect(() => {
         handleAction(action, setAction, tool, setTool, setSubMenu, setSubAction);
@@ -27,17 +27,20 @@ export default function Android_Tools(props) {
 
     return (
         <>
-            {tool === "Home" && (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" }}>
-                    <h1>Android Tools</h1>
+            {tool === "Home" ?
+                <div id="androidToolsMenu">
+                    {TOOLS.map((tool) => {
+                        return (
+                            <button key={tool} onClick={() => setTool(tool)}>
+                                <ToolIcon tool={tool} />
+                                {tool}
+                            </button>
+                        )
+                    })}
                 </div>
-            )}
-            {tool === "Compass" && (
-                <Compass action={subAction} setAction={setSubAction} appMenu={subMenu} setAppMenu={setSubMenu} />
-            )}
-            {tool === "Gyroscope" && (
-                <Gyroscope action={subAction} setAction={setSubAction} appMenu={subMenu} setAppMenu={setSubMenu} />
-            )}
+                :
+                <Tool tool={tool} action={subAction} setAction={setSubAction} appMenu={subMenu} setAppMenu={setSubMenu} />
+            }
         </>
 
     );
