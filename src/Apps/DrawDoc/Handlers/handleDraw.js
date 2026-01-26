@@ -220,13 +220,15 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         };
         //get color from pixel in buffer
         function getPixel(currX, currY) {
-            if (currX < 0 || currX < 0 || currX >= pixelData.width || currX >= pixelData.height) {
-                return -1;  // impossible color
+            if (currX < 0 || currY < 0 || currX >= pixelData.width || currY >= pixelData.height) {
+            console.log("pixelData.width", pixelData.width, "pixelData.height", pixelData.height);
+                return -1;  // out of bounds
             }
             return pixelData.data[currY * imageData.width + currX];
         };
-        //break addBucket if color is the same
+        //break addBucket if color is the same as target, or if it is out of bounds
         let targetColor = getPixel((x - boundary.left) * scaleX, (y - boundary.top) * scaleY);
+        if(targetColor === -1 || targetColor === selectedColor) return;
         //add line to check to spans
         const addSpan = (left, right, line, direction) => {
             spans.push({
@@ -264,6 +266,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         let whileBreak = 0;
         while (spans.length > 0 && whileBreak < 10000) {
             whileBreak++;
+            console.log(whileBreak)
             const { left, right, line, direction } = spans.pop();
             let l = left;
             for (; ;) {
