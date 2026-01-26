@@ -222,7 +222,6 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         //get color from pixel in buffer
         function getPixel(currX, currY) {
             if (currX < 0 || currY < 0 || currX >= pixelData.width || currY >= pixelData.height) {
-                console.log("currX", currX, "currY", currY, "pixelData.width", pixelData.width, "pixelData.height", pixelData.height);
                 return -1;  // out of bounds
             }
             return pixelData.data[currY * imageData.width + currX];

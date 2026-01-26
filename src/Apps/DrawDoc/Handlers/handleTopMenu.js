@@ -139,11 +139,11 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                     "File": {
                         ...updatedAppMenu["File"],
                         "Download": {
-                            ...updatedAppMenu["File"]["Save"],
+                            ...updatedAppMenu["File"]["Download"],
                             "disabled": !hasHistory
                         }/*,
                         "Download As": {
-                            ...updatedAppMenu["File"]["Save As"],
+                            ...updatedAppMenu["File"]["Download As"],
                             "disabled": !hasHistory
                         }*/
                     },
