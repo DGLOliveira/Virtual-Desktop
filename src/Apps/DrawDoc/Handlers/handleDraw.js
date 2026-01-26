@@ -84,6 +84,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     };
 
     const drawPipette = () => {
+        console.log("currX", (x - boundary.left) * scaleX, "currY", (y - boundary.top) * scaleY);
         let pixel = ctx.getImageData(
             (x - boundary.left) * scaleX,
             (y - boundary.top) * scaleY,
@@ -106,17 +107,17 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         if (delta === 0) {
             s = 0;
             h = 0;
-        }else {
+        } else {
             if (l <= 0.5) {
                 s = delta / (cmax + cmin);
             } else {
-                s = delta / (2 - cmax-cmin);
+                s = delta / (2 - cmax - cmin);
             };
             if (cmax === r) {
                 h = (g - b) / delta;
             } else if (cmax === g) {
                 h = ((b - r) / delta) + 2;
-            } else if(cmax === b) {
+            } else if (cmax === b) {
                 h = ((r - g) / delta) + 4;
             }
         }
@@ -125,7 +126,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             h += 360;
         }
         s = Math.abs(s * 100).toFixed(0);
-        l = (l * 100 ).toFixed(0);
+        l = (l * 100).toFixed(0);
         let color = "hsl(" + h + "," + s + "%," + l + "%)";
         //assign color
         if (param.tool === "Pipette") {
@@ -161,27 +162,27 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 start = i + 1;
             }
         }
-        h=hslaColor[0]/360;
-        s=hslaColor[1].slice(0, -1)/100;
-        l=hslaColor[2].slice(0, -1)/100;
-        if(s === 0) {
+        h = hslaColor[0] / 360;
+        s = hslaColor[1].slice(0, -1) / 100;
+        l = hslaColor[2].slice(0, -1) / 100;
+        if (s === 0) {
             r = l * 255;
             g = l * 255;
             b = l * 255;
-        }else{
+        } else {
             let temp1, temp2, tempR, tempG, tempB;
-            if(l < 0.5){
+            if (l < 0.5) {
                 temp1 = l * (1 + s);
-            }else{
+            } else {
                 temp1 = (l + s) - (l * s);
             }
             temp2 = 2 * l - temp1;
             function secondTest(value) {
-                if(value < 0){
+                if (value < 0) {
                     return value + 1;
-                }else if(value > 1){
+                } else if (value > 1) {
                     return value - 1;
-                }else{
+                } else {
                     return value;
                 }
             }
@@ -189,13 +190,13 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             tempG = secondTest(h);
             tempB = secondTest(h - 1 / 3);
             function finalTest(temp1, temp2, tempColor) {
-                if(6*tempColor < 1){
+                if (6 * tempColor < 1) {
                     return temp2 + (temp1 - temp2) * 6 * tempColor;
-                }else if(2*tempColor < 1){
+                } else if (2 * tempColor < 1) {
                     return temp1;
-                }else if(3*tempColor < 2){
+                } else if (3 * tempColor < 2) {
                     return temp2 + (temp1 - temp2) * (2 / 3 - tempColor) * 6;
-                }else{
+                } else {
                     return temp2;
                 }
             }
@@ -206,8 +207,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         function componentToHex(c) {
             var hex = Number(c).toString(16);
             return hex.length == 1 ? "0" + hex : hex;
-          }
-        let hexColor =  "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+        }
+        let hexColor = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
         let spans = [];
         let selectedColor = parseInt("FF" + hexColor.slice(5, 7) + hexColor.slice(3, 5) + hexColor.slice(1, 3), 16);
         //get copy of canvas and convert to a more performant format
@@ -221,14 +222,14 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         //get color from pixel in buffer
         function getPixel(currX, currY) {
             if (currX < 0 || currY < 0 || currX >= pixelData.width || currY >= pixelData.height) {
-            console.log("pixelData.width", pixelData.width, "pixelData.height", pixelData.height);
+                console.log("currX", currX, "currY", currY, "pixelData.width", pixelData.width, "pixelData.height", pixelData.height);
                 return -1;  // out of bounds
             }
             return pixelData.data[currY * imageData.width + currX];
         };
-        //break addBucket if color is the same as target, or if it is out of bounds
-        let targetColor = getPixel((x - boundary.left) * scaleX, (y - boundary.top) * scaleY);
-        if(targetColor === -1 || targetColor === selectedColor) return;
+        //break drawBucket if color is the same as target, or if it is out of bounds
+        let targetColor = getPixel(Math.floor((x - boundary.left) * scaleX), Math.floor((y - boundary.top) * scaleY));
+        if (targetColor === -1 || targetColor === selectedColor) return;
         //add line to check to spans
         const addSpan = (left, right, line, direction) => {
             spans.push({
@@ -243,6 +244,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             let flag = false;
             let start;
             let column;
+            if (line >= height || line < 0) return;
             for (column = left; column < right; ++column) {
                 const color = getPixel(column, line);
                 if (color === targetColor) {
@@ -262,31 +264,32 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 addSpan(start, right - 1, line, direction);
             }
         };
-        addSpan((x - boundary.left) * scaleX, (x - boundary.left) * scaleX, (y - boundary.top) * scaleY, 0);
-        let whileBreak = 0;
-        while (spans.length > 0 && whileBreak < 10000) {
-            whileBreak++;
-            console.log(whileBreak)
+        addSpan(Math.floor((x - boundary.left) * scaleX), Math.floor((x - boundary.left) * scaleX), Math.floor((y - boundary.top) * scaleY), 0);
+        let depth = 0;
+        let MAX_DEPTH = 5000;
+        while (spans.length > 0 && depth < MAX_DEPTH) {
+            depth++;
             const { left, right, line, direction } = spans.pop();
             let l = left;
-            for (; ;) {
-                l--;
-                const color = getPixel(l, line);
-                if (color !== targetColor) {
+            for (l; l >= 0; l--) {
+                if (getPixel(l, line) !== targetColor) {
                     break;
                 }
             }
             ++l;
             let r = right;
-            for (; ;) {
-                ++r;
-                const color = getPixel(r, line);
-                if (color !== targetColor) {
+            for (r; r < width; ++r) {
+                if (getPixel(r, line) !== targetColor) {
                     break;
                 }
             }
             const lineOffset = line * width;
-            pixelData.data.fill(selectedColor, lineOffset + l, lineOffset + r);
+            if (lineOffset + r > pixelData.data.length) {
+                console.log("Attempt to access pixel data array beyond its maximum length");
+                pixelData.data.fill(selectedColor, lineOffset + l, pixelData.data.length);
+            }else {
+                pixelData.data.fill(selectedColor, lineOffset + l, lineOffset + r);
+            }
             if (direction <= 0) {
                 checkSpan(l, r, line - 1, -1);
             } else {
@@ -300,6 +303,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 checkSpan(right, r, line + 1, +1);
             }
         }
+        if(depth >= MAX_DEPTH) console.error("Bucket Tool maximum iterations exceeded, consider using a smaller canvas.");
         ctx.putImageData(imageData, 0, 0);
     };
 
