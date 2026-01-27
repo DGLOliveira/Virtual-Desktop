@@ -17,18 +17,19 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "action": "Save",
                 "keybind": "Ctrl+Alt+S",
                 "disabled": true
-            }/*,
+            },
             "Download As": {
                 "action": "Save As",
                 "keybind": "Ctrl+Alt+Shift+S",
                 "disabled": true,
                 "title": "Not Implemented"
-            }*/,
+            },
             "Change Name": {
                 "action": "Change Name",
                 "keybind": "F2",
                 "disabled": false
             },
+            "LineBreak1":{},
             "Close": {
                 "action": "Close",
                 "keybind": "Alt+Shift+F4",
@@ -141,11 +142,11 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                         "Download": {
                             ...updatedAppMenu["File"]["Download"],
                             "disabled": !hasHistory
-                        }/*,
+                        },
                         "Download As": {
                             ...updatedAppMenu["File"]["Download As"],
                             "disabled": !hasHistory
-                        }*/
+                        }
                     },
                     "Edit": {
                         ...updatedAppMenu["Edit"],
