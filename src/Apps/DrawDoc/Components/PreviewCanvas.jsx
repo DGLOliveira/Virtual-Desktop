@@ -1,8 +1,9 @@
-import { useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { Context } from "../Context.jsx";
 import { handleDraw } from "../Handlers/handleDraw.js";
 
 export const PreviewCanvas = ({ setAction, contextMenu }) => {
+
     const context = useContext(Context);
     const canvasPreviewRef = useRef(null);
     const cursor = context.cursor;
@@ -37,28 +38,30 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
         clipboard,
         setClipboard,
     };
+
     const handleCursor = (e) => {
+        let boundary = canvasPreviewRef.current.getBoundingClientRect();
         if (e.button === 0) {
             switch (e.type) {
                 case "mousedown":
                     if (cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: e.clientX, y: e.clientY },
-                            end: { x: e.clientX, y: e.clientY },
+                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                            end: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
                         });
                     } else {
                         setCursor({
                             ...cursor,
                             down: true,
-                            start: { x: e.clientX, y: e.clientY }
+                            start: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
                         });
                     }
                     break;
                 case "mouseup":
                     setCursor({
                         ...cursor,
-                        end: { x: e.clientX, y: e.clientY },
+                        end: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
                         down: false
                     });
                     break;
@@ -66,21 +69,21 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                     if (!cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: e.clientX, y: e.clientY }
+                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top }
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
-                            current: { x: e.clientX, y: e.clientY },
-                            end: { x: e.clientX, y: e.clientY },
+                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                            end: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
                         })
                     }
                     break;
                 case "mouseleave":
                     setCursor({
                         ...cursor,
-                        current: { x: 0, y: 0 }
+                        current: { x: 0, y: 0, boundX: boundary.left, boundY: boundary.top },
                     });
                     break;
                 case "mouseenter":
@@ -88,15 +91,15 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                         setCursor({
                             ...cursor,
                             down: true,
-                            current: { x: e.clientX, y: e.clientY },
-                            end: { x: e.clientX, y: e.clientY },
+                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                            end: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
                             down: false,
-                            current: { x: e.clientX, y: e.clientY },
+                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
                         })
                     }
                     break;
@@ -108,27 +111,28 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
 
     const handleTouch = (e) => {
         e.preventDefault();
+        let boundary = canvasPreviewRef.current.getBoundingClientRect();
         if (e.touches.length === 1) {
             switch (e.type) {
                 case "touchstart":
                     if (cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY },
-                            end: { x: e.touches[0].clientX, y: e.touches[0].clientY },
+                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
+                            end: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
                         });
                     } else {
                         setCursor({
                             ...cursor,
                             down: true,
-                            start: { x: e.touches[0].clientX, y: e.touches[0].clientY }
+                            start: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top }
                         });
                     }
                     break;
                 case "touchend":
                     setCursor({
                         ...cursor,
-                        end: { x: e.touches[0].clientX, y: e.touches[0].clientY },
+                        end: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
                         down: false
                     });
                     break;
@@ -136,25 +140,25 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                     if (!cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY }
+                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top }
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
-                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY },
-                            end: { x: e.touches[0].clientX, y: e.touches[0].clientY },
+                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
+                            end: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
                         })
                     }
                     break;
                 default:
                     break;
             };
-        }else{
+        } else {
             setCursor({
                 ...cursor,
-                current: { x: 0, y: 0 },
-                end: { x: cursor.current.x, y: cursor.current.y },
+                current: { x: 0, y: 0, boundX: boundary.left, boundY: boundary.top },
+                end: { x: cursor.current.x, y: cursor.current.y, boundX: boundary.left, boundY: boundary.top },
                 down: false
             });
         }

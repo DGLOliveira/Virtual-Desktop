@@ -15,10 +15,16 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     const scaleY = height / boundary.height;
     const x = cursor.current.x;
     const y = cursor.current.y;
+    const boundX = cursor.current.boundX;
+    const boundY = cursor.current.boundY;
     const startX = cursor.start.x;
     const startY = cursor.start.y;
+    const startBoundX = cursor.start.boundX;
+    const startBoundY = cursor.start.boundY;
     const endX = cursor.end.x;
     const endY = cursor.end.y;
+    const endBoundX = cursor.end.boundX;
+    const endBoundY = cursor.end.boundY;
 
     const drawBrush = () => {
         ctx.fillStyle = param.selectedColor;
@@ -27,8 +33,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.setLineDash([]);
         ctx.beginPath();
         ctx.arc(
-            (x - boundary.left) * scaleX,
-            (y - boundary.top) * scaleY,
+            (x - boundX) * scaleX,
+            (y - boundY) * scaleY,
             param.size,
             0,
             Math.PI * 2,
@@ -45,8 +51,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.setLineDash([]);
         ctx.beginPath();
         ctx.arc(
-            (x - boundary.left) * scaleX,
-            (y - boundary.top) * scaleY,
+            (x - boundX) * scaleX,
+            (y - boundY) * scaleY,
             param.size,
             0,
             Math.PI * 2,
@@ -76,8 +82,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         }
         ctx.fillStyle = param.selectedColor;
         ctx.fillRect(
-            (x - boundary.left) * scaleX + randomX,
-            (y - boundary.top) * scaleY + randomY,
+            (x - boundX) * scaleX + randomX,
+            (y - boundY) * scaleY + randomY,
             1,
             1,
         );
@@ -85,8 +91,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
 
     const drawPipette = () => {
         let pixel = ctx.getImageData(
-            (x - boundary.left) * scaleX,
-            (y - boundary.top) * scaleY,
+            (x - boundX) * scaleX,
+            (y - boundY) * scaleY,
             1,
             1,
         );
@@ -226,7 +232,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             return pixelData.data[currY * imageData.width + currX];
         };
         //break drawBucket if color is the same as target, or if it is out of bounds
-        let targetColor = getPixel(Math.floor((x - boundary.left) * scaleX), Math.floor((y - boundary.top) * scaleY));
+        let targetColor = getPixel(Math.floor((x - boundX) * scaleX), Math.floor((y - boundY) * scaleY));
         if (targetColor === -1 || targetColor === selectedColor) return;
         //add line to check to spans
         const addSpan = (left, right, line, direction) => {
@@ -262,7 +268,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 addSpan(start, right - 1, line, direction);
             }
         };
-        addSpan(Math.floor((x - boundary.left) * scaleX), Math.floor((x - boundary.left) * scaleX), Math.floor((y - boundary.top) * scaleY), 0);
+        addSpan(Math.floor((x - boundX) * scaleX), Math.floor((x - boundX) * scaleX), Math.floor((y - boundY) * scaleY), 0);
         let depth = 0;
         let MAX_DEPTH = 5000;
         while (spans.length > 0 && depth < MAX_DEPTH) {
@@ -310,8 +316,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.font = String(param.size + "px " + param.text.fontFamily);
         ctx.fillText(
             param.text.text,
-            (endX - boundary.left) * scaleX,
-            (endY - boundary.top) * scaleY,
+            (endX - endBoundX) * scaleX,
+            (endY - endBoundY) * scaleY,
         );
     };
 
@@ -320,8 +326,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             case "copy":
                 if (!preview && endX - startX !== 0 && endY - startY !== 0) {
                     let data = ctx.getImageData(
-                        (startX - boundary.left) * scaleX,
-                        (startY - boundary.top) * scaleY,
+                        (startX - startBoundX) * scaleX,
+                        (startY - startBoundY) * scaleY,
                         (endX - startX) * scaleX,
                         (endY - startY) * scaleY
                     );
@@ -334,8 +340,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             case "cut":
                 if (!preview && endX - startX !== 0 && endY - startY !== 0) {
                     let data = ctx.getImageData(
-                        (startX - boundary.left) * scaleX,
-                        (startY - boundary.top) * scaleY,
+                        (startX - startBoundX) * scaleX,
+                        (startY - startBoundY) * scaleY,
                         (endX - startX) * scaleX,
                         (endY - startY) * scaleY
                     );
@@ -349,8 +355,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                         ctx.fillStyle = param.color1;
                     }
                     ctx.fillRect(
-                        (startX - boundary.left) * scaleX,
-                        (startY - boundary.top) * scaleY,
+                        (startX - startBoundX) * scaleX,
+                        (startY - startBoundY) * scaleY,
                         (endX - startX) * scaleX,
                         (endY - startY) * scaleY,
                     );
@@ -363,24 +369,24 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 if (cursor.down) {
                     ctx.putImageData(
                         param.clipboard.data,
-                        (x - boundary.left) * scaleX,
-                        (y - boundary.top) * scaleY
+                        (x - boundX) * scaleX,
+                        (y - boundY) * scaleY
                     );
                     ctx.strokeRect(
-                        (x - boundary.left) * scaleX,
-                        (y - boundary.top) * scaleY,
+                        (x - boundX) * scaleX,
+                        (y - boundY) * scaleY,
                         param.clipboard.data.width,
                         param.clipboard.data.height,
                     );
                 } else {
                     ctx.putImageData(
                         param.clipboard.data,
-                        (endX - boundary.left) * scaleX,
-                        (endY - boundary.top) * scaleY
+                        (endX - endBoundX) * scaleX,
+                        (endY - endBoundY) * scaleY
                     );
                     ctx.strokeRect(
-                        (endX - boundary.left) * scaleX,
-                        (endY - boundary.top) * scaleY,
+                        (endX - endBoundX) * scaleX,
+                        (endY - endBoundY) * scaleY,
                         param.clipboard.data.width,
                         param.clipboard.data.height,
                     );
@@ -390,8 +396,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 if (!preview) {
                     ctx.putImageData(
                         param.clipboard.data,
-                        (endX - boundary.left) * scaleX,
-                        (endY - boundary.top) * scaleY
+                        (endX - endBoundX) * scaleX,
+                        (endY - endBoundY) * scaleY
                     );
                     param.setClipboard({
                         ...param.clipboard,
@@ -405,8 +411,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 ctx.lineWidth = 1;
                 ctx.setLineDash([5]);
                 ctx.strokeRect(
-                    (startX - boundary.left) * scaleX,
-                    (startY - boundary.top) * scaleY,
+                    (startX - startBoundX) * scaleX,
+                    (startY - startBoundY) * scaleY,
                     (endX - startX) * scaleX,
                     (endY - startY) * scaleY,
                 );
@@ -419,8 +425,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.lineWidth = 1;
         ctx.setLineDash([5]);
         ctx.strokeRect(
-            (startX - boundary.left) * scaleX,
-            (startY - boundary.top) * scaleY,
+            (startX - startBoundX) * scaleX,
+            (startY - startBoundY) * scaleY,
             (endX - startX) * scaleX,
             (endY - startY) * scaleY,
         );
@@ -432,8 +438,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.setLineDash([5]);
         ctx.beginPath();
         ctx.arc(
-            (startX + centerX - boundary.left) * scaleX,
-            (startY + centerY - boundary.top) * scaleY,
+            (startX + centerX - startBoundX) * scaleX,
+            (startY + centerY - startBoundY) * scaleY,
             radius * scaleX,
             0,
             Math.PI * 2,
@@ -448,8 +454,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.setLineDash([5]);
         ctx.beginPath();
         ctx.ellipse(
-            (startX + centerX - boundary.left) * scaleX,
-            (startY + centerY - boundary.top) * scaleY,
+            (startX + centerX - startBoundX) * scaleX,
+            (startY + centerY - startBoundY) * scaleY,
             stretchX * radius * scaleX,
             stretchY * radius * scaleY,
             Math.PI / 180 * param.subTool.angle,
@@ -487,7 +493,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         }
         if (param.subTool.shape !== "Curve" && param.subTool.shape !== "Line") {
             ctx.save();
-            ctx.translate((startX + centerX - boundary.left) * scaleX, (startY + centerY - boundary.top) * scaleY);
+            ctx.translate((startX + centerX - startBoundX) * scaleX, (startY + centerY - startBoundY) * scaleY);
             ctx.rotate((Math.PI * param.subTool.angle) / 180);
         }
         if (param.subTool.shape === "Rectangle") {
@@ -511,12 +517,12 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     const drawLine = () => {
         ctx.beginPath();
         ctx.moveTo(
-            (startX - boundary.left) * scaleX,
-            (startY - boundary.top) * scaleY,
+            (startX - startBoundX) * scaleX,
+            (startY - startBoundY) * scaleY,
         )
         ctx.lineTo(
-            (endX - boundary.left) * scaleX,
-            (endY - boundary.top) * scaleY,
+            (endX - endBoundX) * scaleX,
+            (endY - endBoundY) * scaleY,
         )
         ctx.stroke();
     }
@@ -549,16 +555,16 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             controlPoint2 = param.curveControls.controlPoint2;
         }
         ctx.moveTo(
-            (startPoint.x - boundary.left) * scaleX,
-            (startPoint.y - boundary.top) * scaleY,
+            (startPoint.x - startBoundX) * scaleX,
+            (startPoint.y - startBoundY) * scaleY,
         )
         ctx.bezierCurveTo(
-            (controlPoint1.x - boundary.left) * scaleX,
-            (controlPoint1.y - boundary.top) * scaleY,
-            (controlPoint2.x - boundary.left) * scaleX,
-            (controlPoint2.y - boundary.top) * scaleY,
-            (endPoint.x - boundary.left) * scaleX,
-            (endPoint.y - boundary.top) * scaleY,
+            (controlPoint1.x - startBoundX) * scaleX,
+            (controlPoint1.y - startBoundY) * scaleY,
+            (controlPoint2.x - endBoundX) * scaleX,
+            (controlPoint2.y - endBoundY) * scaleY,
+            (endPoint.x - endBoundX) * scaleX,
+            (endPoint.y - endBoundY) * scaleY,
         )
         ctx.stroke();
     }
