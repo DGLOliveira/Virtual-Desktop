@@ -85,21 +85,16 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
             <option value={3}>300%</option>
             <option value={4}>400%</option>
           </select>}
-        {context.tool !== "Select" && context.tool !== "Pipette" && context.tool !== "Magnifier" &&
-          <select
+        {context.tool !== "Select" && context.tool !== "Pipette" && context.tool !== "Magnifier" && context.tool !== "Bucket" &&
+          <input
+            type="number"
+            min="1"
+            max="100"
             value={context.size}
-            onChange={(e) => {
-              context.setSize(e.target.value);
-            }}
+            onChange={(e) => context.setSize(e.target.value)}
             title={context.tool === "Text" ? "Font Size" : context.tool === "Shape" ? "Line Width" : "Radius"}
-          >
-            <option value={1}>1px</option>
-            <option value={2}>2px</option>
-            <option value={4}>4px</option>
-            <option value={8}>8px</option>
-            <option value={16}>16px</option>
-            <option value={32}>32px</option>
-          </select>}
+          />
+        }
         {context.tool === "Text" &&
           <select
             title="Font Family"
