@@ -84,7 +84,6 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     };
 
     const drawPipette = () => {
-        console.log("currX", (x - boundary.left) * scaleX, "currY", (y - boundary.top) * scaleY);
         let pixel = ctx.getImageData(
             (x - boundary.left) * scaleX,
             (y - boundary.top) * scaleY,

@@ -43,8 +43,8 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
     handleAction(canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle );
   }, [context.cursor, action]);
   useEffect(() => {
-    let offsetX = (context.dimention.width / 2 - context.zoom * context.dimention.width / 2) * -1 / context.zoom;
-    let offsetY = (context.dimention.height / 2 - context.zoom * context.dimention.height / 2) * -1 / context.zoom;
+    let offsetX = (context.dimentions.width / 2 - context.zoom * context.dimentions.width / 2) * -1 / context.zoom;
+    let offsetY = (context.dimentions.height / 2 - context.zoom * context.dimentions.height / 2) * -1 / context.zoom;
     document.getElementById("previewCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("drawCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
 
@@ -54,7 +54,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
     <canvas
       ref={canvasMainRef}
       id="drawCanvas"
-      height={context.dimention.height} width={context.dimention.width}
+      height={context.dimentions.height} width={context.dimentions.width}
     />
   );
 };

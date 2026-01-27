@@ -5,8 +5,10 @@ export const Context = createContext({
     setName: ()=>{},
     history: {},
     setHistory: () => { },
-    dimention:{},
-    setDimention: () => { },
+    dimentions:{},
+    setDimentions: () => { },
+    tempDimentions:{},
+    setTempDimentions: () => { },
     tool: "",
     setTool: () => { },
     subTool: {},
@@ -39,6 +41,7 @@ export function ContextProvider({ children }) {
       });
     
       const [dimentions, setDimentions] = useState({ width: 350, height: 350, });
+      const [tempDimentions, setTempDimentions] = useState({ width: 350, height: 350, });
       const [tool, setTool] = useState("Brush");
       const [subTool, setSubTool] = useState({
         shape: "Circle",
@@ -93,8 +96,10 @@ export function ContextProvider({ children }) {
         setName: setName,
         history: history,
         setHistory: setHistory,
-        dimention: dimentions,
-        setDimention: setDimentions,
+        dimentions: dimentions,
+        setDimentions: setDimentions,
+        tempDimentions: tempDimentions,
+        setTempDimentions: setTempDimentions,
         tool: tool,
         setTool: setTool,
         subTool: subTool,

@@ -184,8 +184,8 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             style={{ color: params.selectedColor }}
             className={("cursor" + params.tool)}
             id="previewCanvas"
-            height={context.dimention.height}
-            width={context.dimention.width}
+            height={context.dimentions.height}
+            width={context.dimentions.width}
             onMouseDown={(e) => handleCursor(e)}
             onMouseUp={(e) => handleCursor(e)}
             onMouseMove={(e) => handleCursor(e)}

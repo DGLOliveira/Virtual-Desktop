@@ -1,37 +1,41 @@
 export const dialogNew = (context, setAction, setAppDialog) => {
 
+
+    context.setTempDimentions({ width: context.dimentions.width, height: context.dimentions.height });
+
     let title = "New File";
 
     const info = <>
         <label htmlFor="New title">Name</label>
-        <br/>
+        <br />
         <input
             id="New title"
             type="text"
             value={context.name}
-            onChange={(e) => {context.setName(e.target.value);setAction("New") }} />
+            onChange={(e) => { context.setName(e.target.value); setAction("New") }} />
         <br />
         <label htmlFor="Width">Width</label>
-        <br/>
+        <br />
         <input
             id="Width"
             type="number"
-            value={context.dimention.width}
-            onChange={(e) => {context.setDimention({ ...context.dimention, width: e.target.value });setAction("New")}} />
+            value={context.tempDimentions.width}
+            onChange={(e) => { context.setTempDimentions({ ...context.tempDimentions, width: e.target.value }); setAction("New") }} />
         <br />
         <label htmlFor="Height">Height</label>
-        <br/>
+        <br />
         <input
             id="Height"
             type="number"
-            value={context.dimention.height}
-            onChange={(e) => {context.setDimention({ ...context.dimention, height: e.target.value });setAction("New")}} />
+            value={context.tempDimentions.height}
+            onChange={(e) => { context.setTempDimentions({ ...context.tempDimentions, height: e.target.value }); setAction("New") }} />
         <br />
     </>;
 
-    
+
     const actions = {
         Confirm: () => {
+            context.setDimentions({...context.tempDimentions});
             setAction("New Confirm");
             setAppDialog(null);
         },
@@ -40,6 +44,6 @@ export const dialogNew = (context, setAction, setAppDialog) => {
             setAction(false);
         }
     }
-    
+
     setAppDialog({ title: title, info: info, actions: actions });
 }
