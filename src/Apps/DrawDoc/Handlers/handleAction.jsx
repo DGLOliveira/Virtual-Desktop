@@ -6,8 +6,9 @@ import { handleTopMenu } from "./handleTopMenu.js";
 import { dialogNew } from "../Dialog/new.jsx";
 import { dialogChangeName } from "../Dialog/changeName.jsx";
 import { dialogSaveAs } from "../Dialog/saveAs.jsx";
+import { dialogCloseApp } from "../Dialog/closeApp.jsx";
 
-export const handleAction = (canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canCLose, setCanClose, title, setTitle) => {
+export const handleAction = (canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle) => {
   let args = {};
   switch (action) {
     case "Startup":
@@ -185,27 +186,14 @@ export const handleAction = (canvas, ctx, params, action, setAction, context, ap
       setAction(false);
       break;*/
     case "Close":
-      if (!canCLose) {
-        setAppDialog({
-          title: "Warning",
-          info: "Do you want to download the file before closing?",
-          actions: {
-            Save: () => {
-              handleFile(ctx, context.name, "save");
-              setCanClose(true);
-              setAppDialog(null);
-            },
-            Close: () => {
-              setCanClose(true);
-              setAppDialog(null);
-            },
-            Cancel: () => {
-              setAppDialog(null);
-              setAction(false);
-            }
-          }
-        });
+      if (!canClose) {
+        dialogCloseApp(setCanClose, setAction, setAppDialog);
       }
+      break;
+    case "Save and Close":
+      handleFile(ctx, context.name, "save");
+      setCanClose(true);
+      setAction("Close");
       break;
     default:
       setAction(false);
