@@ -16,7 +16,7 @@ export const handleTools = (canvas, cursor, setCursor, params, action, setAction
       for (let i = 0; i < 10; i++) {
         handleDraw(canvas, cursor, params, false);
       }
-      setAction("drawing");
+      setAction("spraying");
       break;
     case "Text":
       if (

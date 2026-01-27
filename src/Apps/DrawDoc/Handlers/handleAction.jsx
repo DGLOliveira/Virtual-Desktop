@@ -130,13 +130,23 @@ export const handleAction = (canvas, ctx, params, action, setAction, context, ap
         setAction("finished");
       }
       break;
+    case "spraying":
+      if (context.cursor.down) {
+        //Allows for a continuous spray without moving the mouse
+        setTimeout(() => {
+          setAction("drawing")
+        }, 100);
+      } else {
+        setAction("finished");
+      }
+      break;
     case "settingPoints":
-      if(context.cursor.down) {
+      if (context.cursor.down) {
         handleTools(canvas, context.cursor, context.setCursor, params, action, setAction);
-      } else{
+      } else {
         setAction(false);
       }
-    break;
+      break;
     case "cancel":
     case "clipping":
     case "confirm":
@@ -172,11 +182,11 @@ export const handleAction = (canvas, ctx, params, action, setAction, context, ap
       setAction(false);
       break;*/
     case "Close":
-      if(!canCLose){
+      if (!canCLose) {
         setAppDialog({
           title: "Warning",
           info: "Do you want to download the file before closing?",
-          actions:{
+          actions: {
             Save: () => {
               handleFile(ctx, context.name, "save");
               setCanClose(true);
