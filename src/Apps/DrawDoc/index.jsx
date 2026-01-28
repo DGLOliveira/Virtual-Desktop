@@ -5,6 +5,7 @@ import Provider from "./Context.jsx";
 import { Context } from "./Context.jsx";
 import { DrawCanvas } from "./Components/DrawCanvas.jsx";
 import { PreviewCanvas } from "./Components/PreviewCanvas.jsx";
+import SelectionCanvas from "./Components/SelectionCanvas.jsx";
 import { TopNavBar } from "./Components/TopNavBar.jsx";
 import { ToolBar } from "./Components/ToolBar.jsx";
 import { BottomNavBar } from "./Components/BottomNavBar.jsx";
@@ -64,6 +65,7 @@ export default function DrawDoc(props) {
               setAction={setAction}
               contextMenu={contextMenu}
             />
+            <SelectionCanvas/>
           </canvas-container>
         </div>
         <BottomNavBar

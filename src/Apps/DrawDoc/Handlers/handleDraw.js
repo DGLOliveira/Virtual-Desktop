@@ -355,32 +355,17 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 }
                 break;
             case "carry":
-                ctx.strokeStyle = param.selectedColor;
-                ctx.lineWidth = 1;
-                ctx.setLineDash([5]);
                 if (cursor.down) {
                     ctx.putImageData(
                         param.clipboard.data,
                         x,
                         y
                     );
-                    ctx.strokeRect(
-                        x,
-                        y,
-                        param.clipboard.data.width,
-                        param.clipboard.data.height,
-                    );
                 } else {
                     ctx.putImageData(
                         param.clipboard.data,
                         endX,
                         endY
-                    );
-                    ctx.strokeRect(
-                        endX,
-                        endY,
-                        param.clipboard.data.width,
-                        param.clipboard.data.height,
                     );
                 }
                 break;
@@ -399,64 +384,9 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 break;
             case "none":
             default:
-                ctx.strokeStyle = param.selectedColor;
-                ctx.lineWidth = 1;
-                ctx.setLineDash([5]);
-                ctx.strokeRect(
-                    startX,
-                    startY,
-                    endX - startX,
-                    endY - startY
-                );
                 break;
         }
     };
-
-    const drawRectangleSelection = () => {
-        ctx.strokeStyle = param.selectedColor;
-        ctx.lineWidth = 1;
-        ctx.setLineDash([5]);
-        ctx.strokeRect(
-            startX,
-            startY,
-            endX - startX,
-            endY - startY
-        );
-    }
-
-    const drawCircleSelection = (centerX, centerY, radius) => {
-        ctx.strokeStyle = param.selectedColor;
-        ctx.lineWidth = 1;
-        ctx.setLineDash([5]);
-        ctx.beginPath();
-        ctx.arc(
-            startX + centerX,
-            startY + centerY,
-            radius,
-            0,
-            Math.PI * 2,
-        );
-        ctx.stroke();
-        ctx.closePath();
-    }
-
-    const drawEllipseSelection = (centerX, centerY, stretchX, stretchY, radius) => {
-        ctx.strokeStyle = param.selectedColor;
-        ctx.lineWidth = 1;
-        ctx.setLineDash([5]);
-        ctx.beginPath();
-        ctx.ellipse(
-            startX + centerX,
-            startY + centerY,
-            stretchX * radius,
-            stretchY * radius,
-            Math.PI / 180 * param.subTool.angle,
-            0,
-            Math.PI * 2,
-        );
-        ctx.stroke();
-        ctx.closePath();
-    }
 
     const drawShape = () => {
         ctx.strokeStyle = param.color1;
@@ -496,13 +426,6 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         if (param.subTool.shape !== "Line" &&
             param.subTool.shape !== "Curve") {
             ctx.restore();
-            if (preview) {
-                drawRectangleSelection();
-                drawCircleSelection(centerX, centerY, radius);
-                if (param.subTool.stretch) {
-                    drawEllipseSelection(centerX, centerY, stretchX, stretchY, radius);
-                }
-            }
         }
     }
 
