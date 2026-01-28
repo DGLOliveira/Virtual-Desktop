@@ -68,56 +68,57 @@ canvas-container {
   position:absolute;
   height:10px;
   width:10px;
-  background: white;
-  border: 2px solid black;
+  background: black;
+  border: 2px solid white;
+  box-sizing: border-box;
 }
 #drawDocSelectionBoxNW{
-  top: -10px;
-  left: -10px;
+  top: -12px;
+  left: -12px;
   cursor: nwse-resize;
 }
 #drawDocSelectionBoxN{
-  top: -10px;
+  top: -12px;
   left: 50%;
   cursor: ns-resize;
   transform: translateX(-50%);
 }
 #drawDocSelectionBoxNE{
-  top: -10px;
-  right: -10px;
+  top: -12px;
+  right: -12px;
   cursor: nesw-resize;
 }
 #drawDocSelectionBoxE{
   top: 50%;
-  right: -10px;
+  right: -12px;
   cursor: ew-resize;
   transform: translateY(-50%);
 }
 #drawDocSelectionBoxSE{
-  bottom: -10px;
-  right: -10px;
+  bottom: -12px;
+  right: -12px;
   cursor: nwse-resize;
 }
 #drawDocSelectionBoxS{
-  bottom: -10px;
+  bottom: -12px;
   left: 50%;
   cursor: ns-resize;
   transform: translateX(-50%);
 }
 #drawDocSelectionBoxSW{
-  bottom: -10px;
-  left: -10px;
+  bottom: -12px;
+  left: -12px;
   cursor: nesw-resize;
 }
 #drawDocSelectionBoxW{
   top: 50%;
-  left: -10px;
+  left: -12px;
   cursor: ew-resize;
   transform: translateY(-50%);
 }
 #drawDocSelectionBoxNW{
-  top: -10px;
-  left: -10px;
+  top: -12px;
+  left: -12px;
   cursor: nwse-resize;
 }
 #drawDocSelectionCircle{
