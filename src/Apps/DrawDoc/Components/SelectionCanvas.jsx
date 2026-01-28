@@ -76,14 +76,14 @@ export default function SelectionCanvas() {
         // calculate difference between cursor and selectionBox
         let newStartX = cursor.start.x, newStartY = cursor.start.y, newEndX = cursor.end.x, newEndY = cursor.end.y;
         if (direction.indexOf("N") !== -1) {
-            invertY ? newEndY = cursorPos[1] + resizeDelta[1] : newStartY = cursorPos[1] + resizeDelta[1]
+            invertY ? newEndY = cursorPos[1] - resizeDelta[1] : newStartY = cursorPos[1] - resizeDelta[1]
         } else if (direction.indexOf("S") !== -1) {
             invertY ? newStartY = cursorPos[1] - resizeDelta[1] : newEndY = cursorPos[1] - resizeDelta[1]
         }
         if (direction.indexOf("E") !== -1) {
-            invertX ? newEndX = cursorPos[0] + resizeDelta[0] : newStartX = cursorPos[0] + resizeDelta[0]
-        } else if (direction.indexOf("W") !== -1) {
             invertX ? newStartX = cursorPos[0] - resizeDelta[0] : newEndX = cursorPos[0] - resizeDelta[0]
+        } else if (direction.indexOf("W") !== -1) {
+            invertX ? newEndX = cursorPos[0] - resizeDelta[0] : newStartX = cursorPos[0] - resizeDelta[0]
         }
         setCursor({ ...cursor, start: { x: newStartX, y: newStartY }, end: { x: newEndX, y: newEndY } })
 
