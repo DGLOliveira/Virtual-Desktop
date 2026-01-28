@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context.jsx";
 import { handleDraw } from "../Handlers/handleDraw.js";
 
@@ -40,28 +40,36 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
     };
 
     const handleCursor = (e) => {
-        let boundary = canvasPreviewRef.current.getBoundingClientRect();
+        let canvas = canvasPreviewRef.current;
+        let ctx = canvas.getContext('2d', { alpha: true });
+        let boundary = canvas.getBoundingClientRect();
+        const height = ctx.canvas.height;
+        const width = ctx.canvas.width;
+        const scaleX = width / boundary.width;
+        const scaleY = height / boundary.height;
+        const trueX = (e.clientX - boundary.left) * scaleX;
+        const trueY = (e.clientY - boundary.top) * scaleY;
         if (e.button === 0) {
             switch (e.type) {
                 case "mousedown":
                     if (cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
-                            end: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                            current: { x: trueX, y: trueY },
+                            end: { x: trueX, y: trueY },
                         });
                     } else {
                         setCursor({
                             ...cursor,
                             down: true,
-                            start: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                            start: { x: trueX, y: trueY },
                         });
                     }
                     break;
                 case "mouseup":
                     setCursor({
                         ...cursor,
-                        end: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                        end: { x: trueX, y: trueY },
                         down: false
                     });
                     break;
@@ -69,21 +77,21 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                     if (!cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top }
+                            current: { x: trueX, y: trueY }
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
-                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
-                            end: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                            current: { x: trueX, y: trueY },
+                            end: { x: trueX, y: trueY },
                         })
                     }
                     break;
                 case "mouseleave":
                     setCursor({
                         ...cursor,
-                        current: { x: 0, y: 0, boundX: boundary.left, boundY: boundary.top },
+                        current: { x: trueX, y: trueY },
                     });
                     break;
                 case "mouseenter":
@@ -91,15 +99,15 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                         setCursor({
                             ...cursor,
                             down: true,
-                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
-                            end: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                            current: { x: trueX, y: trueY },
+                            end: { x: trueX, y: trueY },
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
                             down: false,
-                            current: { x: e.clientX, y: e.clientY, boundX: boundary.left, boundY: boundary.top },
+                            current: { x: trueX, y: trueY },
                         })
                     }
                     break;
@@ -111,28 +119,36 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
 
     const handleTouch = (e) => {
         e.preventDefault();
-        let boundary = canvasPreviewRef.current.getBoundingClientRect();
+        let canvas = canvasPreviewRef.current;
+        let ctx = canvas.getContext('2d', { alpha: true });
+        let boundary = canvas.getBoundingClientRect();
+        const height = ctx.canvas.height;
+        const width = ctx.canvas.width;
+        const scaleX = width / boundary.width;
+        const scaleY = height / boundary.height;
+        const trueX = (e.touches[0].clientX - boundary.left) * scaleX;
+        const trueY = (e.touches[0].clientY - boundary.top) * scaleY;
         if (e.touches.length === 1) {
             switch (e.type) {
                 case "touchstart":
                     if (cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
-                            end: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
+                            current: { x: trueX, y: trueY },
+                            end: { x: trueX, y: trueY },
                         });
                     } else {
                         setCursor({
                             ...cursor,
                             down: true,
-                            start: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top }
+                            start: { x: trueX, y: trueY }
                         });
                     }
                     break;
                 case "touchend":
                     setCursor({
                         ...cursor,
-                        end: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
+                        end: { x: trueX, y: trueY },
                         down: false
                     });
                     break;
@@ -140,14 +156,14 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                     if (!cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top }
+                            current: { x: trueX, y: trueY }
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
-                            current: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
-                            end: { x: e.touches[0].clientX, y: e.touches[0].clientY, boundX: boundary.left, boundY: boundary.top },
+                            current: { x: trueX, y: trueY },
+                            end: { x: trueX, y: trueY },
                         })
                     }
                     break;
@@ -157,8 +173,8 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
         } else {
             setCursor({
                 ...cursor,
-                current: { x: 0, y: 0, boundX: boundary.left, boundY: boundary.top },
-                end: { x: cursor.current.x, y: cursor.current.y, boundX: boundary.left, boundY: boundary.top },
+                current: { x: 0, y: 0 },
+                end: { x: trueX, y: trueY },
                 down: false
             });
         }

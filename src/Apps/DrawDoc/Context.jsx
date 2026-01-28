@@ -79,9 +79,9 @@ export function ContextProvider({ children }) {
       });
       const [zoom, setZoom] = useState(1);
       const [cursor, setCursor] = useState({
-        current: { x: 0, y: 0, boundX:0, boundY:0},
-        start: { x: 0, y: 0, boundX:0, boundY:0},
-        end: { x: 0, y: 0, boundX:0, boundY:0},
+        current: { x: 0, y: 0},
+        start: { x: 0, y: 0},
+        end: { x: 0, y: 0},
         down: false,
       });
       const [view, setView] = useState({

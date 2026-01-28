@@ -8,23 +8,15 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     ctx.webkitImageSmoothingEnabled = false;
     ctx.mozImageSmoothingEnabled = false;
     ctx.imageSmoothingEnabled = false;
-    const boundary = canvas.getBoundingClientRect();
     const height = ctx.canvas.height;
     const width = ctx.canvas.width;
-    const scaleX = width / boundary.width;
-    const scaleY = height / boundary.height;
+
     const x = cursor.current.x;
     const y = cursor.current.y;
-    const boundX = cursor.current.boundX;
-    const boundY = cursor.current.boundY;
     const startX = cursor.start.x;
     const startY = cursor.start.y;
-    const startBoundX = cursor.start.boundX;
-    const startBoundY = cursor.start.boundY;
     const endX = cursor.end.x;
     const endY = cursor.end.y;
-    const endBoundX = cursor.end.boundX;
-    const endBoundY = cursor.end.boundY;
 
     const drawBrush = () => {
         ctx.fillStyle = param.selectedColor;
@@ -33,8 +25,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.setLineDash([]);
         ctx.beginPath();
         ctx.arc(
-            (x - boundX) * scaleX,
-            (y - boundY) * scaleY,
+            x,
+            y,
             param.size,
             0,
             Math.PI * 2,
@@ -51,8 +43,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.setLineDash([]);
         ctx.beginPath();
         ctx.arc(
-            (x - boundX) * scaleX,
-            (y - boundY) * scaleY,
+            x,
+            y,
             param.size,
             0,
             Math.PI * 2,
@@ -82,8 +74,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         }
         ctx.fillStyle = param.selectedColor;
         ctx.fillRect(
-            (x - boundX) * scaleX + randomX,
-            (y - boundY) * scaleY + randomY,
+            x + randomX,
+            y + randomY,
             1,
             1,
         );
@@ -91,8 +83,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
 
     const drawPipette = () => {
         let pixel = ctx.getImageData(
-            (x - boundX) * scaleX,
-            (y - boundY) * scaleY,
+            x,
+            y,
             1,
             1,
         );
@@ -268,7 +260,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 addSpan(start, right - 1, line, direction);
             }
         };
-        addSpan(Math.floor((x - boundX) * scaleX), Math.floor((x - boundX) * scaleX), Math.floor((y - boundY) * scaleY), 0);
+        addSpan(Math.floor(x), Math.floor(x), Math.floor(y), 0);
         let depth = 0;
         let MAX_DEPTH = 5000;
         while (spans.length > 0 && depth < MAX_DEPTH) {
@@ -291,7 +283,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             if (lineOffset + r > pixelData.data.length) {
                 console.log("Attempt to access pixel data array beyond its maximum length");
                 pixelData.data.fill(selectedColor, lineOffset + l, pixelData.data.length);
-            }else {
+            } else {
                 pixelData.data.fill(selectedColor, lineOffset + l, lineOffset + r);
             }
             if (direction <= 0) {
@@ -307,7 +299,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 checkSpan(right, r, line + 1, +1);
             }
         }
-        if(depth >= MAX_DEPTH) console.error("Bucket Tool maximum iterations exceeded, consider using a smaller canvas.");
+        if (depth >= MAX_DEPTH) console.error("Bucket Tool maximum iterations exceeded, consider using a smaller canvas.");
         ctx.putImageData(imageData, 0, 0);
     };
 
@@ -316,8 +308,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.font = String(param.size + "px " + param.text.fontFamily);
         ctx.fillText(
             param.text.text,
-            (endX - endBoundX) * scaleX,
-            (endY - endBoundY) * scaleY,
+            endX,
+            endY,
         );
     };
 
@@ -326,10 +318,10 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             case "copy":
                 if (!preview && endX - startX !== 0 && endY - startY !== 0) {
                     let data = ctx.getImageData(
-                        (startX - startBoundX) * scaleX,
-                        (startY - startBoundY) * scaleY,
-                        (endX - startX) * scaleX,
-                        (endY - startY) * scaleY
+                        startX,
+                        startY,
+                        endX - startX,
+                        endY- startY
                     );
                     param.setClipboard({
                         data: data,
@@ -340,10 +332,10 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             case "cut":
                 if (!preview && endX - startX !== 0 && endY - startY !== 0) {
                     let data = ctx.getImageData(
-                        (startX - startBoundX) * scaleX,
-                        (startY - startBoundY) * scaleY,
-                        (endX - startX) * scaleX,
-                        (endY - startY) * scaleY
+                        startX,
+                        startY,
+                        endX - startX,
+                        endY - startY
                     );
                     param.setClipboard({
                         data: data,
@@ -355,10 +347,10 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                         ctx.fillStyle = param.color1;
                     }
                     ctx.fillRect(
-                        (startX - startBoundX) * scaleX,
-                        (startY - startBoundY) * scaleY,
-                        (endX - startX) * scaleX,
-                        (endY - startY) * scaleY,
+                        startX,
+                        startY,
+                        endX - startX ,
+                        endY - startY
                     );
                 }
                 break;
@@ -369,24 +361,24 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 if (cursor.down) {
                     ctx.putImageData(
                         param.clipboard.data,
-                        (x - boundX) * scaleX,
-                        (y - boundY) * scaleY
+                        x,
+                        y
                     );
                     ctx.strokeRect(
-                        (x - boundX) * scaleX,
-                        (y - boundY) * scaleY,
+                        x,
+                        y,
                         param.clipboard.data.width,
                         param.clipboard.data.height,
                     );
                 } else {
                     ctx.putImageData(
                         param.clipboard.data,
-                        (endX - endBoundX) * scaleX,
-                        (endY - endBoundY) * scaleY
+                        endX,
+                        endY
                     );
                     ctx.strokeRect(
-                        (endX - endBoundX) * scaleX,
-                        (endY - endBoundY) * scaleY,
+                        endX,
+                        endY,
                         param.clipboard.data.width,
                         param.clipboard.data.height,
                     );
@@ -396,8 +388,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 if (!preview) {
                     ctx.putImageData(
                         param.clipboard.data,
-                        (endX - endBoundX) * scaleX,
-                        (endY - endBoundY) * scaleY
+                        endX,
+                        endY
                     );
                     param.setClipboard({
                         ...param.clipboard,
@@ -411,10 +403,10 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 ctx.lineWidth = 1;
                 ctx.setLineDash([5]);
                 ctx.strokeRect(
-                    (startX - startBoundX) * scaleX,
-                    (startY - startBoundY) * scaleY,
-                    (endX - startX) * scaleX,
-                    (endY - startY) * scaleY,
+                    startX,
+                    startY,
+                    endX - startX,
+                    endY - startY
                 );
                 break;
         }
@@ -425,10 +417,10 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.lineWidth = 1;
         ctx.setLineDash([5]);
         ctx.strokeRect(
-            (startX - startBoundX) * scaleX,
-            (startY - startBoundY) * scaleY,
-            (endX - startX) * scaleX,
-            (endY - startY) * scaleY,
+            startX,
+            startY,
+            endX - startX,
+            endY - startY
         );
     }
 
@@ -438,9 +430,9 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.setLineDash([5]);
         ctx.beginPath();
         ctx.arc(
-            (startX + centerX - startBoundX) * scaleX,
-            (startY + centerY - startBoundY) * scaleY,
-            radius * scaleX,
+            startX + centerX,
+            startY + centerY,
+            radius,
             0,
             Math.PI * 2,
         );
@@ -454,10 +446,10 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.setLineDash([5]);
         ctx.beginPath();
         ctx.ellipse(
-            (startX + centerX - startBoundX) * scaleX,
-            (startY + centerY - startBoundY) * scaleY,
-            stretchX * radius * scaleX,
-            stretchY * radius * scaleY,
+            startX + centerX,
+            startY + centerY,
+            stretchX * radius,
+            stretchY * radius,
             Math.PI / 180 * param.subTool.angle,
             0,
             Math.PI * 2,
@@ -493,7 +485,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         }
         if (param.subTool.shape !== "Curve" && param.subTool.shape !== "Line") {
             ctx.save();
-            ctx.translate((startX + centerX - startBoundX) * scaleX, (startY + centerY - startBoundY) * scaleY);
+            ctx.translate(startX + centerX, startY + centerY);
             ctx.rotate((Math.PI * param.subTool.angle) / 180);
         }
         if (param.subTool.shape === "Rectangle") {
@@ -517,12 +509,12 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     const drawLine = () => {
         ctx.beginPath();
         ctx.moveTo(
-            (startX - startBoundX) * scaleX,
-            (startY - startBoundY) * scaleY,
+            startX,
+            startY,
         )
         ctx.lineTo(
-            (endX - endBoundX) * scaleX,
-            (endY - endBoundY) * scaleY,
+            endX,
+            endY,
         )
         ctx.stroke();
     }
@@ -555,33 +547,33 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             controlPoint2 = param.curveControls.controlPoint2;
         }
         ctx.moveTo(
-            (startPoint.x - startBoundX) * scaleX,
-            (startPoint.y - startBoundY) * scaleY,
+            startPoint.x,
+            startPoint.y,
         )
         ctx.bezierCurveTo(
-            (controlPoint1.x - startBoundX) * scaleX,
-            (controlPoint1.y - startBoundY) * scaleY,
-            (controlPoint2.x - endBoundX) * scaleX,
-            (controlPoint2.y - endBoundY) * scaleY,
-            (endPoint.x - endBoundX) * scaleX,
-            (endPoint.y - endBoundY) * scaleY,
+            controlPoint1.x,
+            controlPoint1.y,
+            controlPoint2.x,
+            controlPoint2.y,
+            endPoint.x,
+            endPoint.y,
         )
         ctx.stroke();
     }
     const drawRectangle = (centerX, centerY) => {
         if (param.subTool.fill) {
             ctx.fillRect(
-                -centerX * scaleX,
-                -centerY * scaleY,
-                (endX - startX) * scaleX,
-                (endY - startY) * scaleY,
+                -centerX,
+                -centerY,
+                endX - startX,
+                endY - startY,
             );
         }
         ctx.strokeRect(
-            -centerX * scaleX,
-            -centerY * scaleY,
-            (endX - startX) * scaleX,
-            (endY - startY) * scaleY,
+            -centerX,
+            -centerY,
+            endX - startX,
+            endY - startY,
         );
     }
 
@@ -590,8 +582,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.ellipse(
             0,
             0,
-            stretchX * radius * scaleX,
-            stretchY * radius * scaleY,
+            stretchX * radius,
+            stretchY * radius,
             0,
             0,
             2 * Math.PI
@@ -606,8 +598,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         ctx.beginPath();
         for (let i = 0; i < param.subTool.sides + 2; i++) {
             ctx.lineTo(
-                scaleX * stretchX * radius * Math.cos((2 * Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
-                scaleY * stretchY * radius * Math.sin((2 * Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
+                stretchX * radius * Math.cos((2 * Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
+                stretchY * radius * Math.sin((2 * Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
             );
         };
         if (param.subTool.fill) {
@@ -621,13 +613,13 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         for (let i = 0; i < param.subTool.sides * 2 + 2; i++) {
             if (i % 2 === 0) {
                 ctx.lineTo(
-                    scaleX * stretchX * radius * Math.cos((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
-                    scaleY * stretchY * radius * Math.sin((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
+                    stretchX * radius * Math.cos((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
+                    stretchY * radius * Math.sin((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
                 );
             } else {
                 ctx.lineTo(
-                    scaleX * stretchX * radius / 3 * Math.cos((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
-                    scaleY * stretchY * radius / 3 * Math.sin((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
+                    stretchX * radius / 3 * Math.cos((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle)),
+                    stretchY * radius / 3 * Math.sin((Math.PI * i / param.subTool.sides) - Math.PI / 2 + (Math.PI / 180 * param.subTool.startAngle))
                 );
             }
         };
@@ -639,13 +631,13 @@ export const handleDraw = (canvas, cursor, param, preview) => {
 
     const drawArrow = (stretchX, stretchY, radius) => {
         ctx.beginPath();
-        ctx.moveTo(scaleX * stretchX * -radius * Math.cos(Math.PI / 8), scaleY * stretchY * -radius * Math.sin(Math.PI / 8));
-        ctx.lineTo(0, scaleY * stretchY * -radius * Math.sin(Math.PI / 8));
-        ctx.lineTo(0, scaleY * stretchY * -radius);
-        ctx.lineTo(scaleX * stretchX * radius, 0);
-        ctx.lineTo(0, scaleY * stretchY * radius);
-        ctx.lineTo(0, scaleY * stretchY * radius * Math.sin(Math.PI / 8));
-        ctx.lineTo(scaleX * stretchX * -radius * Math.cos(Math.PI / 8), scaleY * stretchY * radius * Math.sin(Math.PI / 8));
+        ctx.moveTo(stretchX * -radius * Math.cos(Math.PI / 8), stretchY * -radius * Math.sin(Math.PI / 8));
+        ctx.lineTo(0, stretchY * -radius * Math.sin(Math.PI / 8));
+        ctx.lineTo(0, stretchY * -radius);
+        ctx.lineTo(stretchX * radius, 0);
+        ctx.lineTo(0, stretchY * radius);
+        ctx.lineTo(0, stretchY * radius * Math.sin(Math.PI / 8));
+        ctx.lineTo(stretchX * -radius * Math.cos(Math.PI / 8), stretchY * radius * Math.sin(Math.PI / 8));
         ctx.closePath();
         if (param.subTool.fill) {
             ctx.fill();
@@ -662,9 +654,9 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             }
         }
         ctx.beginPath();
-        ctx.moveTo(0, radius * scaleY);
-        ctx.arc(scaleX * -radius / 2, scaleY * -radius / 5, scaleX * radius / 2, 3 * Math.PI / 4, 0, false);
-        ctx.arc(scaleX * radius / 2, scaleY * -radius / 5, scaleX * radius / 2, Math.PI, Math.PI / 4, false);
+        ctx.moveTo(0, radius);
+        ctx.arc(-radius / 2, -radius / 5, radius / 2, 3 * Math.PI / 4, 0, false);
+        ctx.arc(radius / 2, -radius / 5, radius / 2, Math.PI, Math.PI / 4, false);
         ctx.closePath();
         if (param.subTool.fill) {
             ctx.fill();
