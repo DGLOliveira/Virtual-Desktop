@@ -50,7 +50,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
         <div style={{ display: "flex" }}>
           <button title="Color 1" className={context.color.selected === context.color[1] ? "buttonActive" : ""}
             onClick={() => context.setColor({ ...context.color, selected: context.color[1] })}>
-            <label htmlFor="drawColor1" onClick={(e) => e.preventDefault()}>1</label>
+            <label htmlFor="drawColor1" style={{textDecoration: context.color.selected === context.color[1] ? "underline" : ""}} onClick={(e) => e.preventDefault()}>1</label>
           </button>
           <ColorPicker
             color={context.color[1]}
@@ -62,7 +62,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
         <div style={{ display: "flex" }}>
           <button title="Color 2" className={context.color.selected === context.color[2] ? "buttonActive" : ""}
             onClick={() => context.setColor({ ...context.color, selected: context.color[2] })}>
-            <label htmlFor="drawColor2" onClick={(e) => e.preventDefault()}>2</label>
+            <label htmlFor="drawColor2" style={{textDecoration: context.color.selected === context.color[2] ? "underline" : ""}} onClick={(e) => e.preventDefault()}>2</label>
           </button>
           <ColorPicker
             color={context.color[2]}
