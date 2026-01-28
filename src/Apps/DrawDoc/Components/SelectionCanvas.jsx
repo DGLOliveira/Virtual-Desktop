@@ -93,7 +93,7 @@ export default function SelectionCanvas() {
             width: Math.floor(width * zoom) + "px",
             height: Math.floor(height * zoom) + "px"
         })
-    }, [cursor]);
+    }, [cursor, zoom]);
 
 
     return (
@@ -101,155 +101,57 @@ export default function SelectionCanvas() {
             <div
                 id="drawDocSelectionBox"
                 style={{
-                    position: "absolute",
                     display: selectionBox.display,
                     top: selectionBox.top,
                     left: selectionBox.left,
                     width: selectionBox.width,
                     height: selectionBox.height,
-                    border: "2px dashed white",
-                    mixBlendMode: "difference",
-                    cursor: "move"
+                    pointerEvents: cursor.down ? "none" : "auto"
                 }}
             >
                 <div
                     id="drawDocSelectionBoxNW"
-                    style={{
-                        position: "absolute",
-                        top: "-10px",
-                        left: "-10px",
-                        width: "10px",
-                        height: "10px",
-                        cursor: "nwse-resize",
-                        border: "1px solid black",
-                        background: "white"
-                    }}
                 />
                 <div
-                id="drawDocSelectionBoxN"
-                style={{
-                    position: "absolute",
-                    top: "-10px",
-                    left: "50%",
-                    width: "10px",
-                    height: "10px",
-                    cursor: "ns-resize",
-                    border: "1px solid black",
-                    background: "white",
-                    transform: "translateX(-50%)"
-                }}
+                    id="drawDocSelectionBoxN"
                 />
                 <div
                     id="drawDocSelectionBoxNE"
-                    style={{
-                        position: "absolute",
-                        top: "-10px",
-                        right: "-10px",
-                        width: "10px",
-                        height: "10px",
-                        cursor: "nesw-resize",
-                        border: "1px solid black",
-                        background: "white"
-                    }}
-
                 />
                 <div
                     id="drawDocSelectionBoxE"
-                    style={{
-                        position: "absolute",
-                        top: "50%",
-                        right: "-10px",
-                        width: "10px",
-                        height: "10px",
-                        cursor: "ew-resize",
-                        border: "1px solid black",
-                        background: "white",
-                        transform: "translateY(-50%)"
-                    }}
                 />
                 <div
                     id="drawDocSelectionBoxSE"
-                    style={{
-                        position: "absolute",
-                        bottom: "-10px",
-                        right: "-10px",
-                        width: "10px",
-                        height: "10px",
-                        cursor: "nwse-resize",
-                        border: "1px solid black",
-                        background: "white"
-                    }}
                 />
                 <div
                     id="drawDocSelectionBoxS"
-                    style={{
-                        position: "absolute",
-                        bottom: "-10px",
-                        left: "50%",
-                        width: "10px",
-                        height: "10px",
-                        cursor: "ns-resize",
-                        border: "1px solid black",
-                        background: "white",
-                        transform: "translateX(-50%)"
-                    }}
                 />
                 <div
                     id="drawDocSelectionBoxSW"
-                    style={{
-                        position: "absolute",
-                        bottom: "-10px",
-                        left: "-10px",
-                        width: "10px",
-                        height: "10px",
-                        cursor: "nesw-resize",
-                        border: "1px solid black",
-                        background: "white"
-                    }}
                 />
                 <div
                     id="drawDocSelectionBoxW"
-                    style={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "-10px",
-                        width: "10px",
-                        height: "10px",
-                        cursor: "ew-resize",
-                        border: "1px solid black",
-                        background: "white",
-                        transform: "translateY(-50%)"
-                    }}
                 />
             </div>
             <div
                 id="drawDocSelectionCircle"
                 style={{
-                    position: "absolute",
                     display: selectionCircle.display,
                     top: selectionCircle.top,
                     left: selectionCircle.left,
                     width: selectionCircle.diameter,
-                    height: selectionCircle.diameter,
-                    border: "2px dashed white",
-                    borderRadius: "50%",
-                    mixBlendMode: "difference",
-                    pointerEvents: "none"
+                    height: selectionCircle.diameter
                 }}
             />
             <div
                 id="drawDocSelectionEllipse"
                 style={{
-                    position: "absolute",
                     display: selectionEllipse.display,
                     top: selectionEllipse.top,
                     left: selectionEllipse.left,
                     width: selectionEllipse.width,
                     height: selectionEllipse.height,
-                    border: "2px dashed white",
-                    borderRadius: "50%",
-                    mixBlendMode: "difference",
-                    pointerEvents: "none",
                     rotate: subtool.angle + "deg"
                 }}
             >

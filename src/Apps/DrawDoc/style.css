@@ -4,20 +4,20 @@ button>label {
 }
 
 #drawDocTopNavBar {
-  color:inherit;
+  color: inherit;
 }
 
 #drawDocTopNavBar>button:enabled {
-  color:inherit;
+  color: inherit;
 }
 
 #drawDocTopNavBar>*>button:enabled {
-  color:inherit;
+  color: inherit;
 }
 
 #drawDocToolBar {
   display: flex;
-  color:inherit;
+  color: inherit;
   flex-direction: column;
   height: 100%;
   width: 30px;
@@ -25,7 +25,7 @@ button>label {
 }
 
 #drawDocToolBar>button {
-  color:inherit;
+  color: inherit;
   font-size: 25px;
 }
 
@@ -54,6 +54,89 @@ canvas-container {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   border: 1px solid black;
+}
+
+#drawDocSelectionBox {
+  position: absolute;
+  background: transparent;
+  border: 2px dashed white;
+  mix-blend-mode: difference;
+  cursor: move;
+}
+
+#drawDocSelectionBox>*{
+  position:absolute;
+  height:10px;
+  width:10px;
+  background: white;
+  border: 2px solid black;
+}
+#drawDocSelectionBoxNW{
+  top: -10px;
+  left: -10px;
+  cursor: nwse-resize;
+}
+#drawDocSelectionBoxN{
+  top: -10px;
+  left: 50%;
+  cursor: ns-resize;
+  transform: translateX(-50%);
+}
+#drawDocSelectionBoxNE{
+  top: -10px;
+  right: -10px;
+  cursor: nesw-resize;
+}
+#drawDocSelectionBoxE{
+  top: 50%;
+  right: -10px;
+  cursor: ew-resize;
+  transform: translateY(-50%);
+}
+#drawDocSelectionBoxSE{
+  bottom: -10px;
+  right: -10px;
+  cursor: nwse-resize;
+}
+#drawDocSelectionBoxS{
+  bottom: -10px;
+  left: 50%;
+  cursor: ns-resize;
+  transform: translateX(-50%);
+}
+#drawDocSelectionBoxSW{
+  bottom: -10px;
+  left: -10px;
+  cursor: nesw-resize;
+}
+#drawDocSelectionBoxW{
+  top: 50%;
+  left: -10px;
+  cursor: ew-resize;
+  transform: translateY(-50%);
+}
+#drawDocSelectionBoxNW{
+  top: -10px;
+  left: -10px;
+  cursor: nwse-resize;
+}
+#drawDocSelectionCircle{
+  position: absolute;
+  background: transparent;
+  border: 2px dashed white;
+  mix-blend-mode: difference;
+  cursor: move;
+  border-radius: 50%;
+  pointer-events: none;
+}
+#drawDocSelectionEllipse{
+  position: absolute;
+  background: transparent;
+  border: 2px dashed white;
+  mix-blend-mode: difference;
+  cursor: move;
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 canvas-container>textarea {
