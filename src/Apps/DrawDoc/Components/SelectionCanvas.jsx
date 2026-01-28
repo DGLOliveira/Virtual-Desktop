@@ -109,11 +109,118 @@ export default function SelectionCanvas() {
                     height: selectionBox.height,
                     border: "2px dashed white",
                     mixBlendMode: "difference",
-                    cursor: "move",
-                    pointerEvents: "none"
+                    cursor: "move"
                 }}
             >
+                <div
+                    id="drawDocSelectionBoxNW"
+                    style={{
+                        position: "absolute",
+                        top: "-10px",
+                        left: "-10px",
+                        width: "10px",
+                        height: "10px",
+                        cursor: "nwse-resize",
+                        border: "1px solid black",
+                        background: "white"
+                    }}
+                />
+                <div
+                id="drawDocSelectionBoxN"
+                style={{
+                    position: "absolute",
+                    top: "-10px",
+                    left: "50%",
+                    width: "10px",
+                    height: "10px",
+                    cursor: "ns-resize",
+                    border: "1px solid black",
+                    background: "white",
+                    transform: "translateX(-50%)"
+                }}
+                />
+                <div
+                    id="drawDocSelectionBoxNE"
+                    style={{
+                        position: "absolute",
+                        top: "-10px",
+                        right: "-10px",
+                        width: "10px",
+                        height: "10px",
+                        cursor: "nesw-resize",
+                        border: "1px solid black",
+                        background: "white"
+                    }}
 
+                />
+                <div
+                    id="drawDocSelectionBoxE"
+                    style={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "-10px",
+                        width: "10px",
+                        height: "10px",
+                        cursor: "ew-resize",
+                        border: "1px solid black",
+                        background: "white",
+                        transform: "translateY(-50%)"
+                    }}
+                />
+                <div
+                    id="drawDocSelectionBoxSE"
+                    style={{
+                        position: "absolute",
+                        bottom: "-10px",
+                        right: "-10px",
+                        width: "10px",
+                        height: "10px",
+                        cursor: "nwse-resize",
+                        border: "1px solid black",
+                        background: "white"
+                    }}
+                />
+                <div
+                    id="drawDocSelectionBoxS"
+                    style={{
+                        position: "absolute",
+                        bottom: "-10px",
+                        left: "50%",
+                        width: "10px",
+                        height: "10px",
+                        cursor: "ns-resize",
+                        border: "1px solid black",
+                        background: "white",
+                        transform: "translateX(-50%)"
+                    }}
+                />
+                <div
+                    id="drawDocSelectionBoxSW"
+                    style={{
+                        position: "absolute",
+                        bottom: "-10px",
+                        left: "-10px",
+                        width: "10px",
+                        height: "10px",
+                        cursor: "nesw-resize",
+                        border: "1px solid black",
+                        background: "white"
+                    }}
+                />
+                <div
+                    id="drawDocSelectionBoxW"
+                    style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "-10px",
+                        width: "10px",
+                        height: "10px",
+                        cursor: "ew-resize",
+                        border: "1px solid black",
+                        background: "white",
+                        transform: "translateY(-50%)"
+                    }}
+                />
             </div>
             <div
                 id="drawDocSelectionCircle"
