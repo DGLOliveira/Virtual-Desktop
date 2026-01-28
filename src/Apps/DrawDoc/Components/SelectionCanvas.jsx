@@ -4,6 +4,7 @@ import { Context } from "../Context.jsx";
 export default function SelectionCanvas() {
     const context = useContext(Context);
     const cursor = context.cursor;
+    const setCursor = context.setCursor;
     const zoom = context.zoom;
     const tool = context.tool;
     const subtool = context.subTool;
@@ -14,7 +15,8 @@ export default function SelectionCanvas() {
         left: 0 + "px",
         top: 0 + "px",
         height: 0 + "px",
-        width: 0 + "px"
+        width: 0 + "px",
+        canUsePointer: true
     })
 
     const [selectionCircle, setSelectionCircle] = useState({
@@ -31,6 +33,65 @@ export default function SelectionCanvas() {
         width: 0 + "px",
         height: 0 + "px"
     })
+
+    const [resizeDelta, setResizeDelta] = useState([0, 0])
+
+    const getCursorFromEvent = (e) => {
+        let cursorX, cursorY;
+        if (e.button === 0) {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+        } else {
+            cursorX = e.touches[0].clientX;
+            cursorY = e.touches[0].clientY;
+        }
+        console.log(["cursorPos", cursorX, cursorY])
+        return [cursorX, cursorY]
+    }
+
+    const handleResizeStart = (e, direction) => {
+        const cursorPos = getCursorFromEvent(e);
+        let newDeltaX = 0;
+        let newDeltaY = 0;
+        if (direction.indexOf("N") !== -1) {
+            newDeltaY = cursorPos[1] - Math.min(cursor.start.y, cursor.end.y);
+        } else if (direction.indexOf("S") !== -1) {
+            newDeltaY = cursorPos[1] - Math.max(cursor.start.y, cursor.end.y);
+        }
+        if (direction.indexOf("W") !== -1) {
+            newDeltaX = cursorPos[0] - Math.min(cursor.start.x, cursor.end.x);
+        } else if (direction.indexOf("E") !== -1) {
+            newDeltaX = cursorPos[0] - Math.max(cursor.start.x, cursor.end.x);
+        }
+        setResizeDelta([newDeltaX, newDeltaY]);
+    }
+
+    const handleResize = (e, direction) => {
+        e.preventDefault();
+        const cursorPos = getCursorFromEvent(e);
+        // check for inverted axis
+        let invertX = false, invertY = false;
+        if (cursor.start.x > cursor.end.x) invertX = true;
+        if (cursor.start.y > cursor.end.y) invertY = true;
+        // calculate difference between cursor and selectionBox
+        let newStartX = cursor.start.x, newStartY = cursor.start.y, newEndX = cursor.end.x, newEndY = cursor.end.y;
+        if (direction.indexOf("N") !== -1) {
+            invertY ? newEndY = cursorPos[1] + resizeDelta[1] : newStartY = cursorPos[1] + resizeDelta[1]
+        } else if (direction.indexOf("S") !== -1) {
+            invertY ? newStartY = cursorPos[1] - resizeDelta[1] : newEndY = cursorPos[1] - resizeDelta[1]
+        }
+        if (direction.indexOf("E") !== -1) {
+            invertX ? newEndX = cursorPos[0] + resizeDelta[0] : newStartX = cursorPos[0] + resizeDelta[0]
+        } else if (direction.indexOf("W") !== -1) {
+            invertX ? newStartX = cursorPos[0] - resizeDelta[0] : newEndX = cursorPos[0] - resizeDelta[0]
+        }
+        setCursor({ ...cursor, start: { x: newStartX, y: newStartY }, end: { x: newEndX, y: newEndY } })
+
+    }
+
+    const handleResizeEnd = (e, direction) => {
+        handleResize(e, direction);
+    }
 
     //Handles when each selection div should be displayed
     useEffect(() => {
@@ -95,7 +156,6 @@ export default function SelectionCanvas() {
         })
     }, [cursor, zoom]);
 
-
     return (
         <>
             <div
@@ -111,27 +171,51 @@ export default function SelectionCanvas() {
             >
                 <div
                     id="drawDocSelectionBoxNW"
+                    onDragStart={(e) => {if(!cursor.down)handleResizeStart(e, "NW")}}
+                    onDrag={(e) => {if(!cursor.down)handleResize(e, "NW")}}
+                    onDragEnd={(e) => {if(!cursor.down)handleResizeEnd(e, "NW")}}
                 />
                 <div
                     id="drawDocSelectionBoxN"
+                    onDragStart={(e) => {if(!cursor.down)handleResizeStart(e, "N")}}
+                    onDrag={(e) => {if(!cursor.down)handleResize(e, "N")}}
+                    onDragEnd={(e) => {if(!cursor.down)handleResizeEnd(e, "N")}}
                 />
                 <div
                     id="drawDocSelectionBoxNE"
+                    onDragStart={(e) => {if(!cursor.down)handleResizeStart(e, "NE")}}
+                    onDrag={(e) => {if(!cursor.down)handleResize(e, "NE")}}
+                    onDragEnd={(e) => {if(!cursor.down)handleResizeEnd(e, "NE")}}
                 />
                 <div
                     id="drawDocSelectionBoxE"
+                    onDragStart={(e) => {if(!cursor.down)handleResizeStart(e, "E")}}
+                    onDrag={(e) => {if(!cursor.down)handleResize(e, "E")}}
+                    onDragEnd={(e) => {if(!cursor.down)handleResizeEnd(e, "E")}}
                 />
                 <div
                     id="drawDocSelectionBoxSE"
+                    onDragStart={(e) => {if(!cursor.down)handleResizeStart(e, "SE")}}
+                    onDrag={(e) => {if(!cursor.down)handleResize(e, "SE")}}
+                    onDragEnd={(e) => {if(!cursor.down)handleResizeEnd(e, "SE")}}
                 />
                 <div
                     id="drawDocSelectionBoxS"
+                    onDragStart={(e) => {if(!cursor.down)handleResizeStart(e, "S")}}
+                    onDrag={(e) => {if(!cursor.down)handleResize(e, "S")}}
+                    onDragEnd={(e) => {if(!cursor.down)handleResizeEnd(e, "S")}}
                 />
                 <div
                     id="drawDocSelectionBoxSW"
+                    onDragStart={(e) => {if(!cursor.down)handleResizeStart(e, "SW")}}
+                    onDrag={(e) => {if(!cursor.down)handleResize(e, "SW")}}
+                    onDragEnd={(e) => {if(!cursor.down)handleResizeEnd(e, "SW")}}
                 />
                 <div
                     id="drawDocSelectionBoxW"
+                    onDragStart={(e) => {if(!cursor.down)handleResizeStart(e, "W")}}
+                    onDrag={(e) => {if(!cursor.down)handleResize(e, "W")}}
+                    onDragEnd={(e) => {if(!cursor.down)handleResizeEnd(e, "W")}}
                 />
             </div>
             <div
