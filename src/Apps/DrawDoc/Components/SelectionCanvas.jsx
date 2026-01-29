@@ -34,19 +34,31 @@ export default function SelectionCanvas() {
         height: 0 + "px"
     })
 
-    const [resizeDelta, setResizeDelta] = useState([0, 0])
+    const [resizeDelta, setResizeDelta] = useState([0, 0, true])
     const [dragDelta, setDragDelta] = useState([0, 0, 0, 0])
 
+    //Note: Firefox returns zero values during a drag event, therefore, 
+    // in order to avoid incorrect values, values of zero are ignored
     const getCursorFromEvent = (e) => {
-        let cursorX, cursorY;
+        let cursorX, cursorY, flag = false;
         if (e.button === 0) {
+            if(e.clientX!==0 && e.clientY!==0){
             cursorX = e.clientX;
             cursorY = e.clientY;
+            flag = true;
+            }
         } else {
+            if(e.touches[0].clientX!==0 && e.touches[0].clientY!==0){
             cursorX = e.touches[0].clientX;
             cursorY = e.touches[0].clientY;
+            flag = true;
+            }
         }
-        return [cursorX, cursorY]
+        if (!flag) {
+            return [0, 0, false]
+        }else{
+        return [cursorX, cursorY, true]
+        }
     }
 
     const handleResizeStart = (e, direction) => {
@@ -54,6 +66,7 @@ export default function SelectionCanvas() {
         const cursorPos = getCursorFromEvent(e);
         let newDeltaX = 0;
         let newDeltaY = 0;
+        if(cursorPos[2] === false) return
         if (direction.indexOf("N") !== -1) {
             newDeltaY = cursorPos[1] - Math.min(cursor.start.y, cursor.end.y);
         } else if (direction.indexOf("S") !== -1) {
@@ -71,6 +84,7 @@ export default function SelectionCanvas() {
         e.preventDefault();
         e.stopPropagation();
         const cursorPos = getCursorFromEvent(e);
+        if(cursorPos[2] === false) return
         // check for inverted axis
         let invertX = false, invertY = false;
         if (cursor.start.x > cursor.end.x) invertX = true;
@@ -93,6 +107,7 @@ export default function SelectionCanvas() {
 
     const handleDragStart = (e) => {
         const cursorPos = getCursorFromEvent(e);
+        if(cursorPos[2] === false) return
         let startDeltaX = 0, startDeltaY = 0, endDeltaX = 0, endDeltaY = 0;
         startDeltaX = cursorPos[0] - cursor.start.x;
         startDeltaY = cursorPos[1] - cursor.start.y;
@@ -104,6 +119,7 @@ export default function SelectionCanvas() {
     const handleDrag = (e) => {
         e.preventDefault();
         const cursorPos = getCursorFromEvent(e);
+        if(cursorPos[2] === false) return
         setCursor({
             ...cursor,
             start: { x: cursorPos[0] - dragDelta[0], y: cursorPos[1] - dragDelta[1] },
