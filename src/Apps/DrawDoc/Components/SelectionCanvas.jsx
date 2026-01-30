@@ -131,44 +131,32 @@ export default function SelectionCanvas() {
 
     const handleCircleRotateStart = (e) => {
         const cursorPos = getCursorFromEvent(e);
+        const boundary = document.getElementById("previewCanvas").getBoundingClientRect();
         if (cursorPos[2] === false) return
-        setRotateStartPos([cursorPos[0], cursorPos[1], subtool.angle])
+        setRotateStartPos([cursorPos[0] , cursorPos[1] , subtool.angle, boundary.left ,boundary.top]);
     }
 
     const handleCircleRotate = (e) => {
         e.preventDefault();
         const cursorPos = getCursorFromEvent(e);
-        console.log(e)
         //TODO: cursor position must be adjusted to indicate its relative position instead of absolute
         if (cursorPos[2] === false) return
         let top = Number(selectionCircle.top.slice(0,-2));
         let left = Number(selectionCircle.left.slice(0,-2));
         let diameter = Number(selectionCircle.diameter.slice(0,-2));
-        let centerX = left + (diameter / 2)
-        let centerY = top + (diameter / 2)
+        let centerX = left + (diameter / 2) + rotateStartPos[3];
+        let centerY = top + (diameter / 2) + rotateStartPos[4];
         let horizontal = centerX > cursorPos[0] ? centerX - cursorPos[0] : cursorPos[0] - centerX;
         let vertical = centerY > cursorPos[1] ? centerY - cursorPos[1] : cursorPos[1] - centerY;
         let hypothenuse = Math.sqrt(Math.pow(horizontal, 2) + Math.pow(vertical, 2));
         let currAngleRad = Math.acos((Math.pow(horizontal, 2) + Math.pow(hypothenuse, 2) - Math.pow(vertical, 2)) / (2 * horizontal * hypothenuse))
         let currAngleDeg = currAngleRad / (Math.PI / 180)
-        let offsetAngle = 0
-        if (cursorPos[0] > centerX && cursorPos[1] > centerY) offsetAngle = 90
-        else if (cursorPos[0] < centerX && cursorPos[1] > centerY) offsetAngle = 180
-        else if (cursorPos[0] < centerX && cursorPos[1] < centerY) offsetAngle = 270
-        let angle = currAngleDeg
-        setSubTool({...subtool, angle: angle})/*
-        console.log({
-            "top": selectionCircle.top,
-            "left": selectionCircle.left,
-            "diameter": selectionCircle.diameter,
-            "cursorX": cursorPos[0],
-            "cursorY": cursorPos[1],
-            "centerX": centerX,
-            "centerY": centerY,
-            "calculated": currAngleDeg,
-            "offset": offsetAngle,
-            "angle:":  angle
-        });*/
+        let angle = 0;
+        if (cursorPos[0] > centerX && cursorPos[1] < centerY) angle = 90 - currAngleDeg
+        else if (cursorPos[0] > centerX && cursorPos[1] > centerY) angle = 90 + currAngleDeg
+        else if (cursorPos[0] < centerX && cursorPos[1] > centerY) angle = 180 + 90 - currAngleDeg
+        else if (cursorPos[0] < centerX && cursorPos[1] < centerY) angle = 270 + currAngleDeg
+        setSubTool({...subtool, angle: angle})
     }
 
     //Handles when each selection div should be displayed
@@ -309,25 +297,6 @@ export default function SelectionCanvas() {
                 />
             </div>
             <div
-                id="drawDocSelectionCircle"
-                style={{
-                    display: selectionCircle.display,
-                    top: selectionCircle.top,
-                    left: selectionCircle.left,
-                    width: selectionCircle.diameter,
-                    height: selectionCircle.diameter,
-                    rotate: subtool.angle + "deg"
-                }}
-            >
-                {!subtool.stretch && <div
-                    id="drawDocSelectionCirclePoint"
-                    draggable
-                    onDragStart={(e) => { if (!cursor.down) handleCircleRotateStart(e) }}
-                    onDrag={(e) => { if (!cursor.down) handleCircleRotate(e) }}
-                    onDragEnd={(e) => { if (!cursor.down) handleCircleRotate(e) }}
-                />}
-            </div>
-            <div
                 id="drawDocSelectionEllipse"
                 style={{
                     display: selectionEllipse.display,
@@ -338,25 +307,24 @@ export default function SelectionCanvas() {
                     rotate: subtool.angle + "deg"
                 }}
             >
+            </div>
+            <div
+                id="drawDocSelectionCircle"
+                style={{
+                    display: selectionCircle.display,
+                    top: selectionCircle.top,
+                    left: selectionCircle.left,
+                    width: selectionCircle.diameter,
+                    height: selectionCircle.diameter,
+                    rotate: subtool.angle + "deg"
+                }}
+            >
                 <div
-                    id="drawDocSelectionEllipsePoint1"
+                    id="drawDocSelectionCirclePoint"
                     draggable
-                    style={{
-                        top: selectionEllipse.width > selectionEllipse.height ? "50%" : "-40px",
-                        left: selectionEllipse.width > selectionEllipse.height ? "-40px" : "50%",
-                        rotate: selectionEllipse.width > selectionEllipse.height ? "-90deg" : "0deg",
-                        transform: selectionEllipse.width > selectionEllipse.height ? "translateX(50%)" : "translateX(-50%)"
-                    }}
-                />
-                <div
-                    id="drawDocSelectionEllipsePoint2"
-                    draggable
-                    style={{
-                        bottom: selectionEllipse.width > selectionEllipse.height ? "50%" : "-40px",
-                        right: selectionEllipse.width > selectionEllipse.height ? "-40px" : "50%",
-                        rotate: selectionEllipse.width > selectionEllipse.height ? "90deg" : "180deg",
-                        transform: selectionEllipse.width > selectionEllipse.height ? "translateX(50%)" : "translateX(-50%)"
-                    }}
+                    onDragStart={(e) => { if (!cursor.down) handleCircleRotateStart(e) }}
+                    onDrag={(e) => { if (!cursor.down) handleCircleRotate(e) }}
+                    onDragEnd={(e) => { if (!cursor.down) handleCircleRotate(e) }}
                 />
             </div>
         </>
