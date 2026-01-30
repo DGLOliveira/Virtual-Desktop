@@ -8,6 +8,7 @@ export default function SelectionCanvas() {
     const zoom = context.zoom;
     const tool = context.tool;
     const subtool = context.subTool;
+    const setSubTool = context.setSubTool;
     const clipboard = context.clipboard;
 
     const [selectionBox, setSelectionBox] = useState({
@@ -36,6 +37,7 @@ export default function SelectionCanvas() {
 
     const [resizeDelta, setResizeDelta] = useState([0, 0, true])
     const [dragDelta, setDragDelta] = useState([0, 0, 0, 0])
+    const [rotateStartPos, setRotateStartPos] = useState([0, 0, 0])
 
     //Note: Firefox returns zero values during a drag event, therefore, 
     // in order to avoid incorrect values, values of zero are ignored
@@ -125,6 +127,48 @@ export default function SelectionCanvas() {
             start: { x: cursorPos[0] - dragDelta[0], y: cursorPos[1] - dragDelta[1] },
             end: { x: cursorPos[0] - dragDelta[2], y: cursorPos[1] - dragDelta[3] }
         })
+    }
+
+    const handleCircleRotateStart = (e) => {
+        const cursorPos = getCursorFromEvent(e);
+        if (cursorPos[2] === false) return
+        setRotateStartPos([cursorPos[0], cursorPos[1], subtool.angle])
+    }
+
+    const handleCircleRotate = (e) => {
+        e.preventDefault();
+        const cursorPos = getCursorFromEvent(e);
+        console.log(e)
+        //TODO: cursor position must be adjusted to indicate its relative position instead of absolute
+        if (cursorPos[2] === false) return
+        let top = Number(selectionCircle.top.slice(0,-2));
+        let left = Number(selectionCircle.left.slice(0,-2));
+        let diameter = Number(selectionCircle.diameter.slice(0,-2));
+        let centerX = left + (diameter / 2)
+        let centerY = top + (diameter / 2)
+        let horizontal = centerX > cursorPos[0] ? centerX - cursorPos[0] : cursorPos[0] - centerX;
+        let vertical = centerY > cursorPos[1] ? centerY - cursorPos[1] : cursorPos[1] - centerY;
+        let hypothenuse = Math.sqrt(Math.pow(horizontal, 2) + Math.pow(vertical, 2));
+        let currAngleRad = Math.acos((Math.pow(horizontal, 2) + Math.pow(hypothenuse, 2) - Math.pow(vertical, 2)) / (2 * horizontal * hypothenuse))
+        let currAngleDeg = currAngleRad / (Math.PI / 180)
+        let offsetAngle = 0
+        if (cursorPos[0] > centerX && cursorPos[1] > centerY) offsetAngle = 90
+        else if (cursorPos[0] < centerX && cursorPos[1] > centerY) offsetAngle = 180
+        else if (cursorPos[0] < centerX && cursorPos[1] < centerY) offsetAngle = 270
+        let angle = currAngleDeg
+        setSubTool({...subtool, angle: angle})/*
+        console.log({
+            "top": selectionCircle.top,
+            "left": selectionCircle.left,
+            "diameter": selectionCircle.diameter,
+            "cursorX": cursorPos[0],
+            "cursorY": cursorPos[1],
+            "centerX": centerX,
+            "centerY": centerY,
+            "calculated": currAngleDeg,
+            "offset": offsetAngle,
+            "angle:":  angle
+        });*/
     }
 
     //Handles when each selection div should be displayed
@@ -278,6 +322,9 @@ export default function SelectionCanvas() {
                 {!subtool.stretch && <div
                     id="drawDocSelectionCirclePoint"
                     draggable
+                    onDragStart={(e) => { if (!cursor.down) handleCircleRotateStart(e) }}
+                    onDrag={(e) => { if (!cursor.down) handleCircleRotate(e) }}
+                    onDragEnd={(e) => { if (!cursor.down) handleCircleRotate(e) }}
                 />}
             </div>
             <div
@@ -297,7 +344,8 @@ export default function SelectionCanvas() {
                     style={{
                         top: selectionEllipse.width > selectionEllipse.height ? "50%" : "-40px",
                         left: selectionEllipse.width > selectionEllipse.height ? "-40px" : "50%",
-                        rotate: "-90deg"
+                        rotate: selectionEllipse.width > selectionEllipse.height ? "-90deg" : "0deg",
+                        transform: selectionEllipse.width > selectionEllipse.height ? "translateX(50%)" : "translateX(-50%)"
                     }}
                 />
                 <div
@@ -306,7 +354,8 @@ export default function SelectionCanvas() {
                     style={{
                         bottom: selectionEllipse.width > selectionEllipse.height ? "50%" : "-40px",
                         right: selectionEllipse.width > selectionEllipse.height ? "-40px" : "50%",
-                        rotate: "90deg"
+                        rotate: selectionEllipse.width > selectionEllipse.height ? "90deg" : "180deg",
+                        transform: selectionEllipse.width > selectionEllipse.height ? "translateX(50%)" : "translateX(-50%)"
                     }}
                 />
             </div>

@@ -152,7 +152,7 @@ canvas-container {
   display: block;
   content:"";
   top:10px;
-  left:2.5px;
+  left:1.5px;
   height:28px;
   width:0px;
   border-left: 2px dashed white;
@@ -185,7 +185,7 @@ canvas-container {
   display: block;
   content:"";
   top:10px;
-  left:2.5px;
+  left:2px;
   height:28px;
   width:0px;
   border-left: 2px dashed white;
