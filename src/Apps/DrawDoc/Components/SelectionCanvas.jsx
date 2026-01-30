@@ -42,22 +42,22 @@ export default function SelectionCanvas() {
     const getCursorFromEvent = (e) => {
         let cursorX, cursorY, flag = false;
         if (e.button === 0) {
-            if(e.clientX!==0 && e.clientY!==0){
-            cursorX = e.clientX;
-            cursorY = e.clientY;
-            flag = true;
+            if (e.clientX !== 0 && e.clientY !== 0) {
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+                flag = true;
             }
         } else {
-            if(e.touches[0].clientX!==0 && e.touches[0].clientY!==0){
-            cursorX = e.touches[0].clientX;
-            cursorY = e.touches[0].clientY;
-            flag = true;
+            if (e.touches[0].clientX !== 0 && e.touches[0].clientY !== 0) {
+                cursorX = e.touches[0].clientX;
+                cursorY = e.touches[0].clientY;
+                flag = true;
             }
         }
         if (!flag) {
             return [0, 0, false]
-        }else{
-        return [cursorX, cursorY, true]
+        } else {
+            return [cursorX, cursorY, true]
         }
     }
 
@@ -66,7 +66,7 @@ export default function SelectionCanvas() {
         const cursorPos = getCursorFromEvent(e);
         let newDeltaX = 0;
         let newDeltaY = 0;
-        if(cursorPos[2] === false) return
+        if (cursorPos[2] === false) return
         if (direction.indexOf("N") !== -1) {
             newDeltaY = cursorPos[1] - Math.min(cursor.start.y, cursor.end.y);
         } else if (direction.indexOf("S") !== -1) {
@@ -84,7 +84,7 @@ export default function SelectionCanvas() {
         e.preventDefault();
         e.stopPropagation();
         const cursorPos = getCursorFromEvent(e);
-        if(cursorPos[2] === false) return
+        if (cursorPos[2] === false) return
         // check for inverted axis
         let invertX = false, invertY = false;
         if (cursor.start.x > cursor.end.x) invertX = true;
@@ -107,7 +107,7 @@ export default function SelectionCanvas() {
 
     const handleDragStart = (e) => {
         const cursorPos = getCursorFromEvent(e);
-        if(cursorPos[2] === false) return
+        if (cursorPos[2] === false) return
         let startDeltaX = 0, startDeltaY = 0, endDeltaX = 0, endDeltaY = 0;
         startDeltaX = cursorPos[0] - cursor.start.x;
         startDeltaY = cursorPos[1] - cursor.start.y;
@@ -119,7 +119,7 @@ export default function SelectionCanvas() {
     const handleDrag = (e) => {
         e.preventDefault();
         const cursorPos = getCursorFromEvent(e);
-        if(cursorPos[2] === false) return
+        if (cursorPos[2] === false) return
         setCursor({
             ...cursor,
             start: { x: cursorPos[0] - dragDelta[0], y: cursorPos[1] - dragDelta[1] },
@@ -271,9 +271,15 @@ export default function SelectionCanvas() {
                     top: selectionCircle.top,
                     left: selectionCircle.left,
                     width: selectionCircle.diameter,
-                    height: selectionCircle.diameter
+                    height: selectionCircle.diameter,
+                    rotate: subtool.angle + "deg"
                 }}
-            />
+            >
+                {!subtool.stretch && <div
+                    id="drawDocSelectionCirclePoint"
+                    draggable
+                />}
+            </div>
             <div
                 id="drawDocSelectionEllipse"
                 style={{
@@ -285,6 +291,24 @@ export default function SelectionCanvas() {
                     rotate: subtool.angle + "deg"
                 }}
             >
+                <div
+                    id="drawDocSelectionEllipsePoint1"
+                    draggable
+                    style={{
+                        top: selectionEllipse.width > selectionEllipse.height ? "50%" : "-40px",
+                        left: selectionEllipse.width > selectionEllipse.height ? "-40px" : "50%",
+                        rotate: "-90deg"
+                    }}
+                />
+                <div
+                    id="drawDocSelectionEllipsePoint2"
+                    draggable
+                    style={{
+                        bottom: selectionEllipse.width > selectionEllipse.height ? "50%" : "-40px",
+                        right: selectionEllipse.width > selectionEllipse.height ? "-40px" : "50%",
+                        rotate: "90deg"
+                    }}
+                />
             </div>
         </>
     )
