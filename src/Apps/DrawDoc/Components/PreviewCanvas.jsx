@@ -206,16 +206,16 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             id="previewCanvas"
             height={context.dimentions.height}
             width={context.dimentions.width}
-            onMouseDown={(e) => handleCursor(e)}
-            onMouseUp={(e) => handleCursor(e)}
-            onMouseMove={(e) => handleCursor(e)}
-            onMouseLeave={(e) => handleCursor(e)}
-            onMouseEnter={(e) => handleCursor(e)}
-            onTouchStart={(e) => handleTouch(e)}
-            onTouchEnd={(e) => handleTouch(e)}
-            onTouchMove={(e) => handleTouch(e)}
-            onTouchCancel={(e) => handleTouch(e)}
-            onContextMenu={(e) => handleContextMenu(e)}
+            onMouseDown={(e) => {if(!cursor.selecting)handleCursor(e)}}
+            onMouseUp={(e) => {if(!cursor.selecting)handleCursor(e)}}
+            onMouseMove={(e) => {if(!cursor.selecting)handleCursor(e)}}
+            onMouseLeave={(e) => {if(!cursor.selecting)handleCursor(e)}}
+            onMouseEnter={(e) => {if(!cursor.selecting)handleCursor(e)}}
+            onTouchStart={(e) => {if(!cursor.selecting)handleTouch(e)}}
+            onTouchEnd={(e) => {if(!cursor.selecting)handleTouch(e)}}
+            onTouchMove={(e) => {if(!cursor.selecting)handleTouch(e)}}
+            onTouchCancel={(e) => {if(!cursor.selecting)handleTouch(e)}}
+            onContextMenu={(e) => {if(!cursor.selecting)handleTouch(e)}}
         />
     );
 };

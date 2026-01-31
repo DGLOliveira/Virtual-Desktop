@@ -83,6 +83,7 @@ export function ContextProvider({ children }) {
         start: { x: 0, y: 0},
         end: { x: 0, y: 0},
         down: false,
+        selecting:false
       });
       const [view, setView] = useState({
         toolBar: true,

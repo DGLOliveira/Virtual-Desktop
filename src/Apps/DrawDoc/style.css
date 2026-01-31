@@ -164,6 +164,7 @@ canvas-container {
   border: 2px dashed white;
   mix-blend-mode: difference;
   border-radius: 50%;
+  cursor: move;
 }
 
 canvas-container>textarea {

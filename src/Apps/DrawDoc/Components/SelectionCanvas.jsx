@@ -65,6 +65,7 @@ export default function SelectionCanvas() {
 
     const handleResizeStart = (e, direction) => {
         e.stopPropagation();
+        setCursor({ ...cursor, selecting: true });
         const cursorPos = getCursorFromEvent(e);
         let newDeltaX = 0;
         let newDeltaY = 0;
@@ -82,11 +83,7 @@ export default function SelectionCanvas() {
         setResizeDelta([newDeltaX, newDeltaY]);
     }
 
-    const handleResize = (e, direction) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const cursorPos = getCursorFromEvent(e);
-        if (cursorPos[2] === false) return
+    function handleResizeCommon(e, cursorPos, direction) {
         // check for inverted axis
         let invertX = false, invertY = false;
         if (cursor.start.x > cursor.end.x) invertX = true;
@@ -103,13 +100,33 @@ export default function SelectionCanvas() {
         } else if (direction.indexOf("W") !== -1) {
             invertX ? newEndX = cursorPos[0] - resizeDelta[0] : newStartX = cursorPos[0] - resizeDelta[0]
         }
-        setCursor({ ...cursor, start: { x: newStartX, y: newStartY }, end: { x: newEndX, y: newEndY } })
+        return [newStartX, newStartY, newEndX, newEndY]
+    }
 
+    const handleResize = (e, direction) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const cursorPos = getCursorFromEvent(e);
+        if (cursorPos[2] === false) return
+        const resizeResult = handleResizeCommon(e, cursorPos, direction);
+        setCursor({ ...cursor, start: { x: resizeResult[0], y: resizeResult[1] }, end: { x: resizeResult[2], y: resizeResult[3] } })
+    }
+
+    const handleResizeEnd = (e, direction) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const cursorPos = getCursorFromEvent(e);
+        if (cursorPos[2] === false) return
+        const resizeResult = handleResizeCommon(e, cursorPos, direction);
+        setCursor({ ...cursor, start: { x: resizeResult[0], y: resizeResult[1] }, end: { x: resizeResult[2], y: resizeResult[3] }, selecting: false })
     }
 
     const handleDragStart = (e) => {
+        e.stopPropagation();
+        setCursor({ ...cursor, selecting: true });
         const cursorPos = getCursorFromEvent(e);
         if (cursorPos[2] === false) return
+        if(e.target.id !== "drawDocSelectionBox" && e.target.id !== "drawDocSelectionEllipse" && e.target.id !== "drawDocSelectionCircle") return
         let startDeltaX = 0, startDeltaY = 0, endDeltaX = 0, endDeltaY = 0;
         startDeltaX = cursorPos[0] - cursor.start.x;
         startDeltaY = cursorPos[1] - cursor.start.y;
@@ -120,8 +137,10 @@ export default function SelectionCanvas() {
 
     const handleDrag = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const cursorPos = getCursorFromEvent(e);
         if (cursorPos[2] === false) return
+        if(e.target.id !== "drawDocSelectionBox" && e.target.id !== "drawDocSelectionEllipse" && e.target.id !== "drawDocSelectionCircle") return
         setCursor({
             ...cursor,
             start: { x: cursorPos[0] - dragDelta[0], y: cursorPos[1] - dragDelta[1] },
@@ -129,7 +148,22 @@ export default function SelectionCanvas() {
         })
     }
 
+    const handleDragEnd = (e) =>{
+        e.preventDefault();
+        e.stopPropagation();
+        const cursorPos = getCursorFromEvent(e);
+        if (cursorPos[2] === false) return
+        if(e.target.id !== "drawDocSelectionBox" && e.target.id !== "drawDocSelectionEllipse" && e.target.id !== "drawDocSelectionCircle") return
+        setCursor({
+            ...cursor,
+            start: { x: cursorPos[0] - dragDelta[0], y: cursorPos[1] - dragDelta[1] },
+            end: { x: cursorPos[0] - dragDelta[2], y: cursorPos[1] - dragDelta[3] },
+            selecting: false
+        })
+    }
+
     const handleCircleRotateStart = (e) => {
+        setCursor({ ...cursor, selecting: true });
         const cursorPos = getCursorFromEvent(e);
         const boundary = document.getElementById("previewCanvas").getBoundingClientRect();
         if (cursorPos[2] === false) return
@@ -157,6 +191,11 @@ export default function SelectionCanvas() {
         else if (cursorPos[0] < centerX && cursorPos[1] > centerY) angle = 180 + 90 - currAngleDeg
         else if (cursorPos[0] < centerX && cursorPos[1] < centerY) angle = 270 + currAngleDeg
         setSubTool({...subtool, angle: angle})
+    }
+
+    const handleCircleRotateEnd = (e) => {
+        handleCircleRotate(e);
+        setCursor({ ...cursor, selecting: false });
     }
 
     //Handles when each selection div should be displayed
@@ -237,63 +276,63 @@ export default function SelectionCanvas() {
                 draggable
                 onDragStart={(e) => { if (!cursor.down) handleDragStart(e) }}
                 onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
-                onDragEnd={(e) => { if (!cursor.down) handleDrag(e) }}
+                onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
             >
                 <div
                     id="drawDocSelectionBoxNW"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "NW") }}
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "NW") }}
-                    onDragEnd={(e) => { if (!cursor.down) handleResize(e, "NW") }}
+                    onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "NW") }}
                 />
                 <div
                     id="drawDocSelectionBoxN"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "N") }}
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "N") }}
-                    onDragEnd={(e) => { if (!cursor.down) handleResize(e, "N") }}
+                    onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "N") }}
                 />
                 <div
                     id="drawDocSelectionBoxNE"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "NE") }}
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "NE") }}
-                    onDragEnd={(e) => { if (!cursor.down) handleResize(e, "NE") }}
+                    onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "NE") }}
                 />
                 <div
                     id="drawDocSelectionBoxE"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "E") }}
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "E") }}
-                    onDragEnd={(e) => { if (!cursor.down) handleResize(e, "E") }}
+                    onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "E") }}
                 />
                 <div
                     id="drawDocSelectionBoxSE"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "SE") }}
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "SE") }}
-                    onDragEnd={(e) => { if (!cursor.down) handleResize(e, "SE") }}
+                    onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "SE") }}
                 />
                 <div
                     id="drawDocSelectionBoxS"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "S") }}
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "S") }}
-                    onDragEnd={(e) => { if (!cursor.down) handleResize(e, "S") }}
+                    onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "S") }}
                 />
                 <div
                     id="drawDocSelectionBoxSW"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "SW") }}
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "SW") }}
-                    onDragEnd={(e) => { if (!cursor.down) handleResize(e, "SW") }}
+                    onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "SW") }}
                 />
                 <div
                     id="drawDocSelectionBoxW"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "W") }}
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "W") }}
-                    onDragEnd={(e) => { if (!cursor.down) handleResize(e, "W") }}
+                    onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "W") }}
                 />
             </div>
             <div
@@ -306,6 +345,10 @@ export default function SelectionCanvas() {
                     height: selectionEllipse.height,
                     rotate: subtool.angle + "deg"
                 }}
+                draggable
+                onDragStart={(e) => { if (!cursor.down) handleDragStart(e) }}
+                onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
+                onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
             >
             </div>
             <div
@@ -318,13 +361,17 @@ export default function SelectionCanvas() {
                     height: selectionCircle.diameter,
                     rotate: subtool.angle + "deg"
                 }}
+                draggable
+                onDragStart={(e) => { if (!cursor.down) handleDragStart(e) }}
+                onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
+                onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
             >
                 <div
                     id="drawDocSelectionCirclePoint"
                     draggable
                     onDragStart={(e) => { if (!cursor.down) handleCircleRotateStart(e) }}
                     onDrag={(e) => { if (!cursor.down) handleCircleRotate(e) }}
-                    onDragEnd={(e) => { if (!cursor.down) handleCircleRotate(e) }}
+                    onDragEnd={(e) => { if (!cursor.down) handleCircleRotateEnd(e) }}
                 />
             </div>
         </>
