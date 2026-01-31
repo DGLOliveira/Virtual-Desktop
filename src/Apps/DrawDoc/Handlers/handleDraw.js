@@ -224,7 +224,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             return pixelData.data[currY * imageData.width + currX];
         };
         //break drawBucket if color is the same as target, or if it is out of bounds
-        let targetColor = getPixel(Math.floor((x - boundX) * scaleX), Math.floor((y - boundY) * scaleY));
+        let targetColor = getPixel(Math.floor(x), Math.floor(y));
         if (targetColor === -1 || targetColor === selectedColor) return;
         //add line to check to spans
         const addSpan = (left, right, line, direction) => {
