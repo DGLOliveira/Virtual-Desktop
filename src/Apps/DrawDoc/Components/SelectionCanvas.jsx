@@ -221,7 +221,11 @@ export default function SelectionCanvas() {
             } else {
                 setSelectionBox({ ...selectionBox, display: "none" })
             }
-        } else {
+        } else if(tool === "Text") {
+            setSelectionBox({ ...selectionBox, display: "block" })
+            setSelectionCircle({ ...selectionCircle, display: "none" })
+            setSelectionEllipse({ ...selectionEllipse, display: "none" })
+        }else {
             setSelectionBox({ ...selectionBox, display: "none" })
             setSelectionCircle({ ...selectionCircle, display: "none" })
             setSelectionEllipse({ ...selectionEllipse, display: "none" })
@@ -374,6 +378,27 @@ export default function SelectionCanvas() {
                     onDragEnd={(e) => { if (!cursor.down) handleCircleRotateEnd(e) }}
                 />
             </div>
+                {tool === "Text" && 
+                <textarea id="drawDocSelectionBoxText"
+                style={{
+                    display:"absolute",
+                    display: selectionBox.display,
+                    top: selectionBox.top,
+                    left: selectionBox.left,
+                    width: selectionBox.width,
+                    height: selectionBox.height,
+                    resize:"none",
+                    border:"none",
+                    outline:"none",
+                    background:"transparent",
+                    color: context.color.selected,
+                    fontSize: context.size * context.zoom + "px",
+                    fontFamily: context.text.fontFamily
+                }}
+                value={context.text.text}
+                onChange={(e)=>context.setText({...context.text, text: e.target.value})}
+                 />
+                }
         </>
     )
 }

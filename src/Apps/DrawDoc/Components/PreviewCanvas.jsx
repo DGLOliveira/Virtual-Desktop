@@ -215,7 +215,7 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             onTouchEnd={(e) => {if(!cursor.selecting)handleTouch(e)}}
             onTouchMove={(e) => {if(!cursor.selecting)handleTouch(e)}}
             onTouchCancel={(e) => {if(!cursor.selecting)handleTouch(e)}}
-            onContextMenu={(e) => {if(!cursor.selecting)handleTouch(e)}}
+            onContextMenu={(e) => {if(!cursor.selecting)handleContextMenu(e)}}
         />
     );
 };

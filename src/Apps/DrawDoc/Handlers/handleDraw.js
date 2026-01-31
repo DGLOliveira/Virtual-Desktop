@@ -306,11 +306,18 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     const drawText = () => {
         ctx.fillStyle = param.selectedColor;
         ctx.font = String(param.size + "px " + param.text.fontFamily);
-        ctx.fillText(
-            param.text.text,
-            endX,
-            endY,
-        );
+        let linesArr = param.text.text.split("\n");
+        let lineIndex = 0;
+        let maxWidth = endX > startX ? endX - startX : startX - endX;
+        //TODO: split array where the strings go beyond the max width, use ctx.measureText(text)
+        //TODO: Correct line spacing according to font family
+        linesArr.forEach((value, index) => {
+            ctx.fillText(
+                value,
+                startX,
+                startY + param.size * 0.95 + (param.size*1.14 * index)
+            );
+        })
     };
 
     const drawSelect = () => {
@@ -321,7 +328,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                         startX,
                         startY,
                         endX - startX,
-                        endY- startY
+                        endY - startY
                     );
                     param.setClipboard({
                         data: data,
@@ -349,7 +356,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                     ctx.fillRect(
                         startX,
                         startY,
-                        endX - startX ,
+                        endX - startX,
                         endY - startY
                     );
                 }
