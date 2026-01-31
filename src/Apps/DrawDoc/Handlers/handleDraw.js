@@ -304,20 +304,40 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     };
 
     const drawText = () => {
-        ctx.fillStyle = param.selectedColor;
-        ctx.font = String(param.size + "px " + param.text.fontFamily);
-        let linesArr = param.text.text.split("\n");
-        let lineIndex = 0;
-        let maxWidth = endX > startX ? endX - startX : startX - endX;
-        //TODO: split array where the strings go beyond the max width, use ctx.measureText(text)
-        //TODO: Correct line spacing according to font family
+        ctx.fillStyle = param.selectedColor
+        ctx.font = String(param.size + "px " + param.text.fontFamily)
+        let linesArr = param.text.text.split("\n")
+        let lineIndex = 0
+        let maxWidth = endX > startX ? endX - startX : startX - endX
+        let left = endX > startX ? startX : endX
+        let top = endY > startY ? startY : endY
+        let whileBreak = 0
+        const MAX_DEPTH = 500
+        while (lineIndex < linesArr.length && whileBreak < MAX_DEPTH) {
+            if (ctx.measureText(linesArr[lineIndex]).width > maxWidth) {
+                let firstText = linesArr[lineIndex][0]
+                let firstTextIndex = 1
+                let whileBreak2 = 0
+                while (ctx.measureText(firstText).width < maxWidth && whileBreak2 < MAX_DEPTH) {
+                    firstText += linesArr[lineIndex][firstTextIndex]
+                    firstTextIndex++
+                    whileBreak2++
+                }
+                let lastText = linesArr[lineIndex].substring(firstTextIndex - 1, linesArr[lineIndex].length)
+                linesArr[lineIndex] = firstText.substring(0, firstTextIndex - 1)
+                linesArr = linesArr.toSpliced(lineIndex + 1, 0, lastText)
+            }
+            lineIndex++
+            whileBreak++
+        };
         linesArr.forEach((value, index) => {
             ctx.fillText(
                 value,
-                startX,
-                startY + param.size * 0.95 + (param.size*1.14 * index)
+                left,
+                top + param.size * 0.95 + (param.size * 1.14 * index)
             );
         })
+
     };
 
     const drawSelect = () => {

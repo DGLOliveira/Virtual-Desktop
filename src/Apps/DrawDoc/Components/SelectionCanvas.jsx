@@ -381,17 +381,12 @@ export default function SelectionCanvas() {
                 {tool === "Text" && 
                 <textarea id="drawDocSelectionBoxText"
                 style={{
-                    display:"absolute",
                     display: selectionBox.display,
                     top: selectionBox.top,
                     left: selectionBox.left,
                     width: selectionBox.width,
                     height: selectionBox.height,
-                    resize:"none",
-                    border:"none",
-                    outline:"none",
-                    background:"transparent",
-                    color: context.color.selected,
+                    caretColor: context.text.color,
                     fontSize: context.size * context.zoom + "px",
                     fontFamily: context.text.fontFamily
                 }}

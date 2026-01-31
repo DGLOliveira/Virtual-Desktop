@@ -64,65 +64,74 @@ canvas-container {
   cursor: move;
 }
 
-#drawDocSelectionBox>*{
-  position:absolute;
-  height:10px;
-  width:10px;
+#drawDocSelectionBox>* {
+  position: absolute;
+  height: 10px;
+  width: 10px;
   background: black;
   border: 2px solid white;
   box-sizing: border-box;
 }
-#drawDocSelectionBoxNW{
-  top: -12px;
-  left: -12px;
-  cursor: nwse-resize;
-}
-#drawDocSelectionBoxN{
-  top: -12px;
-  left: 50%;
-  cursor: ns-resize;
-  transform: translateX(-50%);
-}
-#drawDocSelectionBoxNE{
-  top: -12px;
-  right: -12px;
-  cursor: nesw-resize;
-}
-#drawDocSelectionBoxE{
-  top: 50%;
-  right: -12px;
-  cursor: ew-resize;
-  transform: translateY(-50%);
-}
-#drawDocSelectionBoxSE{
-  bottom: -12px;
-  right: -12px;
-  cursor: nwse-resize;
-}
-#drawDocSelectionBoxS{
-  bottom: -12px;
-  left: 50%;
-  cursor: ns-resize;
-  transform: translateX(-50%);
-}
-#drawDocSelectionBoxSW{
-  bottom: -12px;
-  left: -12px;
-  cursor: nesw-resize;
-}
-#drawDocSelectionBoxW{
-  top: 50%;
-  left: -12px;
-  cursor: ew-resize;
-  transform: translateY(-50%);
-}
-#drawDocSelectionBoxNW{
+
+#drawDocSelectionBoxNW {
   top: -12px;
   left: -12px;
   cursor: nwse-resize;
 }
 
-#drawDocSelectionCircle{
+#drawDocSelectionBoxN {
+  top: -12px;
+  left: 50%;
+  cursor: ns-resize;
+  transform: translateX(-50%);
+}
+
+#drawDocSelectionBoxNE {
+  top: -12px;
+  right: -12px;
+  cursor: nesw-resize;
+}
+
+#drawDocSelectionBoxE {
+  top: 50%;
+  right: -12px;
+  cursor: ew-resize;
+  transform: translateY(-50%);
+}
+
+#drawDocSelectionBoxSE {
+  bottom: -12px;
+  right: -12px;
+  cursor: nwse-resize;
+}
+
+#drawDocSelectionBoxS {
+  bottom: -12px;
+  left: 50%;
+  cursor: ns-resize;
+  transform: translateX(-50%);
+}
+
+#drawDocSelectionBoxSW {
+  bottom: -12px;
+  left: -12px;
+  cursor: nesw-resize;
+}
+
+#drawDocSelectionBoxW {
+  top: 50%;
+  left: -12px;
+  cursor: ew-resize;
+  transform: translateY(-50%);
+}
+
+#drawDocSelectionBoxNW {
+  top: -12px;
+  left: -12px;
+  cursor: nwse-resize;
+}
+
+#drawDocSelectionCircle {
   position: absolute;
   background: transparent;
   border: 2px dashed white;
@@ -131,34 +140,34 @@ canvas-container {
   border-radius: 50%;
 }
 
-#drawDocSelectionCircle>*{
-  position:absolute;
-  top:-40px;
+#drawDocSelectionCircle>* {
+  position: absolute;
+  top: -40px;
   left: 50%;
   transform: translateX(-50%);
-  height:10px;
-  width:10px;
+  height: 10px;
+  width: 10px;
   background: black;
   border: 2px solid white;
   border-radius: 50%;
   box-sizing: border-box;
-  cursor: 
+  cursor:
     url("./Assets/Font Awesome 6/arrows-rotate.svg") 64 64,
     auto;
 }
 
-#drawDocSelectionCircle>*::before{
+#drawDocSelectionCircle>*::before {
   position: relative;
   display: block;
-  content:"";
-  top:10px;
-  left:1.5px;
-  height:28px;
-  width:0px;
+  content: "";
+  top: 10px;
+  left: 1.5px;
+  height: 28px;
+  width: 0px;
   border-left: 2px dashed white;
 }
 
-#drawDocSelectionEllipse{
+#drawDocSelectionEllipse {
   position: absolute;
   background: transparent;
   border: 2px dashed white;
@@ -167,11 +176,14 @@ canvas-container {
   cursor: move;
 }
 
-canvas-container>textarea {
+#drawDocSelectionBoxText {
   position: absolute;
+  resize: none;
+  border: none;
+  outline: none;
+  color: transparent;
   background: transparent;
-  border-style: dashed;
-  width: auto;
+  overflow-y: visible;
 }
 
 #drawDocBottomNavBar {
