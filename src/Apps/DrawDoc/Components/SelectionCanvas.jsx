@@ -298,13 +298,7 @@ export default function SelectionCanvas() {
                 onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
             >
                 {tool === "Text" &&
-                    <div
-                        id="drawDocSelectionBoxDragPivot"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleDragStart(e) }}
-                        onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
-                        onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
-                    />
+                    <div id="drawDocSelectionBoxDragPivot" />
                 }
                 <div
                     id="drawDocSelectionBoxNW"
@@ -402,7 +396,7 @@ export default function SelectionCanvas() {
                     onDragEnd={(e) => { if (!cursor.down) handleCircleRotateEnd(e) }}
                 />
             </div>
-            {tool === "Text" &&
+            {tool === "Text" && !cursor.down &&
                 <textarea id="drawDocSelectionBoxText"
                     style={{
                         display: selectionBox.display,
