@@ -305,6 +305,8 @@ export const handleDraw = (canvas, cursor, param, preview) => {
 
     const drawText = () => {
         ctx.fillStyle = param.selectedColor
+        ctx.strokeStyle = param.selectedColor === param.color1 ? param.color2 : param.color1
+        ctx.lineWidth = param.text.strokeWidth
         ctx.font = String(param.size + "px " + param.text.fontFamily)
         let linesArr = param.text.text.split("\n")
         let lineIndex = 0
@@ -331,11 +333,19 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             whileBreak++
         };
         linesArr.forEach((value, index) => {
+            if(param.text.fill){
             ctx.fillText(
                 value,
                 left,
-                top + param.size * 0.95 + (param.size * 1.14 * index)
+                top + param.size * 0.95 + (param.size * 1.2 * index)
+            );}
+            if(param.text.stroke){
+            ctx.strokeText(
+                value,
+                left,
+                top + param.size * 0.95 + (param.size * 1.2 * index)
             );
+            }
         })
 
     };

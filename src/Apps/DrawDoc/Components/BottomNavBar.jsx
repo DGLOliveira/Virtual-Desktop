@@ -4,11 +4,11 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
   const context = useContext(Context);
   const handleContextMenu = (event) => {
     event.preventDefault();
-    let content = { "Hide": { action:() => setAction("bottomNavBar")}, }
+    let content = { "Hide": { action: () => setAction("bottomNavBar") }, }
     contextMenu.setOpen();
     contextMenu.setPosition(event.clientX, event.clientY);
     contextMenu.setContent(content);
-};
+  };
   if (context.view.bottomNavBar) {
     return (
       <nav id="drawDocBottomNavBar" onContextMenu={(event) => handleContextMenu(event)}>
@@ -20,12 +20,31 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
             ><small>Confirm</small>
             </button>
             <vertical-rect ></vertical-rect>
+            <button
+              title="Use Fill"
+              className={context.text.fill ? "buttonActive" : ""}
+              onClick={() => { context.setText({ ...context.text, fill: !context.text.fill }) }}
+            >
+              <small>Fill</small>
+            </button>
+            <vertical-rect ></vertical-rect>
+            <button
+              title="Use Stroke"
+              className={context.text.stroke ? "buttonActive" : ""}
+              onClick={() => { context.setText({ ...context.text, stroke: !context.text.stroke }) }}
+            >
+              <small>Stroke</small>
+            </button>
             <input
-              type="text"
-              title="Text Input"
-              value={context.text.text}
-              onChange={(e) => context.setText({ ...context.text, text: e.target.value })}
+              title="Stroke Width"
+              type="number"
+              step="1"
+              min="1"
+              max={context.size-1}
+              value={context.text.strokeWidth}
+              onChange={(e) => { context.setText({ ...context.text, strokeWidth: e.target.value }) }}
             />
+            <vertical-rect ></vertical-rect>
           </>}
         {context.tool === "Select" ?
           <>{action === "clipping" && context.clipboard.state === "carry" ?
@@ -54,23 +73,23 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
               onClick={() => setAction("confirm")}
             ><small>Confirm</small></button>
             <vertical-rect ></vertical-rect>
-            {context.subTool.shape === "Curve" && 
-            <button
-            title="Cancel Shape"
-            onClick={() => setAction("cancel")}
-            ><small>Cancel</small></button>
-              }
+            {context.subTool.shape === "Curve" &&
+              <button
+                title="Cancel Shape"
+                onClick={() => setAction("cancel")}
+              ><small>Cancel</small></button>
+            }
             {context.subTool.shape !== "Line" && context.subTool.shape !== "Curve" ?
               <>
                 <button
                   title="Fill"
-                  className={context.subTool.fill ? "appMenuButtonON" : ""}
+                  className={context.subTool.fill ? "buttonActive" : ""}
                   onClick={() => context.setSubTool({ ...context.subTool, fill: !context.subTool.fill })}
                 ><small>Fill</small></button>
                 <vertical-rect ></vertical-rect>
                 <button
                   title="Stretch"
-                  className={context.subTool.stretch ? "appMenuButtonON" : ""}
+                  className={context.subTool.stretch ? "buttonActive" : ""}
                   onClick={() => context.setSubTool({ ...context.subTool, stretch: !context.subTool.stretch })}
                 ><small>Stretch</small>
                 </button>

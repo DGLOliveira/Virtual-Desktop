@@ -453,10 +453,12 @@ button:disabled {
 
 .buttonActive {
   background: var(--GeneralButtonColorHover);
+  text-decoration: underline;
 }
 
 .buttonActiveRed:hover:enabled {
   background: red;
+  text-decoration: underline;
 }
 
 .expandHeight {

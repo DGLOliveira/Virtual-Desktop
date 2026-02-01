@@ -66,10 +66,9 @@ export function ContextProvider({ children }) {
       const [size, setSize] = useState(16);
       const [text, setText] = useState({
         text: "",
-        top: 0,
-        left: 0,
-        color: "",
-        fontSize: "",
+        fill: true,
+        stroke: false,
+        strokeWidth:2,
         fontFamily: "Arial",
         state: "none",
       });

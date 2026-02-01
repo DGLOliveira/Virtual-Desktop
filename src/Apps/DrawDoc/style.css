@@ -241,10 +241,7 @@ canvas-container {
     auto;
 }
 
-.cursorText {
-  cursor: text;
-}
-
+.cursorText,
 .cursorMagnifier,
 .cursorSelect,
 .cursorShape {
