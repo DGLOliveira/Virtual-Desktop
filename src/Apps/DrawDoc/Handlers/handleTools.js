@@ -23,10 +23,9 @@ export const handleTools = (canvas, cursor, setCursor, params, action, setAction
         cursor.current.x !== 0 &&
         cursor.current.y !== 0
       ) {
-        const boundary = canvas.getBoundingClientRect();
         params.setText({
-          ...params.text,
-          state: "preview",
+          ...params.text, 
+          state: "preview"
         });
       }
       if (action === "confirm") {

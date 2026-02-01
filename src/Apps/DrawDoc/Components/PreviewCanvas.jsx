@@ -39,59 +39,69 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
         setClipboard,
     };
 
-    const handleCursor = (e) => {
+    const getCorrectedPosition = (x, y) => {
         let canvas = canvasPreviewRef.current;
         let ctx = canvas.getContext('2d', { alpha: true });
         let boundary = canvas.getBoundingClientRect();
-        const height = ctx.canvas.height;
-        const width = ctx.canvas.width;
-        const scaleX = width / boundary.width;
-        const scaleY = height / boundary.height;
-        const trueX = (e.clientX - boundary.left) * scaleX;
-        const trueY = (e.clientY - boundary.top) * scaleY;
+        const scaleX = (ctx.canvas.width / boundary.width);
+        const scaleY = (ctx.canvas.height / boundary.height);
+        const newX = (x - boundary.left) * scaleX;
+        const newY = (y - boundary.top) * scaleY;
+        return { x: newX, y: newY };
+    };
+
+    const handleCursor = (e) => {
+        const pos = getCorrectedPosition(e.clientX, e.clientY);
         if (e.button === 0) {
             switch (e.type) {
                 case "mousedown":
                     if (cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: trueX, y: trueY },
-                            end: { x: trueX, y: trueY },
+                            current: { x: pos.x, y: pos.y },
+                            end: { x: pos.x, y: pos.y },
                         });
                     } else {
                         setCursor({
                             ...cursor,
                             down: true,
-                            start: { x: trueX, y: trueY },
+                            start: { x: pos.x, y: pos.y },
                         });
                     }
                     break;
                 case "mouseup":
                     setCursor({
                         ...cursor,
-                        end: { x: trueX, y: trueY },
+                        end: { x: pos.x, y: pos.y },
                         down: false
                     });
                     break;
                 case "mousemove":
-                    if (!cursor.down) {
+                    if (e.buttons === 0) {
                         setCursor({
                             ...cursor,
-                            current: { x: trueX, y: trueY }
+                            down: false,
+                            current: { x: pos.x, y: pos.y },
+                            end: { x: pos.x, y: pos.y },
+                        });
+                    } else if (!cursor.down) {
+                        setCursor({
+                            ...cursor,
+                            current: { x: pos.x, y: pos.y }
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
-                            current: { x: trueX, y: trueY },
-                            end: { x: trueX, y: trueY },
+                            current: { x: pos.x, y: pos.y },
+                            end: { x: pos.x, y: pos.y },
                         })
                     }
                     break;
                 case "mouseleave":
                     setCursor({
                         ...cursor,
-                        current: { x: trueX, y: trueY },
+                        current: { x: pos.x, y: pos.y },
                     });
                     break;
                 case "mouseenter":
@@ -99,15 +109,15 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                         setCursor({
                             ...cursor,
                             down: true,
-                            current: { x: trueX, y: trueY },
-                            end: { x: trueX, y: trueY },
+                            current: { x: pos.x, y: pos.y },
+                            end: { x: pos.x, y: pos.y },
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
                             down: false,
-                            current: { x: trueX, y: trueY },
+                            current: { x: pos.x, y: pos.y },
                         })
                     }
                     break;
@@ -119,36 +129,28 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
 
     const handleTouch = (e) => {
         e.preventDefault();
-        let canvas = canvasPreviewRef.current;
-        let ctx = canvas.getContext('2d', { alpha: true });
-        let boundary = canvas.getBoundingClientRect();
-        const height = ctx.canvas.height;
-        const width = ctx.canvas.width;
-        const scaleX = width / boundary.width;
-        const scaleY = height / boundary.height;
-        const trueX = (e.touches[0].clientX - boundary.left) * scaleX;
-        const trueY = (e.touches[0].clientY - boundary.top) * scaleY;
+        const pos = getCorrectedPosition(e.touches[0].clientX, e.touches[0].clientY);
         if (e.touches.length === 1) {
             switch (e.type) {
                 case "touchstart":
                     if (cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: trueX, y: trueY },
-                            end: { x: trueX, y: trueY },
+                            current: { x: pos.x, y: pos.y },
+                            end: { x: pos.x, y: pos.y },
                         });
                     } else {
                         setCursor({
                             ...cursor,
                             down: true,
-                            start: { x: trueX, y: trueY }
+                            start: { x: pos.x, y: pos.y }
                         });
                     }
                     break;
                 case "touchend":
                     setCursor({
                         ...cursor,
-                        end: { x: trueX, y: trueY },
+                        end: { x: pos.x, y: pos.y },
                         down: false
                     });
                     break;
@@ -156,14 +158,14 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                     if (!cursor.down) {
                         setCursor({
                             ...cursor,
-                            current: { x: trueX, y: trueY }
+                            current: { x: pos.x, y: pos.y }
                         });
                     }
                     else {
                         setCursor({
                             ...cursor,
-                            current: { x: trueX, y: trueY },
-                            end: { x: trueX, y: trueY },
+                            current: { x: pos.x, y: pos.y },
+                            end: { x: pos.x, y: pos.y },
                         })
                     }
                     break;
@@ -174,7 +176,7 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             setCursor({
                 ...cursor,
                 current: { x: 0, y: 0 },
-                end: { x: trueX, y: trueY },
+                end: { x: pos.x, y: pos.y },
                 down: false
             });
         }
@@ -206,16 +208,16 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
             id="previewCanvas"
             height={context.dimentions.height}
             width={context.dimentions.width}
-            onMouseDown={(e) => {if(!cursor.selecting)handleCursor(e)}}
-            onMouseUp={(e) => {if(!cursor.selecting)handleCursor(e)}}
-            onMouseMove={(e) => {if(!cursor.selecting)handleCursor(e)}}
-            onMouseLeave={(e) => {if(!cursor.selecting)handleCursor(e)}}
-            onMouseEnter={(e) => {if(!cursor.selecting)handleCursor(e)}}
-            onTouchStart={(e) => {if(!cursor.selecting)handleTouch(e)}}
-            onTouchEnd={(e) => {if(!cursor.selecting)handleTouch(e)}}
-            onTouchMove={(e) => {if(!cursor.selecting)handleTouch(e)}}
-            onTouchCancel={(e) => {if(!cursor.selecting)handleTouch(e)}}
-            onContextMenu={(e) => {if(!cursor.selecting)handleContextMenu(e)}}
+            onMouseDown={(e) => { if (!cursor.selecting) handleCursor(e) }}
+            onMouseUp={(e) => { if (!cursor.selecting) handleCursor(e) }}
+            onMouseMove={(e) => { if (!cursor.selecting) handleCursor(e) }}
+            onMouseLeave={(e) => { if (!cursor.selecting) handleCursor(e) }}
+            onMouseEnter={(e) => { if (!cursor.selecting) handleCursor(e) }}
+            onTouchStart={(e) => { if (!cursor.selecting) handleTouch(e) }}
+            onTouchEnd={(e) => { if (!cursor.selecting) handleTouch(e) }}
+            onTouchMove={(e) => { if (!cursor.selecting) handleTouch(e) }}
+            onTouchCancel={(e) => { if (!cursor.selecting) handleTouch(e) }}
+            onContextMenu={(e) => { if (!cursor.selecting) handleContextMenu(e) }}
         />
     );
 };
