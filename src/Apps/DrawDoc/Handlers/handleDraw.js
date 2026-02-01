@@ -332,6 +332,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             lineIndex++
             whileBreak++
         };
+        console.log(param)
         linesArr.forEach((value, index) => {
             if(param.text.fill){
             ctx.fillText(

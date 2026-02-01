@@ -97,7 +97,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
               min="1"
               max="100"
               value={context.size}
-              onChange={(e) => context.setSize(e.target.value)}
+              onChange={(e) => context.setSize(Number(e.target.value))}
               title={context.tool === "Text" ? "Font Size" : context.tool === "Shape" ? "Line Width" : "Radius"}
             />
           </>

@@ -409,6 +409,7 @@ export default function SelectionCanvas() {
                         fontFamily: context.text.fontFamily,
                         lineHeight: context.text.lineHeight
                     }}
+                    spellCheck={false}
                     value={context.text.text}
                     onChange={(e) => context.setText({ ...context.text, text: e.target.value })}
                 />

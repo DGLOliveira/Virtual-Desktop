@@ -26,10 +26,6 @@ export const handleTools = (canvas, cursor, setCursor, params, action, setAction
         const boundary = canvas.getBoundingClientRect();
         params.setText({
           ...params.text,
-          left: cursor.start.x - boundary.x,
-          top: cursor.start.y - boundary.y,
-          color: params.selectedColor,
-          size: params.size + "px",
           state: "preview",
         });
       }
