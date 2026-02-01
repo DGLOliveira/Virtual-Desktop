@@ -6,6 +6,16 @@ button>label {
 #drawDocTopNavBar {
   color: inherit;
 }
+#drawDocTopNavBar>svg{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-left: 2px;
+  padding-right: 2px;
+}
 
 #drawDocTopNavBar>button:enabled {
   color: inherit;

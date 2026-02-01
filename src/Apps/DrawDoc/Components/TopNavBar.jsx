@@ -2,6 +2,10 @@ import { useContext } from "react";
 import { Context } from "../Context.jsx";
 import { BiUndo, BiRedo } from "react-icons/bi";
 import { TfiSave, TfiFile } from "react-icons/tfi";
+import { CiLineHeight } from "react-icons/ci";
+import { AiOutlineColumnHeight } from "react-icons/ai";
+import { RiFontSize, RiShapesLine } from "react-icons/ri";
+import { BiShapePolygon } from "react-icons/bi";
 
 import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicker.jsx";
 
@@ -50,7 +54,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
         <div style={{ display: "flex" }}>
           <button title="Color 1" className={context.color.selected === context.color[1] ? "buttonActive" : ""}
             onClick={() => context.setColor({ ...context.color, selected: context.color[1] })}>
-            <label htmlFor="drawColor1" style={{textDecoration: context.color.selected === context.color[1] ? "underline" : ""}} onClick={(e) => e.preventDefault()}>1</label>
+            <label htmlFor="drawColor1" style={{ textDecoration: context.color.selected === context.color[1] ? "underline" : "" }} onClick={(e) => e.preventDefault()}>1</label>
           </button>
           <ColorPicker
             color={context.color[1]}
@@ -62,7 +66,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
         <div style={{ display: "flex" }}>
           <button title="Color 2" className={context.color.selected === context.color[2] ? "buttonActive" : ""}
             onClick={() => context.setColor({ ...context.color, selected: context.color[2] })}>
-            <label htmlFor="drawColor2" style={{textDecoration: context.color.selected === context.color[2] ? "underline" : ""}} onClick={(e) => e.preventDefault()}>2</label>
+            <label htmlFor="drawColor2" style={{ textDecoration: context.color.selected === context.color[2] ? "underline" : "" }} onClick={(e) => e.preventDefault()}>2</label>
           </button>
           <ColorPicker
             color={context.color[2]}
@@ -86,53 +90,61 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
             <option value={4}>400%</option>
           </select>}
         {context.tool !== "Select" && context.tool !== "Pipette" && context.tool !== "Magnifier" && context.tool !== "Bucket" &&
-          <input
-            type="number"
-            min="1"
-            max="100"
-            value={context.size}
-            onChange={(e) => context.setSize(e.target.value)}
-            title={context.tool === "Text" ? "Font Size" : context.tool === "Shape" ? "Line Width" : "Radius"}
-          />
+          <>
+            <AiOutlineColumnHeight />
+            <input
+              type="number"
+              min="1"
+              max="100"
+              value={context.size}
+              onChange={(e) => context.setSize(e.target.value)}
+              title={context.tool === "Text" ? "Font Size" : context.tool === "Shape" ? "Line Width" : "Radius"}
+            />
+          </>
         }
         {context.tool === "Text" &&
-        <>
-          <select
-            title="Font Family"
-            value={context.text.fontFamily}
-            onChange={(e) => context.setText({ ...context.text, fontFamily: e.target.value })}
-          >
-            <option>Arial</option>
-            <option>Times New Roman</option>
-            <option>Monospace</option>
-            <option>Verdana</option>
-            <option>Georgia</option>
-            <option>Courier New</option>
-            <option>Tahoma</option>
-            <option>Garamond</option>
-            <option>Impact</option>
-            <option>Comic Sans MS</option>
-            <option>Lucida Console</option>
-            <option>Lucida Sans Unicode</option>
-            <option>Palatino Linotype</option>
-            <option>Symbol</option>
-            <option>Wingdings</option>
-            <option>Helvetica</option>
-          </select>
-        <vertical-rect ></vertical-rect>
-          <input
-            title="Line Height"
-            type="number"
-            step="0.01"
-            min="0"
-            value={context.text.lineHeight}
-            onChange={(e)=>{context.setText({...context.text, lineHeight: e.target.value})}}
-          />
-
+          <>
+            <vertical-rect ></vertical-rect>
+            <RiFontSize />
+            <select
+              title="Font Family"
+              value={context.text.fontFamily}
+              onChange={(e) => context.setText({ ...context.text, fontFamily: e.target.value })}
+            >
+              <option>Arial</option>
+              <option>Times New Roman</option>
+              <option>Monospace</option>
+              <option>Verdana</option>
+              <option>Georgia</option>
+              <option>Courier New</option>
+              <option>Tahoma</option>
+              <option>Garamond</option>
+              <option>Impact</option>
+              <option>Comic Sans MS</option>
+              <option>Lucida Console</option>
+              <option>Lucida Sans Unicode</option>
+              <option>Palatino Linotype</option>
+              <option>Symbol</option>
+              <option>Wingdings</option>
+              <option>Helvetica</option>
+            </select>
+            <vertical-rect ></vertical-rect>
+            <CiLineHeight />
+            <input
+              title="Line Height"
+              type="number"
+              step="0.01"
+              min="0"
+              value={context.text.lineHeight}
+              onChange={(e) => { context.setText({ ...context.text, lineHeight: e.target.value }) }}
+            />
+            <vertical-rect ></vertical-rect>
           </>
-          }
+        }
         {context.tool === "Shape" &&
           <>
+            <vertical-rect ></vertical-rect>
+            <RiShapesLine />
             <select
               title="Shape"
               value={context.subTool.shape}
@@ -147,14 +159,19 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
               <option>Arrow</option>
               <option>Heart</option>
             </select>
+            <vertical-rect ></vertical-rect>
             {(context.subTool.shape === "Polygon" || context.subTool.shape === "Star") &&
-              <input
-                type="number"
-                title="Sides"
-                value={context.subTool.sides}
-                onChange={(e) => context.setSubTool({ ...context.subTool, sides: e.target.value })}
-                min="3"
-                step="1" />
+              <>
+                <BiShapePolygon />
+                <input
+                  type="number"
+                  title="Sides"
+                  value={context.subTool.sides}
+                  onChange={(e) => context.setSubTool({ ...context.subTool, sides: e.target.value })}
+                  min="3"
+                  step="1" />
+                <vertical-rect ></vertical-rect>
+              </>
             }
           </>}
       </nav>
