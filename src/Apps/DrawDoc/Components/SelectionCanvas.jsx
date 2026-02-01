@@ -406,7 +406,8 @@ export default function SelectionCanvas() {
                         height: selectionBox.height,
                         caretColor: context.text.color,
                         fontSize: context.size * context.zoom + "px",
-                        fontFamily: context.text.fontFamily
+                        fontFamily: context.text.fontFamily,
+                        lineHeight: context.text.lineHeight
                     }}
                     value={context.text.text}
                     onChange={(e) => context.setText({ ...context.text, text: e.target.value })}

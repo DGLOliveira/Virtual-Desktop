@@ -337,13 +337,13 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             ctx.fillText(
                 value,
                 left,
-                top + param.size * 0.95 + (param.size * 1.2 * index)
+                top + param.size + (param.size * param.text.lineHeight * index)
             );}
             if(param.text.stroke){
             ctx.strokeText(
                 value,
                 left,
-                top + param.size * 0.95 + (param.size * 1.2 * index)
+                top + param.size + (param.size * param.text.lineHeight * index)
             );
             }
         })

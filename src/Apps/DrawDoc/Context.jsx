@@ -69,6 +69,7 @@ export function ContextProvider({ children }) {
         fill: true,
         stroke: false,
         strokeWidth:2,
+        lineHeight:1.2,
         fontFamily: "Arial",
         state: "none",
       });

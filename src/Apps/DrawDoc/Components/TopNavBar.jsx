@@ -96,6 +96,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
           />
         }
         {context.tool === "Text" &&
+        <>
           <select
             title="Font Family"
             value={context.text.fontFamily}
@@ -117,7 +118,19 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
             <option>Symbol</option>
             <option>Wingdings</option>
             <option>Helvetica</option>
-          </select>}
+          </select>
+        <vertical-rect ></vertical-rect>
+          <input
+            title="Line Height"
+            type="number"
+            step="0.01"
+            min="0"
+            value={context.text.lineHeight}
+            onChange={(e)=>{context.setText({...context.text, lineHeight: e.target.value})}}
+          />
+
+          </>
+          }
         {context.tool === "Shape" &&
           <>
             <select
