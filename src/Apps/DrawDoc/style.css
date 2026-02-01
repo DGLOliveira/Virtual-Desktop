@@ -131,6 +131,26 @@ canvas-container {
   cursor: nwse-resize;
 }
 
+#drawDocSelectionBoxDragPivot{
+  top:-44px;
+  left:50%;
+  transform: translateY(75%);
+  rotate:45deg;
+  cursor:move;
+}
+
+#drawDocSelectionBoxDragPivot::before{
+  position: relative;
+  display: block;
+  content: "";
+  top: 4px;
+  left: 15.5px;
+  height: 24px;
+  width: 0px;
+  rotate:-45deg;
+  border-left: 2px dashed white;
+}
+
 #drawDocSelectionCircle {
   position: absolute;
   background: transparent;

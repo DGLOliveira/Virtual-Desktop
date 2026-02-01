@@ -126,7 +126,12 @@ export default function SelectionCanvas() {
         setCursor({ ...cursor, selecting: true });
         const cursorPos = getCursorFromEvent(e);
         if (cursorPos[2] === false) return
-        if(e.target.id !== "drawDocSelectionBox" && e.target.id !== "drawDocSelectionEllipse" && e.target.id !== "drawDocSelectionCircle") return
+        if (e.target.id !== "drawDocSelectionBox"
+            && e.target.id !== "drawDocSelectionEllipse"
+            && e.target.id !== "drawDocSelectionCircle"
+            && e.target.id !== "drawDocSelectionBoxDragPivot") {
+            return
+        }
         let startDeltaX = 0, startDeltaY = 0, endDeltaX = 0, endDeltaY = 0;
         startDeltaX = cursorPos[0] - cursor.start.x;
         startDeltaY = cursorPos[1] - cursor.start.y;
@@ -140,7 +145,12 @@ export default function SelectionCanvas() {
         e.stopPropagation();
         const cursorPos = getCursorFromEvent(e);
         if (cursorPos[2] === false) return
-        if(e.target.id !== "drawDocSelectionBox" && e.target.id !== "drawDocSelectionEllipse" && e.target.id !== "drawDocSelectionCircle") return
+        if (e.target.id !== "drawDocSelectionBox"
+            && e.target.id !== "drawDocSelectionEllipse"
+            && e.target.id !== "drawDocSelectionCircle"
+            && e.target.id !== "drawDocSelectionBoxDragPivot") {
+            return
+        }
         setCursor({
             ...cursor,
             start: { x: cursorPos[0] - dragDelta[0], y: cursorPos[1] - dragDelta[1] },
@@ -148,12 +158,17 @@ export default function SelectionCanvas() {
         })
     }
 
-    const handleDragEnd = (e) =>{
+    const handleDragEnd = (e) => {
         e.preventDefault();
         e.stopPropagation();
         const cursorPos = getCursorFromEvent(e);
         if (cursorPos[2] === false) return
-        if(e.target.id !== "drawDocSelectionBox" && e.target.id !== "drawDocSelectionEllipse" && e.target.id !== "drawDocSelectionCircle") return
+        if (e.target.id !== "drawDocSelectionBox"
+            && e.target.id !== "drawDocSelectionEllipse"
+            && e.target.id !== "drawDocSelectionCircle"
+            && e.target.id !== "drawDocSelectionBoxDragPivot") {
+            return
+        }
         setCursor({
             ...cursor,
             start: { x: cursorPos[0] - dragDelta[0], y: cursorPos[1] - dragDelta[1] },
@@ -167,7 +182,7 @@ export default function SelectionCanvas() {
         const cursorPos = getCursorFromEvent(e);
         const boundary = document.getElementById("previewCanvas").getBoundingClientRect();
         if (cursorPos[2] === false) return
-        setRotateStartPos([cursorPos[0] , cursorPos[1] , subtool.angle, boundary.left ,boundary.top]);
+        setRotateStartPos([cursorPos[0], cursorPos[1], subtool.angle, boundary.left, boundary.top]);
     }
 
     const handleCircleRotate = (e) => {
@@ -175,9 +190,9 @@ export default function SelectionCanvas() {
         const cursorPos = getCursorFromEvent(e);
         //TODO: cursor position must be adjusted to indicate its relative position instead of absolute
         if (cursorPos[2] === false) return
-        let top = Number(selectionCircle.top.slice(0,-2));
-        let left = Number(selectionCircle.left.slice(0,-2));
-        let diameter = Number(selectionCircle.diameter.slice(0,-2));
+        let top = Number(selectionCircle.top.slice(0, -2));
+        let left = Number(selectionCircle.left.slice(0, -2));
+        let diameter = Number(selectionCircle.diameter.slice(0, -2));
         let centerX = left + (diameter / 2) + rotateStartPos[3];
         let centerY = top + (diameter / 2) + rotateStartPos[4];
         let horizontal = centerX > cursorPos[0] ? centerX - cursorPos[0] : cursorPos[0] - centerX;
@@ -190,7 +205,7 @@ export default function SelectionCanvas() {
         else if (cursorPos[0] > centerX && cursorPos[1] > centerY) angle = 90 + currAngleDeg
         else if (cursorPos[0] < centerX && cursorPos[1] > centerY) angle = 180 + 90 - currAngleDeg
         else if (cursorPos[0] < centerX && cursorPos[1] < centerY) angle = 270 + currAngleDeg
-        setSubTool({...subtool, angle: angle})
+        setSubTool({ ...subtool, angle: angle })
     }
 
     const handleCircleRotateEnd = (e) => {
@@ -221,11 +236,11 @@ export default function SelectionCanvas() {
             } else {
                 setSelectionBox({ ...selectionBox, display: "none" })
             }
-        } else if(tool === "Text") {
+        } else if (tool === "Text") {
             setSelectionBox({ ...selectionBox, display: "block" })
             setSelectionCircle({ ...selectionCircle, display: "none" })
             setSelectionEllipse({ ...selectionEllipse, display: "none" })
-        }else {
+        } else {
             setSelectionBox({ ...selectionBox, display: "none" })
             setSelectionCircle({ ...selectionCircle, display: "none" })
             setSelectionEllipse({ ...selectionEllipse, display: "none" })
@@ -282,6 +297,15 @@ export default function SelectionCanvas() {
                 onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
                 onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
             >
+                {tool === "Text" &&
+                    <div
+                        id="drawDocSelectionBoxDragPivot"
+                        draggable
+                        onDragStart={(e) => { if (!cursor.down) handleDragStart(e) }}
+                        onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
+                        onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
+                    />
+                }
                 <div
                     id="drawDocSelectionBoxNW"
                     draggable
@@ -378,22 +402,22 @@ export default function SelectionCanvas() {
                     onDragEnd={(e) => { if (!cursor.down) handleCircleRotateEnd(e) }}
                 />
             </div>
-                {tool === "Text" && 
+            {tool === "Text" &&
                 <textarea id="drawDocSelectionBoxText"
-                style={{
-                    display: selectionBox.display,
-                    top: selectionBox.top,
-                    left: selectionBox.left,
-                    width: selectionBox.width,
-                    height: selectionBox.height,
-                    caretColor: context.text.color,
-                    fontSize: context.size * context.zoom + "px",
-                    fontFamily: context.text.fontFamily
-                }}
-                value={context.text.text}
-                onChange={(e)=>context.setText({...context.text, text: e.target.value})}
-                 />
-                }
+                    style={{
+                        display: selectionBox.display,
+                        top: selectionBox.top,
+                        left: selectionBox.left,
+                        width: selectionBox.width,
+                        height: selectionBox.height,
+                        caretColor: context.text.color,
+                        fontSize: context.size * context.zoom + "px",
+                        fontFamily: context.text.fontFamily
+                    }}
+                    value={context.text.text}
+                    onChange={(e) => context.setText({ ...context.text, text: e.target.value })}
+                />
+            }
         </>
     )
 }
