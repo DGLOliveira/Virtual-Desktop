@@ -6,6 +6,7 @@ import { Context } from "./Context.jsx";
 import { DrawCanvas } from "./Components/DrawCanvas.jsx";
 import { PreviewCanvas } from "./Components/PreviewCanvas.jsx";
 import SelectionCanvas from "./Components/SelectionCanvas.jsx";
+import LayersWindow from "./Components/LayersWindow.jsx";
 import { TopNavBar } from "./Components/TopNavBar.jsx";
 import { ToolBar } from "./Components/ToolBar.jsx";
 import { BottomNavBar } from "./Components/BottomNavBar.jsx";
@@ -67,6 +68,7 @@ export default function DrawDoc(props) {
             />
             <SelectionCanvas/>
           </canvas-container>
+          <LayersWindow />
         </div>
         <BottomNavBar
           action={action}
