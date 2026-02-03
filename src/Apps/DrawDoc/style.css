@@ -73,7 +73,6 @@ canvas-container {
   top: 1px;
   left: 1px;
   cursor: none;
-  background: white;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }

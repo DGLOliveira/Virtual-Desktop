@@ -3,9 +3,11 @@ import { useState, useRef, createContext } from "react";
 export const Context = createContext({
   canvasMainRef: null,
   canvasLayersRef: [],
+  currLayer: -1,
+  layers: [],
+  setLayers: () => { },
   name: "",
   setName: () => { },
-  currLayer: -1,
   setCurrLayer: () => { },
   history: {},
   setHistory: () => { },
@@ -39,6 +41,7 @@ export function ContextProvider({ children }) {
   const canvasMainRef = useRef(null);
   const canvasLayersRef = useRef([]);
   const [currLayer, setCurrLayer] = useState(-1);
+  const [layers, setLayers] = useState([]);
   const [name, setName] = useState("Untitled");
   const [history, setHistory] = useState({
     history: [],
@@ -102,11 +105,13 @@ export function ContextProvider({ children }) {
   const contextValue = {
     canvasMainRef: canvasMainRef,
     canvasLayersRef: canvasLayersRef,
+    currLayer: currLayer,
+    layers: layers,
+    setLayers: setLayers,
     name: name,
     setName: setName,
     history: history,
     setHistory: setHistory,
-    currLayer: currLayer,
     setCurrLayer: setCurrLayer,
     dimentions: dimentions,
     setDimentions: setDimentions,

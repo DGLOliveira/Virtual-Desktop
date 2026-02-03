@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, createRef } from "react";
 import { Context } from "../Context.jsx";
 import { RiEyeCloseFill, RiEyeFill, RiEditLine, RiCloseLargeFill } from "react-icons/ri";
 
@@ -10,9 +10,20 @@ export default function LayersWindow(props) {
     const canvasLayersRef = context.canvasLayersRef;
     const currLayer = context.currLayer;
     const setCurrLayer = context.setCurrLayer;
+    const layers = context.layers;
+    const setLayers = context.setLayers;
 
     const [mainCanvasPreview, setMainCanvasPreview] = useState(null);
-    const [layersCanvasPreviews, setLayersCanvasPreviews] = useState(null);
+    const [layersCanvasPreviews, setLayersCanvasPreviews] = useState([]);
+
+    const createNewLayer = () => {
+        const newLayer = {
+            canvas: createRef(),
+            name: `Layer ${layers.length}`,
+            visible: true
+        }
+        setLayers([...layers, newLayer]);
+    }
 
     const getImageFromCanvasRef = (canvas, notMain) => {
         const ctx = notMain ?
@@ -22,7 +33,7 @@ export default function LayersWindow(props) {
     }
 
     const LayerBox = (props) => {
-        return (<div className="drawDocLayersWindowLayer">
+        return (<>
             <img src={props.src} className="drawDocCheckersBackground" />
             <div>
                 <span>{props.name}</span>
@@ -38,26 +49,37 @@ export default function LayersWindow(props) {
                     </button>
                 </div>
             </div>
-        </div>);
+        </>);
     }
 
     useEffect(() => {
         canvasMainRef && setMainCanvasPreview(getImageFromCanvasRef(canvasMainRef.current, false))
-    }, [history])
-
-
+        layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(layer.canvas.current, true)));
+        console.log(layersCanvasPreviews.length);
+    }, [history, layers])
 
     return (
         <div id="drawDocLayersWindow">
             {mainCanvasPreview &&
-                <LayerBox name="Main" src={mainCanvasPreview} isMain={true} />
+                <div className="drawDocLayersWindowLayer">
+                    <LayerBox name="Main" src={mainCanvasPreview} isMain={true} />
+                </div>
             }
-            {layersCanvasPreviews &&
-                layersCanvasPreviews.map((layer, index) => (
-                    <LayerBox key={index} name={`Layer ${index}`} src={layersCanvasPreviews[index]} isMain={false} />
-                ))
+            {layersCanvasPreviews.length > 0 &&
+                layersCanvasPreviews.map((layerPreview, index) => {
+                   return (<div
+                        className="drawDocLayersWindowLayer"
+                        key={index}
+                    >
+                        <LayerBox
+                            name={layers[index].name}
+                            src={layerPreview}
+                            isMain={false}
+                        />
+                    </div>)
+                })
             }
-            <button>
+            <button onClick={() => { createNewLayer() }}>
                 New Layer
             </button>
         </div>);

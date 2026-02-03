@@ -6,6 +6,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
   const context = useContext(Context);
   const canvasMainRef = context.canvasMainRef;
   const canvasLayersRef = context.canvasLayersRef;
+  const layers = context.layers;
   const tool = context.tool;
   const subTool = context.subTool;
   const curveControls = context.curveControls;
@@ -70,11 +71,11 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
         id="drawCanvas"
         height={context.dimentions.height} width={context.dimentions.width}
       />
-      {Array.isArray(canvasLayersRef) && canvasLayersRef.map((canvasLayerRef, index) => {
+      {layers.length > 0 && layers.map((layer, index) => {
         return (
           <canvas
             key={index}
-            ref={canvasLayerRef}
+            ref={layer.canvas}
             className="drawCanvasLayer"
             height={context.dimentions.height} width={context.dimentions.width}
           />
