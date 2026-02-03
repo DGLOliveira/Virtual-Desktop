@@ -23,7 +23,7 @@ export default function LayersWindow(props) {
 
     const LayerBox = (props) => {
         return (<div className="drawDocLayersWindowLayer">
-            <img src={props.src} />
+            <img src={props.src} className="drawDocCheckersBackground" />
             <div>
                 <span>{props.name}</span>
                 <div>

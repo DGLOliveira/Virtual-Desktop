@@ -47,12 +47,23 @@ canvas-container {
   overflow: auto;
 }
 
+.drawDocCheckersBackground{
+  background-image: url(./Assets/checkersBackground.jpg);
+  background-size: cover;
+}
+
+#drawDocCheckersBackground{
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  cursor: none;
+}
+
 #drawCanvas {
   position: absolute;
   top: 1px;
   left: 1px;
   cursor: none;
-  background: white;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
@@ -104,7 +115,7 @@ canvas-container {
 #drawDocContentBar>nav>ul>li {
   display: flex;
   flex-direction: column;
-  width:20px;
+  width: 20px;
   justify-content: center;
   align-items: center;
   writing-mode: sideways-rl;
@@ -116,7 +127,7 @@ canvas-container {
   rotate: 180deg;
 }
 
-#drawDocContentBar>div{
+#drawDocContentBar>div {
   height: 100%;
   overflow-x: hidden;
 }
@@ -128,7 +139,7 @@ canvas-container {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  padding:2px;
+  padding: 2px;
 }
 
 #drawDocLayersWindow>button {

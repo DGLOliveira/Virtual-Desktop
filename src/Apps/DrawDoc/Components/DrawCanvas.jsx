@@ -47,13 +47,24 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
   useEffect(() => {
     let offsetX = (context.dimentions.width / 2 - context.zoom * context.dimentions.width / 2) * -1 / context.zoom;
     let offsetY = (context.dimentions.height / 2 - context.zoom * context.dimentions.height / 2) * -1 / context.zoom;
+    document.getElementById("drawDocCheckersBackground").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("previewCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("drawCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
-
+    const layers = document.getElementsByClassName("drawCanvasLayer");
+    if (layers.length > 0) {
+      for (let i = 0; i < layers.length; i++) {
+        layers[i].style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
+      }
+    }
   }, [context.zoom]);
 
   return (
     <>
+      <img
+        id="drawDocCheckersBackground"
+        className="drawDocCheckersBackground"
+        height={context.dimentions.height} width={context.dimentions.width}
+      />
       <canvas
         ref={canvasMainRef}
         id="drawCanvas"
