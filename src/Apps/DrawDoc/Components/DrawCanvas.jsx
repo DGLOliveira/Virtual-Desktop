@@ -38,8 +38,8 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
   };
 
   useEffect(() => {
-    if(layers[currLayer].canvas === undefined) return
-    let canvas = layers[currLayer].canvas.current;
+    if(layers[currLayer].id === undefined) return
+    let canvas = document.getElementById(layers[currLayer].id);
     let ctx = canvas.getContext("2d", {
       willReadFrequently: true,
     });
@@ -54,8 +54,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
     const layers = document.getElementsByClassName("drawCanvasLayer");
     if (layers.length > 0) {
       for (let i = 0; i < layers.length; i++) {
-        if(layers[i].canvas === undefined) continue
-        layers[i].canvas.current.style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
+        layers[i].style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
       }
     }
   }, [context.zoom]);
@@ -70,8 +69,8 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
       {layers.length > 0 && layers.map((layer, index) => {
         return (
           <canvas
-            key={index}
-            ref={layer.canvas}
+            key={layer.id}
+            id={layer.id}
             className={"drawCanvasLayer"}
             style={{ display: layer.visible ? "block" : "none" }}
             height={context.dimentions.height} width={context.dimentions.width}

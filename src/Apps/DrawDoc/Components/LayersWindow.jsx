@@ -1,6 +1,7 @@
-import { useState, useEffect, useContext, createRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Context } from "../Context.jsx";
-import { RiEyeCloseFill, RiEyeFill, RiEditLine, RiCloseLargeFill } from "react-icons/ri";
+import { RiEyeCloseFill, RiEyeFill, RiEditLine } from "react-icons/ri";
+import { FaTrashCan } from "react-icons/fa6";
 
 export default function LayersWindow(props) {
 
@@ -10,45 +11,57 @@ export default function LayersWindow(props) {
     const setCurrLayer = context.setCurrLayer;
     const layers = context.layers;
     const setLayers = context.setLayers;
-    
+    const lastLayer = context.lastLayer;
+    const setLastLayer = context.setLastLayer;
+
     const [layersCanvasPreviews, setLayersCanvasPreviews] = useState([]);
 
     const createNewLayer = () => {
         const newLayer = {
-            canvas: createRef(),
-            name: `Layer ${layers.length}`,
+            id: `drawDocLayer${lastLayer + 1}`,
+            name: `Layer ${lastLayer + 1}`,
             visible: true
         }
         setLayers([...layers, newLayer]);
         setCurrLayer(layers.length);
+        setLastLayer(lastLayer + 1);
     }
 
-    const getImageFromCanvasRef = (canvas, notMain) => {
+    const getImageFromCanvasRef = (id, notMain) => {
+        const canvas = document.getElementById(id);
         const ctx = notMain ?
             canvas.getContext('2d', { alpha: true }) :
             canvas.getContext('2d', { alpha: false });
         return ctx.canvas.toDataURL("image/png")
     }
 
-    const toggleVisibility = (index) =>{
+    const toggleVisibility = (index) => {
         const newLayers = [...layers];
         newLayers[index].visible = !newLayers[index].visible;
         setLayers(newLayers);
     }
 
+    const deleteLayer = (index) => {
+        setLayers(layers.filter((_layer, i) => i !== index));
+        if (index === currLayer || currLayer > layers.length - 2) {
+            setCurrLayer(0);
+        }
+    }
+
     useEffect(() => {
-        layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(layer.canvas.current, true)));
-    }, [history, layers])
+        console.log(layers);
+        layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(layer.id, true)));
+    }, [history, layers]);
 
     return (
         <div id="drawDocLayersWindow">
-            {layersCanvasPreviews.map((layerPreview, index) => {
+            {layers.map((layer, index) => {
                 return (<div
                     className="drawDocLayersWindowLayer"
                     key={index}
                 >
                     <img
-                        src={layerPreview}
+                        src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
                         className="drawDocCheckersBackground"
                         onClick={() => setCurrLayer(index)}
                     />
@@ -58,17 +71,20 @@ export default function LayersWindow(props) {
                                 textDecoration: index === currLayer ? "underline" : "none"
                             }}
                         >
-                            {layers[index].name}
+                            {layer.name}
                         </span>
                         <div>
                             <button>
                                 <RiEditLine />
                             </button>
-                            <button onClick={()=>toggleVisibility(index)}>
-                                {layers[index].visible ? <RiEyeFill /> : <RiEyeCloseFill />}
+                            <button onClick={() => toggleVisibility(index)}>
+                                {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
                             </button>
-                            <button disabled={layers[index].isMain}>
-                                <RiCloseLargeFill />
+                            <button
+                                onClick={() => deleteLayer(index)}
+                                disabled={index === 0}
+                            >
+                                <FaTrashCan />
                             </button>
                         </div>
                     </div>
