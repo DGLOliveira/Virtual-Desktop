@@ -39,7 +39,7 @@ export default function DrawDoc(props) {
         <div style={{
           display: "flex",
           flexDirection: "row",
-          width: "100%", 
+          width: "100%",
           height: "100%",
           margin: "0px"
         }}>
@@ -66,9 +66,12 @@ export default function DrawDoc(props) {
               setAction={setAction}
               contextMenu={contextMenu}
             />
-            <SelectionCanvas/>
+            <SelectionCanvas />
           </canvas-container>
-          <ContentBar />
+          <ContentBar
+            setAction={setAction}
+            contextMenu={contextMenu}
+          />
         </div>
         <BottomNavBar
           action={action}

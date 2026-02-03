@@ -3,14 +3,22 @@ import { Context } from "../Context.jsx";
 import { GoTriangleLeft, GoTriangleRight } from "react-icons/go";
 import LayersWindow from "./LayersWindow.jsx";
 
-export default function ContentBar() {
+export default function ContentBar({ setAction, contextMenu }) {
     const context = useContext(Context);
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState("Layers");
+
+    const handleContextMenu = (event) => {
+        event.preventDefault();
+        let content = { "Hide": { action:()=>setAction("contentBar")} };
+        contextMenu.setOpen();
+        contextMenu.setPosition(event.clientX, event.clientY);
+        contextMenu.setContent(content);
+    };
 
     if (context.view.contentBar) {
         return (
-            <div id="drawDocContentBar">
+            <div id="drawDocContentBar" onContextMenu={(event) => handleContextMenu(event)}>
                 <nav>
                     <button onClick={() => setOpen(!open)}>{open ? <GoTriangleRight /> : <GoTriangleLeft />}</button>
                     <ul>
