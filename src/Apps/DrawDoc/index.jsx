@@ -1,12 +1,12 @@
 // Paint.exe style editor in javascript, makes use of two overlapping canvas elements
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 
 import Provider from "./Context.jsx";
 import { Context } from "./Context.jsx";
 import { DrawCanvas } from "./Components/DrawCanvas.jsx";
 import { PreviewCanvas } from "./Components/PreviewCanvas.jsx";
 import SelectionCanvas from "./Components/SelectionCanvas.jsx";
-import LayersWindow from "./Components/LayersWindow.jsx";
+import ContentBar from "./Components/ContentBar.jsx";
 import { TopNavBar } from "./Components/TopNavBar.jsx";
 import { ToolBar } from "./Components/ToolBar.jsx";
 import { BottomNavBar } from "./Components/BottomNavBar.jsx";
@@ -68,7 +68,7 @@ export default function DrawDoc(props) {
             />
             <SelectionCanvas/>
           </canvas-container>
-          <LayersWindow />
+          <ContentBar />
         </div>
         <BottomNavBar
           action={action}

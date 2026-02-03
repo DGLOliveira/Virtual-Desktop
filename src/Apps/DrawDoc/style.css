@@ -77,56 +77,117 @@ canvas-container {
   border: 1px solid black;
 }
 
-#drawDocLayersWindow {
-  position: absolute;
+#drawDocContentBar {
+  display: flex;
   right: 0px;
-  bottom: 0px;
-  height: 200px;
-  width: 200px;
+  left: 0px;
+  height: 100%;
   background: var(--AppBkgrColor);
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
   border: 1px var(--GeneralBorderColor) solid;
 }
 
-#drawDocLayersWindowTop {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 20px;
-  border-bottom: 1px var(--GeneralBorderColor) solid;
-  margin-bottom: 5px;
+#drawDocContentBar>nav {
+  width: 20px;
+  border-right: 1px var(--GeneralBorderColor) solid;
 }
 
-#drawDocLayersWindowContainer{
-  width:100%;
-  height:100%;
-  display:flex;
+#drawDocContentBar>nav>ul {
+  display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
-.drawDocLayersWindowLayer{
-  display:flex;
-  flex-direction: row;
+#drawDocContentBar>nav>ul>li {
+  display: flex;
+  flex-direction: column;
+  width:20px;
+  justify-content: center;
+  align-items: center;
+  writing-mode: sideways-rl;
+  text-orientation: sideways-right;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px var(--GeneralBorderColor) solid;
+  border-radius: 0px 10px 10px 0px;
+  rotate: 180deg;
+}
+
+#drawDocContentBar>div{
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#drawDocLayersWindow {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: start;
   align-items: center;
+  padding:2px;
+}
 
-  height: 80px;
-  width:100%;
-  border: 1px var(--GeneralBorderColor) solid;
+#drawDocLayersWindow>button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
   margin: 2px;
-  padding:5px;
+  padding: 0px;
+  border: 1px var(--GeneralBorderColor) solid;
   box-sizing: border-box;
 }
 
-.drawDocLayersWindowLayer>img{
-  width: 50px; 
-  height: 50px; 
+.drawDocLayersWindowLayer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  border: 1px var(--GeneralBorderColor) solid;
+  margin: 2px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.drawDocLayersWindowLayer>span {
+  margin-bottom: 5px;
+}
+
+.drawDocLayersWindowLayer>div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 75px;
+  height: 100%;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.drawDocLayersWindowLayer>div>div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.drawDocLayersWindowLayer>div>div>button {
+  border: 1px var(--GeneralBorderColor) solid;
+  box-sizing: border-box;
+}
+
+.drawDocLayersWindowLayer>img {
+  width: 50px;
+  height: 50px;
   object-fit: contain;
-  margin-right:5px;
+  margin-right: 5px;
 }
 
 #drawDocSelectionBox {
