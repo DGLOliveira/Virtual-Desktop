@@ -33,9 +33,16 @@ export default function LayersWindow(props) {
 
     const LayerBox = (props) => {
         return (<>
-            <img src={props.src} className="drawDocCheckersBackground" />
+            <img
+                src={props.src}
+                className="drawDocCheckersBackground"
+                onClick={() => setCurrLayer(props.index)}
+            />
             <div>
-                <span>{props.name}</span>
+                <span
+                    style={{ textDecoration: props.index === currLayer ? "underline" : "none" }}>
+                    {props.name}
+                </span>
                 <div>
                     <button>
                         <RiEditLine />
@@ -58,18 +65,18 @@ export default function LayersWindow(props) {
     return (
         <div id="drawDocLayersWindow">
             {layersCanvasPreviews.map((layerPreview, index) => {
-                    return (<div
-                        className="drawDocLayersWindowLayer"
-                        key={index}
-                    >
-                        <LayerBox
-                            index={index}
-                            name={layers[index].name}
-                            src={layerPreview}
-                            isMain={false}
-                        />
-                    </div>)
-                })
+                return (<div
+                    className="drawDocLayersWindowLayer"
+                    key={index}
+                >
+                    <LayerBox
+                        index={index}
+                        name={layers[index].name}
+                        src={layerPreview}
+                        isMain={false}
+                    />
+                </div>)
+            })
             }
             <button onClick={() => { createNewLayer() }}>
                 New Layer
