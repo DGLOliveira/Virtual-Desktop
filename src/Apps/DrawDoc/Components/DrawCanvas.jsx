@@ -73,6 +73,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
             key={index}
             ref={layer.canvas}
             className={"drawCanvasLayer"}
+            style={{ display: layer.visible ? "block" : "none" }}
             height={context.dimentions.height} width={context.dimentions.width}
           />
         );

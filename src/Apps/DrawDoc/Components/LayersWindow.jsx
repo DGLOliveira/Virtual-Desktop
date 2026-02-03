@@ -10,8 +10,7 @@ export default function LayersWindow(props) {
     const setCurrLayer = context.setCurrLayer;
     const layers = context.layers;
     const setLayers = context.setLayers;
-
-    const [mainCanvasPreview, setMainCanvasPreview] = useState(null);
+    
     const [layersCanvasPreviews, setLayersCanvasPreviews] = useState([]);
 
     const createNewLayer = () => {
@@ -31,31 +30,10 @@ export default function LayersWindow(props) {
         return ctx.canvas.toDataURL("image/png")
     }
 
-    const LayerBox = (props) => {
-        return (<>
-            <img
-                src={props.src}
-                className="drawDocCheckersBackground"
-                onClick={() => setCurrLayer(props.index)}
-            />
-            <div>
-                <span
-                    style={{ textDecoration: props.index === currLayer ? "underline" : "none" }}>
-                    {props.name}
-                </span>
-                <div>
-                    <button>
-                        <RiEditLine />
-                    </button>
-                    <button>
-                        <RiEyeFill />
-                    </button>
-                    <button disabled={props.isMain}>
-                        <RiCloseLargeFill />
-                    </button>
-                </div>
-            </div>
-        </>);
+    const toggleVisibility = (index) =>{
+        const newLayers = [...layers];
+        newLayers[index].visible = !newLayers[index].visible;
+        setLayers(newLayers);
     }
 
     useEffect(() => {
@@ -69,12 +47,31 @@ export default function LayersWindow(props) {
                     className="drawDocLayersWindowLayer"
                     key={index}
                 >
-                    <LayerBox
-                        index={index}
-                        name={layers[index].name}
+                    <img
                         src={layerPreview}
-                        isMain={false}
+                        className="drawDocCheckersBackground"
+                        onClick={() => setCurrLayer(index)}
                     />
+                    <div>
+                        <span
+                            style={{
+                                textDecoration: index === currLayer ? "underline" : "none"
+                            }}
+                        >
+                            {layers[index].name}
+                        </span>
+                        <div>
+                            <button>
+                                <RiEditLine />
+                            </button>
+                            <button onClick={()=>toggleVisibility(index)}>
+                                {layers[index].visible ? <RiEyeFill /> : <RiEyeCloseFill />}
+                            </button>
+                            <button disabled={layers[index].isMain}>
+                                <RiCloseLargeFill />
+                            </button>
+                        </div>
+                    </div>
                 </div>)
             })
             }
