@@ -167,6 +167,12 @@ export const handleAction = (canvas, ctx, params, action, setAction, context, ap
       handleTopMenu(appMenu, setAppMenu, args, "view");
       setAction(false);
       break;
+    case "contentBar":
+      context.setView({ ...context.view, contentBar: !context.view.contentBar });
+      args = { view: { ...context.view, contentBar: !context.view.contentBar } };
+      handleTopMenu(appMenu, setAppMenu, args, "view");
+      setAction(false);
+      break;
     case "bottomNavBar":
       context.setView({ ...context.view, bottomNavBar: !context.view.bottomNavBar });
       args = { view: { ...context.view, bottomNavBar: !context.view.bottomNavBar } };

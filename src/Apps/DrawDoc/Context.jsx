@@ -93,6 +93,7 @@ export function ContextProvider({ children }) {
   });
   const [view, setView] = useState({
     toolBar: true,
+    contentBar: true,
     topNavBar: true,
     bottomNavBar: true,
     menu: true

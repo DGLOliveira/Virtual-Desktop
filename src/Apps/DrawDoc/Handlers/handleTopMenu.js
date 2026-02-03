@@ -102,6 +102,11 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "checkbox": true,
                 "disabled": false
             },
+            "Content Bar": {
+                "action": "contentBar",
+                "checkbox": true,
+                "disabled": false
+            },
             "Bottom Bar": {
                 "action": "bottomNavBar",
                 "checkbox": true,
@@ -169,6 +174,10 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                         "Tool Bar": {
                             ...updatedAppMenu["View"]["Tool Bar"],
                             "checkbox": args.view.toolBar
+                        },
+                        "Content Bar": {
+                            ...updatedAppMenu["View"]["Content Bar"],
+                            "checkbox": args.view.contentBar
                         },
                         "Bottom Bar": {
                             ...updatedAppMenu["View"]["Bottom Bar"],
