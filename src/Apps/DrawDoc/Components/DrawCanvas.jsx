@@ -4,9 +4,8 @@ import { handleAction } from "../Handlers/handleAction.jsx";
 export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle }) => {
 
   const context = useContext(Context);
-  const canvasMainRef = context.canvasMainRef;
-  const canvasLayersRef = context.canvasLayersRef;
   const layers = context.layers;
+  const currLayer = context.currLayer;
   const tool = context.tool;
   const subTool = context.subTool;
   const curveControls = context.curveControls;
@@ -39,22 +38,24 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
   };
 
   useEffect(() => {
-    let canvas = canvasMainRef.current;
+    if(layers[currLayer].canvas === undefined) return
+    let canvas = layers[currLayer].canvas.current;
     let ctx = canvas.getContext("2d", {
       willReadFrequently: true,
     });
     handleAction(canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle);
   }, [context.cursor, action]);
+
   useEffect(() => {
     let offsetX = (context.dimentions.width / 2 - context.zoom * context.dimentions.width / 2) * -1 / context.zoom;
     let offsetY = (context.dimentions.height / 2 - context.zoom * context.dimentions.height / 2) * -1 / context.zoom;
     document.getElementById("drawDocCheckersBackground").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("previewCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
-    document.getElementById("drawCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     const layers = document.getElementsByClassName("drawCanvasLayer");
     if (layers.length > 0) {
       for (let i = 0; i < layers.length; i++) {
-        layers[i].style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
+        if(layers[i].canvas === undefined) continue
+        layers[i].canvas.current.style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
       }
     }
   }, [context.zoom]);
@@ -66,17 +67,12 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
         className="drawDocCheckersBackground"
         height={context.dimentions.height} width={context.dimentions.width}
       />
-      <canvas
-        ref={canvasMainRef}
-        id="drawCanvas"
-        height={context.dimentions.height} width={context.dimentions.width}
-      />
       {layers.length > 0 && layers.map((layer, index) => {
         return (
           <canvas
             key={index}
             ref={layer.canvas}
-            className="drawCanvasLayer"
+            className={"drawCanvasLayer"}
             height={context.dimentions.height} width={context.dimentions.width}
           />
         );

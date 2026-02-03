@@ -1,9 +1,7 @@
-import { useState, useRef, createContext } from "react";
+import { useState, useRef, createContext, createRef } from "react";
 
 export const Context = createContext({
-  canvasMainRef: null,
-  canvasLayersRef: [],
-  currLayer: -1,
+  currLayer: 0,
   layers: [],
   setLayers: () => { },
   name: "",
@@ -38,10 +36,14 @@ export const Context = createContext({
 });
 
 export function ContextProvider({ children }) {
-  const canvasMainRef = useRef(null);
-  const canvasLayersRef = useRef([]);
-  const [currLayer, setCurrLayer] = useState(-1);
-  const [layers, setLayers] = useState([]);
+  const [currLayer, setCurrLayer] = useState(0);
+  const [layers, setLayers] = useState([
+    {
+      canvas: createRef(),
+      name: "Base",
+      visible: true
+    }
+  ]);
   const [name, setName] = useState("Untitled");
   const [history, setHistory] = useState({
     history: [],
@@ -103,8 +105,6 @@ export function ContextProvider({ children }) {
   })
 
   const contextValue = {
-    canvasMainRef: canvasMainRef,
-    canvasLayersRef: canvasLayersRef,
     currLayer: currLayer,
     layers: layers,
     setLayers: setLayers,

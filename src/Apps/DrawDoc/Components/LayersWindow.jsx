@@ -5,9 +5,7 @@ import { RiEyeCloseFill, RiEyeFill, RiEditLine, RiCloseLargeFill } from "react-i
 export default function LayersWindow(props) {
 
     const context = useContext(Context);
-    const canvasMainRef = context.canvasMainRef;
     const history = context.history;
-    const canvasLayersRef = context.canvasLayersRef;
     const currLayer = context.currLayer;
     const setCurrLayer = context.setCurrLayer;
     const layers = context.layers;
@@ -23,6 +21,7 @@ export default function LayersWindow(props) {
             visible: true
         }
         setLayers([...layers, newLayer]);
+        setCurrLayer(layers.length);
     }
 
     const getImageFromCanvasRef = (canvas, notMain) => {
@@ -53,25 +52,18 @@ export default function LayersWindow(props) {
     }
 
     useEffect(() => {
-        canvasMainRef && setMainCanvasPreview(getImageFromCanvasRef(canvasMainRef.current, false))
         layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(layer.canvas.current, true)));
-        console.log(layersCanvasPreviews.length);
     }, [history, layers])
 
     return (
         <div id="drawDocLayersWindow">
-            {mainCanvasPreview &&
-                <div className="drawDocLayersWindowLayer">
-                    <LayerBox name="Main" src={mainCanvasPreview} isMain={true} />
-                </div>
-            }
-            {layersCanvasPreviews.length > 0 &&
-                layersCanvasPreviews.map((layerPreview, index) => {
-                   return (<div
+            {layersCanvasPreviews.map((layerPreview, index) => {
+                    return (<div
                         className="drawDocLayersWindowLayer"
                         key={index}
                     >
                         <LayerBox
+                            index={index}
                             name={layers[index].name}
                             src={layerPreview}
                             isMain={false}
