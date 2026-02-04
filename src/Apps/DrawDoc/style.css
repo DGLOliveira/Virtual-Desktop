@@ -156,8 +156,12 @@ canvas-container {
   box-sizing: border-box;
 }
 
-.drawDocLayersWindowLayer>span {
+.drawDocLayersWindowLayer>div>span {
   margin-bottom: 5px;
+}
+
+.drawDocLayersWindowLayer>div>input[type="text"] {
+  width:100%;
 }
 
 .drawDocLayersWindowLayer>div {
