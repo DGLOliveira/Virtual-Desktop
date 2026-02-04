@@ -12,7 +12,6 @@ export default function SelectionCanvas() {
     const clipboard = context.clipboard;
 
     const [selectionBox, setSelectionBox] = useState({
-        display: "none",
         left: 0 + "px",
         top: 0 + "px",
         height: 0 + "px",
@@ -21,14 +20,12 @@ export default function SelectionCanvas() {
     })
 
     const [selectionCircle, setSelectionCircle] = useState({
-        display: "none",
         left: 0 + "px",
         top: 0 + "px",
         diameter: 0 + "px"
     })
 
     const [selectionEllipse, setSelectionEllipse] = useState({
-        display: "none",
         left: 0 + "px",
         top: 0 + "px",
         width: 0 + "px",
@@ -213,40 +210,6 @@ export default function SelectionCanvas() {
         setCursor({ ...cursor, selecting: false });
     }
 
-    //Handles when each selection div should be displayed
-    useEffect(() => {
-        if (tool === "Shape" && subtool.shape !== "Line" && subtool.shape !== "Curve") {
-            setSelectionBox({ ...selectionBox, display: "block" })
-            if (tool === "Shape") {
-                setSelectionCircle({ ...selectionCircle, display: "block" })
-                if (subtool.stretch === true) {
-                    setSelectionEllipse({ ...selectionEllipse, display: "block" })
-                } else {
-                    setSelectionEllipse({ ...selectionEllipse, display: "none" })
-                }
-            } else {
-                setSelectionCircle({ ...selectionCircle, display: "none" })
-                setSelectionEllipse({ ...selectionEllipse, display: "none" })
-            }
-        } else if (tool === "Select") {
-            setSelectionCircle({ ...selectionCircle, display: "none" })
-            setSelectionEllipse({ ...selectionEllipse, display: "none" })
-            if (clipboard.state === "none") {
-                setSelectionBox({ ...selectionBox, display: "block" })
-            } else {
-                setSelectionBox({ ...selectionBox, display: "none" })
-            }
-        } else if (tool === "Text") {
-            setSelectionBox({ ...selectionBox, display: "block" })
-            setSelectionCircle({ ...selectionCircle, display: "none" })
-            setSelectionEllipse({ ...selectionEllipse, display: "none" })
-        } else {
-            setSelectionBox({ ...selectionBox, display: "none" })
-            setSelectionCircle({ ...selectionCircle, display: "none" })
-            setSelectionEllipse({ ...selectionEllipse, display: "none" })
-        }
-    }, [tool, subtool, clipboard]);
-
     //Handles position and sizing calculations for each selection div
     useEffect(() => {
         let left = Math.min(cursor.start.x, cursor.end.x);
@@ -282,10 +245,10 @@ export default function SelectionCanvas() {
 
     return (
         <>
-            <div
+            {(tool === "Select" || tool === "Shape" || tool === "Text") &&
+                <div
                 id="drawDocSelectionBox"
                 style={{
-                    display: selectionBox.display,
                     top: selectionBox.top,
                     left: selectionBox.left,
                     width: selectionBox.width,
@@ -356,11 +319,11 @@ export default function SelectionCanvas() {
                     onDrag={(e) => { if (!cursor.down) handleResize(e, "W") }}
                     onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "W") }}
                 />
-            </div>
+            </div>}
+            {tool === "Shape" && subtool.type !== "Line" && subtool.type !== "Curve" && subtool.stretch &&
             <div
                 id="drawDocSelectionEllipse"
                 style={{
-                    display: selectionEllipse.display,
                     top: selectionEllipse.top,
                     left: selectionEllipse.left,
                     width: selectionEllipse.width,
@@ -372,34 +335,33 @@ export default function SelectionCanvas() {
                 onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
                 onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
             >
-            </div>
-            <div
-                id="drawDocSelectionCircle"
-                style={{
-                    display: selectionCircle.display,
-                    top: selectionCircle.top,
-                    left: selectionCircle.left,
-                    width: selectionCircle.diameter,
-                    height: selectionCircle.diameter,
-                    rotate: subtool.angle + "deg"
-                }}
-                draggable
-                onDragStart={(e) => { if (!cursor.down) handleDragStart(e) }}
-                onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
-                onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
-            >
+            </div>}
+            {tool === "Shape" && subtool.type !== "Line" && subtool.type !== "Curve" &&
                 <div
-                    id="drawDocSelectionCirclePoint"
+                    id="drawDocSelectionCircle"
+                    style={{
+                        top: selectionCircle.top,
+                        left: selectionCircle.left,
+                        width: selectionCircle.diameter,
+                        height: selectionCircle.diameter,
+                        rotate: subtool.angle + "deg"
+                    }}
                     draggable
-                    onDragStart={(e) => { if (!cursor.down) handleCircleRotateStart(e) }}
-                    onDrag={(e) => { if (!cursor.down) handleCircleRotate(e) }}
-                    onDragEnd={(e) => { if (!cursor.down) handleCircleRotateEnd(e) }}
-                />
-            </div>
+                    onDragStart={(e) => { if (!cursor.down) handleDragStart(e) }}
+                    onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
+                    onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
+                >
+                    <div
+                        id="drawDocSelectionCirclePoint"
+                        draggable
+                        onDragStart={(e) => { if (!cursor.down) handleCircleRotateStart(e) }}
+                        onDrag={(e) => { if (!cursor.down) handleCircleRotate(e) }}
+                        onDragEnd={(e) => { if (!cursor.down) handleCircleRotateEnd(e) }}
+                    />
+                </div>}
             {tool === "Text" && !cursor.down &&
                 <textarea id="drawDocSelectionBoxText"
                     style={{
-                        display: selectionBox.display,
                         top: selectionBox.top,
                         left: selectionBox.left,
                         width: selectionBox.width,
