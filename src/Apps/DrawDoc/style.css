@@ -125,6 +125,7 @@ canvas-container {
 #drawDocLayersWindow {
   position: relative;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -142,6 +143,15 @@ canvas-container {
   padding: 0px;
   border: 1px var(--GeneralBorderColor) solid;
   box-sizing: border-box;
+}
+
+#drawDocLayersWindow>hr{
+  width: 100%;
+  height:2px;
+  background-color: var(--GeneralBorderColor);
+  padding:0;
+  margin-top:2px;
+  margin-bottom: 2px;
 }
 
 .drawDocLayersWindowLayer {

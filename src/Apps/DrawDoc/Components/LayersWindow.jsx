@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Fragment } from "react";
 import { Context } from "../Context.jsx";
 import { RiEyeCloseFill, RiEyeFill, RiEditLine } from "react-icons/ri";
 import { FaTrashCan } from "react-icons/fa6";
@@ -16,6 +16,8 @@ export default function LayersWindow(props) {
 
     const [layersCanvasPreviews, setLayersCanvasPreviews] = useState([]);
     const [renameLayerIndex, setRenameLayerIndex] = useState(-1);
+    const [dragTargetIndex, setDragTargetIndex] = useState(-1);
+    const [dropTargetIndex, setDropTargetIndex] = useState(-1);
 
 
     const getImageFromCanvasRef = (id, notMain) => {
@@ -36,7 +38,7 @@ export default function LayersWindow(props) {
         setCurrLayer(layers.length);
         setLastLayer(lastLayer + 1);
     }
-    
+
     const renameLayer = (e, index) => {
         const newLayers = [...layers];
         newLayers[index].name = e.target.value;
@@ -74,69 +76,142 @@ export default function LayersWindow(props) {
         }
     }
 
+    const handleLayerDragOver = (e, index) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.dataTransfer.dropEffect = "move";
+        setDropTargetIndex(index);
+    }
+
+    const handleLayerDrop = (e, index) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let newLayers = [];
+        const draggedLayer = layers[dragTargetIndex];
+        //Base layer is not allowed to be dragged, terminates the drag
+        //If the target has been dropped on itself, terminates the drag
+        if (dragTargetIndex < 1 || dragTargetIndex === index) {
+            setDropTargetIndex(-1);
+            setDragTargetIndex(-1);
+            return
+        }
+        //No Layer other than Base is allowed in the start of the Array
+        else if (index === 0) {
+            newLayers = [
+                layers[0],
+                draggedLayer,
+                ...layers.filter((_layer, i) => i !== dragTargetIndex && i !== 0)
+            ];
+        }
+        //Indicates the drop zone is not a layer window, thus its at the end of the Array
+        else if (index === layers.length) {
+            newLayers = [
+                ...layers.filter((_layer, i) => i !== dragTargetIndex),
+                draggedLayer
+            ]
+        }
+        //If the target has been dropped on the last layer, places the dragged layer before the last layer
+        else if (index === layers.length - 1) {
+            const dropLayer = layers[index];
+            newLayers = [
+                ...layers.filter((_layer, i) => i < index && i !== dragTargetIndex),
+                draggedLayer,
+                dropLayer
+            ]
+        }
+        //If the target has been dropped on another layer other than itself or base layer
+        else {
+            const dropLayer = layers[index];
+            newLayers = [
+                ...layers.filter((_layer, i) => i < index && i !== dragTargetIndex),
+                index < dragTargetIndex ? draggedLayer : dropLayer,
+                index > dragTargetIndex ? draggedLayer : dropLayer,
+                ...layers.filter((_layer, i) => i > index && i !== dragTargetIndex)
+            ]
+        }
+        setLayers(newLayers);
+        setDropTargetIndex(-1);
+        setDragTargetIndex(-1);
+    }
+
     useEffect(() => {
         layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(layer.id, true)));
     }, [history, layers]);
 
     return (
-        <div id="drawDocLayersWindow">
+        <div id="drawDocLayersWindow"
+            onDragOver={(e) => { handleLayerDragOver(e, layers.length) }}
+            onDrop={(e) => { handleLayerDrop(e, layers.length); }}
+        >
             {layers.map((layer, index) => {
-                return (<div
-                    className="drawDocLayersWindowLayer"
-                    key={index}
-                >
-                    <img
-                        src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
-                        className="drawDocCheckersBackground"
-                        onClick={() => setCurrLayer(index)}
-                    />
-                    <div>
-                        <span
-                            style={{
-                                textDecoration: index === currLayer ? "underline" : "none",
-                                display: index === renameLayerIndex ? "none" : "inline-block"
-                            }}
+                return (
+                    <Fragment key={layer.id}>
+                        {index !== 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
+                        <div
+                            className="drawDocLayersWindowLayer"
+                            draggable={index !== 0}
+                            onDragStart={(e) => setDragTargetIndex(index)}
+                            onDrag={(e) => e.preventDefault()}
+                            onDragOver={(e) => { handleLayerDragOver(e, index) }}
+                            onDrop={(e) => { handleLayerDrop(e, index) }}
+                            style={{cursor: index === 0 ? "default" : "grab"}}
                         >
-                            {layer.name}
-                        </span>
-                        <input
-                            style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
-                            id={`drawDocLayerNameInput${index}`}
-                            type="text"
-                            value={layer.name}
-                            onChange={(e) => {
-                                renameLayer(e, index);
-                            }}
-                        />
-                        <div>
-                            <button
-                                onClick={() => setRenameLayerIndex(index)}
-                                title="Rename Layer"
-                                aria-label="Rename Layer"
-                                disabled={index === 0}
-                            >
-                                <RiEditLine />
-                            </button>
-                            <button
-                                onClick={() => toggleVisibility(index)}
-                                title="Toggle Visibility"
-                                aria-label="Toggle Visibility"
-                            >
-                                {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
-                            </button>
-                            <button
-                                onClick={() => deleteLayer(index)}
-                                disabled={index === 0}
-                                title="Delete Layer"
-                                aria-label="Delete Layer"
-                            >
-                                <FaTrashCan />
-                            </button>
+                            <img
+                                src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
+                                className="drawDocCheckersBackground"
+                                onClick={() => setCurrLayer(index)}
+                                draggable={index !== 0}
+                            />
+                            <div>
+                                <span
+                                    style={{
+                                        textDecoration: index === currLayer ? "underline" : "none",
+                                        display: index === renameLayerIndex ? "none" : "inline-block"
+                                    }}
+                                >
+                                    {layer.name}
+                                </span>
+                                <input
+                                    style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
+                                    id={`drawDocLayerNameInput${index}`}
+                                    type="text"
+                                    value={layer.name}
+                                    onChange={(e) => {
+                                        renameLayer(e, index);
+                                    }}
+                                />
+                                <div>
+                                    <button
+                                        onClick={() => setRenameLayerIndex(index)}
+                                        title="Rename Layer"
+                                        aria-label="Rename Layer"
+                                        disabled={index === 0}
+                                    >
+                                        <RiEditLine />
+                                    </button>
+                                    <button
+                                        onClick={() => toggleVisibility(index)}
+                                        title="Toggle Visibility"
+                                        aria-label="Toggle Visibility"
+                                    >
+                                        {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
+                                    </button>
+                                    <button
+                                        onClick={() => deleteLayer(index)}
+                                        disabled={index === 0}
+                                        title="Delete Layer"
+                                        aria-label="Delete Layer"
+                                    >
+                                        <FaTrashCan />
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>)
+                        {index === 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
+                    </Fragment>)
             })
             }
+            {dropTargetIndex === layers.length && <hr />}
             <button onClick={() => { createNewLayer() }}>
                 New Layer
             </button>
