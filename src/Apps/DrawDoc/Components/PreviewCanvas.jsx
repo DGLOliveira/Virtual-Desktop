@@ -77,14 +77,7 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
                     });
                     break;
                 case "mousemove":
-                    if (e.buttons === 1) {
-                        setCursor({
-                            ...cursor,
-                            down: false,
-                            current: { x: pos.x, y: pos.y },
-                            end: { x: pos.x, y: pos.y },
-                        });
-                    } else if (!cursor.down) {
+                     if (!cursor.down) {
                         setCursor({
                             ...cursor,
                             current: { x: pos.x, y: pos.y }
