@@ -154,7 +154,7 @@ export default function LayersWindow(props) {
                             onDrag={(e) => e.preventDefault()}
                             onDragOver={(e) => { handleLayerDragOver(e, index) }}
                             onDrop={(e) => { handleLayerDrop(e, index) }}
-                            style={{cursor: index === 0 ? "default" : "grab"}}
+                            style={{ cursor: index === 0 ? "default" : "grab" }}
                         >
                             <img
                                 src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
@@ -163,23 +163,31 @@ export default function LayersWindow(props) {
                                 draggable={index !== 0}
                             />
                             <div>
-                                <span
-                                    style={{
-                                        textDecoration: index === currLayer ? "underline" : "none",
-                                        display: index === renameLayerIndex ? "none" : "inline-block"
-                                    }}
-                                >
-                                    {layer.name}
-                                </span>
-                                <input
-                                    style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
-                                    id={`drawDocLayerNameInput${index}`}
-                                    type="text"
-                                    value={layer.name}
-                                    onChange={(e) => {
-                                        renameLayer(e, index);
-                                    }}
-                                />
+                                <div>
+                                    <input
+                                        type="radio"
+                                        value={index}
+                                        checked={currLayer === index}
+                                        onChange={() => setCurrLayer(index)}
+                                    />
+                                    <span
+                                        style={{
+                                            textDecoration: index === currLayer ? "underline" : "none",
+                                            display: index === renameLayerIndex ? "none" : "inline-block"
+                                        }}
+                                    >
+                                        {layer.name}
+                                    </span>
+                                    <input
+                                        style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
+                                        id={`drawDocLayerNameInput${index}`}
+                                        type="text"
+                                        value={layer.name}
+                                        onChange={(e) => {
+                                            renameLayer(e, index);
+                                        }}
+                                    />
+                                </div>
                                 <div>
                                     <button
                                         onClick={() => setRenameLayerIndex(index)}
