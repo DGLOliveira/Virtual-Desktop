@@ -114,6 +114,46 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
         updateStates(updatedHistory, layers, false)
     }
 
+    const redoAction = (layerIndex) => {
+        let targetIndex, targetId, targetHistoryIndex
+        //Check if undo action comes from a specific layer or not
+        if (layerIndex === -1) {
+            targetId = getLayerFromStep(history.currStep + 1)
+            targetIndex = getLayerIndexFromId(targetId)
+            targetHistoryIndex = history.data[targetId].steps.indexOf(history.currStep + 1)
+        } else {
+            targetId = layers[layerIndex].id
+            targetIndex = layerIndex
+            if(history.data[targetId].steps.indexOf(history.currStep + 1) !== -1){
+                targetHistoryIndex = history.data[targetId].steps.indexOf(history.currStep + 1)
+            }
+            else{
+                targetHistoryIndex = -1
+                history.data[targetId].steps.some((step)=>{
+                    ++targetHistoryIndex
+                    return step > history.currStep + 1
+                })
+            }
+        }
+        const targetCanvas = document.getElementById(`drawCanvasLayer${targetId}`).getContext("2d")
+        targetCanvas.putImageData(history.data[targetId].history[targetHistoryIndex], 0, 0)
+        const canRedoLayer = targetHistoryIndex < history.data[targetId].history.length - 1
+        let canRedoAny = getLayerFromStep(history.currStep + 2) !== null
+        updatedHistory = {
+            data: history.data,
+            currStep: history.currStep + 1,
+            canUndo: true,
+            canRedo: canRedoAny
+        }
+        let updatedLayers = layers
+        updatedLayers[targetIndex] = {
+            ...updatedLayers[targetIndex],
+            canUndo: canRedoLayer,
+            canRedo: true
+        }
+        updateStates(updatedHistory, layers, false)
+    }
+
     const saveAction = () => {
         let id = layers[currLayer].id
         let updatedData = history.data
@@ -183,10 +223,10 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
             undoAction(currLayer);
             break;
         case "redo":
-            //redoAction(-1);
+            redoAction(-1);
             break;
         case "redo layer":
-            //redoAction(currLayer);
+            redoAction(currLayer);
             break;
         case "save":
             saveAction();
