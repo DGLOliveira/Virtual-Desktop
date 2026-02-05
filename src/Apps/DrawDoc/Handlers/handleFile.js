@@ -15,7 +15,7 @@ export const handleFile = (ctx, name, action, layers) => {
         downloadLink.click();
     };
     const newFile = () => {
-        const baseCanvas = document.getElementById(`drawCanvasLayer${layers[0].id}`).getContext("2d");
+        const baseCanvas = document.getElementById(`drawCanvasLayer0`).getContext("2d");
         baseCanvas.fillStyle = "#FFFFFF";
         baseCanvas.fillRect(0, 0, width, height);
     };
