@@ -141,7 +141,6 @@ export default function LayersWindow(props) {
     }
 
     useEffect(() => {
-        console.log(layers)
         layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(`drawCanvasLayer${layer.id}`, true)));
     }, [history, layers]);
 

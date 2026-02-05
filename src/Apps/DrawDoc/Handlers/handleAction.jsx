@@ -7,7 +7,7 @@ import { dialogNew } from "../Dialog/new.jsx";
 import { dialogChangeName } from "../Dialog/changeName.jsx";
 import { dialogSaveAs } from "../Dialog/saveAs.jsx";
 import { dialogCloseApp } from "../Dialog/closeApp.jsx";
-
+//TODO: update history when new layer is created
 export const handleAction = (props) => {
   let args = {};
   const { 

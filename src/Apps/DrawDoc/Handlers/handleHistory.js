@@ -27,7 +27,6 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
     }
     */
 
-    
     function getHistoryLength() {
         let historyLength = 0;
         Object.keys(history.data).forEach((id) => {
@@ -72,13 +71,63 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
         handleTopMenu(appMenu, setAppMenu, args = { history: { ...updatedHistory } }, "history");
     }
 
+
+    const undoAction = (layerIndex) => {
+        let targetIndex, targetId, targetHistoryIndex
+        //Check if undo action comes from a specific layer or not
+        if (layerIndex === -1) {
+            targetId = getLayerFromStep(history.currStep - 1)
+            targetIndex = getLayerIndexFromId(targetId)
+            targetHistoryIndex = history.data[targetId].steps.indexOf(history.currStep - 1)
+        } else {
+            targetId = layers[layerIndex].id
+            targetIndex = layerIndex
+            if(history.data[targetId].steps.indexOf(history.currStep - 1) !== -1){
+                targetHistoryIndex = history.data[targetId].steps.indexOf(history.currStep - 1)
+            }else{
+                targetHistoryIndex = -1
+                history.data[targetId].steps.some((step)=>{
+                    ++targetHistoryIndex
+                    return step > history.currStep - 1
+                })
+            }
+        }
+
+        const targetCanvas = document.getElementById(`drawCanvasLayer${targetId}`).getContext("2d")
+        targetCanvas.putImageData(history.data[targetId].history[targetHistoryIndex], 0, 0)
+
+        const canUndoLayer = targetHistoryIndex > 0
+        let canUndoAny = getLayerFromStep(history.currStep - 2) !== null
+        updatedHistory = {
+            data: history.data,
+            currStep: history.currStep - 1,
+            canUndo: canUndoAny,
+            canRedo: true
+        }
+        let updatedLayers = layers
+        updatedLayers[targetIndex] = {
+            ...updatedLayers[targetIndex],
+            canUndo: canUndoLayer,
+            canRedo: true
+        }
+        console.log(updatedHistory)
+        updateStates(updatedHistory, layers, false)
+    }
+
     const saveAction = () => {
         let id = layers[currLayer].id
         let updatedData = history.data
         let targetCanvas = document.getElementById(`drawCanvasLayer${id}`).getContext("2d")
-        updatedData[id] = {
-            history: [...updatedData[id].history, targetCanvas.getImageData(0, 0, width, height)],
-            steps: [...updatedData[id].steps, history.currStep + 1]
+        if (!updatedData[id]) {
+            updatedData[id] = {
+                history: [targetCanvas.getImageData(0, 0, width, height)],
+                steps: [history.currStep + 1]
+            }
+        } else {
+            updatedData[id] = {
+                history: [...updatedData[id].history, targetCanvas.getImageData(0, 0, width, height)],
+                steps: [...updatedData[id].steps, history.currStep + 1]
+            }
         }
         let updatedLayers = layers
         updatedLayers[currLayer] = {
@@ -128,13 +177,13 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
 
     switch (command) {
         case "undo":
-            //undoAction(-1);
+            undoAction(-1);
+            break;
+        case "undo layer":
+            undoAction(currLayer);
             break;
         case "redo":
             //redoAction(-1);
-            break;
-        case "undo layer":
-            //undoAction(currLayer);
             break;
         case "redo layer":
             //redoAction(currLayer);
