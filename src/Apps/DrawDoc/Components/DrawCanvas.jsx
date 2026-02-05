@@ -41,7 +41,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
 
   useEffect(() => {
     if(layers[currLayer].id === undefined) return
-    let canvas = document.getElementById(layers[currLayer].id);
+    let canvas = document.getElementById(`drawCanvasLayer${layers[currLayer].id}`);
     let ctx = canvas.getContext("2d", {
       willReadFrequently: true,
     });
@@ -72,7 +72,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
         return (
           <canvas
             key={layer.id}
-            id={layer.id}
+            id={`drawCanvasLayer${layer.id}`}
             className={"drawCanvasLayer"}
             style={{ display: layer.visible ? "block" : "none" }}
             height={context.dimentions.height} width={context.dimentions.width}

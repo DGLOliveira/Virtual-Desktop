@@ -34,7 +34,7 @@ export default function LayersWindow(props) {
 
     const createNewLayer = () => {
         const newLayer = {
-            id: `drawDocLayer${lastLayer + 1}`,
+            id: lastLayer + 1,
             name: `Layer ${lastLayer + 1}`,
             visible: true,
             canUndo: false,
@@ -142,7 +142,7 @@ export default function LayersWindow(props) {
 
     useEffect(() => {
         console.log(layers)
-        layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(layer.id, true)));
+        layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(`drawCanvasLayer${layer.id}`, true)));
     }, [history, layers]);
 
     return (

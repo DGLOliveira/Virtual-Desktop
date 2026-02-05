@@ -8,6 +8,27 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
     const MAX_HISTORY_LENGTH = 50;
     const hist = history.history;
     const histIndex = history.index;
+
+    /*
+    history structure
+    {
+        history: [
+            layer[0].id:{
+                history: [imageData1, imageData2, ...], -> indicates the history of the layer
+                indices: [0, 2, ...], -> indicates wich steps belong to the layer
+            },
+            layer[1].id:{
+                history: [imageData1, imageData2, ...], -> indicates the history of the layer
+                indices: [1, 3, ...], -> indicates wich steps belong to the layer
+            },
+            ...
+        ],
+        index: 0,   -> indicates the number of steps the current history has
+        canUndo: false, -> indicates if any layer can be undone
+        canRedo: false -> indicates if any layer can be redone
+    }
+    */
+
     const saveAction = () => {
         if (hist.length < MAX_HISTORY_LENGTH && histIndex === hist.length) {
             updatedHistory = {

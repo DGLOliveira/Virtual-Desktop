@@ -41,7 +41,7 @@ export function ContextProvider({ children }) {
   const [currLayer, setCurrLayer] = useState(0);
   const [layers, setLayers] = useState([
     {
-      id: "drawDocLayer0",
+      id: 0,
       name: "Base",
       visible: true,
       canUndo: false,
