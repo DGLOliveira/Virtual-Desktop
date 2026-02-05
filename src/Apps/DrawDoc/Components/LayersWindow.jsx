@@ -2,8 +2,12 @@ import { useState, useEffect, useContext, Fragment } from "react";
 import { Context } from "../Context.jsx";
 import { RiEyeCloseFill, RiEyeFill, RiEditLine } from "react-icons/ri";
 import { FaTrashCan } from "react-icons/fa6";
+import { BiUndo, BiRedo } from "react-icons/bi";
 
 export default function LayersWindow(props) {
+
+    const setAction = props.setAction;
+    const contextMenu = props.contextMenu;
 
     const context = useContext(Context);
     const history = context.history;
@@ -32,7 +36,9 @@ export default function LayersWindow(props) {
         const newLayer = {
             id: `drawDocLayer${lastLayer + 1}`,
             name: `Layer ${lastLayer + 1}`,
-            visible: true
+            visible: true,
+            canUndo: false,
+            canRedo: false
         }
         setLayers([...layers, newLayer]);
         setCurrLayer(layers.length);
@@ -135,6 +141,7 @@ export default function LayersWindow(props) {
     }
 
     useEffect(() => {
+        console.log(layers)
         layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(layer.id, true)));
     }, [history, layers]);
 
@@ -190,25 +197,43 @@ export default function LayersWindow(props) {
                                 </div>
                                 <div>
                                     <button
-                                        onClick={() => setRenameLayerIndex(index)}
+                                        title="Undo Layer"
+                                        aria-label="Undo Layer"
+                                        disabled={!layer.canUndo}
+                                        onClick={() => { setCurrLayer(index); setAction("Undo Layer") }}
+                                    >
+                                        <BiUndo />
+                                    </button>
+                                    <button
+                                        title="Redo Layer"
+                                        aria-label="Redo Layer"
+                                        disabled={!layer.canRedo}
+                                        onClick={() => { setCurrLayer(index); setAction("Redo Layer") }}
+                                    >
+                                        <BiRedo />
+                                    </button>
+                                </div>
+                                <div>
+                                    <button
                                         title="Rename Layer"
                                         aria-label="Rename Layer"
                                         disabled={index === 0}
+                                        onClick={() => setRenameLayerIndex(index)}
                                     >
                                         <RiEditLine />
                                     </button>
                                     <button
-                                        onClick={() => toggleVisibility(index)}
                                         title="Toggle Visibility"
                                         aria-label="Toggle Visibility"
+                                        onClick={() => toggleVisibility(index)}
                                     >
                                         {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
                                     </button>
                                     <button
-                                        onClick={() => deleteLayer(index)}
-                                        disabled={index === 0}
                                         title="Delete Layer"
                                         aria-label="Delete Layer"
+                                        disabled={index === 0}
+                                        onClick={() => deleteLayer(index)}
                                     >
                                         <FaTrashCan />
                                     </button>

@@ -26,7 +26,7 @@ export default function ContentBar({ setAction, contextMenu }) {
                     </ul>
                 </nav>
                 <div style={{ width: open ? "auto" : "0" }}>
-                    {selected === "Layers" && <LayersWindow />}
+                    {selected === "Layers" && <LayersWindow setAction={setAction} contextMenu={contextMenu} />}
                 </div>
             </div>)
     }

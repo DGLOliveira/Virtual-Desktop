@@ -8,8 +8,29 @@ import { dialogChangeName } from "../Dialog/changeName.jsx";
 import { dialogSaveAs } from "../Dialog/saveAs.jsx";
 import { dialogCloseApp } from "../Dialog/closeApp.jsx";
 
-export const handleAction = (canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle) => {
+export const handleAction = (props) => {
   let args = {};
+  const canvas = props.canvas;
+  const ctx = props.ctx;
+  const context = props.context;
+  const params = props.params;
+  const action = props.action;
+  const setAction = props.setAction;
+  const appMenu = props.appMenu;
+  const setAppMenu = props.setAppMenu;
+  const appDialog = props.appDialog;
+  const setAppDialog = props.setAppDialog;
+  const contextMenu = props.contextMenu;
+  const canClose = props.canClose;
+  const setCanClose = props.setCanClose;
+  const isSelected = props.isSelected;
+  const title = props.title;
+  const setTitle = props.setTitle;
+  const currLayer = props.currLayer;
+  const setCurrLayer = props.setCurrLayer;
+  const layers = props.layers;
+  const setLayers = props.setLayers;
+
   switch (action) {
     case "Startup":
       handleFile(ctx, context.name, "new");
@@ -44,11 +65,19 @@ export const handleAction = (canvas, ctx, params, action, setAction, context, ap
       setAction(false);
       break;
     case "Undo":
-      handleHistory(ctx, context.history, context.setHistory, "undo", appMenu, setAppMenu, setCanClose);
+      handleHistory(ctx, context.history, context.setHistory, "undo", appMenu, setAppMenu, setCanClose, currLayer, layers, setCurrLayer);
       setAction(false);
       break;
     case "Redo":
-      handleHistory(ctx, context.history, context.setHistory, "redo", appMenu, setAppMenu, setCanClose);
+      handleHistory(ctx, context.history, context.setHistory, "redo", appMenu, setAppMenu, setCanClose, currLayer, layers, setCurrLayer);
+      setAction(false);
+      break;
+    case "Undo Layer":
+      handleHistory(ctx, context.history, context.setHistory, "undo layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setCurrLayer);
+      setAction(false);
+      break;
+    case "Redo Layer":
+      handleHistory(ctx, context.history, context.setHistory, "redo layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setCurrLayer);
       setAction(false);
       break;
     case "Zoom In":

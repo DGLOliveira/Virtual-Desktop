@@ -5,7 +5,9 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
 
   const context = useContext(Context);
   const layers = context.layers;
+  const setLayers = context.setLayers;
   const currLayer = context.currLayer;
+  const setCurrLayer = context.setCurrLayer;
   const tool = context.tool;
   const subTool = context.subTool;
   const curveControls = context.curveControls;
@@ -43,7 +45,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
     let ctx = canvas.getContext("2d", {
       willReadFrequently: true,
     });
-    handleAction(canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle);
+    handleAction({canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle, currLayer, setCurrLayer, layers, setLayers});
   }, [context.cursor, action]);
 
   useEffect(() => {

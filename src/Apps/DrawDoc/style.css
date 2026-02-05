@@ -172,7 +172,6 @@ canvas-container {
   justify-content: space-between;
   align-items: center;
   width: 75px;
-  height: 50px;
   padding: 2px;
   box-sizing: border-box;
 }
@@ -193,6 +192,8 @@ canvas-container {
 .drawDocLayersWindowLayer>div>div>input[type="radio"] {
   width: 12px;
   height: 12px;
+  margin: 0;
+  margin-right:5px;
 }
 
 .drawDocLayersWindowLayer>div>div>input[type="text"] {

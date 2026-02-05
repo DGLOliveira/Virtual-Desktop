@@ -43,7 +43,9 @@ export function ContextProvider({ children }) {
     {
       id: "drawDocLayer0",
       name: "Base",
-      visible: true
+      visible: true,
+      canUndo: false,
+      canRedo: false
     }
   ]);
   const [lastLayer, setLastLayer] = useState(0);
