@@ -1,4 +1,4 @@
-export const handleFile = (ctx, name, action) => {
+export const handleFile = (ctx, name, action, layers) => {
 
     const height = ctx.canvas.height;
     const width = ctx.canvas.width;
@@ -14,14 +14,15 @@ export const handleFile = (ctx, name, action) => {
         downloadLink.setAttribute("href", url);
         downloadLink.click();
     };
-    const newFile = (ctx) => {
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(0, 0, width, height);
+    const newFile = () => {
+        const baseCanvas = document.getElementById(`drawCanvasLayer${layers[0].id}`).getContext("2d");
+        baseCanvas.fillStyle = "#FFFFFF";
+        baseCanvas.fillRect(0, 0, width, height);
     };
 
     switch (action) {
         case "new":
-            newFile(ctx);
+            newFile();
             break;
         case "save":
             saveFile(ctx);

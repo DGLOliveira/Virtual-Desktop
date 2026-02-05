@@ -36,7 +36,7 @@ export const handleAction = (props) => {
   switch (action) {
     case "Startup":
       handleFile(ctx, context.name, "new");
-      handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers);
+      handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
     case "New":
@@ -45,8 +45,9 @@ export const handleAction = (props) => {
       break;
     case "New Confirm":
       setAppDialog(null);
-      handleFile(ctx, context.name, "new");
-      handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers);
+      handleFile(ctx, context.name, "new", layers);
+      setCurrLayer(0);
+      handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
     case "Save":
@@ -67,19 +68,19 @@ export const handleAction = (props) => {
       setAction(false);
       break;
     case "Undo":
-      handleHistory(ctx, context.history, context.setHistory, "undo", appMenu, setAppMenu, setCanClose, currLayer, layers);
+      handleHistory(ctx, context.history, context.setHistory, "undo", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
     case "Redo":
-      handleHistory(ctx, context.history, context.setHistory, "redo", appMenu, setAppMenu, setCanClose, currLayer, layers);
+      handleHistory(ctx, context.history, context.setHistory, "redo", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
     case "Undo Layer":
-      handleHistory(ctx, context.history, context.setHistory, "undo layer", appMenu, setAppMenu, setCanClose, currLayer, layers);
+      handleHistory(ctx, context.history, context.setHistory, "undo layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
     case "Redo Layer":
-      handleHistory(ctx, context.history, context.setHistory, "redo layer", appMenu, setAppMenu, setCanClose, currLayer, layers);
+      handleHistory(ctx, context.history, context.setHistory, "redo layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
     case "Zoom In":
@@ -155,7 +156,7 @@ export const handleAction = (props) => {
       setAction(false);
       break;
     case "finished":
-      handleHistory(ctx, context.history, context.setHistory, "save", appMenu, setAppMenu, setCanClose, currLayer, layers);
+      handleHistory(ctx, context.history, context.setHistory, "save", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
     case "drawing":
