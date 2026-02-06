@@ -6,6 +6,7 @@ import { BiUndo, BiRedo } from "react-icons/bi";
 
 export default function LayersWindow(props) {
 
+    const action = props.action;
     const setAction = props.setAction;
     const contextMenu = props.contextMenu;
 
@@ -144,7 +145,7 @@ export default function LayersWindow(props) {
 
     useEffect(() => {
         layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(`drawCanvasLayer${layer.id}`, true)));
-    }, [history, layers]);
+    }, [history, layers, action]);
 
     return (
         <div id="drawDocLayersWindow"
@@ -201,7 +202,7 @@ export default function LayersWindow(props) {
                                         title="Undo Layer"
                                         aria-label="Undo Layer"
                                         disabled={!layer.canUndo}
-                                        onClick={() => { setCurrLayer(index); setAction("Undo Layer") }}
+                                        onClick={() => { setCurrLayer(index); setAction("Undo") }}
                                     >
                                         <BiUndo />
                                     </button>
@@ -209,7 +210,7 @@ export default function LayersWindow(props) {
                                         title="Redo Layer"
                                         aria-label="Redo Layer"
                                         disabled={!layer.canRedo}
-                                        onClick={() => { setCurrLayer(index); setAction("Redo Layer") }}
+                                        onClick={() => { setCurrLayer(index); setAction("Redo") }}
                                     >
                                         <BiRedo />
                                     </button>

@@ -75,14 +75,6 @@ export const handleAction = (props) => {
       handleHistory(ctx, context.history, context.setHistory, "redo", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
-    case "Undo Layer":
-      handleHistory(ctx, context.history, context.setHistory, "undo layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
-      setAction(false);
-      break;
-    case "Redo Layer":
-      handleHistory(ctx, context.history, context.setHistory, "redo layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
-      setAction(false);
-      break;
     case "New Layer":
       handleHistory(ctx, context.history, context.setHistory, "save", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);

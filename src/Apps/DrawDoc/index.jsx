@@ -69,6 +69,7 @@ export default function DrawDoc(props) {
             <SelectionCanvas />
           </canvas-container>
           <ContentBar
+            action={action}
             setAction={setAction}
             contextMenu={contextMenu}
           />

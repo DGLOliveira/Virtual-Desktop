@@ -51,10 +51,10 @@ export function ContextProvider({ children }) {
   const [lastLayer, setLastLayer] = useState(0);
   const [name, setName] = useState("Untitled");
   const [history, setHistory] = useState({
-    history: [],
-    index: 0,
-    canUndo: false,
-    canRedo: false
+    0: {
+      data: [],
+      lastIndex: 0
+    }
   });
   const [dimentions, setDimentions] = useState({ width: 350, height: 350, });
   const [tempDimentions, setTempDimentions] = useState({ width: 350, height: 350, });
