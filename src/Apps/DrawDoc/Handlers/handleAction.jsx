@@ -83,6 +83,14 @@ export const handleAction = (props) => {
       handleHistory(ctx, context.history, context.setHistory, "redo layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
+    case "New Layer":
+      handleHistory(ctx, context.history, context.setHistory, "save", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
+      setAction(false);
+      break;
+    case "Delete Layer":
+      handleHistory(ctx, context.history, context.setHistory, "delete layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
+      setAction(false);
+      break;
     case "Zoom In":
       if (context.zoom < 4) {
         if (context.zoom < 1) {

@@ -65,6 +65,7 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
     }
 
     const updateStates = (updatedHistory, updatedLayers, canClose) => {
+        console.log(updatedHistory)
         setHistory(updatedHistory)
         setLayers(updatedLayers)
         setCanClose(canClose);
@@ -110,7 +111,6 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
             canUndo: canUndoLayer,
             canRedo: true
         }
-        console.log(updatedHistory)
         updateStates(updatedHistory, layers, false)
     }
 
@@ -227,6 +227,9 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
             break;
         case "redo layer":
             redoAction(currLayer);
+            break;
+        case "delete layer":
+            //deleteLayer(currLayer);
             break;
         case "save":
             saveAction();

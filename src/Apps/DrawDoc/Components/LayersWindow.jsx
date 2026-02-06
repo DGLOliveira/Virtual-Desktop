@@ -43,6 +43,7 @@ export default function LayersWindow(props) {
         setLayers([...layers, newLayer]);
         setCurrLayer(layers.length);
         setLastLayer(lastLayer + 1);
+        setAction("New Layer");
     }
 
     const renameLayer = (e, index) => {
@@ -80,6 +81,7 @@ export default function LayersWindow(props) {
         if (index === currLayer || currLayer > layers.length - 2) {
             setCurrLayer(0);
         }
+        setAction("Delete Layer");
     }
 
     const handleLayerDragOver = (e, index) => {
