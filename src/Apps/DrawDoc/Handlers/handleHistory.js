@@ -148,8 +148,8 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
         let updatedLayers = layers
         updatedLayers[targetIndex] = {
             ...updatedLayers[targetIndex],
-            canUndo: canRedoLayer,
-            canRedo: true
+            canUndo: true,
+            canRedo: canRedoLayer
         }
         updateStates(updatedHistory, layers, false)
     }
