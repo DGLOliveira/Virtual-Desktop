@@ -351,36 +351,6 @@ export const handleDraw = (canvas, cursor, param, preview) => {
 
     };
 
-    const putImageDataExceptAlpha = (targetX, targetY, imageData) => {
-        let width = imageData.width
-        let widthCount = 0
-        let height = imageData.height
-        let heightCount = 0
-        let pixelData = []
-        imageData.data.forEach((value) => {
-            pixelData.push(value)
-            if (pixelData.length === 4) {
-                //if alpha is max value
-                if (pixelData[3] === 255) {
-                    ctx.fillStyle = `rgba(${pixelData[0]},${pixelData[1]},${pixelData[2]},1)`
-                    ctx.fillRect(targetX + widthCount, targetY + heightCount, 1, 1)
-                } else if (pixelData[3] > 0) {
-                    //TODO: Find way to blur with target color, replicating the anti-aliasing effect
-                    //let positionColor = ctx.getImageData(targetX + widthCount, targetY + heightCount, 1, 1)
-                    ctx.fillStyle = `rgba(${pixelData[0]},${pixelData[1]},${pixelData[2]},1)`
-                    ctx.fillRect(targetX + widthCount, targetY + heightCount, 1, 1)
-                }
-                pixelData = []
-                widthCount++
-                if (widthCount === width) {
-                    widthCount = 0
-                    heightCount++
-                }
-            }
-        })
-        console.log(imageData)
-    }
-
     const drawSelect = () => {
         switch (param.clipboard.state) {
             case "copy":
@@ -439,14 +409,12 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 break;
             case "paste":
                 if (!preview) {
-                    putImageDataExceptAlpha(endX, endY, param.clipboard.data)
-                    /*
-                    ctx.putImageData(
-                        param.clipboard.data,
-                        endX,
-                        endY
-                    );
-                    */
+                    const carryCanvas = document.createElement("canvas");
+                    carryCanvas.width = param.clipboard.data.width;
+                    carryCanvas.height = param.clipboard.data.height;
+                    const carryCtx = carryCanvas.getContext("2d");
+                    carryCtx.putImageData(param.clipboard.data, 0, 0);
+                    ctx.drawImage(carryCanvas, endX, endY);
                     param.setClipboard({
                         ...param.clipboard,
                         state: "none"
