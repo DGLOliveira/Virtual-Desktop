@@ -3,10 +3,22 @@ export const handleFile = (ctx, name, action, layers) => {
     const height = ctx.canvas.height;
     const width = ctx.canvas.width;
 
-    const saveFile = (ctx) => {
+    const saveFile = () => {
+        let finalCanvas = document.createElement("canvas");
+        finalCanvas.width = width;
+        finalCanvas.height = height;
+        layers.forEach((layer) => {
+            if (layer.visible) {
+                finalCanvas.getContext("2d").drawImage(
+                    document.getElementById(`drawCanvasLayer${layer.id}`),
+                    0,
+                    0
+                );
+            }
+        })
         let downloadLink = document.createElement("a");
         downloadLink.setAttribute("download", name + ".png");
-        let dataURL = ctx.canvas.toDataURL("image/png");
+        let dataURL = finalCanvas.getContext("2d").canvas.toDataURL("image/png");
         let url = dataURL.replace(
             /^data:image\/png/,
             "data:application/octet-stream",

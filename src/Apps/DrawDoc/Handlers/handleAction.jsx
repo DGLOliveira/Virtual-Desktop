@@ -35,7 +35,7 @@ export const handleAction = (props) => {
 
   switch (action) {
     case "Startup":
-      handleFile(ctx, context.name, "new");
+      handleFile(ctx, context.name, "new", layers);
       handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
@@ -51,7 +51,7 @@ export const handleAction = (props) => {
       setAction(false);
       break;
     case "Save":
-      handleFile(ctx, context.name, "save");
+      handleFile(ctx, context.name, "save", layers);
       setAction(false);
       break;
     case "Save As":
