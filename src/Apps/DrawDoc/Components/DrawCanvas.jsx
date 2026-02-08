@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Context } from "../Context.jsx";
 import { handleAction } from "../Handlers/handleAction.jsx";
-export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle }) => {
+export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle }) {
 
   const context = useContext(Context);
   const layers = context.layers;
@@ -54,6 +54,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
     document.getElementById("drawDocCheckersBackground").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("previewCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("carryCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
+    document.getElementById("interfaceCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     const layers = document.getElementsByClassName("drawCanvasLayer");
     if (layers.length > 0) {
       for (let i = 0; i < layers.length; i++) {

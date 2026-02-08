@@ -3,11 +3,13 @@ import { useContext } from "react";
 
 import Provider from "./Context.jsx";
 import { Context } from "./Context.jsx";
-import { DrawCanvas } from "./Components/DrawCanvas.jsx";
-import { PreviewCanvas } from "./Components/PreviewCanvas.jsx";
+import DrawCanvas from "./Components/DrawCanvas.jsx";
+import PreviewCanvas from "./Components/PreviewCanvas.jsx";
 import SelectionCanvas from "./Components/SelectionCanvas.jsx";
 import ContentBar from "./Components/ContentBar.jsx";
 import CarryCanvas from "./Components/CarryCanvas.jsx";
+import CanvasInterface from "./Components/CanvasInterface.jsx";
+
 import { TopNavBar } from "./Components/TopNavBar.jsx";
 import { ToolBar } from "./Components/ToolBar.jsx";
 import { BottomNavBar } from "./Components/BottomNavBar.jsx";
@@ -64,7 +66,9 @@ export default function DrawDoc(props) {
               setTitle={setTitle}
             />
             <CarryCanvas />
-            <PreviewCanvas
+            <PreviewCanvas />
+            <CanvasInterface
+              action={action}
               setAction={setAction}
               contextMenu={contextMenu}
             />
