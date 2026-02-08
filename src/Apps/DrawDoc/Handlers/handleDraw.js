@@ -393,33 +393,15 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 }
                 break;
             case "carry":
-              const carryCanvas = document.getElementById("carryCanvas");
-              const carryCtx = carryCanvas.getContext("2d");
-              carryCtx.height = param.clipboard.data.height;
-              carryCtx.width = param.clipboard.data.width;
-              carryCtx.putImageData(param.clipboard.data, 0, 0);  
-            /*
-                if (cursor.down) {
-                    ctx.putImageData(
-                        param.clipboard.data,
-                        x,
-                        y
-                    );
-                } else {
-                    ctx.putImageData(
-                        param.clipboard.data,
-                        endX,
-                        endY
-                    );
-                }*/
+                const carryCanvas = document.getElementById("carryCanvas");
+                const carryCtx = carryCanvas.getContext("2d");
+                carryCtx.height = param.clipboard.data.height;
+                carryCtx.width = param.clipboard.data.width;
+                carryCtx.putImageData(param.clipboard.data, 0, 0);
                 break;
             case "paste":
                 if (!preview) {
-                    const carryCanvas = document.getElementById("carryCanvas");/*
-                    carryCanvas.width = param.clipboard.data.width;
-                    carryCanvas.height = param.clipboard.data.height;
-                    const carryCtx = carryCanvas.getContext("2d");
-                    carryCtx.putImageData(param.clipboard.data, 0, 0);*/
+                    const carryCanvas = document.getElementById("carryCanvas");
                     ctx.drawImage(carryCanvas, endX, endY);
                     param.setClipboard({
                         ...param.clipboard,

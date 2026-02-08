@@ -213,36 +213,46 @@ export default function SelectionCanvas() {
 
     //Handles position and sizing calculations for each selection div
     useEffect(() => {
-        let left = Math.min(cursor.start.x, cursor.end.x);
-        let right = Math.max(cursor.start.x, cursor.end.x);
-        let top = Math.min(cursor.start.y, cursor.end.y);
-        let bottom = Math.max(cursor.start.y, cursor.end.y);
-        let height = bottom - top;
-        let width = right - left;
-        setSelectionBox({
-            ...selectionBox,
-            left: Math.floor(left * zoom) + "px",
-            top: Math.floor(top * zoom) + "px",
-            width: Math.floor(width * zoom) + "px",
-            height: Math.floor(height * zoom) + "px"
-        })
-        let centerLeft = left + Math.floor(width / 2);
-        let centerTop = top + Math.floor(height / 2);
-        let diameter = Math.min(width, height);
-        setSelectionCircle({
-            ...selectionCircle,
-            left: Math.floor((centerLeft - (diameter / 2)) * zoom) + "px",
-            top: Math.floor((centerTop - (diameter / 2)) * zoom) + "px",
-            diameter: Math.floor(diameter * zoom) + "px"
-        })
-        setSelectionEllipse({
-            ...selectionEllipse,
-            left: Math.floor(left * zoom) + "px",
-            top: Math.floor(top * zoom) + "px",
-            width: Math.floor(width * zoom) + "px",
-            height: Math.floor(height * zoom) + "px"
-        })
-    }, [cursor, zoom]);
+        if (tool !== "Select" || clipboard.state !== "carry") {
+            let left = Math.min(cursor.start.x, cursor.end.x);
+            let right = Math.max(cursor.start.x, cursor.end.x);
+            let top = Math.min(cursor.start.y, cursor.end.y);
+            let bottom = Math.max(cursor.start.y, cursor.end.y);
+            let height = bottom - top;
+            let width = right - left;
+            setSelectionBox({
+                ...selectionBox,
+                left: Math.floor(left * zoom) + "px",
+                top: Math.floor(top * zoom) + "px",
+                width: Math.floor(width * zoom) + "px",
+                height: Math.floor(height * zoom) + "px"
+            })
+            let centerLeft = left + Math.floor(width / 2);
+            let centerTop = top + Math.floor(height / 2);
+            let diameter = Math.min(width, height);
+            setSelectionCircle({
+                ...selectionCircle,
+                left: Math.floor((centerLeft - (diameter / 2)) * zoom) + "px",
+                top: Math.floor((centerTop - (diameter / 2)) * zoom) + "px",
+                diameter: Math.floor(diameter * zoom) + "px"
+            })
+            setSelectionEllipse({
+                ...selectionEllipse,
+                left: Math.floor(left * zoom) + "px",
+                top: Math.floor(top * zoom) + "px",
+                width: Math.floor(width * zoom) + "px",
+                height: Math.floor(height * zoom) + "px"
+            })
+        } else {
+            setSelectionBox({
+                ...selectionBox,
+                left: Math.floor(cursor.end.x * zoom) + "px",
+                top: Math.floor(cursor.end.y * zoom) + "px",
+                width: Math.floor(clipboard.data.width * zoom) + "px",
+                height: Math.floor(clipboard.data.height * zoom) + "px"
+            })
+        }
+    }, [cursor, zoom, tool, clipboard.state]);
 
     return (
         <>
@@ -265,63 +275,67 @@ export default function SelectionCanvas() {
                     {tool === "Text" &&
                         <div id="drawDocSelectionBoxDragPivot" />
                     }
-                    <div
-                        id="drawDocSelectionBoxNW"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "NW") }}
-                        onDrag={(e) => { if (!cursor.down) handleResize(e, "NW") }}
-                        onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "NW") }}
-                    />
-                    <div
-                        id="drawDocSelectionBoxN"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "N") }}
-                        onDrag={(e) => { if (!cursor.down) handleResize(e, "N") }}
-                        onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "N") }}
-                    />
-                    <div
-                        id="drawDocSelectionBoxNE"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "NE") }}
-                        onDrag={(e) => { if (!cursor.down) handleResize(e, "NE") }}
-                        onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "NE") }}
-                    />
-                    <div
-                        id="drawDocSelectionBoxE"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "E") }}
-                        onDrag={(e) => { if (!cursor.down) handleResize(e, "E") }}
-                        onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "E") }}
-                    />
-                    <div
-                        id="drawDocSelectionBoxSE"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "SE") }}
-                        onDrag={(e) => { if (!cursor.down) handleResize(e, "SE") }}
-                        onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "SE") }}
-                    />
-                    <div
-                        id="drawDocSelectionBoxS"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "S") }}
-                        onDrag={(e) => { if (!cursor.down) handleResize(e, "S") }}
-                        onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "S") }}
-                    />
-                    <div
-                        id="drawDocSelectionBoxSW"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "SW") }}
-                        onDrag={(e) => { if (!cursor.down) handleResize(e, "SW") }}
-                        onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "SW") }}
-                    />
-                    <div
-                        id="drawDocSelectionBoxW"
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "W") }}
-                        onDrag={(e) => { if (!cursor.down) handleResize(e, "W") }}
-                        onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "W") }}
-                    />
-                </div>}
+                    {(tool !== "Select" || clipboard.state !== "carry") &&
+                        <>
+                            <div
+                                id="drawDocSelectionBoxNW"
+                                draggable
+                                onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "NW") }}
+                                onDrag={(e) => { if (!cursor.down) handleResize(e, "NW") }}
+                                onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "NW") }}
+                            />
+                            <div
+                                id="drawDocSelectionBoxN"
+                                draggable
+                                onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "N") }}
+                                onDrag={(e) => { if (!cursor.down) handleResize(e, "N") }}
+                                onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "N") }}
+                            />
+                            <div
+                                id="drawDocSelectionBoxNE"
+                                draggable
+                                onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "NE") }}
+                                onDrag={(e) => { if (!cursor.down) handleResize(e, "NE") }}
+                                onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "NE") }}
+                            />
+                            <div
+                                id="drawDocSelectionBoxE"
+                                draggable
+                                onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "E") }}
+                                onDrag={(e) => { if (!cursor.down) handleResize(e, "E") }}
+                                onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "E") }}
+                            />
+                            <div
+                                id="drawDocSelectionBoxSE"
+                                draggable
+                                onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "SE") }}
+                                onDrag={(e) => { if (!cursor.down) handleResize(e, "SE") }}
+                                onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "SE") }}
+                            />
+                            <div
+                                id="drawDocSelectionBoxS"
+                                draggable
+                                onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "S") }}
+                                onDrag={(e) => { if (!cursor.down) handleResize(e, "S") }}
+                                onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "S") }}
+                            />
+                            <div
+                                id="drawDocSelectionBoxSW"
+                                draggable
+                                onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "SW") }}
+                                onDrag={(e) => { if (!cursor.down) handleResize(e, "SW") }}
+                                onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "SW") }}
+                            />
+                            <div
+                                id="drawDocSelectionBoxW"
+                                draggable
+                                onDragStart={(e) => { if (!cursor.down) handleResizeStart(e, "W") }}
+                                onDrag={(e) => { if (!cursor.down) handleResize(e, "W") }}
+                                onDragEnd={(e) => { if (!cursor.down) handleResizeEnd(e, "W") }}
+                            />
+                        </>}
+                </div>
+            }
             {tool === "Shape" && subtool.type !== "Line" && subtool.type !== "Curve" && subtool.stretch &&
                 <div
                     id="drawDocSelectionEllipse"

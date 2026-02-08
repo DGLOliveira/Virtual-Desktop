@@ -17,9 +17,9 @@ export default function CarryCanvas() {
             style={{ 
                 display:tool === "Select" && clipboard.state === "carry" ? "block" : "none", 
                 position: "absolute",
-                zIndex: currLayer+1, 
+                zIndex: currLayer, 
                 top: cursor.end.y + 1 + "px", 
-                left: cursor.end.x + 1 + "px" 
+                left: cursor.end.x + 1 + "px"
             }} />
         )
     
