@@ -53,6 +53,7 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
     let offsetY = (context.dimentions.height / 2 - context.zoom * context.dimentions.height / 2) * -1 / context.zoom;
     document.getElementById("drawDocCheckersBackground").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("previewCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
+    document.getElementById("carryCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     const layers = document.getElementsByClassName("drawCanvasLayer");
     if (layers.length > 0) {
       for (let i = 0; i < layers.length; i++) {
@@ -74,7 +75,10 @@ export const DrawCanvas = ({ action, setAction, appMenu, setAppMenu, appDialog, 
             key={layer.id}
             id={`drawCanvasLayer${layer.id}`}
             className={"drawCanvasLayer"}
-            style={{ display: layer.visible ? "block" : "none" }}
+            style={{ 
+              display: layer.visible ? "block" : "none",
+              zIndex: index
+            }}
             height={context.dimentions.height} width={context.dimentions.width}
           />
         );

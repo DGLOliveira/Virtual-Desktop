@@ -1,6 +1,7 @@
 import { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context.jsx";
 import { handleDraw } from "../Handlers/handleDraw.js";
+import { Layers } from "three";
 
 export const PreviewCanvas = ({ setAction, contextMenu }) => {
 
@@ -22,6 +23,7 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
     const setText = context.setText;
     const clipboard = context.clipboard;
     const setClipboard = context.setClipboard;
+    const layers = context.layers;
     const params = {
         tool,
         subTool,
@@ -195,7 +197,10 @@ export const PreviewCanvas = ({ setAction, contextMenu }) => {
     return (
         <canvas
             ref={canvasPreviewRef}
-            style={{ color: params.selectedColor }}
+            style={{ 
+                color: params.selectedColor,
+                zIndex: layers.length+1
+            }}
             className={("cursor" + params.tool)}
             id="previewCanvas"
             height={context.dimentions.height}

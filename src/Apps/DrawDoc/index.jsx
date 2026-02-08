@@ -7,6 +7,7 @@ import { DrawCanvas } from "./Components/DrawCanvas.jsx";
 import { PreviewCanvas } from "./Components/PreviewCanvas.jsx";
 import SelectionCanvas from "./Components/SelectionCanvas.jsx";
 import ContentBar from "./Components/ContentBar.jsx";
+import CarryCanvas from "./Components/CarryCanvas.jsx";
 import { TopNavBar } from "./Components/TopNavBar.jsx";
 import { ToolBar } from "./Components/ToolBar.jsx";
 import { BottomNavBar } from "./Components/BottomNavBar.jsx";
@@ -62,6 +63,7 @@ export default function DrawDoc(props) {
               title={title}
               setTitle={setTitle}
             />
+            <CarryCanvas />
             <PreviewCanvas
               setAction={setAction}
               contextMenu={contextMenu}
