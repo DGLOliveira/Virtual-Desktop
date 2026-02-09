@@ -46,6 +46,7 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
                     baseCanvas.width = image.width;
                     baseCanvas.height = image.height;
                     context.setDimentions({width: image.width, height: image.height});
+                    context.setName(file.name);
                     const baseCtx = baseCanvas.getContext("2d");
                     baseCtx.drawImage(image, 0, 0);
                     setAction("Open Confirm");
