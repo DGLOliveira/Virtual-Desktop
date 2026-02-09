@@ -53,7 +53,7 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
     let offsetY = (context.dimentions.height / 2 - context.zoom * context.dimentions.height / 2) * -1 / context.zoom;
     document.getElementById("drawDocCheckersBackground").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("previewCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
-    document.getElementById("carryCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
+    //document.getElementById("carryCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     document.getElementById("interfaceCanvas").style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
     const layers = document.getElementsByClassName("drawCanvasLayer");
     if (layers.length > 0) {
@@ -61,7 +61,7 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
         layers[i].style.transform = `scale(${context.zoom}) translate(${offsetX}px,${offsetY}px)`;
       }
     }
-  }, [context.zoom]);
+  }, [context.zoom, context.cursor]);
 
   return (
     <>

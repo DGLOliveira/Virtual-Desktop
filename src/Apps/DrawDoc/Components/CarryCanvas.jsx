@@ -15,11 +15,11 @@ export default function CarryCanvas() {
             height={clipboard.data.height}
             width={clipboard.data.width}
             style={{ 
-                display:tool === "Select" && clipboard.state === "carry" ? "block" : "none", 
+                display:"none", 
                 position: "absolute",
                 zIndex: currLayer, 
-                top: cursor.end.y + 1 + "px", 
-                left: cursor.end.x + 1 + "px"
+                top: cursor.end.y + "px", 
+                left: cursor.end.x + "px"
             }} />
         )
     

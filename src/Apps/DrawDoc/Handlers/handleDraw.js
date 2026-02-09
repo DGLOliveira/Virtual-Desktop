@@ -398,6 +398,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
                 carryCtx.height = param.clipboard.data.height;
                 carryCtx.width = param.clipboard.data.width;
                 carryCtx.putImageData(param.clipboard.data, 0, 0);
+                ctx.putImageData(param.clipboard.data, endX, endY);
                 break;
             case "paste":
                 if (!preview) {
