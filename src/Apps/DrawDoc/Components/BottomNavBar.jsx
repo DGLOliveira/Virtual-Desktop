@@ -17,6 +17,7 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
             <button
               title="Confirm Text"
               onClick={() => setAction("confirm")}
+              disabled={context.layers[context.currLayer].locked}
             ><small>Confirm</small>
             </button>
             <vertical-rect ></vertical-rect>
@@ -51,6 +52,7 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
             <button
               title="Paste"
               onClick={() => { setAction("confirm"); context.setClipboard({ ...context.clipboard, state: "paste" }) }}
+              disabled={context.layers[context.currLayer].locked}
             ><small>Paste</small></button>
             :
             <>
@@ -71,6 +73,7 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
             <button
               title="Confirm Shape"
               onClick={() => setAction("confirm")}
+              disabled={context.layers[context.currLayer].locked}
             ><small>Confirm</small></button>
             <vertical-rect ></vertical-rect>
             {context.subTool.shape === "Curve" &&

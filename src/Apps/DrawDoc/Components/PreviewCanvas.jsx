@@ -21,7 +21,8 @@ export default function PreviewCanvas() {
     const setText = context.setText;
     const clipboard = context.clipboard;
     const setClipboard = context.setClipboard;
-    const curLayer = context.currLayer;
+    const layers = context.layers;
+    const currLayer = context.currLayer;
     const params = {
         tool,
         subTool,
@@ -40,15 +41,18 @@ export default function PreviewCanvas() {
     };
 
     useEffect(() => {
-        handleDraw(canvasPreviewRef.current, cursor, params, true);
+        if (!layers[currLayer].locked) {
+            handleDraw(canvasPreviewRef.current, cursor, params, true);
+        }
     }, [cursor, params]);
 
     return (
         <canvas
             ref={canvasPreviewRef}
-            style={{ 
+            style={{
+                display: layers[currLayer].locked ? "none" : "block",
                 color: params.selectedColor,
-                zIndex: curLayer
+                zIndex: currLayer
             }}
             id="previewCanvas"
             height={context.dimentions.height}

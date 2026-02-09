@@ -21,6 +21,7 @@ export default function CanvasInterface({ setAction, contextMenu }){
     const clipboard = context.clipboard;
     const setClipboard = context.setClipboard;
     const layers = context.layers;
+    const currLayer = context.currLayer;
     const params = {
         tool,
         subTool,
@@ -176,8 +177,8 @@ export default function CanvasInterface({ setAction, contextMenu }){
     const handleContextMenu = (event) => {
         event.preventDefault();
         let content = {
-            "Undo": { action: () => setAction("Undo"), disabled: !context.history.canUndo },
-            "Redo": { action: () => setAction("Redo"), disabled: !context.history.canRedo },
+            "Undo": { action: () => setAction("Undo"), disabled: !context.history.canUndo || layers[currLayer].locked },
+            "Redo": { action: () => setAction("Redo"), disabled: !context.history.canRedo || layers[currLayer].locked },
             "LineBreak": {},
             "Zoom In": { action: () => setAction("Zoom In"), disabled: context.zoom === 4 },
             "Zoom Out": { action: () => setAction("Zoom Out"), disabled: context.zoom === 0.25 },
@@ -197,7 +198,7 @@ export default function CanvasInterface({ setAction, contextMenu }){
                 color: params.selectedColor,
                 zIndex: layers.length+2
             }}
-            className={("cursor" + params.tool)}
+            className={layers[currLayer].locked ? "cursorLocked" : ("cursor" + params.tool)}
             id="interfaceCanvas"
             height={context.dimentions.height}
             width={context.dimentions.width}

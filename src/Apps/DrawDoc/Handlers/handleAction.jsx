@@ -220,14 +220,14 @@ export const handleAction = (props) => {
       setAction(false);
       break;
     case "drawing":
-      if (context.cursor.down) {
+      if (context.cursor.down && !layers[currLayer].locked) {
         handleTools(canvas, context.cursor, context.setCursor, params, action, setAction);
       } else {
         setAction("finished");
       }
       break;
     case "spraying":
-      if (context.cursor.down) {
+      if (context.cursor.down && !layers[currLayer].locked) {
         //Allows for a continuous spray without moving the mouse
         setTimeout(() => {
           setAction("drawing")
@@ -249,7 +249,7 @@ export const handleAction = (props) => {
       handleTools(canvas, context.cursor, context.setCursor, params, action, setAction);
       break;
     case false:
-      if (context.cursor.down) {
+      if (context.cursor.down && !layers[currLayer].locked) {
         handleTools(canvas, context.cursor, context.setCursor, params, action, setAction);
       }
       break;

@@ -405,3 +405,7 @@ canvas-container {
 .cursorShape {
   cursor: crosshair;
 }
+
+.cursorLocked {
+  cursor: not-allowed;
+}

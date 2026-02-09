@@ -4,6 +4,7 @@ import { RiEyeCloseFill, RiEyeFill, RiEditLine } from "react-icons/ri";
 import { FaTrashCan } from "react-icons/fa6";
 import { BiUndo, BiRedo } from "react-icons/bi";
 import { IoDuplicateSharp } from "react-icons/io5";
+import { TiLockOpen, TiLockClosed } from "react-icons/ti";
 
 export default function LayersWindow(props) {
 
@@ -40,6 +41,7 @@ export default function LayersWindow(props) {
             id: lastLayer + 1,
             name: `Layer ${lastLayer + 1}`,
             visible: true,
+            locked: false,
             canUndo: false,
             canRedo: false
         }
@@ -79,6 +81,12 @@ export default function LayersWindow(props) {
         setLayers(newLayers);
     }
 
+    const toggleLock = (index) => {
+        const newLayers = [...layers];
+        newLayers[index].locked = !newLayers[index].locked;
+        setLayers(newLayers);
+    }
+
     const deleteLayer = (index) => {
         setLayers(layers.filter((_layer, i) => i !== index));
         if (index === currLayer || currLayer > layers.length - 2) {
@@ -93,6 +101,7 @@ export default function LayersWindow(props) {
             id: newId,
             name: `Dupe ${layers[index].name}`,
             visible: true,
+            locked: layers[index].locked,
             canUndo: layers[index].canUndo,
             canRedo: layers[index].canRedo
         }
@@ -221,7 +230,7 @@ export default function LayersWindow(props) {
                                     <button
                                         title="Undo Layer"
                                         aria-label="Undo Layer"
-                                        disabled={!layer.canUndo}
+                                        disabled={!layer.canUndo || layer.locked}
                                         onClick={() => { setCurrLayer(index); setAction("Undo") }}
                                     >
                                         <BiUndo />
@@ -229,7 +238,7 @@ export default function LayersWindow(props) {
                                     <button
                                         title="Redo Layer"
                                         aria-label="Redo Layer"
-                                        disabled={!layer.canRedo}
+                                        disabled={!layer.canRedo || layer.locked}
                                         onClick={() => { setCurrLayer(index); setAction("Redo") }}
                                     >
                                         <BiRedo />
@@ -261,10 +270,20 @@ export default function LayersWindow(props) {
                                     <button
                                         title="Delete Layer"
                                         aria-label="Delete Layer"
-                                        disabled={index === 0}
+                                        disabled={index === 0 || layer.locked}
                                         onClick={() => deleteLayer(index)}
                                     >
                                         <FaTrashCan />
+                                    </button>
+                                </div>
+                                <div>
+                                    <button 
+                                        title={layer.locked ? "Unlock Layer" : "Lock Layer"}
+                                        aria-label={layer.locked ? "Unlock Layer" : "Lock Layer"}
+                                        onClick={() => toggleLock(index)}
+                                        className={layer.locked ? "buttonActive" : ""}
+                                    >
+                                        {layer.locked ? <TiLockClosed /> : <TiLockOpen />}
                                     </button>
                                 </div>
                             </div>

@@ -44,6 +44,7 @@ export function ContextProvider({ children }) {
       id: 0,
       name: "Base",
       visible: true,
+      locked: false,
       canUndo: false,
       canRedo: false
     }

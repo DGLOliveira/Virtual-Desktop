@@ -37,10 +37,10 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
   if (context.view.topNavBar) {
     return (
       <nav id="drawDocTopNavBar" onContextMenu={(event) => handleContextMenu(event)}>
-        <button title="Undo" onClick={() => setAction("Undo")} disabled={!context.layers[context.currLayer].canUndo}>
+        <button title="Undo" onClick={() => setAction("Undo")} disabled={!context.layers[context.currLayer].canUndo || context.layers[context.currLayer].locked}>
           <BiUndo />
         </button>
-        <button title="Redo" onClick={() => setAction("Redo")} disabled={!context.layers[context.currLayer].canRedo}>
+        <button title="Redo" onClick={() => setAction("Redo")} disabled={!context.layers[context.currLayer].canRedo || context.layers[context.currLayer].locked}>
           <BiRedo />
         </button>
         <vertical-rect ></vertical-rect>

@@ -10,6 +10,7 @@ export default function SelectionCanvas() {
     const subtool = context.subTool;
     const setSubTool = context.setSubTool;
     const layers = context.layers;
+    const currLayer = context.currLayer;
     const clipboard = context.clipboard;
 
     const [selectionBox, setSelectionBox] = useState({
@@ -261,6 +262,7 @@ export default function SelectionCanvas() {
         }
     }, [cursor, zoom, tool, clipboard.state]);
 
+    if(layers[currLayer].locked) return null
     return (
         <>
             {(tool === "Select" || tool === "Shape" || tool === "Text") &&
