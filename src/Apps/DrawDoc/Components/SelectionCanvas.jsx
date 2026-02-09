@@ -57,6 +57,13 @@ export default function SelectionCanvas() {
         if (!flag) {
             return [0, 0, false]
         } else {
+            let canvas = document.getElementById("interfaceCanvas");
+            let ctx = canvas.getContext('2d', { alpha: true });
+            let boundary = canvas.getBoundingClientRect();
+            const scaleX = (ctx.canvas.width / boundary.width);
+            const scaleY = (ctx.canvas.height / boundary.height);
+            cursorX = (cursorX - boundary.left) * scaleX;
+            cursorY = (cursorY - boundary.top) * scaleY;
             return [cursorX, cursorY, true]
         }
     }
