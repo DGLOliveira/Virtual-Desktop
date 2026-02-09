@@ -1,4 +1,4 @@
-export const handleFile = (ctx, name, action, layers) => {
+export const handleFile = (ctx, context, action, layers, setAction) => {
 
     const height = ctx.canvas.height;
     const width = ctx.canvas.width;
@@ -17,7 +17,7 @@ export const handleFile = (ctx, name, action, layers) => {
             }
         })
         let downloadLink = document.createElement("a");
-        downloadLink.setAttribute("download", name + ".png");
+        downloadLink.setAttribute("download", context.name + ".png");
         let dataURL = finalCanvas.getContext("2d").canvas.toDataURL("image/png");
         let url = dataURL.replace(
             /^data:image\/png/,
@@ -32,12 +32,42 @@ export const handleFile = (ctx, name, action, layers) => {
         baseCanvas.fillRect(0, 0, width, height);
     };
 
+    const uploadImage = () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                const image = new Image();
+                image.onload = () => {
+                    const tempCanvas = document.createElement("canvas");
+                    tempCanvas.width = image.width;
+                    tempCanvas.height = image.height;
+                    const tempCtx = tempCanvas.getContext("2d");
+                    tempCtx.drawImage(image, 0, 0);
+                    const data = tempCtx.getImageData(0, 0, image.width, image.height);
+                    context.setClipboard({ data: data, state: "carry" });
+                    context.setTool("Select");
+                    setAction("clipping");
+                };
+                image.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        };
+        input.click();
+    }
+
     switch (action) {
         case "new":
             newFile();
             break;
         case "save":
             saveFile(ctx);
+            break;
+        case "image":
+            uploadImage(ctx);
             break;
         default:
             break;

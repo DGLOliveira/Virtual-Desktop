@@ -35,7 +35,7 @@ export const handleAction = (props) => {
 
   switch (action) {
     case "Startup":
-      handleFile(ctx, context.name, "new", layers);
+      handleFile(ctx, context, "new", layers);
       handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       setAction(false);
       break;
@@ -49,7 +49,7 @@ export const handleAction = (props) => {
       break;
     case "New Confirm":
       setAppDialog(null);
-      handleFile(ctx, context.name, "new", layers);
+      handleFile(ctx, context, "new", layers);
       setCurrLayer(0);
       handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       context.setClipboard({
@@ -59,7 +59,7 @@ export const handleAction = (props) => {
       setAction(false);
       break;
     case "Save":
-      handleFile(ctx, context.name, "save", layers);
+      handleFile(ctx, context, "save", layers);
       if (context.clipboard.state === "carry" && context.tool === "Select") {
         setAction("clipping")
       } else {
@@ -90,6 +90,9 @@ export const handleAction = (props) => {
       } else {
         setAction(false);
       }
+      break;
+    case "Image":
+      handleFile(ctx, context, "image", layers, setAction);
       break;
     case "Undo":
       handleHistory(ctx, context.history, context.setHistory, "undo", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
@@ -305,7 +308,7 @@ export const handleAction = (props) => {
       }
       break;
     case "Save and Close":
-      handleFile(ctx, context.name, "save");
+      handleFile(ctx, context, "save");
       setCanClose(true);
       setAction("Close");
       break;

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Context } from "../Context.jsx";
 import { BiUndo, BiRedo } from "react-icons/bi";
 import { TfiSave, TfiFile } from "react-icons/tfi";
+import { FaImage } from "react-icons/fa";
 import { CiLineHeight } from "react-icons/ci";
 import { AiOutlineColumnHeight } from "react-icons/ai";
 import { RiFontSize, RiShapesLine } from "react-icons/ri";
@@ -49,6 +50,10 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
         </button>
         <button title="Download File" onClick={() => setAction("Save")} disabled={!(context.history.canRedo || context.history.canUndo)}>
           <TfiSave />
+        </button>
+        <vertical-rect ></vertical-rect>
+        <button title="Upload Image" onClick={() => setAction("Image")} disabled={context.layers[context.currLayer].locked}>
+          <FaImage />
         </button>
         <vertical-rect ></vertical-rect>
         <div style={{ display: "flex" }}>
