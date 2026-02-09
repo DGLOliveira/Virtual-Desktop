@@ -10,7 +10,7 @@ import { dialogCloseApp } from "../Dialog/closeApp.jsx";
 //TODO: update history when new layer is created
 export const handleAction = (props) => {
   let args = {};
-  const { 
+  const {
     canvas,
     ctx,
     context,
@@ -94,7 +94,11 @@ export const handleAction = (props) => {
         }
         handleTopMenu(appMenu, setAppMenu, args, "zoom");
       }
-      setAction(false);
+      if (context.clipboard.state === "carry" && tool === "Selection") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Zoom Out":
       if (context.zoom > 0.25) {
@@ -107,13 +111,21 @@ export const handleAction = (props) => {
         }
         handleTopMenu(appMenu, setAppMenu, args, "zoom");
       }
-      setAction(false);
+      if (context.clipboard.state === "carry" && tool === "Selection") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Zoom Reset":
       context.setZoom(1);
       args = { zoom: 1 };
       handleTopMenu(appMenu, setAppMenu, args, "zoom");
-      setAction(false);
+      if (context.clipboard.state === "carry" && tool === "Selection") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Zoom Min":
       args = { zoom: 0.25 };
