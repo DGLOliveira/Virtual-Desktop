@@ -20,7 +20,7 @@ export const dialogSaveAs = (context, setAction, setAppDialog) => {
         },
         Cancel: () => {
             setAppDialog(null);
-            setAction(false);
+            setAction("Cancel Dialog");
         }
     };
 

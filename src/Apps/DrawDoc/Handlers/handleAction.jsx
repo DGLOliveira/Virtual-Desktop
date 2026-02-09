@@ -41,47 +41,87 @@ export const handleAction = (props) => {
       break;
     case "New":
       dialogNew(context, setAction, setAppDialog);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "New Confirm":
       setAppDialog(null);
       handleFile(ctx, context.name, "new", layers);
       setCurrLayer(0);
       handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
+      context.setClipboard({
+        data: {},
+        state: "none",
+      })
       setAction(false);
       break;
     case "Save":
       handleFile(ctx, context.name, "save", layers);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Save As":
       dialogSaveAs(context, setAction, setAppDialog);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Change Name":
       dialogChangeName(context, setAction, setAppDialog);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Change Name Confirm":
       setTitle(context.name);
       setAppDialog(null);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Undo":
       handleHistory(ctx, context.history, context.setHistory, "undo", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Redo":
       handleHistory(ctx, context.history, context.setHistory, "redo", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "New Layer":
       handleHistory(ctx, context.history, context.setHistory, "save", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Delete Layer":
       handleHistory(ctx, context.history, context.setHistory, "delete layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "Zoom In":
       if (context.zoom < 4) {
@@ -94,7 +134,7 @@ export const handleAction = (props) => {
         }
         handleTopMenu(appMenu, setAppMenu, args, "zoom");
       }
-      if (context.clipboard.state === "carry" && tool === "Selection") {
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
         setAction("clipping")
       } else {
         setAction(false);
@@ -111,7 +151,7 @@ export const handleAction = (props) => {
         }
         handleTopMenu(appMenu, setAppMenu, args, "zoom");
       }
-      if (context.clipboard.state === "carry" && tool === "Selection") {
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
         setAction("clipping")
       } else {
         setAction(false);
@@ -121,7 +161,7 @@ export const handleAction = (props) => {
       context.setZoom(1);
       args = { zoom: 1 };
       handleTopMenu(appMenu, setAppMenu, args, "zoom");
-      if (context.clipboard.state === "carry" && tool === "Selection") {
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
         setAction("clipping")
       } else {
         setAction(false);
@@ -209,25 +249,41 @@ export const handleAction = (props) => {
       context.setView({ ...context.view, topNavBar: !context.view.topNavBar });
       args = { view: { ...context.view, topNavBar: !context.view.topNavBar } };
       handleTopMenu(appMenu, setAppMenu, args, "view");
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "contentBar":
       context.setView({ ...context.view, contentBar: !context.view.contentBar });
       args = { view: { ...context.view, contentBar: !context.view.contentBar } };
       handleTopMenu(appMenu, setAppMenu, args, "view");
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "bottomNavBar":
       context.setView({ ...context.view, bottomNavBar: !context.view.bottomNavBar });
       args = { view: { ...context.view, bottomNavBar: !context.view.bottomNavBar } };
       handleTopMenu(appMenu, setAppMenu, args, "view");
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     case "toolBar":
       context.setView({ ...context.view, toolBar: !context.view.toolBar });
       args = { view: { ...context.view, toolBar: !context.view.toolBar } };
       handleTopMenu(appMenu, setAppMenu, args, "view");
-      setAction(false);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     /*case "menuBar":
       context.setView({ ...context.view, menuBar: !context.view.menuBar });
@@ -244,6 +300,13 @@ export const handleAction = (props) => {
       handleFile(ctx, context.name, "save");
       setCanClose(true);
       setAction("Close");
+      break;
+    case "Cancel Dialog":
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
       break;
     default:
       setAction(false);
