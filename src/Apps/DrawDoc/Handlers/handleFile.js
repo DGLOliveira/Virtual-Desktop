@@ -32,6 +32,32 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
         baseCanvas.fillRect(0, 0, width, height);
     };
 
+    const openFile = () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                const image = new Image();
+                image.onload = () => {
+                    const baseCanvas = document.getElementById(`drawCanvasLayer0`);
+                    baseCanvas.width = image.width;
+                    baseCanvas.height = image.height;
+                    context.setDimentions({width: image.width, height: image.height});
+                    const baseCtx = baseCanvas.getContext("2d");
+                    baseCtx.drawImage(image, 0, 0);
+                    setAction("Open Confirm");
+                };
+                image.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        };
+        input.click();
+
+    }
+
     const uploadImage = () => {
         const input = document.createElement("input");
         input.type = "file";
@@ -65,6 +91,9 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
             break;
         case "save":
             saveFile(ctx);
+            break;
+        case "open":
+            openFile(ctx);
             break;
         case "image":
             uploadImage(ctx);

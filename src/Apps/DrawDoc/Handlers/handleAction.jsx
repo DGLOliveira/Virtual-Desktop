@@ -58,6 +58,18 @@ export const handleAction = (props) => {
       })
       setAction(false);
       break;
+    case "Open":
+      handleFile(ctx, context, "open", layers, setAction);
+      break;
+    case "Open Confirm":
+      setCurrLayer(0);
+      handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
+      context.setClipboard({
+        data: {},
+        state: "none",
+      })
+      setAction(false);
+      break;
     case "Save":
       handleFile(ctx, context, "save", layers);
       if (context.clipboard.state === "carry" && context.tool === "Select") {

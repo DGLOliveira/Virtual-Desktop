@@ -6,13 +6,12 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "action": "New",
                 "keybind": "Alt+N",
                 "disabled": false
-            },/*
+            },
             "Open": {
                 "action": "Open",
                 "keybind": "Alt+O",
-                "disabled": true,
-                "title": "Not Implemented"
-            },*/
+                "disabled": false
+            },
             "Download": {
                 "action": "Save",
                 "keybind": "Ctrl+Alt+S",
