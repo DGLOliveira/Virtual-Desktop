@@ -111,6 +111,13 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
         updateStates(updatedHistory, updatedLayers, true)
     }
 
+    const duplicateLayer = () => {
+        let id = layers[currLayer].id
+        const target = document.getElementById(`drawCanvasLayer${id}`).getContext("2d")
+        const image = history[id].data[history[id].lastIndex]
+        target.putImageData(image, 0, 0)
+    }
+
     switch (command) {
         case "undo":
             undoAction();
@@ -120,6 +127,9 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
             break;
         case "delete layer":
             //deleteLayer(currLayer);
+            break;
+        case "duplicate layer":
+            duplicateLayer();
             break;
         case "save":
             saveAction();

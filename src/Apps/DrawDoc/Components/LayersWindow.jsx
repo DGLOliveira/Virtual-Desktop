@@ -3,6 +3,7 @@ import { Context } from "../Context.jsx";
 import { RiEyeCloseFill, RiEyeFill, RiEditLine } from "react-icons/ri";
 import { FaTrashCan } from "react-icons/fa6";
 import { BiUndo, BiRedo } from "react-icons/bi";
+import { IoDuplicateSharp } from "react-icons/io5";
 
 export default function LayersWindow(props) {
 
@@ -12,6 +13,7 @@ export default function LayersWindow(props) {
 
     const context = useContext(Context);
     const history = context.history;
+    const setHistory = context.setHistory;
     const currLayer = context.currLayer;
     const setCurrLayer = context.setCurrLayer;
     const layers = context.layers;
@@ -83,6 +85,24 @@ export default function LayersWindow(props) {
             setCurrLayer(0);
         }
         setAction("Delete Layer");
+    }
+
+    const duplicateLayer = (index) => {
+        let newId = lastLayer + 1;
+        const newLayer = {
+            id: newId,
+            name: `Dupe ${layers[index].name}`,
+            visible: true,
+            canUndo: layers[index].canUndo,
+            canRedo: layers[index].canRedo
+        }
+        setLayers([...layers.slice(0, index + 1), newLayer, ...layers.slice(index + 1)]);
+        setCurrLayer(index + 1);
+        setLastLayer(lastLayer + 1);
+        let newHistory = history
+        newHistory[newId] = history[layers[index].id];
+        setHistory(newHistory);
+        setAction("Duplicate Layer");
     }
 
     const handleLayerDragOver = (e, index) => {
@@ -213,6 +233,13 @@ export default function LayersWindow(props) {
                                         onClick={() => { setCurrLayer(index); setAction("Redo") }}
                                     >
                                         <BiRedo />
+                                    </button>
+                                    <button
+                                        title="Duplicate Layer"
+                                        aria-label="Duplicate Layer"
+                                        onClick={() => duplicateLayer(index)}
+                                    >
+                                        <IoDuplicateSharp />
                                     </button>
                                 </div>
                                 <div>

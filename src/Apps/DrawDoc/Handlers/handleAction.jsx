@@ -123,6 +123,14 @@ export const handleAction = (props) => {
         setAction(false);
       }
       break;
+    case "Duplicate Layer":
+      handleHistory(ctx, context.history, context.setHistory, "duplicate layer", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
+      if (context.clipboard.state === "carry" && context.tool === "Select") {
+        setAction("clipping")
+      } else {
+        setAction(false);
+      }
+      break;
     case "Zoom In":
       if (context.zoom < 4) {
         if (context.zoom < 1) {
