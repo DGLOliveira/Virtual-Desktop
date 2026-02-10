@@ -3,6 +3,20 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
     const height = ctx.canvas.height;
     const width = ctx.canvas.width;
 
+    //Detects if the upload action has been removed, and if so, 
+    // removes the input so to prevent upload dialog from reactivating
+    function checkCancelledUpload(input) {
+        document.body.onfocus = () => {
+            if (input.value.length > 0) {
+                document.body.onfocus = null;
+            } else {
+                input.remove();
+                setAction(false);
+                document.body.onfocus = null;
+            }
+        }
+    }
+
     const saveFile = () => {
         let finalCanvas = document.createElement("canvas");
         finalCanvas.width = width;
@@ -46,17 +60,18 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
                     const baseCanvas = document.getElementById(`drawCanvasLayer0`);
                     baseCanvas.width = image.width;
                     baseCanvas.height = image.height;
-                    context.setDimentions({width: image.width, height: image.height});
+                    context.setDimentions({ width: image.width, height: image.height });
                     context.setName(file.name);
                     const baseCtx = baseCanvas.getContext("2d");
                     baseCtx.drawImage(image, 0, 0);
                     setAction("Open Confirm");
+                    input.remove();
                 };
             };
             reader.readAsDataURL(file);
         };
         input.click();
-
+        checkCancelledUpload(input);
     }
 
     const uploadImage = () => {
@@ -79,11 +94,13 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
                     context.setClipboard({ data: data, state: "carry" });
                     context.setTool("Select");
                     setAction("clipping");
+                    input.remove();
                 };
             };
             reader.readAsDataURL(file);
         };
         input.click();
+        checkCancelledUpload(input);
     }
 
     switch (action) {
