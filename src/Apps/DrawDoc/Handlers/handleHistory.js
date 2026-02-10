@@ -64,10 +64,12 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
 
     const saveAction = () => {
         let id = layers[currLayer].id
+        let isNewLayer = false
         updatedHistory = history
         let targetCanvas = document.getElementById(`drawCanvasLayer${id}`).getContext("2d")
         //Checks if the layer does not have a history
         if (!updatedHistory[id]) {
+            isNewLayer = true
             updatedHistory[id] = {
                 data: [targetCanvas.getImageData(0, 0, width, height)],
                 lastIndex: 0
@@ -89,7 +91,7 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
         let updatedLayers = layers
         updatedLayers[currLayer] = {
             ...updatedLayers[currLayer],
-            canUndo: true,
+            canUndo: !isNewLayer,
             canRedo: false
         }
         //if the history is too long, remove the oldest step and associated data
