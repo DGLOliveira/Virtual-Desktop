@@ -78,6 +78,8 @@ export default function DrawDoc(props) {
             action={action}
             setAction={setAction}
             contextMenu={contextMenu}
+            appMenu={appMenu}
+            setAppMenu={setAppMenu}
           />
         </div>
         <BottomNavBar

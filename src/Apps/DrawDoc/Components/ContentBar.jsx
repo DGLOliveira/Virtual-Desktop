@@ -3,7 +3,7 @@ import { Context } from "../Context.jsx";
 import { GoTriangleLeft, GoTriangleRight } from "react-icons/go";
 import LayersWindow from "./LayersWindow.jsx";
 
-export default function ContentBar({ action, setAction, contextMenu }) {
+export default function ContentBar({ action, setAction, contextMenu, appMenu, setAppMenu }) {
     const context = useContext(Context);
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState("Layers");
@@ -26,7 +26,7 @@ export default function ContentBar({ action, setAction, contextMenu }) {
                     </ul>
                 </nav>
                 <div style={{ width: open ? "auto" : "0" }}>
-                    {selected === "Layers" && <LayersWindow action={action} setAction={setAction} contextMenu={contextMenu} />}
+                    <LayersWindow action={action} setAction={setAction} contextMenu={contextMenu} appMenu={appMenu} setAppMenu={setAppMenu} />
                 </div>
             </div>)
     }

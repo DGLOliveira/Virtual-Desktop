@@ -5,12 +5,15 @@ import { FaTrashCan } from "react-icons/fa6";
 import { BiUndo, BiRedo } from "react-icons/bi";
 import { IoDuplicateSharp } from "react-icons/io5";
 import { TiLockOpen, TiLockClosed } from "react-icons/ti";
+import { handleTopMenu } from "../Handlers/handleTopMenu.js";
 
 export default function LayersWindow(props) {
 
     const action = props.action;
     const setAction = props.setAction;
     const contextMenu = props.contextMenu;
+    const appMenu = props.appMenu;
+    const setAppMenu = props.setAppMenu;
 
     const context = useContext(Context);
     const history = context.history;
@@ -34,6 +37,12 @@ export default function LayersWindow(props) {
             canvas.getContext('2d', { alpha: true }) :
             canvas.getContext('2d', { alpha: false });
         return ctx.canvas.toDataURL("image/png")
+    }
+
+    const changeCurrLayer = (index) => {
+        setCurrLayer(index);
+        let args;
+        handleTopMenu(appMenu, setAppMenu, args = { history: { ...layers[index] } }, "history");
     }
 
     const createNewLayer = () => {
@@ -172,6 +181,7 @@ export default function LayersWindow(props) {
         setDragTargetIndex(-1);
     }
 
+    //Updates image previews
     useEffect(() => {
         layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(`drawCanvasLayer${layer.id}`, true)));
     }, [history, layers, action]);
@@ -197,7 +207,7 @@ export default function LayersWindow(props) {
                             <img
                                 src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
                                 className="drawDocCheckersBackground"
-                                onClick={() => setCurrLayer(index)}
+                                onClick={() => changeCurrLayer(index)}
                                 draggable={index !== 0}
                             />
                             <div>
@@ -206,7 +216,7 @@ export default function LayersWindow(props) {
                                         type="radio"
                                         value={index}
                                         checked={currLayer === index}
-                                        onChange={() => setCurrLayer(index)}
+                                        onChange={() => changeCurrLayer(index)}
                                     />
                                     <span
                                         style={{
