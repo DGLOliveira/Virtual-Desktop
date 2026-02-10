@@ -41,6 +41,7 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
             const reader = new FileReader();
             reader.onload = () => {
                 const image = new Image();
+                image.src = reader.result;
                 image.onload = () => {
                     const baseCanvas = document.getElementById(`drawCanvasLayer0`);
                     baseCanvas.width = image.width;
@@ -51,7 +52,6 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
                     baseCtx.drawImage(image, 0, 0);
                     setAction("Open Confirm");
                 };
-                image.src = reader.result;
             };
             reader.readAsDataURL(file);
         };
@@ -68,6 +68,7 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
             const reader = new FileReader();
             reader.onload = () => {
                 const image = new Image();
+                image.src = reader.result;
                 image.onload = () => {
                     const tempCanvas = document.createElement("canvas");
                     tempCanvas.width = image.width;
@@ -79,7 +80,6 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
                     context.setTool("Select");
                     setAction("clipping");
                 };
-                image.src = reader.result;
             };
             reader.readAsDataURL(file);
         };
