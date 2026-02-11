@@ -227,8 +227,7 @@ export default function SelectionCanvas() {
         setCursor({ ...cursor, selecting: true });
         const cursorPos = getCursorFromEvent(e);
         if (cursorPos[2] === false) return
-        if(e.target.className !== "drawDocSelectionPivotPoint") return
-        console.log(e)
+        if (e.target.className !== "drawDocSelectionPivotPoint") return
         let startDeltaX = 0, startDeltaY = 0, initialX = 0, initialY = 0;
         switch (pivot) {
             case 0:
@@ -258,7 +257,7 @@ export default function SelectionCanvas() {
         e.stopPropagation();
         const cursorPos = getCursorFromEvent(e);
         if (cursorPos[2] === false) return
-        if(e.target.className !== "drawDocSelectionPivotPoint") return
+        if (e.target.className !== "drawDocSelectionPivotPoint") return
         switch (pivot) {
             case 0:
                 setCursor({
@@ -306,7 +305,7 @@ export default function SelectionCanvas() {
         e.stopPropagation();
         const cursorPos = getCursorFromEvent(e);
         if (cursorPos[2] === false) return
-        if(e.target.className !== "drawDocSelectionPivotPoint") return
+        if (e.target.className !== "drawDocSelectionPivotPoint") return
         switch (pivot) {
             case 0:
                 setCursor({
@@ -545,45 +544,101 @@ export default function SelectionCanvas() {
                     onChange={(e) => context.setText({ ...context.text, text: e.target.value })}
                 />
             }
-            {tool === "Shape" && (subtool.shape === "Line" || subtool.shape === "Curve") &&
-                <>
-                    <div
-                        id="drawDocSelectionPivotStartPoint"
-                        className="drawDocSelectionPivotPoint"
-                        style={{
-                            display: !cursor.down ? "block" : "none",
-                            top: subtool.shape === "Curve" ? Math.floor(curveControls.start.y * zoom) + "px" : Math.floor(cursor.start.y * zoom) + "px",
-                            left: subtool.shape === "Curve" ? Math.floor(curveControls.start.x * zoom) + "px" : Math.floor(cursor.start.x * zoom) + "px",
-                            zIndex: layers.length + 2
-                        }}
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleDragPivotStart(e, 0) }}
-                        onDrag={(e) => { if (!cursor.down) handleDragPivot(e, 0) }}
-                        onDragEnd={(e) => { if (!cursor.down) handleDragPivotEnd(e, 0) }}
-                    />
-                    <div
-                        id="drawDocSelectionPivotEndPoint"
-                        className="drawDocSelectionPivotPoint"
-                        style={{
-                            display: !cursor.down ? "block" : "none", 
-                            top: subtool.shape === "Curve" ? Math.floor(curveControls.end.y * zoom) + "px" : Math.floor(cursor.end.y * zoom) + "px",
-                            left: subtool.shape === "Curve" ? Math.floor(curveControls.end.x * zoom) + "px" : Math.floor(cursor.end.x * zoom) + "px",
-                            zIndex: layers.length + 2
-                        }}
-                        draggable
-                        onDragStart={(e) => { if (!cursor.down) handleDragPivotStart(e, 3) }}
-                        onDrag={(e) => { if (!cursor.down) handleDragPivot(e, 3) }}
-                        onDragEnd={(e) => { if (!cursor.down) handleDragPivotEnd(e, 3) }}
-                    />
-                </>
-            }
             {tool === "Shape" && subtool.shape === "Curve" &&
                 <>
+                    {curveControls.controlPoint1.x === -1 && curveControls.controlPoint2.x === -1 &&
+                        <div
+                            id="drawDocSelectionPivotLineStartEnd"
+                            className="drawDocSelectionPivotLine"
+                            style={{
+                                display: "block",
+                                top: Math.floor(curveControls.start.y * zoom) + "px",
+                                left: Math.floor(curveControls.start.x * zoom) + "px",
+                                width: Math.floor(
+                                    Math.sqrt(Math.pow(curveControls.end.x - curveControls.start.x, 2) + Math.pow(curveControls.end.y - curveControls.start.y, 2)) * zoom) + "px",
+                                rotate: Math.floor(Math.atan2(curveControls.end.y - curveControls.start.y, curveControls.end.x - curveControls.start.x) * 180 / Math.PI) + "deg",
+                                zIndex: layers.length + 2
+                            }}
+                        />
+                    }
+                    {curveControls.controlPoint1.x !== -1 && curveControls.controlPoint2.x === -1 &&
+                        <>
+                            <div
+                                id="drawDocSelectionPivotLineStart1"
+                                className="drawDocSelectionPivotLine"
+                                style={{
+                                    display: "block",
+                                    top: Math.floor(curveControls.start.y * zoom) + "px",
+                                    left: Math.floor(curveControls.start.x * zoom) + "px",
+                                    width: Math.floor(
+                                        Math.sqrt(Math.pow(curveControls.controlPoint1.x - curveControls.start.x, 2) + Math.pow(curveControls.controlPoint1.y - curveControls.start.y, 2)) * zoom) + "px",
+                                    rotate: Math.floor(Math.atan2(curveControls.controlPoint1.y - curveControls.start.y, curveControls.controlPoint1.x - curveControls.start.x) * 180 / Math.PI) + "deg",
+                                    zIndex: layers.length + 2
+                                }}
+                            />
+                            <div
+                                id="drawDocSelectionPivotLine1End"
+                                className="drawDocSelectionPivotLine"
+                                style={{
+                                    display: "block",
+                                    top: Math.floor(curveControls.controlPoint1.y * zoom) + "px",
+                                    left: Math.floor(curveControls.controlPoint1.x * zoom) + "px",
+                                    width: Math.floor(
+                                        Math.sqrt(Math.pow(curveControls.end.x - curveControls.controlPoint1.x, 2) + Math.pow(curveControls.end.y - curveControls.controlPoint1.y, 2)) * zoom) + "px",
+                                    rotate: Math.floor(Math.atan2(curveControls.end.y - curveControls.controlPoint1.y, curveControls.end.x - curveControls.controlPoint1.x) * 180 / Math.PI) + "deg",
+                                    zIndex: layers.length + 2
+                                }}
+                            />
+                        </>
+                    }
+                    {curveControls.controlPoint1.x !== -1 && curveControls.controlPoint2.x !== -1 &&
+                        <>
+                            <div
+                                id="drawDocSelectionPivotLineStart1"
+                                className="drawDocSelectionPivotLine"
+                                style={{
+                                    display: "block",
+                                    top: Math.floor(curveControls.start.y * zoom) + "px",
+                                    left: Math.floor(curveControls.start.x * zoom) + "px",
+                                    width: Math.floor(
+                                        Math.sqrt(Math.pow(curveControls.controlPoint1.x - curveControls.start.x, 2) + Math.pow(curveControls.controlPoint1.y - curveControls.start.y, 2)) * zoom) + "px",
+                                    rotate: Math.floor(Math.atan2(curveControls.controlPoint1.y - curveControls.start.y, curveControls.controlPoint1.x - curveControls.start.x) * 180 / Math.PI) + "deg",
+                                    zIndex: layers.length + 2
+                                }}
+                            />
+                            <div
+                                id="drawDocSelectionPivotLine12"
+                                className="drawDocSelectionPivotLine"
+                                style={{
+                                    display: "block",
+                                    top: Math.floor(curveControls.controlPoint1.y * zoom) + "px",
+                                    left: Math.floor(curveControls.controlPoint1.x * zoom) + "px",
+                                    width: Math.floor(
+                                        Math.sqrt(Math.pow(curveControls.controlPoint2.x - curveControls.controlPoint1.x, 2) + Math.pow(curveControls.controlPoint2.y - curveControls.controlPoint1.y, 2)) * zoom) + "px",
+                                    rotate: Math.floor(Math.atan2(curveControls.controlPoint2.y - curveControls.controlPoint1.y, curveControls.controlPoint2.x - curveControls.controlPoint1.x) * 180 / Math.PI) + "deg",
+                                    zIndex: layers.length + 2
+                                }}
+                            />
+                            <div
+                                id="drawDocSelectionPivotLine2End"
+                                className="drawDocSelectionPivotLine"
+                                style={{
+                                    display: "block",
+                                    top: Math.floor(curveControls.controlPoint2.y * zoom) + "px",
+                                    left: Math.floor(curveControls.controlPoint2.x * zoom) + "px",
+                                    width: Math.floor(
+                                        Math.sqrt(Math.pow(curveControls.end.x - curveControls.controlPoint2.x, 2) + Math.pow(curveControls.end.y - curveControls.controlPoint2.y, 2)) * zoom) + "px",
+                                    rotate: Math.floor(Math.atan2(curveControls.end.y - curveControls.controlPoint2.y, curveControls.end.x - curveControls.controlPoint2.x) * 180 / Math.PI) + "deg",
+                                    zIndex: layers.length + 2
+                                }}
+                            />
+                        </>
+                    }
                     <div
                         id="drawDocSelectionPivotPoint1"
                         className="drawDocSelectionPivotPoint"
                         style={{
-                            display: curveControls.controlPoint1.x > -1 && !cursor.down  ? "block" : "none",
+                            display: curveControls.controlPoint1.x > -1 && !cursor.down ? "block" : "none",
                             top: Math.floor(curveControls.controlPoint1.y * zoom) + "px",
                             left: Math.floor(curveControls.controlPoint1.x * zoom) + "px",
                             zIndex: layers.length + 2
@@ -609,6 +664,39 @@ export default function SelectionCanvas() {
                     />
                 </>
             }
+            {tool === "Shape" && (subtool.shape === "Line" || subtool.shape === "Curve") &&
+                <>
+                    <div
+                        id="drawDocSelectionPivotStartPoint"
+                        className="drawDocSelectionPivotPoint"
+                        style={{
+                            display: !cursor.down ? "block" : "none",
+                            top: subtool.shape === "Curve" ? Math.floor(curveControls.start.y * zoom) + "px" : Math.floor(cursor.start.y * zoom) + "px",
+                            left: subtool.shape === "Curve" ? Math.floor(curveControls.start.x * zoom) + "px" : Math.floor(cursor.start.x * zoom) + "px",
+                            zIndex: layers.length + 2
+                        }}
+                        draggable
+                        onDragStart={(e) => { if (!cursor.down) handleDragPivotStart(e, 0) }}
+                        onDrag={(e) => { if (!cursor.down) handleDragPivot(e, 0) }}
+                        onDragEnd={(e) => { if (!cursor.down) handleDragPivotEnd(e, 0) }}
+                    />
+                    <div
+                        id="drawDocSelectionPivotEndPoint"
+                        className="drawDocSelectionPivotPoint"
+                        style={{
+                            display: !cursor.down ? "block" : "none",
+                            top: subtool.shape === "Curve" ? Math.floor(curveControls.end.y * zoom) + "px" : Math.floor(cursor.end.y * zoom) + "px",
+                            left: subtool.shape === "Curve" ? Math.floor(curveControls.end.x * zoom) + "px" : Math.floor(cursor.end.x * zoom) + "px",
+                            zIndex: layers.length + 2
+                        }}
+                        draggable
+                        onDragStart={(e) => { if (!cursor.down) handleDragPivotStart(e, 3) }}
+                        onDrag={(e) => { if (!cursor.down) handleDragPivot(e, 3) }}
+                        onDragEnd={(e) => { if (!cursor.down) handleDragPivotEnd(e, 3) }}
+                    />
+                </>
+            }
+
         </>
     )
 }

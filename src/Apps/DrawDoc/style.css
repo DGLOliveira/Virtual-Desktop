@@ -242,6 +242,15 @@ canvas-container {
   transform: translate(-50%,-50%);
 }
 
+.drawDocSelectionPivotLine{
+  position:absolute;
+  background: transparent;
+  border-top: 2px dashed white;
+  mix-blend-mode: difference;
+  transform-origin: top left;
+  pointer-events: none;
+}
+
 #drawDocSelectionBoxNW {
   top: -12px;
   left: -12px;
