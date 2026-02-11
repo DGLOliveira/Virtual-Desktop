@@ -64,7 +64,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
           <ColorPicker
             color={context.color[1]}
             setColor={(color) => { context.setColor({ ...context.color, selected: color, 1: color }) }}
-            useAlpha={false}
+            useAlpha={true}
           />
         </div>
         <vertical-rect ></vertical-rect>
@@ -76,7 +76,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
           <ColorPicker
             color={context.color[2]}
             setColor={(color) => context.setColor({ ...context.color, selected: color, 2: color })}
-            useAlpha={false}
+            useAlpha={true}
           />
         </div>
         <vertical-rect ></vertical-rect>

@@ -3,7 +3,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     if (preview) {
         ctx = canvas.getContext('2d', { alpha: true });
     } else {
-        ctx = canvas.getContext('2d', { alpha: false });
+        ctx = canvas.getContext('2d', { alpha: true });
     }
     ctx.webkitImageSmoothingEnabled = false;
     ctx.mozImageSmoothingEnabled = false;
@@ -144,7 +144,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     //This solution looks at entire lines and fills them in.
     //Code has been edited to work with hsla color values
     const drawBucket = () => {
-        let r, g, b, h, s, l;
+        let r, g, b, h, s, l, alpha;
         let hslaColor = [];
         for (let i = 0; i < param.selectedColor.length; i++) {
             var start;
@@ -162,6 +162,7 @@ export const handleDraw = (canvas, cursor, param, preview) => {
         h = hslaColor[0] / 360;
         s = hslaColor[1].slice(0, -1) / 100;
         l = hslaColor[2].slice(0, -1) / 100;
+        alpha = hslaColor[3].slice(0, -1) * 255;
         if (s === 0) {
             r = l * 255;
             g = l * 255;
@@ -205,9 +206,9 @@ export const handleDraw = (canvas, cursor, param, preview) => {
             var hex = Number(c).toString(16);
             return hex.length == 1 ? "0" + hex : hex;
         }
-        let hexColor = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+        let hexColor = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b) + componentToHex(alpha);
         let spans = [];
-        let selectedColor = parseInt("FF" + hexColor.slice(5, 7) + hexColor.slice(3, 5) + hexColor.slice(1, 3), 16);
+        let selectedColor = parseInt(hexColor.slice(7, 9) + hexColor.slice(5, 7) + hexColor.slice(3, 5) + hexColor.slice(1, 3), 16);
         //get copy of canvas and convert to a more performant format
         //canvas data has no negative values and none of the data points require the standard 64 bit
         const imageData = ctx.getImageData(0, 0, width, height);

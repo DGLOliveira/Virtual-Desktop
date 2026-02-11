@@ -77,8 +77,8 @@ export function ContextProvider({ children }) {
   });
   const [color, setColor] = useState({
     selected: "hsl(0, 100%, 0%)",
-    1: "hsl(0, 100%, 0%)",
-    2: "hsl(0, 100%, 100%)",
+    1: "hsla(0, 100%, 0%, 1)",
+    2: "hsla(0, 100%, 100%, 1)",
   });
   const [size, setSize] = useState(16);
   const [text, setText] = useState({
