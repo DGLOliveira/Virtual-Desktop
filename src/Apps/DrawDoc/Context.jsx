@@ -13,8 +13,10 @@ export const Context = createContext({
   setHistory: () => { },
   dimentions: {},
   setDimentions: () => { },
-  tempDimentions: {},
-  setTempDimentions: () => { },
+  useAlpha: false,
+  setUseAlpha: () => { },
+  newParams: {},
+  setNewParams: () => { },
   tool: "",
   setTool: () => { },
   subTool: {},
@@ -58,7 +60,13 @@ export function ContextProvider({ children }) {
     }
   });
   const [dimentions, setDimentions] = useState({ width: 350, height: 350, });
-  const [tempDimentions, setTempDimentions] = useState({ width: 350, height: 350, });
+  const [useAlpha, setUseAlpha] = useState(false);
+  const [newParams, setNewParams] = useState({ 
+    width: 350, 
+    height: 350, 
+    alpha: false,
+    name: "Untitled",
+  });
   const [tool, setTool] = useState("Brush");
   const [subTool, setSubTool] = useState({
     shape: "Circle",
@@ -123,8 +131,10 @@ export function ContextProvider({ children }) {
     setCurrLayer: setCurrLayer,
     dimentions: dimentions,
     setDimentions: setDimentions,
-    tempDimentions: tempDimentions,
-    setTempDimentions: setTempDimentions,
+    useAlpha: useAlpha,
+    setUseAlpha: setUseAlpha,
+    newParams: newParams,
+    setNewParams: setNewParams,
     tool: tool,
     setTool: setTool,
     subTool: subTool,

@@ -49,7 +49,7 @@ export const handleAction = (props) => {
       break;
     case "New Confirm":
       setAppDialog(null);
-      handleFile(ctx, context, "new", layers);
+      handleFile(ctx, context, "new", layers, setAction);
       setCurrLayer(0);
       handleHistory(ctx, context.history, context.setHistory, "clear", appMenu, setAppMenu, setCanClose, currLayer, layers, setLayers);
       context.setClipboard({

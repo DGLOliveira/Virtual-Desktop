@@ -42,7 +42,11 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
     };
     const newFile = () => {
         const baseCanvas = document.getElementById(`drawCanvasLayer0`).getContext("2d");
-        baseCanvas.fillStyle = "#FFFFFF";
+        if (context.useAlpha) {
+            baseCanvas.fillStyle = "#00000000";
+        } else {
+            baseCanvas.fillStyle = "#FFFFFFFF";
+        }
         baseCanvas.fillRect(0, 0, width, height);
     };
 
