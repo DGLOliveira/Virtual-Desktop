@@ -19,6 +19,8 @@ export const Context = createContext({
   setNewParams: () => { },
   tool: "",
   setTool: () => { },
+  brushPoints: {},
+  setBrushPoints: () => { },
   subTool: {},
   setSubTool: () => { },
   curveControls: {},
@@ -68,6 +70,7 @@ export function ContextProvider({ children }) {
     name: "Untitled",
   });
   const [tool, setTool] = useState("Brush");
+  const [brushPoints, setBrushPoints] = useState([]);
   const [subTool, setSubTool] = useState({
     shape: "Circle",
     fill: false,
@@ -137,6 +140,8 @@ export function ContextProvider({ children }) {
     setNewParams: setNewParams,
     tool: tool,
     setTool: setTool,
+    brushPoints: brushPoints,
+    setBrushPoints: setBrushPoints,
     subTool: subTool,
     setSubTool: setSubTool,
     curveControls: curveControls,

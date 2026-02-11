@@ -1,4 +1,4 @@
-export const handleDraw = (canvas, cursor, param, preview) => {
+export const handleDraw = (canvas, cursor, param, preview, action) => {
     let ctx;
     if (preview) {
         ctx = canvas.getContext('2d', { alpha: true });
@@ -19,21 +19,33 @@ export const handleDraw = (canvas, cursor, param, preview) => {
     const endY = cursor.end.y;
 
     const drawBrush = () => {
-        ctx.fillStyle = param.selectedColor;
-        ctx.strokeStyle = param.selectedColor;
-        ctx.lineWidth = 1;
-        ctx.setLineDash([]);
-        ctx.beginPath();
-        ctx.arc(
-            x,
-            y,
-            param.size,
-            0,
-            Math.PI * 2,
-        );
-        ctx.stroke();
-        ctx.fill();
-        ctx.closePath();
+        if (action !== "drawing" && action !== "finished") {
+            ctx.strokeStyle = param.selectedColor;
+            ctx.fillStyle = param.selectedColor;
+            ctx.lineWidth = 1;
+            ctx.setLineDash([]);
+            ctx.beginPath();
+            ctx.arc(
+                x,
+                y,
+                param.size / 2,
+                0,
+                Math.PI * 2,
+            );
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+        } else if (action === "drawing" && param.brushPoints.length > 1) {
+            ctx.strokeStyle = param.selectedColor;
+            ctx.lineWidth = param.size;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.setLineDash([]);
+            ctx.beginPath();
+            ctx.moveTo(param.brushPoints[param.brushPoints.length - 2][0], param.brushPoints[param.brushPoints.length - 2][1]);
+            ctx.lineTo(param.brushPoints[param.brushPoints.length - 1][0], param.brushPoints[param.brushPoints.length - 1][1]);
+            ctx.stroke();
+        }
     };
 
     const drawEraser = () => {

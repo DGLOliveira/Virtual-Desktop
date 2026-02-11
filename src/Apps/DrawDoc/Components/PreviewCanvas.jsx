@@ -8,6 +8,8 @@ export default function PreviewCanvas() {
     const canvasPreviewRef = useRef(null);
     const cursor = context.cursor;
     const tool = context.tool;
+    const brushPoints = context.brushPoints;
+    const setBrushPoints = context.setBrushPoints;
     const subTool = context.subTool;
     const curveControls = context.curveControls;
     const setCurveControls = context.setCurveControls;
@@ -26,6 +28,8 @@ export default function PreviewCanvas() {
     const params = {
         tool,
         subTool,
+        brushPoints,
+        setBrushPoints,
         curveControls,
         setCurveControls,
         size,

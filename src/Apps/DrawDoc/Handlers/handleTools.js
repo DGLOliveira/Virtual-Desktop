@@ -3,9 +3,12 @@ export const handleTools = (canvas, cursor, setCursor, params, action, setAction
   switch (params.tool) {
     case "Brush":
     case "Eraser":
-      handleDraw(canvas, cursor, params, false);
+      handleDraw(canvas, cursor, params, false, action);
       if (action !== "drawing") {
+        params.setBrushPoints([[cursor.current.x, cursor.current.y]]);
         setAction("drawing");
+      }else{
+        params.setBrushPoints([...params.brushPoints, [cursor.current.x, cursor.current.y]]);
       }
       break;
     case "Bucket":

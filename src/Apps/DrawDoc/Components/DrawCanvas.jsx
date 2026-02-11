@@ -9,6 +9,8 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
   const currLayer = context.currLayer;
   const setCurrLayer = context.setCurrLayer;
   const tool = context.tool;
+  const brushPoints = context.brushPoints;
+  const setBrushPoints = context.setBrushPoints;
   const subTool = context.subTool;
   const curveControls = context.curveControls;
   const setCurveControls = context.setCurveControls;
@@ -24,6 +26,8 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
   const setClipboard = context.setClipboard;
   const params = {
     tool,
+    brushPoints,
+    setBrushPoints,
     subTool,
     curveControls,
     setCurveControls,
