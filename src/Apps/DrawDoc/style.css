@@ -130,7 +130,7 @@ canvas-container {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  padding-left:2px;
+  padding-left: 2px;
 }
 
 #drawDocLayersWindow>button {
@@ -193,7 +193,7 @@ canvas-container {
   width: 12px;
   height: 12px;
   margin: 0;
-  margin-right:5px;
+  margin-right: 5px;
 }
 
 .drawDocLayersWindowLayer>div>div>input[type="text"] {
@@ -229,6 +229,17 @@ canvas-container {
   background: black;
   border: 2px solid white;
   box-sizing: border-box;
+}
+
+.drawDocSelectionPivotPoint {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background: black;
+  border: 2px solid white;
+  box-sizing: border-box;
+  cursor: move;
+  transform: translate(-50%,-50%);
 }
 
 #drawDocSelectionBoxNW {

@@ -12,6 +12,8 @@ export default function SelectionCanvas() {
     const layers = context.layers;
     const currLayer = context.currLayer;
     const clipboard = context.clipboard;
+    const curveControls = context.curveControls;
+    const setCurveControls = context.setCurveControls;
 
     const [selectionBox, setSelectionBox] = useState({
         left: 0 + "px",
@@ -37,6 +39,7 @@ export default function SelectionCanvas() {
     const [resizeDelta, setResizeDelta] = useState([0, 0, true])
     const [dragDelta, setDragDelta] = useState([0, 0, 0, 0])
     const [rotateStartPos, setRotateStartPos] = useState([0, 0, 0])
+    const [dragPivotDelta, setDragPivotDelta] = useState([0, 0, false])
 
     //Note: Firefox returns zero values during a drag event, therefore, 
     // in order to avoid incorrect values, values of zero are ignored
@@ -219,6 +222,143 @@ export default function SelectionCanvas() {
         setCursor({ ...cursor, selecting: false });
     }
 
+    const handleDragPivotStart = (e, pivot) => {
+        e.stopPropagation();
+        setCursor({ ...cursor, selecting: true });
+        const cursorPos = getCursorFromEvent(e);
+        if (cursorPos[2] === false) return
+        if(e.target.className !== "drawDocSelectionPivotPoint") return
+        console.log(e)
+        let startDeltaX = 0, startDeltaY = 0, initialX = 0, initialY = 0;
+        switch (pivot) {
+            case 0:
+                initialX = cursor.start.x;
+                initialY = cursor.start.y;
+                break;
+            case 1:
+                initialX = curveControls.controlPoint1.x;
+                initialY = curveControls.controlPoint1.y;
+                break;
+            case 2:
+                initialX = curveControls.controlPoint2.x;
+                initialY = curveControls.controlPoint2.y;
+                break;
+            case 3:
+                initialX = cursor.end.x;
+                initialY = cursor.end.y;
+                break;
+        }
+        startDeltaX = cursorPos[0] - initialX;
+        startDeltaY = cursorPos[1] - initialY;
+        setDragPivotDelta([startDeltaX, startDeltaY]);
+    }
+
+    const handleDragPivot = (e, pivot) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const cursorPos = getCursorFromEvent(e);
+        if (cursorPos[2] === false) return
+        if(e.target.className !== "drawDocSelectionPivotPoint") return
+        switch (pivot) {
+            case 0:
+                setCursor({
+                    ...cursor,
+                    start: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                });
+                if (subtool.shape === "Curve") {
+                    setCurveControls({
+                        ...curveControls,
+                        start: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                    })
+                }
+                break;
+            case 1:
+                setCurveControls({
+                    ...curveControls,
+                    controlPoint1: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                });
+                break;
+            case 2:
+                setCurveControls({
+                    ...curveControls,
+                    controlPoint2: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                })
+                break;
+            case 3:
+                setCursor({
+                    ...cursor,
+                    end: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                });
+                if (subtool.shape === "Curve") {
+                    setCurveControls({
+                        ...curveControls,
+                        end: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                    })
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    const handleDragPivotEnd = (e, pivot) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const cursorPos = getCursorFromEvent(e);
+        if (cursorPos[2] === false) return
+        if(e.target.className !== "drawDocSelectionPivotPoint") return
+        switch (pivot) {
+            case 0:
+                setCursor({
+                    ...cursor,
+                    start: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] },
+                    selecting: false
+                });
+                if (subtool.shape === "Curve") {
+                    setCurveControls({
+                        ...curveControls,
+                        start: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                    })
+                }
+                break;
+            case 1:
+                setCursor({
+                    ...cursor,
+                    selecting: false
+                })
+                setCurveControls({
+                    ...curveControls,
+                    controlPoint1: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                });
+                break;
+            case 2:
+                setCursor({
+                    ...cursor,
+                    selecting: false
+                })
+                setCurveControls({
+                    ...curveControls,
+                    controlPoint2: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                })
+                break;
+            case 3:
+                setCursor({
+                    ...cursor,
+                    end: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] },
+                    selecting: false
+                });
+                if (subtool.shape === "Curve") {
+                    setCurveControls({
+                        ...curveControls,
+                        end: { x: cursorPos[0] - dragPivotDelta[0], y: cursorPos[1] - dragPivotDelta[1] }
+                    })
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     //Handles position and sizing calculations for each selection div
     useEffect(() => {
         if (tool !== "Select" || clipboard.state !== "carry") {
@@ -262,10 +402,10 @@ export default function SelectionCanvas() {
         }
     }, [cursor, zoom, tool, clipboard.state]);
 
-    if(layers[currLayer].locked) return null
+    if (layers[currLayer].locked) return null
     return (
         <>
-            {(tool === "Select" || tool === "Shape" || tool === "Text") &&
+            {(tool === "Select" || (tool === "Shape" && subtool.shape !== "Curve" && subtool.shape !== "Line") || tool === "Text") &&
                 <div
                     id="drawDocSelectionBox"
                     style={{
@@ -345,7 +485,7 @@ export default function SelectionCanvas() {
                         </>}
                 </div>
             }
-            {tool === "Shape" && subtool.type !== "Line" && subtool.type !== "Curve" && subtool.stretch &&
+            {tool === "Shape" && subtool.shape !== "Line" && subtool.shape !== "Curve" && subtool.stretch &&
                 <div
                     id="drawDocSelectionEllipse"
                     style={{
@@ -362,7 +502,7 @@ export default function SelectionCanvas() {
                     onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
                 >
                 </div>}
-            {tool === "Shape" && subtool.type !== "Line" && subtool.type !== "Curve" &&
+            {tool === "Shape" && subtool.shape !== "Line" && subtool.shape !== "Curve" &&
                 <div
                     id="drawDocSelectionCircle"
                     style={{
@@ -385,7 +525,8 @@ export default function SelectionCanvas() {
                         onDrag={(e) => { if (!cursor.down) handleCircleRotate(e) }}
                         onDragEnd={(e) => { if (!cursor.down) handleCircleRotateEnd(e) }}
                     />
-                </div>}
+                </div>
+            }
             {tool === "Text" && !cursor.down &&
                 <textarea id="drawDocSelectionBoxText"
                     style={{
@@ -403,6 +544,70 @@ export default function SelectionCanvas() {
                     value={context.text.text}
                     onChange={(e) => context.setText({ ...context.text, text: e.target.value })}
                 />
+            }
+            {tool === "Shape" && (subtool.shape === "Line" || subtool.shape === "Curve") &&
+                <>
+                    <div
+                        id="drawDocSelectionPivotStartPoint"
+                        className="drawDocSelectionPivotPoint"
+                        style={{
+                            display: !cursor.down ? "block" : "none",
+                            top: subtool.shape === "Curve" ? Math.floor(curveControls.start.y * zoom) + "px" : Math.floor(cursor.start.y * zoom) + "px",
+                            left: subtool.shape === "Curve" ? Math.floor(curveControls.start.x * zoom) + "px" : Math.floor(cursor.start.x * zoom) + "px",
+                            zIndex: layers.length + 2
+                        }}
+                        draggable
+                        onDragStart={(e) => { if (!cursor.down) handleDragPivotStart(e, 0) }}
+                        onDrag={(e) => { if (!cursor.down) handleDragPivot(e, 0) }}
+                        onDragEnd={(e) => { if (!cursor.down) handleDragPivotEnd(e, 0) }}
+                    />
+                    <div
+                        id="drawDocSelectionPivotEndPoint"
+                        className="drawDocSelectionPivotPoint"
+                        style={{
+                            display: !cursor.down ? "block" : "none", 
+                            top: subtool.shape === "Curve" ? Math.floor(curveControls.end.y * zoom) + "px" : Math.floor(cursor.end.y * zoom) + "px",
+                            left: subtool.shape === "Curve" ? Math.floor(curveControls.end.x * zoom) + "px" : Math.floor(cursor.end.x * zoom) + "px",
+                            zIndex: layers.length + 2
+                        }}
+                        draggable
+                        onDragStart={(e) => { if (!cursor.down) handleDragPivotStart(e, 3) }}
+                        onDrag={(e) => { if (!cursor.down) handleDragPivot(e, 3) }}
+                        onDragEnd={(e) => { if (!cursor.down) handleDragPivotEnd(e, 3) }}
+                    />
+                </>
+            }
+            {tool === "Shape" && subtool.shape === "Curve" &&
+                <>
+                    <div
+                        id="drawDocSelectionPivotPoint1"
+                        className="drawDocSelectionPivotPoint"
+                        style={{
+                            display: curveControls.controlPoint1.x > -1 && !cursor.down  ? "block" : "none",
+                            top: Math.floor(curveControls.controlPoint1.y * zoom) + "px",
+                            left: Math.floor(curveControls.controlPoint1.x * zoom) + "px",
+                            zIndex: layers.length + 2
+                        }}
+                        draggable
+                        onDragStart={(e) => { if (!cursor.down) handleDragPivotStart(e, 1) }}
+                        onDrag={(e) => { if (!cursor.down) handleDragPivot(e, 1) }}
+                        onDragEnd={(e) => { if (!cursor.down) handleDragPivotEnd(e, 1) }}
+                    />
+                    <div
+                        id="drawDocSelectionPivotPoint2"
+                        className="drawDocSelectionPivotPoint"
+                        style={{
+                            display: curveControls.controlPoint2.x > -1 && !cursor.down ? "block" : "none",
+                            top: Math.floor(curveControls.controlPoint2.y * zoom) + "px",
+                            left: Math.floor(curveControls.controlPoint2.x * zoom) + "px",
+                            zIndex: layers.length + 2
+                        }}
+                        draggable
+                        onDragStart={(e) => { if (!cursor.down) handleDragPivotStart(e, 2) }}
+                        onDrag={(e) => { if (!cursor.down) handleDragPivot(e, 2) }}
+                        onDragEnd={(e) => { if (!cursor.down) handleDragPivotEnd(e, 2) }}
+                    />
+                </>
             }
         </>
     )
