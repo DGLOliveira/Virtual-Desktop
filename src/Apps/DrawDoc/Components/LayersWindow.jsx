@@ -49,6 +49,7 @@ export default function LayersWindow(props) {
         const newLayer = {
             id: lastLayer + 1,
             name: `Layer ${lastLayer + 1}`,
+            blending: "source-over",
             visible: true,
             locked: false,
             canUndo: false,
@@ -109,6 +110,7 @@ export default function LayersWindow(props) {
         const newLayer = {
             id: newId,
             name: `Dupe ${layers[index].name}`,
+            blending: layers[index].blending,
             visible: true,
             locked: layers[index].locked,
             canUndo: layers[index].canUndo,
@@ -121,6 +123,12 @@ export default function LayersWindow(props) {
         newHistory[newId] = history[layers[index].id];
         setHistory(newHistory);
         setAction("Duplicate Layer");
+    }
+
+    const changeBlending = (index, value) => {
+        const newLayers = [...layers];
+        newLayers[index].blending = value;
+        setLayers(newLayers);
     }
 
     const handleLayerDragOver = (e, index) => {
@@ -287,7 +295,7 @@ export default function LayersWindow(props) {
                                     </button>
                                 </div>
                                 <div>
-                                    <button 
+                                    <button
                                         title={layer.locked ? "Unlock Layer" : "Lock Layer"}
                                         aria-label={layer.locked ? "Unlock Layer" : "Lock Layer"}
                                         onClick={() => toggleLock(index)}
@@ -295,6 +303,33 @@ export default function LayersWindow(props) {
                                     >
                                         {layer.locked ? <TiLockClosed /> : <TiLockOpen />}
                                     </button>
+                                </div>
+                                <div>
+                                    <select
+                                        id="drawDocBlendingSelect"
+                                        title="Change Blending"
+                                        aria-label="Change Blending"
+                                        onChange={(e) => changeBlending(index, e.target.value)}
+                                        value={layer.blending}
+                                    >
+                                        <option value="source-over">Normal</option>
+                                        <option value="multiply">Multiply</option>
+                                        <option value="screen">Screen</option>
+                                        <option value="overlay">Overlay</option>
+                                        <option value="darken">Darken</option>
+                                        <option value="lighten">Lighten</option>
+                                        <option value="color-dodge">Color Dodge</option>
+                                        <option value="color-burn">Color Burn</option>
+                                        <option value="hard-light">Hard Light</option>
+                                        <option value="soft-light">Soft Light</option>
+                                        <option value="difference">Difference</option>
+                                        <option value="exclusion">Exclusion</option>
+                                        <option value="hue">Hue</option>
+                                        <option value="saturation">Saturation</option>
+                                        <option value="color">Color</option>
+                                        <option value="luminosity">Luminosity</option>
+                                    </select>
+
                                 </div>
                             </div>
                         </div>

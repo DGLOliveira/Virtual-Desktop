@@ -19,11 +19,13 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
 
     const saveFile = () => {
         let finalCanvas = document.createElement("canvas");
+        let finalCtx = finalCanvas.getContext("2d");
         finalCanvas.width = width;
         finalCanvas.height = height;
         layers.forEach((layer) => {
             if (layer.visible) {
-                finalCanvas.getContext("2d").drawImage(
+                finalCtx.globalCompositeOperation = layer.blending;
+                finalCtx.drawImage(
                     document.getElementById(`drawCanvasLayer${layer.id}`),
                     0,
                     0
