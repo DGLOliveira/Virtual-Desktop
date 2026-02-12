@@ -100,13 +100,15 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
             1,
             1,
         );
-        // convert from rgb to hsl
+        // convert from rgba to hsla
         let r = pixel.data[0],
             g = pixel.data[1],
-            b = pixel.data[2];
+            b = pixel.data[2],
+            a = pixel.data[3];
         r /= 255;
         g /= 255;
         b /= 255;
+        a /= 255;
         let cmin = Math.min(r, g, b),
             cmax = Math.max(r, g, b),
             delta = cmax - cmin,
@@ -136,7 +138,7 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
         }
         s = Math.abs(s * 100).toFixed(0);
         l = (l * 100).toFixed(0);
-        let color = "hsl(" + h + "," + s + "%," + l + "%)";
+        let color = "hsla(" + h + "," + s + "%," + l + "%," + a + ")";
         //assign color
         if (param.tool === "Pipette") {
             if (param.selectedColor === param.color1) {
@@ -219,7 +221,6 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
             return hex.length == 1 ? "0" + hex : hex;
         }
         let hexColor = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b) + componentToHex(alpha);
-        console.log(hexColor);
         let spans = [];
         let selectedColor = parseInt(hexColor.slice(7, 9) + hexColor.slice(5, 7) + hexColor.slice(3, 5) + hexColor.slice(1, 3), 16);
         //get copy of canvas and convert to a more performant format
