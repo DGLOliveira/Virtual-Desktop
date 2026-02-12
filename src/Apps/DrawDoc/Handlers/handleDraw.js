@@ -174,7 +174,7 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
         h = hslaColor[0] / 360;
         s = hslaColor[1].slice(0, -1) / 100;
         l = hslaColor[2].slice(0, -1) / 100;
-        alpha = hslaColor[3].slice(0, -1) * 255;
+        alpha = Math.round(hslaColor[3] * 255);
         if (s === 0) {
             r = l * 255;
             g = l * 255;
@@ -219,6 +219,7 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
             return hex.length == 1 ? "0" + hex : hex;
         }
         let hexColor = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b) + componentToHex(alpha);
+        console.log(hexColor);
         let spans = [];
         let selectedColor = parseInt(hexColor.slice(7, 9) + hexColor.slice(5, 7) + hexColor.slice(3, 5) + hexColor.slice(1, 3), 16);
         //get copy of canvas and convert to a more performant format
