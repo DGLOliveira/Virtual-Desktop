@@ -15,20 +15,19 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
             "Download": {
                 "action": "Save",
                 "keybind": "Ctrl+Alt+S",
-                "disabled": true
+                "disabled": false
             },
             "Download As": {
                 "action": "Save As",
                 "keybind": "Ctrl+Alt+Shift+S",
-                "disabled": true,
-                "title": "Not Implemented"
+                "disabled": false
             },
             "Change Name": {
                 "action": "Change Name",
                 "keybind": "F2",
                 "disabled": false
             },
-            "LineBreak1":{},
+            "LineBreak1": {},
             "Close": {
                 "action": "Close",
                 "keybind": "Alt+Shift+F4",
@@ -95,7 +94,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                 "keybind": "Alt+0",
                 "disabled": true
             },
-            "LineBreak1":{},
+            "LineBreak1": {},
             "Tool Bar": {
                 "action": "toolBar",
                 "checkbox": true,
@@ -138,20 +137,8 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
         let updatedAppMenu = { ...appMenu };
         switch (flag) {
             case "history":
-                let hasHistory = args.history.canUndo || args.history.canRedo;
                 updatedAppMenu = {
                     ...updatedAppMenu,
-                    "File": {
-                        ...updatedAppMenu["File"],
-                        "Download": {
-                            ...updatedAppMenu["File"]["Download"],
-                            "disabled": !hasHistory
-                        },
-                        "Download As": {
-                            ...updatedAppMenu["File"]["Download As"],
-                            "disabled": !hasHistory
-                        }
-                    },
                     "Edit": {
                         ...updatedAppMenu["Edit"],
                         "Undo": {
@@ -189,7 +176,7 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                     }
                 }
                 break;
-                case "zoom":
+            case "zoom":
                 updatedAppMenu = {
                     ...updatedAppMenu,
                     "View": {

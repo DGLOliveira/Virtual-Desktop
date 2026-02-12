@@ -12,6 +12,7 @@ import ColorPicker from "../../../System/GlobalComponents/ColorPicker/ColorPicke
 
 export const TopNavBar = ({ setAction, contextMenu }) => {
   const context = useContext(Context);
+
   const handleZoom = (e) => {
     context.setZoom(Number(e.target.value));
     if (e.target.value === "0.25") {
@@ -48,7 +49,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
         <button title="New File" onClick={() => setAction("New")}>
           <TfiFile />
         </button>
-        <button title="Download File" onClick={() => setAction("Save")} disabled={!(context.history.canRedo || context.history.canUndo)}>
+        <button title="Download File" onClick={() => setAction("Save")}>
           <TfiSave />
         </button>
         <vertical-rect ></vertical-rect>
