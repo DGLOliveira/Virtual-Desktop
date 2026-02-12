@@ -25,6 +25,7 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
         layers.forEach((layer) => {
             if (layer.visible) {
                 finalCtx.globalCompositeOperation = layer.blending;
+                finalCtx.globalAlpha = layer.opacity;
                 finalCtx.drawImage(
                     document.getElementById(`drawCanvasLayer${layer.id}`),
                     0,

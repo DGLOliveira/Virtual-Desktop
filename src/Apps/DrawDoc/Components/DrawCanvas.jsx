@@ -82,6 +82,7 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
             className={"drawCanvasLayer"}
             style={{ 
               display: layer.visible ? "block" : "none",
+              opacity: layer.opacity,
               mixBlendMode: layer.blending,
               zIndex: index
             }}

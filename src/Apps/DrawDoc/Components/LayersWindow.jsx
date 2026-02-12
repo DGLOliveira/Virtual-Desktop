@@ -50,6 +50,7 @@ export default function LayersWindow(props) {
             id: lastLayer + 1,
             name: `Layer ${lastLayer + 1}`,
             blending: "normal",
+            opacity: 1,
             visible: true,
             locked: false,
             canUndo: false,
@@ -111,6 +112,7 @@ export default function LayersWindow(props) {
             id: newId,
             name: `Dupe ${layers[index].name}`,
             blending: layers[index].blending,
+            opacity: layers[index].opacity,
             visible: true,
             locked: layers[index].locked,
             canUndo: layers[index].canUndo,
@@ -128,6 +130,12 @@ export default function LayersWindow(props) {
     const changeBlending = (index, value) => {
         const newLayers = [...layers];
         newLayers[index].blending = value;
+        setLayers(newLayers);
+    }
+
+    const changeOpacity = (index, value) => {
+        const newLayers = [...layers];
+        newLayers[index].opacity = value;
         setLayers(newLayers);
     }
 
@@ -330,7 +338,17 @@ export default function LayersWindow(props) {
                                         <option value="color">Color</option>
                                         <option value="luminosity">Luminosity</option>
                                     </select>
-
+                                </div>
+                                <div>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        max="1"
+                                        step="0.01"
+                                        value={layer.opacity}
+                                        onChange={(e) => changeOpacity(index, e.target.value)}
+                                        disabled={layer.locked}
+                                    />
                                 </div>
                             </div>
                         </div>

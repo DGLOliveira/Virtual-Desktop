@@ -48,6 +48,7 @@ export function ContextProvider({ children }) {
       id: 0,
       name: "Base",
       blending: "normal",
+      opacity: 1,
       visible: true,
       locked: false,
       canUndo: false,
@@ -64,9 +65,9 @@ export function ContextProvider({ children }) {
   });
   const [dimentions, setDimentions] = useState({ width: 350, height: 350, });
   const [useAlpha, setUseAlpha] = useState(false);
-  const [newParams, setNewParams] = useState({ 
-    width: 350, 
-    height: 350, 
+  const [newParams, setNewParams] = useState({
+    width: 350,
+    height: 350,
     alpha: false,
     name: "Untitled",
   });
