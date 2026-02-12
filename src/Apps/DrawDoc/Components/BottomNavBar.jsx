@@ -41,7 +41,7 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
               type="number"
               step="1"
               min="1"
-              max={context.size-1}
+              max={context.size - 1}
               value={context.text.strokeWidth}
               onChange={(e) => { context.setText({ ...context.text, strokeWidth: e.target.value }) }}
             />
@@ -77,10 +77,14 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
             ><small>Confirm</small></button>
             <vertical-rect ></vertical-rect>
             {context.subTool.shape === "Curve" &&
-              <button
-                title="Cancel Shape"
-                onClick={() => setAction("cancel")}
-              ><small>Cancel</small></button>
+              <>
+                <button
+                  title="Cancel Shape"
+                  onClick={() => setAction("cancel")}
+                ><small>Cancel</small>
+                </button>
+                <vertical-rect ></vertical-rect>
+              </>
             }
             {context.subTool.shape !== "Line" && context.subTool.shape !== "Curve" ?
               <>
@@ -124,6 +128,32 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
                   </> : null}
               </>
               : null}
+            <button>
+              <label htmlFor="lineCap">Cap</label>
+              <select
+                id="lineCap"
+                value={context.subTool.lineCap}
+                onChange={(e) => context.setSubTool({ ...context.subTool, lineCap: e.target.value })}>
+                <option value="butt">Butt</option>
+                <option value="round">Round</option>
+                <option value="square">Square</option>
+              </select>
+            </button>
+            <vertical-rect ></vertical-rect>
+            {context.subTool.shape !== "Line" && context.subTool.shape !== "Curve" &&
+              <><button>
+                <label htmlFor="lineJoin">Joints</label>
+                <select
+                  id="lineJoin"
+                  value={context.subTool.lineJoin}
+                  onChange={(e) => context.setSubTool({ ...context.subTool, lineJoin: e.target.value })}>
+                  <option value="miter">Miter</option>
+                  <option value="round">Round</option>
+                  <option value="bevel">Bevel</option>
+                </select>
+              </button>
+                <vertical-rect ></vertical-rect>
+              </>}
           </> : null}
       </nav>
     )
