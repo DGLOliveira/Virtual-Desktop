@@ -47,7 +47,7 @@ export function ContextProvider({ children }) {
     {
       id: 0,
       name: "Base",
-      blending: "source-over",
+      blending: "normal",
       visible: true,
       locked: false,
       canUndo: false,

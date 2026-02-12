@@ -49,7 +49,7 @@ export default function LayersWindow(props) {
         const newLayer = {
             id: lastLayer + 1,
             name: `Layer ${lastLayer + 1}`,
-            blending: "source-over",
+            blending: "normal",
             visible: true,
             locked: false,
             canUndo: false,
@@ -311,8 +311,9 @@ export default function LayersWindow(props) {
                                         aria-label="Change Blending"
                                         onChange={(e) => changeBlending(index, e.target.value)}
                                         value={layer.blending}
+                                        disabled={layer.locked}
                                     >
-                                        <option value="source-over">Normal</option>
+                                        <option value="normal">Normal</option>
                                         <option value="multiply">Multiply</option>
                                         <option value="screen">Screen</option>
                                         <option value="overlay">Overlay</option>
