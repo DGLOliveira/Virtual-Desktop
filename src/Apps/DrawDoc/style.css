@@ -154,6 +154,45 @@ canvas-container {
   margin-bottom: 2px;
 }
 
+#drawDocLayersWindowNav {
+  border-top: 1px var(--GeneralBorderColor) solid;
+  border-bottom: 1px var(--GeneralBorderColor) solid;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-left:2px;
+  padding-right: 2px;
+}
+
+#drawDocLayersWindowHeaderMixes {
+  width: 230px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px var(--GeneralBorderColor) solid;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+#drawDocLayersWindowHeaderOptions {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-evenly; 
+  align-items: center;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+#drawDocLayersWindowHeaderOptions>button{
+  border: 1px var(--GeneralBorderColor) solid;
+  box-sizing: border-box;
+}
+
+#drawDocLayersWindowHeaderOptions>button>svg{
+  width:16px;
+  height:16px;
+}
+
 .drawDocLayersWindowLayer {
   display: flex;
   flex-direction: row;
@@ -239,11 +278,11 @@ canvas-container {
   border: 2px solid white;
   box-sizing: border-box;
   cursor: move;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
-.drawDocSelectionPivotLine{
-  position:absolute;
+.drawDocSelectionPivotLine {
+  position: absolute;
   background: transparent;
   border-top: 2px dashed white;
   mix-blend-mode: difference;

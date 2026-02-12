@@ -199,166 +199,170 @@ export default function LayersWindow(props) {
 
     //Updates image previews
     useEffect(() => {
-        layers.length > 0 && setLayersCanvasPreviews(layers.map((layer, index) => getImageFromCanvasRef(`drawCanvasLayer${layer.id}`, true)));
+        layers.length > 0 && setLayersCanvasPreviews(layers.map((layer) => getImageFromCanvasRef(`drawCanvasLayer${layer.id}`, true)));
     }, [history, layers, action]);
 
     return (
-        <div id="drawDocLayersWindow"
-            onDragOver={(e) => { handleLayerDragOver(e, layers.length) }}
-            onDrop={(e) => { handleLayerDrop(e, layers.length); }}
-        >
-            {layers.map((layer, index) => {
-                return (
-                    <Fragment key={layer.id}>
-                        {index !== 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
-                        <div
-                            className="drawDocLayersWindowLayer"
-                            draggable={index !== 0}
-                            onDragStart={(e) => setDragTargetIndex(index)}
-                            onDrag={(e) => e.preventDefault()}
-                            onDragOver={(e) => { handleLayerDragOver(e, index) }}
-                            onDrop={(e) => { handleLayerDrop(e, index) }}
-                            style={{ cursor: index === 0 ? "default" : "grab" }}
-                        >
-                            <img
-                                src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
-                                className="drawDocCheckersBackground"
-                                onClick={() => changeCurrLayer(index)}
+        <>
+            <div id="drawDocLayersWindowNav">
+                <div id="drawDocLayersWindowHeaderMixes">
+                    <select
+                        id="drawDocBlendingSelect"
+                        title="Change Blending"
+                        aria-label="Change Blending"
+                        onChange={(e) => changeBlending(currLayer, e.target.value)}
+                        value={layers[currLayer].blending}
+                        disabled={layers[currLayer].locked || currLayer === 0}
+                    >
+                        <option value="normal">Normal</option>
+                        <option value="multiply">Multiply</option>
+                        <option value="screen">Screen</option>
+                        <option value="overlay">Overlay</option>
+                        <option value="darken">Darken</option>
+                        <option value="lighten">Lighten</option>
+                        <option value="color-dodge">Color Dodge</option>
+                        <option value="color-burn">Color Burn</option>
+                        <option value="hard-light">Hard Light</option>
+                        <option value="soft-light">Soft Light</option>
+                        <option value="difference">Difference</option>
+                        <option value="exclusion">Exclusion</option>
+                        <option value="hue">Hue</option>
+                        <option value="saturation">Saturation</option>
+                        <option value="color">Color</option>
+                        <option value="luminosity">Luminosity</option>
+                    </select>
+                    <div>
+                        <label htmlFor="drawDocOpacityInput">Opacity:</label>
+                        <input
+                            id="drawDocOpacityInput"
+                            type="number"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={layers[currLayer].opacity}
+                            onChange={(e) => changeOpacity(currLayer, e.target.value)}
+                            disabled={layers[currLayer].locked || currLayer === 0}
+                        />
+                    </div>
+                </div>
+                <div id="drawDocLayersWindowHeaderOptions">
+                    <button
+                        title="Duplicate Layer"
+                        aria-label="Duplicate Layer"
+                        onClick={() => duplicateLayer(currLayer)}
+                    >
+                        <IoDuplicateSharp />
+                    </button>
+                    <button
+                        title="Rename Layer"
+                        aria-label="Rename Layer"
+                        disabled={currLayer === 0}
+                        onClick={() => setRenameLayerIndex(currLayer)}
+                    >
+                        <RiEditLine />
+                    </button>
+                    <button
+                        title={layers[currLayer].locked ? "Unlock Layer" : "Lock Layer"}
+                        aria-label={layers[currLayer].locked ? "Unlock Layer" : "Lock Layer"}
+                        onClick={() => toggleLock(currLayer)}
+                        className={layers[currLayer].locked ? "buttonActive" : ""}
+                    >
+                        {layers[currLayer].locked ? <TiLockClosed /> : <TiLockOpen />}
+                    </button>
+                    <button
+                        title="Delete Layer"
+                        aria-label="Delete Layer"
+                        disabled={currLayer === 0 || layers[currLayer].locked}
+                        onClick={() => deleteLayer(currLayer)}
+                    >
+                        <FaTrashCan />
+                    </button>
+                </div>
+            </div>
+            <div id="drawDocLayersWindow"
+                onDragOver={(e) => { handleLayerDragOver(e, layers.length) }}
+                onDrop={(e) => { handleLayerDrop(e, layers.length); }}
+            >
+                {layers.map((layer, index) => {
+                    return (
+                        <Fragment key={layer.id}>
+                            {index !== 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
+                            <div
+                                className="drawDocLayersWindowLayer"
                                 draggable={index !== 0}
-                            />
-                            <div>
+                                onDragStart={(e) => setDragTargetIndex(index)}
+                                onDrag={(e) => e.preventDefault()}
+                                onDragOver={(e) => { handleLayerDragOver(e, index) }}
+                                onDrop={(e) => { handleLayerDrop(e, index) }}
+                                style={{ cursor: index === 0 ? "default" : "grab" }}
+                            >
+                                <img
+                                    src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
+                                    className="drawDocCheckersBackground"
+                                    onClick={() => changeCurrLayer(index)}
+                                    draggable={index !== 0}
+                                />
                                 <div>
-                                    <input
-                                        type="radio"
-                                        value={index}
-                                        checked={currLayer === index}
-                                        onChange={() => changeCurrLayer(index)}
-                                    />
-                                    <span
-                                        style={{
-                                            textDecoration: index === currLayer ? "underline" : "none",
-                                            display: index === renameLayerIndex ? "none" : "inline-block"
-                                        }}
-                                    >
-                                        {layer.name}
-                                    </span>
-                                    <input
-                                        style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
-                                        id={`drawDocLayerNameInput${index}`}
-                                        type="text"
-                                        value={layer.name}
-                                        onChange={(e) => {
-                                            renameLayer(e, index);
-                                        }}
-                                    />
-                                </div>
-                                <div>
-                                    <button
-                                        title="Undo Layer"
-                                        aria-label="Undo Layer"
-                                        disabled={!layer.canUndo || layer.locked}
-                                        onClick={() => { setCurrLayer(index); setAction("Undo") }}
-                                    >
-                                        <BiUndo />
-                                    </button>
-                                    <button
-                                        title="Redo Layer"
-                                        aria-label="Redo Layer"
-                                        disabled={!layer.canRedo || layer.locked}
-                                        onClick={() => { setCurrLayer(index); setAction("Redo") }}
-                                    >
-                                        <BiRedo />
-                                    </button>
-                                    <button
-                                        title="Duplicate Layer"
-                                        aria-label="Duplicate Layer"
-                                        onClick={() => duplicateLayer(index)}
-                                    >
-                                        <IoDuplicateSharp />
-                                    </button>
-                                </div>
-                                <div>
-                                    <button
-                                        title="Rename Layer"
-                                        aria-label="Rename Layer"
-                                        disabled={index === 0}
-                                        onClick={() => setRenameLayerIndex(index)}
-                                    >
-                                        <RiEditLine />
-                                    </button>
-                                    <button
-                                        title="Toggle Visibility"
-                                        aria-label="Toggle Visibility"
-                                        onClick={() => toggleVisibility(index)}
-                                    >
-                                        {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
-                                    </button>
-                                    <button
-                                        title="Delete Layer"
-                                        aria-label="Delete Layer"
-                                        disabled={index === 0 || layer.locked}
-                                        onClick={() => deleteLayer(index)}
-                                    >
-                                        <FaTrashCan />
-                                    </button>
-                                </div>
-                                <div>
-                                    <button
-                                        title={layer.locked ? "Unlock Layer" : "Lock Layer"}
-                                        aria-label={layer.locked ? "Unlock Layer" : "Lock Layer"}
-                                        onClick={() => toggleLock(index)}
-                                        className={layer.locked ? "buttonActive" : ""}
-                                    >
-                                        {layer.locked ? <TiLockClosed /> : <TiLockOpen />}
-                                    </button>
-                                </div>
-                                <div>
-                                    <select
-                                        id="drawDocBlendingSelect"
-                                        title="Change Blending"
-                                        aria-label="Change Blending"
-                                        onChange={(e) => changeBlending(index, e.target.value)}
-                                        value={layer.blending}
-                                        disabled={layer.locked}
-                                    >
-                                        <option value="normal">Normal</option>
-                                        <option value="multiply">Multiply</option>
-                                        <option value="screen">Screen</option>
-                                        <option value="overlay">Overlay</option>
-                                        <option value="darken">Darken</option>
-                                        <option value="lighten">Lighten</option>
-                                        <option value="color-dodge">Color Dodge</option>
-                                        <option value="color-burn">Color Burn</option>
-                                        <option value="hard-light">Hard Light</option>
-                                        <option value="soft-light">Soft Light</option>
-                                        <option value="difference">Difference</option>
-                                        <option value="exclusion">Exclusion</option>
-                                        <option value="hue">Hue</option>
-                                        <option value="saturation">Saturation</option>
-                                        <option value="color">Color</option>
-                                        <option value="luminosity">Luminosity</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        max="1"
-                                        step="0.01"
-                                        value={layer.opacity}
-                                        onChange={(e) => changeOpacity(index, e.target.value)}
-                                        disabled={layer.locked}
-                                    />
+                                    <div>
+                                        <input
+                                            type="radio"
+                                            value={index}
+                                            checked={currLayer === index}
+                                            onChange={() => changeCurrLayer(index)}
+                                        />
+                                        <span
+                                            style={{
+                                                textDecoration: index === currLayer ? "underline" : "none",
+                                                display: index === renameLayerIndex ? "none" : "inline-block"
+                                            }}
+                                        >
+                                            {layer.name}
+                                        </span>
+                                        <input
+                                            style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
+                                            id={`drawDocLayerNameInput${index}`}
+                                            type="text"
+                                            value={layer.name}
+                                            onChange={(e) => {
+                                                renameLayer(e, index);
+                                            }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <button
+                                            title="Toggle Visibility"
+                                            aria-label="Toggle Visibility"
+                                            onClick={() => toggleVisibility(index)}
+                                        >
+                                            {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
+                                        </button>
+                                        <button
+                                            title="Undo Layer"
+                                            aria-label="Undo Layer"
+                                            disabled={!layer.canUndo || layer.locked}
+                                            onClick={() => { setCurrLayer(index); setAction("Undo") }}
+                                        >
+                                            <BiUndo />
+                                        </button>
+                                        <button
+                                            title="Redo Layer"
+                                            aria-label="Redo Layer"
+                                            disabled={!layer.canRedo || layer.locked}
+                                            onClick={() => { setCurrLayer(index); setAction("Redo") }}
+                                        >
+                                            <BiRedo />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {index === 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
-                    </Fragment>)
-            })
-            }
-            {dropTargetIndex === layers.length && <hr />}
-            <button onClick={() => { createNewLayer() }}>
-                New Layer
-            </button>
-        </div>);
+                            {index === 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
+                        </Fragment>)
+                })
+                }
+                {dropTargetIndex === layers.length && <hr />}
+                <button onClick={() => { createNewLayer() }}>
+                    New Layer
+                </button>
+            </div>
+        </>);
 };
