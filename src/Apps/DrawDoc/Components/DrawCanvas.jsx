@@ -43,6 +43,15 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
     setClipboard,
   };
 
+  function constructFilters(filters){
+    if(!filters) return ""
+    let filtersString = "";
+    Object.keys(filters).forEach((key) => {
+      filtersString += `${key}(${filters[key]}) `
+    });
+    return filtersString
+  }
+
   useEffect(() => {
     if(layers[currLayer].id === undefined) return
     let canvas = document.getElementById(`drawCanvasLayer${layers[currLayer].id}`);
@@ -82,6 +91,7 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
             className={"drawCanvasLayer"}
             style={{ 
               display: layer.visible ? "block" : "none",
+              filter: constructFilters(layer.filters),
               opacity: layer.opacity,
               mixBlendMode: layer.blending,
               zIndex: index

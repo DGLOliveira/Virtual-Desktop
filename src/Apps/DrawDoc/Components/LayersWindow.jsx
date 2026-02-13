@@ -30,6 +30,16 @@ export default function LayersWindow(props) {
     const [dragTargetIndex, setDragTargetIndex] = useState(-1);
     const [dropTargetIndex, setDropTargetIndex] = useState(-1);
 
+    const BLEND_LIST = ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
+    const FILTER_LIST = ["blur", "brightness", "contrast", "grayscale", "hue-rotate", "invert", "opacity", "saturate", "sepia"];
+
+    function formatListName(name) {
+        //Replaces all "-" with " "
+        let formattedName = name.replace(/-/g, " ");
+        //Capitalizes the first letter of each word
+        formattedName = formattedName.replace(/\b([a-zÁ-ú]{3,})/g, (match) => match.charAt(0).toUpperCase() + match.slice(1));
+        return formattedName
+    }
 
     const getImageFromCanvasRef = (id, notMain) => {
         const canvas = document.getElementById(id);
@@ -50,6 +60,7 @@ export default function LayersWindow(props) {
             id: lastLayer + 1,
             name: `Layer ${lastLayer + 1}`,
             blending: "normal",
+            filters: {},
             opacity: 1,
             visible: true,
             locked: false,
@@ -112,6 +123,7 @@ export default function LayersWindow(props) {
             id: newId,
             name: `Dupe ${layers[index].name}`,
             blending: layers[index].blending,
+            filters: layers[index].filters,
             opacity: layers[index].opacity,
             visible: true,
             locked: layers[index].locked,
@@ -136,6 +148,24 @@ export default function LayersWindow(props) {
     const changeOpacity = (index, value) => {
         const newLayers = [...layers];
         newLayers[index].opacity = value;
+        setLayers(newLayers);
+    }
+
+    const addFilter = (index, key, value) => {
+        const newLayers = [...layers];
+        newLayers[index].filters[key] = value;
+        setLayers(newLayers);
+    }
+
+    const changeFilter = (index, key, value) => {
+        const newLayers = [...layers];
+        newLayers[index].filters[key] = value;
+        setLayers(newLayers);
+    }
+
+    const removeFilter = (index, key) => {
+        const newLayers = [...layers];
+        delete newLayers[index].filters[key];
         setLayers(newLayers);
     }
 
@@ -214,22 +244,9 @@ export default function LayersWindow(props) {
                         value={layers[currLayer].blending}
                         disabled={layers[currLayer].locked || currLayer === 0}
                     >
-                        <option value="normal">Normal</option>
-                        <option value="multiply">Multiply</option>
-                        <option value="screen">Screen</option>
-                        <option value="overlay">Overlay</option>
-                        <option value="darken">Darken</option>
-                        <option value="lighten">Lighten</option>
-                        <option value="color-dodge">Color Dodge</option>
-                        <option value="color-burn">Color Burn</option>
-                        <option value="hard-light">Hard Light</option>
-                        <option value="soft-light">Soft Light</option>
-                        <option value="difference">Difference</option>
-                        <option value="exclusion">Exclusion</option>
-                        <option value="hue">Hue</option>
-                        <option value="saturation">Saturation</option>
-                        <option value="color">Color</option>
-                        <option value="luminosity">Luminosity</option>
+                        {BLEND_LIST.map((blend, index) => {
+                            return <option key={index} value={blend}>{formatListName(blend)}</option>
+                        })}
                     </select>
                     <div>
                         <label htmlFor="drawDocOpacityInput">Opacity:</label>
