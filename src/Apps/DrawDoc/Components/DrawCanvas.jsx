@@ -48,7 +48,9 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
     let filtersString = "";
     Object.keys(filters).forEach((key) => {
       if(key==="hue-rotate") {
-        filtersString += `${key}(${filters[key]}deg) `
+        //Note: CSS filters rotate in the opposite direction as Canvas filter
+        //unfortunatelly, this does not quite capture the full difference between the two resulting colors
+        filtersString += `${key}(-${filters[key]}deg) `
       }else if(key==="blur") {
         filtersString += `${key}(${filters[key]}px) `
       }else{
