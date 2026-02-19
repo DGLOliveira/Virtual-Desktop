@@ -22,10 +22,21 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
         let finalCtx = finalCanvas.getContext("2d");
         finalCanvas.width = width;
         finalCanvas.height = height;
+        function constructFilters(filters) {
+            if (!filters) return ""
+            let filtersString = "";
+            Object.keys(filters).forEach((key) => {
+                filtersString += `${key}(${filters[key]}) `
+            });
+            return filtersString
+        }
         layers.forEach((layer) => {
             if (layer.visible) {
                 finalCtx.globalCompositeOperation = layer.blending;
                 finalCtx.globalAlpha = layer.opacity;
+                if (layer.filters) {
+                    finalCtx.filter = constructFilters(layer.filters)
+                }
                 finalCtx.drawImage(
                     document.getElementById(`drawCanvasLayer${layer.id}`),
                     0,

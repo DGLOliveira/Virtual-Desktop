@@ -6,7 +6,7 @@ import { FaTrashCan } from "react-icons/fa6";
 import { BiUndo, BiRedo } from "react-icons/bi";
 import { IoDuplicateSharp } from "react-icons/io5";
 import { TiLockOpen, TiLockClosed } from "react-icons/ti";
-import { TbMathFunction } from "react-icons/tb";
+import { IoClose } from "react-icons/io5";
 
 export default function LayersWindow(props) {
 
@@ -409,7 +409,7 @@ export default function LayersWindow(props) {
                                                 aria-label="Delete Filter"
                                                 onClick={() => removeFilter(index, key)}
                                             >
-                                                <FaTrashCan />
+                                                <IoClose />
                                             </button>
                                         </div>
                                     })}
