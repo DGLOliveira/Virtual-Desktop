@@ -31,8 +31,34 @@ export default function LayersWindow(props) {
     const [dragTargetIndex, setDragTargetIndex] = useState(-1);
     const [dropTargetIndex, setDropTargetIndex] = useState(-1);
 
-    const BLEND_LIST = ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
-    const FILTER_LIST = ["blur", "brightness", "contrast", "grayscale", "hue-rotate", "invert", "opacity", "saturate", "sepia"];
+    const BLEND_LIST = [
+        "normal",
+        "multiply",
+        "screen",
+        "overlay",
+        "darken",
+        "lighten",
+        "color-dodge",
+        "color-burn",
+        "hard-light",
+        "soft-light",
+        "difference",
+        "exclusion",
+        "hue",
+        "saturation",
+        "color",
+        "luminosity"
+    ];
+    const FILTER_LIST = [
+        ["blur", "length"],
+        ["brightness", "percentage"],
+        ["contrast", "percentage"],
+        ["grayscale", "percentage"],
+        ["hue-rotate", "angle"],
+        ["invert", "percentage"],
+        ["saturate", "percentage"],
+        ["sepia", "percentage"]
+    ];
 
 
     function formatListName(name) {
@@ -154,7 +180,7 @@ export default function LayersWindow(props) {
     }
 
     const addFilter = (index, key) => {
-        if(layers[index].filters[key]) return
+        if (layers[index].filters[key]) return
         const newLayers = [...layers];
         newLayers[index].filters[key] = 0;
         setLayers(newLayers);
@@ -385,7 +411,7 @@ export default function LayersWindow(props) {
                                         >
                                             <option value="">Select</option>
                                             {FILTER_LIST.map((filter, index) => {
-                                                return <option key={index} value={filter}>{formatListName(filter)}</option>
+                                                return <option key={index} value={filter[0]}>{formatListName(filter[0])}</option>
                                             })}
                                         </select>
                                     </div>
@@ -396,14 +422,32 @@ export default function LayersWindow(props) {
                                     {layer.filters && Object.keys(layer.filters).map((key) => {
                                         return <div key={key}>
                                             {formatListName(key)}:
-                                            <input
+                                            {FILTER_LIST.find((filter) => filter[0] === key)[1] === "length" && 
+                                            <><input
                                                 type="number"
                                                 min="0"
-                                                max="1"
-                                                step="0.01"
+                                                step="1"
                                                 value={layer.filters[key]}
                                                 onChange={(e) => changeFilter(index, key, e.target.value)}
-                                            />
+                                            />px</>}
+                                            {FILTER_LIST.find((filter) => filter[0] === key)[1] === "percentage" && 
+                                            <><input
+                                                type="number"
+                                                min="0"
+                                                max="100"
+                                                step="1"
+                                                value={layer.filters[key]}
+                                                onChange={(e) => changeFilter(index, key, e.target.value)}
+                                            />%</>}
+                                            {FILTER_LIST.find((filter) => filter[0] === key)[1] === "angle" && 
+                                            <><input
+                                                type="number"
+                                                min="0"
+                                                max="359"
+                                                step="1"
+                                                value={layer.filters[key]}
+                                                onChange={(e) => changeFilter(index, key, e.target.value)}
+                                            />°</>}
                                             <button
                                                 title="Delete Filter"
                                                 aria-label="Delete Filter"

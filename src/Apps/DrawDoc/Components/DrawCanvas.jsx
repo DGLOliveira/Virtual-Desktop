@@ -47,7 +47,13 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
     if(!filters) return ""
     let filtersString = "";
     Object.keys(filters).forEach((key) => {
-      filtersString += `${key}(${filters[key]}) `
+      if(key==="hue-rotate") {
+        filtersString += `${key}(${filters[key]}deg) `
+      }else if(key==="blur") {
+        filtersString += `${key}(${filters[key]}px) `
+      }else{
+      filtersString += `${key}(${filters[key]}%) `
+    }
     });
     return filtersString
   }
