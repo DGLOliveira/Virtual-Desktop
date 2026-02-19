@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { Context } from "../Context.jsx";
+import { handleTopMenu } from "../Handlers/handleTopMenu.js";
 import { RiEyeCloseFill, RiEyeFill, RiEditLine } from "react-icons/ri";
 import { FaTrashCan } from "react-icons/fa6";
 import { BiUndo, BiRedo } from "react-icons/bi";
 import { IoDuplicateSharp } from "react-icons/io5";
 import { TiLockOpen, TiLockClosed } from "react-icons/ti";
-import { handleTopMenu } from "../Handlers/handleTopMenu.js";
+import { TbMathFunction } from "react-icons/tb";
 
 export default function LayersWindow(props) {
 
@@ -32,6 +33,7 @@ export default function LayersWindow(props) {
 
     const BLEND_LIST = ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
     const FILTER_LIST = ["blur", "brightness", "contrast", "grayscale", "hue-rotate", "invert", "opacity", "saturate", "sepia"];
+
 
     function formatListName(name) {
         //Replaces all "-" with " "
@@ -151,9 +153,9 @@ export default function LayersWindow(props) {
         setLayers(newLayers);
     }
 
-    const addFilter = (index, key, value) => {
+    const addFilter = (index, key) => {
         const newLayers = [...layers];
-        newLayers[index].filters[key] = value;
+        newLayers[index].filters[key] = 0;
         setLayers(newLayers);
     }
 
@@ -312,64 +314,97 @@ export default function LayersWindow(props) {
                                 onDragOver={(e) => { handleLayerDragOver(e, index) }}
                                 onDrop={(e) => { handleLayerDrop(e, index) }}
                                 style={{ cursor: index === 0 ? "default" : "grab" }}
-                            >
-                                <img
-                                    src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
-                                    className="drawDocCheckersBackground"
-                                    onClick={() => changeCurrLayer(index)}
-                                    draggable={index !== 0}
-                                />
-                                <div>
+                            ><div>
+                                    <img
+                                        src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
+                                        className="drawDocCheckersBackground"
+                                        onClick={() => changeCurrLayer(index)}
+                                        draggable={index !== 0}
+                                    />
                                     <div>
-                                        <input
-                                            type="radio"
-                                            value={index}
-                                            checked={currLayer === index}
-                                            onChange={() => changeCurrLayer(index)}
-                                        />
-                                        <span
-                                            style={{
-                                                textDecoration: index === currLayer ? "underline" : "none",
-                                                display: index === renameLayerIndex ? "none" : "inline-block"
-                                            }}
-                                        >
-                                            {layer.name}
-                                        </span>
-                                        <input
-                                            style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
-                                            id={`drawDocLayerNameInput${index}`}
-                                            type="text"
-                                            value={layer.name}
-                                            onChange={(e) => {
-                                                renameLayer(e, index);
-                                            }}
-                                        />
+                                        <div>
+                                            <input
+                                                type="radio"
+                                                value={index}
+                                                checked={currLayer === index}
+                                                onChange={() => changeCurrLayer(index)}
+                                            />
+                                            <span
+                                                style={{
+                                                    textDecoration: index === currLayer ? "underline" : "none",
+                                                    display: index === renameLayerIndex ? "none" : "inline-block"
+                                                }}
+                                            >
+                                                {layer.name}
+                                            </span>
+                                            <input
+                                                style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
+                                                id={`drawDocLayerNameInput${index}`}
+                                                type="text"
+                                                value={layer.name}
+                                                onChange={(e) => {
+                                                    renameLayer(e, index);
+                                                }}
+                                            />
+                                        </div>
+                                        <div>
+                                            <button
+                                                title="Toggle Visibility"
+                                                aria-label="Toggle Visibility"
+                                                onClick={() => toggleVisibility(index)}
+                                            >
+                                                {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
+                                            </button>
+                                            <button
+                                                title="Undo Layer"
+                                                aria-label="Undo Layer"
+                                                disabled={!layer.canUndo || layer.locked}
+                                                onClick={() => { setCurrLayer(index); setAction("Undo") }}
+                                            >
+                                                <BiUndo />
+                                            </button>
+                                            <button
+                                                title="Redo Layer"
+                                                aria-label="Redo Layer"
+                                                disabled={!layer.canRedo || layer.locked}
+                                                onClick={() => { setCurrLayer(index); setAction("Redo") }}
+                                            >
+                                                <BiRedo />
+                                            </button>
+                                        </div>
                                     </div>
                                     <div>
-                                        <button
-                                            title="Toggle Visibility"
-                                            aria-label="Toggle Visibility"
-                                            onClick={() => toggleVisibility(index)}
+                                        Add Filter:
+                                        <select
+                                            title="Add filter"
+                                            aria-label="Add filter"
+                                            value=""
+                                            onChange={(e) => addFilter(index, e.target.value)}
+                                            disabled={layer.locked || index === 0}
                                         >
-                                            {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
-                                        </button>
-                                        <button
-                                            title="Undo Layer"
-                                            aria-label="Undo Layer"
-                                            disabled={!layer.canUndo || layer.locked}
-                                            onClick={() => { setCurrLayer(index); setAction("Undo") }}
-                                        >
-                                            <BiUndo />
-                                        </button>
-                                        <button
-                                            title="Redo Layer"
-                                            aria-label="Redo Layer"
-                                            disabled={!layer.canRedo || layer.locked}
-                                            onClick={() => { setCurrLayer(index); setAction("Redo") }}
-                                        >
-                                            <BiRedo />
-                                        </button>
+                                            <option value="">Select</option>
+                                            {FILTER_LIST.map((filter, index) => {
+                                                return <option key={index} value={filter}>{formatListName(filter)}</option>
+                                            })}
+                                        </select>
                                     </div>
+                                </div>
+                                <div
+                                    className="drawDocLayersFilterList"
+                                >
+                                    {layer.filters && Object.keys(layer.filters).map((key) => {
+                                        return <div key={key}>
+                                            {formatListName(key)}:
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max="1"
+                                                step="0.01"
+                                                value={layer.filters[key]}
+                                                onChange={(e) => changeFilter(index, key, e.target.value)}
+                                            />
+                                        </div>
+                                    })}
                                 </div>
                             </div>
                             {index === 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
