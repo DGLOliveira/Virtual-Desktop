@@ -154,6 +154,7 @@ export default function LayersWindow(props) {
     }
 
     const addFilter = (index, key) => {
+        if(layers[index].filters[key]) return
         const newLayers = [...layers];
         newLayers[index].filters[key] = 0;
         setLayers(newLayers);
@@ -403,6 +404,13 @@ export default function LayersWindow(props) {
                                                 value={layer.filters[key]}
                                                 onChange={(e) => changeFilter(index, key, e.target.value)}
                                             />
+                                            <button
+                                                title="Delete Filter"
+                                                aria-label="Delete Filter"
+                                                onClick={() => removeFilter(index, key)}
+                                            >
+                                                <FaTrashCan />
+                                            </button>
                                         </div>
                                     })}
                                 </div>

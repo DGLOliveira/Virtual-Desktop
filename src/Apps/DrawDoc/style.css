@@ -270,6 +270,14 @@ canvas-container {
   margin-right:5px;
 }
 
+.drawDocLayersWindowLayer>div:last-child>div{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+}
+
 #drawDocSelectionBox {
   position: absolute;
   background: transparent;
