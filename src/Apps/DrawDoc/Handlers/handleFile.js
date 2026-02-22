@@ -30,6 +30,8 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
                     filtersString += `${key}(${filters[key]}deg) `
                 } else if (key === "blur") {
                     filtersString += `${key}(${filters[key]}px) `
+                } else if (key === "drop-shadow") {
+                    filtersString += `${key}(${filters[key][0]}px ${filters[key][1]}px ${filters[key][2]}px ${filters[key][3]}) `
                 } else {
                     filtersString += `${key}(${filters[key]}%) `
                 };

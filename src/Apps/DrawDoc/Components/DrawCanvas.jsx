@@ -43,30 +43,32 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
     setClipboard,
   };
 
-  function constructFilters(filters){
-    if(!filters) return ""
+  function constructFilters(filters) {
+    if (!filters) return ""
     let filtersString = "";
     Object.keys(filters).forEach((key) => {
-      if(key==="hue-rotate") {
+      if (key === "hue-rotate") {
         //Note: CSS filters rotate in the opposite direction as Canvas filter
         //unfortunatelly, this does not quite capture the full difference between the two resulting colors
         filtersString += `${key}(-${filters[key]}deg) `
-      }else if(key==="blur") {
+      } else if (key === "blur") {
         filtersString += `${key}(${filters[key]}px) `
-      }else{
-      filtersString += `${key}(${filters[key]}%) `
-    }
+      } else if (key === "drop-shadow") {
+        filtersString += `${key}(${filters[key][0]}px ${filters[key][1]}px ${filters[key][2]}px ${filters[key][3]}) `
+      } else {
+        filtersString += `${key}(${filters[key]}%) `
+      }
     });
     return filtersString
   }
 
   useEffect(() => {
-    if(layers[currLayer].id === undefined) return
+    if (layers[currLayer].id === undefined) return
     let canvas = document.getElementById(`drawCanvasLayer${layers[currLayer].id}`);
     let ctx = canvas.getContext("2d", {
       willReadFrequently: true,
     });
-    handleAction({canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle, currLayer, setCurrLayer, layers, setLayers});
+    handleAction({ canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle, currLayer, setCurrLayer, layers, setLayers });
   }, [context.cursor, action]);
 
   useEffect(() => {
@@ -97,7 +99,7 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
             key={layer.id}
             id={`drawCanvasLayer${layer.id}`}
             className={"drawCanvasLayer"}
-            style={{ 
+            style={{
               display: layer.visible ? "block" : "none",
               filter: constructFilters(layer.filters),
               opacity: layer.opacity,
