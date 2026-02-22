@@ -533,7 +533,7 @@ export default function SelectionCanvas() {
                         left: selectionBox.left,
                         width: selectionBox.width,
                         height: selectionBox.height,
-                        caretColor: context.text.color,
+                        caretColor: context.color.selected,
                         fontSize: context.size * context.zoom + "px",
                         fontFamily: context.text.fontFamily,
                         lineHeight: context.text.lineHeight,
