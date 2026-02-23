@@ -83,6 +83,7 @@ export function ContextProvider({ children }) {
     startAngle: 0,
     lineJoin: "round",
     lineCap: "round",
+    radii: [10, 10, 10, 10],
   });
   const [curveControls, setCurveControls] = useState({
     state: "none",

@@ -154,6 +154,56 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
               </button>
                 <vertical-rect ></vertical-rect>
               </>}
+            {context.subTool.shape === "Squagle" &&
+              <><button>
+                <label htmlFor="topleft">Top Left</label>
+                <input
+                  id="topleft"
+                  type="number"
+                  step="1"
+                  min="0"
+                  value={context.subTool.radii[0]}
+                  onChange={(e) => context.setSubTool({ ...context.subTool, radii: [e.target.value, ...context.subTool.radii.slice(1)] })}
+                />
+              </button>
+                <vertical-rect ></vertical-rect>
+                <button>
+                  <label htmlFor="topright">Top Right</label>
+                  <input
+                    id="topright"
+                    type="number"
+                    step="1"
+                    min="0"
+                    value={context.subTool.radii[1]}
+                    onChange={(e) => context.setSubTool({ ...context.subTool, radii: [...context.subTool.radii.slice(0, 1), e.target.value, ...context.subTool.radii.slice(2)] })}
+                  />
+                </button>
+                <vertical-rect ></vertical-rect>
+                <button>
+                  <label htmlFor="bottomright">Bottom Right</label>
+                  <input
+                    id="bottomright"
+                    type="number"
+                    step="1"
+                    min="0"
+                    value={context.subTool.radii[2]}
+                    onChange={(e) => context.setSubTool({ ...context.subTool, radii: [...context.subTool.radii.slice(0, 2), e.target.value, context.subTool.radii[3]] })}
+                  />
+                </button>
+                <vertical-rect ></vertical-rect>
+                <button>
+                  <label htmlFor="bottomleft">Bottom Left</label>
+                  <input
+                    id="bottomleft"
+                    type="number"
+                    step="1"
+                    min="0"
+                    value={context.subTool.radii[3]}
+                    onChange={(e) => context.setSubTool({ ...context.subTool, radii: [...context.subTool.radii.slice(0, 3), e.target.value] })}
+                  />
+                </button>
+                <vertical-rect ></vertical-rect>
+              </>}
           </> : null}
       </nav>
     )

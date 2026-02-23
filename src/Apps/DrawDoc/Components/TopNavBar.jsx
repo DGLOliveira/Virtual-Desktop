@@ -160,6 +160,7 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
               <option>Curve</option>
               <option>Circle</option>
               <option>Rectangle</option>
+              <option>Squagle</option>
               <option>Polygon</option>
               <option>Star</option>
               <option>Arrow</option>

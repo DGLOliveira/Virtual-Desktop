@@ -43,6 +43,16 @@ export const SubToolIcon = ({ subtool, isSelected }) => {
         context.strokeRect(0, height / 4, width, height / 2);
 
     };
+
+    const drawSquagleIcon = (context, width, height) => {
+        context.beginPath();
+        context.roundRect(0, height / 4, width, height / 2, 10);
+        context.stroke();
+        if (subtool.fill) {
+            context.fill();
+        }
+    };
+
     const drawPolygonIcon = (context, width, height) => {
         context.beginPath();
         //context.moveTo(width/2, 0);
@@ -126,6 +136,7 @@ export const SubToolIcon = ({ subtool, isSelected }) => {
         drawCircleIcon,
         drawEllipseIcon,
         drawRectangleIcon,
+        drawSquagleIcon,
         drawPolygonIcon,
         drawLineIcon,
         drawCurveIcon,

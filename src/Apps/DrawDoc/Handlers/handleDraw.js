@@ -463,7 +463,7 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
             ctx.translate(startX + centerX, startY + centerY);
             ctx.rotate((Math.PI * param.subTool.angle) / 180);
         }
-        if (param.subTool.shape === "Rectangle") {
+        if (param.subTool.shape === "Rectangle" || param.subTool.shape === "Squagle") {
             drawFunctions["draw" + param.subTool.shape](centerX, centerY);
         } else {
             drawFunctions["draw" + param.subTool.shape](stretchX, stretchY, radius);
@@ -543,6 +543,21 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
             endX - startX,
             endY - startY,
         );
+    }
+
+    const drawSquagle = (centerX, centerY) => {
+        ctx.beginPath();
+        ctx.roundRect(
+            -centerX,
+            -centerY,
+            endX - startX,
+            endY - startY,
+            param.subTool.radii
+        );
+        ctx.stroke();
+        if (param.subTool.fill) {
+            ctx.fill();
+        }
     }
 
     const drawCircle = (stretchX, stretchY, radius) => {
@@ -645,6 +660,7 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
         drawCurve,
         drawCircle,
         drawRectangle,
+        drawSquagle,
         drawPolygon,
         drawStar,
         drawArrow,
