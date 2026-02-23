@@ -13,8 +13,6 @@ export function handleHistory(
     switch (command) {
         case "add":
             if (history.length < MAX_HISTORY_LENGTH) {
-                console.log(history.length);
-                console.log(historyIndex);
                 setHistory([...history, newPath]);
                 setHistoryIndex(history.length + 1);
                 setCanBack(true);
