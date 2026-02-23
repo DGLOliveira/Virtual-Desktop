@@ -431,33 +431,33 @@ export default function LayersWindow(props) {
                                 >
                                     {layer.filters && Object.keys(layer.filters).map((key) => {
                                         return <div key={key}>
-                                            {formatListName(key)}:
+                                            <span>{formatListName(key)}</span>
                                             {FILTER_LIST.find((filter) => filter[0] === key)[1] === "length" &&
-                                                <><input
+                                                <div><div><input
                                                     type="number"
                                                     min="0"
                                                     step="1"
                                                     value={layer.filters[key]}
                                                     onChange={(e) => changeFilter(index, key, e.target.value)}
-                                                />px</>}
+                                                />px</div></div>}
                                             {FILTER_LIST.find((filter) => filter[0] === key)[1] === "percentage" &&
-                                                <><input
+                                                <div><div><input
                                                     type="number"
                                                     min="0"
                                                     max="100"
                                                     step="1"
                                                     value={layer.filters[key]}
                                                     onChange={(e) => changeFilter(index, key, e.target.value)}
-                                                />%</>}
+                                                />%</div></div>}
                                             {FILTER_LIST.find((filter) => filter[0] === key)[1] === "angle" &&
-                                                <><input
+                                                <div><div><input
                                                     type="number"
                                                     min="0"
                                                     max="359"
                                                     step="1"
                                                     value={layer.filters[key]}
                                                     onChange={(e) => changeFilter(index, key, e.target.value)}
-                                                />°</>}
+                                                />°</div></div>}
                                             {FILTER_LIST.find((filter) => filter[0] === key)[1] === "shadow" &&
                                                 <div>
                                                     <div>

@@ -278,12 +278,19 @@ canvas-container {
   width: 100%;
   margin-top:2px;
 }
+
+.drawDocLayersWindowLayer>div:last-child>div>span{
+  min-width:75px;
+}
+
 .drawDocLayersWindowLayer>div:last-child>div>div{
   display: flex; 
   flex-direction: column; 
   align-items: end;
   border-left: 1px solid var(--GeneralBorderColor);
-  border-radius:10px;
+  border-right: 1px solid var(--GeneralBorderColor);
+  padding-right:5px;
+  border-radius:7px;
 }
 .drawDocLayersWindowLayer>div:last-child>div>div>div{
   display:flex;
