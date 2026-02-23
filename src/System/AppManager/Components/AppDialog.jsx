@@ -49,7 +49,7 @@ export const AppDialog = ({ action, setAction, appDialog }) => {
                             paddingBottom: theme.dialogButtonsLocation === "in window" ? "5px" : "0px",
                             marginBottom: theme.dialogButtonsLocation === "in window" ? "0px" : "var(--DialogPadding)"
                         }}>
-                        <p>{appDialog.info}</p>
+                        <div>{appDialog.info}</div>
                         {theme.dialogButtonsLocation === "in info container" &&
                             <app-dialog-actions>
                                 {Object.keys(appDialog.actions).map((name, index) =>

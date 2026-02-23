@@ -50,7 +50,7 @@ app-dialog-info {
     overflow: hidden;
 }
 
-app-dialog-info>p{
+app-dialog-info>div{
     margin: 10px;
 }
 

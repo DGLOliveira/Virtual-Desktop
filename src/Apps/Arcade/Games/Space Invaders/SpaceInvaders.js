@@ -549,7 +549,6 @@ export default function SpaceInvaders({ controls, isSelected, gameState, setGame
             entities[enemyMoveParam.index].currSprite = 1;
         }
         enemyMoveParam.index++;
-        //console.log(entities[enemyMoveParam.index].sprites.length);
         for (let i = 0; i < entities.length; i++) {
             if (entities[i].id === 8) {
                 if (entities[i].x + entities[i].w > 0 && entities[i].x < cols) {
@@ -690,7 +689,6 @@ export default function SpaceInvaders({ controls, isSelected, gameState, setGame
     const handleBullets = () => {
         let newArray = [];
         if (bullets.length > 0) {
-            //console.log(bullets);
             for (let i = 0; i < bullets.length; i++) {
                 if (!checkColisions(i)) {
                     if (bullets[i].id === "player") {
