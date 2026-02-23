@@ -94,13 +94,14 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
                   onClick={() => context.setSubTool({ ...context.subTool, fill: !context.subTool.fill })}
                 ><small>Fill</small></button>
                 <vertical-rect ></vertical-rect>
-                <button
-                  title="Stretch"
-                  className={context.subTool.stretch ? "buttonActive" : ""}
-                  onClick={() => context.setSubTool({ ...context.subTool, stretch: !context.subTool.stretch })}
-                ><small>Stretch</small>
-                </button>
-                <vertical-rect ></vertical-rect>
+                {context.subTool.shape !== "Rectangle" && context.subTool.shape !== "Squagle" &&
+                  <><button
+                    title="Stretch"
+                    className={context.subTool.stretch ? "buttonActive" : ""}
+                    onClick={() => context.setSubTool({ ...context.subTool, stretch: !context.subTool.stretch })}
+                  ><small>Stretch</small>
+                  </button>
+                    <vertical-rect ></vertical-rect></>}
                 <button>
                   <label htmlFor="rotationAngle">Rotation</label>
                   <input
@@ -128,19 +129,22 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
                   </> : null}
               </>
               : null}
-            <button>
-              <label htmlFor="lineCap">Cap</label>
-              <select
-                id="lineCap"
-                value={context.subTool.lineCap}
-                onChange={(e) => context.setSubTool({ ...context.subTool, lineCap: e.target.value })}>
-                <option value="butt">Butt</option>
-                <option value="round">Round</option>
-                <option value="square">Square</option>
-              </select>
-            </button>
-            <vertical-rect ></vertical-rect>
-            {context.subTool.shape !== "Line" && context.subTool.shape !== "Curve" &&
+            {context.subTool.shape === "Line" && context.subTool.shape === "Curve" &&
+              <>
+                <button>
+                  <label htmlFor="lineCap">Cap</label>
+                  <select
+                    id="lineCap"
+                    value={context.subTool.lineCap}
+                    onChange={(e) => context.setSubTool({ ...context.subTool, lineCap: e.target.value })}>
+                    <option value="butt">Butt</option>
+                    <option value="round">Round</option>
+                    <option value="square">Square</option>
+                  </select>
+                </button>
+                <vertical-rect ></vertical-rect>
+              </>}
+            {context.subTool.shape !== "Line" && context.subTool.shape !== "Curve" && context.subTool.shape !== "Squagle" && context.subTool.shape !== "Rectangle" &&
               <><button>
                 <label htmlFor="lineJoin">Joints</label>
                 <select

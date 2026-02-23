@@ -434,7 +434,11 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
     const drawShape = () => {
         ctx.strokeStyle = param.color1;
         ctx.fillStyle = param.color2;
-        ctx.lineCap = param.subTool.lineCap;
+        if (param.subTool.shape !== "Curve" && param.subTool.shape !== "Line") {
+            ctx.lineCap = param.subTool.lineCap;
+        } else {
+            ctx.lineCap = "round";
+        }
         ctx.lineJoin = param.subTool.lineJoin;
         ctx.setLineDash([]);
         ctx.lineWidth = param.size;
