@@ -1,3 +1,4 @@
+import {Fragment} from "react";
 //Generates a complete compass rose
 export default function RoseFull({ TRANSITION_TIME, rotation }) {
     var compassRosePoints = [];
@@ -41,7 +42,7 @@ export default function RoseFull({ TRANSITION_TIME, rotation }) {
             <circle cx="100" cy="100" r="40.5" stroke="gray" strokeWidth="0.5" />
             {compassRosePoints.map((val, index) => {
                 return (
-                    <>
+                    <Fragment key={index}>
                         <polygon key={index + "a"} points={val[0]} fill="white" stroke="black" strokeWidth="1" />
                         <polygon key={index + "b"} points={val[1]} fill="black" />
                         {index>=12 && index<16 ?
@@ -53,7 +54,7 @@ export default function RoseFull({ TRANSITION_TIME, rotation }) {
                         stroke="black" 
                         strokeWidth="0.5" />
                         :null}
-                    </>
+                    </Fragment>
                 )
             })}
             <polygon points="100,30 96,45 100,50 104,45" fill="white" stroke="black" strokeWidth="1" />

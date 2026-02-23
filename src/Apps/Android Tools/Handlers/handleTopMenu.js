@@ -25,18 +25,14 @@ export default function handleTopMenu(appMenu, setAppMenu, tool, subMenu) {
     if (appMenu === null || tool === "Home") {
         setAppMenu(defaultAppMenu);
     } else {
-        console.log(tool);
         let updatedAppMenu = { ...defaultAppMenu, ...subMenu };
         Object.keys(updatedAppMenu.Tools).forEach((key) => {
             if (key === tool) {
-                console.log(key + " true");
                 updatedAppMenu["Tools"][key].radio = true;
             } else {
-                console.log(key + " false");
                 updatedAppMenu["Tools"][key].radio = false;
             }
         })
-        console.log(updatedAppMenu);
         setAppMenu(updatedAppMenu);
     }
 }

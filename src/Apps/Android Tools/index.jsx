@@ -21,7 +21,6 @@ export default function Android_Tools(props) {
     }, [action]);
 
     useEffect(() => {
-        console.log(subMenu);
         handleTopMenu(appMenu, setAppMenu, tool, subMenu);
     }, [tool, subMenu])
 
