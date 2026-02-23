@@ -83,7 +83,7 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
                 }
             }
             //if not, remove all history after the current step
-            else{
+            else {
                 updatedHistory[id].data.splice(updatedHistory[id].lastIndex + 1, 0, targetCanvas.getImageData(0, 0, width, height))
                 updatedHistory[id].lastIndex++
             }
@@ -109,7 +109,17 @@ export const handleHistory = (context, history, setHistory, command, appMenu, se
                 lastIndex: 0
             }
         }
-        const updatedLayers = [{ id: 0, name: "Base", visible: true, canUndo: false, canRedo: false }]
+        const updatedLayers = [{
+            id: 0,
+            name: "Base",
+            blending: "normal",
+            filters: {},
+            opacity: 1,
+            visible: true,
+            locked: false,
+            canUndo: false,
+            canRedo: false
+        }]
         updateStates(updatedHistory, updatedLayers, true)
     }
 
