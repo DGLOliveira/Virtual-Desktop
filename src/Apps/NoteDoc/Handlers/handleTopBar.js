@@ -135,54 +135,17 @@ export default function handleTopBar(appTopBar, setAppTopBar, args) {
     if (!appTopBar) {
         setAppTopBar(defaultTopBar);
     } else {
-        setAppTopBar({
-            ...appTopBar,
-            "File": {
-                ...appTopBar["File"],
-                "New": {
-                    ...appTopBar["File"]["New"],
-                    "disabled": args.ref.current.innerHTML === "" ? true : false
-                },
-                "Download": {
-                    ...appTopBar["File"]["Save"],
-                    "disabled": args.ref.current.innerHTML === "" ? true : false
-                },
-            },
-            "View": {
-                ...appTopBar["View"],
-                "Zoom In": {
-                    ...appTopBar["View"]["Zoom In"],
-                    "disabled": args.settings.zoom >= args.MAX_ZOOM ? true : false
-                },
-                "Zoom Out": {
-                    ...appTopBar["View"]["Zoom Out"],
-                    "disabled": args.settings.zoom <= args.MIN_ZOOM ? true : false
-                },
-                "Zoom Reset": {
-                    ...appTopBar["View"]["Zoom Reset"],
-                    "disabled": args.settings.zoom === 1 ? true : false
-                },
-                "Text Wrap": {
-                    ...appTopBar["View"]["Text Wrap"],
-                    "checkbox": args.settings.textWrap === "nowrap" ? false : true
-                }
-            },
-            "Theme": {
-                ...appTopBar["Theme"],
-                "Default": {
-                    ...appTopBar["Theme"]["Default"],
-                    "radio": args.settings.theme.type === "System" ? true : false
-                },
-                "Light": {
-                    ...appTopBar["Theme"]["Light"],
-                    "radio": args.settings.theme.type === "Light" ? true : false
-                },
-                "Dark": {
-                    ...appTopBar["Theme"]["Dark"],
-                    "radio": args.settings.theme.type === "Dark" ? true : false
-                },
-            }
-        });
+        let newTopBar = defaultTopBar;
+        newTopBar["File"]["New"]["disabled"] = args.ref.current.innerHTML === "" ? true : false;
+        newTopBar["File"]["Download File"]["disabled"] = args.ref.current.innerHTML === "" ? true : false;
+        newTopBar["View"]["Zoom In"]["disabled"] = args.settings.zoom >= args.MAX_ZOOM ? true : false;
+        newTopBar["View"]["Zoom Out"]["disabled"] = args.settings.zoom <= args.MIN_ZOOM ? true : false;
+        newTopBar["View"]["Zoom Reset"]["disabled"] = args.settings.zoom === 1 ? true : false;
+        newTopBar["View"]["Text Wrap"]["checkbox"] = args.settings.textWrap === "nowrap" ? false : true;
+        newTopBar["Theme"]["Default"]["radio"] = args.settings.theme.type === "System" ? true : false;
+        newTopBar["Theme"]["Light"]["radio"] = args.settings.theme.type === "Light" ? true : false;
+        newTopBar["Theme"]["Dark"]["radio"] = args.settings.theme.type === "Dark" ? true : false;
+        setAppTopBar(newTopBar);
     }
 
 }
