@@ -5,7 +5,7 @@ export const handleTools = (canvas, cursor, setCursor, params, action, setAction
     case "Eraser":
       handleDraw(canvas, cursor, params, false, action);
       if (action !== "drawing") {
-        params.setBrushPoints([[cursor.current.x, cursor.current.y]]);
+        params.setBrushPoints([[cursor.start.x, cursor.start.y]]);
         setAction("drawing");
       }else{
         params.setBrushPoints([...params.brushPoints, [cursor.current.x, cursor.current.y]]);
