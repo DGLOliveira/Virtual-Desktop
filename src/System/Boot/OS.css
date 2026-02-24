@@ -371,6 +371,11 @@
   z-index: 0;
 }
 
+html,
+body {
+    overscroll-behavior-y: contain;
+}
+
 body {
   background-color: var(--DesktopBkgrColor);
   overscroll-behavior: contain;
