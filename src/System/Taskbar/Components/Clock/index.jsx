@@ -155,9 +155,9 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
     let newX = x - calendarRect.x - hoverDiv.width / 2;
     let newY = y - calendarRect.y - hoverDiv.height / 2;
     let calendarTableRect = document.getElementsByTagName("calendar-container-table")[0].getBoundingClientRect();
-    if(x<calendarTableRect.left || x>calendarTableRect.right || y<calendarTableRect.top || y>calendarTableRect.bottom) {
+    if (x < calendarTableRect.left || x > calendarTableRect.right || y < calendarTableRect.top || y > calendarTableRect.bottom) {
       setCalendarHover({ active: false, x: 0, y: 0 });
-    }else{
+    } else {
       setCalendarHover({ active: true, x: newX, y: newY });
     }
   }
@@ -171,10 +171,36 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
     else if (!e.currentTarget.contains(e.relatedTarget)) {
       setCalendarHover({ active: false, x: 0, y: 0 });
     }
-    else if(x<calendarTableRect.left || x>calendarTableRect.right || y<calendarTableRect.top || y>calendarTableRect.bottom) {
+    else if (x < calendarTableRect.left || x > calendarTableRect.right || y < calendarTableRect.top || y > calendarTableRect.bottom) {
       setCalendarHover({ active: false, x: 0, y: 0 });
     }
   }
+
+  function getTime() {
+    let newHour = !formats.hour24 && hours > 12 ? hours - 12 : hours
+    let newMinutes = ":" + minutes
+    let newSeconds = formats.time === "hh:mm:ss" ? ":" + seconds : ""
+    let newFormat = formats.hour24 ? "" : hours > 12 ? " PM" : " AM"
+    return newHour + newMinutes + newSeconds + newFormat
+  }
+
+  function getDate(isDatetime) {
+    //Checks if the format must be a valid datetime attribute
+    if (isDatetime) {
+      return `${year}-${Number(month) + 1}-${day}`
+    }
+    switch (formats.date) {
+      case "dd/mm/yyyy":
+        return `${day}/${Number(month) + 1}/${year}`
+      case "mm/dd/yyyy":
+        return `${Number(month) + 1}/${day}/${year}`
+      case "yyyy/mm/dd":
+        return `${year}/${Number(month) + 1}/${day}`
+      default:
+        return `${year}/${Number(month) + 1}/${day}`
+    }
+  }
+
   return (
     <>
       <button
@@ -188,11 +214,8 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
       >
         {formats.clock === "numeric" ?
           <>
-            {!formats.hour24 && hours > 12 ? hours - 12 : hours}:{minutes}{formats.time === "hh:mm:ss" ? <>:{seconds}</> : ""}{formats.hour24 ? "" : hours > 12 ? " PM" : " AM"}
-            <br />
-            {formats.date === "dd/mm/yyyy" && <>{day}/{Number(month) + 1}/{year}</>}
-            {formats.date === "mm/dd/yyyy" && <>{Number(month) + 1}/{day}/{year}</>}
-            {formats.date === "yyyy/mm/dd" && <>{year}/{Number(month) + 1}/{day}</>}
+            <time dateTime={getTime()}>{getTime()}</time>
+            <time dateTime={getDate(true)}>{getDate(false)}</time>
           </> :
           <div style={{ display: "flex", height: "var(--TaskbarIconSize)", width: "var(--TaskbarIconSize)" }}>
             <SVGClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
@@ -217,7 +240,7 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
             </calendar-clock>
           </taskbar-window-header>
           <taskbar-window-nav
-          style={{ zIndex: "2" }}
+            style={{ zIndex: "2" }}
           >
             <button
               title="Settings"
