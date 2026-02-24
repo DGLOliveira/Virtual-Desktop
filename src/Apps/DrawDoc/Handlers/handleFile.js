@@ -63,7 +63,8 @@ export const handleFile = (ctx, context, action, layers, setAction) => {
         downloadLink.click();
     };
     const newFile = () => {
-        const baseCanvas = document.getElementById(`drawCanvasLayer0`).getContext("2d");
+        const baseCanvas = document.getElementById(`drawCanvasLayer0`).getContext("2d", { alpha: true });
+        baseCanvas.clearRect(0, 0, width, height)
         if (context.useAlpha) {
             baseCanvas.fillStyle = "#00000000";
         } else {
