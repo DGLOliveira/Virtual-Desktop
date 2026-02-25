@@ -177,6 +177,7 @@ export const AppTopBar = ({ appName, title, setAction }) => {
         >
             <AppIcon appName={appName} />
             <h1
+                className={title === "" || title === "Untitled" ? "" : "notranslate"}
                 onDoubleClick={(e) => (
                     e.stopPropagation(), appContext.switchMaximized(appName)
                 )}>
