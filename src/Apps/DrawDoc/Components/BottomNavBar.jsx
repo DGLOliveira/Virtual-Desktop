@@ -34,7 +34,7 @@ export const BottomNavBar = ({ action, setAction, contextMenu }) => {
               className={context.text.stroke ? "buttonActive" : ""}
               onClick={() => { context.setText({ ...context.text, stroke: !context.text.stroke }) }}
             >
-              <small>Stroke</small>
+              <small>Outline</small>
             </button>
             <input
               title="Stroke Width"

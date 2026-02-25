@@ -117,22 +117,22 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
               value={context.text.fontFamily}
               onChange={(e) => context.setText({ ...context.text, fontFamily: e.target.value })}
             >
-              <option>Arial</option>
-              <option>Times New Roman</option>
-              <option>Monospace</option>
-              <option>Verdana</option>
-              <option>Georgia</option>
-              <option>Courier New</option>
-              <option>Tahoma</option>
-              <option>Garamond</option>
-              <option>Impact</option>
-              <option>Comic Sans MS</option>
-              <option>Lucida Console</option>
-              <option>Lucida Sans Unicode</option>
-              <option>Palatino Linotype</option>
-              <option>Symbol</option>
-              <option>Wingdings</option>
-              <option>Helvetica</option>
+              <option value="Arial">Arial</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Monospace">Monospace</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Tahoma">Tahoma</option>
+              <option value="Garamond">Garamond</option>
+              <option value="Impact">Impact</option>
+              <option value="Comic Sans MS">Comic Sans MS</option>
+              <option value="Lucida Console">Lucida Console</option>
+              <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+              <option value="Palatino Linotype">Palatino Linotype</option>
+              <option value="Symbol">Symbol</option>
+              <option value="Wingdings">Wingdings</option>
+              <option value="Helvetica">Helvetica</option>
             </select>
             <vertical-rect ></vertical-rect>
             <CiLineHeight />
@@ -156,15 +156,15 @@ export const TopNavBar = ({ setAction, contextMenu }) => {
               value={context.subTool.shape}
               onChange={(e) => context.setSubTool({ ...context.subTool, shape: e.target.value })}
             >
-              <option>Line</option>
-              <option>Curve</option>
-              <option>Circle</option>
-              <option>Rectangle</option>
-              <option>Squagle</option>
-              <option>Polygon</option>
-              <option>Star</option>
-              <option>Arrow</option>
-              <option>Heart</option>
+              <option value="Line">Line</option>
+              <option value="Curve">Curve</option>
+              <option value="Circle">Circle</option>
+              <option value="Rectangle">Rectangle</option>
+              <option value="Squagle">Squagle</option>
+              <option value="Polygon">Polygon</option>
+              <option value="Star">Star</option>
+              <option value="Arrow">Arrow</option>
+              <option value="Heart">Heart</option>
             </select>
             <vertical-rect ></vertical-rect>
             {(context.subTool.shape === "Polygon" || context.subTool.shape === "Star") &&

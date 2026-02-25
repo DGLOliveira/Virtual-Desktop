@@ -436,7 +436,9 @@ export const handleDraw = (canvas, cursor, param, preview, action) => {
         ctx.fillStyle = param.color2;
         if (param.subTool.shape !== "Curve" && param.subTool.shape !== "Line") {
             ctx.lineCap = param.subTool.lineCap;
-        } else {
+        } else if(param.subTool.shape === "Rectangle") {
+            ctx.lineCap = "miter"
+        }else {
             ctx.lineCap = "round";
         }
         ctx.lineJoin = param.subTool.lineJoin;
