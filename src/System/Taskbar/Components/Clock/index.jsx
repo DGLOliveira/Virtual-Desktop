@@ -176,10 +176,10 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
     }
   }
 
-  function getTime() {
+  function getTime(isFullTime) {
     let newHour = !formats.hour24 && hours > 12 ? hours - 12 : hours
     let newMinutes = ":" + minutes
-    let newSeconds = formats.time === "hh:mm:ss" ? ":" + seconds : ""
+    let newSeconds = (formats.time === "hh:mm:ss" || isFullTime) ? ":" + seconds : ""
     let newFormat = formats.hour24 ? "" : hours > 12 ? " PM" : " AM"
     return newHour + newMinutes + newSeconds + newFormat
   }
@@ -214,7 +214,7 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
       >
         {formats.clock === "numeric" ?
           <>
-            <time dateTime={getTime()}>{getTime()}</time>
+            <time dateTime={getTime(true)}>{getTime(false)}</time>
             <time dateTime={getDate(true)}>{getDate(false)}</time>
           </> :
           <div style={{ display: "flex", height: "var(--TaskbarIconSize)", width: "var(--TaskbarIconSize)" }}>
@@ -230,10 +230,10 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
         >
           <taskbar-window-header>
             <calendar-date>
-              <div style={{ fontSize: "30px", fontWeight: "bold" }}>
-                {!formats.hour24 && hours > 12 ? hours - 12 : hours}:{minutes}:{seconds}{formats.hour24 ? "" : hours > 12 ? " PM" : " AM"}
-              </div>
-              {dayString}{", "}{day}{" of "}{monthString}{", "}{year}
+              <time dateTime={getTime(true)} style={{ fontSize: "30px", fontWeight: "bold" }}>
+                {getTime(true)}
+              </time>
+              <>{`${dayString}, ${day} of ${monthString}, ${year}`}</>
             </calendar-date>
             <calendar-clock>
               <SVGClock time={{ hours: hours, minutes: minutes, seconds: seconds }} />
@@ -255,7 +255,7 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
               title="Next Month"
               aria-label="Next Month"
               onClick={() => changeSelectedMonthYear("next")}><FaArrowRight /></button>
-            {monthList[selectedMonthYear.month]}{", "}{selectedMonthYear.year}
+            <>{`${monthList[selectedMonthYear.month]}, ${selectedMonthYear.year}`}</>
           </taskbar-window-nav>
           <taskbar-window-body>
             <calendar-container>
@@ -269,7 +269,7 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
                   <thead>
                     <tr>
                       {dayList.map(weekDay =>
-                        <th key={weekDay}>{weekDay.slice(0, 3)}</th>
+                        <th key={weekDay} style={{ display:"inline-block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{weekDay}</th>
                       )}
                     </tr>
                   </thead>
@@ -291,18 +291,20 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
                 </table>
               </calendar-container-table>
             </calendar-container>
-            {displaySettings && <calendar-settings>
+            <calendar-settings style={{ display: displaySettings ? "block" : "none"  }}>
               <button
+              style={{display: "flex", width:"100%", flexDirection:"row", justifyContent:"start"}}
                 title="Hour Format"
                 aria-label="Hour Format"
                 onClick={() => setFormats({ ...formats, hour24: !formats.hour24 })}>
-                Hour Format:{formats.hour24 ? "24h" : "12h"}
+                {`Hour Format: ${formats.hour24 ? "24h" : "12h"}`}
               </button>
               <button
+              style={{display: "flex", width:"100%", flexDirection:"row", justifyContent:"start"}}
                 title="Clock Type"
                 aria-label="Clock Type"
                 onClick={() => setFormats({ ...formats, clock: formats.clock === "numeric" ? "analog" : "numeric" })}>
-                Clock Type: {formats.clock}
+                {`Clock Type: ${formats.clock}`}
               </button>
               <div>
                 Date Format:
@@ -320,7 +322,6 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
                 </select>
               </div>
             </calendar-settings>
-            }
           </taskbar-window-body>
         </taskbar-window>
         , document.getElementById("root"))}
