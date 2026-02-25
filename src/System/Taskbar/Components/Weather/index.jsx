@@ -54,7 +54,7 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
     {
       name: "Location",
       component: <Location
-        location={location} 
+        location={location}
         setLocation={setLocation}
         widgetState={widgetState}
         setWidgetState={setWidgetState}
@@ -121,20 +121,25 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
   const handleContextMenu = (e) => {
     e.preventDefault();
     let content = {
-        "Settings": { action: () => {
+      "Settings": {
+        action: () => {
           setShowDetails(true);
-          setCurrentWeatherPage(1);}},
-        "Location": { action: () => {
+          setCurrentWeatherPage(1);
+        }
+      },
+      "Location": {
+        action: () => {
           setShowDetails(true);
           setCurrentWeatherPage(0);
-        }},
-        "LineBreak": {},
-        "Hide": { action: () => { setShowWeather(false)}, checkbox: true },
-      };
-      contextMenu.setOpen();
-      contextMenu.setPosition(e.clientX, e.clientY);
-      contextMenu.setContent(content);
-    
+        }
+      },
+      "LineBreak": {},
+      "Hide": { action: () => { setShowWeather(false) }, checkbox: true },
+    };
+    contextMenu.setOpen();
+    contextMenu.setPosition(e.clientX, e.clientY);
+    contextMenu.setContent(content);
+
   }
   const changeWeatherPage = (delta) => {
     if (weatherData !== null) {
@@ -216,22 +221,22 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
       setShowDetails(false);
     }
   };
-  
+
   return (
     <>
-        <button 
+      <button
         id="WeatherButton"
         onClick={() => setShowDetails(!showDetails)}
         onContextMenu={(e) => handleContextMenu(e)}
-        style={{display: "flex", flexDirection: "row"}}
-        >
-          {weatherData === null ? <WiUmbrella /> : <>
-            {WeatherCode(weatherData.hourly.weathercode[currentHour]).icon}
-            {weatherData.hourly.temperature_2m[currentHour]}
-            {weatherData.hourly_units.temperature_2m}
-          </>
-          }
-        </button>
+        style={{ display: "flex", flexDirection: "row" }}
+      >
+        {weatherData === null ? <WiUmbrella /> : <>
+          {WeatherCode(weatherData.hourly.weathercode[currentHour]).icon}
+          {weatherData.hourly.temperature_2m[currentHour]}
+          {weatherData.hourly_units.temperature_2m}
+        </>
+        }
+      </button>
       {showDetails && createPortal(
         <taskbar-window
           ref={detailsRef}
@@ -258,16 +263,16 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
                       <weather-param-icon title="Cloud Cover" aria-label="Cloud Cover" style={{ color: "silver" }}>
                         <FaCloud />
                       </weather-param-icon>
-                      <div title="Cloud Cover" aria-label="Cloud Cover">
-                        Cloud Cover: {weatherData.hourly.cloudcover[currentHour]}{weatherData.hourly_units.cloudcover}
+                      <div title="Cloud Cover" aria-label="Cloud Cover" style={{ textAlign: "left" }}>
+                        {`Cloud Cover: ${weatherData.hourly.cloudcover[currentHour]}${weatherData.hourly_units.cloudcover}`}
                       </div>
                     </weather-param>
                     <weather-param >
                       <weather-param-icon title="UV Index" aria-label="UV Index" style={{ color: "violet" }}>
                         <FaSun />
                       </weather-param-icon>
-                      <div title="UV Index" aria-label="UV Index">
-                        UV Index: {weatherData.hourly.uv_index[currentHour]}{weatherData.hourly_units.uv_index}
+                      <div title="UV Index" aria-label="UV Index" style={{ textAlign: "left" }}>
+                        {`UV Index: ${weatherData.hourly.uv_index[currentHour]}${weatherData.hourly_units.uv_index}`}
                       </div>
                     </weather-param>
                   </flex-column-start>
@@ -277,11 +282,11 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
                         <FaTemperatureHalf />
                       </weather-param-icon>
                       <flex-column-start>
-                        <div title="Real Temperature" aria-label="Real Temperature">
-                          Real:{" "}{weatherData.hourly.temperature_2m[currentHour]}{weatherData.hourly_units.temperature_2m}
+                        <div title="Real Temperature" aria-label="Real Temperature" style={{ textAlign: "left" }}>
+                          {`Real: ${weatherData.hourly.temperature_2m[currentHour]}${weatherData.hourly_units.temperature_2m}`}
                         </div>
-                        <div title="Feel Temperature" aria-label="Feel Temperature">
-                          Feel:{" "}{weatherData.hourly.apparent_temperature[currentHour]}{weatherData.hourly_units.apparent_temperature}
+                        <div title="Feel Temperature" aria-label="Feel Temperature" style={{ textAlign: "left" }}>
+                          {`Feel: ${weatherData.hourly.apparent_temperature[currentHour]}${weatherData.hourly_units.apparent_temperature}`}
                         </div>
                       </flex-column-start>
                     </weather-param>
@@ -289,56 +294,56 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
                       <weather-param-icon title="Relatice Humidity" aria-label="Relatice Humidity" style={{ color: "cornflowerblue" }}>
                         <FaDroplet />
                       </weather-param-icon>
-                      <div title="Relatice Humidity" aria-label="Relatice Humidity">
-                        Humidity: {weatherData.hourly.relativehumidity_2m[currentHour]}{weatherData.hourly_units.relativehumidity_2m}
+                      <div title="Relatice Humidity" aria-label="Relatice Humidity" style={{ textAlign: "left" }}>
+                        {`Humidity: ${weatherData.hourly.relativehumidity_2m[currentHour]}${weatherData.hourly_units.relativehumidity_2m}`}
                       </div>
                     </weather-param>
                     <weather-param >
-                      <weather-param-icon title="Wind" aria-label="Wind">
-                        <div title="Wind" aria-label="Wind" style={{ color: "turquoise" }}>
-                          <FaWind />
-                        </div>
-                        <div style={{ color: "silver", rotate: `${weatherData.hourly.winddirection_10m[currentHour]}deg` }}>
-                          <FaArrowDown />
-                        </div>
+                      <weather-param-icon title="Wind" aria-label="Wind" style={{ color: "turquoise" }}>
+                        <FaWind />
                       </weather-param-icon>
                       <flex-column-start>
-                        <div title="Wind Speed" aria-label="Wind Speed">
-                          Speed:{" "}{weatherData.hourly.windspeed_10m[currentHour]}{" "}{weatherData.hourly_units.windspeed_10m}
+                        <div title="Wind Speed" aria-label="Wind Speed" style={{ textAlign: "left" }}>
+                          {`Speed: ${weatherData.hourly.windspeed_10m[currentHour]} ${weatherData.hourly_units.windspeed_10m}`}
                         </div>
-                        <div title="Wind Gust" aria-label=" Wind Gust">
-                          Gust:{" "}{weatherData.hourly.wind_gusts_10m[currentHour]}{" "}{weatherData.hourly_units.wind_gusts_10m}
-                        </div>
-                        <div title="Wind Direction" aria-label="Wind Direction">
-                          Direction:{" "}{weatherData.hourly.winddirection_10m[currentHour]}{weatherData.hourly_units.winddirection_10m}
+                        <div title="Wind Gust" aria-label=" Wind Gust" style={{ textAlign: "left" }}>
+                          {`Gust: ${weatherData.hourly.wind_gusts_10m[currentHour]} ${weatherData.hourly_units.wind_gusts_10m}`}
                         </div>
                       </flex-column-start>
+                    </weather-param>
+                    <weather-param >
+                      <weather-param-icon title="Wind Direction Arrow" aria-label="Wind Direction Arrow" style={{ color: "silver", rotate: `${weatherData.hourly.winddirection_10m[currentHour]}deg` }}>
+                        <FaArrowDown />
+                      </weather-param-icon>
+                      <div title="Wind Direction" aria-label="Wind Direction" style={{ textAlign: "left" }}>
+                        {`Direction: ${weatherData.hourly.winddirection_10m[currentHour]}${weatherData.hourly_units.winddirection_10m}`}
+                      </div>
                     </weather-param>
                   </flex-column-start>
                 </>
               }
             </weather-header-now>
           </taskbar-window-header>
-            <taskbar-window-nav>
-              <button onClick={() => { currentWeatherPage === 1 ? setCurrentWeatherPage(2) : setCurrentWeatherPage(1) }} className={currentWeatherPage === 1 ? "buttonActive" : ""}>
-                <FaGear />
-              </button>
-              <button onClick={() => { currentWeatherPage === 0 ? setCurrentWeatherPage(2) : setCurrentWeatherPage(0) }} className={currentWeatherPage === 0 ? "buttonActive" : ""}>
-                <FaLocationDot />
-              </button>
-              <button onClick={() => changeWeatherPage(-1)} disabled={weatherData === null || currentWeatherPage < 2}>
+          <taskbar-window-nav>
+            <button onClick={() => { currentWeatherPage === 1 ? setCurrentWeatherPage(2) : setCurrentWeatherPage(1) }} className={currentWeatherPage === 1 ? "buttonActive" : ""}>
+              <FaGear />
+            </button>
+            <button onClick={() => { currentWeatherPage === 0 ? setCurrentWeatherPage(2) : setCurrentWeatherPage(0) }} className={currentWeatherPage === 0 ? "buttonActive" : ""}>
+              <FaLocationDot />
+            </button>
+            <button onClick={() => changeWeatherPage(-1)} disabled={weatherData === null || currentWeatherPage < 2}>
               <FaArrowLeft />
-              </button>
-              <button onClick={() => changeWeatherPage(1)} disabled={weatherData === null || currentWeatherPage < 2}>
+            </button>
+            <button onClick={() => changeWeatherPage(1)} disabled={weatherData === null || currentWeatherPage < 2}>
               <FaArrowRight />
-              </button>
-                <div style={{ paddingRight: "5px", color: weatherPages[currentWeatherPage].color }}>
-                  {weatherPages[currentWeatherPage].icon}
-                </div>
-              <div>
-                {" "}{weatherPages[currentWeatherPage].name}
-              </div>
-            </taskbar-window-nav>
+            </button>
+            <div style={{ paddingRight: "5px", color: weatherPages[currentWeatherPage].color }}>
+              {weatherPages[currentWeatherPage].icon}
+            </div>
+            <div>
+              {` ${weatherPages[currentWeatherPage].name}`}
+            </div>
+          </taskbar-window-nav>
           <taskbar-window-body>
             <weather-page>
               {weatherPages[currentWeatherPage].component}
