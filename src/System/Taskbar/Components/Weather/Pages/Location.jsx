@@ -12,6 +12,7 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
     const [searchText, setSearchText] = useState("");
     const [searchList, setSearchList] = useState([]);
     const [showSearchList, setShowSearchList] = useState(false);
+    const [locationString, setLocationString] = useState("Set Location");
     const MAX_LAT = 90;
     const MIN_LAT = -90;
     const MAX_LONG = 180;
@@ -54,6 +55,8 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
         setSearchText(searchList[index].name);
     }
 
+
+
     useEffect(() => {
         setNewLocation(location);
     }, [location])
@@ -61,24 +64,29 @@ export const Location = ({ location, setLocation, widgetState, setWidgetState })
     useEffect(() => {
         GeoCoding(searchText, setSearchList);
     }, [searchText])
-    
-    
 
+    useEffect(() => {
+        let string = "";
+        if (widgetState === "Done") {
+            if (location.source === "Code") {
+                string = ` ${location.location.name} `;
+            } else if (location.source === "Coords") {
+                string = `Lat: ${location.lat}, Long: ${location.long}`;
+            } else if (location.source === "GPS") {
+                string = "GPS Location";
+            }
+        } else {
+            string = "Set Location"
+        }
+        setLocationString(string);
+    }, [widgetState, location])
+    
     return (
         <weather-location>
-            <div style={{ display: "flex", width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "center", fontSize: "12px"}}>
-                <FaLocationDot /> {
-                    widgetState === "Done" ? <>
-                        {location.source === "Code" && <>
-                            {location.location.name}{" "}
-                            <CircleFlag
-                                height="15"
-                                countryCode={location.location.country_code}
-                            /></>}
-                        {location.source === "Coords" && `Lat: ${location.lat}, Long: ${location.long}`}
-                        {location.source === "GPS" && "GPS Location"}
-                    </>
-                        : "Set Location"}
+            <div style={{ display: "flex", width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "center", fontSize: "12px" }}>
+                <FaLocationDot /> 
+                <>{locationString}</>
+                {location.source === "Code" && <CircleFlag height="15" countryCode={location.location.country_code} />}
             </div>
             <div style={{ display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between" }}>
                 <flex-column-start>
