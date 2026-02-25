@@ -148,8 +148,7 @@ weather-page-summary{
 weather-page-summary-card{
     display: flex; 
     flex-direction: column; 
-    min-width: 160px;
-    height: 220px; 
+    min-width: 180px;
     padding: 1px;
     margin: 15px; 
     border: 1px silver solid; 
@@ -157,7 +156,7 @@ weather-page-summary-card{
     background: linear-gradient(80deg, rgba(0, 128, 255, 0.1), rgba(20, 87, 149, 0.1), rgba(0, 128, 255, 0.1));
 }
 
-weather-page-summary-card-date{
+weather-page-summary-card>time{
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -197,6 +196,13 @@ weather-page-summary-card>weather-param{
 }
 
 weather-page-summary-card>weather-param>weather-param-icon{
+    width: 40px;
+    font-size: 18px;
+    padding-top: 2px;
+    padding-bottom:2px;
+}
+
+weather-page-summary-card>weather-param>weather-param-icon>div{
     width: 40px;
     font-size: 18px;
     padding-top: 2px;

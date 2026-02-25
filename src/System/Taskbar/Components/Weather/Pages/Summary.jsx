@@ -14,14 +14,15 @@ export const Summary = ({ weatherData, currentHour }) => {
             }
             setWeatherCodeArray(newWeatherCodeArray);
         }, [weatherData]);
+        
         return (
             <>
                 <weather-page-summary>
                     {weatherCodeArray.map((result, index) =>
                         <weather-page-summary-card key={index}>
-                            <weather-page-summary-card-date>
-                                {weatherData.daily.time[index]}
-                            </weather-page-summary-card-date>
+                                <time dateTime={weatherData.daily.time[index]}>
+                                    {weatherData.daily.time[index]}
+                                    </time>
                             <weather-page-summary-card-summary>
                                 <weather-param-icon title="Weather Icon" aria-label="Weather Icon">
                                     {result.icon}
@@ -35,11 +36,11 @@ export const Summary = ({ weatherData, currentHour }) => {
                                     <FaTemperatureHalf />
                                 </weather-param-icon>
                                 <flex-column-start>
-                                    <div title="Max Temperature" aria-label="Max Temperature">
-                                        Max:{" "}{weatherData.daily.temperature_2m_max[index]}{weatherData.daily_units.temperature_2m_max}
+                                    <div title="Max Temperature" aria-label="Max Temperature" style={{ textAlign:"left" }}>
+                                        {`Max: ${weatherData.daily.temperature_2m_max[index]}${weatherData.daily_units.temperature_2m_max}`}
                                     </div>
-                                    <div title="Min Temperature" aria-label="Min Temperature">
-                                        Min:{" "}{weatherData.daily.temperature_2m_min[index]}{weatherData.daily_units.temperature_2m_min}
+                                    <div title="Min Temperature" aria-label="Min Temperature" style={{ textAlign:"left" }}>
+                                        {`Min: ${weatherData.daily.temperature_2m_min[index]}${weatherData.daily_units.temperature_2m_min}`}
                                     </div>
                                 </flex-column-start>
                             </weather-param>
@@ -53,14 +54,14 @@ export const Summary = ({ weatherData, currentHour }) => {
                                     </div>
                                 </weather-param-icon>
                                 <flex-column-start>
-                                    <div title="Max Wind Speed" aria-label="Max Wind Speed">
-                                        Speed:{" "}{weatherData.daily.windspeed_10m_max[index]}{" "}{weatherData.daily_units.windspeed_10m_max}
+                                    <div title="Max Wind Speed" aria-label="Max Wind Speed" style={{ textAlign:"left" }}>
+                                        {`Speed: ${weatherData.daily.windspeed_10m_max[index]} ${weatherData.daily_units.windspeed_10m_max}`}
                                     </div>
-                                    <div title="Max Wind Gust" aria-label="Max Wind Gust">
-                                        Gust:{" "}{weatherData.daily.windgusts_10m_max[index]}{" "}{weatherData.daily_units.windgusts_10m_max}
+                                    <div title="Max Wind Gust" aria-label="Max Wind Gust" style={{ textAlign:"left" }}>
+                                        {`Gust: ${weatherData.daily.windgusts_10m_max[index]} ${weatherData.daily_units.windgusts_10m_max}`}
                                     </div>
-                                    <div title="Wind Direction" aria-label="Wind Direction">
-                                        Direction:{" "}{weatherData.daily.wind_direction_10m_dominant[index]}{weatherData.daily_units.wind_direction_10m_dominant}{" "}
+                                    <div title="Wind Direction" aria-label="Wind Direction" style={{ textAlign:"left" }}>
+                                        {`Direction: ${weatherData.daily.wind_direction_10m_dominant[index]}${weatherData.daily_units.wind_direction_10m_dominant}`}
                                     </div>
                                 </flex-column-start>
                             </weather-param>
@@ -69,11 +70,11 @@ export const Summary = ({ weatherData, currentHour }) => {
                                     <GiHeavyRain />
                                 </weather-param-icon>
                                 <flex-column-start>
-                                    <div title="Precipitation Total" aria-label="Precipitation Total">
-                                        Total: {weatherData.daily.precipitation_sum[index]}{weatherData.daily_units.precipitation_sum}
+                                    <div title="Precipitation Total" aria-label="Precipitation Total" style={{ textAlign:"left" }}>
+                                        {`Total: ${weatherData.daily.precipitation_sum[index]}${weatherData.daily_units.precipitation_sum}`}
                                     </div>
-                                    <div title="Precipitation Probability" aria-label="Precipitation Probability">
-                                        Probability:{weatherData.daily.precipitation_probability_mean[index]}{weatherData.daily_units.precipitation_probability_mean}
+                                    <div title="Precipitation Probability" aria-label="Precipitation Probability" style={{ textAlign:"left" }}>
+                                        {`Probability: ${weatherData.daily.precipitation_probability_mean[index]}${weatherData.daily_units.precipitation_probability_mean}`}
                                     </div>
                                 </flex-column-start>
                             </weather-param>
@@ -81,8 +82,8 @@ export const Summary = ({ weatherData, currentHour }) => {
                                 <weather-param-icon title="UV Index" aria-label="UV Index" style={{ color: "violet" }}>
                                     <FaSun />
                                 </weather-param-icon>
-                                <div title="UV Index" aria-label="UV Index">
-                                    UV Index: {weatherData.daily.uv_index_clear_sky_max[index]}
+                                <div title="UV Index" aria-label="UV Index" style={{ textAlign:"left" }}>
+                                    {`UV Index: ${weatherData.daily.uv_index_clear_sky_max[index]}`}
                                 </div>
                             </weather-param>
                         </weather-page-summary-card>
