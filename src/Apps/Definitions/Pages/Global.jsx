@@ -51,7 +51,7 @@ export const Global = () => {
                             onChange={(e) => setFontFamily(e.target.value)}
                         >
                             {fontFamilyList.sort().map((font) => (
-                                <option key={font} style={{ fontFamily: font }}>
+                                <option key={font} value={font} style={{ fontFamily: font }}>
                                     {font}
                                 </option>
                             ))}
@@ -69,7 +69,7 @@ export const Global = () => {
                         onChange={(e) => device.setDeviceType(e.target.value)}
                     >
                         {device.deviceTypeList.map((device) => (
-                            <option key={device}>{device}</option>
+                            <option key={device} value={device}>{device}</option>
                         ))}
                     </select>
                 </div>
@@ -83,7 +83,7 @@ export const Global = () => {
                         onChange={(e) => theme.setTheme(e.target.value)}
                     >
                         {theme.themeList.map((theme) => (
-                            <option key={theme}>{theme}</option>
+                            <option key={theme} value={theme}>{theme}</option>
                         ))}
                     </select>
                 </div>
@@ -94,7 +94,7 @@ export const Global = () => {
                         onChange={(e) => theme.setMode(e.target.value)}
                     >
                         {theme.modeList.map((mode) => (
-                            <option key={mode}>{mode}</option>
+                            <option key={mode} value={mode}>{mode}</option>
                         ))}
                     </select>
                 </div>
