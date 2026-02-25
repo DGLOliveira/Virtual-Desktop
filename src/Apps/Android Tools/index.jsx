@@ -32,7 +32,7 @@ export default function Android_Tools(props) {
                         return (
                             <button key={tool} onClick={() => setTool(tool)}>
                                 <ToolIcon tool={tool} />
-                                {tool}
+                                <span>{tool}</span>
                             </button>
                         )
                     })}
