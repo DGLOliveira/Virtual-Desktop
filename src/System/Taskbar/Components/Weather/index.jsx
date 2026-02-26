@@ -64,7 +64,7 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
     },
     {
       name: "Settings",
-      component: <Settings units={units} setUnits={setUnits} />,
+      component: <Settings units={units} setUnits={setUnits} weatherData={weatherData} setWeatherData={setWeatherData} />,
       icon: <FaGear />,
       color: "silver",
     },
@@ -208,7 +208,7 @@ export const Weather = ({ contextMenu, setShowWeather }) => {
     if (weatherData !== null) {
       handleUnitConversion(weatherData, setWeatherData, units);
     }
-  }, [weatherData, units]);
+  }, [weatherData]);
   //Display/Update Weather Data
   useEffect(() => {
     if (dailyData !== null && hourlyData !== null, latestDataIndex !== null) {
