@@ -269,7 +269,7 @@ export const TaskbarClock = ({ contextMenu, setShowClock }) => {
                   <thead>
                     <tr>
                       {dayList.map(weekDay =>
-                        <th key={weekDay} style={{ display:"inline-block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{weekDay}</th>
+                        <th key={weekDay} title={weekDay} style={{ display:"inline-block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{weekDay}</th>
                       )}
                     </tr>
                   </thead>
