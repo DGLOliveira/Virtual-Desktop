@@ -1,7 +1,7 @@
 import { useRef, useContext } from "react";
 import { Context } from "../Context.jsx";
 
-export default function CanvasInterface({ setAction, contextMenu }){
+export default function CanvasInterface({ setAction, contextMenu }) {
     const context = useContext(Context);
     const interfaceRef = useRef(null);
     const cursor = context.cursor;
@@ -77,7 +77,7 @@ export default function CanvasInterface({ setAction, contextMenu }){
                     });
                     break;
                 case "mousemove":
-                     if (!cursor.down) {
+                    if (!cursor.down) {
                         setCursor({
                             ...cursor,
                             current: { x: pos.x, y: pos.y }
@@ -121,7 +121,14 @@ export default function CanvasInterface({ setAction, contextMenu }){
 
     const handleTouch = (e) => {
         e.preventDefault();
-        const pos = getCorrectedPosition(e.touches[0].clientX, e.touches[0].clientY);
+        console.log(e)
+        let pos;
+        if(e.touches.length === 0) {
+            pos = getCorrectedPosition(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+        }else{
+            pos = getCorrectedPosition(e.touches[0].clientX, e.touches[0].clientY)
+        }
+        
         if (e.touches.length === 1) {
             switch (e.type) {
                 case "touchstart":
@@ -135,10 +142,12 @@ export default function CanvasInterface({ setAction, contextMenu }){
                         setCursor({
                             ...cursor,
                             down: true,
-                            start: { x: pos.x, y: pos.y }
+                            start: { x: pos.x, y: pos.y },
+                            current: { x: pos.x, y: pos.y }
                         });
                     }
                     break;
+                case "touchcancel":
                 case "touchend":
                     setCursor({
                         ...cursor,
@@ -191,12 +200,12 @@ export default function CanvasInterface({ setAction, contextMenu }){
     return (
         <canvas
             ref={interfaceRef}
-            style={{ 
+            style={{
                 position: "absolute",
                 top: 0,
                 left: 0,
                 color: params.selectedColor,
-                zIndex: layers.length+2
+                zIndex: layers.length + 2
             }}
             className={layers[currLayer].locked ? "cursorLocked" : ("cursor" + params.tool)}
             id="interfaceCanvas"
