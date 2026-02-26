@@ -140,7 +140,7 @@ weather-map-container{
 weather-page-summary{
     display: flex; 
     flex-direction: row; 
-    width: 100%;
+    width: 350px;
     overflow-x: scroll; 
     overflow-y: hidden;
 }

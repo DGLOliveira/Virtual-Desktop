@@ -31,7 +31,6 @@ taskbar-window {
   bottom: var(--TaskbarHeight);
   height: auto;
   width: auto;
-  max-width: 350px;
   box-sizing: border-box;
   padding: var(--TaskbarWindowPadding);
   border: var(--TaskbarWindowBorderColor) var(--TaskbarWindowBorderWidth) var(--TaskbarWindowBorderType);
