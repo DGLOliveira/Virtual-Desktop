@@ -488,7 +488,7 @@ export default function SelectionCanvas() {
                         </>}
                 </div>
             }
-            {tool === "Shape" && subtool.shape !== "Line" && subtool.shape !== "Curve" && subtool.stretch &&
+            {tool === "Shape" && subtool.shape !== "Line" && subtool.shape !== "Curve" && subtool.shape !== "Rectangle" && subtool.shape !== "Squagle" && subtool.stretch &&
                 <div
                     id="drawDocSelectionEllipse"
                     style={{
