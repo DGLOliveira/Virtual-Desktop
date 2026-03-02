@@ -120,8 +120,6 @@ export default function CanvasInterface({ setAction, contextMenu }) {
     };
 
     const handleTouch = (e) => {
-        e.preventDefault();
-        console.log(e)
         let pos;
         if(e.touches.length === 0) {
             pos = getCorrectedPosition(e.changedTouches[0].clientX, e.changedTouches[0].clientY)

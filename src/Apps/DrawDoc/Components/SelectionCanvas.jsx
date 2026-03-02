@@ -52,7 +52,11 @@ export default function SelectionCanvas() {
                 flag = true;
             }
         } else {
-            if (e.touches[0].clientX !== 0 && e.touches[0].clientY !== 0) {
+            if(e.touches.length === 0){
+                cursorX = e.changedTouches[0].clientX;
+                cursorY = e.changedTouches[0].clientY;
+                flag = true;
+            }else if(e.touches[0].clientX !== 0 && e.touches[0].clientY !== 0) {
                 cursorX = e.touches[0].clientX;
                 cursorY = e.touches[0].clientY;
                 flag = true;
@@ -416,9 +420,9 @@ export default function SelectionCanvas() {
                         zIndex: layers.length + 2
                     }}
                     draggable
-                    onDragStart={(e) => { if (!cursor.down) handleDragStart(e) }}
-                    onDrag={(e) => { if (!cursor.down) handleDrag(e) }}
-                    onDragEnd={(e) => { if (!cursor.down) handleDragEnd(e) }}
+                    onDragStart={(e) => {if (!cursor.down) handleDragStart(e) }}
+                    onDrag={(e) => {if (!cursor.down) handleDrag(e) }}
+                    onDragEnd={(e) => {if (!cursor.down) handleDragEnd(e) }}
                 >
                     {tool === "Text" &&
                         <div id="drawDocSelectionBoxDragPivot" />
