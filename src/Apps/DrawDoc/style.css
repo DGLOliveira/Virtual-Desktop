@@ -13,7 +13,6 @@ button>label {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 100%;
   padding-left: 2px;
   padding-right: 2px;
 }
