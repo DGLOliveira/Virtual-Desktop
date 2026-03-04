@@ -155,6 +155,16 @@ export const Desktop = () => {
             >
               Use Image
             </button>
+            <button
+              className={
+                background.state.active === "random image"
+                  ? "defFormButtonON"
+                  : "defFormButton"
+              }
+              onClick={() => background.setActive("random image")}
+            >
+              Get Random Image
+            </button>
             <div>
               <label htmlFor="imageUpload">Upload Image: </label>
               <input

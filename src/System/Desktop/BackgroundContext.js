@@ -1,6 +1,7 @@
 //Allows changing the Desktop Background from the Definitions task, custom scenarios can be found in Data/Backgrounds
 
 import { useState, createContext } from "react";
+import RandomImage from "./Services/RandomImage.js";
 //TODO: Image upload for background purposes, as well as its aspect ratio
 //TODO: Some custom 2D shaders
 //TODO: New 3D scenarios such as the classic windows Meadows
@@ -62,7 +63,7 @@ export function BackgroundProvider({ children }) {
         isActive: true,
         color: "hsl(0, 0%, 100%)"
       },
-      ambientLight:{
+      ambientLight: {
         isActive: true,
         intensity: 1,
         color: "hsl(0, 0%, 100%)"
@@ -88,6 +89,9 @@ export function BackgroundProvider({ children }) {
           ...state,
           active: "image",
         });
+        break;
+      case "random image":
+        handleRandomImage()
         break;
       case "shader":
         setState({
@@ -157,6 +161,11 @@ export function BackgroundProvider({ children }) {
       });
     }
   }
+
+  async function handleRandomImage() {
+    RandomImage(setState, state);
+  }
+
   const contextValue = {
     state,
     setActive,
