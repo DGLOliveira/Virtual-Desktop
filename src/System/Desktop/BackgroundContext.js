@@ -1,6 +1,6 @@
 //Allows changing the Desktop Background from the Definitions task, custom scenarios can be found in Data/Backgrounds
 
-import { useState, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
 import RandomImage from "./Services/RandomImage.js";
 //TODO: Image upload for background purposes, as well as its aspect ratio
 //TODO: Some custom 2D shaders
@@ -17,7 +17,7 @@ export const BackgroundContext = createContext({
 
 export function BackgroundProvider({ children }) {
   const [state, setState] = useState({
-    active: "scenario",
+    active: "random image",
     color: {
       type: "color",
       color: "hsl(210, 100%, 34%)",
@@ -29,9 +29,9 @@ export function BackgroundProvider({ children }) {
       },
     },
     image: {
-      url: {},
+      url: "",
       position: "top left",
-      size: "auto",
+      size: "cover",
       repeat: "no-repeat",
     },
     shader: { type: "none" },
@@ -165,6 +165,11 @@ export function BackgroundProvider({ children }) {
   async function handleRandomImage() {
     RandomImage(setState, state);
   }
+
+  useEffect(()=>{
+    if(state.active === "random image" && state.image.url === "") 
+      handleRandomImage();
+  },[])
 
   const contextValue = {
     state,

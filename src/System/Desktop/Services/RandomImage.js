@@ -11,7 +11,6 @@ export default function RandomImage(setState, state) {
         .get(url)
         .then((response) => {
             if (response.status === 200) {
-                console.log(response.request.responseURL);
                 setState({
                     ...state,
                     image: {

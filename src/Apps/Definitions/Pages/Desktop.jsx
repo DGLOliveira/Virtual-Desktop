@@ -163,8 +163,9 @@ export const Desktop = () => {
               }
               onClick={() => background.setActive("random image")}
             >
-              Get Random Image
+              Use/Update Random Image
             </button>
+              <small>Random images provided by <a style={{color: "var(--WindowFontColor)"}} href="https://picsum.photos/" target="_blank" rel="noopener noreferrer">Lorem Picsum</a>.</small>
             <div>
               <label htmlFor="imageUpload">Upload Image: </label>
               <input

@@ -8,10 +8,10 @@
   
   --DesktopBkgrColor: hsl(210, 100%, 34%);
   --DesktopBkgrImage: none;
-  --DesktopBkgrPosition: "top left";
-  --DesktopBkgrSize: "auto";
-  --DesktopBkgrRepeat: "no-repeat";
-  --DesktopBkgrAttachment: "fixed";
+  --DesktopBkgrPosition: top left;
+  --DesktopBkgrSize: cover;
+  --DesktopBkgrRepeat: no-repeat;
+  --DesktopBkgrAttachment: fixed;
   --DesktopFontColor: hsl(0, 0%, 100%);
   --DesktopFontSize: 16px;
   --DesktopIconSize: 80px;
