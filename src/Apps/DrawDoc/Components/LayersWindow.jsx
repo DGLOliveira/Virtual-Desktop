@@ -82,7 +82,7 @@ export default function LayersWindow(props) {
     const changeCurrLayer = (index) => {
         setCurrLayer(index);
         let args;
-        handleTopMenu(appMenu, setAppMenu, args = { history: { ...layers[index] } }, "history");
+        handleTopMenu(appMenu, setAppMenu, args = { canUndo: layers[index].canUndo, canRedo: layers[index].canRedo }, "history");
     }
 
     const createNewLayer = () => {
