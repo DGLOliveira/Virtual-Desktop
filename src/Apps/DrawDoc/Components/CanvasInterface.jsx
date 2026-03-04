@@ -184,8 +184,8 @@ export default function CanvasInterface({ setAction, contextMenu }) {
     const handleContextMenu = (event) => {
         event.preventDefault();
         let content = {
-            "Undo": { action: () => setAction("Undo"), disabled: !context.history.canUndo || layers[currLayer].locked },
-            "Redo": { action: () => setAction("Redo"), disabled: !context.history.canRedo || layers[currLayer].locked },
+            "Undo": { action: () => setAction("Undo"), disabled: !context.layers[context.currLayer].canUndo || context.layers[context.currLayer].locked},
+            "Redo": { action: () => setAction("Redo"), disabled: !context.layers[context.currLayer].canRedo || context.layers[context.currLayer].locked},
             "LineBreak": {},
             "Zoom In": { action: () => setAction("Zoom In"), disabled: context.zoom === 4 },
             "Zoom Out": { action: () => setAction("Zoom Out"), disabled: context.zoom === 0.25 },

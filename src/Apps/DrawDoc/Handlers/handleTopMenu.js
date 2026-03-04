@@ -38,12 +38,12 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
             "Undo": {
                 "action": "Undo",
                 "keybind": "Ctrl+Z",
-                "disabled": false
+                "disabled": true
             },
             "Redo": {
                 "action": "Redo",
                 "keybind": "Ctrl+Y",
-                "disabled": false
+                "disabled": true
             }/*,
             "LineBreak1":{},
             "Cut": {
@@ -143,11 +143,11 @@ export const handleTopMenu = (appMenu, setAppMenu, args, flag) => {
                         ...updatedAppMenu["Edit"],
                         "Undo": {
                             ...updatedAppMenu["Edit"]["Undo"],
-                            "disabled": !args.history.canUndo
+                            "disabled": !args.canUndo
                         },
                         "Redo": {
                             ...updatedAppMenu["Edit"]["Redo"],
-                            "disabled": !args.history.canRedo
+                            "disabled": !args.canRedo
                         }
                     }
                 }

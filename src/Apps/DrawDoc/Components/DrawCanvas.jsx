@@ -24,6 +24,8 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
   const setText = context.setText;
   const clipboard = context.clipboard;
   const setClipboard = context.setClipboard;
+  const canUndo = context.layers[context.currLayer].canUndo || context.layers[context.currLayer].locked;
+  const canRedo = context.layers[context.currLayer].canRedo || context.layers[context.currLayer].locked;
   const params = {
     tool,
     brushPoints,
@@ -40,7 +42,7 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
     text,
     setText,
     clipboard,
-    setClipboard,
+    setClipboard
   };
 
   function constructFilters(filters) {
@@ -68,7 +70,7 @@ export default function DrawCanvas({ action, setAction, appMenu, setAppMenu, app
     let ctx = canvas.getContext("2d", {
       willReadFrequently: true,
     });
-    handleAction({ canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canClose, setCanClose, title, setTitle, currLayer, setCurrLayer, layers, setLayers });
+    handleAction({ canvas, ctx, params, action, setAction, context, appMenu, setAppMenu, appDialog, setAppDialog, contextMenu, canUndo, canRedo, canClose, setCanClose, title, setTitle, currLayer, setCurrLayer, layers, setLayers });
   }, [context.cursor, action]);
 
   useEffect(() => {
