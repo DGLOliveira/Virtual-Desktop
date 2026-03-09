@@ -79,11 +79,9 @@ Future features will include:
 
 ### Drawdoc
 
-A stylized but limited version of the well known Paint program, present in most Windows operating systems. This app allows the user to create a .png image with the use of basic tools such as the brush, bucket, erasor and a form and shape generator for lines, curves, polygons, stars, hearts and arrows. The objective here is not to stray away too much from the original program in terms of functionality, with its only unique feature being the hability to generate stretched shapes and stars with dozens of points. 
+A stylized and enhanced version of the well known MS Paint program, present in most Windows operating systems. This app allows the user to create a .png image with the use of basic tools such as the brush, bucket, erasor and a form and shape generator for lines, curves, polygons, stars, hearts and arrows, with more fine control over the result, such as stretching and shearing along odd angles and rounding the curves. It also has a layers system, making it possible to apply filters and blending modes, allowing for more elaborate results.
 
-<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/drawdoc_Seven_Star.jpg" />
-
-This app is currently in development, as some of its features are currently not intuitive or practical.
+<img src="https://github.com/RagingDisease90/Portfolio/blob/main/docs/DrawDoc_Logo.png" width="66%"/>
 
 ### Arcade
 
