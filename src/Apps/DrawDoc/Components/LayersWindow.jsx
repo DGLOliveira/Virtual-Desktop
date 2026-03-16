@@ -335,181 +335,184 @@ export default function LayersWindow(props) {
                     </button>
                 </div>
             </div>
-            <div id="drawDocLayersWindow"
-                onDragOver={(e) => { handleLayerDragOver(e, layers.length) }}
-                onDrop={(e) => { handleLayerDrop(e, layers.length); }}
-            >
-                {layers.map((layer, index) => {
-                    return (
-                        <Fragment key={layer.id}>
-                            {index !== 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
-                            <div
-                                className="drawDocLayersWindowLayer"
-                                draggable={index !== 0}
-                                onDragStart={(e) => setDragTargetIndex(index)}
-                                onDrag={(e) => e.preventDefault()}
-                                onDragOver={(e) => { handleLayerDragOver(e, index) }}
-                                onDrop={(e) => { handleLayerDrop(e, index) }}
-                                style={{ cursor: index === 0 ? "default" : "grab" }}
-                            ><div>
-                                    <img
-                                        src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
-                                        className="drawDocCheckersBackground"
-                                        onClick={() => changeCurrLayer(index)}
-                                        draggable={index !== 0}
-                                    />
-                                    <div>
-                                        <div>
-                                            <input
-                                                type="radio"
-                                                value={index}
-                                                checked={currLayer === index}
-                                                onChange={() => changeCurrLayer(index)}
-                                            />
-                                            <span
-                                                style={{
-                                                    textDecoration: index === currLayer ? "underline" : "none",
-                                                    display: index === renameLayerIndex ? "none" : "inline-block"
-                                                }}
-                                            >
-                                                {layer.name}
-                                            </span>
-                                            <input
-                                                style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
-                                                id={`drawDocLayerNameInput${index}`}
-                                                type="text"
-                                                value={layer.name}
-                                                onChange={(e) => {
-                                                    renameLayer(e, index);
-                                                }}
-                                            />
-                                        </div>
-                                        <div>
-                                            <button
-                                                title="Toggle Visibility"
-                                                aria-label="Toggle Visibility"
-                                                onClick={() => toggleVisibility(index)}
-                                            >
-                                                {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
-                                            </button>
-                                            <button
-                                                title="Undo Layer"
-                                                aria-label="Undo Layer"
-                                                disabled={!layer.canUndo || layer.locked}
-                                                onClick={() => { setCurrLayer(index); setAction("Undo") }}
-                                            >
-                                                <BiUndo />
-                                            </button>
-                                            <button
-                                                title="Redo Layer"
-                                                aria-label="Redo Layer"
-                                                disabled={!layer.canRedo || layer.locked}
-                                                onClick={() => { setCurrLayer(index); setAction("Redo") }}
-                                            >
-                                                <BiRedo />
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        Add Filter:
-                                        <select
-                                            title="Add filter"
-                                            aria-label="Add filter"
-                                            value=""
-                                            onChange={(e) => addFilter(index, e.target.value)}
-                                            disabled={layer.locked || index === 0}
-                                        >
-                                            <option value="">Select</option>
-                                            {FILTER_LIST.map((filter, index) => {
-                                                return <option key={index} value={filter[0]}>{formatListName(filter[0])}</option>
-                                            })}
-                                        </select>
-                                    </div>
-                                </div>
+            <div style={{ position: "relative", height:"100%", overflowY:"scroll", overflowX:"hidden" }}>
+                <div id="drawDocLayersWindow"
+                    onDragOver={(e) => { handleLayerDragOver(e, layers.length) }}
+                    onDrop={(e) => { handleLayerDrop(e, layers.length); }}
+                >
+                    {layers.map((layer, index) => {
+                        return (
+                            <Fragment key={layer.id}>
+                                {index !== 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
                                 <div
-                                    className="drawDocLayersFilterList"
-                                >
-                                    {layer.filters && Object.keys(layer.filters).map((key) => {
-                                        return <div key={key}>
-                                            <span>{formatListName(key)}</span>
-                                            {FILTER_LIST.find((filter) => filter[0] === key)[1] === "length" &&
-                                                <div><div><input
-                                                    type="number"
-                                                    min="0"
-                                                    step="1"
-                                                    value={layer.filters[key]}
-                                                    onChange={(e) => changeFilter(index, key, e.target.value)}
-                                                />px</div></div>}
-                                            {FILTER_LIST.find((filter) => filter[0] === key)[1] === "percentage" &&
-                                                <div><div><input
-                                                    type="number"
-                                                    min="0"
-                                                    max="100"
-                                                    step="1"
-                                                    value={layer.filters[key]}
-                                                    onChange={(e) => changeFilter(index, key, e.target.value)}
-                                                />%</div></div>}
-                                            {FILTER_LIST.find((filter) => filter[0] === key)[1] === "angle" &&
-                                                <div><div><input
-                                                    type="number"
-                                                    min="0"
-                                                    max="359"
-                                                    step="1"
-                                                    value={layer.filters[key]}
-                                                    onChange={(e) => changeFilter(index, key, e.target.value)}
-                                                />°</div></div>}
-                                            {FILTER_LIST.find((filter) => filter[0] === key)[1] === "shadow" &&
-                                                <div>
-                                                    <div>
-                                                        Offset X
-                                                        <input
-                                                            type="number"
-                                                            step="1"
-                                                            value={layer.filters[key][0]}
-                                                            onChange={(e) => changeFilter(index, key, e.target.value, 0)}
-                                                        />px</div>
-                                                    <div>
-                                                        Offset Y
-                                                        <input
-                                                            type="number"
-                                                            step="1"
-                                                            value={layer.filters[key][1]}
-                                                            onChange={(e) => changeFilter(index, key, e.target.value, 1)}
-                                                        />px
-                                                    </div>
-                                                    <div>Blur:<input
+                                    className="drawDocLayersWindowLayer"
+                                    draggable={index !== 0}
+                                    onDragStart={(e) => setDragTargetIndex(index)}
+                                    onDrag={(e) => e.preventDefault()}
+                                    onDragOver={(e) => { handleLayerDragOver(e, index) }}
+                                    onDrop={(e) => { handleLayerDrop(e, index) }}
+                                    style={{ cursor: index === 0 ? "default" : "grab" }}
+                                ><div>
+                                        <img
+                                            src={layersCanvasPreviews[index] ? layersCanvasPreviews[index] : ""}
+                                            className="drawDocCheckersBackground"
+                                            onClick={() => changeCurrLayer(index)}
+                                            draggable={index !== 0}
+                                        />
+                                        <div>
+                                            <div>
+                                                <input
+                                                    type="radio"
+                                                    value={index}
+                                                    checked={currLayer === index}
+                                                    onChange={() => changeCurrLayer(index)}
+                                                />
+                                                <span
+                                                    style={{
+                                                        textDecoration: index === currLayer ? "underline" : "none",
+                                                        display: index === renameLayerIndex ? "none" : "inline-block"
+                                                    }}
+                                                >
+                                                    {layer.name}
+                                                </span>
+                                                <input
+                                                    style={{ display: index === renameLayerIndex ? "inline-block" : "none" }}
+                                                    id={`drawDocLayerNameInput${index}`}
+                                                    type="text"
+                                                    value={layer.name}
+                                                    onChange={(e) => {
+                                                        renameLayer(e, index);
+                                                    }}
+                                                />
+                                            </div>
+                                            <div>
+                                                <button
+                                                    title="Toggle Visibility"
+                                                    aria-label="Toggle Visibility"
+                                                    onClick={() => toggleVisibility(index)}
+                                                >
+                                                    {layer.visible ? <RiEyeFill /> : <RiEyeCloseFill />}
+                                                </button>
+                                                <button
+                                                    title="Undo Layer"
+                                                    aria-label="Undo Layer"
+                                                    disabled={!layer.canUndo || layer.locked}
+                                                    onClick={() => { setCurrLayer(index); setAction("Undo") }}
+                                                >
+                                                    <BiUndo />
+                                                </button>
+                                                <button
+                                                    title="Redo Layer"
+                                                    aria-label="Redo Layer"
+                                                    disabled={!layer.canRedo || layer.locked}
+                                                    onClick={() => { setCurrLayer(index); setAction("Redo") }}
+                                                >
+                                                    <BiRedo />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            Add Filter:
+                                            <select
+                                                title="Add filter"
+                                                aria-label="Add filter"
+                                                value=""
+                                                onChange={(e) => addFilter(index, e.target.value)}
+                                                disabled={layer.locked || index === 0}
+                                            >
+                                                <option value="">Select</option>
+                                                {FILTER_LIST.map((filter, index) => {
+                                                    return <option key={index} value={filter[0]}>{formatListName(filter[0])}</option>
+                                                })}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="drawDocLayersFilterList"
+                                    >
+                                        {layer.filters && Object.keys(layer.filters).map((key) => {
+                                            return <div key={key}>
+                                                <span>{formatListName(key)}</span>
+                                                {FILTER_LIST.find((filter) => filter[0] === key)[1] === "length" &&
+                                                    <div><div><input
                                                         type="number"
                                                         min="0"
                                                         step="1"
-                                                        value={layer.filters[key][2]}
-                                                        onChange={(e) => changeFilter(index, key, e.target.value, 2)}
-                                                    />px</div>
-                                                    <div>Color:
-                                                        <ColorPicker
-                                                            color={layer.filters[key][3]}
-                                                            setColor={(color) => changeFilter(index, key, color, 3)}
-                                                            useAlpha={true}
-                                                        /></div>
-                                                </div>}
-                                            <button
-                                                title="Delete Filter"
-                                                aria-label="Delete Filter"
-                                                onClick={() => removeFilter(index, key)}
-                                            >
-                                                <IoClose />
-                                            </button>
-                                        </div>
-                                    })}
+                                                        value={layer.filters[key]}
+                                                        onChange={(e) => changeFilter(index, key, e.target.value)}
+                                                    />px</div></div>}
+                                                {FILTER_LIST.find((filter) => filter[0] === key)[1] === "percentage" &&
+                                                    <div><div><input
+                                                        type="number"
+                                                        min="0"
+                                                        max="100"
+                                                        step="1"
+                                                        value={layer.filters[key]}
+                                                        onChange={(e) => changeFilter(index, key, e.target.value)}
+                                                    />%</div></div>}
+                                                {FILTER_LIST.find((filter) => filter[0] === key)[1] === "angle" &&
+                                                    <div><div><input
+                                                        type="number"
+                                                        min="0"
+                                                        max="359"
+                                                        step="1"
+                                                        value={layer.filters[key]}
+                                                        onChange={(e) => changeFilter(index, key, e.target.value)}
+                                                    />°</div></div>}
+                                                {FILTER_LIST.find((filter) => filter[0] === key)[1] === "shadow" &&
+                                                    <div>
+                                                        <div>
+                                                            Offset X
+                                                            <input
+                                                                type="number"
+                                                                step="1"
+                                                                value={layer.filters[key][0]}
+                                                                onChange={(e) => changeFilter(index, key, e.target.value, 0)}
+                                                            />px</div>
+                                                        <div>
+                                                            Offset Y
+                                                            <input
+                                                                type="number"
+                                                                step="1"
+                                                                value={layer.filters[key][1]}
+                                                                onChange={(e) => changeFilter(index, key, e.target.value, 1)}
+                                                            />px
+                                                        </div>
+                                                        <div>Blur:<input
+                                                            type="number"
+                                                            min="0"
+                                                            step="1"
+                                                            value={layer.filters[key][2]}
+                                                            onChange={(e) => changeFilter(index, key, e.target.value, 2)}
+                                                        />px</div>
+                                                        <div>Color:
+                                                            <ColorPicker
+                                                                color={layer.filters[key][3]}
+                                                                setColor={(color) => changeFilter(index, key, color, 3)}
+                                                                useAlpha={true}
+                                                            /></div>
+                                                    </div>}
+                                                <button
+                                                    title="Delete Filter"
+                                                    aria-label="Delete Filter"
+                                                    onClick={() => removeFilter(index, key)}
+                                                >
+                                                    <IoClose />
+                                                </button>
+                                            </div>
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                            {index === 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
-                        </Fragment>)
-                })
-                }
-                {dropTargetIndex === layers.length && <hr />}
-                <button onClick={() => { createNewLayer() }}>
-                    New Layer
-                </button>
+                                {index === 0 && <hr style={{ display: dropTargetIndex === index ? "block" : "none" }} />}
+                            </Fragment>)
+                    })
+                    }
+                    {dropTargetIndex === layers.length && <hr />}
+                    <button onClick={() => { createNewLayer() }}>
+                        New Layer
+                    </button>
+                    <span style={{ minHeight: "30px", width: "100%" }}/>
+                </div>
             </div>
         </>);
 };

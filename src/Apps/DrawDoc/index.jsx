@@ -44,7 +44,8 @@ export default function DrawDoc(props) {
           flexDirection: "row",
           width: "100%",
           height: "100%",
-          margin: "0px"
+          margin: "0px",
+          position: "relative"
         }}>
           <ToolBar
             setAction={setAction}
