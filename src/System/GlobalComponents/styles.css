@@ -262,6 +262,7 @@ color-inputs>div{
     align-content: center; 
     justify-content: center; 
     text-align: center;
+    color: var(--AppFontColor)
 }
 
 color-inputs>div>input[type="number"]{
