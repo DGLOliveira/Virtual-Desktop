@@ -243,6 +243,21 @@ alpha-slider>slider-thumb{
     transform: translate(-8px, 0px);
 }
 
+color-format{
+    display: flex;
+    flex-direction:row;
+    margin-top:10px;
+    margin-bottom: 5px;
+    align-items: center;
+    width:100%;
+}
+color-format>button{
+    width:100%;
+    border: var(--DialogBorderWidth) var(--DialogBorderType) var(--DialogBorderColor);
+    margin:0;
+    padding:0;
+}
+
 color-inputs{
     display: flex; 
     flex-direction: row; 

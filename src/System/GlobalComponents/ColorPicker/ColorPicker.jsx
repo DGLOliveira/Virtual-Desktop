@@ -29,10 +29,17 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
     const [saturationSliderPos, setSaturationSliderPos] = useState(0);
     const [alphaSliderPos, setAlphaSliderPos] = useState(0);
     const [open, setOpen] = useState(false);
+    const [format, setFormat] = useState("HSLA");
+    const [HSLA, setHSLA] = useState([0, 0, 0, 0]);
+    const [RGBA, setRGBA] = useState([0, 0, 0, 0]);
+    const [HEX, setHEX] = useState("#00000000");
+
+
     const [hue, setHue] = useState(0);
     const [lightness, setLightness] = useState(50);
     const [saturation, setSaturation] = useState(100);
     const [alpha, setAlpha] = useState(100);
+
 
     // Focus color picker when open, allowing its closing on blur
     useEffect(() => {
@@ -49,6 +56,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
     };
 
     // Set displayed color based on current hue, saturation, and lightness, and uptades slider positions
+    // Note: Independent of selected format, all colors are internally stored in hsl/hsla format
     useEffect(() => {
         if (color) {
             if (useAlpha) {
@@ -247,6 +255,34 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
         setAlphaSliderPos(value * rect.width);
     };
 
+    //Updates all color formatted values
+    const updateAllColors = (target, value) => {
+        let newRGBA = []
+        let newHSLA = []
+        let newHEX = ""
+        switch (target) {
+            case "HEX":
+                newHEX = value;
+                newRGBA = hexToRgba(value);
+                newHSLA = rgbaToHsla(newRGBA);
+                break;
+            case "HSLA":
+                newHSLA = value;
+                newRGBA = hslaToRgba(value);
+                newHEX = rgbaToHex(newRGBA);
+                break;
+            case "RGBA":
+                newRGBA = value;
+                newHSLA = rgbaToHsla(value);
+                newHEX = rgbaToHex(value);
+                break;
+        }
+        setHEX(newHEX);
+        setHSLA(newHSLA);
+        setRGBA(newRGBA);
+        //if (selected) setColors({ ...colors, [selected]: newHex });
+    }
+
     return (
         <>
             <color-picker-button onClick={() => setOpen(!open)} >
@@ -340,29 +376,106 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                             />
                         </alpha-slider>
                     }
+                    <color-format>
+                        <button
+                            onClick={() => setFormat("HSLA")}
+                            className={format === "HSLA" ? "buttonActive" : ""}>
+                            {useAlpha ? "HSLA" : "HSL"}
+                        </button>
+                        <button
+                            onClick={() => setFormat("RGBA")}
+                            className={format === "RGBA" ? "buttonActive" : ""}>
+                            {useAlpha ? "RGBA" : "RGB"}
+                        </button>
+                        <button
+                            onClick={() => setFormat("HEX")}
+                            className={format === "HEX" ? "buttonActive" : ""}>
+                            HEX
+                        </button>
+                    </color-format>
                     <color-inputs>
+                {format === "HSLA" &&
+                    <>
                         <div>
-                            Hue
-                            <input type="number" min="0" max="360" value={hue}
-                                onChange={(e) => handleHueInput(e.target.value)} />
+                            <label htmlFor="hue">Hue</label>
+                            <input type="number" id="hue" value={HSLA[0]} min="0" max="360" onChange={(e) => {/*handleHSLInput("h", e.target.value)*/}} />
                         </div>
                         <div>
-                            Lum.
-                            <input type="number" min="0" max="100" value={lightness}
-                                onChange={(e) => handleLumInput(e.target.value)} />
+                            <label htmlFor="saturation" title="Saturation">Sat.</label>
+                            <input type="number" id="saturation" value={HSLA[1]} min="0" max="100" onChange={(e) => {/*handleHSLInput("s", e.target.value)*/}} />
                         </div>
                         <div>
-                            Sat.
-                            <input type="number" min="0" max="100" value={saturation}
-                                onChange={(e) => handleSaturationInput(e.target.value)} />
+                            <label htmlFor="luminosity" title="Luminosity">Lum.</label>
+                            <input type="number" id="luminosity" value={HSLA[2]} min="0" max="100" onChange={(e) => {/*handleHSLInput("l", e.target.value)*/}} />
                         </div>
                         {useAlpha &&
+                        <div>
+                            <label htmlFor="alpha">Alpha</label>
+                            <input type="number" id="alpha" value={HSLA[3]} min="0" max="1" step="0.01" onChange={(e) => {/*handleHSLInput("b", e.target.value)*/}} />
+                        </div>}
+                    </>}
+                {format === "RGBA" &&
+                    <>
+                        <div>
+                            <label htmlFor="red">Red</label>
+                            <input type="number" id="red" value={RGBA[0]} min="0" max="255" onChange={(e) => {/*handleRGBInput("r", e.target.value)*/}} />
+                        </div>
+                        <div>
+                            <label htmlFor="green">Green</label>
+                            <input type="number" id="green" value={RGBA[1]} min="0" max="255" onChange={(e) => {/*handleRGBInput("g", e.target.value)*/}} />
+                        </div>
+                        <div>
+                            <label htmlFor="blue">Blue</label>
+                            <input type="number" id="blue" value={RGBA[2]} min="0" max="255" onChange={(e) => {/*handleRGBInput("b", e.target.value)*/}} />
+                        </div>
+                        {useAlpha &&
+                        <div>
+                            <label htmlFor="alpha">Alpha</label>
+                            <input type="number" id="alpha" value={RGBA[3]} min="0" max="1" step="0.01" onChange={(e) => {/*handleRGBInput("b", e.target.value)*/}} />
+                        </div>}
+                    </>
+                }{/*
+                    format === "HEX" &&
+                    <>
+                        <div style={{ justifyContent: "center" }}>
+                            <input 
+                            type="text" 
+                            id="hex" 
+                            pattern={useAlpha ? "#[0-9a-fA-F]{3}([0-9a-fA-F]{4})?" : "#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?"} 
+                            value={hexInput} 
+                            onChange={(e) => setHexInput(e.target.value)} />
+                        </div>
+                        <div style={{ justifyContent: "center" }}>
+                            <button onClick={() => handleHEXInput()}>Confirm</button>
+                        </div>
+                        <div style={{ justifyContent: "center", color: "red" }}>
+                            {invalidHex && "Invalid Value!"}
+                        </div>
+                    </>*/
+                }
+                        {/*format === "HSLA" && <>
                             <div>
-                                Alpha
-                                <input type="number" min="0" max="1" step="0.01" value={alpha}
-                                    onChange={(e) => handleAlphaInput(e.target.value)} />
+                                Hue
+                                <input type="number" min="0" max="360" value={hue}
+                                    onChange={(e) => handleHueInput(e.target.value)} />
                             </div>
-                        }
+                            <div>
+                                Lum.
+                                <input type="number" min="0" max="100" value={lightness}
+                                    onChange={(e) => handleLumInput(e.target.value)} />
+                            </div>
+                            <div>
+                                Sat.
+                                <input type="number" min="0" max="100" value={saturation}
+                                    onChange={(e) => handleSaturationInput(e.target.value)} />
+                            </div>
+                            {useAlpha &&
+                                <div>
+                                    Alpha
+                                    <input type="number" min="0" max="1" step="0.01" value={alpha}
+                                        onChange={(e) => handleAlphaInput(e.target.value)} />
+                                </div>
+                            }</>*/}
                     </color-inputs>
                     <color-button >
                         <button
