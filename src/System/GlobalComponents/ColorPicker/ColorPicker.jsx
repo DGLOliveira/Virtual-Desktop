@@ -17,8 +17,13 @@ import hexToRgb from "./Converters/hexToRgb";
 import hexToRgba from "./Converters/hexToRgba";
 import rgbToHsl from "./Converters/rgbToHsl";
 import rgbaToHsla from "./Converters/rgbaToHsla";
+import rgbToHex from "./Converters/rgbToHex";
+import rgbaToHex from "./Converters/rgbaToHex";
+import hslToRgb from "./Converters/hslToRgb";
+import hslaToRgba from "./Converters/hslaToRgba";
 import nameToHsl from "./Converters/nameToHsl";
 import "../styles.css";
+import { update } from "three/examples/jsm/libs/tween.module.js";
 
 export default function ColorPicker({ color, setColor, useAlpha }) {
     const colorPickerRef = useRef(null);
@@ -29,17 +34,12 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
     const [saturationSliderPos, setSaturationSliderPos] = useState(0);
     const [alphaSliderPos, setAlphaSliderPos] = useState(0);
     const [open, setOpen] = useState(false);
-    const [format, setFormat] = useState("HSLA");
-    const [HSLA, setHSLA] = useState([0, 0, 0, 0]);
-    const [RGBA, setRGBA] = useState([0, 0, 0, 0]);
-    const [HEX, setHEX] = useState("#00000000");
-
-
-    const [hue, setHue] = useState(0);
-    const [lightness, setLightness] = useState(50);
-    const [saturation, setSaturation] = useState(100);
-    const [alpha, setAlpha] = useState(100);
-
+    const [format, setFormat] = useState("HSL");
+    const [HSL, setHSL] = useState(useAlpha ? [0, 0, 0, 0] : [0, 0, 0]);
+    const [RGB, setRGB] = useState(useAlpha ? [0, 0, 0, 0] : [0, 0, 0]);
+    const [HEX, setHEX] = useState(useAlpha ? "#00000000" : "#000000");
+    const [hexInput, setHexInput] = useState(useAlpha ? "#00000000" : "#000000");
+    const [invalidHex, setInvalidHex] = useState(false);
 
     // Focus color picker when open, allowing its closing on blur
     useEffect(() => {
@@ -54,6 +54,35 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             setOpen(false);
         }
     };
+    
+    //Updates all color formatted values
+    const updateAllColors = (target, value) => {
+        console.log(target, value); 
+        let newRGB = []
+        let newHSL = []
+        let newHEX = ""
+        switch (target) {
+            case "hex":
+                newHEX = value;
+                newRGB = useAlpha ? hexToRgba(newHEX) : hexToRgb(newHEX);
+                newHSL = useAlpha ? rgbaToHsla(newRGB) : rgbToHsl(newRGB);
+                break;
+            case "hsl":
+                newHSL = value;
+                newRGB = useAlpha ? hslaToRgba(newHSL) : hslToRgb(newHSL);
+                newHEX = useAlpha ? rgbaToHex(newRGB) : rgbToHex(newRGB);
+                break;
+            case "rgb":
+                newRGB = value;
+                newHSL = useAlpha ? rgbaToHsla(newRGB) : rgbToHsl(newRGB);
+                newHEX = useAlpha ? rgbaToHex(newRGB) : rgbToHex(newRGB);
+                break;
+        }
+        console.log(newHEX, newHSL, newRGB);
+        setHEX(newHEX);
+        setHSL(newHSL);
+        setRGB(newRGB);
+    }
 
     // Set displayed color based on current hue, saturation, and lightness, and uptades slider positions
     // Note: Independent of selected format, all colors are internally stored in hsl/hsla format
@@ -80,18 +109,21 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                         }
                     }
                 }
-                setHue(Number(hslaColor[0]));
-                setSaturation(Number(hslaColor[1].slice(0, hslaColor[1].length - 1)));
-                setLightness(Number(hslaColor[2].slice(0, hslaColor[2].length - 1)));
-                setAlpha(Number(hslaColor[3]));
+                hslaColor = [
+                    Number(hslaColor[0]), 
+                    Number(hslaColor[1].slice(0, hslaColor[1].length - 1)), 
+                    Number(hslaColor[2].slice(0, hslaColor[2].length - 1)), 
+                    Number(hslaColor[3])
+                ];
+                updateAllColors("hsl", hslaColor);
                 if (open) {
                     const hueLumRect = hueLumRef.current.getBoundingClientRect();
                     setColorSelectorPos({
                         x: hslaColor[0] / 360 * hueLumRect.width,
-                        y: (100 - hslaColor[2].slice(0, hslaColor[2].length - 1)) / 100 * hueLumRect.height
+                        y: (100 - hslaColor[2]) / 100 * hueLumRect.height
                     });
                     const saturationRect = saturationRef.current.getBoundingClientRect();
-                    setSaturationSliderPos(((100 - hslaColor[1].slice(0, hslaColor[1].length - 1)) / 100) * saturationRect.height);
+                    setSaturationSliderPos(((100 - hslaColor[1]) / 100) * saturationRect.height);
                     const alphaRect = alphaRef.current.getBoundingClientRect();
                     setAlphaSliderPos(hslaColor[3] * alphaRect.width);
                 }
@@ -118,17 +150,20 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                 } else {
                     hslColor = nameToHsl(color);
                 }
-                setHue(Number(hslColor[0]));
-                setSaturation(Number(hslColor[1].slice(0, hslColor[1].length - 1)));
-                setLightness(Number(hslColor[2].slice(0, hslColor[2].length - 1)));
+                hslColor = [
+                    Number(hslColor[0]), 
+                    Number(hslColor[1].slice(0, hslColor[1].length - 1)), 
+                    Number(hslColor[2].slice(0, hslColor[2].length - 1))
+                ];
+                updateAllColors("hsl", hslColor);
                 if (open) {
                     const hueLumRect = hueLumRef.current.getBoundingClientRect();
                     setColorSelectorPos({
                         x: hslColor[0] / 360 * hueLumRect.width,
-                        y: (100 - hslColor[2].slice(0, hslColor[2].length - 1)) / 100 * hueLumRect.height
+                        y: (100 - hslColor[2]) / 100 * hueLumRect.height
                     });
                     const saturationRect = saturationRef.current.getBoundingClientRect();
-                    setSaturationSliderPos(((100 - hslColor[1].slice(0, hslColor[1].length - 1)) / 100) * saturationRect.height);
+                    setSaturationSliderPos(((100 - hslColor[1]) / 100) * saturationRect.height);
                 }
             }
         }
@@ -141,22 +176,36 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
         let blockheight = ctx.canvas.height / 100;
         for (let i = 0; i < 360; i++) {
             for (let j = 0; j < 100; j++) {
-                ctx.fillStyle = `hsl(${i},${saturation}%,${100 - j}%)`;
+                ctx.fillStyle = `hsl(${i},${HSL[1]}%,${100 - j}%)`;
                 ctx.fillRect(i * blockwidth, j * blockheight, (i + 1) * blockwidth, (j + 1) * blockheight);
             }
         }
     };
 
-    //Updates color map when saturation changes
+    //Updates color map
     useEffect(() => {
         if (hueLumRef.current) {
             const ctxColorPicker = hueLumRef.current.getContext("2d", { alpha: false });
             drawColorMap(ctxColorPicker);
         }
+    },[open, HSL[1]]);
 
-    }, [open, saturation]);
+    //Updates slider positions
+    useEffect(() => {
+        if (hueLumRef.current && saturationRef.current) {
+            const rect = hueLumRef.current.getBoundingClientRect();
+            setColorSelectorPos({ x: HSL[0] / 360 * rect.width, y: (100 - HSL[2]) / 100 * rect.height });
+            const vert = saturationRef.current.getBoundingClientRect();
+            setSaturationSliderPos(((100 - HSL[1]) / 100) * vert.height);
+        }
+        if (useAlpha && alphaRef.current) {
+            const alphaRect = alphaRef.current.getBoundingClientRect();
+            setAlphaSliderPos(HSL[3] * alphaRect.width);
+        }
 
-    //Updates hue and luminance map slider positions when mouse moves, as well as their respective values
+    }, [open, HEX]);
+
+    //Updates hue and luminance map slider positions when mouse moves, as well as color values
     const handleHueLumMap = (event) => {
         if (event.buttons !== 0) {
             const rect = hueLumRef.current.getBoundingClientRect();
@@ -164,11 +213,15 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             let y = event.clientY - rect.top;
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
                 setColorSelectorPos({ x, y });
-                setHue(Math.floor(360 * x / rect.width));
-                setLightness(100 - Math.floor(100 * y / rect.height));
+                let newHSL = [Math.floor(360 * x / rect.width), HSL[1], 100 - Math.floor(100 * y / rect.height)];
+                if(useAlpha){ 
+                    newHSL[3] = HSL[3];
+                }
+                updateAllColors("hsl", newHSL);
             }
         }
     };
+    //Updates hue and luminance map slider position on touch, as well as their respective values
     const touchHueLumMap = (event) => {
         if (event.touches.length === 1) {
             const rect = hueLumRef.current.getBoundingClientRect();
@@ -176,8 +229,11 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             let y = event.touches[0].clientY - rect.top;
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
                 setColorSelectorPos({ x, y });
-                setHue(Math.floor(360 * x / rect.width));
-                setLightness(100 - Math.floor(100 * y / rect.height));
+                let newHSL = [Math.floor(360 * x / rect.width), HSL[1], 100 - Math.floor(100 * y / rect.height)];
+                if(useAlpha){ 
+                    newHSL[3] = HSL[3];
+                }
+                updateAllColors("hsl", newHSL);
             }
         }
     };
@@ -189,23 +245,31 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             let x = event.clientX - rect.left;
             let y = event.clientY - rect.top;
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                setSaturation(100 - Math.floor(100 * y / rect.height));
                 setSaturationSliderPos(y);
+                let newHSL = [HSL[0], 100 - Math.floor(100 * y / rect.height), HSL[2]];
+                if(useAlpha){ 
+                    newHSL[3] = HSL[3];
+                }
+                updateAllColors("hsl", newHSL);
             }
         }
     };
+    //Updates saturation slider position on touch, as well as its value
     const touchSaturationSlider = (event) => {
         if (event.touches.length === 1) {
             const rect = saturationRef.current.getBoundingClientRect();
             let x = event.touches[0].clientX - rect.left;
             let y = event.touches[0].clientY - rect.top;
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                setSaturation(100 - Math.floor(100 * y / rect.height));
                 setSaturationSliderPos(y);
+                let newHSL = [HSL[0], 100 - Math.floor(100 * y / rect.height), HSL[2]];
+                if(useAlpha){ 
+                    newHSL[3] = HSL[3];
+                }
+                updateAllColors("hsl", newHSL);
             }
         }
     };
-
     //Updates alpha slider position when mouse moves, as well as its value
     const handleAlphaSlider = (event) => {
         if (event.buttons !== 0) {
@@ -213,8 +277,9 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             let x = event.clientX - rect.left;
             let y = event.clientY - rect.top;
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                setAlpha((Math.floor(100 * x / rect.width)) / 100);
                 setAlphaSliderPos(x);
+                let newHSL = [HSL[0], HSL[1], HSL[2], (Math.floor(100 * x / rect.width)) / 100];
+                updateAllColors("hsl", newHSL);
             }
         }
     };
@@ -224,63 +289,72 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
             let x = event.touches[0].clientX - rect.left;
             let y = event.touches[0].clientY - rect.top;
             if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                setAlpha((Math.floor(100 * x / rect.width)) / 100);
                 setAlphaSliderPos(x);
+                let newHSL = [HSL[0], HSL[1], HSL[2], (Math.floor(100 * x / rect.width)) / 100];
+                updateAllColors("hsl", newHSL);
             }
         }
     };
 
+    //Updates color values based on HSL input
+    const handleHSLInput = (target, value) => {
+        let newHSL = HSL;
+        if (target === "h") newHSL[0] = Number(value);
+        if (target === "s") newHSL[1] = Number(value);
+        if (target === "l") newHSL[2] = Number(value);
+        if (target === "a") newHSL[3] = Number(value);
+        updateAllColors("hsl", newHSL);
+    }
 
-    const handleHueInput = (value) => {
-        setHue(value);
-        const rect = hueLumRef.current.getBoundingClientRect();
-        setColorSelectorPos({ ...colorSelectorPos, x: value / 360 * rect.width });
-    };
+    //Updates color values based on RGB input
+    const handleRGBInput = (target, value) => {
+        let newRGB = RGB;
+        if (target === "r") newRGB[0] = Number(value);
+        if (target === "g") newRGB[1] = Number(value);
+        if (target === "b") newRGB[2] = Number(value);
+        if (target === "a") newRGB[3] = Number(value);
+        updateAllColors("rgb", newRGB);
+    }
 
-    const handleLumInput = (value) => {
-        setLightness(value);
-        const rect = hueLumRef.current.getBoundingClientRect();
-        setColorSelectorPos({ ...colorSelectorPos, y: (100 - value) / 100 * rect.height });
-    };
-
-    const handleSaturationInput = (value) => {
-        setSaturation(value);
-        const rect = saturationRef.current.getBoundingClientRect();
-        setSaturationSliderPos(((100 - value) / 100) * rect.height);
-    };
-
-    const handleAlphaInput = (value) => {
-        setAlpha(value);
-        const rect = alphaRef.current.getBoundingClientRect();
-        setAlphaSliderPos(value * rect.width);
-    };
-
-    //Updates all color formatted values
-    const updateAllColors = (target, value) => {
-        let newRGBA = []
-        let newHSLA = []
-        let newHEX = ""
-        switch (target) {
-            case "HEX":
-                newHEX = value;
-                newRGBA = hexToRgba(value);
-                newHSLA = rgbaToHsla(newRGBA);
-                break;
-            case "HSLA":
-                newHSLA = value;
-                newRGBA = hslaToRgba(value);
-                newHEX = rgbaToHex(newRGBA);
-                break;
-            case "RGBA":
-                newRGBA = value;
-                newHSLA = rgbaToHsla(value);
-                newHEX = rgbaToHex(value);
-                break;
+    //Validates hex color and updates color values if valid
+    const handleHEXInput = () => {
+        let newHex = "";
+        if (!useAlpha) {
+            if (hexInput.match(/^#([A-Fa-f0-9]{6})$/)) {
+                newHex = hexInput
+                updateAllColors("hex", newHex);
+            }
+            else if (hexInput.match(/^#([A-Fa-f0-9]{3})$/)) {
+                newHex = `#${hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2] + hexInput[3] + hexInput[3]}`
+                updateAllColors("hex", newHex);
+            } else if (hexInput.match(/^([A-Fa-f0-9]{6})$/)) {
+                newHex = `#${hexInput[0] + hexInput[0] + hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2]}`
+                updateAllColors("hex", newHex);
+            } else if (hexInput.match(/^([A-Fa-f0-9]{3})$/)) {
+                newHex = `#${hexInput[0] + hexInput[0] + hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2]}`
+                updateAllColors("hex", newHex);
+            }
+        }else{
+            if (hexInput.match(/^#([A-Fa-f0-9]{8})$/)) {
+                newHex = hexInput
+                updateAllColors("hex", newHex);
+            }
+            else if (hexInput.match(/^#([A-Fa-f0-9]{4})$/)) {
+                newHex = `#${hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2] + hexInput[3] + hexInput[3] + hexInput[4] + hexInput[4]}`
+                updateAllColors("hex", newHex);
+            } else if (hexInput.match(/^([A-Fa-f0-9]{8})$/)) {
+                newHex = `#${hexInput[0] + hexInput[0] + hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2] + hexInput[3] + hexInput[3]}`
+                updateAllColors("hex", newHex);
+            } else if (hexInput.match(/^([A-Fa-f0-9]{4})$/)) {
+                newHex = `#${hexInput[0] + hexInput[0] + hexInput[1] + hexInput[1] + hexInput[2] + hexInput[2] + hexInput[3] + hexInput[3]}`
+                updateAllColors("hex", newHex);
+            }
         }
-        setHEX(newHEX);
-        setHSLA(newHSLA);
-        setRGBA(newRGBA);
-        //if (selected) setColors({ ...colors, [selected]: newHex });
+        if (newHex === "") {
+            setInvalidHex(true);
+        } else {
+            setInvalidHex(false);
+        }
     }
 
     return (
@@ -305,7 +379,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                 onTouchStart={(e) => touchHueLumMap(e)}
                                 onTouchEnd={(e) => touchHueLumMap(e)}
                                 ref={hueLumRef} width="180" height="180"
-                                style={{ opacity: useAlpha ? alpha : 1 }}
+                                style={{ opacity: useAlpha ? HSL[3] : 1 }}
                             />
                             <slider-thumb
                                 style={{
@@ -313,8 +387,8 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                     left: colorSelectorPos.x,
                                     background:
                                         useAlpha ?
-                                            `hsla(${hue},${saturation}%,${lightness}%, ${alpha})` :
-                                            `hsl(${hue},${saturation}%,${lightness}%)`
+                                            `hsla(${HSL[0]},${HSL[1]}%,${HSL[2]}%, ${HSL[3]})` :
+                                            `hsl(${HSL[0]},${HSL[1]}%,${HSL[2]}%)`
                                 }}
                                 onMouseDown={(e) => handleHueLumMap(e)}
                                 onMouseMove={(e) => handleHueLumMap(e)}
@@ -328,7 +402,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                 ref={saturationRef}
                                 style={{
                                     background:
-                                        `linear-gradient(0deg, hsl(${hue},0%,${lightness}%), hsla(${hue},100%,${lightness}%))`
+                                        `linear-gradient(0deg, hsl(${HSL[0]},0%,${HSL[2]}%), hsla(${HSL[0]},100%,${HSL[2]}%))`
                                 }}
                                 onMouseDown={(e) => handleSaturationSlider(e)}
                                 onMouseMove={(e) => handleSaturationSlider(e)}
@@ -339,7 +413,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                             <slider-thumb
                                 style={{
                                     top: saturationSliderPos,
-                                    background: `hsla(${hue},${saturation}%,${lightness}%, ${alpha})`
+                                    background: `hsla(${HSL[0]},${HSL[1]}%,${HSL[2]}%, ${HSL[3]})`
                                 }}
                                 onMouseDown={(e) => handleSaturationSlider(e)}
                                 onMouseMove={(e) => handleSaturationSlider(e)}
@@ -355,7 +429,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                                 ref={alphaRef}
                                 style={{
                                     background:
-                                        `linear-gradient(90deg, hsla(${hue},${saturation}%,${lightness}%, 0), hsla(${hue},${saturation}%,${lightness}%, 1))`
+                                        `linear-gradient(90deg, hsla(${HSL[0]},${HSL[1]}%,${HSL[2]}%, 0), hsla(${HSL[0]},${HSL[1]}%,${HSL[2]}%, 1))`
                                 }}
                                 onMouseDown={(e) => handleAlphaSlider(e)}
                                 onMouseMove={(e) => handleAlphaSlider(e)}
@@ -366,7 +440,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                             <slider-thumb
                                 style={{
                                     left: alphaSliderPos,
-                                    background: `hsl(${hue},${saturation}%,${lightness}%, ${alpha})`
+                                    background: `hsl(${HSL[0]},${HSL[1]}%,${HSL[2]}%, ${HSL[3]})`
                                 }}
                                 onMouseDown={(e) => handleAlphaSlider(e)}
                                 onMouseMove={(e) => handleAlphaSlider(e)}
@@ -378,13 +452,13 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                     }
                     <color-format>
                         <button
-                            onClick={() => setFormat("HSLA")}
-                            className={format === "HSLA" ? "buttonActive" : ""}>
+                            onClick={() => setFormat("HSL")}
+                            className={format === "HSL" ? "buttonActive" : ""}>
                             {useAlpha ? "HSLA" : "HSL"}
                         </button>
                         <button
-                            onClick={() => setFormat("RGBA")}
-                            className={format === "RGBA" ? "buttonActive" : ""}>
+                            onClick={() => setFormat("RGB")}
+                            className={format === "RGB" ? "buttonActive" : ""}>
                             {useAlpha ? "RGBA" : "RGB"}
                         </button>
                         <button
@@ -394,47 +468,47 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                         </button>
                     </color-format>
                     <color-inputs>
-                {format === "HSLA" &&
-                    <>
-                        <div>
-                            <label htmlFor="hue">Hue</label>
-                            <input type="number" id="hue" value={HSLA[0]} min="0" max="360" onChange={(e) => {/*handleHSLInput("h", e.target.value)*/}} />
-                        </div>
-                        <div>
-                            <label htmlFor="saturation" title="Saturation">Sat.</label>
-                            <input type="number" id="saturation" value={HSLA[1]} min="0" max="100" onChange={(e) => {/*handleHSLInput("s", e.target.value)*/}} />
-                        </div>
-                        <div>
-                            <label htmlFor="luminosity" title="Luminosity">Lum.</label>
-                            <input type="number" id="luminosity" value={HSLA[2]} min="0" max="100" onChange={(e) => {/*handleHSLInput("l", e.target.value)*/}} />
-                        </div>
-                        {useAlpha &&
-                        <div>
-                            <label htmlFor="alpha">Alpha</label>
-                            <input type="number" id="alpha" value={HSLA[3]} min="0" max="1" step="0.01" onChange={(e) => {/*handleHSLInput("b", e.target.value)*/}} />
-                        </div>}
-                    </>}
-                {format === "RGBA" &&
-                    <>
-                        <div>
-                            <label htmlFor="red">Red</label>
-                            <input type="number" id="red" value={RGBA[0]} min="0" max="255" onChange={(e) => {/*handleRGBInput("r", e.target.value)*/}} />
-                        </div>
-                        <div>
-                            <label htmlFor="green">Green</label>
-                            <input type="number" id="green" value={RGBA[1]} min="0" max="255" onChange={(e) => {/*handleRGBInput("g", e.target.value)*/}} />
-                        </div>
-                        <div>
-                            <label htmlFor="blue">Blue</label>
-                            <input type="number" id="blue" value={RGBA[2]} min="0" max="255" onChange={(e) => {/*handleRGBInput("b", e.target.value)*/}} />
-                        </div>
-                        {useAlpha &&
-                        <div>
-                            <label htmlFor="alpha">Alpha</label>
-                            <input type="number" id="alpha" value={RGBA[3]} min="0" max="1" step="0.01" onChange={(e) => {/*handleRGBInput("b", e.target.value)*/}} />
-                        </div>}
-                    </>
-                }{/*
+                        {format === "HSL" &&
+                            <>
+                                <div>
+                                    <label htmlFor="hue">Hue</label>
+                                    <input type="number" id="hue" value={HSL[0]} min="0" max="360" onChange={(e) => handleHSLInput("h", e.target.value)} />
+                                </div>
+                                <div>
+                                    <label htmlFor="saturation" title="Saturation">Sat.</label>
+                                    <input type="number" id="saturation" value={HSL[1]} min="0" max="100" onChange={(e) => handleHSLInput("s", e.target.value)} />
+                                </div>
+                                <div>
+                                    <label htmlFor="luminosity" title="Luminosity">Lum.</label>
+                                    <input type="number" id="luminosity" value={HSL[2]} min="0" max="100" onChange={(e) => handleHSLInput("l", e.target.value)} />
+                                </div>
+                                {useAlpha &&
+                                    <div>
+                                        <label htmlFor="alpha">Alpha</label>
+                                        <input type="number" id="alpha" value={HSL[3]} min="0" max="1" step="0.01" onChange={(e) => handleHSLInput("a", e.target.value)} />
+                                    </div>}
+                            </>}
+                        {format === "RGB" &&
+                            <>
+                                <div>
+                                    <label htmlFor="red">Red</label>
+                                    <input type="number" id="red" value={RGB[0]} min="0" max="255" onChange={(e) => handleRGBInput("r", e.target.value)} />
+                                </div>
+                                <div>
+                                    <label htmlFor="green">Green</label>
+                                    <input type="number" id="green" value={RGB[1]} min="0" max="255" onChange={(e) => handleRGBInput("g", e.target.value)} />
+                                </div>
+                                <div>
+                                    <label htmlFor="blue">Blue</label>
+                                    <input type="number" id="blue" value={RGB[2]} min="0" max="255" onChange={(e) => handleRGBInput("b", e.target.value)} />
+                                </div>
+                                {useAlpha &&
+                                    <div>
+                                        <label htmlFor="alpha">Alpha</label>
+                                        <input type="number" id="alpha" value={RGB[3]} min="0" max="1" step="0.01" onChange={(e) => handleRGBInput("a", e.target.value)} />
+                                    </div>}
+                            </>
+                        }{
                     format === "HEX" &&
                     <>
                         <div style={{ justifyContent: "center" }}>
@@ -451,38 +525,14 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                         <div style={{ justifyContent: "center", color: "red" }}>
                             {invalidHex && "Invalid Value!"}
                         </div>
-                    </>*/
-                }
-                        {/*format === "HSLA" && <>
-                            <div>
-                                Hue
-                                <input type="number" min="0" max="360" value={hue}
-                                    onChange={(e) => handleHueInput(e.target.value)} />
-                            </div>
-                            <div>
-                                Lum.
-                                <input type="number" min="0" max="100" value={lightness}
-                                    onChange={(e) => handleLumInput(e.target.value)} />
-                            </div>
-                            <div>
-                                Sat.
-                                <input type="number" min="0" max="100" value={saturation}
-                                    onChange={(e) => handleSaturationInput(e.target.value)} />
-                            </div>
-                            {useAlpha &&
-                                <div>
-                                    Alpha
-                                    <input type="number" min="0" max="1" step="0.01" value={alpha}
-                                        onChange={(e) => handleAlphaInput(e.target.value)} />
-                                </div>
-                            }</>*/}
+                    </>}
                     </color-inputs>
                     <color-button >
                         <button
                             style={{
-                                background: useAlpha ? `hsla(${hue},${saturation}%,${lightness}%, ${alpha})` : `hsl(${hue},${saturation}%,${lightness}%)`
+                                background: useAlpha ? `hsla(${HSL[0]},${HSL[1]}%,${HSL[2]}%, ${HSL[3]})` : `hsl(${HSL[0]},${HSL[1]}%,${HSL[2]}%)`
                             }}
-                            onClick={() => { useAlpha ? setColor(`hsla(${hue},${saturation}%,${lightness}%, ${alpha})`) : setColor(`hsl(${hue},${saturation}%,${lightness}%)`) }}
+                            onClick={() => { useAlpha ? setColor(`hsla(${HSL[0]},${HSL[1]}%,${HSL[2]}%, ${HSL[3]})`) : setColor(`hsl(${HSL[0]},${HSL[1]}%,${HSL[2]}%)`) }}
                         >
                             Apply
                         </button>
