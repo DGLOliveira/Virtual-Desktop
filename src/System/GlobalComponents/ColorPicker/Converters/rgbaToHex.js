@@ -1,4 +1,7 @@
 export default function rgbaToHex(rgba) {
-    let a = rgba[3]*255;
-    return "#" + ((1 << 32) + (rgba[0] << 24) + (rgba[1] << 16) + (rgba[2] << 8) + a).toString(16).slice(1);
+    return "#" +
+    (rgba[0] | 1 << 8).toString(16).slice(1) +
+    (rgba[1] | 1 << 8).toString(16).slice(1) +
+    (rgba[2] | 1 << 8).toString(16).slice(1) +
+    ((rgba[3]*255) | 1 << 8).toString(16).slice(1);
 }
