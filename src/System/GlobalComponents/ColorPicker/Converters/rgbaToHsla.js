@@ -3,10 +3,6 @@ export default function rgbaToHsla(rgba) {
         g = rgba[1],
         b = rgba[2],
         a = rgba[3];
-        var r = parseInt(rgba[1], 16);
-        var g = parseInt(rgba[2], 16);
-        var b = parseInt(rgba[3], 16);
-        var a = parseInt(rgba[4], 16);
         r /= 255;
         g /= 255;
         b /= 255;
@@ -39,6 +35,6 @@ export default function rgbaToHsla(rgba) {
         }
         s = Math.abs(s * 100).toFixed(0);
         l = (l * 100 ).toFixed(0);
-        let hsla = [h, s + '%', l + '%', a];
+        let hsla = [Number(h), Number(s), Number(l), Number(a)];
         return hsla;
     }

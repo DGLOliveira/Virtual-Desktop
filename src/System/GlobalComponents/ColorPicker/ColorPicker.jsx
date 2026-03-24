@@ -80,6 +80,7 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
         }
         console.log(newHEX, newHSL, newRGB);
         setHEX(newHEX);
+        setHexInput(newHEX);
         setHSL(newHSL);
         setRGB(newRGB);
     }
