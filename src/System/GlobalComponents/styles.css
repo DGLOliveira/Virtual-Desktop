@@ -250,6 +250,7 @@ color-format{
     margin-bottom: 5px;
     align-items: center;
     width:100%;
+    background:var(--DialogInfoBkgr);
 }
 color-format>button{
     width:100%;
@@ -268,6 +269,7 @@ color-inputs{
     font-size: 14px;
     margin-top: 6px;
     margin-bottom: 6px;
+    background:var(--DialogInfoBkgr);
 }
 
 color-inputs>div{

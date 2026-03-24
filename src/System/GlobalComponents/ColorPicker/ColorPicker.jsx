@@ -23,7 +23,6 @@ import hslToRgb from "./Converters/hslToRgb";
 import hslaToRgba from "./Converters/hslaToRgba";
 import nameToHsl from "./Converters/nameToHsl";
 import "../styles.css";
-import { update } from "three/examples/jsm/libs/tween.module.js";
 
 export default function ColorPicker({ color, setColor, useAlpha }) {
     const colorPickerRef = useRef(null);
@@ -57,7 +56,6 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
     
     //Updates all color formatted values
     const updateAllColors = (target, value) => {
-        console.log(target, value); 
         let newRGB = []
         let newHSL = []
         let newHEX = ""
@@ -78,7 +76,6 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                 newHEX = useAlpha ? rgbaToHex(newRGB) : rgbToHex(newRGB);
                 break;
         }
-        console.log(newHEX, newHSL, newRGB);
         setHEX(newHEX);
         setHexInput(newHEX);
         setHSL(newHSL);
@@ -511,22 +508,20 @@ export default function ColorPicker({ color, setColor, useAlpha }) {
                             </>
                         }{
                     format === "HEX" &&
-                    <>
-                        <div style={{ justifyContent: "center" }}>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: "flex", flexDirection: "row" ,justifyContent: "center" }}>
                             <input 
                             type="text" 
                             id="hex" 
                             pattern={useAlpha ? "#[0-9a-fA-F]{3}([0-9a-fA-F]{4})?" : "#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?"} 
                             value={hexInput} 
                             onChange={(e) => setHexInput(e.target.value)} />
-                        </div>
-                        <div style={{ justifyContent: "center" }}>
                             <button onClick={() => handleHEXInput()}>Confirm</button>
                         </div>
                         <div style={{ justifyContent: "center", color: "red" }}>
-                            {invalidHex && "Invalid Value!"}
+                            {invalidHex && <b>Invalid Value!</b>}
                         </div>
-                    </>}
+                    </div>}
                     </color-inputs>
                     <color-button >
                         <button
