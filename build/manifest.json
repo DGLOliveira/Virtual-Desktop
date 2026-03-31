@@ -1,0 +1,21 @@
+{
+  "name": "Virtual Desktop",
+  "short_name": "V-Desktop",
+  "description": "A mock Operating System Desktop webapp.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/Virtual-Desktop/public/faviconLight.ico",
+      "sizes": "256x256",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/Virtual-Desktop/public/faviconDark.ico",
+      "sizes": "256x256",
+      "type": "image/x-icon"
+    }
+  ]
+}
