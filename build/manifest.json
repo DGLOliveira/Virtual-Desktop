@@ -2,7 +2,7 @@
   "name": "Virtual Desktop",
   "short_name": "V-Desktop",
   "description": "A mock Operating System Desktop webapp.",
-  "start_url": "/",
+  "start_url": "/Virtual-Desktop/index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#000000",
